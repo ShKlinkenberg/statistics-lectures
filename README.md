@@ -1,6 +1,6 @@
 # Statistics Lectures
 
-For the last few years I've been usung Rstudio to create HTML5 presentations in Rmarkdown's IOslides. This works great except that I have to change mij source files every new year if there are changes in the curriculum.
+For the last few years I've been using Rstudio to create HTML5 presentations in Rmarkdown's IOslides. This works great except that I have to change mij source files every new year if there are changes in the curriculum.
 
 So now I've thought of a setup where I create seperate .rmd files for every topic I teach. And generate IOslides using a template where I specify which topics should be added.
 
