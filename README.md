@@ -1,1 +1,1 @@
-# statistics-lectures
+# Statistics Lectures
