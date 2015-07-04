@@ -1,0 +1,142 @@
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+
+if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+library("visualize")
+```
+
+# Wilcoxon signed-rank test
+
+# Paired 2 samples
+
+## Wilcoxon signed-rank test
+
+<img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 10%;">
+
+The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the differences and summing these ranks for the positive group, the null hypothesis is tested that both positive and negative differences are equal.
+
+## Simulate data
+
+```{r}
+n      = 20
+factor = rep(c("Ecstasy","Alcohol"),each=n/2)
+dummy  = ifelse(factor == "Ecstacy", 0, 1)
+b.0    = 23
+b.1    = 5
+error  = rnorm(n, 0, 1.7)
+depres = b.0 + b.1*dummy + error
+depres = round(depres)
+
+data <- data.frame(factor, depres)
+
+Ecstasy <- subset(data, factor=="Ecstasy")$depres
+Alcohol <- subset(data, factor=="Alcohol")$depres
+
+data <- data.frame(Ecstasy, Alcohol)
+```
+
+## Example
+
+```{r, echo=FALSE}
+datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+
+# Write data for use in SPSS
+write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ parametric/mann-whitney-signed-rank.csv", row.names=FALSE)
+```
+
+## Calculate T {.smaller}
+
+<!-- Dit gaat niet goed Ranking moet zonder de ties en absoluut. 
+
+data$difference = abs(data$Ecstasy - data$Alcohol)
+
+data$rank <- NA
+
+data
+
+data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0),'difference'])
+
+
+-->
+
+```{r}
+# Calculate difference in scores between first and second measure
+data$difference = data$Ecstasy - data$Alcohol
+
+# Calculate difference in scores between first and second measure
+data$abs.difference = abs(data$Ecstasy - data$Alcohol)
+
+# Create rank variable with place holder NA
+data$rank <- NA
+
+# Rank only the non tied difference scores
+data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0),'abs.difference'])
+
+# Assign a '+' or a '-' to those values 
+data$sign = sign(data$Ecstasy - data$Alcohol)
+
+# Ass positive and negative rank to     test  if    else
+data$rank_pos = with(data, ifelse(sign ==  1, rank, 0   ))
+data$rank_neg = with(data, ifelse(sign == -1, rank, 0   ))
+```
+
+## The data
+
+```{r, echo=FALSE}
+datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate $T_+$
+
+```{r}
+# Calculate the sum of the positive ranks
+T_pos = sum(data$rank_pos)
+T_pos
+
+# Calculate N without 0 (no differences).
+n = sum(abs(data$sign))
+n
+```
+
+## Calculate $\bar{T}$ and ${SE}_{T}$
+
+$$\bar{T} = \frac{n(n+1)}{4}$$
+
+```{r}
+T_mean = (n*(n+1))/4
+T_mean
+```
+
+$${SE}_{T} = \sqrt{\frac{n(n+1)(2n+1)}{24}}$$
+
+```{r}
+SE_T = sqrt( (n*(n+1)*(2*n+1)) / 24 )
+```
+
+## Calculate Z
+
+$$z = \frac{T_+ - \bar{T}}{{SE}_T}$$
+
+```{r}
+z = (T_pos - T_mean)/SE_T
+z
+```
+
+## Test for significance
+
+```{r, fig.align='center', warning=FALSE}
+visualize.norm(c(z,-z), section="tails")
+```
+
+## Effect size
+
+$$r = \frac{z}{\sqrt{N}}$$
+
+Here $N$ is the number of observations.
+
+```{r}
+N = 20
+r = z / sqrt(N)
+r
+```

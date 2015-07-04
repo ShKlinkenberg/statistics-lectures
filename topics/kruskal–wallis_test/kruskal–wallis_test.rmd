@@ -1,0 +1,98 @@
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+
+if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
+library("visualize")
+```
+
+# Kruskal–Wallis test
+
+Independent >2 samples
+
+## Kruskal–Wallis test
+
+<img src="http://owpdb.mfo.de/photoNormal?id=15500" style="float: left; margin: 0 20px 0 0; height: 150px;">
+<img src="http://www.peoples.ru/science/economy/wilson_allen_wallis/wallis_1.jpg" style="float: left; margin: 0 20px 0 0; height: 150px;">
+
+Created by [William Henry Kruskal](http://en.wikipedia.org/wiki/William_Kruskal) (L) and [Wilson Allen Wallis](http://en.wikipedia.org/wiki/W._Allen_Wallis) (R), the Kruskal-Wallis test is a nonparametric alternative to the independent one-way ANOVA.
+
+The Kruskal-Wallis test essentially subtracts the expected mean ranking from the calculated oberved mean ranking, which is $\chi^2$ distributed.
+
+## Simulate data
+
+```{r}
+n      = 30
+factor = rep(c("ecstasy","alcohol","control"), each=n/3)
+
+dummy.1 = ifelse(factor == "alcohol", 1, 0)
+dummy.2 = ifelse(factor == "ecstasy", 1, 0)
+b.0     = 23
+b.1     = 0
+b.2     = 0
+error   = rnorm(n, 0, 1.7)
+
+# Model
+depres  = b.0 + b.1*dummy.1 + b.2*dummy.2 + error
+depres  = round(depres)
+
+data <- data.frame(factor, depres)
+```
+
+## Assign ranks
+
+```{r}
+# Assign ranks
+data$ranks = rank(data$depres)
+```
+
+## The data
+
+```{r, echo=FALSE}
+datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
+
+# Write data for use in SPSS
+write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ parametric/kruskal-Wallisk.csv", row.names=FALSE)
+```
+
+## Calculate H
+
+$$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
+
+- $N$ total sample size
+- $n$ sample size per group
+- $k$ number of groups
+- $R$ rank sums
+
+## Calculate H
+
+```{r}
+# Vervolgens hebben we per groep de som van deze rangen nodig.
+R.i = aggregate(ranks ~ factor, data = data, sum)$ranks
+R.i
+
+# De totale sample size N is:
+N = nrow(data)
+
+# En per groep is de sample size n:
+n.i = aggregate(depres ~ factor, data=data, length)$depres
+n.i
+```
+
+## Calculate H
+
+$$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
+
+```{r}
+H = ( 12/(N*(N+1)) ) * sum(R.i^2/n.i) - 3*(N+1)
+H
+
+k  = 3
+df = k - 1
+```
+
+## Test for significance
+
+```{r, fig.align='center', warning=FALSE}
+visualize.chisq(H, df, section="upper")
+```
