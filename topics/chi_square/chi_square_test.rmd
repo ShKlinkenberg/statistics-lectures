@@ -1,0 +1,97 @@
+# $\chi^2$ test
+
+Relation between categorical variables
+
+```{r}
+
+# Install if nesserary and load RCurl package
+if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
+library(RCurl)
+
+key = "1yg31q0Q2sEcGq2Y3JaXEEcwsJ5DvDDGzjDbSfAvzZ2c"
+
+# Set google url
+google.url <- paste("https://docs.google.com/spreadsheets/d/",key,"/export?format=csv&id=",key, sep='')
+
+# Load csv
+myCsv <- getURL(google.url)
+# Read csv and assing to data object
+data <- read.csv(textConnection(myCsv))
+
+tail(data)
+
+setwd('~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture 15 chi square and (partial) correlation')
+
+# Correct variables
+data.spss <- data
+
+data.spss$sekse   <- factor(data.spss$sekse,   labels=c(1,2))
+data.spss$fluiten <- factor(data.spss$fluiten, labels=c(0,1))
+
+# Write data for use in SPSS
+write.table(data.spss, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture 15 chi square and (partial) correlation/data.csv", row.names=FALSE, col.names=TRUE, dec=',')
+
+####################
+#                  #
+# chi squared test #
+#                  #
+####################
+
+data
+
+observed <- table(data[,c('fluiten','sekse')])
+observed
+
+n   = sum(observed)        ; n
+ct1 = colSums(observed)[1] ; ct1
+ct2 = colSums(observed)[2] ; ct2
+rt1 = rowSums(observed)[1] ; rt1
+rt2 = rowSums(observed)[2] ; rt2
+
+model = matrix( c((ct1*rt1)/n,
+                  (ct2*rt1)/n,
+                  (ct1*rt2)/n,
+                  (ct2*rt2)/n),2,2,byrow=T
+          )
+model
+
+observed - model
+
+# Calculate chi squared
+chi.squared <- sum((observed - model)^2/model)
+chi.squared
+
+pchisq(chi.squared,1,lower.tail=F)
+
+library('visualize')
+visualize.chisq(chi.squared,1,section='upper')
+
+###
+### SIMULATION 
+###
+
+chi.values = vector()
+
+for(i in 1:1000) {
+	
+	# Simulate non correlated data
+	
+	x = rbinom(73,1,.5)
+	y = rbinom(73,1,.5)
+
+	data = data.frame(x,y)
+
+	table(data)
+
+	observed <- as.matrix(table(data))
+
+	chi.values[i] = chisq.test(observed,1,correct=FALSE)$statistic
+
+}
+
+hist(chi.values,freq=F)
+chi = seq(0,20,.01)
+lines(chi,dchisq(chi,1),         lty=1,col='red',  cex=2) # Chi distribution under H0
+lines(chi,dchisq(chi,1, ncp = 6),lty=1,col='blue', cex=2) # Chi distribution under HA
+
+```
