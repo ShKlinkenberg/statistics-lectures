@@ -2,11 +2,11 @@
 
 For the last few years I've been using Rstudio to create HTML5 presentations in Rmarkdown's IOslides. This works great except that I have to change mij source files every new year if there are changes in the curriculum.
 
-So now I've thought of a setup where I create seperate .rmd files for every topic I teach. And generate IOslides using a template where I specify which topics should be added.
+So now I've thought of a setup where I create seperate .rmd files for every topic I teach and generate IOslides using a template where I specify which topics should be added.
 
 ## Template
 
-The template folder contains the main file used to generate IOslides. To create a new lecture, just open the template ans save as a new lecture in courses/coursename/lecturename.rmd. In this file add the topics available in topics. Refer to the .rmd files in the topic folder.
+The template folder contains the main file used to generate IOslides. To create a new lecture, just open the template and save as a new lecture in courses/coursename/lecturename.rmd. In this file add the topics available in topics. Refer to the .rmd files in the topic folder.
 
 ## Topics
 
@@ -14,4 +14,4 @@ This folder contains all topics covered in my teaching. New topics can be added 
 
 ## Courses
 
-In this folder courses are added. And in each course lectures are available. I plan to copy the current course for the next year and change course content where nessesary.
+In this folder courses are added and in each course, lectures are available. I plan to copy the current course for the next year and change course content where nessesary.
