@@ -26,7 +26,6 @@ local({
 ```{r child="../../../topics/non-parametric_concept/non-parametric_concept.rmd", eval=TRUE}
 ```
 
-
 ```{r child="../../../topics/wilcoxon_rank-sum_test/wilcoxon_rank-sum_test.rmd", eval=TRUE}
 ```
 
@@ -38,8 +37,6 @@ local({
 
 ```{r child="../../../topics/friedman_anova/friedman_anova.rmd", eval=TRUE}
 ```
-
-
 
 # END
 
