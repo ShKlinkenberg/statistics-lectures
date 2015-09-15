@@ -1,0 +1,88 @@
+# Binomial Distribution
+
+## Binomial distribution
+
+$$\left(\frac{n}{k}\right) p^k (1-p)^{n-k}$$
+
+Where:
+
+* n = number of throws
+* k = number of heads
+* p = probability for heads
+* $\left(\frac{n}{k}\right) = \frac{n!}{k!(n-k)!}$
+
+## Our experiment
+
+```{r}
+n = 10
+k = 0:10
+p = .5
+
+cbind(n, k, p)
+```
+
+
+## Permutations {.smaller}
+
+$$\left(\frac{n}{k}\right) = \frac{n!}{k!(n-k)!}$$
+
+```{r}
+permutations = factorial(n) / (factorial(k) * factorial(n-k) )
+
+cbind(n, k, p, permutations)
+```
+
+## Probabilities {.smaller}
+
+$$p^k (1-p)^{n-k}$$
+
+```{r}
+probabilities = p^k * (1-p)^(n-k)
+
+cbind(n, k, p, permutations, probabilities)
+```
+
+## Null distribution {.smaller}
+
+```{r}
+per.pro = permutations * probabilities
+
+cbind(n, k, p, permutations, probabilities, per.pro)
+
+barplot(per.pro, main="Null distribution")
+```
+
+## Alternative distribution
+
+```{r}
+p = .75
+
+ha.probabilities = p^k * (1-p)^(n-k)
+
+ha.per.pro = permutations * ha.probabilities
+
+barplot(ha.per.pro, col = "blue", main="Alternative distribution")
+```
+
+## Merge $H_0$ and $H_A$
+
+```{r}
+title = "Both distributions"
+
+colh0 =c(rep("red",2),rep("grey",7),rep("red",2))
+colha =c(rep("blue",11))
+
+barplot( rbind(per.pro, ha.per.pro), 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col = rbind(colh0,colha),
+         beside=TRUE,
+         #legend.text = c("H0", "HA")
+         )
+
+legend("topright", legend=c("accept H0","reject H0","HA"), fill=c("grey","red","blue"))
+```
+
+
