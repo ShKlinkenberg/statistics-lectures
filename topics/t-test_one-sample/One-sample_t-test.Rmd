@@ -1,0 +1,102 @@
+# One-sample t-test
+
+## Compare sample mean
+
+We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu$. 
+
+Let's take a different sample of n = 43 and calculate the mean of this sample.
+
+```{r, echo=FALSE}
+set.seed(7845)
+
+# Remove all objects from workspace
+rm(list=ls())
+
+# Install if nesserary and load RCurl package
+if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
+library(RCurl)
+
+# https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing
+
+
+# Load csv
+myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/export?format=csv&id=13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg")
+# Read csv and assing to data object
+data <- read.csv(textConnection(myCsv))
+
+IQ.van.je.buur = data$IQ.van.je.buur
+
+# data[grep("2014", as.character(data$Timestamp)),"IQ.van.je.buur"]
+```
+
+
+```{r}
+mu    = 100
+sigma = 15
+n     = 43
+
+x = IQ.van.je.buur
+mean(x)
+```
+
+Does this mean differ significantly from the population mean $\mu = `r mu`$?
+
+## Hypothesis
+
+### Null hypothesis
+
+* $H_0: \bar{x} = \mu$
+
+### Alternative hypothesis
+
+* $H_0: \bar{x} \neq \mu$
+* $H_0: \bar{x} > \mu$
+* $H_0: \bar{x} < \mu$
+
+## T-statistic
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+
+So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size, expressed as the degrees of freedom $df = n - 1$
+
+
+```{r}
+t = (mean(x) - mu) / (sd(x) / sqrt(n)); t
+```
+
+## Type I error
+
+To determine if this t-value significantly differs from the population mean we have to specify an type I error that we are willing to make.
+
+* Type I error / $\alpha$ = .05
+
+## _P_-value one sided
+
+Finally we have to calculate our _p_-value
+
+```{r}
+df = n - 1
+
+if(!"visualize" %in% installed.packages()) {
+install.packages("visualize") }
+library("visualize")
+
+visualize.t(t, df, "upper")
+```
+
+## _P_-value two sided
+
+```{r}
+visualize.t(c(-t, t), df, section = "tails")
+```
+
+## Effect-size
+
+$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+
+```{r}
+r = sqrt(t^2/(t^2 + df))
+
+r
+```
+

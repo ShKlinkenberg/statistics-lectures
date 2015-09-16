@@ -78,11 +78,13 @@ barplot( rbind(per.pro, ha.per.pro),
          xlab="number of head", 
          ylab="P(%)", 
          col = rbind(colh0,colha),
+         #col = "white",        
          beside=TRUE,
          #legend.text = c("H0", "HA")
          )
 
-legend("topright", legend=c("accept H0","reject H0","HA"), fill=c("grey","red","blue"))
+#legend("topright", legend=c("accept H0","reject H0","HA"), fill=c("grey","red","blue"))
+
 ```
 
 
