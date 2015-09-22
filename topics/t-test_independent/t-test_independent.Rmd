@@ -1,0 +1,143 @@
+# Independent-samples t-test
+
+Compare 2 independent samples
+
+## Independent-samples t-test
+
+In the independent-samples t-test the mean of both independent samples is calculated and the difference of these $(\bar{X}_1 - \bar{X}_2)$ means is tested against the null hypothesis where $\mu = 0$.
+
+## Example
+
+We are going to use the IQ estimates we collected last week again. You had to gues the IQ of the one sitting next to you and your own IQ. But we are going to add gender to the data set. We did not register this so we are going to simulate some genders.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+set.seed(7845)
+
+# Remove all objects from workspace
+rm(list=ls())
+
+# Install if nesserary and load RCurl package
+if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
+library(RCurl)
+
+# https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing
+
+# Load csv
+myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/export?format=csv&id=13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg")
+# Read csv and assing to data object
+data <- read.csv(textConnection(myCsv))
+
+IQ.van.je.buur = data$IQ.van.je.buur
+Eigen.IQ = data$Eigen.IQ
+
+# data[grep("2014", as.character(data$Timestamp)),"IQ.van.je.buur"]
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+```{r}
+gender = sample(c("male", "female"), length(IQ.van.je.buur), replace = TRUE)
+```
+
+## The data
+
+```{r, echo=FALSE}
+data$gender = gender
+
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate means
+
+```{r}
+Eigen.IQ.male   = subset(data, gender == "male",   select = Eigen.IQ)$Eigen.IQ
+Eigen.IQ.female = subset(data, gender == "female", select = Eigen.IQ)$Eigen.IQ
+
+Eigen.IQ.male.mean   = mean(Eigen.IQ.male,   na.rm = T)
+Eigen.IQ.female.mean = mean(Eigen.IQ.female, na.rm = T)
+
+Eigen.IQ.male.mean
+Eigen.IQ.female.mean
+```
+
+## Calculate variance {.smaller}
+
+```{r}
+Eigen.IQ.male.var   = var(Eigen.IQ.male,   na.rm = T)
+Eigen.IQ.female.var = var(Eigen.IQ.female, na.rm = T)
+Eigen.IQ.male.var
+Eigen.IQ.female.var
+
+Eigen.IQ.male.n   = length(Eigen.IQ.male)   - 1
+Eigen.IQ.female.n = length(Eigen.IQ.female) - 1
+Eigen.IQ.male.n
+Eigen.IQ.female.n
+```
+
+## Calculate t-value
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+
+Where ${SE}_p$ is the pooled standard error.
+
+$${SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}$$
+
+And $S_p$ is the pooled variance.
+
+$$S_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
+
+Where $s^2$ is the variance and $n$ the sample size.
+
+## Calculate pooled variance
+
+$$S_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
+
+```{r}
+df = Eigen.IQ.male.n + Eigen.IQ.female.n - 2
+
+s2.p = ( (Eigen.IQ.male.n-1)*Eigen.IQ.male.var + (Eigen.IQ.female.n-1)*Eigen.IQ.female.var ) / df
+
+df
+s2.p
+```
+
+## Calculate pooled SE
+
+$${SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}$$
+
+```{r}
+se.p    = sqrt( ((s2.p/Eigen.IQ.male.n) + (s2.p/Eigen.IQ.female.n)) )
+se.p
+```
+
+## Calculate t-value
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+
+```{r}
+t = ( Eigen.IQ.male.mean - Eigen.IQ.female.mean ) / se.p
+
+t
+```
+
+## Test for significance
+
+Two tailed
+
+```{r}
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.t(c(-t,t), df, section="tails")
+```
+
+## Effect-size
+
+$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+
+```{r}
+r = sqrt(t^2/(t^2 + df))
+
+r
+```

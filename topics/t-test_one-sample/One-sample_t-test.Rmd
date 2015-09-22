@@ -18,7 +18,6 @@ library(RCurl)
 
 # https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing
 
-
 # Load csv
 myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/export?format=csv&id=13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg")
 # Read csv and assing to data object
@@ -31,11 +30,10 @@ IQ.van.je.buur = data$IQ.van.je.buur
 
 
 ```{r}
-mu    = 100
-sigma = 15
-n     = 43
+mu = 120
+n  = length(IQ.van.je.buur)
+x  = IQ.van.je.buur
 
-x = IQ.van.je.buur
 mean(x)
 ```
 

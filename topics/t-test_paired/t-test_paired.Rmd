@@ -1,0 +1,133 @@
+# Paired-samples t-test
+
+Paired 2 samples
+
+## Paired-samples t-test
+
+In the Paired samples t-test the deviation ($D$) for each pair is calculated and the mean of these deviations ($\bar{D}$) is tested against the null hypothesis where $\mu = 0$.
+
+## Data example
+
+We are going to use the IQ estimates we collected last week. You had to gues the IQ of the one sitting next to you and your own IQ.
+
+Let's take a look at the data.
+
+## IQ estimates
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+set.seed(7845)
+
+# Remove all objects from workspace
+rm(list=ls())
+
+# Install if nesserary and load RCurl package
+if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
+library(RCurl)
+
+# https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing
+
+# Load csv
+myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/export?format=csv&id=13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg")
+# Read csv and assing to data object
+data <- read.csv(textConnection(myCsv))
+
+IQ.van.je.buur = data$IQ.van.je.buur
+Eigen.IQ = data$Eigen.IQ
+
+# data[grep("2014", as.character(data$Timestamp)),"IQ.van.je.buur"]
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+```{r, echo=FALSE}
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate $D$ {.smaller}
+
+```{r}
+D = IQ.van.je.buur - Eigen.IQ
+```
+
+
+```{r, echo=FALSE}
+data$D = D
+
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate $\bar{D}$
+
+```{r}
+D      = na.omit(D) # get rid of all missing values
+D.mean = mean(D)
+D.mean
+```
+
+And we also need n.
+
+```{r}
+n = length(D)
+n
+```
+
+## Calculate t-value
+
+$$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
+
+```{r}
+mu = 0                # Define mu
+
+D.sd = sd(D)          # Calculate standard deviation
+D.se = D.sd / sqrt(n) # Calculate standard error
+
+df   = n - 1          # Calculate degrees of freedom
+
+# Calculate t
+t = ( D.mean - mu ) / D.se
+t
+```
+
+## Test for significance
+
+Two tailed
+
+```{r}
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.t(c(-t,t), df, section="tails")
+```
+
+## Effect-size
+
+$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+
+```{r}
+r = sqrt(t^2/(t^2 + df))
+
+r
+```
+
+## Confidence interval {.smaller}
+
+To display correct conficance intervals in SPSS we need to correct the original scores for whithin subject variation.
+
+```{}
+DATASET ACTIVATE DataSet1.
+COMPUTE whithinmean=MEAN(IQ.van.je.buur,Eigen.IQ).
+EXECUTE.
+
+AGGREGATE
+  /OUTFILE=* MODE=ADDVARIABLES
+  /BREAK=
+  /whithinmean_mean=MEAN(whithinmean).
+
+COMPUTE adjustment=whithinmean_mean - whithinmean.
+EXECUTE.
+
+COMPUTE IQ.van.je.buur.adj = IQ.van.je.buur + adjustment.
+COMPUTE Eigen.IQ           = Eigen.IQ       + adjustment.
+EXECUTE.
+```
