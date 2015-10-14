@@ -1,7 +1,7 @@
 ---
-title: "One-way independent and F-distribution"
+title: "ANCOVA"
 author: "Klinkenberg"
-date: "8 okt 2015"
+date: "14 okt 2015"
 output: 
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
@@ -24,10 +24,7 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/t-test_paired/t-test_paired.rmd"}
-```
-
-```{r child="../../../topics/t-test_independent/t-test_independent.rmd"}
+```{r child="../../../topics/ancova/ancova.rmd"}
 ```
 
 # END

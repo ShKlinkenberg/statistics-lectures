@@ -1,5 +1,5 @@
 ---
-title: "One-way independent and F-distribution"
+title: "One-way independent &<br> F-distribution"
 author: "Klinkenberg"
 date: "8 okt 2015"
 output: 
@@ -24,10 +24,10 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/t-test_paired/t-test_paired.rmd"}
+```{r child="../../../topics/f-distribution/f-distribution.rmd"}
 ```
 
-```{r child="../../../topics/t-test_independent/t-test_independent.rmd"}
+```{r child="../../../topics/ANOVA_one-way_independent/ANOVA_one-way_independent.rmd"}
 ```
 
 # END

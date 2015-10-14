@@ -1,0 +1,214 @@
+---
+output: html_document
+---
+# One-way independent ANOVA
+
+Compare 2 or more independent groups.
+
+## Jet lag
+
+Wright and Czeisler (2002) performed an experiment where they measured the circadian rhythm by the daily cycle of melatonin production in 22 subjects randomly assigned to one of three light treatments.
+
+* Control condition (no light)
+* Knees (3 hour light to back of knees)
+* Eyes (3 hour light in eyes)
+
+```{r}
+rm(list=ls())
+x.c = c( .53, .36,  .2,  -.37, -.6,  -.64, -.68,-1.27) # Control 
+x.k = c( .73, .31,  .03, -.29, -.56, -.96,-1.61      ) # Knees
+x.e = c(-.78,-.86,-1.35,-1.48,-1.52,-2.04,-2.83      ) # Eyes
+x   = c( x.c, x.k, x.e )                               # Conditions combined
+```
+
+## Total variance
+
+$${MS}_{total} = s_x^2$$
+
+```{r}
+ms.t = var(x); ms.t
+
+sum( (x - mean(x))^2 ) / (length(x) - 1)
+```
+
+--------
+
+$${SS}_{total} = s_x^2 (N-1)$$
+
+```{r}
+N = length(x)
+
+ss.t = var(x) * (N-1); ss.t
+
+sum( (x - mean(x))^2 )
+```
+
+## Visual ${SS}_{total}$ {.smaller}
+
+```{r}
+# Assign labels
+lab = c("Control", "Knee", "Eyes") 
+
+# Plot all data points
+plot(1:N,x, 
+     ylab="Shift in circadian rhythm (h)",
+     xlab="Light treatment",
+     main="Total variance")
+
+# Add mean line
+lines(c(1,22),rep(mean(x),2),lwd=3)
+
+# Add delta lines / variance components
+segments(1:N, mean(x), 1:N, x)
+
+# Add labels
+text(c(4,11.5,18.5),rep(.6,3),labels=lab)
+```
+
+## Model variance {.smaller}
+
+$${MS}_{model} = \frac{{SS}_{model}}{{df}_{model}} \\ {df}_{model} = k - 1$$
+
+Where $k$ is the number of independent groups and
+
+$${SS}_{model} = \sum_{k} n_k (\bar{X}_k - \bar{X})^2$$
+
+```{r}
+k      = 3
+n.c = length(x.c)
+n.k = length(x.k)
+n.e = length(x.e)
+```
+
+--------
+
+```{r}
+ss.m.c = n.c * (mean(x.c) - mean(x))^2
+ss.m.k = n.k * (mean(x.k) - mean(x))^2
+ss.m.e = n.e * (mean(x.e) - mean(x))^2
+
+ss.m = sum(ss.m.c, ss.m.k, ss.m.e); ss.m
+df.m = (k - 1)
+ms.m = ss.m / df.m; ms.m
+```
+
+## Visual ${SS}_{model}$
+
+```{r, echo=FALSE}
+# Assign labels
+lab = c("Control", "Knee", "Eyes") 
+
+# Plot all data points
+plot(1:N,x, 
+     ylab="Shift in circadian rhythm (h)",
+     xlab="Light treatment",
+     main="Total variance")
+
+# Add mean line
+lines(c(1,22),rep(mean(x),2),lwd=3)
+
+# Add delta lines / variance components
+segments(1:N, mean(x), 1:N, x)
+
+# Add labels
+text(c(4,11.5,18.5),rep(.6,3),labels=lab)
+
+# Add model means lines
+lines(c( 1,8 ),rep(mean(x.c),2),col="red",  lwd=3)
+lines(c( 9,15),rep(mean(x.k),2),col="blue", lwd=3)
+lines(c(16,22),rep(mean(x.e),2),col="green",lwd=3)
+
+# Add model delta lines
+segments(1:8,   mean(x.c), 1:8,   mean(x), col="red",  lwd=3)
+segments(9:15,  mean(x.k), 9:15,  mean(x), col="blue", lwd=3)
+segments(16:22, mean(x.e), 16:22, mean(x), col="green",lwd=3)
+```
+
+## Error variance
+
+$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
+
+where
+
+$${SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)$$
+
+```{r}
+ss.e.c = var(x.c) * (n.c - 1)
+ss.e.k = var(x.k) * (n.k - 1)
+ss.e.e = var(x.e) * (n.e - 1)
+
+ss.e = sum(ss.e.c, ss.e.k, ss.e.e); ss.e
+```
+
+-----
+
+$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
+
+```{r}
+df.e = (N - k)
+ms.e = ss.e / df.e; ms.e
+```
+
+## Visual ${SS}_{error}$
+
+```{r, echo=FALSE}
+# Assign labels
+lab = c("Control", "Knee", "Eyes") 
+
+# Plot all data points
+plot(1:N,x, 
+     ylab="Shift in circadian rhythm (h)",
+     xlab="Light treatment",
+     main="Total variance")
+
+# Add mean line
+lines(c(1,22),rep(mean(x),2),lwd=3)
+
+# Add delta lines / variance components
+segments(1:N, mean(x), 1:N, x)
+
+# Add labels
+text(c(4,11.5,18.5),rep(.6,3),labels=lab)
+
+# Add model means lines
+lines(c( 1,8 ),rep(mean(x.c),2),col="red",  lwd=3)
+lines(c( 9,15),rep(mean(x.k),2),col="blue", lwd=3)
+lines(c(16,22),rep(mean(x.e),2),col="green",lwd=3)
+
+# Add model delta lines
+segments(1:8,   mean(x.c), 1:8,   mean(x), col="red",  lwd=3)
+segments(9:15,  mean(x.k), 9:15,  mean(x), col="blue", lwd=3)
+segments(16:22, mean(x.e), 16:22, mean(x), col="green",lwd=3)
+
+# Add error lines
+segments(1:8,   mean(x.c), 1:8,   x.c, col="purple", lwd=3)
+segments(9:15,  mean(x.k), 9:15,  x.k, col="purple", lwd=3)
+segments(16:22, mean(x.e), 16:22, x.e, col="purple", lwd=3)
+```
+
+## Variance components
+
+$${SS}_{total} = {SS}_{model} + {SS}_{error}$$
+$$`r ss.t` = `r ss.m` + `r ss.e`$$
+
+$${MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= `r ms.t`$$
+$${MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= `r ms.m`$$
+$${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = `r ms.e`$$
+
+## F-ratio
+
+$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
+
+```{r}
+F = ms.m / ms.e; F
+```
+
+## Reject $H_0$?
+
+```{r}
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.f(F, df.m,df.e,section="upper")
+```
+

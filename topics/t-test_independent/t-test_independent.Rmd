@@ -45,6 +45,10 @@ gender = sample(c("male", "female"), length(IQ.van.je.buur), replace = TRUE)
 ```{r, echo=FALSE}
 data$gender = gender
 
+# Write data for use in SPSS
+write.table(data, "IQ.csv", row.names=FALSE, col.names=TRUE, dec=',')
+
+
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
