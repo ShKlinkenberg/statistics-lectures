@@ -1,7 +1,7 @@
 ---
-title: "Multiple regression"
+title: "Correlation and Simple regression"
 author: "Klinkenberg"
-date: "18 nov 2015"
+date: "11 nov 2015"
 output: 
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
@@ -24,8 +24,12 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/regression_multiple_predictors/regression_multiple_predictors.rmd"}
+```{r child="../../../topics/correlation/correlation.rmd"}
 ```
+
+```{r child="../../../topics/regression_one_predictor/regression_one_predictor.rmd"}
+```
+
 
 # END
 

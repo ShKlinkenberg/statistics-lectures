@@ -1,0 +1,195 @@
+# Correlation
+
+```{r, eval=FALSE, echo=FALSE}
+# Remove all objects from workspace
+rm(list=ls())
+
+# Install if nesserary and load RCurl package
+if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
+library(RCurl)
+
+key = "1foUIwXqvvAWRg7FKdRMAIBLakpLbnhUpYhiTYayaPfc" # IQ cijfer
+
+# key = "1yg31q0Q2sEcGq2Y3JaXEEcwsJ5DvDDGzjDbSfAvzZ2c" # Fluiten
+
+# Set google url
+google.url <- paste("https://docs.google.com/spreadsheets/d/",key,"/export?format=csv&id=",key, sep='')
+
+# Load csv
+myCsv <- getURL(google.url)
+# Read csv and assing to data object
+data <- read.csv(textConnection(myCsv))
+# Change header names
+names(data)[2:4] <- c('IQ', 'cijfers', 'betrouwbaar')
+
+# Get rid of outliers
+data[data$cijfers   %in% boxplot.stats(data$cijfers)$out,   'cijfers']   = NA
+data[data$IQ %in% boxplot.stats(data$IQ)$out, 'IQ'] = NA
+```
+
+## Simulate data
+
+```{r, eval=T}
+n          = 50
+cijfers    = rnorm(n, 6, 1.6)
+b.0        = 100
+b.1        = .3
+error      = rnorm(n, 0, 0.7)
+
+IQ = b.0 + b.1 * cijfers + error
+#IQ = group(IQ)
+
+error       = rnorm(n, 0, 0.7)
+betrouwbaar = 3.2 + .2 * IQ + error
+```
+
+```{r, echo=FALSE}
+data <- data.frame(cijfers, IQ, betrouwbaar)
+data <- round(data, 2)
+# Write data for use in SPSS
+write.table(data, "cijfers.csv", row.names=FALSE, col.names=TRUE, dec='.')
+```
+
+
+## Explaining vairance
+
+```{r}
+cijfers        = data$cijfers
+IQ             = data$IQ
+mean.cijfers   = mean(cijfers)
+mean.IQ        = mean(IQ)
+N              = length(cijfers)
+
+plot(data$cijfers, ylim=summary(c(data$cijfers, data$IQ))[c('Min.','Max.')], col='orange')
+points(data$IQ, col='blue')
+```
+
+## Standarize {.smaller}
+
+$$z = \frac{x_i - \bar{x}}{{sd}_x}$$
+
+```{r}
+data[, c('z.cijfers', 'z.IQ')] = scale(data[, c('cijfers', 'IQ')])
+
+z.cijfers        = data$z.cijfers
+z.IQ             = data$z.IQ
+
+mean.z.cijfers   = mean(z.cijfers, na.rm=T)
+mean.z.IQ        = mean(z.IQ,      na.rm=T)
+
+plot(z.cijfers, 
+     ylim = summary(c(z.cijfers, z.IQ))[c('Min.','Max.')], 
+     col  = 'orange', 
+     ylab = "", xlab="participants")
+points(z.IQ, col='blue')
+
+# Add mean lines
+lines(rep(mean.z.cijfers, N), col='orange')
+lines(rep(mean.z.IQ,      N), col='blue', lt=2)
+
+# Add vertical variance lines
+segments(1:N, mean.z.cijfers, 1:N, z.cijfers, col='orange')
+segments(1:N, mean.z.IQ, 1:N, z.IQ, col='blue')
+```
+
+## Covariance
+
+$${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+```{r}
+mean.cijfers = mean(cijfers, na.rm=T)
+mean.IQ      = mean(IQ,      na.rm=T)
+
+delta.cijfers = cijfers - mean.cijfers
+delta.IQ      = IQ      - mean.IQ
+
+prod = (cijfers - mean.cijfers) * (IQ - mean.IQ)
+
+covariance = sum(prod) / (N - 1)
+```
+
+## Correlation {.smaller}
+
+$$\frac{{COV}_{xy}}{S_xS_y}$$
+
+```{r}
+correlation = covariance / ( sd(cijfers) * sd(IQ) ); correlation
+
+cor(z.cijfers, z.IQ)
+cor(  cijfers,   IQ)
+
+sum( z.cijfers * z.IQ ) / (N - 1)
+
+  1 *  1
+ -1 * -1
+ -1 *  1
+  0 *  1
+ .5 *  1
+-.5 *  1
+
+plot(cijfers,IQ)
+```
+
+## Significance of a correlation
+
+$$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
+{df} = N - 2$$
+
+```{r}
+df = N-2
+df
+t.r = ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
+t.r
+```
+
+## Viualize
+
+One-sample t-test
+
+```{r}
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.t(c(-t.r, t.r),df,section='tails')
+```
+
+# Partial correlation
+
+## Partial correlation {.smaller}
+
+$$r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}$$
+
+```{r}
+betrouwbaar = data$betrouwbaar
+
+cor.cijfers.IQ            = cor(cijfers,IQ)
+cor.cijfers.betrouwbaar   = cor(cijfers,betrouwbaar)
+cor.IQ.betrouwbaar        = cor(IQ,betrouwbaar)
+
+cor.cijfers.IQ; cor.cijfers.betrouwbaar; cor.IQ.betrouwbaar
+```
+
+------
+
+```{r}
+teller = cor.cijfers.IQ - (cor.cijfers.betrouwbaar * cor.IQ.betrouwbaar)
+noemer = sqrt( (1-cor.cijfers.betrouwbaar^2)*(1-cor.IQ.betrouwbaar^2) )
+
+partial.correlation = teller / noemer
+
+partial.correlation
+```
+
+## Significance of parial correlation
+
+One-sample t-test
+
+```{r}
+df = N - 3
+
+t.pr = ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
+t.pr
+
+visualize.t(c(-t.pr,t.pr),df,section='tails')
+```
+

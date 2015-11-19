@@ -1,0 +1,342 @@
+# MANOVA
+
+Compare multiple independent variables on multiple dependent variables.
+
+```{r, echo=FALSE}
+rm(list=ls())
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## MANOVA
+
+Multivariate analysis of variance. We are looking for the multivariate signal to noise ratio.
+
+## Example {.smaller}
+
+We will use the data from Field's chapter 16 about behavioural and cognitive neurosis. Let's first load the data and have a look.
+
+```{r, echo=FALSE}
+data <- read.csv("MANOVA gedrags therapie.csv")
+
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Sums of squares {.smaller}
+
+Fist we have to calculate the sums of squares for the model and the error for both variates, actions and thoughts.
+
+Let's first get some of the means we need for our calculations
+
+```{r, tidy=FALSE}
+aggregate(. ~ group, data, function(x) c(mn =mean(x), n=length(x) ))
+
+thoughts = data$thoughts
+actions  = data$actions
+
+m.tho = mean(thoughts)
+m.act = mean(actions)
+
+n.tho = length(thoughts)
+n.act = length(actions)
+```
+
+##  And more means {.smaller}
+
+```{r}
+cbt.tho = subset(data, group == "cognitieve gedrags therapie", select="thoughts")$thoughts
+bet.tho = subset(data, group == "gedrags therapie",            select="thoughts")$thoughts
+con.tho = subset(data, group == "Controle groep",              select="thoughts")$thoughts
+
+cbt.act = subset(data, group == "cognitieve gedrags therapie", select="actions")$actions
+bet.act = subset(data, group == "gedrags therapie",            select="actions")$actions
+con.act = subset(data, group == "Controle groep",              select="actions")$actions
+        
+n.cbt.tho = length(cbt.tho)
+n.bet.tho = length(bet.tho)
+n.con.tho = length(con.tho)
+
+n.cbt.act = length(cbt.act)
+n.bet.act = length(bet.act)
+n.con.act = length(con.act)
+
+m.cbt.tho = mean(cbt.tho)
+m.bet.tho = mean(bet.tho)
+m.con.tho = mean(con.tho)
+
+m.cbt.act = mean(cbt.act)
+m.bet.act = mean(bet.act)
+m.con.act = mean(con.act)
+```
+
+## ${SS}_{total}$
+
+Now we can calculate our total sums of squares for both models. This one is easy.
+
+```{r, tidy=FALSE}
+SS.total.tho = var(thoughts) * (n.tho-1)
+SS.total.act = var(actions)  * (n.act-1)
+
+SS.total.tho == sum( (thoughts - m.tho)^2 )
+SS.total.act == sum( (actions  - m.act)^2 )
+```
+
+```{r, echo=FALSE}
+par(mai = c(0,1,0,0), xaxt = "n")
+layout(matrix(1:2, nrow = 2, ncol = 1))
+
+plot(thoughts)
+lines(c(1, n.tho), c(m.tho, m.tho))
+segments(1:n.tho, thoughts, 1:n.tho, m.tho)
+
+plot(actions)
+lines(c(1, n.act), c(m.act, m.act))
+segments(1:n.act, actions, 1:n.act, m.act)
+
+p.t <- recordPlot()
+```
+
+## ${SS}_{model}$
+
+And our sums of squares for both models.
+
+$${SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}$$
+
+```{r, echo=TRUE}
+SS.model.tho = sum( n.cbt.tho*( m.cbt.tho - m.tho )^2,
+                    n.bet.tho*( m.bet.tho - m.tho )^2,
+                    n.con.tho*( m.con.tho - m.tho )^2 )
+
+SS.model.act = sum( n.cbt.act*( m.cbt.act - m.act )^2,
+                    n.bet.act*( m.bet.act - m.act )^2,
+                    n.con.act*( m.con.act - m.act )^2 )
+```
+
+```{r, echo=FALSE, eval=TRUE}
+par(mai = c(0,1,0,0), xaxt = "n")
+layout(matrix(1:2, nrow = 2, ncol = 1))
+
+plot(thoughts, xlab="")
+lines(c(1, n.tho), c(m.tho, m.tho))
+segments(1:n.tho, thoughts, 1:n.tho, m.tho)
+
+fit.tho <- lm(thoughts ~ group, data)
+n = length(thoughts)
+
+segments(1:n, fit.tho$fitted.values, 1:n, m.tho, col = "green")
+
+plot(actions, xlab="")
+lines(c(1, n.act), c(m.act, m.act))
+segments(1:n.act, actions, 1:n.act, m.act)
+
+fit.act <- lm(actions ~ group, data)
+
+segments(1:n, fit.act$fitted.values, 1:n, m.act, col = "green")
+
+p.m <- recordPlot()
+```
+
+## ${SS}_{error}$
+
+$${SS}_{error} = \sum{s_k^2(n_k-1)}$$
+
+And finally the sums of squares for the errors are easy.
+
+```{r, tidy=FALSE}
+SS.error.tho = SS.total.tho - SS.model.tho
+SS.error.act = SS.total.act - SS.model.act
+```
+
+We will leave the the mean squares for what they are because we only need the sums of squares.
+
+```{r, echo=FALSE}
+par(mai = c(0,1,0,0), xaxt = "n")
+layout(matrix(1:2, nrow = 2, ncol = 1))
+
+plot(thoughts, xlab="")
+lines(c(1, n.tho), c(m.tho, m.tho))
+segments(1:n.tho, thoughts, 1:n.tho, m.tho)
+
+segments(1:n, fit.tho$fitted.values, 1:n, m.tho, col = "green")
+segments(1:n, fit.tho$fitted.values, 1:n, thoughts, col = "purple")
+
+plot(actions, xlab="")
+lines(c(1, n.act), c(m.act, m.act))
+segments(1:n.act, actions, 1:n.act, m.act)
+
+
+segments(1:n, fit.act$fitted.values, 1:n, m.act, col = "green")
+segments(1:n, fit.act$fitted.values, 1:n, actions, col = "purple")
+
+p.e <- recordPlot()
+```
+
+## Cross product
+
+For the MANOVA we need the cross products (cross multiplications) of the two variates for the total, the model and the error. This is comparable to calculating the covariance for a correlation.
+
+## ${CP}_{total}$
+
+$${CP}_{total} = \sum_{i=1}^n \left( X_{i({DV}_1)} - \bar{X}_{grand({{DV}_1})} \right) \left( X_{i({DV}_2)} - \bar{X}_{grand({{DV}_2})} \right)$$
+
+```{r, tidy=FALSE}
+CP.total = sum( (actions - m.act) * (thoughts - m.tho) )
+```
+
+```{r, echo=FALSE}
+p.t
+```
+
+
+## ${CP}_{model}$ {.smaller}
+
+$${CP}_{model} = \sum_{grp=1}^k n_{grp} \left( \bar{X}_{grp({{DV}_1})} - \bar{X}_{grand({{DV}_1})} \right) \left(\bar{X}_{grp({{DV}_2})} - \bar{X}_{grand({{DV}_2})} \right)$$
+
+```{r}
+CP.model = n.cbt.tho * (m.cbt.tho - m.tho) * (m.cbt.act  - m.act) +
+           n.bet.tho * (m.bet.tho - m.tho) * (m.bet.act  - m.act) +
+           n.con.tho * (m.con.tho - m.tho) * (m.con.act  - m.act)
+```
+
+```{r, echo=FALSE}
+p.m
+```
+
+## ${CP}_{error}$
+
+$${CP}_{error} = \sum_{i=1}^n \left(X_{i({{DV}_1})} - \bar{X}_{grp({{DV}_1})} \right)  \left(X_{i({{DV}_2})} - \bar{X}_{(grp{{DV}_2})} \right)$$
+
+```{r}
+# And the easy way
+CP.error = CP.total - CP.model
+```
+
+```{r, echo=FALSE}
+p.e
+```
+
+## SS cross product matrix
+
+Now we have all the components to create the sums of squares cross product matrix. Creating a matrix in R is easy. We can use the `matrix()` function. We can define the values in the matrix using the `c()` function and we can define the dimentions, in our case 2x2.
+
+## Total cross product matrix
+
+$$T = \begin{pmatrix} {SS}_{T({DV}_1)} & {CP}_T \\ {CP}_T & {SS}_{T({DV}_2)} \end{pmatrix}$$
+
+```{r, tidy=FALSE}
+# Assign total matrix to variable T
+T = matrix(c(SS.total.act,CP.total,
+             CP.total,SS.total.tho),2,2)
+round(T, 2)
+```
+
+## Model cross product matrix
+
+$$H = \begin{pmatrix} {SS}_{M({{DV}_1})} & {CP}_M \\ {CP}_M & {SS}_{M({DV}_2)} \end{pmatrix}$$
+
+```{r}
+# Assign model/hypothesis matrix to variable H
+H = matrix(c(SS.model.act,CP.model,
+             CP.model,SS.model.tho),2,2)
+round(H, 2)
+```
+
+## Error cross product matrix
+
+$$E = \begin{pmatrix} {SS}_{E({DV}_1)} & {CP}_E \\ {CP}_E & {SS}_{E({DV}_2)} \end{pmatrix}$$ 
+
+```{r}
+# Assign error matrix to variable E
+E = matrix(c(SS.error.act,CP.error,
+             CP.error,SS.error.tho),2,2)
+round(E, 0)
+```
+
+## Multivariate signal to noise {.smaller}
+
+Now in the same way we get the F ration in ANOVA by looking at the ratio of the variance in the model and the variance of the error, with MANOVA we have to look at the ratio of the hypothesis matrix H and the error matrix E. The problem is that you just can't devide matrices. Bus you can multibply by the inverse to get to the devision of a matrix. This is said to be very hard but R makes this very easy for us.
+
+We can use the `solve()` function to get the inverse of a matrix. U can use the `%*%` operator to multiply a matrix by an inverse matrix.
+
+So let's first calculate the inverse of the error matrix E and then multiply that with the hypothesis matrix H.
+
+------------
+
+```{r}
+# Create inverse E
+E.inverse = solve(E)
+round(E.inverse, 4)
+
+# And multiply
+HE.inverse = H %*% E.inverse
+round(HE.inverse, 4)
+```
+
+## Eigen values
+
+```{r}
+eigen.values = eigen(HE.inverse)$values
+round(eigen.values, 3)
+```
+
+## Test statistics
+
+Finaly we can calculate the test statistic for our $H_0$ hypothesis testing.
+
+## Pillai-Barrtlett trace
+
+> Pillai’s trace is the sum of the proportion of explained variance on the discriminant functions.
+
+Excerpt From: Field, Andy. “Discovering Statistics Using IBM SPSS Statistics 4th c2013 Andy Field.”. 
+
+$$V = \sum_{i=1}^s \frac{\lambda_i}{1 + \lambda_i}$$
+
+```{r}
+P.B.trace = sum(eigen.values / (1 + eigen.values))
+P.B.trace
+```
+
+## Hotelling-Lawley trace
+
+> The Hotelling–Lawley trace&hellip; &hellip;is simply the sum of the eigenvalues for each variate
+
+Excerpt From: Field, Andy. “Discovering Statistics Using IBM SPSS Statistics 4th c2013 Andy Field.”. 
+
+$$T = \sum_{i=1}^s \lambda_i$$
+
+```{r}  
+H.L.trace = sum(eigen.values)
+H.L.trace
+```
+
+## Wilks's lambda
+
+> Wilks’s lambda is the product of the unexplained variance
+
+Excerpt From: Field, Andy. “Discovering Statistics Using IBM SPSS Statistics 4th c2013 Andy Field.”. 
+
+$$\Lambda = \prod_{i=1}^s \frac{1}{1 + \lambda_i}$$
+
+```{r}  
+W.lambda = prod(1 / (1 + eigen.values))
+W.lambda
+```
+
+## Roy's largest root
+
+> Roy’s largest root is the largest eigenvalue.
+
+$$\Theta = \lambda_{largest}$$
+
+```{r}
+R.largest.root = max(eigen.values)
+R.largest.root
+```
+
+```{r, eval=FALSE, echo=FALSE}
+
+ E^{-1} = \begin{pmatrix} SS_{E({DV}_1)} & CP_E \\ CP_E & SS_{E({DV}_2)} \end{pmatrix}^{-1} = \\
+HE^{-1} &=& \begin{pmatrix} \dots & \dots \\ \dots & \dots \end{pmatrix} \\
+HE^{-1}_{variate} &=& \begin{pmatrix} \dots & 0 \\ 0 & \dots \end{pmatrix} \\
+```
+

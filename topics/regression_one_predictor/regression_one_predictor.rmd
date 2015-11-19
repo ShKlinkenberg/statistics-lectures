@@ -1,0 +1,278 @@
+# Regression
+
+One predictor
+
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Regression {.smaller}
+
+$$y_i = b_0 + b_1 x_i + \epsilon_i$$
+
+```{r, echo=FALSE, eval=FALSE}
+# Install if nesserary and load RCurl package
+if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
+library(RCurl)
+
+key = "1foUIwXqvvAWRg7FKdRMAIBLakpLbnhUpYhiTYayaPfc" # cijfers cijfer
+
+# Set google url
+google.url <- paste("https://docs.google.com/spreadsheets/d/",key,"/export?format=csv&id=",key, sep='')
+
+# Load csv
+myCsv <- getURL(google.url)
+# Read csv and assing to data object
+data <- read.csv(textConnection(myCsv))
+# Change header names
+names(data)[2:4] <- c('IQ', 'cijfers', 'betrouwbaar')
+```
+
+```{r}
+set.seed(28736)
+
+N     = 123
+mu    = 120
+sigma = 15
+IQ    = rnorm(N, mu, sigma)
+
+b_0   =  1
+b_1   = .04
+error = rnorm(N, 0, 1)
+  
+cijfers = b_0 + b_1 * IQ + error
+
+data = data.frame(cijfers, IQ)
+data = round(data, 2)
+
+# Write data for use in SPSS
+write.table(data, "IQ.csv", row.names=FALSE, col.names=TRUE, dec='.')
+```
+
+
+## The data {.smaller}
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate regression parameters
+
+$${cijfer}_i = b_0 + b_1 {IQ}_i + \epsilon_i$$
+
+```{r, eval=T}
+IQ      = data$IQ
+cijfers = data$cijfers
+```
+
+## Calculate $b_1$
+
+$$b_1 = r_{yx} \frac{s_y}{s_x}$$
+
+```{r}
+# Calculate b1
+
+cor.cijfers.IQ = cor(cijfers,IQ)
+sd.cijfers     = sd(cijfers)
+sd.IQ          = sd(IQ)
+
+b1 = cor.cijfers.IQ * ( sd.cijfers / sd.IQ )
+b1
+```
+
+## Calculate $b_0$
+
+$$b_0 = \bar{y} - b_1 \bar{x}$$
+
+```{r}
+mean.cijfers = mean(cijfers)
+mean.IQ      = mean(IQ)
+
+b0 = mean.cijfers - b1 * mean.IQ
+b0
+```
+
+## Calculate t-values for b's {.smaller}
+
+$$t_{n-p-1} = \frac{b - \mu_b}{{SE}_b}$$
+
+Where $n$ is the number of rows, $p$ is the number of predictors, $b$ is the beta coefficient and ${SE}_b$ its standard error.
+
+```{r}
+# Get Standard error's for b
+fit <- lm(cijfers~IQ)
+se = summary(fit)[4]$coefficients[,2]
+
+se.b0 = se[1]; se.b0
+se.b1 = se[2]; se.b1
+```
+
+-------
+
+```{r}
+# Calculate t's
+mu.b0 = 0
+mu.b1 = 0
+t.b0  = (b0 - mu.b0) / se.b0; t.b0
+t.b1  = (b1 - mu.b1) / se.b1; t.b1
+
+n     = nrow(data) # number of rows
+p     = 1          # number of predictors
+df.b0 = n - p - 1
+df.b1 = n - p - 1
+```
+
+## P-values of $b_0$
+
+```{r}
+if (!"visualize" %in% installed.packages()) { 
+  install.packages("visualize")} 
+  
+library("visualize")
+
+# p-value for b0
+visualize.t(c(-t.b0,t.b0),df.b0,section='tails')
+```
+
+## P-values of $b_1$
+
+```{r}
+# p-value for b1
+visualize.t(c(-t.b1,t.b1),df.b1,section='tails')
+```
+
+## Define regression equation
+
+$$\widehat{cijfer} = {model} = b_0 + b_1 {IQ}$$
+
+So now we can add the expected cijfers based on this model
+
+```{r}
+data$expcijfers = b0 + b1 * IQ
+```
+
+## Expected values {.smaller}
+
+Let's have a look
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## $y$ vs $\hat{y}$
+
+And lets have a look at this relation between expectation and reality
+
+```{r}
+expcijfers <- data$expcijfers
+
+plot(expcijfers,cijfers)
+```
+
+## Error {.smaller}
+
+The error / residual is the difference between expected and reality
+
+```{r}
+data$error = cijfers - expcijfers
+```
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Model fit
+
+The fit of the model is the amount of error, which can be summed in the correlation r.
+
+Let's look at this correlation r
+
+```{r}
+r = cor(expcijfers,cijfers)
+r
+```
+
+## Explained variance
+
+```{r}
+r^2
+```
+
+## Explained variance visually
+
+```{r}
+# This is all the cijfers data
+plot(cijfers,xlab='participants')
+# With the mean
+lines(1:n,rep(mean(cijfers),n),col='blue',lwd=2)
+
+# The blue lines are the total variance, the deviation from the mean.
+segments(1:n, cijfers, 1:n, mean(cijfers), col='blue')
+
+# The model predicts the cijfers scores
+points(1:n,expcijfers, col='red')
+
+# The part of the variation that overlaps is the 'explained' variance. 
+segments(1:n, expcijfers, 1:n, mean(cijfers), col='red')
+```
+
+The part that does not overlap is therefore 'unexplained' variance. And because $r^2$ is the explained variance, $1 - r^2$ is the unexplained variance.
+
+## Test model fit
+
+Compare model to mean Y (cijfers) as model
+
+$$F = \frac{(n-p-1) r^2}{p (1-r^2)}$$
+
+Where ${df}_{model} = n - p - 1 = N - K - 1$.
+
+```{r}
+F = ( (n-p-1)*r^2 ) / ( p*(1-r^2) )
+F
+```
+
+## Signal to noise
+
+Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.
+
+```{r}
+df.model = n-p-1
+df.error = p
+
+ SS_model = sum((expcijfers - mean(cijfers))^2)
+ SS_error = sum((cijfers - expcijfers)^2)
+ MS_model = SS_model * df.model
+ MS_error = SS_error * df.error
+ F = MS_model / MS_error
+ F
+```
+
+## Visualize
+
+```{r}
+visualize.f(F, df.model, df.error, section='upper')
+```
+
+## The slope
+
+```{r}
+# Extra
+
+plot(IQ,cijfers, xlim=c(0, 160), ylim=c(0,10))
+abline(lm(cijfers~IQ))
+lines(c(2,2),c(0,200),col='red')
+lines(c(3,3),c(0,200),col='red')
+lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
+lines(c(0,10),rep(b0 + b1 * 2, 2),col='red')
+lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
+lines(c(0,10),rep(b0 + b1 * 3, 2),col='red')
+
+text(2.5, (b0 + b1 * 2),1, pos=1, cex=2)
+text(3  , (b0 + b1 * 2.5),
+     (b0 + b1 * 3)-(b0 + b1 * 2), 
+     pos=4, 
+     cex=2)
+
+```
+
