@@ -1,7 +1,8 @@
 ---
-title: "Multiple regression"
+title: "ANOVA"
+subtitle: "One-way repeated"
 author: "Klinkenberg"
-date: "18 nov 2015"
+date: "21 okt 2015"
 output: 
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
@@ -24,7 +25,7 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/regression_multiple_predictors/regression_multiple_predictors.rmd"}
+```{r child="../../../topics/anova_repeated_one-way/anova_repeated_one-way.rmd"}
 ```
 
 # END

@@ -1,0 +1,139 @@
+# Multiple regression
+
+## Read data
+
+```{r, echo=FALSE, eval=FALSE}
+set.seed(273645)
+n = 89
+
+latente_variabele = rnorm(n, 0, 1) # Brain speed?
+
+IQ        = 120 + ( latente_variabele * 15 ) + rnorm(n)
+Motivatie = 15  + ( latente_variabele * 2  ) + rnorm(n)
+
+b_0 = -100
+b_1 = 1 # Beta for IQ̧
+b_2 = 1 # Beta for Motivation
+
+error = rnorm(n, 0, 5)
+
+Studieprestatie = b_0 + b_1 * IQ + b_2 * Motivatie + error
+
+data = data.frame(Studieprestatie, Motivatie, IQ)
+
+fit = lm(Studieprestatie ~ Motivatie + IQ, data)
+summary(fit)
+
+head(data, 10)
+```
+
+
+```{r}
+data <- read.csv('IQ.csv', header=T)
+
+head(data)
+
+IQ              = data$IQ
+Studieprestatie = data$Studieprestatie
+Motivatie       = data$Motivatie
+```
+
+## Regressie model in R
+
+studie prestatie voorspellen op basis van IQ en motivatie
+
+```{r}
+fit <- lm(Studieprestatie ~ IQ + Motivatie)
+```
+
+## Wat is het regressie model
+
+```{r}
+fit$coefficients
+
+b.0 = fit$coefficients[1] ## Intercept
+b.1 = fit$coefficients[2] ## Beta coefficient voor IQ
+b.2 = fit$coefficients[3] ## Beta coefficient voor Motivatie
+```
+
+De beta coëfficienten zijn: 
+
+* $b_0$ (intercept) = `r b.0`
+* $b_1$ = `r b.1`
+* $b_2$ = `r b.2`.
+
+## Wat zijn de verwachte waarden op basis van dit model
+
+$$\widehat{\text{studie prestatie}} = b_0 + b_1 \text{IQ} + b_2 \text{Motivatie}$$
+
+```{r}
+exp.stu.prest = b.0 + b.1 * IQ + b.2 * Motivatie
+
+model = exp.stu.prest
+```
+
+$$\text{model} = \widehat{\text{studie prestatie}}$$
+
+## Regressie model toepassen
+
+$$\widehat{\text{studie prestatie}} = b_0 + b_1 \text{IQ} + b_2 \text{Motivatie}$$
+$$\widehat{\text{model}} = b_0 + b_1 \text{IQ} + b_2 \text{Motivatie}$$
+
+```{r}
+cbind(model, b.0, b.1, IQ, b.2, Motivatie)[1:5,]
+```
+
+$$\widehat{\text{model}} = `r b.0` + `r b.1` \times \text{IQ} + `r b.2` \times \text{Motivatie}$$
+
+## Hoever zitten we er naast?
+
+```{r}
+error = Studieprestatie - model
+
+cbind(model, Studieprestatie, error)[1:5,]
+```
+
+## Outcome = Model + Error
+
+Is dat zo?
+
+```{r}
+Studieprestatie == model + error
+```
+
+> - Ja!
+
+## Visueel {.smaller}
+
+```{r}
+plot(Studieprestatie, xlab='personen', ylab='Studieprestatie')
+
+n = length(Studieprestatie)
+gemiddelde.studieprestatie = mean(Studieprestatie)
+
+## Voeg het gemiddelde toe
+lines(c(1, n), rep(gemiddelde.studieprestatie, 2))
+
+## Wat is de totale variantie?
+segments(1:n, Studieprestatie, 1:n, gemiddelde.studieprestatie, col='blue')
+
+## Wat zijn onze verwachte scores op basis van dit regressie model?
+points(model, col='orange')
+
+## Hoever zitten we ernaast, wat is de error?
+segments(1:n, Studieprestatie, 1:n, model, col='purple', lwd=3)
+```
+
+## Verklaarde variantie
+
+De verklaarde variantie is dat deel van de afwijking ten opzichte van het gemiddelde die het model overeen heeft met de outcome.
+
+In percentage moet dat worden afgezet tegen de totale variantie, dit wordt ook wel $r^2$ of $R^2$ genoemd.
+
+Waarom?
+
+```{r}
+r = cor(Studieprestatie, model)
+r^2
+```
+
