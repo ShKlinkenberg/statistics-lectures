@@ -37,7 +37,9 @@ We want to test the difference in national extraversion but want to controll for
 n = 20
 k = 3
 group = round(runif(n,1,k),0)
-covar = round(rnorm(n,8,1),2)
+mu.covar    = 8
+sigma.covar = 1
+covar = round(rnorm(n,mu.covar,sigma.covar),2)
 
 # Create dummy variables
 dummy.1 <- ifelse(group == 2, 1, 0)
@@ -73,12 +75,14 @@ outcome = b.0 + b.1 * dummy.1 + b.2 * dummy.2 + b.3 * covar + error
 ```{r, echo=FALSE}
 
 outcome <- round(outcome,2)
+
+n <- 1:length(outcome)
 # put data in data frame
 data <- data.frame(group, covar, outcome)
 
 # Order by group
 data <- data[order(data$group),]
-
+data <- cbind(n, data)
 # Write data for use in SPSS
 write.csv(data, "ANCOVA.csv", row.names=FALSE)
 
@@ -148,7 +152,6 @@ datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, inf
 ## Total variance visual
 
 ```{r}
-data$n <- 1:length(data$outcome)
 plot <- ggplot(data, aes(x=n, y=outcome)) + geom_point(shape=1) +
         geom_line(stat = "hline", yintercept = "mean") +
         geom_segment(aes(x = n, y = grand.mean, xend = n, yend = outcome))
@@ -200,6 +203,23 @@ plot + geom_segment(aes(x = n-.1, y = outcome, xend = n-.1, yend = data$model, c
 plot
 ```
 
+## Sums of squares
+
+```{r}
+SS.model = with(data, sum((model       - grand.mean)^2))
+
+# Sums of squares for individual effects
+SS.model.group = with(data, sum((model.group - grand.mean)^2))
+SS.model.covar = with(data, sum((model.covar - grand.mean)^2))
+
+SS.covar = SS.model - SS.model.group; SS.covar ## SS.covar corrected for group
+SS.group = SS.model - SS.model.covar; SS.group ## SS.group corrected for covar
+```
+
+## F-ratio
+
+$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
+
 ## Adjusted means
 
 ```{r}
@@ -217,19 +237,18 @@ data$mean.adj <- with(data, b.int + b.cov * mean(covar) + b.2 * dummy.1 + b.3 * 
 aggregate(mean.adj ~ group, data, mean)
 ```
 
-
-
-
-
+## Real $\beta$'s
 
 ```{r}
-SS.model       = with(data, sum((model       - grand.mean)^2))
-SS.error       = with(data, sum((outcome     - model     )^2))
+b.0 = 15 # initial value for group 1
+b.1 = 3  # difference between group 1 and 2
+b.2 = 4  # difference between group 1 and 3
+b.3 = 3  # Weight for covariate
 
-# Sums of squares for individual effects
-SS.model.group = with(data, sum((model.group - grand.mean)^2))
-SS.model.covar = with(data, sum((model.covar - grand.mean)^2))
-
-SS.model - SS.model.group ## SS.covar corrected for group
-SS.model - SS.model.covar ## SS.group corrected for covar
+cbind(m.covar = mu.covar*3, 
+      BETA    = c(b.0, b.0+b.1, b.0+b.2), 
+      sum     = mu.covar*3 + c(b.0, b.0+b.1, b.0+b.2))
 ```
+
+
+
