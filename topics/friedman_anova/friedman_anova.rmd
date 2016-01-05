@@ -4,6 +4,8 @@ library("DT")
 
 if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
 library("visualize")
+
+set.seed(87364536)
 ```
 
 # Friedman’s ANOVA
@@ -62,7 +64,7 @@ write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ param
 Rank each row.
 
 ```{r}
-# Ken de rangordening per persoon toe.
+# Rank for each person
 ranks = t(apply(data, 1, rank))
 ```
 
@@ -78,7 +80,7 @@ $$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
 
 - $N$ total number of subjects
 - $k$ number of groups
-- $R$ rank sums
+- $R_i$ rank sums for each group
 
 ## Calculate $F_r$
 
@@ -98,12 +100,16 @@ $$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
 
 ```{r}
 k = 3
-
-df = k - 1
-
 F.r = ( ( 12/(N*k*(k+1)) ) * sum(R.i^2) ) - ( 3*N*(k+1) )
 F.r
 ```
+
+And the degrees of freedom
+
+```{r}
+df = k - 1
+```
+
 
 ## Test for significance
 

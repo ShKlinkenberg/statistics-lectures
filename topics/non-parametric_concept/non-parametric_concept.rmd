@@ -2,7 +2,7 @@
 
 ## Parametric vs Nonparametric {#mytable}
 
-<style>
+<!-- <style>
 #mytable th {
 background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #FFA500), color-stop(80%, #FFA500)) no-repeat !important;
 background-image: -webkit-linear-gradient(top, rgb(255,165,0) 40%, rgb(255,165,0) 80%) !important;
@@ -12,7 +12,7 @@ background: -moz-linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !impor
 background: -o-linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 }
-</style>
+</style> -->
 
 Attribute    | Parametric            | Nonparametric
 -------------|-----------------------|--------------------------
@@ -25,17 +25,12 @@ speed        | fast                  | slow
 ## Ranking
 
 ```{r, fig.height=3, fig.align='center'}
-x = c(1, 4, 6, 7, 8, 9); y = c(1, 4, 6, 7, 8, 39)
+x = c(1, 4, 6, 7, 8, 9)
+y = c(1, 4, 6, 7, 8, 39)
 
 layout(matrix(1:2, 1, 2))
-boxplot(x, horizontal=T, col='orange'); boxplot(y, horizontal=T, col='orange')
-```
-
-## Ranking
-
-```{r, echo=FALSE, fig.height=3, fig.align='center'}
-layout(matrix(1:2, 1, 2))
-boxplot(rank(x), horizontal=T, col='orange'); boxplot(rank(y), horizontal=T, col='orange')
+boxplot(x, horizontal=T, col='red')
+boxplot(y, horizontal=T, col='red')
 ```
 
 ```{r, fig.height=3}

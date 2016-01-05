@@ -1,0 +1,84 @@
+load("/Users/Sharon/Dropbox/UvA/Onderwijs/statistics-lectures/topics/moderation/moderation.rdata")
+ls()
+## 3d plot package rgl#
+## install.packages('rgl')#
+library(rgl)#
+attach(data)#
+#
+plot3d(predictor, moderator, outcome, #
+       #col  = rainbow(100), #
+       col  = "red",#
+       size = 8)
+planes3d(a = 0, #
+         b = 1, #
+         c = 0,#
+         d = -sds,#
+         #d = -quantiles,#
+         alpha=0.7,#
+         color = c("blue"))
+z.pre[1:5,1:5]
+surface3d(x.pre,y.mod,z.pre, color = c("green"))
+planes3d(a = 0, #
+         b = 1, #
+         c = 0,#
+         #d = -sds,#
+         d = -quantiles,#
+         alpha=0.7,#
+         color = c("blue"))
+## 3d plot package rgl#
+## install.packages('rgl')#
+library(rgl)#
+attach(data)#
+#
+plot3d(predictor, moderator, outcome, #
+       col  = rainbow(100), #
+       #col  = "red",#
+       size = 8)
+## install.packages('rgl')#
+library(rgl)#
+attach(data)#
+#
+plot3d(predictor, moderator, outcome, #
+       #col  = rainbow(100), #
+       col  = "red",#
+       size = 8)
+planes3d(a = 0, #
+         b = 1, #
+         c = 0,#
+         d = -sds,#
+         #d = -quantiles,#
+         alpha=0.7,#
+         color = c("blue"))
+surface3d(x.pre,y.mod,z.pre, color = c("green"))
+load("/Users/sklinke1/Dropbox/UvA/Onderwijs/statistics-lectures/topics/moderation/moderation.rdata")
+library(rgl)#
+attach(data)#
+#
+plot3d(predictor, moderator, outcome, #
+       #col  = rainbow(100), #
+       col  = "red",#
+       size = 8)
+planes3d(a = 0, #
+         b = 1, #
+         c = 0,#
+         d = -sds,#
+         #d = -quantiles,#
+         alpha=0.7,#
+         color = c("blue"))
+surface3d(x.pre,y.mod,z.pre, color = c("green"))
+factor_lading = matrix(c(0.18, 0.66, 0.59,#
+                         0.62, 0.25, 0.48,#
+                         0.25, 0.03, 0.86,#
+                         0.58, 0.91, 0.12), 4,3)
+factor_lading
+factor_lading[3,]
+factor_lading[,2]
+sum(factor_lading[3,]^2)
+sum(factor_lading[,2]^2)
+rm(list=ls())
+factor_lading = matrix(c(0.18, 0.66, 0.59,#
+                         0.62, 0.25, 0.48,#
+                         0.25, 0.03, 0.86,#
+                         0.58, 0.91, 0.12), 4,3, byrow=T)
+sum(factor_lading[3,]^2)
+sum(factor_lading[,2]^2)

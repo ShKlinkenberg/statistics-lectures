@@ -55,7 +55,7 @@ R
 
 $$W=min\left(\sum{R_1},\sum{R_2}\right)$$
   
-  ```{r}
+```{r}
 W <- min(R$R)
 W
 ```
@@ -79,7 +79,7 @@ cbind(n.1, n.2)
 
 $$\bar{W}_s=\frac{n_1(n_1+n_2+1)}{2}$$
   
-  ```{r}
+```{r}
 W.mean = (n.1*(n.1+n.2+1))/2
 W.mean
 ```
@@ -88,7 +88,7 @@ W.mean
 
 $${SE}_{\bar{W}_s}=\sqrt{ \frac{n_1 n_2 (n_1+n_2+1)}{12} }$$
   
-  ```{r}
+```{r}
 W.se = sqrt((n.1*n.2*(n.1+n.2+1))/12)
 W.se
 ```
@@ -101,23 +101,23 @@ $$z = \frac{W - \bar{W}}{{SE}_W}$$
 
 $$\frac{X - \bar{X}}{{SE}_X} \text{or} \frac{b - \mu_{b}}{{SE}_b} $$
   
-  ```{r}
+```{r}
 z = (W - W.mean) / W.se
 z
 ```
 
-## Test for significance
+## Test for significance 1 sided
 
-```{r, echo=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=TRUE, warning=FALSE, fig.align='center'}
 if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
 library("visualize")
 
 visualize.norm(z, section="lower")
 ```
 
-## Test for significance
+## Test for significance 2 sided
 
-```{r, echo=FALSE, warning=FALSE, fig.align='center'}
+```{r, echo=TRUE, warning=FALSE, fig.align='center'}
 visualize.norm(c(z,-z), section="tails")
 ```
 
@@ -125,7 +125,7 @@ visualize.norm(c(z,-z), section="tails")
 
 $$r = \frac{z}{\sqrt{N}}$$
   
-  ```{r}
+```{r}
 N = sum(n$R)
 r = z / sqrt(N)
 r
@@ -135,7 +135,7 @@ r
 
 $$U = n_1 n_2 + \frac{n_1 (n_1 + 1)}{2} - R_1$$
   
-  ```{r}
+```{r}
 U = (n.1*n.2)+(n.1*(n.1+1))/2-R$R[1]
 U
 ```
@@ -144,12 +144,12 @@ U
 
 $$\bar{U} = \frac{n_1 n_2}{2}$$
   
-  ```{r}
+```{r}
 (n.1*n.2)/2
 ```
 
 $${SE}_U = \sqrt{\frac{n_1 n_2 (n_1 + n_2 + 1)}{12}}$$
   
-  ```{r}
+```{r}
 sqrt((n.1*n.2*(n.1+n.2+1))/12)
 ```

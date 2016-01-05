@@ -1,0 +1,180 @@
+# Mediation
+
+```{r, echo=FALSE}
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Onderzoek
+
+Gaat de snelheid van genezing sneller bij het gebruik van homeopathische middelen of wordt dit gemedieerd door een gezonde leefstijl?
+
+![Homeopatisch](http://www.kidneyabc.com/uploads/allimg/130404/2-13040414233CW.jpg)
+
+## Simulate data
+
+Create predictor variable
+
+```{r}
+set.seed(1976)
+## Set parameters for simulation
+n     = 100
+mu    = 10
+sigma = 2
+## Predictor
+gebruik.homeopathisch.middel = rnorm(n, mu, sigma)
+```
+
+## Mediator 
+
+Create mediator
+
+```{r}
+b0    = 2
+b1    = 1.2
+error = rnorm(n,0,.7)
+gezonde.leefstijl = b0 + b1*gebruik.homeopathisch.middel + error
+```
+
+## Specify model 
+
+Create outcome variable
+
+```{r}
+b0    = 6
+b1    = 1.2
+b2    = 3
+error = rnorm(n,0,1.4)
+snelheid.van.genezing = b0 + b1*gebruik.homeopathisch.middel +
+                             b2*gezonde.leefstijl + error
+
+data <- data.frame(gebruik.homeopathisch.middel, 
+                   gezonde.leefstijl, 
+                   snelheid.van.genezing)
+data <- round(data, 4)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+## Write data for use in SPSS
+write.csv(data, "mediation.csv", row.names=FALSE)
+```
+
+## The data
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Apply 3 models {.smaller}
+
+```{r}
+m.1.out.pre     <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel)
+m.2.med.pre     <- lm(gezonde.leefstijl     ~ gebruik.homeopathisch.middel)
+m.3.out.pre.med <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel + 
+                                              gezonde.leefstijl)
+```
+
+## Extract beta coëfficients
+
+```{r}
+b.a        = m.2.med.pre$coefficients[2]
+b.b        = m.3.out.pre.med$coefficients[3]
+b.c        = m.1.out.pre$coefficients[2]
+b.c.accent = m.3.out.pre.med$coefficients[2]
+```
+
+## View beta coëfficients
+
+```{r}
+b.a
+b.b
+```
+
+## View beta coëfficients
+
+```{r}
+b.c
+b.c.accent
+```
+
+## Calculate indirect effect
+
+$$a \times b = b_a \times b_b$$
+
+```{r}
+b.a*b.b
+b.c - b.c.accent
+```
+
+## Calculate inderect effect (partially standardized)
+
+$$\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$$
+
+```{r}
+b.a*b.b/sd(snelheid.van.genezing)
+```
+
+## Calculate inderect effect (standardized)
+
+$$\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}$$
+
+```{r}
+b.a*b.b/sd(snelheid.van.genezing)*sd(gebruik.homeopathisch.middel)
+```
+
+## Calculate $P_M$
+
+$$\frac{ab}{c} = \frac{b_a b_b}{b_c}$$
+
+```{r}
+b.a*b.b/b.c
+```
+
+## Calculate $R_M$
+
+$$\frac{ab}{c`} = \frac{b_a b_b}{b_{c`}}$$
+
+```{r}
+b.a*b.b/b.c.accent
+```
+
+## Calculate $R^2_M$ {.smaller}
+
+$$R^2_{out,med} − (R^2_{out,pre \times med} − R^2_{out,pre})$$
+
+```{r}
+m.4.out.med <- lm(snelheid.van.genezing ~ gezonde.leefstijl)
+R2_out.med     = cor(m.4.out.med$fitted.values, snelheid.van.genezing)^2
+R2_out.pre.med = cor(m.3.out.pre.med$fitted.values, snelheid.van.genezing)^2
+R2_out.pre     = cor(m.1.out.pre$fitted.values, snelheid.van.genezing)^2
+
+R2_out.med - (R2_out.pre.med - R2_out.pre)
+```
+
+## Calculate $\kappa^2$
+
+$$\frac{ab}{max(ab)} = \frac{b_a b_b}{max(b_a b_b)}$$
+
+What is $max(ab)$?
+
+I am speculating here.
+
+## Calculate $\kappa^2$ {.smaller}
+
+```{r}
+summary(m.1.out.pre)
+```
+
+## Calculate $\kappa^2$ {.smaller}
+
+```{r}
+summary(m.3.out.pre.med)
+```
+
+## Calculate $\kappa^2$
+
+$$\frac{ab}{max(ab)} = \frac{b_a b_b}{max(b_a b_b)}$$
+
+```{r}
+b.a*b.b/max(rnorm(1000, b.a*b.b, 0.14+0.24))
+```

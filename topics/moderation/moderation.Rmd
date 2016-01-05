@@ -1,0 +1,169 @@
+# Moderation
+
+<!-- Allow color highlighting in mathjax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+```{r, echo=FALSE}
+rm(list=ls())
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Model
+
+$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}Out_i = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}+ \epsilon_i$$
+
+## Simulate data.
+
+```{r}
+set.seed(283) ## Mooie seed :-)
+predictor <-             rnorm(100, 0, 3)
+moderator <- predictor + rnorm(100, 0, 3) ## multicollineariteit
+error     <-             rnorm(100, 0, 3) ## error
+intercept <- 5
+outcome   <- intercept + .5*predictor + 
+                        -.4*moderator + 
+                         .4*predictor*moderator + 
+                         error
+```
+
+## Mean un centring
+
+```{r}
+predictor <- predictor + 15 
+moderator <- moderator + 7
+
+data <- data.frame(predictor, moderator, outcome)
+head(data) 
+```
+
+```{r,echo=FALSE}
+save(data, file="moderation.rdata")
+write.csv(data, "moderation.csv")
+```
+
+## View data {.smaller}
+
+```{r, echo=FALSE}
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Scatterplots
+
+```{r}
+plot(data)
+```
+
+## Correlations
+
+```{r}
+cor(data)
+```
+
+## 3D plot
+
+```{r, eval=FALSE}
+## 3d plot package rgl
+## install.packages('rgl')
+library(rgl)
+attach(data)
+
+plot3d(predictor, moderator, outcome, 
+       #col  = rainbow(100), 
+       col  = "red",
+       size = 8)
+```
+
+## 1 SD planes
+
+```{r}
+quantiles <- as.vector(quantile(moderator,seq(.1,.9,.1)))
+sds       <- c(mean(moderator)+(sd(moderator)*c(-1,0,1)))  
+```
+
+```{r, eval=FALSE}
+planes3d(a = 0, 
+         b = 1, 
+         c = 0,
+         d = -sds,
+         #d = -quantiles,
+         alpha=0.7,
+         color = c("blue"))
+```
+
+## Fit model {.smaller}
+
+```{r}
+#fit2 <- lm(outcome ~ predictor + moderator)
+fit <- lm(outcome ~ predictor + moderator + predictor*moderator)
+summary(fit)
+```
+
+## Regression equation
+
+$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}$$
+
+$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times Pred_i + `r round(fit$coefficients[3],2)` \times Mod_i + \color{red} `r round(fit$coefficients[4],2)` \times Pred_i \times Mod_i \color{black}$$
+
+```{r}
+regeq <- function(model, predictor, moderator) { 
+    fit$coefficients[1] + 
+    fit$coefficients[2]*predictor + 
+    fit$coefficients[3]*moderator + 
+    fit$coefficients[4]*predictor*moderator
+}
+
+x.pre <- seq(10,21,length.out=30)
+y.mod <- seq( 0,16,length.out=30)
+
+z.pre <- outer(x.pre, y.mod, FUN='regeq', model=fit)
+```
+
+```{r, echo=FALSE}
+colnames(z.pre) <- x.pre
+rownames(z.pre) <- y.mod
+save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
+```
+
+## Expected surface
+
+```{r, eval=FALSE}
+surface3d(x.pre,y.mod,z.pre, color = c("green"))
+```
+
+## Expected values
+
+```{r}
+data$exp <- fit$fitted.values
+```
+
+## Explained variance {.smaller}
+
+```{r, echo=FALSE}
+## This is all the data
+n=nrow(data)
+plot(data$outcome,xlab='participants')
+## With the mean
+lines(1:n,rep(mean(data$outcome),n),col='blue',lwd=2)
+
+## The blue lines are the total variance, the deviation from the mean.
+segments(1:n, mean(data$outcome), 1:n, data$outcome, col='blue')
+
+p <- recordPlot()
+```
+
+```{r, echo=FALSE}
+p
+
+## The model predicts the IQ scores
+points(1:n, data$exp, col='red')
+
+## The part of the variation that overlaps is the 'explained' variance. 
+#for(i in 1:n) {lines(c(i,i),c(mean(data$exp), data$exp[i]), col='red')}
+segments(1:n, mean(data$exp), 1:n, data$exp, col='red')
+```

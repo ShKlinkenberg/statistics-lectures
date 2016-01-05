@@ -1,7 +1,7 @@
 ---
 title: "Non-parametric tests"
 author: "Klinkenberg"
-date: "4 Jul 2015"
+date: "5 Jan 2016"
 output: 
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
@@ -40,4 +40,4 @@ local({
 
 # END
 
-<img src="https://g.twimg.com/Twitter_logo_white.png" style="width:20px">  <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:inherit; border-bottom:none;">@shklinkenberg</a>
+<img src="https://g.twimg.com/Twitter_logo_white.png" style="width:20px">  <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:inherit; border-bottom:none; ">@shklinkenberg</a>

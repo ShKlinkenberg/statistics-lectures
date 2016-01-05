@@ -4,11 +4,13 @@ library("DT")
 
 if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
 library("visualize")
+
+set.seed(3562534)
 ```
 
 # Wilcoxon signed-rank test
 
-# Paired 2 samples
+Paired 2 samples
 
 ## Wilcoxon signed-rank test
 
@@ -71,17 +73,18 @@ data$abs.difference = abs(data$Ecstasy - data$Alcohol)
 data$rank <- NA
 
 # Rank only the non tied difference scores
-data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0),'abs.difference'])
+data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0),
+                                                      'abs.difference'])
 
 # Assign a '+' or a '-' to those values 
 data$sign = sign(data$Ecstasy - data$Alcohol)
 
-# Ass positive and negative rank to     test  if    else
+# Add positive and negative rank to     test  if    else
 data$rank_pos = with(data, ifelse(sign ==  1, rank, 0   ))
 data$rank_neg = with(data, ifelse(sign == -1, rank, 0   ))
 ```
 
-## The data
+## The data {.smaller}
 
 ```{r, echo=FALSE}
 datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))

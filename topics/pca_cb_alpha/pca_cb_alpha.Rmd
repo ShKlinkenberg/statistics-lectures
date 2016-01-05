@@ -1,0 +1,341 @@
+# Principal component analysis
+
+<!-- Allow color highlighting in mathjax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+```{r, echo=FALSE}
+# Clear memory
+rm(list=ls())
+
+# simulate data
+set.seed(1976)
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Simulate latent traits
+
+* Conscientiousness
+* Extraversion
+* Neuroticism
+
+```{r}
+n     = 100
+mu    = 0 
+sigma = 2
+
+# Create latent traits
+trait.con <- rnorm(n,mu,sigma)
+trait.ext <- rnorm(n,mu,sigma)
+trait.neu <- rnorm(n,mu,sigma) 
+```
+
+---------
+
+<img style="float:none; width: 450px;" src="../../../topics/pca_cb_alpha/conditional_indep.png">
+
+## Latent traits are uncorrelated
+
+```{r}
+cor(cbind(trait.con,
+          trait.ext,
+          trait.neu))
+```
+
+## Set number of items per trait
+
+```{r}
+n.trait.con = 6
+n.trait.ext = 5
+n.trait.neu = 7
+
+data <- data.frame(id = 1:n)
+```
+
+## Items for traits 1
+
+```{r}
+sigma.internal.inconsistency = 6
+data$item.1 <- trait.con + rnorm(n,10,sigma.internal.inconsistency)
+data$item.2 <- trait.con + rnorm(n,10,sigma.internal.inconsistency)
+data$item.3 <- trait.con + rnorm(n,10,sigma.internal.inconsistency)
+data$item.4 <- trait.con + rnorm(n,10,sigma.internal.inconsistency)
+data$item.5 <- trait.con + rnorm(n,10,sigma.internal.inconsistency)
+data$item.6 <- trait.con + rnorm(n,10,sigma.internal.inconsistency)
+```
+
+## Correlations trait 1
+
+```{r}
+plot(cbind(trait.con,data[,2:7]))
+```
+
+## Items for traits 2
+
+```{r}
+sigma.internal.inconsistency = 1
+data$item.7  <- trait.ext + rnorm(n,10,sigma.internal.inconsistency)
+data$item.8  <- trait.ext + rnorm(n,10,sigma.internal.inconsistency)
+data$item.9  <- trait.ext + rnorm(n,10,sigma.internal.inconsistency)
+data$item.10 <- trait.ext + rnorm(n,10,sigma.internal.inconsistency)
+data$item.11 <- trait.ext + rnorm(n,10,sigma.internal.inconsistency)
+```
+
+## Correlations trait 2
+
+```{r}
+plot(cbind(trait.ext,data[,8:12]))
+```
+
+## Items for traits 3
+
+```{r}
+sigma.internal.inconsistency = 1
+data$item.12 <- trait.neu + rnorm(n,10,sigma.internal.inconsistency)
+data$item.13 <- trait.neu + rnorm(n,10,sigma.internal.inconsistency)
+data$item.14 <- trait.neu + rnorm(n,10,sigma.internal.inconsistency)
+data$item.15 <- trait.neu + rnorm(n,10,sigma.internal.inconsistency)
+data$item.16 <- trait.neu + rnorm(n,10,sigma.internal.inconsistency)
+data$item.17 <- trait.neu + rnorm(n,10,sigma.internal.inconsistency)
+data$item.18 <- trait.neu + rnorm(n,10,sigma.internal.inconsistency)
+```
+
+## Correlations trait 3
+
+```{r}
+plot(cbind(trait.neu,data[,13:19]))
+```
+
+## Have a look at the data {.smaller}
+
+```{r, echo=FALSE}
+data <- round(abs(data), 2)
+
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+```{r, echo=FALSE}
+# Write data for use in SPSS
+write.csv(data, "factors.csv", row.names=FALSE)
+```
+
+## Correlations trait 1
+
+```{r, echo=FALSE, eval=FALSE}
+plot(cbind(trait.con,data[ , 2:7 ],
+           trait.ext,data[ , 8:12],
+           trait.neu,data[ ,13:19]))
+```
+
+```{r}
+cor(cbind(trait.con,
+          trait.ext,
+          trait.neu,
+          data[ ,2:7]))[-c(1:3),1:3]
+```
+
+## Correlations trait 2
+
+```{r}
+cor(cbind(trait.con,
+          trait.ext,
+          trait.neu,
+          data[ ,8:12]))[-c(1:3),1:3]
+```
+
+## Correlations trait 3
+
+```{r}
+cor(cbind(trait.con,
+          trait.ext,
+          trait.neu,
+          data[ ,13:19]))[-c(1:3),1:3]
+```
+
+## Show local independence
+
+Item 7 and 8 are positively correlated.
+
+```{r}
+cor(data$item.7, data$item.8)
+```
+
+<img style="float:right; width: 250px;" src="../../../topics/pca_cb_alpha/conditional_indep.png">
+
+--------
+
+But this correlation dissapears if we control for the latent variable.
+
+```{r}
+r.xy = cor(data$item.7, data$item.8)
+r.xz = cor(data$item.7, trait.ext)
+r.yz = cor(data$item.8, trait.ext)
+pcor = ( r.xy - (r.xz * r.yz) ) / ( sqrt(1-r.xz^2) * sqrt(1-r.yz^2) )
+pcor
+```
+
+# KTT
+
+## Klassieke Test Theorie (KTT)
+
+True score = Observed score + Error
+
+$$T = X + E$$
+
+```{r}
+X = apply(data[,2:7], 1, sum)
+T = trait.con
+```
+
+## Plot X and T
+
+```{r, echo=FALSE}
+plot(X,T)
+```
+
+## Explained variance
+
+Indication of accuracy of estimations
+
+<!-- $\rho_{XT}$ &rarr; $r_{XT}$ -->
+
+```{r}
+cor(X,T)^2
+```
+
+## Error
+
+```{r}
+E = T - X
+head(E)
+tail(E)
+```
+
+## Cronbach's alpha
+
+$$\alpha = \frac{N}{N-1} \left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
+
+- $N$ = number of items. $K$ is also used some times
+- $\sigma_{Y_i}^2$ = variances of individual items
+- $\sigma_X^2$ = variance of observed sum score
+
+## CB $\alpha$ calculations
+
+$$\definecolor{red}{RGB}{255,0,0}
+\alpha = \frac{N}{N-1} \left(1-\frac{\color{red}\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
+
+```{r}
+# Calculate variance per column
+variance.per.column <- apply(data[,2:7], 2, var)
+
+# Sum of variance per column
+sum.var <- sum(variance.per.column)
+
+sum.var
+```
+
+## CB $\alpha$ calculations
+
+$$\alpha = \frac{N}{N-1} \left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\color{red} \sigma_X^2}\right)$$
+
+```{r}
+# Calculate sum score per row
+sum.score <- apply(data[,2:7], 1, sum)
+
+# Calculate variance of sum score
+var.sum.score <- var(sum.score)
+
+var.sum.score
+```
+
+## Calculate variance component
+
+This represents the proportion of item variance to total variance.
+
+$$\alpha = \frac{N}{N-1} \left(1-\color{red}\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
+
+```{r}
+prop.item.total.var <- sum.var / var.sum.score
+
+prop.item.total.var
+```
+
+## Calculate proportion covariance
+
+$$\alpha = \frac{N}{N-1} \color{red}\left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
+
+```{r}
+prop.covar <- 1 - prop.item.total.var
+```
+
+## Show relation sumscore variance {.smaller}
+
+Here we show the relation of the variance in the sumscore to the variance and covariance of the individual items.
+
+$$
+\Sigma
+=
+\begin{bmatrix}
+    \sigma^2_{11} & \sigma^2_{12} & \dots  & \sigma^2_{1n} \\
+    \sigma^2_{21} & \sigma^2_{22} & \dots  & \sigma^2_{2n} \\
+    \vdots        & \vdots        & \ddots & \vdots \\
+    \sigma^2_{d1} & \sigma^2_{d2} & \dots  & \sigma^2_{dn}
+\end{bmatrix} = \sigma_{sumscore}
+$$
+
+```{r}
+cov(data[,2:7])
+```
+
+----------
+
+```{r}
+sum(cov(data[,2:7])); var(sum.score)
+sum(cov(data[,2:7])) == var(sum.score)
+```
+
+## Covariance {.smaller}
+
+```{r}
+cov(data[,2:7])
+variance.per.column
+```
+
+$$\alpha = \frac{N}{N-1} \color{red}\left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
+
+## Calculate CB $\alpha$
+
+$$\alpha = \frac{N}{N-1} \left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
+
+```{r}
+# Set number of items
+N = 6
+
+# Calculate Cronbach's Alpha
+cb.alpha = (N/(N-1)) * prop.covar
+
+cb.alpha
+```
+
+## Show CB $\alpha$ < $\rho_{TX}$ {.smaller}
+
+Cronbach's $\alpha$ is the lower bound of the reliability $\rho_{TX}$. 
+
+```{r}
+cb.alpha
+cor(T, X)
+# var(T) / var(X)
+
+cor_XT   = vector()
+
+for(i in 1:1000) { X_values = T + rnorm(n,10,3.6) 
+                   cor_XT[i] = cor(T, X_values)
+                 }
+
+hist(cor_XT, breaks=20, col='red')
+sort(cor_XT)[.025*10000]
+```
+

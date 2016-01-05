@@ -4,6 +4,8 @@ library("DT")
 
 if(!"visualize" %in% installed.packages()){ install.packages("visualize") }
 library("visualize")
+
+set.seed(2348586)
 ```
 
 # Kruskal–Wallis test
@@ -60,21 +62,21 @@ write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ param
 $$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
 
 - $N$ total sample size
-- $n$ sample size per group
+- $n_i$ sample size per group
 - $k$ number of groups
-- $R$ rank sums
+- $R_i$ rank sums per group
 
 ## Calculate H
 
 ```{r}
-# Vervolgens hebben we per groep de som van deze rangen nodig.
+# Now we need the sum of the ranks per group.
 R.i = aggregate(ranks ~ factor, data = data, sum)$ranks
 R.i
 
-# De totale sample size N is:
+# De total sample size N is:
 N = nrow(data)
 
-# En per groep is de sample size n:
+# And the sample size per group is n_i:
 n.i = aggregate(depres ~ factor, data=data, length)$depres
 n.i
 ```
@@ -86,7 +88,11 @@ $$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
 ```{r}
 H = ( 12/(N*(N+1)) ) * sum(R.i^2/n.i) - 3*(N+1)
 H
+````
 
+And the degrees of freedom
+
+```{r}
 k  = 3
 df = k - 1
 ```
