@@ -2,10 +2,11 @@
 title: "Non-parametric tests"
 author: "Klinkenberg"
 date: "5 Jan 2016"
-output: 
+output:
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
-    smaller: FALSE
+    smaller: no
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE}
