@@ -10,7 +10,7 @@ The template folder contains the main file used to generate IOslides. To create 
 
 ## Topics
 
-This folder contains all topics covered in my teaching. New topics can be added by creating a new topic folder and inside the folder a new topic .rmd file. The .rmd file has no YAML header, just a first sectin heading # and subsequent ## headings.
+This folder contains all topics covered in my teaching. New topics can be added by creating a new topic folder and inside the folder a new topic .rmd file. The .rmd file has no YAML header, just a first section heading # and subsequent ## headings.
 
 ## Courses
 
