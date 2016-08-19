@@ -1,4 +1,4 @@
-# Multiple regression
+# Multiple regression {.section}
 
 ## Read data
 
@@ -38,7 +38,7 @@ Studieprestatie = data$Studieprestatie
 Motivatie       = data$Motivatie
 ```
 
-## Regressie model in R
+## Regressie model in R 
 
 studie prestatie voorspellen op basis van IQ en motivatie
 
@@ -46,7 +46,7 @@ studie prestatie voorspellen op basis van IQ en motivatie
 fit <- lm(Studieprestatie ~ IQ + Motivatie)
 ```
 
-## Wat is het regressie model
+## Wat is het regressie model {.subsection}
 
 ```{r}
 fit$coefficients
@@ -74,7 +74,7 @@ model = exp.stu.prest
 
 $$\text{model} = \widehat{\text{studie prestatie}}$$
 
-## Regressie model toepassen
+## Regressie model toepassen {.subsection}
 
 $$\widehat{\text{studie prestatie}} = b_0 + b_1 \text{IQ} + b_2 \text{Motivatie}$$
 $$\widehat{\text{model}} = b_0 + b_1 \text{IQ} + b_2 \text{Motivatie}$$
@@ -93,7 +93,7 @@ error = Studieprestatie - model
 cbind(model, Studieprestatie, error)[1:5,]
 ```
 
-## Outcome = Model + Error
+## Outcome = Model + Error {.subsection}
 
 Is dat zo?
 
@@ -103,7 +103,7 @@ Studieprestatie == model + error
 
 > - Ja!
 
-## Visueel {.smaller}
+## Visueel {.smaller .subsection}
 
 ```{r}
 plot(Studieprestatie, xlab='personen', ylab='Studieprestatie')
@@ -124,7 +124,7 @@ points(model, col='orange')
 segments(1:n, Studieprestatie, 1:n, model, col='purple', lwd=3)
 ```
 
-## Verklaarde variantie
+## Verklaarde variantie {.subsection}
 
 De verklaarde variantie is dat deel van de afwijking ten opzichte van het gemiddelde die het model overeen heeft met de outcome.
 
