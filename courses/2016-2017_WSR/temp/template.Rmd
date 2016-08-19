@@ -6,7 +6,7 @@ output:
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
     smaller: FALSE
-    css: ../../../TOC/toc-style.css
+    css: ../../../styles/style.css
     includes:
       in_header: ../../../TOC/TOC_generator.js.wrapper
     self_contained: true
