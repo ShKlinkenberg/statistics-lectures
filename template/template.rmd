@@ -6,8 +6,11 @@ output:
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
     smaller: FALSE
+    css: ../../../styles/style.css
+    includes:
+      in_header: ../../../TOC/TOC_generator.js.wrapper
+    self_contained: true
 ---
-
 
 ```{r setup, include=FALSE}
 # Display plots on next slide in IOslides
@@ -21,6 +24,10 @@ local({
   })
 })
 ```
+
+## Inhoud
+
+<div id="toc"></div>
 
 <!-- Add the required topics below -->
 

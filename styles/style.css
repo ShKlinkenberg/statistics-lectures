@@ -21,8 +21,8 @@ slides { animation: uva_rainbow 600s infinite;
 #mermaidChart0,       #mermaidChart1 { transition: all .2s ease-in-out; }
 #mermaidChart0:hover, #mermaidChart1:hover { transform: scaleY(1.5); }
 
-li.section { color: black; }
+.section { color: black; }
 
-li.subsection {font-size: .95em; 
+.subsection {font-size: .95em; 
                list-style-type:circle;
 }
