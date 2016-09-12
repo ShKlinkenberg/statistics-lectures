@@ -1,4 +1,4 @@
-# T-distribution
+# T-distribution {.section}
 
 ## Gosset {.smaller}
 
@@ -8,11 +8,9 @@ In probability and statistics, Student's t-distribution (or simply the t-distrib
 
 In the English-language literature it takes its name from William Sealy Gosset's 1908 paper in Biometrika under the pseudonym "Student". Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples, for example the chemical properties of barley where sample sizes might be as low as 3.
 
-[Wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
 
-<img src="http://213.173.178.129/~/media/MCI/Files/CaseStudy/guinnes_cs_logo1.ashx" style="float: right; width: 150px; margin: 0 20px 0 0;">
-
-## Population distribution {.smaller}
+## Population distribution {.smaller .subsection} 
 
 ```{r}
 layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
@@ -20,39 +18,49 @@ layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
 n  = 56    # Sample size
 df = n - 1 # Degrees of freedom
 
-mu    = 120
+mu    = 100
 sigma = 15
 
 IQ = seq(mu-45, mu+45, 1)
 
-par(mar=c(4,2,0,0))  
-plot(IQ, dnorm(IQ, mean = mu, sd = sigma), type='l', col="red")
+par(mar=c(4,2,2,0))  
+plot(IQ, dnorm(IQ, mean = mu, sd = sigma), type='l', col="red", main = "Population Distribution")
 
 n.samples = 12
 
 for(i in 1:n.samples) {
   
-  par(mar=c(2,2,0,0))  
-  hist(rnorm(n, mu, sigma), main="", cex.axis=.5, col="red")
+  par(mar=c(2,2,2,0))  
+  hist(rnorm(n, mu, sigma), main="Sample Distribution", cex.axis=.5, col="red", cex.main = .75)
   
 }
 ```
 
-## T-statistic
+## T-statistic {.subsection}
 
 $$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
 
 So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size, expressed as the degrees of freedom $df = n - 1$
 
-## A samples {.smaller}
+## A sample {.smaller}
 
 Let's take one sample from our normal populatiion and calculate the t-value.
 
 ```{r}
 x = rnorm(n, mu, sigma); x
+
+hist(x, main = "Sample distribution", col = "red")
 mean(x)
+```
+
+## t-value
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+
+```{r}
 t = (mean(x) - mu) / (sd(x) / sqrt(n)); t
 ```
+
 
 ## More samples
 
@@ -60,18 +68,21 @@ let's take more samples and calculate the t-value every time.
 
 ```{r}
 n.samples = 1000
-
-t.values = vector()
+t.values  = vector()
 
 for(i in 1:n.samples) {
-  
   x = rnorm(n, mu, sigma)
-
   t.values[i] = (mean(x) - mu) / (sd(x) / sqrt(n))
-  
 }
+head(t.values)
+```
 
-hist(t.values, freq = F, main="T-values")
+## Samples distribution
+
+What is the distribution of all these t-values?
+
+```{r}
+hist(t.values, freq = F, main="T distribution", xlab = "T-values", ylim = c(0, .4))
 T = seq(-4, 4, .01)
 lines(T, dt(T,df), col = "red")
 ```
@@ -100,3 +111,24 @@ for(i in 2:length(multiple.df)) {
 legend("topright", legend = paste("n =",multiple.n), lty=1, col = col)
 ```
 
+## Effect-size
+
+The effect-size is the standardised difference between the mean and the expected $\mu$. In the t-test effect-size is expressed as $r$.
+
+$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+
+```{r}
+r = sqrt(t^2/(t^2 + df))
+
+r
+```
+
+## Effect-size distribution
+
+We can also calculate effect-sizes for all our calculated t-values. Under the assumption of $H_0$ the effect-size distribution looks like this.
+
+```{r}
+r = sqrt(t.values^2/(t.values^2 + df))
+
+hist(r, main = "effect-size distribution", col = "red")
+```
