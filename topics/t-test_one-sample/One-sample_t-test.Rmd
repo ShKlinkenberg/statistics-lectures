@@ -76,8 +76,7 @@ To determine if this t-value significantly differs from the population mean we h
 Finally we have to calculate our _p_-value
 
 ```{r}
-if(!"visualize" %in% installed.packages()) { 
-  install.packages("visualize") }
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
 library("visualize")
 
 visualize.t(t, df, section = "upper")
@@ -89,7 +88,7 @@ visualize.t(t, df, section = "upper")
 visualize.t(c(-t, t), df, section = "tails")
 ```
 
-## Effect-size {.subsection}
+## Effect-size
 
 $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
 
@@ -98,4 +97,3 @@ r = sqrt(t^2/(t^2 + df))
 
 r
 ```
-

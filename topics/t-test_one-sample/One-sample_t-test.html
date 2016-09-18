@@ -151,7 +151,7 @@ mean_x = mean(x, na.rm = T); mean_x</code></pre>
 </ul>
 </div>
 </div>
-<div id="t-statistic" class="section level2 subsection">
+<div id="t-statistic" class="section level2">
 <h2>T-statistic</h2>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size, expressed as the degrees of freedom <span class="math inline">\(df = n - 1\)</span></p>
@@ -160,8 +160,8 @@ mean_x = mean(x, na.rm = T); mean_x</code></pre>
 <pre class="r"><code>t = (mean_x - mu) / (sd_x / sqrt(n)); t</code></pre>
 <pre><code>## [1] 0.9049443</code></pre>
 </div>
-<div id="type-i-error" class="section level2 subsection">
-<h2>Type I error</h2>
+<div id="type-1-error" class="section level2 subsection">
+<h2>Type 1 error</h2>
 <p>To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.</p>
 <ul>
 <li>Type I error / <span class="math inline">\(\alpha\)</span> = .05</li>
@@ -170,8 +170,7 @@ mean_x = mean(x, na.rm = T); mean_x</code></pre>
 <div id="p-value-one-sided" class="section level2 subsection">
 <h2><em>P</em>-value one sided</h2>
 <p>Finally we have to calculate our <em>p</em>-value</p>
-<pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { 
-  install.packages(&quot;visualize&quot;) }
+<pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { install.packages(&quot;visualize&quot;) }
 library(&quot;visualize&quot;)
 
 visualize.t(t, df, section = &quot;upper&quot;)</code></pre>

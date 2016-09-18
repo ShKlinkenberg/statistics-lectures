@@ -77,14 +77,15 @@ for(i in 1:n.samples) {
 head(t.values)
 ```
 
-## Samples distribution
+## Sampled t-values
 
 What is the distribution of all these t-values?
 
 ```{r}
-hist(t.values, freq = F, main="T distribution", xlab = "T-values", ylim = c(0, .4))
+hist(t.values, freq = F, main="Sampled T-values", xlab = "T-values", ylim = c(0, .4))
 T = seq(-4, 4, .01)
 lines(T, dt(T,df), col = "red")
+legend("topright", lty = 1, col="red", legend = "T-distribution")
 ```
 
 
@@ -111,7 +112,7 @@ for(i in 2:length(multiple.df)) {
 legend("topright", legend = paste("n =",multiple.n), lty=1, col = col)
 ```
 
-## Effect-size
+## Effect-size {.subsection}
 
 The effect-size is the standardised difference between the mean and the expected $\mu$. In the t-test effect-size is expressed as $r$.
 
@@ -123,12 +124,18 @@ r = sqrt(t^2/(t^2 + df))
 r
 ```
 
-## Effect-size distribution
+## Effect-size distribution {.smaller}
 
 We can also calculate effect-sizes for all our calculated t-values. Under the assumption of $H_0$ the effect-size distribution looks like this.
 
-```{r}
+```{r, fig.height=3}
 r = sqrt(t.values^2/(t.values^2 + df))
 
 hist(r, main = "effect-size distribution", col = "red")
 ```
+
+Cohen (1988)
+
+* Small: 0 <= .1
+* Medium: .1 <= .3
+* Large: .3 <= .5
