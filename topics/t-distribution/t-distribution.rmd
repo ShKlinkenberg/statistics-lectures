@@ -139,3 +139,7 @@ Cohen (1988)
 * Small: 0 <= .1
 * Medium: .1 <= .3
 * Large: .3 <= .5
+
+--------
+
+<iframe src="http://rpsychologist.com/d3/NHST/#viz"></iframe>
