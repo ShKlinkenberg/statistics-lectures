@@ -61,20 +61,45 @@ $$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
 t = (mean(x) - mu) / (sd(x) / sqrt(n)); t
 ```
 
-
 ## More samples
 
-let's take more samples and calculate the t-value every time.
+let's take more samples.
 
 ```{r}
-n.samples = 1000
-t.values  = vector()
+n.samples     = 1000
+mean.x.values = vector()
+se.x.values   = vector()
 
 for(i in 1:n.samples) {
   x = rnorm(n, mu, sigma)
-  t.values[i] = (mean(x) - mu) / (sd(x) / sqrt(n))
+  mean.x.values[i] = mean(x)
+  se.x.values[i]   = (sd(x) / sqrt(n))
 }
-head(t.values)
+```
+
+## Mean and SE for all samples
+
+```{r}
+head(cbind(mean.x.values, se.x.values))
+```
+
+## Samples distribution
+
+```{r}
+hist(mean.x.values, 
+     col  = "red", 
+     main = "Samples distribution", 
+     xlab = "all sample means")
+```
+
+## Calculate t-values
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+
+```{r}
+t.values = (mean.x.values - mu) / se.x.values
+
+tail(cbind(mean.x.values, mu, se.x.values, t.values))
 ```
 
 ## Sampled t-values
@@ -82,20 +107,29 @@ head(t.values)
 What is the distribution of all these t-values?
 
 ```{r}
-hist(t.values, freq = F, main="Sampled T-values", xlab = "T-values", ylim = c(0, .4))
+hist(t.values, 
+     freq = F, 
+     main = "Sampled T-values", 
+     xlab = "T-values", 
+     ylim = c(0, .4))
 T = seq(-4, 4, .01)
 lines(T, dt(T,df), col = "red")
 legend("topright", lty = 1, col="red", legend = "T-distribution")
 ```
 
-
 ## T-distribution {.smaller}
 
 So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean ($\mu$), given a certain sample size ($df = n - 1$). 
 
-The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough.
+The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough. 
 
-```{r}
+The t-distribution is defined by:
+
+$$\textstyle\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\!$$
+
+Source: [wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
+
+```{r, echo=FALSE}
 multiple.n  = c(5, 15, 30, 75, 100)
 multiple.df = multiple.n - 1
 col         = rainbow(length(multiple.df))
@@ -130,6 +164,8 @@ We can also calculate effect-sizes for all our calculated t-values. Under the as
 
 ```{r, fig.height=3}
 r = sqrt(t.values^2/(t.values^2 + df))
+
+tail(cbind(mean.x.values, mu, se.x.values, t.values, r))
 
 hist(r, main = "effect-size distribution", col = "red")
 ```

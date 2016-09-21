@@ -1,6 +1,6 @@
 # One-sample t-test {.section}
 
-## Compare sample mean
+## Compare sample mean {.smaller}
 
 We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu$. 
 
