@@ -150,14 +150,14 @@ legend("topright", legend = paste("n =",multiple.n), lty=1, col = col)
 
 ## One or two sided {.subsection}
 
-One sided
-
-* $H_0: \bar{x} \neq \mu$
-
 Two sided
 
-* $H_0: \bar{x} > \mu$
-* $H_0: \bar{x} < \mu$
+* $H_A: \bar{x} \neq \mu$
+
+One sided
+
+* $H_A: \bar{x} > \mu$
+* $H_A: \bar{x} < \mu$
 
 ```{r, echo=FALSE}
 layout(matrix(1:2, 1, 2))

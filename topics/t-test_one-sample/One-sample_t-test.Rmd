@@ -48,9 +48,9 @@ Does this mean differ significantly from the population mean $\mu = `r mu`$?
 
 ### Alternative hypothesis
 
-* $H_0: \bar{x} \neq \mu$
-* $H_0: \bar{x} > \mu$
-* $H_0: \bar{x} < \mu$
+* $H_A: \bar{x} \neq \mu$
+* $H_A: \bar{x} > \mu$
+* $H_A: \bar{x} < \mu$
 
 ## T-statistic
 
