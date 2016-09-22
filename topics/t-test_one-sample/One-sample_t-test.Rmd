@@ -1,6 +1,6 @@
 # One-sample t-test {.section}
 
-## Compare sample mean
+## Compare sample mean {.smaller}
 
 We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu$. 
 
@@ -54,14 +54,11 @@ Does this mean differ significantly from the population mean $\mu = `r mu`$?
 
 ## T-statistic
 
-$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{`r round(mean_x,2)` - `r mu` }{`r round(sd_x,2)` / \sqrt{`r n`}}$$
 
-So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size, expressed as the degrees of freedom $df = n - 1$
-
+So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size.
 
 ```{r}
-df = n - 1; df
-
 t = (mean_x - mu) / (sd_x / sqrt(n)); t
 ```
 
@@ -73,9 +70,11 @@ To determine if this t-value significantly differs from the population mean we h
 
 ## _P_-value one sided {.subsection}
 
-Finally we have to calculate our _p_-value
+Finally we have to calculate our _p_-value for which we need the degrees of freedom $df = n - 1$ to determine the shape of the t-distribution.
 
 ```{r}
+df = n - 1; df
+
 if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
 library("visualize")
 
