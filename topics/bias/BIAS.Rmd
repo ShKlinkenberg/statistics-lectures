@@ -1,0 +1,183 @@
+## Wat is BIAS {.section}
+
+<quote style="font-style:italic;">Things that lead us to the wrong conclusions (Field)</quote>
+
+$$outcome_i = model_i + error_i$$
+$$model_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
+
+- $X$ = predictor variables
+- $b$ = parameters
+
+## BIAS
+
+Verkeerde conclussies over:
+
+- Parameters $b_i$
+- Standaard error en betrouwbaarheidsintervallen
+- Toetsingsgrootheden en *p-waarden*
+
+means &rarr; SE &rarr; CI
+
+SE &rarr; toetsingsgrootheid &rarr; *p-waarden*
+
+**The beasts:**
+
+>- Uitbijters (Outliers)
+>- Assumpties
+
+## Voorbeeld
+
+Eigen IQ schatting van mannen en vrouwen. Wat we willen is een uitspraak doen over het verschil in de populatie. Niet enkel deze sample. We willen een inferentie maken (Vandaar de term inferentiële statistiek).
+
+```{r}
+data = read.csv("IQ.csv")
+data[12:17,]
+```
+
+-----
+
+We zien dat de vrouwen als 0 gecodeerd zijn en mannen als 1. We kunnen dan het regressie model invullen voor dit onderzoek.
+
+$$\text{Schatting eigen IQ}_i = b_0 + b_1 Sekse_i + error_i$$
+
+```{r, echo=FALSE}
+means <- aggregate(Eigen.IQ ~ factor(sekse), data, mean)
+```
+
+```{r}
+aggregate(Eigen.IQ ~ factor(sekse), data, mean)
+```
+
+We kunnen nu de $b$'s berekenen: $b_0 = `r means[1,2]`$ en $b_1 = `r means[2,2] - means[1,2]`$
+
+-----
+
+$$\text{Schatting eigen IQ}_i = b_0 + b_1 Sekse_i + error_i$$
+
+Als we dan het regressie model invullen, krijgen we:
+
+```{r, echo=FALSE}
+fit <- lm(Eigen.IQ ~ factor(sekse), data)
+cbind(Eigen.IQ = data$Eigen.IQ, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], sekse = data$sekse, error = fit$residuals)[12:17,]
+```
+
+De gemiddelden vormen dus indirect de parameters $b$'s in dit regressie model. Deze $b$'s zijn de schatters van de populatie $\beta$'s.
+
+-----
+
+En wat nou als deze gemiddelden niet zo goed zijn?
+
+Bijvoorbeeld omdat er extreme uitbijters tussen zitten.
+
+```{r, echo=FALSE}
+boxplot(data$Eigen.IQ, horizontal = T, col= 'red', main=names(data)[3])
+```
+
+-----
+
+Zonder deze outliers ziet het er net wat anders uit.
+
+```{r, echo=FALSE}
+data2 <- subset(data,  Eigen.IQ > 100)
+data2 <- subset(data2, Eigen.IQ < 140)
+
+aggregate(Eigen.IQ ~ factor(sekse), data2, mean)
+
+fit <- lm(Eigen.IQ ~ factor(sekse), data2)
+cbind(Eigen.IQ = data2$Eigen.IQ, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], sekse = data2$sekse, error = fit$residuals)[12:17,]
+```
+
+## Uitbijters {.subsection}
+
+```{r, echo=FALSE, fig.height=2.2, eval=FALSE}
+boxplot(data$Eigen.IQ, horizontal = T, col= 'red')
+```
+
+Uitbijters kunnen grote invloed hebben op de gemiddelden.
+
+- Verwijderen op basis van boxplot.
+- Verwijderen op basis van 3 standaard deviaties.
+- Trimmed mean
+- Winsorizing
+
+## Assumpties {.subsection}
+
+- Additiviteit en lineairiteit
+- Normaliteit
+- Homoscedasticiteit/homogeniteit van variantie
+- Onafhankelijkheid
+
+## Additiviteit en lineairiteit {.subsecton}
+
+De afhankelijke variabele is in werkelijkheid lineair gerelateerd aan de predictoren.
+
+![relations](relationships.jpg)
+
+$$\text{MODEL}_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
+
+## Additiviteit en lineairiteit
+
+Dit is te controleren door een plot te maken van de gestandaardiseerde error/residu en de gestandaardiseerde verwachte uitkomst/model.
+
+```{r, echo=FALSE, fig.height=4}
+plot(scale(fit$fitted.values), scale(fit$residuals), ylab="(e - mean e) / sd e", xlab="(m - mean m) / sd m")
+lines(c(-10,10),c(0,0), col='red')
+lines(c(0,0),c(-10,10), col='red')
+```
+
+## Additiviteit en lineairiteit
+
+![Lineairiteit](linearity heteroscedasticity heterogeneity.png)
+
+## Normaliteit {.subsection}
+
+- Parameter schattingen $b$'s
+- Betrouwbaarheidsintervallen (SE * **1.196**)
+- Nul hypothese toetsing
+- Error
+
+Het gaat niet om de normaliteit van de data maar van de populatie verdeling. Deze willen we testen aan de hand van de data.
+
+Geen zorgen bij grote samples (Centrale limietstelling).
+
+## Centrale limietstelling
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/aS8B2yY73g0" frameborder="0" allowfullscreen></iframe>
+
+## Normaliteit
+
+Te bekijken met:
+
+- Skewness en Kurtosis
+
+Te toetsen met:
+
+- Kolmogorov-Smirnof test
+- Shapiro-Wilk test
+
+Maar hoe groter de sample hoe kleiner de *p-waarde* bij gelijke toetsingsgrootheden. Dus dat bijt elkaar een beetje.
+
+- transformatie van de outcome variable.
+
+## Homoscedasticiteit/homogeniteit <br>van variantie {.subsection}
+
+Van invloed op:
+
+- Parameters $b$'s
+- NHT
+
+De assumptie van de nul hypothese is dat de nul verdeling waar is. Dus bij verschillende samples uit die verdeling, laten we zeggen mannen en vrouwen op IQ, verwachten we dat de variantie van beide groepen identiek is. Anders zou onze assumptie niet gelden.
+
+In algemene termen kunnen we dus zeggen dat op elk niveau van de predictorvariabele de varianties gelijk moeten zijn.
+
+## Homoscedasticiteit/homogeniteit
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/V5BUIy6cThw?rel=0" frameborder="0" allowfullscreen></iframe>
+
+## Onafhankelijkheid {.subsection}
+
+De observaties die gedaan zijn, lees: de rijen in SPSS of de proefpersonen in je onderzoek moeten onafhankelijk van alkaar een reactie gegeven hebben op de outcome variable. Het antwoord van persoon B moet niet afhangen van die van pesoon A.
+
+![Whisper](whisper-clipart.png)
+
+# Vragen?
