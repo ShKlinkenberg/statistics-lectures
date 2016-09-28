@@ -111,7 +111,7 @@ Uitbijters kunnen grote invloed hebben op de gemiddelden.
 
 De afhankelijke variabele is in werkelijkheid lineair gerelateerd aan de predictoren.
 
-![relations](relationships.jpg)
+![relations](../../../topics/bias/relationships.jpg)
 
 $$\text{MODEL}_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
 
@@ -127,7 +127,7 @@ lines(c(0,0),c(-10,10), col='red')
 
 ## Additiviteit en lineairiteit
 
-![Lineairiteit](linearity heteroscedasticity heterogeneity.png)
+![Lineairiteit](../../../topics/bias/linearity_heteroscedasticity_heterogeneity.png)
 
 ## Normaliteit {.subsection}
 
@@ -178,6 +178,6 @@ In algemene termen kunnen we dus zeggen dat op elk niveau van de predictorvariab
 
 De observaties die gedaan zijn, lees: de rijen in SPSS of de proefpersonen in je onderzoek moeten onafhankelijk van alkaar een reactie gegeven hebben op de outcome variable. Het antwoord van persoon B moet niet afhangen van die van pesoon A.
 
-![Whisper](whisper-clipart.png)
+![Whisper](../../../topics/bias/whisper-clipart.png)
 
 # Vragen?
