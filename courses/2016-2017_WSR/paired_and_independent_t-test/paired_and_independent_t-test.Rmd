@@ -1,0 +1,42 @@
+---
+title: "Paired and Independent<br> t-test"
+author: "Klinkenberg"
+date: "27 sep 2016"
+output: 
+  ioslides_presentation:
+    logo: ../../../template/logo_uva.png
+    smaller: FALSE
+    css: ../../../styles/style.css
+    includes:
+      in_header: ../../../TOC/TOC_generator.js.wrapper
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/t-test_paired/t-test_paired.rmd"}
+```
+
+```{r child="../../../topics/t-test_independent/t-test_independent.rmd"}
+```
+
+# END
+
+<img src="https://g.twimg.com/Twitter_logo_white.png" style="width:20px">  <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:inherit; border-bottom:none;">@shklinkenberg</a>

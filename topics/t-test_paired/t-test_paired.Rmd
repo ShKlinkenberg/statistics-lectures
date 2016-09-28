@@ -1,4 +1,4 @@
-# Paired-samples t-test
+# Paired-samples t-test {.section}
 
 Paired 2 samples
 
@@ -44,7 +44,7 @@ library("DT")
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Calculate $D$ {.smaller}
+## Calculate $D$ {.smaller .subsection}
 
 ```{r}
 D = IQ.van.je.buur - Eigen.IQ
@@ -72,7 +72,7 @@ n = length(D)
 n
 ```
 
-## Calculate t-value
+## Calculate t-value {.subsection}
 
 $$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
 
@@ -89,7 +89,7 @@ t = ( D.mean - mu ) / D.se
 t
 ```
 
-## Test for significance
+## Test for significance {.subsection}
 
 Two tailed
 
@@ -100,7 +100,7 @@ library("visualize")
 visualize.t(c(-t,t), df, section="tails")
 ```
 
-## Effect-size
+## Effect-size {.subsection}
 
 $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
 
@@ -110,7 +110,7 @@ r = sqrt(t^2/(t^2 + df))
 r
 ```
 
-## Confidence interval {.smaller}
+## Confidence interval {.smaller .subsection}
 
 To display correct conficance intervals in SPSS we need to correct the original scores for whithin subject variation.
 
