@@ -20,10 +20,12 @@ means &rarr; SE &rarr; CI
 
 SE &rarr; toetsingsgrootheid &rarr; *p-waarden*
 
-**The beasts:**
+## The beasts {.flexbox .vcenter}
+
+![Beasts](../../../topics/bias/here-be-dragons.jpg)
 
 >- Uitbijters (Outliers)
->- Assumpties
+>- Schendingen van assumpties
 
 ## Voorbeeld
 
@@ -73,6 +75,19 @@ Bijvoorbeeld omdat er extreme uitbijters tussen zitten.
 boxplot(data$Eigen.IQ, horizontal = T, col= 'red', main=names(data)[3])
 ```
 
+## Uitbijters {.subsection}
+
+```{r, echo=FALSE, fig.height=2.2, eval=FALSE}
+boxplot(data$Eigen.IQ, horizontal = T, col= 'red')
+```
+
+Uitbijters kunnen grote invloed hebben op de gemiddelden.
+
+- **Trim** Verwijderen op basis van boxplot.
+- **Trim** Verwijderen op basis van 3 standaard deviaties.
+- **Trim** Trimmed mean: verwijder bovenste en onderste percentage.
+- **Winsorizing** Vervang met de hoogste score dat geen uitbeiter is.
+
 -----
 
 Zonder deze outliers ziet het er net wat anders uit.
@@ -87,19 +102,6 @@ fit <- lm(Eigen.IQ ~ factor(sekse), data2)
 cbind(Eigen.IQ = data2$Eigen.IQ, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], sekse = data2$sekse, error = fit$residuals)[12:17,]
 ```
 
-## Uitbijters {.subsection}
-
-```{r, echo=FALSE, fig.height=2.2, eval=FALSE}
-boxplot(data$Eigen.IQ, horizontal = T, col= 'red')
-```
-
-Uitbijters kunnen grote invloed hebben op de gemiddelden.
-
-- Verwijderen op basis van boxplot.
-- Verwijderen op basis van 3 standaard deviaties.
-- Trimmed mean
-- Winsorizing
-
 ## Assumpties {.subsection}
 
 - Additiviteit en lineairiteit
@@ -107,7 +109,7 @@ Uitbijters kunnen grote invloed hebben op de gemiddelden.
 - Homoscedasticiteit/homogeniteit van variantie
 - Onafhankelijkheid
 
-## Additiviteit en lineairiteit {.subsecton}
+## Additiviteit en lineairiteit {.subsection}
 
 De afhankelijke variabele is in werkelijkheid lineair gerelateerd aan de predictoren.
 
@@ -117,17 +119,7 @@ $$\text{MODEL}_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
 
 ## Additiviteit en lineairiteit
 
-Dit is te controleren door een plot te maken van de gestandaardiseerde error/residu en de gestandaardiseerde verwachte uitkomst/model.
-
-```{r, echo=FALSE, fig.height=4}
-plot(scale(fit$fitted.values), scale(fit$residuals), ylab="(e - mean e) / sd e", xlab="(m - mean m) / sd m")
-lines(c(-10,10),c(0,0), col='red')
-lines(c(0,0),c(-10,10), col='red')
-```
-
-## Additiviteit en lineairiteit
-
-![Lineairiteit](../../../topics/bias/linearity_heteroscedasticity_heterogeneity.png)
+Dit is te controleren door te kijken naar het verband tussen de predictor variabelen en de outcome variabele.
 
 ## Normaliteit {.subsection}
 
@@ -142,7 +134,7 @@ Geen zorgen bij grote samples (Centrale limietstelling).
 
 ## Centrale limietstelling
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/aS8B2yY73g0" frameborder="0" allowfullscreen></iframe>
+<iframe style="width:750px; height:480px;" src="https://www.youtube.com/embed/aS8B2yY73g0" frameborder="0" allowfullscreen></iframe>
 
 ## Normaliteit
 
@@ -159,7 +151,7 @@ Maar hoe groter de sample hoe kleiner de *p-waarde* bij gelijke toetsingsgroothe
 
 - transformatie van de outcome variable.
 
-## Homoscedasticiteit/homogeniteit <br>van variantie {.subsection}
+## Homoscedasticiteit homogeniteit <br>van variantie {.subsection}
 
 Van invloed op:
 
@@ -170,9 +162,23 @@ De assumptie van de nul hypothese is dat de nul verdeling waar is. Dus bij versc
 
 In algemene termen kunnen we dus zeggen dat op elk niveau van de predictorvariabele de varianties gelijk moeten zijn.
 
-## Homoscedasticiteit/homogeniteit
+-----
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/V5BUIy6cThw?rel=0" frameborder="0" allowfullscreen></iframe>
+Dit is te controleren door een plot te maken van de gestandaardiseerde error/residu en de gestandaardiseerde verwachte uitkomst/model.
+
+```{r, echo=FALSE, fig.height=4}
+plot(scale(fit$fitted.values), scale(fit$residuals), ylab="(e - mean e) / sd e", xlab="(m - mean m) / sd m")
+lines(c(-10,10),c(0,0), col='red')
+lines(c(0,0),c(-10,10), col='red')
+```
+
+-----
+
+![Lineairiteit](../../../topics/bias/linearity_heteroscedasticity_heterogeneity.png)
+
+-----
+
+<iframe style="width:750px; height:480px;" src="http://www.youtube.com/embed/V5BUIy6cThw?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ## Onafhankelijkheid {.subsection}
 
@@ -180,4 +186,3 @@ De observaties die gedaan zijn, lees: de rijen in SPSS of de proefpersonen in je
 
 ![Whisper](../../../topics/bias/whisper-clipart.png)
 
-# Vragen?
