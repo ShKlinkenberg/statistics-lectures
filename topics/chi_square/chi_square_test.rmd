@@ -2,6 +2,80 @@
 
 Relation between categorical variables
 
+## $\chi^2$ test
+
+A '''chi-squared test''', also written as $\chi^2</math> test$, is any statistical hypothesis test wherein the sampling distribution of the test statistic is a chi-squared distribution when the null hypothesis is true. Without other qualification, 'chi-squared test' often is used as short for Pearson's chi-squared test.
+
+Chi-squared tests are often constructed from a Lack-of-fit sum of squares#Sums of squares|sum of squared errors, or through the Variance Distribution of the sample variance|sample variance. Test statistics that follow a chi-squared distribution arise from an assumption of independent normally distributed data, which is valid in many cases due to the central limit theorem. A chi-squared test can be used to attempt rejection of the null hypothesis that the data are independent.
+
+## $\chi^2$ test statistic
+
+$$\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}$$
+
+### Contingency table
+
+<table style="width:700px;">
+<tr><td>
+
+$$\text{observed}_{ij} = 
+ \begin{pmatrix}
+  o_{11} & o_{12} & \cdots & o_{1j} \\
+  o_{21} & o_{22} & \cdots & o_{2j} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  o_{i1} & o_{i2} & \cdots & o_{ij} 
+ \end{pmatrix}$$
+ 
+ </td><td>
+ 
+ $$\text{model}_{ij} = 
+ \begin{pmatrix}
+  m_{11}  & m_{12} & \cdots & m_{1j} \\
+  m_{21}  & m_{22} & \cdots & m_{2j} \\
+  \vdots  & \vdots & \ddots & \vdots \\
+  m_{i1}  & m_{i2} & \cdots & m_{ij} 
+ \end{pmatrix}$$
+ 
+ </td></tr>
+ </table>
+
+## $\chi^2$ distribution
+
+The $\chi^2$ distribution describes the test statistic under the assumption of $H_0$, given the degrees of freedom. 
+
+$df = (r - 1) (c - 1)$ where $r$ is the number of rows and $c$ the amount of columns.
+
+```{r}
+chi = seq(0,8,.01)
+df  = c(1,2,3,6,8,10)
+col = rainbow(n = length(df))
+
+plot( chi, dchisq(chi, df[1]), lwd = 2, col = col[1], type="l",
+      main = "Chi squared distributions",
+      ylab = "Density",
+      ylim = c(0,1),
+      xlab = "Chi squared")
+
+lines(chi, dchisq(chi, df[2]), lwd = 2, col = col[2], type="l")
+lines(chi, dchisq(chi, df[3]), lwd = 2, col = col[3], type="l")
+lines(chi, dchisq(chi, df[4]), lwd = 2, col = col[4], type="l")
+lines(chi, dchisq(chi, df[5]), lwd = 2, col = col[5], type="l")
+lines(chi, dchisq(chi, df[6]), lwd = 2, col = col[6], type="l")
+
+legend("topright", legend = paste("k =",df), col = col, lty = 1, bty = "n")
+```
+
+## Example
+
+<iframe src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829?needAccess=true"></iframe>
+
+## Experiment {.flexbox .vcenter}
+
+<a href="https://www.the-qrcode-generator.com/"><img src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=http%3A%2F%2Fgoo.gl%2Ffaj76B" alt="QR Code" /></a>
+
+http://goo.gl/faj76B
+
+## Data
+
 ```{r}
 
 # Install if nesserary and load RCurl package
@@ -18,9 +92,13 @@ myCsv <- getURL(google.url)
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-tail(data)
+# install.packages("DT")
+library("DT")
+datatable(data)
+```
 
-setwd('~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture 15 chi square and (partial) correlation')
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# setwd('~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture 15 chi square and (partial) correlation')
 
 # Correct variables
 data.spss <- data
@@ -29,47 +107,85 @@ data.spss$sekse   <- factor(data.spss$sekse,   labels=c(1,2))
 data.spss$fluiten <- factor(data.spss$fluiten, labels=c(0,1))
 
 # Write data for use in SPSS
-write.table(data.spss, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture 15 chi square and (partial) correlation/data.csv", row.names=FALSE, col.names=TRUE, dec=',')
+write.table(data.spss, "data.csv", row.names=FALSE, col.names=TRUE, dec=',')
+```
 
-####################
-#                  #
-# chi squared test #
-#                  #
-####################
+## Calculating $\chi^2$
 
-data
-
+```{r}
 observed <- table(data[,c('fluiten','sekse')])
 observed
+```
 
-n   = sum(observed)        ; n
-ct1 = colSums(observed)[1] ; ct1
-ct2 = colSums(observed)[2] ; ct2
-rt1 = rowSums(observed)[1] ; rt1
-rt2 = rowSums(observed)[2] ; rt2
+$$\text{observed}_{ij} = 
+ \begin{pmatrix}
+  `r observed[1,1]` & `r observed[1,2]` \\
+  `r observed[2,1]` & `r observed[2,2]` \\
+ \end{pmatrix}$$
 
+## Calculating the model
+
+$$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$$
+
+```{r}
+n   = sum(observed)
+ct1 = colSums(observed)[1]
+ct2 = colSums(observed)[2]
+rt1 = rowSums(observed)[1]
+rt2 = rowSums(observed)[2]
+
+addmargins(observed)
+```
+
+
+## Calculating the model
+
+$$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$$
+
+```{r}
 model = matrix( c((ct1*rt1)/n,
                   (ct2*rt1)/n,
                   (ct1*rt2)/n,
                   (ct2*rt2)/n),2,2,byrow=T
           )
 model
+```
 
+## observed - model
+
+```{r}
 observed - model
+```
 
+## Calculating the model
+
+$$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$$
+
+```{r}
 # Calculate chi squared
 chi.squared <- sum((observed - model)^2/model)
 chi.squared
+```
 
-pchisq(chi.squared,1,lower.tail=F)
+## Testing for significance
+
+$df = (r - 1) (c - 1)$
+
+```{r}
+df = (2 - 1) * ( 2 - 1)
+```
+
+
+```{r}
+pchisq(chi.squared, df, lower.tail=F)
 
 library('visualize')
-visualize.chisq(chi.squared,1,section='upper')
+visualize.chisq(chi.squared,df,section='upper')
+```
 
-###
-### SIMULATION 
-###
+## SIMULATION 
 
+```{r}
 chi.values = vector()
 
 for(i in 1:1000) {
