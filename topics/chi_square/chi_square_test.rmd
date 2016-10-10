@@ -185,9 +185,11 @@ library('visualize')
 visualize.chisq(chi.squared,df,section='upper')
 ```
 
-## Fisher's exact test
+## Fisher's exact test {.subsection}
 
-## Likelihood ratio
+Calculates axact $\chi^2$ for small samples
+
+## Likelihood ratio {.subsection}
 
 $$L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$$
 
@@ -198,7 +200,7 @@ lx2 = 2 * sum(observed * log(observed / model) ); lx2
 visualize.chisq(lx2,df,section='upper')
 ```
 
-## Yates's correction
+## Yates's correction {.subsection}
 
 For 2 x 2 contingency tables.
 
@@ -211,6 +213,46 @@ chi.squared.yates
 visualize.chisq(chi.squared.yates,df,section='upper')
 ```
 
+## Standardized residuals {.subsection}
+
+$$\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }$$
+
+```{r}
+(observed - model) / sqrt(model)
+```
+
+## Effect size {.subsection}
+
+Odds ratio based on the model / expected values
+
+```{r, echo=FALSE}
+odds <- round( observed, 2); odds
+```
+
+
+$$\begin{pmatrix}
+  a & b \\
+  c & d \\
+ \end{pmatrix}$$
+ 
+$$OR = \frac{a \times d}{b \times c} = \frac{`r odds[1,1]` \times `r odds[2,2]`}{`r odds[1,2]` \times `r odds[2,1]`} = `r (odds[1,1] * odds[2,2]) / (odds[1,2] * odds[2,1])`$$
+
+## Odds
+
+```{r, echo =FALSE}
+odds
+```
+
+The man and women ratio of people that can whisle and the ratio of those who can't whistle
+
+* Can wistle $\text{Odds}_{mf} = \frac{ `r odds[1,1]` }{ `r odds[1,2]` }$ = `r odds[1,1] / odds[1,2]`
+* Can't wistle $\text{Odds}_{mf} = \frac{ `r odds[2,1]` }{ `r odds[2,2]` }$ = `r odds[2,1] / odds[2,2]`
+
+## Odds ratio
+
+Is the ratio of these odds.
+
+$$OR = \frac{\text{wistle}}{\text{can't wistle}} = \frac{`r odds[1,1] / odds[1,2]`}{`r odds[2,1] / odds[2,2]`} = `r (odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2])`$$
 
 ## Simulation {.subsection .smaller}
 
