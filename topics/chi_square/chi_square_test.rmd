@@ -1,14 +1,16 @@
-# $\chi^2$ test
+# $\chi^2$ test {.section}
 
 Relation between categorical variables
 
-## $\chi^2$ test
+## $\chi^2$ test {.smaller}
 
-A '''chi-squared test''', also written as $\chi^2</math> test$, is any statistical hypothesis test wherein the sampling distribution of the test statistic is a chi-squared distribution when the null hypothesis is true. Without other qualification, 'chi-squared test' often is used as short for Pearson's chi-squared test.
+A '''chi-squared test''', also written as $\chi^2$ test, is any statistical hypothesis test wherein the sampling distribution of the test statistic is a chi-squared distribution when the null hypothesis is true. Without other qualification, 'chi-squared test' often is used as short for Pearson's chi-squared test.
 
 Chi-squared tests are often constructed from a Lack-of-fit sum of squares#Sums of squares|sum of squared errors, or through the Variance Distribution of the sample variance|sample variance. Test statistics that follow a chi-squared distribution arise from an assumption of independent normally distributed data, which is valid in many cases due to the central limit theorem. A chi-squared test can be used to attempt rejection of the null hypothesis that the data are independent.
 
-## $\chi^2$ test statistic
+Source: [wikipedia](https://en.wikipedia.org/wiki/Chi-squared_test)
+
+## $\chi^2$ test statistic {.subsection}
 
 $$\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}$$
 
@@ -38,7 +40,7 @@ $$\text{observed}_{ij} =
  </td></tr>
  </table>
 
-## $\chi^2$ distribution
+## $\chi^2$ distribution {.smaller .subsection}
 
 The $\chi^2$ distribution describes the test statistic under the assumption of $H_0$, given the degrees of freedom. 
 
@@ -74,10 +76,9 @@ legend("topright", legend = paste("k =",df), col = col, lty = 1, bty = "n")
 
 http://goo.gl/faj76B
 
-## Data
+## Data {.smaller}
 
-```{r}
-
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Install if nesserary and load RCurl package
 if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
 library(RCurl)
@@ -110,7 +111,7 @@ data.spss$fluiten <- factor(data.spss$fluiten, labels=c(0,1))
 write.table(data.spss, "data.csv", row.names=FALSE, col.names=TRUE, dec=',')
 ```
 
-## Calculating $\chi^2$
+## Calculating $\chi^2$ {.subsection}
 
 ```{r}
 observed <- table(data[,c('fluiten','sekse')])
@@ -123,7 +124,7 @@ $$\text{observed}_{ij} =
   `r observed[2,1]` & `r observed[2,2]` \\
  \end{pmatrix}$$
 
-## Calculating the model
+## Calculating the model {.subsection}
 
 $$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$$
 
@@ -138,7 +139,7 @@ addmargins(observed)
 ```
 
 
-## Calculating the model
+## Calculating the model {.smaller}
 
 $$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$$
 
@@ -151,15 +152,21 @@ model = matrix( c((ct1*rt1)/n,
 model
 ```
 
-## observed - model
+$$\text{model}_{ij} = 
+ \begin{pmatrix}
+  `r model[1,1]` & `r model[1,2]` \\
+  `r model[2,1]` & `r model[2,2]` \\
+ \end{pmatrix}$$
+
+## observed - model {.subsection}
 
 ```{r}
 observed - model
 ```
 
-## Calculating the model
+## Calculating $\chi^2$
 
-$$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$$
+$$\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}$$
 
 ```{r}
 # Calculate chi squared
@@ -167,23 +174,45 @@ chi.squared <- sum((observed - model)^2/model)
 chi.squared
 ```
 
-## Testing for significance
+## Testing for significance {.subsection}
 
 $df = (r - 1) (c - 1)$
 
 ```{r}
 df = (2 - 1) * ( 2 - 1)
-```
-
-
-```{r}
-pchisq(chi.squared, df, lower.tail=F)
 
 library('visualize')
 visualize.chisq(chi.squared,df,section='upper')
 ```
 
-## SIMULATION 
+## Fisher's exact test
+
+## Likelihood ratio
+
+$$L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$$
+
+```{r}
+# ln is log
+lx2 = 2 * sum(observed * log(observed / model) ); lx2
+
+visualize.chisq(lx2,df,section='upper')
+```
+
+## Yates's correction
+
+For 2 x 2 contingency tables.
+
+$$\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}$$
+
+```{r}
+# Calculate Yates's corrected chi squared
+chi.squared.yates <- sum((abs(observed - model) - .5)^2/model)
+chi.squared.yates
+visualize.chisq(chi.squared.yates,df,section='upper')
+```
+
+
+## Simulation {.subsection .smaller}
 
 ```{r}
 chi.values = vector()
@@ -197,8 +226,6 @@ for(i in 1:1000) {
 
 	data = data.frame(x,y)
 
-	table(data)
-
 	observed <- as.matrix(table(data))
 
 	chi.values[i] = chisq.test(observed,1,correct=FALSE)$statistic
@@ -209,5 +236,4 @@ hist(chi.values,freq=F)
 chi = seq(0,20,.01)
 lines(chi,dchisq(chi,1),         lty=1,col='red',  cex=2) # Chi distribution under H0
 lines(chi,dchisq(chi,1, ncp = 6),lty=1,col='blue', cex=2) # Chi distribution under HA
-
 ```
