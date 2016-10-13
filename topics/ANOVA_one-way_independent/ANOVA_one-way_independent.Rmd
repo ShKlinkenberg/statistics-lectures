@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# One-way independent ANOVA
-=======
 # One-way independent ANOVA {.section}
->>>>>>> 88ed42e1cd9b696fd5fa8fb7807e1926017f3e9d
 
 Compare 2 or more independent groups.
 
