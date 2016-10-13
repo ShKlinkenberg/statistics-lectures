@@ -223,7 +223,7 @@ $$\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij
 
 ## Effect size {.subsection}
 
-Odds ratio based on the model / expected values
+Odds ratio based on the observed values
 
 ```{r, echo=TRUE}
 odds <- round( observed, 2); odds
