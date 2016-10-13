@@ -1,6 +1,6 @@
-# F-distribution
+# F-distribution {.section}
 
-## Ronald Fisher {.smaller}
+## Ronald Fisher {.smaller .subsection}
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Biologist_and_statistician_Ronald_Fisher.jpg" style="float: left; width: 150px; margin: 0 20px 0 0;">
 
@@ -12,7 +12,7 @@ Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. 
 
 [Wikipedia](https://en.wikipedia.org/wiki/Ronald_Fisher)
 
-## Population distribution {.smaller}
+## Population distribution {.smaller .subsection}
 
 ```{r}
 layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
@@ -58,7 +58,7 @@ F = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
 F
 ```
 
-## More samples {.smaller}
+## More samples {.smaller .subsection}
 
 let's take more samples and calculate the t-value every time.
 
