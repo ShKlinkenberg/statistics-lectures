@@ -1,6 +1,3 @@
----
-output: html_document
----
 # One-way independent ANOVA
 
 Compare 2 or more independent groups.
