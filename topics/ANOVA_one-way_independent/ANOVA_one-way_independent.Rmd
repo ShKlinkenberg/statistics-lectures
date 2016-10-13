@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # One-way independent ANOVA
+=======
+# One-way independent ANOVA {.section}
+>>>>>>> 88ed42e1cd9b696fd5fa8fb7807e1926017f3e9d
 
 Compare 2 or more independent groups.
 
@@ -18,7 +22,7 @@ x.e = c(-.78,-.86,-1.35,-1.48,-1.52,-2.04,-2.83      ) # Eyes
 x   = c( x.c, x.k, x.e )                               # Conditions combined
 ```
 
-## Total variance
+## Total variance {.subsection}
 
 $${MS}_{total} = s_x^2$$
 
@@ -62,7 +66,7 @@ segments(1:N, mean(x), 1:N, x)
 text(c(4,11.5,18.5),rep(.6,3),labels=lab)
 ```
 
-## Model variance {.smaller}
+## Model variance {.smaller .subsection}
 
 $${MS}_{model} = \frac{{SS}_{model}}{{df}_{model}} \\ {df}_{model} = k - 1$$
 
@@ -121,7 +125,7 @@ segments(9:15,  mean(x.k), 9:15,  mean(x), col="blue", lwd=3)
 segments(16:22, mean(x.e), 16:22, mean(x), col="green",lwd=3)
 ```
 
-## Error variance
+## Error variance {.subsection}
 
 $${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k$$
 
@@ -183,7 +187,7 @@ segments(9:15,  mean(x.k), 9:15,  x.k, col="purple", lwd=3)
 segments(16:22, mean(x.e), 16:22, x.e, col="purple", lwd=3)
 ```
 
-## Variance components
+## Variance components {.subsection}
 
 $${SS}_{total} = {SS}_{model} + {SS}_{error}$$
 $$`r ss.t` = `r ss.m` + `r ss.e`$$
@@ -192,7 +196,7 @@ $${MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= `r ms.t`$$
 $${MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= `r ms.m`$$
 $${MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = `r ms.e`$$
 
-## F-ratio
+## F-ratio {.subsection}
 
 $$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
 
