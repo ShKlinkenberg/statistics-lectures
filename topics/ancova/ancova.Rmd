@@ -13,7 +13,7 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
-## ANCOVA
+## ANCOVA {.section}
 
 Analysis of covariance (ANCOVA) is a general linear model which blends ANOVA and regression. ANCOVA evaluates whether population means of a dependent variable (DV) are equal across levels of a categorical independent variable (IV) often called a treatment, while statistically controlling for the effects of other continuous variables that are not of primary interest, known as covariates (CV).
 
@@ -30,7 +30,7 @@ We want to test the difference in national extraversion but want to controll for
      + Belgian
 * Covariate: Openness to experience
 
-## Simulate data
+## Simulate data {.smaller}
 
 ```{r}
 # Simulate data
@@ -55,7 +55,7 @@ b.3 = 3  # Weight for covariate
 error = rnorm(n,0,1)
 ```
 
-## Define the model
+## Define the model {.subsection}
 
 $${outcome} = {model} + {error}$$
 $${model} = {indvar} + {covariate} = {nationality} + {openness}$$
@@ -70,13 +70,22 @@ $$b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar$$
 outcome = b.0 + b.1 * dummy.1 + b.2 * dummy.2 + b.3 * covar + error
 ```
 
+## Dummies {.smaller}
+
+```{r, echo=FALSE}
+outcome <- round(outcome,2)
+error <- round(error,2)
+
+n <- 1:length(outcome)
+
+dummies <- data.frame(group, b.0, b.1, dummy.1, b.2, dummy.2, b.3, covar, error, outcome)
+
+datatable(dummies, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
 ## The data
 
 ```{r, echo=FALSE}
-
-outcome <- round(outcome,2)
-
-n <- 1:length(outcome)
 # put data in data frame
 data <- data.frame(group, covar, outcome)
 
@@ -89,26 +98,24 @@ write.csv(data, "ANCOVA.csv", row.names=FALSE)
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Group means
+## Group means {.subsection}
 
 ```{r}
 aggregate(outcome ~ group, data, mean)
 ```
 
-
-## Model fit no covar {.smaller}
+## Model fit no covar {.smaller .subsection}
 
 What are the beta coëfficients based on the data without the covariate?
 
 ```{r}
-fit.group <- lm(outcome ~ factor(group), data)
-fit.group
+fit.group <- lm(outcome ~ factor(group), data); fit.group
 fit.group$coefficients[2:3] + fit.group$coefficients[1]
 ```
 
 $${Dutch} = `r  fit.group$coefficients[1]` \> {German} = `r fit.group$coefficients[2] + fit.group$coefficients[1]` \> {Belgian} = `r fit.group$coefficients[3] + fit.group$coefficients[1]`$$
 
-## Model fit only covar
+## Model fit only covar {.subsection}
 
 What is the weight of only the covariate?
 
@@ -117,19 +124,20 @@ fit.covar <- lm(outcome ~ covar, data)
 fit.covar
 ```
 
-## Model fit with covar {.smaller}
+## Model fit with covar {.smaller .subsection}
 
 ```{r}
-fit <- lm(outcome ~ factor(group) + covar, data)
-fit
+fit <- lm(outcome ~ factor(group) + covar, data); fit
 fit$coefficients[2:3] + fit$coefficients[1]
+```
 
+```{r, echo=FALSE}
 fit$coefficients <- round(fit$coefficients, 2)
 ```
 
 $${Dutch} = `r  fit$coefficients[1]` \> {German} = `r fit$coefficients[2] + fit$coefficients[1]` \> {Belgian} = `r fit$coefficients[3] + fit$coefficients[1]`$$
 
-## Total variance
+## Total variance {.subsection}
 
 What is the total variance
 
@@ -149,12 +157,13 @@ data$grand.mean <- mean(data$outcome)
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Total variance visual
+## Total variance visual {.subsection}
 
 ```{r}
 plot <- ggplot(data, aes(x=n, y=outcome)) + geom_point(shape=1) +
-        geom_line(stat = "hline", yintercept = "mean") +
-        geom_segment(aes(x = n, y = grand.mean, xend = n, yend = outcome))
+        geom_hline(yintercept=mean(outcome)) +
+        geom_segment(aes(x = n, y = grand.mean, xend = n, yend = outcome)) +
+        ggtitle("Total variance")
 plot
 ```
 
@@ -165,20 +174,22 @@ The model variance consists of two parts. One for the independent variable and o
 ```{r, echo=FALSE}
 data$model.group <- round(fit.group$fitted.values, 2)
 
-datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, options = list(searching = FALSE, scrollY = 315, paging = F, info = F))
 ```
 
-## Model variance group visual
+## Model variance group visual {.subsection}
 
 ```{r}
-plot + geom_segment(aes(x = n, y = grand.mean, xend = n, yend = data$model.group, colour = factor(group)))
+plot + geom_segment(aes(x = n, y = grand.mean, xend = n, yend = data$model.group, colour = factor(group))) +
+       ggtitle("Only group variance")
 ```
 
-## Model variance covariate visual
+## Model variance covariate visual {.subsection}
 
 ```{r}
 data$model.covar <- round(fit.covar$fitted.values,2)
-plot + geom_segment(aes(x = n, y = grand.mean, xend = n, yend = data$model.covar, colour = factor(group)))
+plot + geom_segment(aes(x = n, y = grand.mean, xend = n, yend = data$model.covar, colour = factor(group))) +
+       ggtitle("Only covariate variance")
 ```
 
 ## Model variance group and covariate {.smaller}
@@ -189,21 +200,21 @@ data$model       <- round(fit$fitted.values, 2)
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Model variance group and covariate visual
+## Model variance group and covariate visual {.subsection}
 
 ```{r}
-plot + geom_segment(aes(x = n, y = grand.mean, xend = n, yend = data$model, colour = factor(group))) -> plot
-plot
+plot + geom_segment(aes(x = n, y = grand.mean, xend = n, yend = data$model, colour = factor(group))) + 
+       ggtitle("Both group and covariate variance")
 ```
 
-## Error variance with covariate
+## Error variance with covariate {.subsection}
 
 ```{r}
-plot + geom_segment(aes(x = n-.1, y = outcome, xend = n-.1, yend = data$model, colour = "purple")) -> plot
-plot
+plot + geom_segment(aes(x = n-.1, y = outcome, xend = n-.1, yend = data$model, colour = "purple")) + 
+       ggtitle("Error variance")
 ```
 
-## Sums of squares
+## Sums of squares {.subsection}
 
 ```{r}
 SS.model = with(data, sum((model       - grand.mean)^2))
@@ -216,11 +227,11 @@ SS.covar = SS.model - SS.model.group; SS.covar ## SS.covar corrected for group
 SS.group = SS.model - SS.model.covar; SS.group ## SS.group corrected for covar
 ```
 
-## F-ratio
+## F-ratio {.subsection}
 
 $$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
 
-## Adjusted means
+## Adjusted means {.smaller .subsection}
 
 ```{r}
 # Add dummy variables
