@@ -1,0 +1,25 @@
+Y_i = b_0 &+ b_1 ALC_{beetje_i} + b_2 ALC_{veel_i} \\
+&+ b_3 SPE_{beetje_i} + b_4 SPE_{veel_i} \\
+&+ b_5 ALC_{beetje_i}\times SPE_{beetje_i} \\ 
+&+ b_6 ALC_{beetje_i}\times SPE_{veel_i} \\
+&+ b_7 ALC_{veel_i}\times SPE_{beetje_i} \\ 
+&+ b_8 ALC_{veel_i}\times SPE_{veel_i} \\ 
+&+ \epsilon_i
+
+
+
+
+\renewcommand{\arraystretch}{2.6}
+\begin{tabular}{l c c c c }
+Variance & Sum of squares & df & Mean squares & F-ratio \\
+\hline
+Model & $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ & $k_{model}-1$ & $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ & $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ \\
+$\hspace{2ex}$A & $\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ & $k_A-1$ & $\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}$ & $\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}$ \\
+$\hspace{2ex}$B & $\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ & $k_B-1$ & $\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}$ & $\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}$ \\
+$\hspace{2ex}$AB & $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ & $df_A \times df_B$ & $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ & $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ \\
+\hline
+Error  & $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ & $N-k$ & $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ & \\
+\hline
+Total & $\text{SS}_{\text{total}} = \text{SS}_{\text{model}} + \text{SS}_{\text{error}}$ & $N-1$ & $\frac{\text{SS}_{\text{total}}}{\text{df}_{\text{total}}}$ & \\
+\hline
+\end{tabular}
