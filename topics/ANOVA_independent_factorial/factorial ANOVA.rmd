@@ -1,9 +1,14 @@
+# Independent factorial ANOVA
+
+## Independent factorial ANOVA
+
+```{r}
 rm(list=ls())
 
-setwd("~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture ANOVA independent factorial")
-
 data <- read.csv("anova_alcohol_speed_sekse.csv")
+```
 
+```{r}
 brokken <- data$brokken
 n       = length(brokken)
 
@@ -86,3 +91,4 @@ legend("topleft",
        legend = c("speed","alcohol","speed * alcohol") )
 
 #dev.off()
+```
