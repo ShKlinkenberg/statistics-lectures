@@ -1,4 +1,4 @@
-# Independent factorial ANOVA
+# Independent factorial ANOVA {.section}
 
 Two or more independent variables with two or more categories. One dependent variable.
 
@@ -18,9 +18,9 @@ library("DT")
 
 ## Independent factorial ANOVA
 
-Thw independent factorial ANOVA analyses the variance of multiple independent variables with two or more categories (Factors). 
+The independent factorial ANOVA analyses the variance of multiple independent variables with two or more categories (Factors). 
 
-## Formulas
+## Formulas {.subsection}
 
 | Variance | Sum of squares | df | Mean squares | F-ratio |
 |----------|----------------|----|--------------|---------|
@@ -31,7 +31,7 @@ Thw independent factorial ANOVA analyses the variance of multiple independent va
 | Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
 | Total | $\text{SS}_{\text{total}} = \text{SS}_{\text{model}} + \text{SS}_{\text{error}}$ | $N-1$ | $\frac{\text{SS}_{\text{total}}}{\text{df}_{\text{total}}}$ | |
 
-## Example
+## Example {.smaller}
 
 In this example we will look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol.
 
@@ -47,32 +47,56 @@ In this example we will look at the amount of accidents in a car driving simulat
         * Small
         * Large
       
-## Data      
+## Data {.smaller}
 
 ```{r, echo=FALSE}
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## $SS_{model}$
+## SS<sub>model</sub> {.subsection}
 
 | Variance | Sum of squares | df | Mean squares | F-ratio |
 |----------|----------------|----|--------------|---------|
 | Model | $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_{model}-1$ | $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ | $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ |
 
-## $SS_{\text{model}}$ visual
-
-```{r}
+```{r, echo=FALSE}
 brokken <- data$brokken
 n       = length(brokken)
 
-# pdf("factorial ANOVA.pdf", width=9, height=5)
+# Descriptives for model
+means.model <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, mean  )
+n.k.model   <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, length)
+
+cbind(means.model, n.k.model$brokken)
 ```
+
+--------
+
+```{r, echo=FALSE}
+# Calculate expected brokken
+fit <- lm(brokken ~ speed + alcohol + speed * alcohol, data)
+exp.brokken <- fit$fitted.values
+
+datatable(data.frame(data$speed, 
+                     data$alcohol, 
+                     brokken = round(brokken,2), 
+                     mean = round(mean(brokken),2), 
+                     exp.brokken = round(exp.brokken,2)), options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+--------
+
+```{r}
+SS.model <- sum((exp.brokken - mean(data$brokken))^2)
+SS.model
+```
+
+## SS<sub>model</sub> visual {.smaller}
 
 ```{r}
 # Plot all data points
 plot(brokken,
-     xlab = 'participants',
-     main = 'speed + alcohol + speed * alcohol')
+     xlab = 'participants')
 
 # With the mean
 lines(1:n,rep(mean(brokken),n),col='black',lwd=2)
@@ -80,49 +104,54 @@ lines(1:n,rep(mean(brokken),n),col='black',lwd=2)
 # The black lines are the total variance, the deviation from the mean.
 segments(1:n, mean(brokken), 1:n, brokken)
 
-# Calculate expected brokken
-fit <- lm(brokken ~ speed + alcohol + speed * alcohol, data)
-exp.brokken <- fit$fitted.values
-
 # The model predicts the brokken scores
-points(1:n,exp.brokken, col='purple')
+points(1:n,exp.brokken, col='red')
 
 p <- recordPlot()
 
-# Descriptives for model
-means.model <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, mean  )
-n.k.model   <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, length)
-means.model
-n.k.model
+# The black lines are the total variance, the deviation from the mean.
+segments(1:n, exp.brokken, 1:n, mean(brokken), col = "red")
 
-SS.model <- sum((exp.brokken - mean(data$brokken))^2)
-SS.model
+# Add legend to plot
+legend("topleft",
+       pch    = c("o"),
+       col    = c("red"),
+       legend = c("Full model") )
 ```
 
-## $SS_{\text{error}}$
+## SS<sub>error</sub> {.subsection}
 
 | Variance | Sum of squares | df | Mean squares | F-ratio |
 |----------|----------------|----|--------------|---------|
 | Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
 
-```{r, eval=TRUE}
-p2 <-p
+```{r}
+SS.error <- sum((brokken - exp.brokken)^2)
+SS.error
+```
+
+## SS<sub>error</sub> visual
+
+```{r}
 p
 
 # Now we can add the error of this model
 segments(1:n, brokken, 1:n, exp.brokken, col='purple')
 
-SS.error <- sum((brokken - exp.brokken)^2)
-SS.error
+# Add legend to plot
+legend("topleft",
+       pch    = c("o", "-"),
+       col    = c("red", "purple"),
+       legend = c("Full model", "error") )
 ```
 
-## SS<sub>A</sub> Speed
+## SS<sub>A</sub> Speed {.subsection}
 
 | Variance | Sum of squares | df | Mean squares | F-ratio |
 |----------|----------------|----|--------------|---------|
 | $\hspace{2ex}A$ | $\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_A-1$ | $\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}$ | $\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}$ |
 
-```{r, eval=TRUE}
+```{r, echo=FALSE}
 # Descriptives for speed
 means.speed <- aggregate(brokken ~ speed, data, mean  )
 n.k.speed   <- aggregate(brokken ~ speed, data, length)
@@ -132,57 +161,75 @@ means.speed
 
 data <- merge(data, means.speed,  by="speed",  all.x=TRUE)
 data <- data[order(data$pp),]
+```
 
-p2
-
-
-
-# Deviation of speed
-points(1:n, data$means.speed,  col='green')
-segments(1:n, mean(brokken), 1:n, data$means.speed, col='green')
-
+```{r}
 SS.speed <- sum(with(data, (means.speed   - mean.total)^2))
 SS.speed
 ```
 
-## SS<sub>B</sub> Alcohol
+## SS<sub>A</sub> Speed Visual
+
+```{r}
+p
+# Deviation of speed
+points(1:n, data$means.speed,  col='green')
+segments(1:n, mean(brokken), 1:n, data$means.speed, col='green')
+
+# Add legend to plot
+legend("topleft",
+       pch    = c("o", "o"),
+       col    = c("green", "red"),
+       legend = c("speed", "Full model") )
+```
+
+## SS<sub>B</sub> Alcohol {.subsection}
 
 | Variance | Sum of squares | df | Mean squares | F-ratio |
 |----------|----------------|----|--------------|---------|
-| $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
+| $\hspace{2ex}B$ | $\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_B-1$ | $\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}$ | $\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}$ |
 
-```{r, eval=TRUE}
+```{r, echo=FALSE}
 # Descriptives for alcohol
 means.alcohol <- aggregate(brokken ~ alcohol, data, mean)
 n.k.alcohol   <- aggregate(brokken ~ alcohol, data, length)
 names(means.alcohol)[2] <- "means.alcohol"
 means.alcohol
 
-
 data <- merge(data,means.alcohol,by="alcohol",all.x=TRUE)
 data <- data[order(data$pp),]
+```
 
+```{r}
+SS.alcohol <- sum(with(data, (means.alcohol - mean.total)^2))
+SS.alcohol
+```
+
+## SS<sub>B</sub> Alcohol Visual
+
+```{r}
 p
 
 # Deviation of alcohol
 points(1:n, data$means.alcohol,col='orange',type="p")
 segments(1:n, mean(brokken), 1:n, data$means.alcohol, col='orange')
 
-SS.alcohol <- sum(with(data, (means.alcohol - mean.total)^2))
-SS.alcohol
+# Add legend to plot
+legend("topleft",
+       pch    = c("o", "o"),
+       col    = c("orange", "red"),
+       legend = c("alcohol", "Full model") )
+```
 
+## SS<sub>AB</sub> Alcohol x Speed {.subsection}
 
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
 
+```{r}
 # Sums of squares for the interaction between speed and alcohol
 
 SS.speed.alcohol <- SS.model - SS.speed - SS.alcohol
 SS.speed.alcohol
-
-# Add legend to plot
-legend("topleft",
-       pch    = c("o","o","o"),
-       col    = c("orange","green",'purple'),
-       legend = c("speed","alcohol","speed * alcohol") )
-
-#dev.off()
 ```
