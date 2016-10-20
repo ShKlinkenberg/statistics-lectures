@@ -1,19 +1,38 @@
 # Independent factorial ANOVA
 
-## Independent factorial ANOVA
-
-```{r}
+```{r, echo=FALSE}
 rm(list=ls())
 
 data <- read.csv("anova_alcohol_speed_sekse.csv")
+
+if(!"ggplot2" %in% installed.packages()) { install.packages("ggplot2") }
+library("ggplot2")
+
+set.seed(1976)
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
 ```
+
+## Independent factorial ANOVA
+
+
+
+## Example
+
+```{r, echo=FALSE}
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
 
 ```{r}
 brokken <- data$brokken
 n       = length(brokken)
 
 # pdf("factorial ANOVA.pdf", width=9, height=5)
+```
 
+```{r}
 # Plot all data points
 plot(brokken,
      xlab = 'participants',
