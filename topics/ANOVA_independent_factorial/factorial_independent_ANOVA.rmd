@@ -59,7 +59,7 @@ datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, inf
 |----------|----------------|----|--------------|---------|
 | Model | $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_{model}-1$ | $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ | $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ |
 
-## $SS_{\text{model}$ visual
+## $SS_{\text{model}}$ visual
 
 ```{r}
 brokken <- data$brokken
@@ -87,6 +87,8 @@ exp.brokken <- fit$fitted.values
 # The model predicts the brokken scores
 points(1:n,exp.brokken, col='purple')
 
+p <- recordPlot()
+
 # Descriptives for model
 means.model <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, mean  )
 n.k.model   <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, length)
@@ -103,7 +105,10 @@ SS.model
 |----------|----------------|----|--------------|---------|
 | Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
+p2 <-p
+p
+
 # Now we can add the error of this model
 segments(1:n, brokken, 1:n, exp.brokken, col='purple')
 
@@ -113,28 +118,51 @@ SS.error
 
 ## SS<sub>A</sub> Speed
 
-```{r, eval=FALSE}
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| $\hspace{2ex}A$ | $\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_A-1$ | $\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}$ | $\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}$ |
+
+```{r, eval=TRUE}
 # Descriptives for speed
 means.speed <- aggregate(brokken ~ speed, data, mean  )
 n.k.speed   <- aggregate(brokken ~ speed, data, length)
+data$mean.total <- mean(data$brokken)
 names(means.speed)[2] <- "means.speed"
 means.speed
+
+data <- merge(data, means.speed,  by="speed",  all.x=TRUE)
+data <- data[order(data$pp),]
+
+p2
+
+
+
+# Deviation of speed
+points(1:n, data$means.speed,  col='green')
+segments(1:n, mean(brokken), 1:n, data$means.speed, col='green')
+
+SS.speed <- sum(with(data, (means.speed   - mean.total)^2))
+SS.speed
 ```
 
 ## SS<sub>B</sub> Alcohol
 
-```{r, eval=FALSE}
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
+
+```{r, eval=TRUE}
 # Descriptives for alcohol
 means.alcohol <- aggregate(brokken ~ alcohol, data, mean)
 n.k.alcohol   <- aggregate(brokken ~ alcohol, data, length)
 names(means.alcohol)[2] <- "means.alcohol"
 means.alcohol
 
-data <- merge(data,means.speed,  by="speed",  all.x=TRUE)
+
 data <- merge(data,means.alcohol,by="alcohol",all.x=TRUE)
 data <- data[order(data$pp),]
 
-data$mean.total <- mean(data$brokken)
+p
 
 # Deviation of alcohol
 points(1:n, data$means.alcohol,col='orange',type="p")
@@ -143,12 +171,7 @@ segments(1:n, mean(brokken), 1:n, data$means.alcohol, col='orange')
 SS.alcohol <- sum(with(data, (means.alcohol - mean.total)^2))
 SS.alcohol
 
-# Deviation of speed
-points(1:n, data$means.speed,  col='green')
-segments(1:n, mean(brokken), 1:n, data$means.speed, col='green')
 
-SS.speed <- sum(with(data, (means.speed   - mean.total)^2))
-SS.speed
 
 # Sums of squares for the interaction between speed and alcohol
 
