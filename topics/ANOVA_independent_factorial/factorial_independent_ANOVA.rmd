@@ -1,5 +1,7 @@
 # Independent factorial ANOVA
 
+Two or more independent variables with two or more categories. One dependent variable.
+
 ```{r, echo=FALSE}
 rm(list=ls())
 
@@ -16,14 +18,48 @@ library("DT")
 
 ## Independent factorial ANOVA
 
+Thw independent factorial ANOVA analyses the variance of multiple independent variables with two or more categories (Factors). 
 
+## Formulas
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| Model | $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_{model}-1$ | $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ | $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ |
+| $\hspace{2ex}A$ | $\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_A-1$ | $\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}$ | $\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}$ |
+| $\hspace{2ex}B$ | $\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_B-1$ | $\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}$ | $\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}$ |
+| $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
+| Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
+| Total | $\text{SS}_{\text{total}} = \text{SS}_{\text{model}} + \text{SS}_{\text{error}}$ | $N-1$ | $\frac{\text{SS}_{\text{total}}}{\text{df}_{\text{total}}}$ | |
 
 ## Example
+
+In this example we will look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol.
+
+* Dependent variable
+    * Accidents
+* Independent variables
+    * Speed
+        * None
+        * Small
+        * Large
+    * Alcohol
+        * None
+        * Small
+        * Large
+      
+## Data      
 
 ```{r, echo=FALSE}
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
+## $SS_{model}$
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| Model | $\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k_{model}-1$ | $\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}$ | $\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}$ |
+
+## $SS_{\text{model}$ visual
 
 ```{r}
 brokken <- data$brokken
@@ -51,27 +87,43 @@ exp.brokken <- fit$fitted.values
 # The model predicts the brokken scores
 points(1:n,exp.brokken, col='purple')
 
-SS.model <- sum((exp.brokken - mean(data$brokken))^2)
-SS.model
-
-# Now we can add the error of this model
-segments(1:n, brokken, 1:n, exp.brokken, col='purple')
-
-SS.error <- sum((brokken - exp.brokken)^2)
-SS.error
-
 # Descriptives for model
 means.model <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, mean  )
 n.k.model   <- aggregate(brokken ~ speed + alcohol + speed * alcohol, data, length)
 means.model
 n.k.model
 
+SS.model <- sum((exp.brokken - mean(data$brokken))^2)
+SS.model
+```
+
+## $SS_{\text{error}}$
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
+
+```{r, eval=FALSE}
+# Now we can add the error of this model
+segments(1:n, brokken, 1:n, exp.brokken, col='purple')
+
+SS.error <- sum((brokken - exp.brokken)^2)
+SS.error
+```
+
+## SS<sub>A</sub> Speed
+
+```{r, eval=FALSE}
 # Descriptives for speed
 means.speed <- aggregate(brokken ~ speed, data, mean  )
 n.k.speed   <- aggregate(brokken ~ speed, data, length)
 names(means.speed)[2] <- "means.speed"
 means.speed
+```
 
+## SS<sub>B</sub> Alcohol
+
+```{r, eval=FALSE}
 # Descriptives for alcohol
 means.alcohol <- aggregate(brokken ~ alcohol, data, mean)
 n.k.alcohol   <- aggregate(brokken ~ alcohol, data, length)
