@@ -313,8 +313,34 @@
 
 </article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
 
-<pre class = 'prettyprint lang-r'>SS.model &lt;- sum((exp.brokken - mean(data$brokken))^2)
-SS.model</pre>
+<pre >## [1] 493.8609</pre>
+
+<pre class = 'prettyprint lang-r'>m.k1 = mean(subset(data, speed == &quot;geen&quot;   &amp; alcohol == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+m.k2 = mean(subset(data, speed == &quot;geen&quot;   &amp; alcohol == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+m.k3 = mean(subset(data, speed == &quot;geen&quot;   &amp; alcohol == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)
+m.k4 = mean(subset(data, speed == &quot;beetje&quot; &amp; alcohol == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+m.k5 = mean(subset(data, speed == &quot;beetje&quot; &amp; alcohol == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+m.k6 = mean(subset(data, speed == &quot;beetje&quot; &amp; alcohol == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)
+m.k7 = mean(subset(data, speed == &quot;veel&quot;   &amp; alcohol == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+m.k8 = mean(subset(data, speed == &quot;veel&quot;   &amp; alcohol == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+m.k9 = mean(subset(data, speed == &quot;veel&quot;   &amp; alcohol == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)
+
+n.k1 = n.k2 = n.k3 = n.k4 = n.k5 = n.k6 = n.k7 = n.k8 = n.k9 = 20</pre>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>ss.m.k1 = sum(n.k1 * (m.k1 - mean(brokken))^2 )
+ss.m.k2 = sum(n.k2 * (m.k2 - mean(brokken))^2 )
+ss.m.k3 = sum(n.k3 * (m.k3 - mean(brokken))^2 )
+ss.m.k4 = sum(n.k4 * (m.k4 - mean(brokken))^2 )
+ss.m.k5 = sum(n.k5 * (m.k5 - mean(brokken))^2 )
+ss.m.k6 = sum(n.k6 * (m.k6 - mean(brokken))^2 )
+ss.m.k7 = sum(n.k7 * (m.k7 - mean(brokken))^2 )
+ss.m.k8 = sum(n.k8 * (m.k8 - mean(brokken))^2 )
+ss.m.k9 = sum(n.k9 * (m.k9 - mean(brokken))^2 )
+
+ss.model = sum(ss.m.k1,ss.m.k2,ss.m.k3,ss.m.k4,ss.m.k5,ss.m.k6,ss.m.k7,ss.m.k8,ss.m.k9)
+ss.model</pre>
 
 <pre >## [1] 493.8609</pre>
 
@@ -372,8 +398,30 @@ legend(&quot;topleft&quot;,
 </tr>
 </table>
 
-<pre class = 'prettyprint lang-r'>SS.error &lt;- sum((brokken - exp.brokken)^2)
-SS.error</pre>
+<pre class = 'prettyprint lang-r'>v.k1 = var(subset(data, speed == &quot;geen&quot;   &amp; alcohol == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+v.k2 = var(subset(data, speed == &quot;geen&quot;   &amp; alcohol == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+v.k3 = var(subset(data, speed == &quot;geen&quot;   &amp; alcohol == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)
+v.k4 = var(subset(data, speed == &quot;beetje&quot; &amp; alcohol == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+v.k5 = var(subset(data, speed == &quot;beetje&quot; &amp; alcohol == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+v.k6 = var(subset(data, speed == &quot;beetje&quot; &amp; alcohol == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)
+v.k7 = var(subset(data, speed == &quot;veel&quot;   &amp; alcohol == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+v.k8 = var(subset(data, speed == &quot;veel&quot;   &amp; alcohol == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+v.k9 = var(subset(data, speed == &quot;veel&quot;   &amp; alcohol == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)</pre>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>ss.e.k1 = v.k1 * (n.k1 - 1)
+ss.e.k2 = v.k2 * (n.k2 - 1)
+ss.e.k3 = v.k3 * (n.k3 - 1)
+ss.e.k4 = v.k4 * (n.k4 - 1)
+ss.e.k5 = v.k5 * (n.k5 - 1)
+ss.e.k6 = v.k6 * (n.k6 - 1)
+ss.e.k7 = v.k7 * (n.k7 - 1)
+ss.e.k8 = v.k8 * (n.k8 - 1)
+ss.e.k9 = v.k9 * (n.k9 - 1)
+
+ss.error = sum(ss.e.k1,ss.e.k2,ss.e.k3,ss.e.k4,ss.e.k5,ss.e.k6,ss.e.k7,ss.e.k8,ss.e.k9)
+ss.error</pre>
 
 <pre >## [1] 66.32596</pre>
 
@@ -418,13 +466,20 @@ legend(&quot;topleft&quot;,
 </tr>
 </table>
 
-<pre >##    speed means.speed
-## 1 beetje    4.739688
-## 2   geen    3.615949
-## 3   veel    5.679066</pre>
+<pre class = 'prettyprint lang-r'>m.s1 = mean(subset(data, speed == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+m.s2 = mean(subset(data, speed == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+m.s3 = mean(subset(data, speed == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)
 
-<pre class = 'prettyprint lang-r'>SS.speed &lt;- sum(with(data, (means.speed   - mean.total)^2))
-SS.speed</pre>
+n.s1 = n.s2 = n.s3 = 60</pre>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>ss.s1 = sum(n.s1 * (m.s1 - mean(brokken))^2 )
+ss.s2 = sum(n.s2 * (m.s2 - mean(brokken))^2 )
+ss.s3 = sum(n.s3 * (m.s3 - mean(brokken))^2 )
+
+ss.speed = sum(ss.s1,ss.s2,ss.s3)
+ss.speed</pre>
 
 <pre >## [1] 128.0335</pre>
 
@@ -469,13 +524,20 @@ legend(&quot;topleft&quot;,
 </tr>
 </table>
 
-<pre >##   alcohol means.alcohol
-## 1  beetje      4.594585
-## 2    geen      2.980110
-## 3    veel      6.460008</pre>
+<pre class = 'prettyprint lang-r'>m.a1 = mean(subset(data, alcohol == &quot;geen&quot;,   select = &quot;brokken&quot;)$brokken)
+m.a2 = mean(subset(data, alcohol == &quot;beetje&quot;, select = &quot;brokken&quot;)$brokken)
+m.a3 = mean(subset(data, alcohol == &quot;veel&quot;,   select = &quot;brokken&quot;)$brokken)
 
-<pre class = 'prettyprint lang-r'>SS.alcohol &lt;- sum(with(data, (means.alcohol - mean.total)^2))
-SS.alcohol</pre>
+n.a1 = n.a2 = n.a3 = 60</pre>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>ss.a1 = sum(n.a1 * (m.a1 - mean(brokken))^2 )
+ss.a2 = sum(n.a2 * (m.a2 - mean(brokken))^2 )
+ss.a3 = sum(n.a3 * (m.a3 - mean(brokken))^2 )
+
+ss.alcohol = sum(ss.a1,ss.a2,ss.a3)
+ss.alcohol</pre>
 
 <pre >## [1] 363.9203</pre>
 
@@ -521,10 +583,11 @@ legend(&quot;topleft&quot;,
 </tr>
 </table>
 
-<pre class = 'prettyprint lang-r'># Sums of squares for the interaction between speed and alcohol
+<pre >## [1] 1.907124</pre>
 
-SS.speed.alcohol &lt;- SS.model - SS.speed - SS.alcohol
-SS.speed.alcohol</pre>
+<pre class = 'prettyprint lang-r'># Sums of squares for the interaction between speed and alcohol
+ss.speed.alcohol &lt;- ss.model - ss.speed - ss.alcohol
+ss.speed.alcohol</pre>
 
 <pre >## [1] 1.907124</pre>
 

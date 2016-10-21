@@ -86,10 +86,42 @@ datatable(data.frame(data$speed,
 
 --------
 
-```{r}
+```{r, echo=FALSE}
 SS.model <- sum((exp.brokken - mean(data$brokken))^2)
 SS.model
 ```
+
+```{r}
+m.k1 = mean(subset(data, speed == "geen"   & alcohol == "geen",   select = "brokken")$brokken)
+m.k2 = mean(subset(data, speed == "geen"   & alcohol == "beetje", select = "brokken")$brokken)
+m.k3 = mean(subset(data, speed == "geen"   & alcohol == "veel",   select = "brokken")$brokken)
+m.k4 = mean(subset(data, speed == "beetje" & alcohol == "geen",   select = "brokken")$brokken)
+m.k5 = mean(subset(data, speed == "beetje" & alcohol == "beetje", select = "brokken")$brokken)
+m.k6 = mean(subset(data, speed == "beetje" & alcohol == "veel",   select = "brokken")$brokken)
+m.k7 = mean(subset(data, speed == "veel"   & alcohol == "geen",   select = "brokken")$brokken)
+m.k8 = mean(subset(data, speed == "veel"   & alcohol == "beetje", select = "brokken")$brokken)
+m.k9 = mean(subset(data, speed == "veel"   & alcohol == "veel",   select = "brokken")$brokken)
+
+n.k1 = n.k2 = n.k3 = n.k4 = n.k5 = n.k6 = n.k7 = n.k8 = n.k9 = 20
+```
+
+---------
+
+```{r}
+ss.m.k1 = sum(n.k1 * (m.k1 - mean(brokken))^2 )
+ss.m.k2 = sum(n.k2 * (m.k2 - mean(brokken))^2 )
+ss.m.k3 = sum(n.k3 * (m.k3 - mean(brokken))^2 )
+ss.m.k4 = sum(n.k4 * (m.k4 - mean(brokken))^2 )
+ss.m.k5 = sum(n.k5 * (m.k5 - mean(brokken))^2 )
+ss.m.k6 = sum(n.k6 * (m.k6 - mean(brokken))^2 )
+ss.m.k7 = sum(n.k7 * (m.k7 - mean(brokken))^2 )
+ss.m.k8 = sum(n.k8 * (m.k8 - mean(brokken))^2 )
+ss.m.k9 = sum(n.k9 * (m.k9 - mean(brokken))^2 )
+
+ss.model = sum(ss.m.k1,ss.m.k2,ss.m.k3,ss.m.k4,ss.m.k5,ss.m.k6,ss.m.k7,ss.m.k8,ss.m.k9)
+ss.model
+```
+
 
 ## SS<sub>model</sub> visual {.smaller}
 
@@ -125,9 +157,38 @@ legend("topleft",
 |----------|----------------|----|--------------|---------|
 | Error  | $\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}$ | $N-k$ | $\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}$ | |
 
-```{r}
+```{r, echo=FALSE, eval=FALSE}
 SS.error <- sum((brokken - exp.brokken)^2)
 SS.error
+```
+
+```{r}
+v.k1 = var(subset(data, speed == "geen"   & alcohol == "geen",   select = "brokken")$brokken)
+v.k2 = var(subset(data, speed == "geen"   & alcohol == "beetje", select = "brokken")$brokken)
+v.k3 = var(subset(data, speed == "geen"   & alcohol == "veel",   select = "brokken")$brokken)
+v.k4 = var(subset(data, speed == "beetje" & alcohol == "geen",   select = "brokken")$brokken)
+v.k5 = var(subset(data, speed == "beetje" & alcohol == "beetje", select = "brokken")$brokken)
+v.k6 = var(subset(data, speed == "beetje" & alcohol == "veel",   select = "brokken")$brokken)
+v.k7 = var(subset(data, speed == "veel"   & alcohol == "geen",   select = "brokken")$brokken)
+v.k8 = var(subset(data, speed == "veel"   & alcohol == "beetje", select = "brokken")$brokken)
+v.k9 = var(subset(data, speed == "veel"   & alcohol == "veel",   select = "brokken")$brokken)
+```
+
+---------
+
+```{r}
+ss.e.k1 = v.k1 * (n.k1 - 1)
+ss.e.k2 = v.k2 * (n.k2 - 1)
+ss.e.k3 = v.k3 * (n.k3 - 1)
+ss.e.k4 = v.k4 * (n.k4 - 1)
+ss.e.k5 = v.k5 * (n.k5 - 1)
+ss.e.k6 = v.k6 * (n.k6 - 1)
+ss.e.k7 = v.k7 * (n.k7 - 1)
+ss.e.k8 = v.k8 * (n.k8 - 1)
+ss.e.k9 = v.k9 * (n.k9 - 1)
+
+ss.error = sum(ss.e.k1,ss.e.k2,ss.e.k3,ss.e.k4,ss.e.k5,ss.e.k6,ss.e.k7,ss.e.k8,ss.e.k9)
+ss.error
 ```
 
 ## SS<sub>error</sub> visual
@@ -157,15 +218,34 @@ means.speed <- aggregate(brokken ~ speed, data, mean  )
 n.k.speed   <- aggregate(brokken ~ speed, data, length)
 data$mean.total <- mean(data$brokken)
 names(means.speed)[2] <- "means.speed"
-means.speed
+#means.speed
 
 data <- merge(data, means.speed,  by="speed",  all.x=TRUE)
 data <- data[order(data$pp),]
 ```
 
-```{r}
+```{r, echo = FALSE}
 SS.speed <- sum(with(data, (means.speed   - mean.total)^2))
-SS.speed
+#SS.speed
+```
+
+```{r}
+m.s1 = mean(subset(data, speed == "geen",   select = "brokken")$brokken)
+m.s2 = mean(subset(data, speed == "beetje", select = "brokken")$brokken)
+m.s3 = mean(subset(data, speed == "veel",   select = "brokken")$brokken)
+
+n.s1 = n.s2 = n.s3 = 60
+```
+
+-------
+
+```{r}
+ss.s1 = sum(n.s1 * (m.s1 - mean(brokken))^2 )
+ss.s2 = sum(n.s2 * (m.s2 - mean(brokken))^2 )
+ss.s3 = sum(n.s3 * (m.s3 - mean(brokken))^2 )
+
+ss.speed = sum(ss.s1,ss.s2,ss.s3)
+ss.speed
 ```
 
 ## SS<sub>A</sub> Speed Visual
@@ -194,15 +274,34 @@ legend("topleft",
 means.alcohol <- aggregate(brokken ~ alcohol, data, mean)
 n.k.alcohol   <- aggregate(brokken ~ alcohol, data, length)
 names(means.alcohol)[2] <- "means.alcohol"
-means.alcohol
+# means.alcohol
 
 data <- merge(data,means.alcohol,by="alcohol",all.x=TRUE)
 data <- data[order(data$pp),]
 ```
 
-```{r}
+```{r, echo=FALSE}
 SS.alcohol <- sum(with(data, (means.alcohol - mean.total)^2))
-SS.alcohol
+# SS.alcohol
+```
+
+```{r}
+m.a1 = mean(subset(data, alcohol == "geen",   select = "brokken")$brokken)
+m.a2 = mean(subset(data, alcohol == "beetje", select = "brokken")$brokken)
+m.a3 = mean(subset(data, alcohol == "veel",   select = "brokken")$brokken)
+
+n.a1 = n.a2 = n.a3 = 60
+```
+
+------
+
+```{r}
+ss.a1 = sum(n.a1 * (m.a1 - mean(brokken))^2 )
+ss.a2 = sum(n.a2 * (m.a2 - mean(brokken))^2 )
+ss.a3 = sum(n.a3 * (m.a3 - mean(brokken))^2 )
+
+ss.alcohol = sum(ss.a1,ss.a2,ss.a3)
+ss.alcohol
 ```
 
 ## SS<sub>B</sub> Alcohol Visual
@@ -227,9 +326,14 @@ legend("topleft",
 |----------|----------------|----|--------------|---------|
 | $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
 
-```{r}
+```{r, echo=FALSE}
 # Sums of squares for the interaction between speed and alcohol
-
 SS.speed.alcohol <- SS.model - SS.speed - SS.alcohol
 SS.speed.alcohol
+```
+
+```{r}
+# Sums of squares for the interaction between speed and alcohol
+ss.speed.alcohol <- ss.model - ss.speed - ss.alcohol
+ss.speed.alcohol
 ```
