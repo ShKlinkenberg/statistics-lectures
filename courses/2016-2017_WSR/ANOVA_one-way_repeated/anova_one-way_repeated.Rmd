@@ -1,6 +1,6 @@
 ---
 title: "ANOVA"
-subtitle: "Independent factiorial"
+subtitle: "One-way repeated"
 author: "Klinkenberg"
 date: "21 okt 2016"
 output: 
@@ -32,7 +32,7 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA.rmd"}
+```{r child="../../../topics/anova_repeated_one-way/anova_repeated_one-way.rmd"}
 ```
 
 # END
