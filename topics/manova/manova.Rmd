@@ -19,7 +19,7 @@ We will use the data from Field's chapter 16 about behavioural and cognitive neu
 ```{r, echo=FALSE}
 data <- read.csv("MANOVA gedrags therapie.csv")
 
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 345, paging = F, info = F))
 ```
 
 ## Sums of squares {.smaller .subsection}
