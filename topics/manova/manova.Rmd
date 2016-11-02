@@ -8,7 +8,7 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
-## MANOVA
+## MANOVA {.section}
 
 Multivariate analysis of variance. We are looking for the multivariate signal to noise ratio.
 
@@ -22,7 +22,7 @@ data <- read.csv("MANOVA gedrags therapie.csv")
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Sums of squares {.smaller}
+## Sums of squares {.smaller .subsection}
 
 Fist we have to calculate the sums of squares for the model and the error for both variates, actions and thoughts.
 
@@ -69,7 +69,7 @@ m.bet.act = mean(bet.act)
 m.con.act = mean(con.act)
 ```
 
-## ${SS}_{total}$
+## ${SS}_{total}$ {.subsection}
 
 Now we can calculate our total sums of squares for both models. This one is easy.
 
@@ -96,7 +96,7 @@ segments(1:n.act, actions, 1:n.act, m.act)
 p.t <- recordPlot()
 ```
 
-## ${SS}_{model}$
+## ${SS}_{model}$ {.subsection}
 
 And our sums of squares for both models.
 
@@ -136,7 +136,7 @@ segments(1:n, fit.act$fitted.values, 1:n, m.act, col = "green")
 p.m <- recordPlot()
 ```
 
-## ${SS}_{error}$
+## ${SS}_{error}$ {.subsection}
 
 $${SS}_{error} = \sum{s_k^2(n_k-1)}$$
 
@@ -175,7 +175,7 @@ p.e <- recordPlot()
 
 For the MANOVA we need the cross products (cross multiplications) of the two variates for the total, the model and the error. This is comparable to calculating the covariance for a correlation.
 
-## ${CP}_{total}$
+## ${CP}_{total}$ {.subsection}
 
 $${CP}_{total} = \sum_{i=1}^n \left( X_{i({DV}_1)} - \bar{X}_{grand({{DV}_1})} \right) \left( X_{i({DV}_2)} - \bar{X}_{grand({{DV}_2})} \right)$$
 
@@ -188,7 +188,7 @@ p.t
 ```
 
 
-## ${CP}_{model}$ {.smaller}
+## ${CP}_{model}$ {.smaller .subsection}
 
 $${CP}_{model} = \sum_{grp=1}^k n_{grp} \left( \bar{X}_{grp({{DV}_1})} - \bar{X}_{grand({{DV}_1})} \right) \left(\bar{X}_{grp({{DV}_2})} - \bar{X}_{grand({{DV}_2})} \right)$$
 
@@ -202,7 +202,7 @@ CP.model = n.cbt.tho * (m.cbt.tho - m.tho) * (m.cbt.act  - m.act) +
 p.m
 ```
 
-## ${CP}_{error}$
+## ${CP}_{error}$  {.subsection}
 
 $${CP}_{error} = \sum_{i=1}^n \left(X_{i({{DV}_1})} - \bar{X}_{grp({{DV}_1})} \right)  \left(X_{i({{DV}_2})} - \bar{X}_{(grp{{DV}_2})} \right)$$
 
@@ -215,7 +215,7 @@ CP.error = CP.total - CP.model
 p.e
 ```
 
-## SS cross product matrix
+## SS cross product matrix  {.subsection}
 
 Now we have all the components to create the sums of squares cross product matrix. Creating a matrix in R is easy. We can use the `matrix()` function. We can define the values in the matrix using the `c()` function and we can define the dimentions, in our case 2x2.
 
@@ -230,7 +230,7 @@ T = matrix(c(SS.total.act,CP.total,
 round(T, 2)
 ```
 
-## Model cross product matrix
+## Model cross product matrix  {.subsection}
 
 $$H = \begin{pmatrix} {SS}_{M({{DV}_1})} & {CP}_M \\ {CP}_M & {SS}_{M({DV}_2)} \end{pmatrix}$$
 
@@ -241,7 +241,7 @@ H = matrix(c(SS.model.act,CP.model,
 round(H, 2)
 ```
 
-## Error cross product matrix
+## Error cross product matrix  {.subsection}
 
 $$E = \begin{pmatrix} {SS}_{E({DV}_1)} & {CP}_E \\ {CP}_E & {SS}_{E({DV}_2)} \end{pmatrix}$$ 
 
@@ -252,7 +252,7 @@ E = matrix(c(SS.error.act,CP.error,
 round(E, 0)
 ```
 
-## Multivariate signal to noise {.smaller}
+## Multivariate signal to noise {.smaller .subsection}
 
 Now in the same way we get the F ration in ANOVA by looking at the ratio of the variance in the model and the variance of the error, with MANOVA we have to look at the ratio of the hypothesis matrix H and the error matrix E. The problem is that you just can't devide matrices. Bus you can multibply by the inverse to get to the devision of a matrix. This is said to be very hard but R makes this very easy for us.
 
@@ -283,7 +283,7 @@ round(eigen.values, 3)
 
 Finaly we can calculate the test statistic for our $H_0$ hypothesis testing.
 
-## Pillai-Barrtlett trace
+## Pillai-Barrtlett trace  {.subsection}
 
 > Pillai’s trace is the sum of the proportion of explained variance on the discriminant functions.
 
@@ -296,7 +296,7 @@ P.B.trace = sum(eigen.values / (1 + eigen.values))
 P.B.trace
 ```
 
-## Hotelling-Lawley trace
+## Hotelling-Lawley trace  {.subsection}
 
 > The Hotelling–Lawley trace&hellip; &hellip;is simply the sum of the eigenvalues for each variate
 
@@ -309,7 +309,7 @@ H.L.trace = sum(eigen.values)
 H.L.trace
 ```
 
-## Wilks's lambda
+## Wilks's lambda  {.subsection}
 
 > Wilks’s lambda is the product of the unexplained variance
 
@@ -322,7 +322,7 @@ W.lambda = prod(1 / (1 + eigen.values))
 W.lambda
 ```
 
-## Roy's largest root
+## Roy's largest root  {.subsection}
 
 > Roy’s largest root is the largest eigenvalue.
 
