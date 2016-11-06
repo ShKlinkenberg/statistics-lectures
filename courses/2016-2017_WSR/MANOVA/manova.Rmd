@@ -2,7 +2,7 @@
 title: "MANOVA"
 subtitle: "One-way independent"
 author: "Klinkenberg"
-date: "2 nov 2016"
+date: "3 nov 2016"
 output: 
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
