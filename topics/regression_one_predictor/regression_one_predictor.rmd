@@ -27,6 +27,8 @@ myCsv <- getURL(google.url)
 data <- read.csv(textConnection(myCsv))
 # Change header names
 names(data)[2:4] <- c('IQ', 'cijfers', 'betrouwbaar')
+
+write.table(data, "cijfers.csv", row.names=FALSE, col.names=TRUE, dec='.')
 ```
 
 ```{r}
@@ -68,7 +70,7 @@ cijfers = data$cijfers
 
 ## Calculate $b_1$ {.subsection}
 
-$$b_1 = r_{yx} \frac{s_y}{s_x}$$
+$$b_1 = r_{xy} \frac{s_y}{s_x}$$
 
 ```{r}
 # Calculate b1
@@ -91,6 +93,27 @@ mean.IQ      = mean(IQ)
 
 b0 = mean.cijfers - b1 * mean.IQ
 b0
+```
+
+## The slope
+
+```{r}
+# Extra
+
+plot(IQ,cijfers, xlim=c(0, 160), ylim=c(0,10))
+abline(lm(cijfers~IQ))
+lines(c(2,2),c(0,200),col='red')
+lines(c(3,3),c(0,200),col='red')
+lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
+lines(c(0,10),rep(b0 + b1 * 2, 2),col='red')
+lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
+lines(c(0,10),rep(b0 + b1 * 3, 2),col='red')
+
+text(2.5, (b0 + b1 * 2),1, pos=1, cex=2)
+text(3  , (b0 + b1 * 2.5),
+     (b0 + b1 * 3)-(b0 + b1 * 2), 
+     pos=4, 
+     cex=2)
 ```
 
 ## Calculate t-values for b's {.smaller .subsection}
@@ -157,17 +180,18 @@ data$expcijfers = b0 + b1 * IQ
 Let's have a look
 
 ```{r, echo=FALSE}
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 375, paging = F, info = F))
 ```
 
 ## $y$ vs $\hat{y}$
 
 And lets have a look at this relation between expectation and reality
 
-```{r}
+```{r, fig.height=5, fig.width=5}
 expcijfers <- data$expcijfers
 
-plot(expcijfers,cijfers)
+plot(expcijfers,cijfers, xlim = c(0,10), ylim = c(0,10))
+lines(c(0,10), c(0,10), col='red')
 ```
 
 ## Error {.smaller}
@@ -179,14 +203,12 @@ data$error = cijfers - expcijfers
 ```
 
 ```{r, echo=FALSE}
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 300, paging = F, info = F))
 ```
 
 ## Model fit
 
-The fit of the model is the amount of error, which can be summed in the correlation r.
-
-Let's look at this correlation r
+The fit of the model is the amount of error, which can be viewed in the correlation ($r$).
 
 ```{r}
 r = cor(expcijfers,cijfers)
@@ -237,42 +259,33 @@ F
 Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.
 
 ```{r}
-df.model = n-p-1
-df.error = p
+df.model = p # n = rows, p = predictors
+df.error = n-p-1
 
- SS_model = sum((expcijfers - mean(cijfers))^2)
- SS_error = sum((cijfers - expcijfers)^2)
- MS_model = SS_model * df.model
- MS_error = SS_error * df.error
- F = MS_model / MS_error
- F
+SS_model = sum((expcijfers - mean(cijfers))^2)
+SS_error = sum((cijfers - expcijfers)^2)
+MS_model = SS_model / df.model
+MS_error = SS_error / df.error
+F = MS_model / MS_error 
+F
+```
+
+----------
+
+```{r}
+SS_total = var(cijfers) * (n-1)
+SS_total
+SS_model
+# Proportion explained variance
+SS_model / SS_total
+r^2
 ```
 
 ## Visualize
 
-```{r}
+```{r, warning=FALSE}
 visualize.f(F, df.model, df.error, section='upper')
 ```
 
-## The slope
 
-```{r}
-# Extra
-
-plot(IQ,cijfers, xlim=c(0, 160), ylim=c(0,10))
-abline(lm(cijfers~IQ))
-lines(c(2,2),c(0,200),col='red')
-lines(c(3,3),c(0,200),col='red')
-lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
-lines(c(0,10),rep(b0 + b1 * 2, 2),col='red')
-lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
-lines(c(0,10),rep(b0 + b1 * 3, 2),col='red')
-
-text(2.5, (b0 + b1 * 2),1, pos=1, cex=2)
-text(3  , (b0 + b1 * 2.5),
-     (b0 + b1 * 3)-(b0 + b1 * 2), 
-     pos=4, 
-     cex=2)
-
-```
 

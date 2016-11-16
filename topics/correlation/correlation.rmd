@@ -193,7 +193,7 @@ cor.cijfers.IQ            = cor(cijfers,IQ)
 cor.cijfers.betrouwbaar   = cor(cijfers,betrouwbaar)
 cor.IQ.betrouwbaar        = cor(IQ,betrouwbaar)
 
-cor.cijfers.IQ; cor.cijfers.betrouwbaar; cor.IQ.betrouwbaar
+data.frame(cor.cijfers.IQ, cor.cijfers.betrouwbaar, cor.IQ.betrouwbaar)
 ```
 
 ------
