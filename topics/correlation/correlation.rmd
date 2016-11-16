@@ -1,4 +1,4 @@
-# Correlation
+# Correlation {.section}
 
 ```{r, eval=FALSE, echo=FALSE}
 # Remove all objects from workspace
@@ -50,8 +50,7 @@ data <- round(data, 2)
 write.table(data, "cijfers.csv", row.names=FALSE, col.names=TRUE, dec='.')
 ```
 
-
-## Explaining vairance
+## Explaining vairance {.subsection}
 
 ```{r}
 cijfers        = data$cijfers
@@ -92,7 +91,7 @@ segments(1:N, mean.z.cijfers, 1:N, z.cijfers, col='orange')
 segments(1:N, mean.z.IQ, 1:N, z.IQ, col='blue')
 ```
 
-## Covariance
+## Covariance {.subsection}
 
 $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
@@ -117,20 +116,29 @@ correlation = covariance / ( sd(cijfers) * sd(IQ) ); correlation
 
 cor(z.cijfers, z.IQ)
 cor(  cijfers,   IQ)
-
-sum( z.cijfers * z.IQ ) / (N - 1)
-
-  1 *  1
- -1 * -1
- -1 *  1
-  0 *  1
- .5 *  1
--.5 *  1
-
-plot(cijfers,IQ)
 ```
 
-## Significance of a correlation
+--------
+
+```{r}
+sum( z.cijfers * z.IQ ) / (N - 1)
+
+x = c(1,-1,-1, 0,.5,-.5)
+y = c(1,-1, 1, 1, 1, 1)
+cbind(x,y,x*y)
+```
+
+```{r, echo=FALSE}
+plot(cijfers,IQ)
+lines(c(mean.cijfers, mean.cijfers), c(-80,120), col="red")
+lines(c(-100,100), c(mean.IQ, mean.IQ), col="red")
+text(mean.cijfers, mean.IQ, "+", adj = c(-3,-3), col = "red", cex = 2)
+text(mean.cijfers, mean.IQ, "+", adj = c( 3, 3), col = "red", cex = 2)
+text(mean.cijfers, mean.IQ, "-", adj = c(-3, 3), col = "red", cex = 2)
+text(mean.cijfers, mean.IQ, "-", adj = c( 3,-3), col = "red", cex = 2)
+```
+
+## Significance of a correlation {.subsection}
 
 $$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
 {df} = N - 2$$
@@ -153,7 +161,7 @@ library("visualize")
 visualize.t(c(-t.r, t.r),df,section='tails')
 ```
 
-# Partial correlation
+# Partial correlation {.section}
 
 ## Partial correlation {.smaller}
 
@@ -180,7 +188,7 @@ partial.correlation = teller / noemer
 partial.correlation
 ```
 
-## Significance of parial correlation
+## Significance of parial correlation {.subsection}
 
 One-sample t-test
 

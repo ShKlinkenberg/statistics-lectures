@@ -1,4 +1,4 @@
-# Regression
+# Regression {.section}
 
 One predictor
 
@@ -57,7 +57,7 @@ write.table(data, "IQ.csv", row.names=FALSE, col.names=TRUE, dec='.')
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Calculate regression parameters
+## Calculate regression parameters {.subsection}
 
 $${cijfer}_i = b_0 + b_1 {IQ}_i + \epsilon_i$$
 
@@ -66,7 +66,7 @@ IQ      = data$IQ
 cijfers = data$cijfers
 ```
 
-## Calculate $b_1$
+## Calculate $b_1$ {.subsection}
 
 $$b_1 = r_{yx} \frac{s_y}{s_x}$$
 
@@ -81,7 +81,7 @@ b1 = cor.cijfers.IQ * ( sd.cijfers / sd.IQ )
 b1
 ```
 
-## Calculate $b_0$
+## Calculate $b_0$ {.subsection}
 
 $$b_0 = \bar{y} - b_1 \bar{x}$$
 
@@ -93,7 +93,7 @@ b0 = mean.cijfers - b1 * mean.IQ
 b0
 ```
 
-## Calculate t-values for b's {.smaller}
+## Calculate t-values for b's {.smaller .subsection}
 
 $$t_{n-p-1} = \frac{b - \mu_b}{{SE}_b}$$
 
@@ -152,7 +152,7 @@ So now we can add the expected cijfers based on this model
 data$expcijfers = b0 + b1 * IQ
 ```
 
-## Expected values {.smaller}
+## Expected values {.smaller .subsection}
 
 Let's have a look
 
@@ -193,7 +193,7 @@ r = cor(expcijfers,cijfers)
 r
 ```
 
-## Explained variance
+## Explained variance {.subsection}
 
 ```{r}
 r^2
