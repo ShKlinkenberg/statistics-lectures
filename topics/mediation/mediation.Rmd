@@ -106,7 +106,7 @@ b.a*b.b
 b.c - b.c.accent
 ```
 
-## Calculate inderect effect (partially standardized) {.subsection}
+## Calculate indirect effect (partially standardized) {.subsection}
 
 $$\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$$
 
@@ -114,7 +114,7 @@ $$\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$$
 b.a*b.b/sd(snelheid.van.genezing)
 ```
 
-## Calculate inderect effect (standardized) {.subsection}
+## Calculate indirect effect (standardized) {.subsection}
 
 $$\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}$$
 
