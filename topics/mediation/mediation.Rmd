@@ -97,12 +97,18 @@ b.c
 b.c.accent
 ```
 
-## Mediaton paths
+## Mediaton paths  {.flexbox .vcenter}
 
-```{r, echo=FALSE}
+1. $\widehat{\text{Outcome}} = b_0 + b_c \text{Predictor}_i$
+2. $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$
+3. $\widehat{\text{Outcome}} = b_0 + b_{c`} \text{Predictor}_i + b_b \text{Mediator}_i$
+
+![Mediation Path](../../../topics/mediation/mediation.jpeg)
+
+```{r, echo=FALSE, eval=FALSE}
 library("DiagrammeR")
 
-mermaid("mediation.mmd", width = 800)
+mermaid("mediation.mmd")
 ```
 
 ## Calculate indirect effect {.subsection}
