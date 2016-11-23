@@ -138,7 +138,7 @@ $$\frac{ab}{c`} = \frac{b_a b_b}{b_{c`}}$$
 b.a*b.b/b.c.accent
 ```
 
-## Calculate $R^2_M$ {.smaller} {.subsection}
+## Calculate $R^2_M$ {.smaller .subsection}
 
 $$R^2_{out,med} − (R^2_{out,pre \times med} − R^2_{out,pre})$$
 
