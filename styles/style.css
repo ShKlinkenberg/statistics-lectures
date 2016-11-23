@@ -18,8 +18,6 @@ slides { animation: uva_rainbow 600s infinite;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#mermaidChart0,       #mermaidChart1 { transition: all .2s ease-in-out; }
-#mermaidChart0:hover, #mermaidChart1:hover { transform: scaleY(1.5); }
 
 .section { color: black; }
 
