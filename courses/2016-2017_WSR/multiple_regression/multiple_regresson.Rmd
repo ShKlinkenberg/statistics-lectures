@@ -1,7 +1,7 @@
 ---
 title: "Multiple regression"
 author: "Klinkenberg"
-date: "23 nov 2016"
+date: "24 nov 2016"
 output: 
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
