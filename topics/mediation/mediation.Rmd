@@ -97,6 +97,14 @@ b.c
 b.c.accent
 ```
 
+## Mediaton paths
+
+```{r, echo=FALSE}
+library("DiagrammeR")
+
+mermaid("mediation.mmd", width = 800)
+```
+
 ## Calculate indirect effect {.subsection}
 
 $$a \times b = b_a \times b_b$$
