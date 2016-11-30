@@ -35,7 +35,8 @@ trait.neu <- rnorm(n,mu,sigma)
 
 ---------
 
-<img style="float:none; width: 450px;" src="../../../topics/pca_cb_alpha/conditional_indep.png">
+![Local independence](../../../topics/pca_cb_alpha/conditional_indep.png)
+
 
 ## Latent traits are uncorrelated {.subsection}
 
@@ -163,7 +164,7 @@ Item 7 and 8 are positively correlated.
 cor(data$item.7, data$item.8)
 ```
 
-<img style="float:right; width: 250px;" src="../../../topics/pca_cb_alpha/conditional_indep.png">
+![Local independence](../../../topics/pca_cb_alpha/conditional_indep_small.png)
 
 --------
 
