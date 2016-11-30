@@ -211,8 +211,7 @@ cor(X,T)^2
 
 ```{r}
 E = T - X
-head(E)
-tail(E)
+summary(scale(E))
 ```
 
 ## Cronbach's alpha {.subsection}
@@ -284,7 +283,7 @@ $$
     \sigma^2_{21} & \sigma^2_{22} & \dots  & \sigma^2_{2n} \\
     \vdots        & \vdots        & \ddots & \vdots \\
     \sigma^2_{d1} & \sigma^2_{d2} & \dots  & \sigma^2_{dn}
-\end{bmatrix} = \sigma_{sumscore}
+\end{bmatrix} = \sigma_{sumscore}^2
 $$
 
 ```{r}
@@ -304,6 +303,29 @@ sum(cov(data[,2:7])) == var(sum.score)
 cov(data[,2:7])
 variance.per.column
 ```
+
+## Covariance {.smaller}
+
+So the covariance can be found off diagonal.
+
+```{r}
+cov(data[,2:7])*(1-diag(6))
+```
+
+---------
+
+Where the proportion of covariance to the total variance is:
+
+```{r}
+sum(cov(data[,2:7])*(1-diag(6))) / sum(cov(data[,2:7]))
+```
+
+Wich is equal to:
+
+```{r}
+prop.covar
+```
+
 
 $$\alpha = \frac{N}{N-1} \color{red}\left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
 
