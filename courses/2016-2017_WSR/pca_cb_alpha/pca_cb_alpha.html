@@ -372,10 +372,15 @@ T = trait.con</pre>
 </article></slide><slide class=''><hgroup><h2>Error</h2></hgroup><article  id="error">
 
 <pre class = 'prettyprint lang-r'>E = T - X
-summary(E)</pre>
+summary(scale(E))</pre>
 
-<pre >##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## -103.50  -71.46  -58.92  -60.21  -48.55  -29.10</pre>
+<pre >##        V1          
+##  Min.   :-2.68990  
+##  1st Qu.:-0.69958  
+##  Median : 0.08034  
+##  Mean   : 0.00000  
+##  3rd Qu.: 0.72492  
+##  Max.   : 1.93398</pre>
 
 </article></slide><slide class=''><hgroup><h2>Cronbach&#39;s alpha</h2></hgroup><article  id="cronbachs-alpha" class="subsection">
 
