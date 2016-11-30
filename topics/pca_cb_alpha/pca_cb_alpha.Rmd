@@ -1,4 +1,4 @@
-# Principal component analysis
+# Principal component analysis {.section}
 
 <!-- Allow color highlighting in mathjax -->
 <script type="text/x-mathjax-config">
@@ -16,7 +16,7 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
-## Simulate latent traits
+## Simulate latent traits {.subsection}
 
 * Conscientiousness
 * Extraversion
@@ -37,7 +37,7 @@ trait.neu <- rnorm(n,mu,sigma)
 
 <img style="float:none; width: 450px;" src="../../../topics/pca_cb_alpha/conditional_indep.png">
 
-## Latent traits are uncorrelated
+## Latent traits are uncorrelated {.subsection}
 
 ```{r}
 cor(cbind(trait.con,
@@ -155,7 +155,7 @@ cor(cbind(trait.con,
           data[ ,13:19]))[-c(1:3),1:3]
 ```
 
-## Show local independence
+## Show local independence {.subsection}
 
 Item 7 and 8 are positively correlated.
 
@@ -177,13 +177,13 @@ pcor = ( r.xy - (r.xz * r.yz) ) / ( sqrt(1-r.xz^2) * sqrt(1-r.yz^2) )
 pcor
 ```
 
-# KTT
+# KTT  
 
-## Klassieke Test Theorie (KTT)
+## Klassieke Test Theorie (KTT) {.section}
 
-True score = Observed score + Error
+Observed score = True score + Error
 
-$$T = X + E$$
+$$X = T + E$$
 
 ```{r}
 X = apply(data[,2:7], 1, sum)
@@ -196,7 +196,7 @@ T = trait.con
 plot(X,T)
 ```
 
-## Explained variance
+## Explained variance {.subsection}
 
 Indication of accuracy of estimations
 
@@ -214,7 +214,7 @@ head(E)
 tail(E)
 ```
 
-## Cronbach's alpha
+## Cronbach's alpha {.subsection}
 
 $$\alpha = \frac{N}{N-1} \left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
 
@@ -222,7 +222,7 @@ $$\alpha = \frac{N}{N-1} \left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\
 - $\sigma_{Y_i}^2$ = variances of individual items
 - $\sigma_X^2$ = variance of observed sum score
 
-## CB $\alpha$ calculations
+## CB $\alpha$ calculations {.subsection}
 
 $$\definecolor{red}{RGB}{255,0,0}
 \alpha = \frac{N}{N-1} \left(1-\frac{\color{red}\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
@@ -251,7 +251,7 @@ var.sum.score <- var(sum.score)
 var.sum.score
 ```
 
-## Calculate variance component
+## Calculate variance component {.subsection}
 
 This represents the proportion of item variance to total variance.
 
@@ -263,7 +263,7 @@ prop.item.total.var <- sum.var / var.sum.score
 prop.item.total.var
 ```
 
-## Calculate proportion covariance
+## Calculate proportion covariance {.subsection}
 
 $$\alpha = \frac{N}{N-1} \color{red}\left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\right)$$
 
@@ -271,7 +271,7 @@ $$\alpha = \frac{N}{N-1} \color{red}\left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\
 prop.covar <- 1 - prop.item.total.var
 ```
 
-## Show relation sumscore variance {.smaller}
+## Show relation sumscore variance {.smaller .subsection}
 
 Here we show the relation of the variance in the sumscore to the variance and covariance of the individual items.
 
@@ -319,23 +319,3 @@ cb.alpha = (N/(N-1)) * prop.covar
 
 cb.alpha
 ```
-
-## Show CB $\alpha$ < $\rho_{TX}$ {.smaller}
-
-Cronbach's $\alpha$ is the lower bound of the reliability $\rho_{TX}$. 
-
-```{r}
-cb.alpha
-cor(T, X)
-# var(T) / var(X)
-
-cor_XT   = vector()
-
-for(i in 1:1000) { X_values = T + rnorm(n,10,3.6) 
-                   cor_XT[i] = cor(T, X_values)
-                 }
-
-hist(cor_XT, breaks=20, col='red')
-sort(cor_XT)[.025*10000]
-```
-
