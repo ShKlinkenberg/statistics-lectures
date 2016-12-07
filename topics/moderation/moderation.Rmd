@@ -130,7 +130,6 @@ planes3d(a = 0,
          color = c("blue"))
 ```
 
------
 
 ```{r, eval=FALSE, echo=FALSE}
 x <- c(18,18,14,14)
