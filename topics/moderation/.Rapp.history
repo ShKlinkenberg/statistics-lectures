@@ -82,3 +82,43 @@ factor_lading = matrix(c(0.18, 0.66, 0.59,#
                          0.58, 0.91, 0.12), 4,3, byrow=T)
 sum(factor_lading[3,]^2)
 sum(factor_lading[,2]^2)
+load("/Users/Sharon/GitHub/Statistics-Lectures-NEW/topics/moderation/moderation.rdata")
+## 3d plot package rgl#
+## install.packages('rgl')#
+library(rgl)#
+attach(data)#
+#
+plot3d(predictor, moderator, outcome, #
+       #col  = rainbow(100), #
+       col  = "red",#
+       size = 8)
+install.packages('rgl')
+library(rgl)#
+attach(data)#
+#
+plot3d(predictor, moderator, outcome, #
+       #col  = rainbow(100), #
+       col  = "red",#
+       size = 8)
+planes3d(a = 0, #
+         b = 1, #
+         c = 0,#
+         d = -sds,#
+         #d = -quantiles,#
+         alpha=0.7,#
+         color = c("blue"))
+#fit <- lm(outcome ~ predictor + moderator)#
+fit <- lm(outcome ~ predictor + moderator + predictor*moderator)#
+summary(fit)
+regeq <- function(model, predictor, moderator) { #
+    fit$coefficients[1] + #
+    fit$coefficients[2]*predictor + #
+    fit$coefficients[3]*moderator + #
+    fit$coefficients[4]*predictor*moderator#
+}#
+#
+x.pre <- seq(10,21,length.out=30)#
+y.mod <- seq( 0,16,length.out=30)#
+#
+z.pre <- outer(x.pre, y.mod, FUN='regeq', model=fit)
+surface3d(x.pre,y.mod,z.pre, color = c("green"))
