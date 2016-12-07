@@ -1,6 +1,8 @@
 ## 3d plot package rgl
 ## install.packages('rgl')
 library(rgl)
+
+load("topics/moderation/moderation.rdata")
 attach(data)
 
 plot3d(predictor, moderator, outcome, 
@@ -10,6 +12,7 @@ plot3d(predictor, moderator, outcome,
 
 quantiles <- as.vector(quantile(moderator,seq(.1,.9,.1)))
 sds       <- c(mean(moderator)+(sd(moderator)*c(-1,0,1)))  
+
 planes3d(a = 0, 
          b = 1, 
          c = 0,
