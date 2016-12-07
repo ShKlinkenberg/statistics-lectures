@@ -77,6 +77,42 @@ plot3d(predictor, moderator, outcome,
        size = 8)
 ```
 
+-------
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(plotly)
+library(reshape2)
+
+#Graph Resolution (more important for more complex shapes)
+graph_reso <- 0.05
+
+#Setup Axis
+axis_x <- seq(min(data$predictor), max(data$predictor), by = graph_reso)
+axis_y <- seq(min(data$moderator), max(data$moderator), by = graph_reso)
+
+#Sample points
+#petal_lm_surface              <- expand.grid(Sepal.Length = axis_x,Sepal.Width = axis_y,KEEP.OUT.ATTRS = F)
+#petal_lm_surface$Petal.Length <- predict.lm(petal_lm, newdata = petal_lm_surface)
+#petal_lm_surface              <- acast(petal_lm_surface, Sepal.Width ~ Sepal.Length, value.var = "Petal.Length") #y ~ x
+
+plot3D <- plot_ly(data, 
+                  x = predictor, 
+                  y = moderator, 
+                  z = outcome,
+                  text = "Moderation", 
+                  type = "scatter3d", 
+                  mode = "markers") %>% 
+          layout(title = "Moderation",
+                 scene = list(xaxis = list(title = "predictor"), 
+                              yaxis = list(title = "moderator"), 
+                              zaxis = list(title = "outcome")
+                              )
+                 )
+
+plot3D
+```
+
 ## 1 SD planes
 
 ```{r}
@@ -93,6 +129,20 @@ planes3d(a = 0,
          alpha=0.7,
          color = c("blue"))
 ```
+
+-----
+
+```{r, eval=FALSE, echo=FALSE}
+x <- c(18,18,14,14)
+y <- c(10,10,10,10)
+z <- c(0, 20, 0,20)
+
+cbind(x,y,z)
+
+plot3D <- add_surface(z = ~z, opacity = 0.98)
+plot3D
+```
+
 
 ## Fit model {.smaller}
 
