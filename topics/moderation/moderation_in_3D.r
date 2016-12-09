@@ -5,10 +5,14 @@ library(rgl)
 load("topics/moderation/moderation.rdata")
 attach(data)
 
+#1 #D scatter 
+
 plot3d(predictor, moderator, outcome, 
-       #col  = rainbow(100), 
-       col  = "red",
+       col  = rainbow(100), 
+       #col  = "red",
        size = 8)
+
+#2 Planes
 
 quantiles <- as.vector(quantile(moderator,seq(.1,.9,.1)))
 sds       <- c(mean(moderator)+(sd(moderator)*c(-1,0,1)))  
@@ -16,10 +20,12 @@ sds       <- c(mean(moderator)+(sd(moderator)*c(-1,0,1)))
 planes3d(a = 0, 
          b = 1, 
          c = 0,
-         d = -sds,
-         #d = -quantiles,
+         #d = -sds,
+         d = -quantiles,
          alpha=0.7,
          color = c("blue"))
+
+#3 Model surface
 
 #fit2 <- lm(outcome ~ predictor + moderator)
 fit <- lm(outcome ~ predictor + moderator + predictor*moderator)
