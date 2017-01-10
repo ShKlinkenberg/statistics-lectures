@@ -1,12 +1,15 @@
 ---
 title: "Non-parametric tests"
 author: "Klinkenberg"
-date: "5 Jan 2016"
-output:
+date: "12 Jan 2017"
+output: 
   ioslides_presentation:
     logo: ../../../template/logo_uva.png
-    smaller: no
-  beamer_presentation: default
+    smaller: FALSE
+    css: ../../../styles/style.css
+    includes:
+      in_header: ../../../TOC/TOC_generator.js.wrapper
+    self_contained: true
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +24,10 @@ local({
   })
 })
 ```
+
+## Inhoud
+
+<div id="toc"></div>
 
 <!-- Add the required topics below -->
 

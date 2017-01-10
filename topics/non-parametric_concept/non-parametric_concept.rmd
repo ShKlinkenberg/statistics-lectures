@@ -1,4 +1,4 @@
-# Nonparametric tests
+# Nonparametric tests {.section}
 
 ## Parametric vs Nonparametric {#mytable}
 
@@ -22,7 +22,7 @@ sensitivity to outliers | yes        | no
 works with   | large data sets       | small and large data sets
 speed        | fast                  | slow
 
-## Ranking
+## Ranking {.subsection}
 
 ```{r, fig.height=3, fig.align='center'}
 x = c(1, 4, 6, 7, 8, 9)
@@ -37,7 +37,7 @@ boxplot(y, horizontal=T, col='red')
 rbind(rx = rank(x), ry = rank(y))
 ```
 
-## Ties
+## Ties {.subsection}
 
 ```{r}
 x = c(1, 4, 6, 7, 8, 8)
@@ -51,7 +51,7 @@ rbind(x, Rx = rank(x))
 ```
 
 
-## Procedure
+## Procedure {.subsection}
 
 1. Assumption: independent random samples.
 2. Hypothesis: 

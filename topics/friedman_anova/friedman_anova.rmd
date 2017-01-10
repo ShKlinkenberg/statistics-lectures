@@ -12,7 +12,7 @@ set.seed(87364536)
 
 Paired >2 samples
 
-## Friedman’s ANOVA
+## Friedman’s ANOVA {.section}
 
 <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/William-Friedman.jpg/220px-William-Friedman.jpg" style="float: left; margin: 0 20px 0 0; height: 150px;">
 
@@ -74,7 +74,7 @@ ranks = t(apply(data, 1, rank))
 datatable(ranks, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Calculate $F_r$
+## Calculate $F_r$ {.subsection}
 
 $$F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)$$
 

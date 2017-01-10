@@ -7,7 +7,7 @@ library("DT")
 
 Independent 2 samples
 
-## Wilcoxon rank-sum test
+## Wilcoxon rank-sum test {.section}
 
 <img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0;">
   
@@ -44,7 +44,7 @@ datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, inf
 write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ parametric/mann-whitney.csv", row.names=FALSE)
 ```
 
-## Calculate the sum of ranks per group
+## Calculate the sum of ranks per group {.subsection}
 
 ```{r}
 R <- aggregate(R ~ factor, data, sum)
@@ -93,7 +93,7 @@ W.se = sqrt((n.1*n.2*(n.1+n.2+1))/12)
 W.se
 ```
 
-## Calculate Z
+## Calculate Z {.subsection}
 
 $$z = \frac{W - \bar{W}}{{SE}_W}$$
   
@@ -131,7 +131,7 @@ r = z / sqrt(N)
 r
 ```
 
-## Mann–Whitney test
+## Mann–Whitney test {.section}
 
 $$U = n_1 n_2 + \frac{n_1 (n_1 + 1)}{2} - R_1$$
   
@@ -140,7 +140,7 @@ U = (n.1*n.2)+(n.1*(n.1+1))/2-R$R[1]
 U
 ```
 
-## $\bar{U}$ and ${SE}_U$ for non tied ranks
+## $\bar{U}$ and ${SE}_U$ for non tied ranks {.subsection}
 
 $$\bar{U} = \frac{n_1 n_2}{2}$$
   

@@ -12,7 +12,7 @@ set.seed(3562534)
 
 Paired 2 samples
 
-## Wilcoxon signed-rank test
+## Wilcoxon signed-rank test {.section}
 
 <img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 10%;">
 
@@ -47,7 +47,7 @@ datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 
 write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ parametric/mann-whitney-signed-rank.csv", row.names=FALSE)
 ```
 
-## Calculate T {.smaller}
+## Calculate T {.smaller .subsection}
 
 <!-- Dit gaat niet goed Ranking moet zonder de ties en absoluut. 
 
@@ -102,7 +102,7 @@ n = sum(abs(data$sign))
 n
 ```
 
-## Calculate $\bar{T}$ and ${SE}_{T}$
+## Calculate $\bar{T}$ and ${SE}_{T}$ {.subsection}
 
 $$\bar{T} = \frac{n(n+1)}{4}$$
 
