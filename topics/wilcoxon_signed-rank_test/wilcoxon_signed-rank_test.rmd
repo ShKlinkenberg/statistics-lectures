@@ -72,7 +72,7 @@ data$abs.difference = abs(data$Ecstasy - data$Alcohol)
 # Create rank variable with place holder NA
 data$rank <- NA
 
-# Rank only the non tied difference scores
+# Rank only the difference scores
 data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0),
                                                       'abs.difference'])
 
