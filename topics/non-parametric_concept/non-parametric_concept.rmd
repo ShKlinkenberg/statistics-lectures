@@ -40,16 +40,12 @@ rbind(rx = rank(x), ry = rank(y))
 ## Ties {.subsection}
 
 ```{r}
-x = c(1, 4, 6, 7, 8, 8)
-rank(x)
+x = c(1, 4, 6, 7, 8, 8, 4, 7, 9)
+
+rbind(x, ordered = sort(x), non.tied.rank = 1:length(x), ranked = rank(sort(x)))
 ```
 
-$$\frac{5 + 6}{2} = 5.5$$
-
-```{r}
-rbind(x, Rx = rank(x))
-```
-
+$$\frac{2 + 3}{2} = 2.5,  \frac{5 + 6}{2} = 5.5,  \frac{7 + 8}{2} = 7.5$$
 
 ## Procedure {.subsection}
 
