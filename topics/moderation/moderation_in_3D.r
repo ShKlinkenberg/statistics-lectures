@@ -1,6 +1,6 @@
 ## 3d plot package rgl
 ## install.packages('rgl')
-library(rgl)
+library("rgl")
 
 load("topics/moderation/moderation.rdata")
 attach(data)
@@ -8,8 +8,8 @@ attach(data)
 #1 #D scatter 
 
 plot3d(predictor, moderator, outcome, 
-       col  = rainbow(100), 
-       #col  = "red",
+       #col  = rainbow(100), 
+       col  = "red",
        size = 8)
 
 #2 Planes
@@ -20,8 +20,8 @@ sds       <- c(mean(moderator)+(sd(moderator)*c(-1,0,1)))
 planes3d(a = 0, 
          b = 1, 
          c = 0,
-         #d = -sds,
-         d = -quantiles,
+         d = -sds,
+         #d = -quantiles,
          alpha=0.7,
          color = c("blue"))
 
@@ -46,4 +46,9 @@ z.pre <- outer(x.pre, y.mod, FUN='regeq', model=fit)
 ## Add 3D regression plane to scatter plot 
 surface3d(x.pre,y.mod,z.pre, color = c("green"))
 
+dir = "topics/moderation/webGL"
+# writeWebGL(filename = file.path(dir, "index.html"), width = 500, height = 500)
 
+
+setwd("~/GitHub/Statistics-Lectures-NEW/topics/moderation")
+writeASY(title = "interactive")
