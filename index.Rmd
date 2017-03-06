@@ -2,7 +2,7 @@
 title: "Lectures and topics"
 ---
 
-Below you can find the links to my lecture slides and topics.
+Below you can find the links to my lecture slides and topics. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
 
 ```{r, echo=FALSE}
 rm(list = ls())
