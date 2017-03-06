@@ -1,0 +1,41 @@
+---
+title: "Lectures and topics"
+---
+
+## Recent course lectures
+
+```{r, echo=FALSE}
+rm(list = ls())
+lectures <- list.files(path = "courses/2016-2017_WSR/", pattern = "*.html", recursive = T)
+
+#links <- sprintf('topics/%s', topics)
+
+lectures.names <- gsub("_|(.html)|*/", " ", lectures)
+
+links <- sprintf('<a href="courses/2016-2017_WSR/%s">%s</a>', lectures, lectures.names)
+
+table <- data.frame(links)
+
+# install.packages("DT")
+library("DT")
+datatable(table, escape = F, rownames = F)
+```
+
+## Topics
+
+```{r, echo=FALSE}
+rm(list = ls())
+topics <- list.files(path = "topics/", pattern = "*.html", recursive = T)
+
+#links <- sprintf('topics/%s', topics)
+
+topic.names <- gsub("_|(.html)|*/", " ", topics)
+
+links <- sprintf('<a href="topics/%s">%s</a>', topics, topic.names)
+
+table <- data.frame(links)
+
+# install.packages("DT")
+library("DT")
+datatable(table, escape = F, rownames = F)
+```

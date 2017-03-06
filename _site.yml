@@ -1,0 +1,10 @@
+name: "Statistics Lectures"
+output_dir: "."
+navbar:
+  title: "Statistics Lectures"
+  right:
+    - icon: fa-github-alt # fa-github 
+      href: https://github.com/ShKlinkenberg/ICTO-PSY
+output:
+  html_document:
+    theme: cerulean  # "default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", and "yeti"
