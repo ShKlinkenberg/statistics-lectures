@@ -10,7 +10,7 @@ lectures <- list.files(path = "courses/2016-2017_WSR/", pattern = "*.html", recu
 
 #links <- sprintf('topics/%s', topics)
 
-lectures.names <- gsub("_|(.html)|*/", " ", lectures)
+lectures.names <- gsub("_|(.html)|.*/", " ", lectures)
 
 links <- sprintf('<a href="courses/2016-2017_WSR/%s" target="_blank">%s</a>', lectures, lectures.names)
 
@@ -29,7 +29,7 @@ topics <- list.files(path = "topics/", pattern = "*.html", recursive = T)
 
 #links <- sprintf('topics/%s', topics)
 
-topic.names <- gsub("_|(.html)|*/", " ", topics)
+topic.names <- gsub("_|(.html)|.*/", " ", topics)
 
 links <- sprintf('<a href="topics/%s" target="_blank">%s</a>', topics, topic.names)
 
