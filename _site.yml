@@ -1,10 +1,10 @@
-name: "Statistics Lectures"
+name: "Statistics Lectures - Klinkenberg"
 output_dir: "."
 navbar:
-  title: "Statistics Lectures"
+  title: "Statistics Lectures - Klinkenberg"
   right:
     - icon: fa-github-alt # fa-github 
-      href: https://github.com/ShKlinkenberg/ICTO-PSY
+      href: https://github.com/ShKlinkenberg/statistics-lectures
 output:
   html_document:
     theme: cerulean  # "default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", and "yeti"
