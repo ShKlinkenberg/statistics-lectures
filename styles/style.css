@@ -1,7 +1,15 @@
 slides > slide { border-radius: 30px; border: solid 3px white; }
 
+slides > slide.dark {
+    background: #BC0031 !important;
+}
+
+aside.gdbar {
+  background: #BC0031 !important;
+}
+
 slides { animation: uva_rainbow 600s infinite;
-         background-image: url("https://dl.dropboxusercontent.com/u/1429185/uva_acroniem/Andreaskruizen_patroon_A_t_w.png");
+         background-image: url("http://shklinkenberg.github.io/statistics-lectures/template/Andreaskruizen_patroon_A_t_w.png");
          background-repeat: repeat-y; 
          background-position: left top; }
 
@@ -18,12 +26,13 @@ slides { animation: uva_rainbow 600s infinite;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-
 .section { color: black; }
 
-.subsection {font-size: .95em; 
+.subsection { font-size: .95em; 
                list-style-type:circle;
 }
 
 
-pre, code {white-space:pre !important; overflow-x:scroll !important}
+pre, code { white-space:pre !important; overflow-x:scroll !important }
+
+
