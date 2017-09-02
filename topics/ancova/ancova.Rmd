@@ -83,7 +83,7 @@ dummies <- data.frame(group, b.0, b.1, dummy.1, b.2, dummy.2, b.3, covar, error,
 datatable(dummies, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## The data
+## The data {.smaller}
 
 ```{r, echo=FALSE}
 # put data in data frame
@@ -95,7 +95,15 @@ data <- cbind(n, data)
 # Write data for use in SPSS
 write.csv(data, "ANCOVA.csv", row.names=FALSE)
 
-datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, 
+          extensions = 'Buttons',
+          options    = list(searching = FALSE, 
+                            scrollY   = 300, 
+                            paging    = F, 
+                            info      = F,
+                            dom       = 'Bfrtip',
+                            buttons   = c('csv', 'excel')),
+           )
 ```
 
 ## Group means {.subsection}
