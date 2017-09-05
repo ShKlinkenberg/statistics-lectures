@@ -1,0 +1,29 @@
+# Null hypothesis statistical significance testing
+
+Neyman-Pearson Paradigm
+
+## $H_0$ and $H_A$
+
+<table style="width:100%; border: none;">
+  
+<tr><td>
+
+$H_0$
+
+* Skeptical point of view
+* No effect
+* No preference
+* No Correlation
+* No difference
+
+</td><td>
+
+$H_A$
+
+* Refute Skepticism
+* Effect
+* Preference
+* Correlation
+* Difference
+
+</td></tr></table>
