@@ -1,0 +1,31 @@
+# Resoning in statistics
+
+Source: [ARTIST](https://apps3.cehd.umn.edu/artist/glossary.html)
+
+## Statistical Literacy
+
+* Knowledge (Basic understanding of concepts)
+    * Identify
+    * Describe
+* Skils (Ability to work with statistical tools)
+    * Translate
+    * Interpret
+    * Read
+    * Compute
+
+## Statistical Reasoning
+
+* Understanding
+    * Explain why
+    * Explain how
+    
+## Statistical thinking
+
+* Apply
+    * What methods to use in a specific situation
+* Critique
+    * Comment and reflect on work of others
+* Evaluate
+    * Assigning value to work
+* Generalize
+    * What does variation mean in the large scheme of life
