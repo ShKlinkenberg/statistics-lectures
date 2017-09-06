@@ -10,9 +10,10 @@ output:
     includes       :
       in_header    : ../../../TOC/TOC_generator.js.wrapper
     self_contained : TRUE
+    incremental    : TRUE
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, eval=FALSE}
 # Display plots on next slide in IOslides
 # smaller in the above YAML must be off to make this work.
 
