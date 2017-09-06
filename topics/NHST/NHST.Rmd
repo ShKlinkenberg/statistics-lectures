@@ -28,7 +28,7 @@ $H_A$
 
 </td></tr></table>
 
-## Modus tollens
+## Modus tollens {.smaller}
 
 Denying the consequent
 
@@ -43,10 +43,10 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 * $Q$, the test statistic is not equal to EV with a low p-value
 * Therefore $P$, $H_0$, is rejected
 
-## Decisions {.subsection}
+## Decisions {.flexbox .vcenter}
 
 <table style="border: none;">
-  <col width="100px">
+  <col width="200px">
   <col width="150px">
   <col width="150px">
 <tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
@@ -82,7 +82,7 @@ Some common test statistics
 * $\chi^2$-statistic
 * etc...
 
-## Effect size
+## Effect size {.subsection}
 
 In statistics, an effect size is a quantitative measure of the strength of a phenomenon.[1] Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference, or even the risk with which something happens, such as how many people survive after a heart attack for every one person that does not survive. For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
 
@@ -92,17 +92,103 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ![](../../../topics/NHST/effec_size.png)
 
+## Standard Error {.subsection}
+
+$$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}$$
+
+* Lowerbound = $\bar{x} - 1.96 \times SE$
+* Upperbound = $\bar{x} + 1.96 \times SE$
+
+```{r, echo=FALSE, out.height=600}
+set.seed(1548)
+
+x  = seq(-4,4,.05) # sequence x values for normal distribution
+hx = dnorm(x)      # calculate y values
+
+title = expression(atop("SAMPLES FROM NORMAL DISTRIBUTION",paste(mu," falls within the CI in ~95% of the samples")))
+
+plot(x,hx+1,type="l",ylim=c(0,1.45),xlim=c(-4,9), yaxt="n", xaxt="n",ylab="",xlab="",main=title, mai=c(3,1,2,1),mar=c(3,1,2,1))
+
+# Add red area
+polygon(c(x,rev(x)),c(rep(1,length(x)),hx+1),col="red",lty=1)
+
+# Add mu line
+lines(c(0,0),c(0,max(hx)+1))
+
+# Add mu symbol to x axis
+axis( 1,at=0,labels=expression(mu), cex=2 )
+
+# Create curly braces for normal distribution 
+ybracket = seq(1,max(hx)+1,length=39)
+xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+
+lines(xbracket,ybracket,col="black")
+
+# Create curly braces for samples
+ybracket = seq(0,1,length=39)
+xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+
+lines(xbracket,ybracket,col="black")
+
+text = expression(atop("Normally distributed","population"))
+
+text(4.1*1.06,1+(max(hx)/2), text,pos=4)
+
+text = expression(atop("95% Confidence interval","in 100 samples","drawn from the","normal distribution"))
+
+text(4.1*1.06,.5, text,pos=4)
+
+# Add confidence intervals
+
+mu  = 0
+sig = 1
+
+mu_in_ci = array() # create empty array
+
+iterations = 100
+
+for(i in 1:iterations) {
+	
+	n      = round(runif(1,10,60)) # use variable sample sizes between 10 and 60
+	sample = rnorm(n,mu,sig)       # sample from normal distribution
+	
+	sample_mean = mean(sample)
+	sample_sd   = sd(sample)
+	sample_ci   = sample_sd/sqrt(n)
+
+	sample_ci_upperbound = sample_mean + sample_ci * 1.96
+	sample_ci_lowerbound = sample_mean - sample_ci * 1.96
+	
+	if(sample_ci_lowerbound < mu & sample_ci_upperbound > mu) {
+		
+		mu_in_ci[i] = 1	
+		col = "darkgrey"	
+		}
+	else {
+		mu_in_ci[i] = 0
+		col = "red"
+		}
+    
+    # plot CI lines
+    lines(c(sample_ci_lowerbound,sample_ci_upperbound),rep((.98/iterations)*i,2),col=col)
+
+	}
+	
+percentage = (1/iterations)*sum(mu_in_ci)
+```
+
+
 ## Standard Error {.flexbox .vcenter}
 
 <style>
-ul li {
+ul#menu li {
     display:inline;
 }
 </style>
 
 <div onLoad="execute(10,10)">
 
-<ul>
+<ul  id="menu">
   <li>n₁ = <input type="number" name="n_x1" id="n_x1" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/></li>
   <li>n₂ = <input type="number" name="n_x2" id="n_x2" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/></li>
 </ul>
@@ -115,8 +201,6 @@ Your browser does not support the canvas element.
 </canvas>
 
 <script type="text/javascript"  charset="utf-8">
-
-
 
 function execute(n_x1, n_x2) {
 	
