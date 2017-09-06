@@ -66,6 +66,14 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 
 <img src="../../../topics/NHST/Type-1-and-2-error.jpg">
 
+## Power {.subsection}
+
+* True positive
+* Power equal to: 1 - Beta
+    * Beta is Type II error
+* Criteria often 80%
+* Depends on sample size
+
 ## Standard Error {.subsection}
 
 $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}$$
@@ -289,14 +297,6 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 }
 </script>
 </div>
-
-## Power {.subsection}
-
-* True positive
-* Power equal to: 1 - Beta
-    * Beta is Type II fout.
-* Criteria often 80%
-* Depends on sample size
 
 ## Reasoning Scheme {.subsection}
 

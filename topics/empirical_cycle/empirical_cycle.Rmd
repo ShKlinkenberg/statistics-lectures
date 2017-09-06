@@ -15,7 +15,7 @@
     * Expectation / Prediction
     * Operationalization
 * Testing
-    * Test hypotheses
+    * Test hypothesis
     * Compare data to prediction
 * Evaluation
     * Interpret results in terms of hypothesis
