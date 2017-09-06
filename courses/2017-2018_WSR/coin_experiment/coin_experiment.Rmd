@@ -1,7 +1,7 @@
 ---
-title: "Template"
+title: "Coin experiment"
 author: "Klinkenberg"
-date: "18 nov 2015"
+date: "06 sep 2017"
 output: 
   ioslides_presentation:
     logo           : http://shklinkenberg.github.io/statistics-lectures/template/logo_uva.png
@@ -9,7 +9,7 @@ output:
     css            : http://shklinkenberg.github.io/statistics-lectures/styles/style.css
     includes       :
       in_header    : ../../../TOC/TOC_generator.js.wrapper
-    self_contained : true
+    self_contained : TRUE
 ---
 
 ```{r setup, include=FALSE}
@@ -31,7 +31,8 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/regression_multiple_predictors/regression_multiple_predictors.rmd"}
+```{r child = "../../../topics/coin_expreiment/coin_experiment.Rmd"}
+
 ```
 
 # END

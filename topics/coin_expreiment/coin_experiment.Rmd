@@ -1,48 +1,36 @@
 # Coin Experiment
 
-## Experiment
+## Experiment {.flexbox .vcenter}
 
 <div>
-Number of heads
 
-![](QR_heads.png)
+![Number of heads](../../../topics/coin_expreiment/QR_heads.png)
 
 </div>
 
-## Emperical Cycle
+## Emperical Cycle {.section}
 
 * **Observation** Patiënt is showing post traumatic symptoms
-* **Induction** $H_0$: P: fair coin &rarr; C: patiënt is balanced
+* **Induction** Intherapy works
+* **Deduction** $H_0$: P: fair coin &rarr; C: patiënt is balanced
 * **Deduction** $H_A$: P: Unfair coin &rarr; C: patiënt is unbalanced
 * **Deduction** $H_A$: P: data $\neq$ EV &rarr; C: is unbalanced
 * **Testing** Choose $\alpha$ and Power
 * **Evaluation** Make a decision
 
-<!-- Hypothesis over diagnostics: Time heals. -->
-
-<!-- We gaan een Psychologisch experiment uitvoeren. Hierbij gaan we de psychologische diagnostiek onderzoeken. Dit gaan we echter in een ietwat abstracte vorm doen. -->
-
-<!-- Ik heb hier een persoon (muntstuk) die in het belang van dit experiment helaas wat traumatische ervaringen moet meemaken (Munt krom slaan). Deze eens zo gebalanceerde persoon komt bij de dokter en geeft te kennen dat ze zich een beetje uit balans voelt. De dokter moet op basis van wat diagnostische tests achterhalen of er sprake is van een post traumatische stress stoornis.  -->
-
-<!-- De vraag die de dokter beantwoord moet zien te krijgen is of deze persoon afwijkend gedrag vertoond. We kunnen in ieder geval veronderstellen dat een evenwichtige munt, ik bedoel persoon, een kans heeft van 50% om op kop of munt te vallen. -->
-
-<!-- Als ik nu 10 keer met deze munt gooi dan zou ik dus kunnen verwachten dat ik 5 keer munt krijg en 5 keer kop.  Maar ik zal dat op een of andere manier moeten toetsen. Want ook een gezond persoon vertoont wel eens wat afwijkend gedrag. -->
-
-<!-- Gelukkig zijn jullie allemaal in het bezit van een gezond exemplaar dus ik heb een redelijke vergelijkingsgroep.  -->
-
-# Nul distribution
+## Nul distribution
 
 Let's analyse the null distribution of the results.
 
-<iframe width="100%" height="400px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQuAsPxgBYJ8C6x0iWb_Z8L4h4om4cbHHrnPp_X4RQEPfA827FdIpUEhTbI_Fwnxw4GslTrmyhrKhgH/pubhtml?gid=601036432&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+<iframe width="100%" height="300px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQuAsPxgBYJ8C6x0iWb_Z8L4h4om4cbHHrnPp_X4RQEPfA827FdIpUEhTbI_Fwnxw4GslTrmyhrKhgH/pubhtml?gid=601036432&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
 
 
-# Binomial distribution
+## Binomial distribution
 
 $$ {n\choose k}p^k(1-p)^{n-k} \\
  {n\choose k} = \frac{n!}{k!(n-k)!} $$
 
-Met als waarden:
+With values:
 
 ```{r, tidy=FALSE}
 n = 10   # Sample size
@@ -50,44 +38,27 @@ k = 0:10 # Discrete probability space
 p = .5   # Probability of head
 ```
 
-# Permutaties
+## Probabilities {.section}
 
-Wat zijn alle mogelijke uitkomsten van het aantal worpen?
-
-```{r "permutaties", tidy=FALSE}
+```{r, echo=FALSE}
 munt = 0:1
 
-alle_mogelijkheden = expand.grid(munt,munt,munt,munt,munt,munt,munt,munt,munt,munt)
+# alle_mogelijkheden = expand.grid(munt,munt,munt,munt,munt,munt,munt,munt,munt,munt)
+# 
+# sommen = rowSums(alle_mogelijkheden)
 
-sommen = rowSums(alle_mogelijkheden)
+# table(sommen)
 
-table(sommen)
-```
-Dit kan slimmer!
-
-## n choose k
-
-$$ {n\choose k} = \frac{n!}{k!(n-k)!} $$
-
-```{r, tidy=FALSE}
 permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
-permutations
-```
+# permutations
 
-# Probabilities
-
-```{r, tidy=FALSE}
 p_k  = p^k * (1-p)^(n-k)  # Probability of single event
 p_kp = p_k * permutations # Probability of event times 
                           # the occurrence of that event
-sample = 90
-freq_munt = round(p_kp*sample)
-cbind(k,permutations,p_k,p_kp,freq_munt)
-```
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
 
----
-
-```{r "Nul verdeling", tidy=FALSE}
 title = "Binomial Null distribution"
 
 col=c(rep("red",2),rep("white",7),rep("red",2))
@@ -97,85 +68,49 @@ barplot( p_kp,
          names.arg=0:10, 
          xlab="number of head", 
          ylab="P(%)", 
-         col=col,
+         col='darkgreen',
          ylim=c(0,.3) )
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-# Cumulative Probability CMF
-```{r CMF, tidy=FALSE}
-plot( cumsum(p_kp),
-      col="red",
-      type="s", 
-      main="CMF Binomial distribution",
-      xlab="heads",
-      ylab="Cumulative Probability",
-      xlim=c(1,11),
-      xaxt="n")
+## Testing {.section}
 
-text(1:11,cumsum(p_kp),0:10)
+I landed 2 times head. Can we conclude that the therapy worked? 
 
-alpha = .05
+> As you can see from the distribution of healthy coins, we cannot conclude that by definition.
 
-lines(c(1,11),rep(alpha,2),col="blue")
-text(10,alpha,expression(paste(alpha,"=.05")),pos=3)
-```
+> What we can do is indicate how rare 2 is in a healthy population.
 
-# Toetsing
+> We can see that a percentage of 5% is very rare.
 
-Ik heb 1 keer munt gegooid. Kunnen we nu met zekerheid stellen dat de therapie geholpen heeft? 
+## Testing {.smaller}
 
-Zoals je kan zien aan de verdeling van gezonde munten kunnen we dat dus per definitie niet weten.
-
-Wat we wel kunnen doen is aangeven wat in een gezonde populatie zeldzaam is. 
-```{r, tidy=FALSE}
-barplot( freq_munt,
-         names=round(cumsum(p_kp),2),
-         col=col,
-         xlab="cumulatieve percentage aantal munt",
-         ylab="aantal" )
-         
-# lines(c(1.3,1.3),c(0,80),col="red")
-```
-We kunnen zo bijvoorbeeld zien dat een percentage kleiner dan 5% erg zeldzaam is.
-
-# Toetsing
-
-* Op basis van deze null verdeling zien we dat de verwachte waarde 5 is. We kunnen dus stellen dat in de situatie waarin er niets aan de hand is de test statistiek 5 zou moeten zijn. 
-* We kunnen nu onze $H_0$ hypothese formuleren: $H_0 = 5$
-* Wat is nu de alternatieve hypothese die we kunnen opstellen?
-* De alternatieve hypothese beschrijft de situatie waarin er dan wel iets aan de hand zou zijn.
-* Zo zouden we kunnen stellen dat de alternatieve hypothese niet 5 is.
+* Based on the null distribution we can see that the expected value (EV is 5.)
+* We can now define the $H_0$ hypothesis: $H_0 = 5$
+* What is the alternative hypothesis?
+* The alternative hypothesis describes a situation where the therapy worked.
+* We could say that the alternative hypothesis is not 5.
   * $H_A \ne 5$
-* We zouden de $H_0$ en de $H_A$ ook abstracter kunnen formuleren:
-  * $H_0:$ de patient is in balans
-  * $H_A:$ de patient is uit balans
-* De vraag is echter wat voor criterium je zou moeten hanteren om te besluiten of iemand gezond is. 
-* In de wetenschap wordt dit criterium vaak op 5% gesteld.
-* Aangezien mijn persoon 1 maal op munt is gevallen en dat minder dan 5% voorkomt is dat in een gezonde populatie zeer zeldzaam.
-* Vandaar dat we kunnen stellen dat onze patient waarschijnlijk niet genezen is. Maar zeker weten doen we dat niet.
-* Het zou namelijk kunnen zijn dat mijn munt nog steeds behoord tot de populatie gezonde munten.
+* We could also formulate our $H_0$ and $H_A$ more abstract:
+  * $H_0:$ the patient is balenced
+  * $H_A:$ the patient is unbalenced
+* What criterium should we use to conclude that one would be unbalenced?
+* In the social sciences this $\alpha$ criteria is often 5%.
+* I tossed 2 times head. That is more frequent than 5%.
+* Therefore, we conclude that our patient is probably healthy but we can never be sure.
+* My coin could still be part of the unbalenced population.
 
-# Modus tollens
+## Alternative Distribution
 
-$$((P\rightarrow{Q})\land\neg{Q})\rightarrow\neg{P}$$
+But we have no clue of what this distribution could look like. 
 
-Where $P$ is a proposition, $\rightarrow$ means leads to, $Q$ is the consequence, $\land$ is a logical and, $\neg$ means not. 
+For now let's assume the probability of landing heads for my coin is .25
 
-So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
+```{r, echo=FALSE}
 
-* $P$ states $H_0$ is TRUE
-* Than $Q$, the test statistic should be equal to the expected value of $H_0$
-* $Q$, the test statistic is not equal to EV with a low p-value
-* Therefore $P$, $H_0$, is rejected
-
-# Alternatieve verdeling
-
-```{r "alternative distribution", tidy=FALSE}
-
-n = 10   # Sample size
-k = 0:10 # Discrete probability space
+# n = 10   # Sample size
+# k = 0:10 # Discrete probability space
 p = .25   # Probability of head
 
 permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
@@ -194,21 +129,63 @@ barplot( p_kp2,
          xlab="number of head", 
          ylab="P(%)", 
          beside=TRUE,
-         #col=col,
+         col="darkorange",
          ylim=c(0,.3) 
          )
 
 text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 ```
 
-# $H_0$ en $H_A$ verdeling
+## $H_0$ and $H_A$ distribution
 
-```{r "Both distributions", tidy=FALSE }
+<style>
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 135px;
+  right: 0;
+  height: 100%;
+  width: 210px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(255,0,0,.5);
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="container">
+
+```{r, echo=FALSE}
 
 title = "Both distributions"
 
-colh0 =c(rep("red",2),rep("grey",7),rep("red",2))
-colha =c(rep("blue",11))
+colh0 = 'darkgreen'
+colha = 'darkorange'
 
 barplot( rbind(p_kp,p_kp2), 
          main=title, 
@@ -216,31 +193,89 @@ barplot( rbind(p_kp,p_kp2),
          xlab="number of head", 
          ylab="P(%)", 
          col = rbind(colh0,colha),
-         beside=TRUE,
+         beside=TRUE
          #legend.text = c("H0", "HA")
          )
 
-legend("topright", legend=c("accept H0","reject H0","HA"), fill=c("grey","red","blue"))
+legend("topright", legend=c("H0","HA"), fill=c("darkgreen","darkorange"))
 
 ```
 
-# Propositions in hypotheses
+  <div class="overlay">
+    
+  </div>
+</div>
 
-<table>
-<tr>
-<td>
-<td style="text-align:right;">$\neg{H_0} \land H_A$
-<td style="text-align:right;">$H_0 \land \neg{H_A}$
-</tr>
-<tr>
-<td style="text-align:right;">$\neg{EV}$
-<td style="text-align:right; border: solid black 1px; padding: 15px; background-color:#00FF00;">
-$((\neg{H_0}\rightarrow\neg{EV})\land{\neg{EV}}) \rightarrow{\neg{H_0}}$
-<td style="text-align:right; border: solid black 1px; padding: 15px; background-color:#FF0000; color:white;">$((H_0\rightarrow{EV})\land\neg{EV})\rightarrow\neg{H_0}$
-</tr>
-<tr>
-<td style="text-align:right;">$EV$
-<td style="text-align:right; border: solid black 1px; padding: 15px;  background-color:#FF0000;  color:white;">$((\neg{H_0}\rightarrow\neg{EV})\land{EV})\rightarrow{H_0}$
-<td style="text-align:right; border: solid black 1px; padding: 15px; background-color:#00FF00;">$((H_0\rightarrow{EV})\land EV)\rightarrow H_0$
-</tr>
-</table>
+
+
+## Power and more
+
+```{r, echo=FALSE}
+N     = 10  # Sample size
+H0    = .5  # Kop 50/50
+HA    = .25 # Aternatieve verdeling
+alpha = .02 # Gekozen type I fout
+
+# Juiste gebieden in rood weergeven op basis van de gekozen alpha
+lb = qbinom(alpha/2, N, H0, lower.tail = T)
+ub = qbinom(alpha/2, N, H0, lower.tail = F)
+
+col = rep("white", N+1)
+col[0:lb+1] = "red"
+col[ub:N+1] = "red"
+
+
+col2 = rep("red", N+1)
+col2[0:lb+1] = "white"
+col2[ub:N+1] = "white"
+
+
+# Haal onderstaande # voor col weg om geen kleurtjes aan te geven.
+# col = col2  = "white"
+
+layout(matrix(1:9,3,3, byrow=T))
+
+plot.new()
+text(0.5,0.5,"Binomial Distribution",cex=1.5)
+# text(0.5,0.1,paste("N:",N),cex=1.5)
+
+plot.new()
+text(0.5,0.5,"H0 True",cex=2)
+
+plot.new()
+text(0.5,0.5,"H0 False",cex=2)
+
+plot.new()
+text(0.5,0.5,"Reject H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col, 
+#        yaxt = 'n', 
+        main = 'Alpha / Type I error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+barplot(dbinom(0:N,N, HA), 
+        col  = col, 
+        yaxt = 'n', 
+        main = 'Power', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+plot.new()
+text(0.5,0.5,"Accept H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col2, 
+#        yaxt = 'n', 
+        main = '1 - alpha', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col2, 
+        yaxt = 'n', 
+        main = 'Beta / Type II error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+```
+
