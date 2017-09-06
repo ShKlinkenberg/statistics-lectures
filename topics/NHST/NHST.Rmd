@@ -2,6 +2,15 @@
 
 Neyman-Pearson Paradigm
 
+## Experiment
+
+<div>
+Number of heads
+
+![](QR_heads.png)
+
+</div>
+
 ## $H_0$ and $H_A$
 
 <table style="width:100%; border: none;">
