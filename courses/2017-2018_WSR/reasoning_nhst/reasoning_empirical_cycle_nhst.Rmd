@@ -1,5 +1,6 @@
 ---
-title: "Introduction WSR"
+title: "WSR"
+subtitle: "Statistical reasoning"
 author: "Klinkenberg"
 date: "07 sep 2017"
 output: 
