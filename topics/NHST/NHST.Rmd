@@ -66,32 +66,6 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 
 <img src="../../../topics/NHST/Type-1-and-2-error.jpg">
 
-## Reasoning Scheme {.subsection}
-
-![NHST Reasoning Scheme](https://www.rationaleonline.com/map/ycqv69/screenshot/540x405/)
-
-## Test statistics
-
-Some common test statistics
-
-* Number of heads
-* Sum of dice
-* Difference
-* $t$-statistic
-* $F$-statistic
-* $\chi^2$-statistic
-* etc...
-
-## Effect size {.subsection}
-
-In statistics, an effect size is a quantitative measure of the strength of a phenomenon.[1] Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference, or even the risk with which something happens, such as how many people survive after a heart attack for every one person that does not survive. For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
-
-Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
-
-## Effect size {.flexbox .vcenter}
-
-![](../../../topics/NHST/effec_size.png)
-
 ## Standard Error {.subsection}
 
 $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}$$
@@ -176,7 +150,6 @@ for(i in 1:iterations) {
 	
 percentage = (1/iterations)*sum(mu_in_ci)
 ```
-
 
 ## Standard Error {.flexbox .vcenter}
 
@@ -316,3 +289,40 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 }
 </script>
 </div>
+
+## Power {.subsection}
+
+* True positive
+* Power equal to: 1 - Beta
+    * Beta is Type II fout.
+* Criteria often 80%
+* Depends on sample size
+
+## Reasoning Scheme {.subsection}
+
+![NHST Reasoning Scheme](https://www.rationaleonline.com/map/ycqv69/screenshot/540x405/)
+
+## Test statistics
+
+Some common test statistics
+
+* Number of heads
+* Sum of dice
+* Difference
+* $t$-statistic
+* $F$-statistic
+* $\chi^2$-statistic
+* etc...
+
+## Effect size {.subsection}
+
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon.[1] Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference, or even the risk with which something happens, such as how many people survive after a heart attack for every one person that does not survive. For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
+
+Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
+
+## Effect size {.flexbox .vcenter}
+
+![](../../../topics/NHST/effec_size.png)
+
+
+

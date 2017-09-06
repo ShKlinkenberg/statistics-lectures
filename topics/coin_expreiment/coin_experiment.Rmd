@@ -78,11 +78,11 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 I landed 2 times head. Can we conclude that the therapy worked? 
 
-> As you can see from the distribution of healthy coins, we cannot conclude that by definition.
+* As you can see from the distribution of healthy coins, we cannot conclude that by definition.
 
-> What we can do is indicate how rare 2 is in a healthy population.
+* What we can do is indicate how rare 2 is in a healthy population.
 
-> We can see that a percentage of 5% is very rare.
+* We can see that a percentage of 5% is very rare.
 
 ## Testing {.smaller}
 
@@ -101,7 +101,7 @@ I landed 2 times head. Can we conclude that the therapy worked?
 * Therefore, we conclude that our patient is probably healthy but we can never be sure.
 * My coin could still be part of the unbalenced population.
 
-## Alternative Distribution
+## Alternative Distribution {.smaller .build}
 
 But we have no clue of what this distribution could look like. 
 
@@ -154,10 +154,10 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 135px;
+  left: 200px;
   right: 0;
   height: 100%;
-  width: 210px;
+  width: 360px;
   opacity: 0;
   transition: .5s ease;
   background-color: rgba(255,0,0,.5);
