@@ -1,5 +1,5 @@
 ---
-title: "Coin experiment"
+title: "Experiment"
 author: "Klinkenberg"
 date: "06 sep 2017"
 output: 
