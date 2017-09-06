@@ -1,4 +1,6 @@
-.background-image slides > slide { border-radius: 30px; border: solid 3px white; }
+slides > slide { border-radius: 30px; border: solid 3px white; }
+
+.background-image { border-radius: 30px; border: solid 3px white; }
 
 slides > slide.dark {
     background: #BC0031 !important;
