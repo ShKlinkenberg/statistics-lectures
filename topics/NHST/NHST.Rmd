@@ -1,17 +1,8 @@
-# Null hypothesis statistical significance testing
+# Null Hypothesis Statistical Significance Testing {.section}
 
 Neyman-Pearson Paradigm
 
-## Experiment
-
-<div>
-Number of heads
-
-![](QR_heads.png)
-
-</div>
-
-## $H_0$ and $H_A$
+## $H_0$ and $H_A$ {.subsection}
 
 <table style="width:100%; border: none;">
   
@@ -52,7 +43,7 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 * $Q$, the test statistic is not equal to EV with a low p-value
 * Therefore $P$, $H_0$, is rejected
 
-## Decisions
+## Decisions {.subsection}
 
 <table style="border: none;">
   <col width="100px">
@@ -71,11 +62,11 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 </tr>
 </table>
 
-## Fail
+## Fail {.flexbox .vcenter}
 
-![Errors](Type-1-and-2-error.jpg)
+<img src="../../../topics/NHST/Type-1-and-2-error.jpg">
 
-## Reasoning Scheme
+## Reasoning Scheme {.subsection}
 
 ![NHST Reasoning Scheme](https://www.rationaleonline.com/map/ycqv69/screenshot/540x405/)
 
@@ -90,3 +81,154 @@ Some common test statistics
 * $F$-statistic
 * $\chi^2$-statistic
 * etc...
+
+## Effect size
+
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon.[1] Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference, or even the risk with which something happens, such as how many people survive after a heart attack for every one person that does not survive. For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
+
+Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
+
+## Effect size {.flexbox .vcenter}
+
+![](../../../topics/NHST/effec_size.png)
+
+## Standard Error {.flexbox .vcenter}
+
+<style>
+ul li {
+    display:inline;
+}
+</style>
+
+<div onLoad="execute(10,10)">
+
+<ul>
+  <li>n₁ = <input type="number" name="n_x1" id="n_x1" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/></li>
+  <li>n₂ = <input type="number" name="n_x2" id="n_x2" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/></li>
+</ul>
+
+<canvas id     = "myCanvas" 
+        width  = "600" 
+        height = "400" 
+        style  = "border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script type="text/javascript"  charset="utf-8">
+
+
+
+function execute(n_x1, n_x2) {
+	
+var c         = document.getElementById("myCanvas");
+var ctx       = c.getContext("2d");
+
+// clear canvas
+//ctx.clearRect(0,0,600,400);
+
+// Store the current transformation matrix
+ctx.save();
+
+// Use the identity matrix while clearing the canvas
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.clearRect(0, 0, 600, 400);
+ctx.beginPath();
+
+// Restore the transform
+ctx.restore();
+
+
+
+ctx.font      = "20pt Calibri";
+ctx.fillStyle = "#000000"; // text color
+ctx.fillText("The influence of n on the confidence interval", 50, 50);
+
+
+
+var mean_x1 = 5;
+var mean_x2 = 7;
+var   sd_x1 = 2.6;
+var   sd_x2 = 2.7;
+var    n_x1 = n_x1;
+var    n_x2 = n_x2;
+var   se_x1 = sd_x1/Math.sqrt(n_x1);
+var   se_x2 = sd_x2/Math.sqrt(n_x2);
+
+var text_x_pos = 50;
+var text_y_pos = 210;
+var text_guter = 20;
+
+ctx.font      = "14pt Calibri";
+ctx.fillStyle = "#000000"; // text color
+ctx.fillText("x̄₁ = "+mean_x1, text_x_pos, text_y_pos);
+ctx.fillText("x̄₂ = "+mean_x2, text_x_pos, text_y_pos+1*text_guter);
+ctx.fillText("σ₁ = "+sd_x1,  text_x_pos, text_y_pos+2*text_guter);
+ctx.fillText("σ₂ = "+sd_x2,  text_x_pos, text_y_pos+3*text_guter);
+ctx.fillText("n₁ = "+n_x1,    text_x_pos, text_y_pos+4*text_guter);
+ctx.fillText("n₂ = "+n_x2,    text_x_pos, text_y_pos+5*text_guter);
+ctx.fillText("se₁ = σ₁/√n₁ = "+sd_x1+"/√"+n_x1+" = "+se_x1.toFixed(2), text_x_pos, text_y_pos+6*text_guter);
+ctx.fillText("se₂ = σ₂/√n₂ = "+sd_x2+"/√"+n_x2+" = "+se_x2.toFixed(2), text_x_pos, text_y_pos+7*text_guter);
+
+var hight_x1 = (250/10)*mean_x1;
+var hight_x2 = (250/10)*mean_x2;
+
+var   sd_x1 = (250/10)*sd_x1;
+var   sd_x2 = (250/10)*sd_x2;
+
+var   se_x1 = 1.96*sd_x1/Math.sqrt(n_x1);
+var   se_x2 = 1.96*sd_x2/Math.sqrt(n_x2);
+
+var bar_x_pos  = 315;
+var bar_y_pos  = 350;
+var bar_width  = 100;
+var bar_gutter = 35;
+
+ctx.fillStyle = "#87ceeb";
+ctx.fillRect(bar_x_pos, bar_y_pos-hight_x1,  bar_width,hight_x1);
+
+ctx.fillStyle = "#87ceeb";
+ctx.fillRect(bar_x_pos+bar_width+bar_gutter, bar_y_pos-hight_x2,  bar_width,hight_x2);
+
+
+ctx.moveTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1+se_x1);
+ctx.lineTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1-se_x1);
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1-se_x1); // upper bound 
+ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1); // upper bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1+se_x1); // lower bound 
+ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1); // lower bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2+se_x2);
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2-se_x2);
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2-se_x2); // upper bound 
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2); // upper bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2+se_x2); // lower bound 
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2); // lower bound
+ctx.stroke();
+
+// X in bar
+ctx.fillStyle = "#000";
+ctx.font      = "20pt Calibri";
+ctx.fillText("x₁", bar_x_pos+10,                      bar_y_pos-hight_x1+hight_x1-10);
+ctx.fillText("x₂", bar_x_pos+bar_width+bar_gutter+10, bar_y_pos-hight_x2+hight_x2-10);
+
+// upper and lower bound text
+ctx.fillStyle = "#000";
+ctx.font      = "10pt Calibri";
+ctx.fillText("1.96se₁+x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1+2);
+ctx.fillText("1.96se₁-x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1+2);
+
+ctx.fillText("1.96se₂+x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2+2);
+ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2+2);
+
+}
+</script>
+</div>

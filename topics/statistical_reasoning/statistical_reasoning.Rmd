@@ -1,8 +1,8 @@
-# Resoning in statistics
+# Resoning in statistics {.section}
 
 Source: [ARTIST](https://apps3.cehd.umn.edu/artist/glossary.html)
 
-## Statistical Literacy
+## Statistical Literacy {.subsection}
 
 * Knowledge (Basic understanding of concepts)
     * Identify
@@ -13,13 +13,13 @@ Source: [ARTIST](https://apps3.cehd.umn.edu/artist/glossary.html)
     * Read
     * Compute
 
-## Statistical Reasoning
+## Statistical Reasoning {.subsection}
 
 * Understanding
     * Explain why
     * Explain how
     
-## Statistical thinking
+## Statistical thinking {.subsection}
 
 * Apply
     * What methods to use in a specific situation
