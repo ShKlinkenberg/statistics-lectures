@@ -66,6 +66,76 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 
 <img src="../../../topics/NHST/Type-1-and-2-error.jpg">
 
+
+```{r, echo=FALSE}
+N     = 10  # Sample size
+H0    = .5  # Kop 50/50
+HA    = .25 # Aternatieve verdeling
+alpha = .02 # Gekozen type I fout
+
+# Juiste gebieden in rood weergeven op basis van de gekozen alpha
+lb = qbinom(alpha/2, N, H0, lower.tail = T)
+ub = qbinom(alpha/2, N, H0, lower.tail = F)
+
+col = rep("white", N+1)
+col[0:lb+1] = "red"
+col[ub:N+1] = "red"
+
+
+col2 = rep("red", N+1)
+col2[0:lb+1] = "white"
+col2[ub:N+1] = "white"
+
+
+# Haal onderstaande # voor col weg om geen kleurtjes aan te geven.
+# col = col2  = "white"
+
+layout(matrix(1:9,3,3, byrow=T))
+
+plot.new()
+text(0.5,0.5,"Binomial Distribution",cex=1.5)
+# text(0.5,0.1,paste("N:",N),cex=1.5)
+
+plot.new()
+text(0.5,0.5,"H0 True",cex=2)
+
+plot.new()
+text(0.5,0.5,"H0 False",cex=2)
+
+plot.new()
+text(0.5,0.5,"Reject H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col, 
+#        yaxt = 'n', 
+        main = 'Alpha / Type I error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+barplot(dbinom(0:N,N, HA), 
+        col  = col, 
+        yaxt = 'n', 
+        main = 'Power', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+plot.new()
+text(0.5,0.5,"Accept H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col2, 
+#        yaxt = 'n', 
+        main = '1 - alpha', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col2, 
+        yaxt = 'n', 
+        main = 'Beta / Type II error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+```
+
 ## Power {.subsection}
 
 * True positive
