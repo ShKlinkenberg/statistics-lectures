@@ -1,10 +1,10 @@
-# Coin Experiment
+# Experiment
 
-## Experiment {.flexbox .vcenter}
+## Heads {.flexbox .vcenter}
 
 <div>
 
-![Number of heads](../../../topics/coin_expreiment/QR_heads.png)
+![bit.ly/2j54A2U](../../../topics/coin_expreiment/QR_heads.png)
 
 </div>
 
@@ -22,7 +22,7 @@
 
 Let's analyse the null distribution of the results.
 
-<iframe width="100%" height="300px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQuAsPxgBYJ8C6x0iWb_Z8L4h4om4cbHHrnPp_X4RQEPfA827FdIpUEhTbI_Fwnxw4GslTrmyhrKhgH/pubhtml?gid=601036432&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+<iframe style="height:400px;"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQuAsPxgBYJ8C6x0iWb_Z8L4h4om4cbHHrnPp_X4RQEPfA827FdIpUEhTbI_Fwnxw4GslTrmyhrKhgH/pubhtml?gid=601036432&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
 
 
 ## Binomial distribution

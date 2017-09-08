@@ -2,7 +2,7 @@
 
 ## By Adriaan de Groot
 
-<iframe id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="550" height="300" src="https://prezi.com/embed/bpjkj8bz_kja/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI5a2svK0VieFZlK1cxOTFvS1ZwWVVBNFZRPT0&amp;landing_sign=T515ue0i-w4c7Sok6m5LPjV9-MucmIMETU_ItCafgr8"></iframe>
+<iframe style="height:450px;" id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" src="https://prezi.com/embed/bpjkj8bz_kja/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI5a2svK0VieFZlK1cxOTFvS1ZwWVVBNFZRPT0&amp;landing_sign=T515ue0i-w4c7Sok6m5LPjV9-MucmIMETU_ItCafgr8"></iframe>
 
 ## The components {.smaller}
 
@@ -15,11 +15,11 @@
     * Expectation / Prediction
     * Operationalization
 * Testing
-    * Test hypotheses
+    * Test hypothesis
     * Compare data to prediction
 * Evaluation
     * Interpret results in terms of hypothesis
 
 ## Explained by Annemarie Zandscholten
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/57YvSQNmkEA?rel=0&amp;controls=1" frameborder="0" allowfullscreen></iframe>
+<iframe style="height:450px;"  src="https://www.youtube.com/embed/57YvSQNmkEA?rel=0&amp;controls=1" frameborder="0" allowfullscreen></iframe>

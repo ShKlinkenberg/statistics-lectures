@@ -46,25 +46,33 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 ## Decisions {.flexbox .vcenter}
 
 <table style="border: none;">
-  <col width="200px">
   <col width="150px">
-  <col width="150px">
+  <col width="225px">
+  <col width="225px">
 <tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
 <tr height="150px">
 <td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid white; padding: 3px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid white; padding: 3px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
 </tr>
 <tr height="150px">
 <td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid white; padding: 3px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid white; padding: 3px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
 </tr>
 </table>
 
 ## Fail {.flexbox .vcenter}
 
 <img src="../../../topics/NHST/Type-1-and-2-error.jpg">
+
+## Power {.subsection}
+
+* True positive
+* Power equal to: 1 - Beta
+    * Beta is Type II error
+* Criteria often 80%
+* Depends on sample size
 
 ## Standard Error {.subsection}
 
@@ -289,14 +297,6 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 }
 </script>
 </div>
-
-## Power {.subsection}
-
-* True positive
-* Power equal to: 1 - Beta
-    * Beta is Type II fout.
-* Criteria often 80%
-* Depends on sample size
 
 ## Reasoning Scheme {.subsection}
 
