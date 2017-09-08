@@ -6,7 +6,7 @@ Below you can find the links to my lecture slides and topics. The source code ca
 
 ```{r, echo=FALSE}
 rm(list = ls())
-lectures <- list.files(path = "courses/2016-2017_WSR/", pattern = "*.html", recursive = T)
+lectures <- list.files(path = "courses/2017-2018_WSR/", pattern = "*.html", recursive = T)
 
 #links <- sprintf('topics/%s', topics)
 
@@ -20,19 +20,19 @@ table1 <- data.frame(item = "Lecture slide", links)
 #library("DT")
 #datatable(table, escape = F, rownames = F)
 
-topics <- list.files(path = "topics/", pattern = "*.html", recursive = T)
-
-#links <- sprintf('topics/%s', topics)
-
-topic.names <- gsub("_|(.html)|.*/", " ", topics)
-
-links <- sprintf('<a href="topics/%s" target="_blank">%s</a>', topics, topic.names)
-
-table2 <- data.frame(item = "Topic", links)
-
-table <- rbind(table1, table2)
+# topics <- list.files(path = "topics/", pattern = "*.html", recursive = T)
+# 
+# #links <- sprintf('topics/%s', topics)
+# 
+# topic.names <- gsub("_|(.html)|.*/", " ", topics)
+# 
+# links <- sprintf('<a href="topics/%s" target="_blank">%s</a>', topics, topic.names)
+# 
+# table2 <- data.frame(item = "Topic", links)
+# 
+# table <- rbind(table1, table2)
 
 # install.packages("DT")
 library("DT")
-datatable(table, escape = F, rownames = F)
+datatable(table1, escape = F, rownames = F)
 ```
