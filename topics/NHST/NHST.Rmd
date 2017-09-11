@@ -28,22 +28,82 @@ $H_A$
 
 </td></tr></table>
 
-## Modus tollens {.smaller}
+## Binomial $H_0$ distribution
 
-Denying the consequent
+```{r, echo=FALSE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
 
-$$((P\rightarrow{Q})\land\neg{Q})\rightarrow\neg{P}$$
+munt = 0:1
 
-Where $P$ is a proposition, $\rightarrow$ means leads to, $Q$ is the consequence, $\land$ is a logical and, $\neg$ means not. 
+# alle_mogelijkheden = expand.grid(munt,munt,munt,munt,munt,munt,munt,munt,munt,munt)
+# 
+# sommen = rowSums(alle_mogelijkheden)
 
-So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
+# table(sommen)
 
-* $P$ states $H_0$ is TRUE
-* Than $Q$, the test statistic should be equal to the expected value of $H_0$
-* $Q$, the test statistic is not equal to EV with a low p-value
-* Therefore $P$, $H_0$, is rejected
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+# permutations
 
-## Decisions {.flexbox .vcenter}
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("red",2),rep("white",7),rep("red",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col='darkgreen',
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Binomial $H_A$ distribution
+
+```{r, echo=FALSE}
+
+# n = 10   # Sample size
+# k = 0:10 # Discrete probability space
+prob = c(.2, .4, .6, .8)  # Probability of head
+
+layout(matrix(1:4, 2,2)) 
+
+for(p in prob) {
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+
+p_k2  = p^k  * (1-p)^(n-k)  # Probability of single event
+p_kp2 = p_k2 * permutations # Probability of event times 
+                            # the occurrence of that event
+
+title = "Binomial alternative distribution"
+
+col=c(rep("red",2),rep("white",7),rep("red",2))
+
+barplot( p_kp2, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         beside=TRUE,
+         col="darkorange",
+         ylim=c(0,.3) 
+         )
+
+text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
+}
+```
+
+## Decision table {.flexbox .vcenter}
 
 <table style="border: none;">
   <col width="150px">
@@ -61,6 +121,201 @@ So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
 <td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
 </tr>
 </table>
+
+## Alpha $\alpha$
+
+* Type I error
+* False Positive
+* Criteria often 5%
+* Distribution depends on sample size
+
+```{r, echo=FALSE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("red",2),rep("darkgreen",7),rep("red",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Power {.subsection}
+
+* True positive
+* Power equal to: 1 - Beta
+    * Beta is Type II error
+* Criteria often 80%
+* Depends on sample size
+
+```{r, echo=FALSE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .25   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("red",2),rep("darkorange",7),rep("red",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Post-Hoc Power {.subsection}
+
+* Also known as: observed, retrospective, achieved, prospective and a priori power
+* Specificly meaning:
+
+> The power of a test assuming a population effect size equal to the observed effect size in the current sample.
+
+Source: [O'Keefe (2007)](http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf)
+
+## 1 - alpha
+
+* True negative
+
+```{r, echo=FALSE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("darkgreen",2),rep("red",7),rep("darkgreen",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+
+## Beta
+
+* Type II error
+* False Negative
+* Criteria often 20%
+* Distribution depends on sample size
+
+```{r, echo=FALSE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .25   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("darkorange",2),rep("red",7),rep("darkorange",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## P-value
+
+> Probability of the found test statistic or more extreme assuming the null hypothesis is true.
+
+* $p$-value <= $alpha$
+* test statistic <= critical value
+
+```{r, echo=FALSE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("blue",3),rep("darkgreen",5),rep("blue",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Modus tollens {.smaller}
+
+Denying the consequent
+
+$$((P\rightarrow{Q})\land\neg{Q})\rightarrow\neg{P}$$
+
+Where $P$ is a proposition, $\rightarrow$ means leads to, $Q$ is the consequence, $\land$ is a logical and, $\neg$ means not. 
+
+So in words, $P$ leads to $Q$, $Q$ is not true, therefore $P$ is not true.
+
+* $P$ states $H_0$ is TRUE
+* Than $Q$, the test statistic should be equal to the expected value of $H_0$
+* $Q$, the test statistic is not equal to EV with a low p-value
+* Therefore $P$, $H_0$, is rejected
+
+
 
 ## Fail {.flexbox .vcenter}
 
@@ -136,13 +391,7 @@ barplot(dbinom(0:N,N, HA),
         cex.names = 0.7)
 ```
 
-## Power {.subsection}
 
-* True positive
-* Power equal to: 1 - Beta
-    * Beta is Type II error
-* Criteria often 80%
-* Depends on sample size
 
 ## Standard Error {.subsection}
 
