@@ -12,7 +12,7 @@ lectures <- list.files(path = "courses/2017-2018_WSR/", pattern = "*.html", recu
 
 lectures.names <- gsub("_|(.html)|.*/", " ", lectures)
 
-links <- sprintf('<a href="courses/2016-2017_WSR/%s" target="_blank">%s</a>', lectures, lectures.names)
+links <- sprintf('<a href="courses/2017-2018_WSR/%s" target="_blank">%s</a>', lectures, lectures.names)
 
 table1 <- data.frame(item = "Lecture slide", links)
 
