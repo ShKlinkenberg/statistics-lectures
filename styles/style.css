@@ -37,12 +37,11 @@ slides { animation: uva_rainbow 600s infinite;
 
 pre, code { white-space:pre !important; 
             overflow:scroll !important;
+            max-height: 100px !important;;
            }
 
 .prettyprint {
     background-color: rgba(172, 136, 78, 0.2);
 }
-
-.prettyprint.lang-r { max-height: 100px; }
 
 a { color: #009CDD; }
