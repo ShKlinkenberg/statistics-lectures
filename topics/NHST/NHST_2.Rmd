@@ -28,6 +28,98 @@ $H_A$
 
 </td></tr></table>
 
+## Frequentist probability {.subsection}
+
+* Subjective Probability
+* Relative frequency in the long run
+
+## Standard Error {.subsection}
+
+> 95% confidence interval 
+
+$$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}$$
+
+* Lowerbound = $\bar{x} - 1.96 \times SE$
+* Upperbound = $\bar{x} + 1.96 \times SE$
+
+```{r, echo=FALSE, out.height=600}
+set.seed(1548)
+
+x  = seq(-4,4,.05) # sequence x values for normal distribution
+hx = dnorm(x)      # calculate y values
+
+title = expression(atop("SAMPLES FROM NORMAL DISTRIBUTION",paste(mu," falls within the CI in ~95% of the samples")))
+
+plot(x,hx+1,type="l",ylim=c(0,1.45),xlim=c(-4,9), yaxt="n", xaxt="n",ylab="",xlab="",main=title, mai=c(3,1,2,1),mar=c(3,1,2,1))
+
+# Add red area
+polygon(c(x,rev(x)),c(rep(1,length(x)),hx+1),col="red",lty=1)
+
+# Add mu line
+lines(c(0,0),c(0,max(hx)+1))
+
+# Add mu symbol to x axis
+axis( 1,at=0,labels=expression(mu), cex=2 )
+
+# Create curly braces for normal distribution 
+ybracket = seq(1,max(hx)+1,length=39)
+xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+
+lines(xbracket,ybracket,col="black")
+
+# Create curly braces for samples
+ybracket = seq(0,1,length=39)
+xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+
+lines(xbracket,ybracket,col="black")
+
+text = expression(atop("Normally distributed","population"))
+
+text(4.1*1.06,1+(max(hx)/2), text,pos=4)
+
+text = expression(atop("95% Confidence interval","in 100 samples","drawn from the","normal distribution"))
+
+text(4.1*1.06,.5, text,pos=4)
+
+# Add confidence intervals
+
+mu  = 0
+sig = 1
+
+mu_in_ci = array() # create empty array
+
+iterations = 100
+
+for(i in 1:iterations) {
+	
+	n      = round(runif(1,10,60)) # use variable sample sizes between 10 and 60
+	sample = rnorm(n,mu,sig)       # sample from normal distribution
+	
+	sample_mean = mean(sample)
+	sample_sd   = sd(sample)
+	sample_ci   = sample_sd/sqrt(n)
+
+	sample_ci_upperbound = sample_mean + sample_ci * 1.96
+	sample_ci_lowerbound = sample_mean - sample_ci * 1.96
+	
+	if(sample_ci_lowerbound < mu & sample_ci_upperbound > mu) {
+		
+		mu_in_ci[i] = 1	
+		col = "darkgrey"	
+		}
+	else {
+		mu_in_ci[i] = 0
+		col = "red"
+		}
+    
+    # plot CI lines
+    lines(c(sample_ci_lowerbound,sample_ci_upperbound),rep((.98/iterations)*i,2),col=col)
+
+	}
+	
+percentage = (1/iterations)*sum(mu_in_ci)
+```
+
 ## Binomial $H_0$ distribution
 
 ```{r, echo=FALSE}
@@ -124,6 +216,7 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 
 ## Alpha $\alpha$
 
+* Incorrectly reject $H_0$
 * Type I error
 * False Positive
 * Criteria often 5%
@@ -158,6 +251,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Power {.subsection}
 
+* Correctly reject $H_0$
 * True positive
 * Power equal to: 1 - Beta
     * Beta is Type II error
@@ -176,7 +270,7 @@ p_kp = p_k * permutations # Probability of event times
 # freq_munt = round(p_kp*sample)
 # cbind(k,permutations,p_k,p_kp,freq_munt)
 
-title = "Binomial Null distribution"
+title = "Binomial alternative distribution"
 
 col=c(rep("red",2),rep("darkorange",7),rep("red",2))
 
@@ -200,8 +294,41 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 Source: [O'Keefe (2007)](http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf)
 
+## Effect size {.subsection}
+
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon.[1] Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference, or even the risk with which something happens, such as how many people survive after a heart attack for every one person that does not survive. For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
+
+Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
+
+```{r, echo=FALSE}
+
+title = "Both distributions"
+
+colh0 = 'darkgreen'
+colha = 'darkorange'
+
+barplot( rbind(dbinom(0:10, 10, .5),
+               dbinom(0:10, 10, .2)), 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col = rbind(colh0,colha),
+         beside=TRUE
+         #legend.text = c("H0", "HA")
+         )
+
+legend("topright", legend=c("H0","HA"), fill=c("darkgreen","darkorange"))
+
+```
+
+## Effect size {.flexbox .vcenter}
+
+![](../../../topics/NHST/effec_size.png)
+
 ## 1 - alpha
 
+* Correctly accept $H_0$
 * True negative
 
 ```{r, echo=FALSE}
@@ -234,6 +361,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Beta
 
+* Incorrectly accept $H_0$
 * Type II error
 * False Negative
 * Criteria often 20%
@@ -251,7 +379,7 @@ p_kp = p_k * permutations # Probability of event times
 # freq_munt = round(p_kp*sample)
 # cbind(k,permutations,p_k,p_kp,freq_munt)
 
-title = "Binomial Null distribution"
+title = "Binomial alternative distribution"
 
 col=c(rep("darkorange",2),rep("red",7),rep("darkorange",2))
 
@@ -268,7 +396,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## P-value
 
-> Probability of the found test statistic or more extreme assuming the null hypothesis is true.
+> Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.
 
 Reject $H_0$ when:
 
@@ -314,7 +442,7 @@ Some common test statistics
 * $\chi^2$-statistic
 * etc...
 
-## Decision table {.flexbox .vcenter .smaller}
+## Decision Table {.flexbox .vcenter .smaller}
 
 ```{r, echo=TRUE}
 N     = 10  # Sample size
@@ -385,247 +513,12 @@ barplot(dbinom(0:N,N, HA),
         cex.names = 0.7)
 ```
 
-
-
-## Standard Error {.subsection}
-
-$$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}$$
-
-* Lowerbound = $\bar{x} - 1.96 \times SE$
-* Upperbound = $\bar{x} + 1.96 \times SE$
-
-```{r, echo=FALSE, out.height=600}
-set.seed(1548)
-
-x  = seq(-4,4,.05) # sequence x values for normal distribution
-hx = dnorm(x)      # calculate y values
-
-title = expression(atop("SAMPLES FROM NORMAL DISTRIBUTION",paste(mu," falls within the CI in ~95% of the samples")))
-
-plot(x,hx+1,type="l",ylim=c(0,1.45),xlim=c(-4,9), yaxt="n", xaxt="n",ylab="",xlab="",main=title, mai=c(3,1,2,1),mar=c(3,1,2,1))
-
-# Add red area
-polygon(c(x,rev(x)),c(rep(1,length(x)),hx+1),col="red",lty=1)
-
-# Add mu line
-lines(c(0,0),c(0,max(hx)+1))
-
-# Add mu symbol to x axis
-axis( 1,at=0,labels=expression(mu), cex=2 )
-
-# Create curly braces for normal distribution 
-ybracket = seq(1,max(hx)+1,length=39)
-xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
-
-lines(xbracket,ybracket,col="black")
-
-# Create curly braces for samples
-ybracket = seq(0,1,length=39)
-xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
-
-lines(xbracket,ybracket,col="black")
-
-text = expression(atop("Normally distributed","population"))
-
-text(4.1*1.06,1+(max(hx)/2), text,pos=4)
-
-text = expression(atop("95% Confidence interval","in 100 samples","drawn from the","normal distribution"))
-
-text(4.1*1.06,.5, text,pos=4)
-
-# Add confidence intervals
-
-mu  = 0
-sig = 1
-
-mu_in_ci = array() # create empty array
-
-iterations = 100
-
-for(i in 1:iterations) {
-	
-	n      = round(runif(1,10,60)) # use variable sample sizes between 10 and 60
-	sample = rnorm(n,mu,sig)       # sample from normal distribution
-	
-	sample_mean = mean(sample)
-	sample_sd   = sd(sample)
-	sample_ci   = sample_sd/sqrt(n)
-
-	sample_ci_upperbound = sample_mean + sample_ci * 1.96
-	sample_ci_lowerbound = sample_mean - sample_ci * 1.96
-	
-	if(sample_ci_lowerbound < mu & sample_ci_upperbound > mu) {
-		
-		mu_in_ci[i] = 1	
-		col = "darkgrey"	
-		}
-	else {
-		mu_in_ci[i] = 0
-		col = "red"
-		}
-    
-    # plot CI lines
-    lines(c(sample_ci_lowerbound,sample_ci_upperbound),rep((.98/iterations)*i,2),col=col)
-
-	}
-	
-percentage = (1/iterations)*sum(mu_in_ci)
-```
-
-## Standard Error {.flexbox .vcenter}
-
-<style>
-ul#menu li {
-    display:inline;
-}
-</style>
-
-<div onLoad="execute(10,10)">
-
-<ul  id="menu">
-  <li>n₁ = <input type="number" name="n_x1" id="n_x1" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/></li>
-  <li>n₂ = <input type="number" name="n_x2" id="n_x2" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/></li>
-</ul>
-
-<canvas id     = "myCanvas" 
-        width  = "600" 
-        height = "400" 
-        style  = "border:1px solid #c3c3c3;">
-Your browser does not support the canvas element.
-</canvas>
-
-<script type="text/javascript"  charset="utf-8">
-
-function execute(n_x1, n_x2) {
-	
-var c         = document.getElementById("myCanvas");
-var ctx       = c.getContext("2d");
-
-// clear canvas
-//ctx.clearRect(0,0,600,400);
-
-// Store the current transformation matrix
-ctx.save();
-
-// Use the identity matrix while clearing the canvas
-ctx.setTransform(1, 0, 0, 1, 0, 0);
-ctx.clearRect(0, 0, 600, 400);
-ctx.beginPath();
-
-// Restore the transform
-ctx.restore();
-
-
-
-ctx.font      = "20pt Calibri";
-ctx.fillStyle = "#000000"; // text color
-ctx.fillText("The influence of n on the confidence interval", 50, 50);
-
-
-
-var mean_x1 = 5;
-var mean_x2 = 7;
-var   sd_x1 = 2.6;
-var   sd_x2 = 2.7;
-var    n_x1 = n_x1;
-var    n_x2 = n_x2;
-var   se_x1 = sd_x1/Math.sqrt(n_x1);
-var   se_x2 = sd_x2/Math.sqrt(n_x2);
-
-var text_x_pos = 50;
-var text_y_pos = 210;
-var text_guter = 20;
-
-ctx.font      = "14pt Calibri";
-ctx.fillStyle = "#000000"; // text color
-ctx.fillText("x̄₁ = "+mean_x1, text_x_pos, text_y_pos);
-ctx.fillText("x̄₂ = "+mean_x2, text_x_pos, text_y_pos+1*text_guter);
-ctx.fillText("σ₁ = "+sd_x1,  text_x_pos, text_y_pos+2*text_guter);
-ctx.fillText("σ₂ = "+sd_x2,  text_x_pos, text_y_pos+3*text_guter);
-ctx.fillText("n₁ = "+n_x1,    text_x_pos, text_y_pos+4*text_guter);
-ctx.fillText("n₂ = "+n_x2,    text_x_pos, text_y_pos+5*text_guter);
-ctx.fillText("se₁ = σ₁/√n₁ = "+sd_x1+"/√"+n_x1+" = "+se_x1.toFixed(2), text_x_pos, text_y_pos+6*text_guter);
-ctx.fillText("se₂ = σ₂/√n₂ = "+sd_x2+"/√"+n_x2+" = "+se_x2.toFixed(2), text_x_pos, text_y_pos+7*text_guter);
-
-var hight_x1 = (250/10)*mean_x1;
-var hight_x2 = (250/10)*mean_x2;
-
-var   sd_x1 = (250/10)*sd_x1;
-var   sd_x2 = (250/10)*sd_x2;
-
-var   se_x1 = 1.96*sd_x1/Math.sqrt(n_x1);
-var   se_x2 = 1.96*sd_x2/Math.sqrt(n_x2);
-
-var bar_x_pos  = 315;
-var bar_y_pos  = 350;
-var bar_width  = 100;
-var bar_gutter = 35;
-
-ctx.fillStyle = "#87ceeb";
-ctx.fillRect(bar_x_pos, bar_y_pos-hight_x1,  bar_width,hight_x1);
-
-ctx.fillStyle = "#87ceeb";
-ctx.fillRect(bar_x_pos+bar_width+bar_gutter, bar_y_pos-hight_x2,  bar_width,hight_x2);
-
-
-ctx.moveTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1+se_x1);
-ctx.lineTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1-se_x1);
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1-se_x1); // upper bound 
-ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1); // upper bound
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1+se_x1); // lower bound 
-ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1); // lower bound
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2+se_x2);
-ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2-se_x2);
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2-se_x2); // upper bound 
-ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2); // upper bound
-ctx.stroke();
-
-ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2+se_x2); // lower bound 
-ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2); // lower bound
-ctx.stroke();
-
-// X in bar
-ctx.fillStyle = "#000";
-ctx.font      = "20pt Calibri";
-ctx.fillText("x₁", bar_x_pos+10,                      bar_y_pos-hight_x1+hight_x1-10);
-ctx.fillText("x₂", bar_x_pos+bar_width+bar_gutter+10, bar_y_pos-hight_x2+hight_x2-10);
-
-// upper and lower bound text
-ctx.fillStyle = "#000";
-ctx.font      = "10pt Calibri";
-ctx.fillText("1.96se₁+x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1+2);
-ctx.fillText("1.96se₁-x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1+2);
-
-ctx.fillText("1.96se₂+x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2+2);
-ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2+2);
-
-}
-</script>
-</div>
-
 ## Reasoning Scheme {.subsection}
 
 ![NHST Reasoning Scheme](https://www.rationaleonline.com/map/ycqv69/screenshot/540x405/)
 
 
 
-## Effect size {.subsection}
-
-In statistics, an effect size is a quantitative measure of the strength of a phenomenon.[1] Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference, or even the risk with which something happens, such as how many people survive after a heart attack for every one person that does not survive. For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
-
-Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
-
-## Effect size {.flexbox .vcenter}
-
-![](../../../topics/NHST/effec_size.png)
 
 
 
