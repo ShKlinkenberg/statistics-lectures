@@ -37,7 +37,7 @@ slides { animation: uva_rainbow 600s infinite;
 
 pre, code { white-space:pre !important; 
             overflow:scroll !important;
-            max-height: 400px !important;;
+            max-height: 450px !important;;
            }
 
 .prettyprint {
