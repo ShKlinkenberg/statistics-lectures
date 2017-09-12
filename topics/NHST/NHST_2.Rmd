@@ -446,25 +446,20 @@ Some common test statistics
 
 ```{r, echo=TRUE}
 N     = 10  # Sample size
-H0    = .5  # Kop 50/50
-HA    = .25 # Aternatieve verdeling
-alpha = .02 # Gekozen type I fout
+H0    = .5  # Probability of head under H0 50/50
+HA    = .2  # Aternative expected value
+alpha = .05 # Selected type I error
 
-# Juiste gebieden in rood weergeven op basis van de gekozen alpha
-lb = qbinom(alpha/2, N, H0, lower.tail = T)
-ub = qbinom(alpha/2, N, H0, lower.tail = F)
+# Color areas red for selected alpha
+area <- dbinom(0:N, N, H0) < alpha/2
 
 col = rep("white", N+1)
-col[0:lb+1] = "red"
-col[ub:N+1] = "red"
-
+col[area] = "red"
 
 col2 = rep("red", N+1)
-col2[0:lb+1] = "white"
-col2[ub:N+1] = "white"
+col2[area] = "white"
 
-
-# Haal onderstaande # voor col weg om geen kleurtjes aan te geven.
+# Delete # to not color the plots
 # col = col2  = "white"
 
 layout(matrix(1:9,3,3, byrow=T))
@@ -484,10 +479,11 @@ text(0.5,0.5,"Reject H0",cex=2)
 
 barplot(dbinom(0:N,N, H0), 
         col  = col, 
-#        yaxt = 'n', 
+        # yaxt = 'n', 
         main = 'Alpha / Type I error', 
         names.arg = 0:N, 
         cex.names = 0.7)
+
 barplot(dbinom(0:N,N, HA), 
         col  = col, 
         yaxt = 'n', 
@@ -500,7 +496,7 @@ text(0.5,0.5,"Accept H0",cex=2)
 
 barplot(dbinom(0:N,N, H0), 
         col  = col2, 
-#        yaxt = 'n', 
+        # yaxt = 'n', 
         main = '1 - alpha', 
         names.arg = 0:N, 
         cex.names = 0.7)
