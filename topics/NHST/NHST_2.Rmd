@@ -1,6 +1,22 @@
-# Null Hypothesis Statistical Significance Testing {.section}
+# Null Hypothesis<br>Significance Testing {.section}
 
-Neyman-Pearson Paradigm
+[Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman)-[Pearson](https://en.wikipedia.org/wiki/Egon_Pearson) Paradigm
+
+<style>
+.np { mix-blend-mode: overlay;
+      height: 400px;
+      float: left;
+
+}
+
+</style>
+
+<img class="np" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg">
+
+<img class="np" src="http://www-history.mcs.st-and.ac.uk/BigPictures/Pearson_Egon_4.jpeg">
+
+
+
 
 ## $H_0$ and $H_A$ {.subsection}
 
@@ -195,7 +211,7 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 }
 ```
 
-## Decision table {.flexbox .vcenter}
+## Decision table {.flexbox .vcenter .subsection}
 
 <table style="border: none;">
   <col width="150px">
@@ -204,17 +220,17 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 <tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
 <tr height="150px">
 <td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid beige; padding: 10px; color: beige; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid beige; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
 </tr>
 <tr height="150px">
 <td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid beige; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid beige; padding: 10px; color: beige; background-color: red;">Type II error <br>Beta $\beta$ </td>
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
 </tr>
 </table>
 
-## Alpha $\alpha$
+## Alpha $\alpha$ {.subsection}
 
 * Incorrectly reject $H_0$
 * Type I error
@@ -296,7 +312,9 @@ Source: [O'Keefe (2007)](http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf)
 
 ## Effect size {.subsection}
 
-In statistics, an effect size is a quantitative measure of the strength of a phenomenon.[1] Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference, or even the risk with which something happens, such as how many people survive after a heart attack for every one person that does not survive. For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon.  Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.
+
+For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
 
 Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
@@ -326,7 +344,7 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 ![](../../../topics/NHST/effec_size.png)
 
-## 1 - alpha
+## 1 - alpha {.subsection}
 
 * Correctly accept $H_0$
 * True negative
@@ -358,8 +376,7 @@ barplot( p_kp,
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-
-## Beta
+## Beta {.subsection}
 
 * Incorrectly accept $H_0$
 * Type II error
@@ -394,7 +411,7 @@ barplot( p_kp,
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## P-value
+## P-value {.subsection}
 
 > Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.
 
