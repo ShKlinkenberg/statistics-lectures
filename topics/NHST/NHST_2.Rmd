@@ -509,12 +509,14 @@ barplot(dbinom(0:N,N, HA),
         cex.names = 0.7)
 ```
 
-## Reasoning Scheme {.subsection}
+## Reasoning Scheme {.flexbox .vcenter .subsection}
 
 ![NHST Reasoning Scheme](https://www.rationaleonline.com/map/ycqv69/screenshot/540x405/)
 
+## R<-PSYCHOLOGIST {.smaller}
 
+<iframe style="height:450px;" src="http://rpsychologist.com/d3/NHST/"></iframe>
 
-
+Source: [Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/)
 
 
