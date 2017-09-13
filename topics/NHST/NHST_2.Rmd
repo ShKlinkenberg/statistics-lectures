@@ -147,14 +147,14 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial Null distribution"
 
-col=c(rep("red",2),rep("white",7),rep("red",2))
+col=c(rep("red",2),rep("beige",7),rep("red",2))
 
 barplot( p_kp, 
          main=title, 
          names.arg=0:10, 
          xlab="number of head", 
          ylab="P(%)", 
-         col='darkgreen',
+         col='beige',
          ylim=c(0,.3) )
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
@@ -179,7 +179,7 @@ p_kp2 = p_k2 * permutations # Probability of event times
 
 title = "Binomial alternative distribution"
 
-col=c(rep("red",2),rep("white",7),rep("red",2))
+col=c(rep("red",2),rep("beige",7),rep("red",2))
 
 barplot( p_kp2, 
          main=title, 
@@ -187,7 +187,7 @@ barplot( p_kp2,
          xlab="number of head", 
          ylab="P(%)", 
          beside=TRUE,
-         col="darkorange",
+         col="beige",
          ylim=c(0,.3) 
          )
 
@@ -204,13 +204,13 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 <tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
 <tr height="150px">
 <td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
+<td style = "border: 5px solid beige; padding: 10px; color: beige; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
+<td style = "border: 5px solid beige; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
 </tr>
 <tr height="150px">
 <td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
+<td style = "border: 5px solid beige; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
+<td style = "border: 5px solid beige; padding: 10px; color: beige; background-color: red;">Type II error <br>Beta $\beta$ </td>
 </tr>
 </table>
 
@@ -236,7 +236,7 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial Null distribution"
 
-col=c(rep("red",2),rep("darkgreen",7),rep("red",2))
+col=c(rep("red",2),rep("beige",7),rep("red",2))
 
 barplot( p_kp, 
          main=title, 
@@ -272,7 +272,7 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial alternative distribution"
 
-col=c(rep("red",2),rep("darkorange",7),rep("red",2))
+col=c(rep("red",2),rep("beige",7),rep("red",2))
 
 barplot( p_kp, 
          main=title, 
@@ -318,7 +318,7 @@ barplot( rbind(dbinom(0:10, 10, .5),
          #legend.text = c("H0", "HA")
          )
 
-legend("topright", legend=c("H0","HA"), fill=c("darkgreen","darkorange"))
+legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 ```
 
@@ -345,7 +345,7 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial Null distribution"
 
-col=c(rep("darkgreen",2),rep("red",7),rep("darkgreen",2))
+col=c(rep("beige",2),rep("red",7),rep("beige",2))
 
 barplot( p_kp, 
          main=title, 
@@ -381,7 +381,7 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial alternative distribution"
 
-col=c(rep("darkorange",2),rep("red",7),rep("darkorange",2))
+col=c(rep("beige",2),rep("red",7),rep("beige",2))
 
 barplot( p_kp, 
          main=title, 
@@ -417,7 +417,7 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial Null distribution"
 
-col=c(rep("blue",3),rep("darkgreen",5),rep("blue",2))
+col=c(rep("blue",3),rep("beige",5),rep("blue",2))
 
 barplot( p_kp, 
          main=title, 
@@ -453,14 +453,14 @@ alpha = .05 # Selected type I error
 # Color areas red for selected alpha
 area <- dbinom(0:N, N, H0) < alpha/2
 
-col = rep("white", N+1)
+col = rep("beige", N+1)
 col[area] = "red"
 
 col2 = rep("red", N+1)
-col2[area] = "white"
+col2[area] = "beige"
 
 # Delete # to not color the plots
-# col = col2  = "white"
+# col = col2  = "beige"
 
 layout(matrix(1:9,3,3, byrow=T))
 
