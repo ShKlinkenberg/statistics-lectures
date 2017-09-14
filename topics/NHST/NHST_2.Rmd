@@ -46,7 +46,7 @@ $H_A$
 
 ## Frequentist probability {.subsection}
 
-* Subjective Probability
+* Objective Probability
 * Relative frequency in the long run
 
 ## Standard Error {.subsection}
