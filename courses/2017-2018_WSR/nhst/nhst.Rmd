@@ -10,7 +10,6 @@ output:
     includes       :
       in_header    : ../../../TOC/TOC_generator.js.wrapper
     self_contained : true
-# output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
