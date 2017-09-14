@@ -2,7 +2,7 @@
 title: "Null Hypothesis Testing"
 author: "Klinkenberg"
 date: "14 sep 2017"
-output: 
+output:
   ioslides_presentation:
     logo           : http://shklinkenberg.github.io/statistics-lectures/template/logo_uva.png
     smaller        : FALSE
