@@ -4,6 +4,12 @@
 
 ![http://goo.gl/T6Lo2s](../../../topics/t-test_one-sample/QR_iq.png)
 
+## Models {.flexbox .vcenter}
+
+<div style="font-size:200%; transform: rotate(-11deg);">
+$$\text{outcome} = \text{model} + \text{error}$$
+</div>
+
 ## Compare sample mean {.smaller}
 
 We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu$. 
