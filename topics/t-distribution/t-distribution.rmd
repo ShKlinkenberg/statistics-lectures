@@ -10,7 +10,7 @@ In the English-language literature it takes its name from William Sealy Gosset's
 
 Source: [Wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
 
-<img style="float: right; width:300px;" src="https://i.vimeocdn.com/video/432998159_1280x768.jpg">
+<img style="float: right; mix-blend-mode: multiply; width:300px;" src="https://i.vimeocdn.com/video/432998159_1280x768.jpg">
 
 ## Population distribution {.smaller .subsection} 
 
