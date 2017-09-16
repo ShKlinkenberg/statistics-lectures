@@ -33,7 +33,7 @@ n.samples = 12
 for(i in 1:n.samples) {
   
   par(mar=c(2,2,2,0))  
-  hist(rnorm(n, mu, sigma), main="Sample Distribution", cex.axis=.5, col="red", cex.main = .75)
+  hist(rnorm(n, mu, sigma), main="Sample Distribution", cex.axis=.5, col="beige", cex.main = .75)
   
 }
 ```
@@ -51,7 +51,7 @@ Let's take one sample from our normal populatiion and calculate the t-value.
 ```{r}
 x = rnorm(n, mu, sigma); x
 
-hist(x, main = "Sample distribution", col = "red")
+hist(x, main = "Sample distribution", col = "beige")
 mean(x)
 ```
 
@@ -89,7 +89,7 @@ head(cbind(mean.x.values, se.x.values))
 
 ```{r}
 hist(mean.x.values, 
-     col  = "red", 
+     col  = "beige", 
      main = "Samples distribution", 
      xlab = "all sample means")
 ```
@@ -112,7 +112,8 @@ What is the distribution of all these t-values?
 hist(t.values, 
      freq = F, 
      main = "Sampled T-values", 
-     xlab = "T-values", 
+     xlab = "T-values",
+     col  = "beige",
      ylim = c(0, .4))
 T = seq(-4, 4, .01)
 lines(T, dt(T,df), col = "red")
@@ -280,7 +281,7 @@ r = sqrt(t.values^2/(t.values^2 + df))
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values, r))
 
-hist(r, main = "effect-size distribution", col = "red")
+hist(r, main = "effect-size distribution", col = "beige")
 ```
 
 Cohen (1988)
