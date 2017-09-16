@@ -1,5 +1,9 @@
 # One-sample t-test {.section}
 
+## IQ next to you {.flexbox .vcenter}
+
+![http://goo.gl/T6Lo2s](../../../topics/t-test_one-sample/QR_iq.png)
+
 ## Compare sample mean {.smaller}
 
 We use the one-sample t-test to compare the sample mean $\bar{x}$ to the population mean $\mu$. 
@@ -23,22 +27,22 @@ myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSv
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-IQ.van.je.buur = data$IQ.van.je.buur
+IQ.next.to.you = data$IQ.van.je.buur
 
-# data[grep("2014", as.character(data$Timestamp)),"IQ.van.je.buur"]
+# data[grep("2014", as.character(data$Timestamp)),"IQ.next.to.you"]
 ```
 
 
 ```{r}
-mu = 120
-n  = length(IQ.van.je.buur)
-x  = IQ.van.je.buur
-
-mean_x = mean(x, na.rm = T); mean_x
-sd_x   = sd(x, na.rm = T); sd_x
+mu     = 120
+n      = length(IQ.next.to.you)
+x      = IQ.next.to.you
+mean_x = mean(x, na.rm = T)
+sd_x   = sd(x, na.rm = T)
+rbind(mean_x, sd_x)
 ```
 
-Does this mean differ significantly from the population mean $\mu = `r mu`$?
+Does this mean, differ significantly from the population mean $\mu = `r mu`$?
 
 ## Hypothesis {.subsection}
 
@@ -51,6 +55,13 @@ Does this mean differ significantly from the population mean $\mu = `r mu`$?
 * $H_A: \bar{x} \neq \mu$
 * $H_A: \bar{x} > \mu$
 * $H_A: \bar{x} < \mu$
+
+## Assumptions
+
+* Normal samples distribution
+* Measurement level
+    * Interval
+    * Ratio
 
 ## T-statistic
 

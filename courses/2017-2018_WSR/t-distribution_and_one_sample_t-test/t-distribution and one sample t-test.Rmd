@@ -1,8 +1,8 @@
 ---
-title: "Null Hypothesis Testing"
+title: "T-distribution and the<br>One-sample t-test"
 author: "Klinkenberg"
-date: "14 sep 2017"
-output:
+date: "22 sep 2016"
+output: 
   ioslides_presentation:
     logo           : http://shklinkenberg.github.io/statistics-lectures/template/logo_uva.png
     smaller        : FALSE
@@ -25,13 +25,16 @@ local({
 })
 ```
 
-## TOC
+## Inhoud
 
 <div id="toc"></div>
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/nhst/NHST_2.rmd"}
+```{r child="../../../topics/t-distribution/t-distribution.rmd"}
+```
+
+```{r child="../../../topics/t-test_one-sample/One-sample_t-test.rmd"}
 ```
 
 # END
