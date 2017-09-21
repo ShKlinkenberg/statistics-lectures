@@ -69,7 +69,7 @@ Does this mean, differ significantly from the population mean $\mu = `r mu`$?
 
 ## T-statistic
 
-$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{`r round(mean_x,2)` - `r mu` }{`r round(sd_x,2)` / \sqrt{`r n`}}$$
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s^2_x / \sqrt{n}} = \frac{`r round(mean_x,2)` - `r mu` }{`r round(sd_x,2)` / \sqrt{`r n`}}$$
 
 So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size.
 
