@@ -33,9 +33,7 @@ myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSv
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-IQ.next.to.you = data$IQ.van.je.buur
-
-# data[grep("2014", as.character(data$Timestamp)),"IQ.next.to.you"]
+IQ.next.to.you = data[grep("2017", as.character(data$Timestamp)),"IQ.van.je.buur"]
 ```
 
 
@@ -45,7 +43,7 @@ n      = length(IQ.next.to.you)
 x      = IQ.next.to.you
 mean_x = mean(x, na.rm = T)
 sd_x   = sd(x, na.rm = T)
-rbind(mean_x, sd_x)
+cbind(n, mean_x, sd_x)
 ```
 
 Does this mean, differ significantly from the population mean $\mu = `r mu`$?
