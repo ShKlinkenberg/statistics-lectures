@@ -40,7 +40,7 @@ for(i in 1:n.samples) {
 
 ## T-statistic {.subsection}
 
-$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s^2_x / \sqrt{n}}$$
 
 So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size, expressed as the degrees of freedom $df = n - 1$
 
@@ -57,7 +57,7 @@ mean(x)
 
 ## t-value
 
-$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s^2_x / \sqrt{n}}$$
 
 ```{r}
 t = (mean(x) - mu) / (sd(x) / sqrt(n)); t
@@ -96,7 +96,7 @@ hist(mean.x.values,
 
 ## Calculate t-values
 
-$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s^2_x / \sqrt{n}}$$
 
 ```{r}
 t.values = (mean.x.values - mu) / se.x.values
