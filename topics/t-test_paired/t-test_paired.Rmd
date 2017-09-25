@@ -12,10 +12,12 @@ Where $n$ (the number of cases) minus $1$, are the degrees of freedom $df = n - 
 ## Hypothesis
 
 $$\LARGE{
-  H_0: \bar{D} = \mu_D \\
-  H_A: \bar{D} \neq \mu_D \\
-  H_A: \bar{D} > \mu_D \\
-  H_A: \bar{D} < \mu_D \\}$$
+  \begin{aligned}
+  H_0 &: \bar{D} = \mu_D \\
+  H_A &: \bar{D} \neq \mu_D \\
+  H_A &: \bar{D} > \mu_D \\
+  H_A &: \bar{D} < \mu_D \\
+  \end{aligned}}$$
 
 ## Data structure
 
