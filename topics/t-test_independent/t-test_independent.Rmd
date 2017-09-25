@@ -6,6 +6,30 @@ Compare 2 independent samples
 
 In the independent-samples t-test the mean of both independent samples is calculated and the difference of these $(\bar{X}_1 - \bar{X}_2)$ means is tested against the null hypothesis where $\mu = 0$.
 
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+Where $n_1$ and $n_2$ are the number of cases in each group and $SE_p$ is the pooled standard error.
+
+## Hypothesis
+
+$$\LARGE{
+  \begin{aligned}
+  H_0 &: t = 0 = \mu_t \\
+  H_A &: t \neq 0 \\
+  H_A &: t > 0 \\
+  H_A &: t < 0 \\
+  \end{aligned}}$$
+
+## Data structure
+
+index | k | outcome
+------|----|--
+1     | 1 | d
+2     | 1 | d
+3     | 2 | d
+4     | 2 | d
+
+Where $k$ is the level of the categorical predictor variabla and $d$ is the value of the outcome/dependent variable.
+
 ## Example
 
 We are going to use the IQ estimates we collected last week again. You had to gues the IQ of the one sitting next to you and your own IQ. But we are going to add gender to the data set. We did not register this so we are going to simulate some genders.
@@ -19,8 +43,10 @@ rm(list=ls())
 # Install if nesserary and load RCurl package
 if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
 if(!'bitops' %in% installed.packages()) { install.packages('bitops') }
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library('bitops')
 library('RCurl')
+library("DT")
 
 # https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing
 
@@ -29,17 +55,13 @@ myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSv
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-IQ.van.je.buur = data$IQ.van.je.buur
-Eigen.IQ = data$Eigen.IQ
+data <- data[grep("2014", as.character(data$Timestamp)),c("IQ.van.je.buur","Eigen.IQ")]
 
-# data[grep("2014", as.character(data$Timestamp)),"IQ.van.je.buur"]
-
-if(!"DT" %in% installed.packages()) { install.packages("DT") }
-library("DT")
+names(data) <- c('IQ.next.to.you', 'IQ.you')
 ```
 
 ```{r}
-gender = sample(c("male", "female"), length(IQ.van.je.buur), replace = TRUE)
+gender = sample(c("male", "female"), dim(data)[1], replace = TRUE)
 ```
 
 ## The data
@@ -50,35 +72,31 @@ data$gender = gender
 # Write data for use in SPSS
 write.table(data, "IQ.csv", row.names=FALSE, col.names=TRUE, dec=',')
 
-
-datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data[,c('gender', 'IQ.you')], options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
 ## Calculate means {.subsection}
 
 ```{r}
-Eigen.IQ.male   = subset(data, gender == "male",   select = Eigen.IQ)$Eigen.IQ
-Eigen.IQ.female = subset(data, gender == "female", select = Eigen.IQ)$Eigen.IQ
+IQ.you.male   = subset(data, gender == "male",   select = IQ.you)$IQ.you
+IQ.you.female = subset(data, gender == "female", select = IQ.you)$IQ.you
 
-Eigen.IQ.male.mean   = mean(Eigen.IQ.male,   na.rm = T)
-Eigen.IQ.female.mean = mean(Eigen.IQ.female, na.rm = T)
+IQ.you.male.mean   = mean(IQ.you.male,   na.rm = T)
+IQ.you.female.mean = mean(IQ.you.female, na.rm = T)
 
-Eigen.IQ.male.mean
-Eigen.IQ.female.mean
+rbind(IQ.you.male.mean, IQ.you.female.mean)
 ```
 
 ## Calculate variance {.smaller .subsection}
 
 ```{r}
-Eigen.IQ.male.var   = var(Eigen.IQ.male,   na.rm = T)
-Eigen.IQ.female.var = var(Eigen.IQ.female, na.rm = T)
-Eigen.IQ.male.var
-Eigen.IQ.female.var
+IQ.you.male.var   = var(IQ.you.male,   na.rm = T)
+IQ.you.female.var = var(IQ.you.female, na.rm = T)
+rbind(IQ.you.male.var, IQ.you.female.var)
 
-Eigen.IQ.male.n   = length(Eigen.IQ.male)   - 1
-Eigen.IQ.female.n = length(Eigen.IQ.female) - 1
-Eigen.IQ.male.n
-Eigen.IQ.female.n
+IQ.you.male.n   = length(IQ.you.male)   - 1
+IQ.you.female.n = length(IQ.you.female) - 1
+rbind(IQ.you.male.n, IQ.you.female.n)
 ```
 
 ## Calculate t-value
@@ -100,9 +118,9 @@ Where $s^2$ is the variance and $n$ the sample size.
 $$S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
 
 ```{r}
-df = Eigen.IQ.male.n + Eigen.IQ.female.n - 2
+df = IQ.you.male.n + IQ.you.female.n - 2
 
-s2.p = ( (Eigen.IQ.male.n-1)*Eigen.IQ.male.var + (Eigen.IQ.female.n-1)*Eigen.IQ.female.var ) / df
+s2.p = ( (IQ.you.male.n-1)*IQ.you.male.var + (IQ.you.female.n-1)*IQ.you.female.var ) / df
 
 df
 s2.p
@@ -113,7 +131,7 @@ s2.p
 $${SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}$$
 
 ```{r}
-se.p    = sqrt( ((s2.p/Eigen.IQ.male.n) + (s2.p/Eigen.IQ.female.n)) )
+se.p    = sqrt( ((s2.p/IQ.you.male.n) + (s2.p/IQ.you.female.n)) )
 se.p
 ```
 
@@ -122,7 +140,7 @@ se.p
 $$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
 
 ```{r}
-t = ( Eigen.IQ.male.mean - Eigen.IQ.female.mean ) / se.p
+t = ( IQ.you.male.mean - IQ.you.female.mean ) / se.p
 
 t
 ```
