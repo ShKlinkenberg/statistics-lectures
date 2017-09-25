@@ -30,6 +30,14 @@ index | k | outcome
 
 Where $k$ is the level of the categorical predictor variabla and $d$ is the value of the outcome/dependent variable.
 
+## Additional assumption
+
+Specificly for independent sample $t$-test.
+
+* Equality of variance
+    * $H_0$ : Variance $=$ equal ($p$ > .05)
+    * $H_A$ : Variance $\neq$ equal ($p$ < .05)
+
 ## Example
 
 We are going to use the IQ estimates we collected last week again. You had to gues the IQ of the one sitting next to you and your own IQ. But we are going to add gender to the data set. We did not register this so we are going to simulate some genders.
