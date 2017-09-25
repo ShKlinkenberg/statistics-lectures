@@ -6,6 +6,28 @@ Paired 2 samples
 
 In the Paired samples t-test the deviation ($D$) for each pair is calculated and the mean of these deviations ($\bar{D}$) is tested against the null hypothesis where $\mu = 0$.
 
+$$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
+Where $n$ (the number of cases) minus $1$, are the degrees of freedom $df = n - 1$ and $SE_D$ is the standard error of $D$, defined as $s_D/\sqrt{n}$.
+
+## Hypothesis
+
+$$\LARGE{
+  H_0: \bar{D} = \mu_D \\
+  H_A: \bar{D} \neq \mu_D \\
+  H_A: \bar{D} > \mu_D \\
+  H_A: \bar{D} < \mu_D \\}$$
+
+## Data structure
+
+index | k1 | k2
+------|----|--
+1     | d  | d
+2     | d  | d
+3     | d  | d
+4     | d  | d
+
+Where $k$ is the level of the categorical predictor variabla and $d$ is the value of the outcome/dependent variable.
+
 ## Data example
 
 We are going to use the IQ estimates we collected last week. You had to gues the IQ of the one sitting next to you and your own IQ.
@@ -24,17 +46,15 @@ rm(list=ls())
 if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
 library(RCurl)
 
-# https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing
-
 # Load csv
 myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/export?format=csv&id=13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg")
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-IQ.van.je.buur = data$IQ.van.je.buur
-Eigen.IQ = data$Eigen.IQ
+data = data[grep("2017", as.character(data$Timestamp)),c("IQ.van.je.buur", "Eigen.IQ")]
 
-# data[grep("2014", as.character(data$Timestamp)),"IQ.van.je.buur"]
+IQ.next.to.you = data$IQ.van.je.buur
+IQ.you           = data$Eigen.IQ
 
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
@@ -47,14 +67,14 @@ datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, inf
 ## Calculate $D$ {.smaller .subsection}
 
 ```{r}
-D = IQ.van.je.buur - Eigen.IQ
+D = IQ.next.to.you - IQ.you
 ```
 
 
 ```{r, echo=FALSE}
 data$D = D
 
-datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, options = list(searching = FALSE, scrollY = 315, paging = F, info = F))
 ```
 
 ## Calculate $\bar{D}$
@@ -106,7 +126,6 @@ $$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
 
 ```{r}
 r = sqrt(t^2/(t^2 + df))
-
 r
 ```
 
@@ -115,8 +134,10 @@ r
 To display correct conficance intervals in SPSS we need to correct the original scores for whithin subject variation.
 
 ```{}
+** SPSS SYNTAX
+
 DATASET ACTIVATE DataSet1.
-COMPUTE whithinmean=MEAN(IQ.van.je.buur,Eigen.IQ).
+COMPUTE whithinmean=MEAN(IQ.next.to.you,IQ.you).
 EXECUTE.
 
 AGGREGATE
@@ -127,7 +148,7 @@ AGGREGATE
 COMPUTE adjustment=whithinmean_mean - whithinmean.
 EXECUTE.
 
-COMPUTE IQ.van.je.buur.adj = IQ.van.je.buur + adjustment.
-COMPUTE Eigen.IQ           = Eigen.IQ       + adjustment.
+COMPUTE IQ.next.to.you.adj = IQ.next.to.you + adjustment.
+COMPUTE IQ.you           = IQ.you       + adjustment.
 EXECUTE.
 ```
