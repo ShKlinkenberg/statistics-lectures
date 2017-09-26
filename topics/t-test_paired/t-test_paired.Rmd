@@ -144,7 +144,7 @@ EXECUTE.
 AGGREGATE
   /OUTFILE=* MODE=ADDVARIABLES
   /BREAK=
-  /total_mean = MEAN(whithinmean).
+  /total_mean = MEAN(personal_mean).
 
 COMPUTE adjustment = total_mean - personal_mean.
 EXECUTE.
