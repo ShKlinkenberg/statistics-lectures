@@ -304,20 +304,19 @@ r</pre>
 
 <pre >** SPSS SYNTAX
 
-DATASET ACTIVATE DataSet1.
-COMPUTE whithinmean=MEAN(IQ.next.to.you,IQ.you).
+COMPUTE personal_mean = MEAN(IQ.next.to.you, IQ.you).
 EXECUTE.
 
 AGGREGATE
   /OUTFILE=* MODE=ADDVARIABLES
   /BREAK=
-  /whithinmean_mean=MEAN(whithinmean).
+  /total_mean = MEAN(whithinmean).
 
-COMPUTE adjustment=whithinmean_mean - whithinmean.
+COMPUTE adjustment = total_mean - personal_mean.
 EXECUTE.
 
 COMPUTE IQ.next.to.you.adj = IQ.next.to.you + adjustment.
-COMPUTE IQ.you           = IQ.you       + adjustment.
+COMPUTE IQ.you             = IQ.you         + adjustment.
 EXECUTE.</pre>
 
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Independent-samples t-test</h2></hgroup><article  id="independent-samples-t-test" class="section">

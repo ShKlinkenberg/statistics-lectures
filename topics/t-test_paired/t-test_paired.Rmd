@@ -138,19 +138,18 @@ To display correct conficance intervals in SPSS we need to correct the original 
 ```{}
 ** SPSS SYNTAX
 
-DATASET ACTIVATE DataSet1.
-COMPUTE whithinmean=MEAN(IQ.next.to.you,IQ.you).
+COMPUTE personal_mean = MEAN(IQ.next.to.you, IQ.you).
 EXECUTE.
 
 AGGREGATE
   /OUTFILE=* MODE=ADDVARIABLES
   /BREAK=
-  /whithinmean_mean=MEAN(whithinmean).
+  /total_mean = MEAN(whithinmean).
 
-COMPUTE adjustment=whithinmean_mean - whithinmean.
+COMPUTE adjustment = total_mean - personal_mean.
 EXECUTE.
 
 COMPUTE IQ.next.to.you.adj = IQ.next.to.you + adjustment.
-COMPUTE IQ.you           = IQ.you       + adjustment.
+COMPUTE IQ.you             = IQ.you         + adjustment.
 EXECUTE.
 ```
