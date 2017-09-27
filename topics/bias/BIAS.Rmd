@@ -22,17 +22,19 @@ SE &rarr; test statistics &rarr; $p$-values
 
 ## The beasts {.flexbox .vcenter}
 
-![Beasts](../../../topics/bias/here-be-dragons.jpg)
+![](../../../topics/bias/here-be-dragons.jpg)
 
 >- Outliers
 >- Violations of assumptions
 
 ## Example
 
-IQ estimations of males and females. We want to know the differences in the population not the sample. We therefore want to make an inference about the population, hence the name inferential statistics. 
+IQ estimations of males and febecouse. We want to know the differences in the population not the sample. We therefore want to make an inference about the population, hence the name inferential statistics. 
 
 ```{r}
 data = read.table("../../topics/t-test_independent/IQ.csv", sep = ' ', header = T)
+names(data)[3] <- "male"
+data$male <- ifelse(data$male == "male" , 1, 0)
 data[12:17,]
 ```
 
@@ -40,44 +42,45 @@ data[12:17,]
 
 We can see that fameles are coded as 0 and males as 1. Such coding can be used in a linear regression equation.
 
-$$\text{IQ you}_i = b_0 + b_1 males_i + error_i$$
+$$\text{IQ you}_i = b_0 + b_1 male_i + error_i$$
 
 ```{r, echo=FALSE}
-means <- aggregate(IQ.you ~ factor(gender), data, mean)
+means <- aggregate(IQ.you ~ factor(male), data, mean)
 ```
 
 ```{r}
-aggregate(IQ.you ~ factor(gender), data, mean)
+means
 ```
 
-We can now calculate the $b$'s: $b_0 = `r means[1,2]`$ and $b_1 = `r means[2,2] - means[1,2]`$
+We can now calculate the $b$'s: $b_0 = `r round(means[1,2],2)`$ and $b_1 = `r round(means[2,2] - means[1,2],2)`$
 
 -----
 
-$$\text{IQ you}_i = b_0 + b_1 males_i + error_i$$
+$$\text{IQ you}_i = b_0 + b_1 male_i + error_i$$
 
 If we apply this to the regression model we get:
 
-```{r, echo=FALSE}
-fit <- lm(IQ.you ~ factor(gender), data)
-cbind(IQ.you = data$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], gender = data$gender, error = fit$residuals)[12:17,]
+```{r, echo=FALSE, warning=FALSE}
+fit <- lm(IQ.you ~ factor(male), data)
+cbind(b.0    = round(fit$coefficients[1], 2),
+      b.1    = round(fit$coefficients[2], 2),
+      male  = data$male, 
+      model  = round(fit$fitted.values, 2),
+      IQ.you = data$IQ.you,
+      error  = round(fit$residuals, 2)
+      ) -> regression.model
+regression.model[1:8,]
 ```
 
 The means indirectly represent the parameters $b$'s in this regression model. These $b$'s are the estimates of the population parameters $\beta$'s.
 
------
-
-But what if these means are not correct, becouse of an extreme outlier.
-
 ```{r, echo=FALSE}
-boxplot(data$IQ.you, horizontal = T, col= 'red', main=names(data)[3])
-```
-
-## Outliers {.subsection}
-
-```{r, echo=FALSE, fig.height=2.2, eval=FALSE}
 boxplot(data$IQ.you, horizontal = T, col= 'red')
 ```
+
+But what if these means are not correct, because of an extreme outlier.
+
+## Outliers {.subsection}
 
 Outliers can have a huge impact on the estimations
 
@@ -94,10 +97,14 @@ Without these outliers the results look a bit different.
 data2 <- subset(data,  IQ.you > 100)
 data2 <- subset(data2, IQ.you < 140)
 
-aggregate(IQ.you ~ factor(gender), data2, mean)
+aggregate(IQ.you ~ factor(male), data2, mean)
 
-fit <- lm(IQ.you ~ factor(gender), data2)
-cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], gender = data2$gender, error = fit$residuals)[12:17,]
+fit <- lm(IQ.you ~ factor(male), data2)
+cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], male = data2$male, error = fit$residuals)[12:17,]
+```
+
+```{r, echo=FALSE}
+boxplot(data2$IQ.you, horizontal = T, col= 'red')
 ```
 
 ## Assumptions {.subsection}
