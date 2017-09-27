@@ -209,15 +209,13 @@
 <pre class = 'prettyprint lang-r'>data = read.table(&quot;../../topics/t-test_independent/IQ.csv&quot;, sep = &#39; &#39;, header = T)
 names(data)[3] &lt;- &quot;male&quot;
 data$male &lt;- ifelse(data$male == &quot;male&quot; , 1, 0)
-data[12:17,]</pre>
+data[12:15,]</pre>
 
 <pre >##    IQ.next.to.you IQ.you male
 ## 12            125    125    1
 ## 13            115    111    1
 ## 14             60    160    0
-## 15            115    115    1
-## 16            125    110    0
-## 17            130    125    0</pre>
+## 15            115    115    1</pre>
 
 </article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
 
@@ -225,7 +223,7 @@ data[12:17,]</pre>
 
 <p>\[\text{IQ you}_i = b_0 + b_1 male_i + error_i\]</p>
 
-<pre class = 'prettyprint lang-r'>means</pre>
+<pre class = 'prettyprint lang-r'>means &lt;- aggregate(IQ.you ~ factor(male), data, mean); means</pre>
 
 <pre >##   factor(male)   IQ.you
 ## 1            0 123.6735

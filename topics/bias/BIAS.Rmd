@@ -100,7 +100,7 @@ data2 <- subset(data2, IQ.you < 140)
 aggregate(IQ.you ~ factor(male), data2, mean)
 
 fit <- lm(IQ.you ~ factor(male), data2)
-cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], male = data2$male, error = fit$residuals)[12:17,]
+cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], male = data2$male, error = fit$residuals)[12:15,]
 ```
 
 ```{r, echo=FALSE}
