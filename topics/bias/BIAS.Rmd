@@ -35,7 +35,7 @@ IQ estimations of males and febecouse. We want to know the differences in the po
 data = read.table("../../topics/t-test_independent/IQ.csv", sep = ' ', header = T)
 names(data)[3] <- "male"
 data$male <- ifelse(data$male == "male" , 1, 0)
-data[12:17,]
+data[12:15,]
 ```
 
 -----
@@ -44,12 +44,8 @@ We can see that fameles are coded as 0 and males as 1. Such coding can be used i
 
 $$\text{IQ you}_i = b_0 + b_1 male_i + error_i$$
 
-```{r, echo=FALSE}
-means <- aggregate(IQ.you ~ factor(male), data, mean)
-```
-
 ```{r}
-means
+means <- aggregate(IQ.you ~ factor(male), data, mean); means
 ```
 
 We can now calculate the $b$'s: $b_0 = `r round(means[1,2],2)`$ and $b_1 = `r round(means[2,2] - means[1,2],2)`$
@@ -100,7 +96,7 @@ data2 <- subset(data2, IQ.you < 140)
 aggregate(IQ.you ~ factor(male), data2, mean)
 
 fit <- lm(IQ.you ~ factor(male), data2)
-cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], male = data2$male, error = fit$residuals)[12:15,]
+cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], male = data2$male, error = fit$residuals)[12:17,]
 ```
 
 ```{r, echo=FALSE}
