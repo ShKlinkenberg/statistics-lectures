@@ -1,0 +1,46 @@
+---
+title: "The beast of BIAS"
+author: "Klinkenberg"
+date: "29 sep 2016"
+output: 
+  ioslides_presentation:
+    logo           : http://shklinkenberg.github.io/statistics-lectures/template/logo_uva.png
+    smaller        : FALSE
+    css            : http://shklinkenberg.github.io/statistics-lectures/styles/style.css
+    includes       :
+      in_header    : ../../../TOC/TOC_generator.js.wrapper
+    self_contained : true
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/bias/BIAS.Rmd"}
+```
+
+# END
+
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+
+<ul>
+<li><i class="fa fa-twitter" aria-hidden="true" style="color:white;"></i>  <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:white; border-bottom:none;">@shklinkenberg</a></li>
+<li><i class="fa fa-linkedin-square" aria-hidden="true" style="color:white"></i>  <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:white; border-bottom:none;">Klinkenberg</a></li>
+<li><i class="fa fa-envelope-o" aria-hidden="true" style="color:white"></i>  <a style="unicode-bidi:bidi-override; direction: rtl; color:white" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a></li>
+<li><i class="fa fa-github" aria-hidden="true" style="color:white"></i>  <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:white; border-bottom:none;">ShKlinkenberg</a></li>
+</ul>

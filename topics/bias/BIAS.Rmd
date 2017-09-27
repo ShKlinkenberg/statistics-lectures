@@ -1,4 +1,4 @@
-## Wat is BIAS {.section}
+## What is BIAS {.section}
 
 <quote style="font-style:italic;">Things that lead us to the wrong conclusions (Field)</quote>
 
@@ -10,161 +10,159 @@ $$model_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
 
 ## BIAS
 
-Verkeerde conclussies over:
+Wrong conclusions about:
 
 - Parameters $b_i$
-- Standaard error en betrouwbaarheidsintervallen
-- Toetsingsgrootheden en *p-waarden*
+- Standaard error and confidence intervals
+- Test statistics and $p$-values
 
 means &rarr; SE &rarr; CI
 
-SE &rarr; toetsingsgrootheid &rarr; *p-waarden*
+SE &rarr; test statistics &rarr; $p$-values
 
 ## The beasts {.flexbox .vcenter}
 
 ![Beasts](../../../topics/bias/here-be-dragons.jpg)
 
->- Uitbijters (Outliers)
->- Schendingen van assumpties
+>- Outliers
+>- Violations of assumptions
 
-## Voorbeeld
+## Example
 
-Eigen IQ schatting van mannen en vrouwen. Wat we willen is een uitspraak doen over het verschil in de populatie. Niet enkel deze sample. We willen een inferentie maken (Vandaar de term inferentiële statistiek).
+IQ estimations of males and females. We want to know the differences in the population not the sample. We therefore want to make an inference about the population, hence the name inferential statistics. 
 
 ```{r}
-data = read.csv("IQ.csv")
+data = read.table("../../topics/t-test_independent/IQ.csv", sep = ' ', header = T)
 data[12:17,]
 ```
 
 -----
 
-We zien dat de vrouwen als 0 gecodeerd zijn en mannen als 1. We kunnen dan het regressie model invullen voor dit onderzoek.
+We can see that fameles are coded as 0 and males as 1. Such coding can be used in a linear regression equation.
 
-$$\text{Schatting eigen IQ}_i = b_0 + b_1 Sekse_i + error_i$$
+$$\text{IQ you}_i = b_0 + b_1 males_i + error_i$$
 
 ```{r, echo=FALSE}
-means <- aggregate(Eigen.IQ ~ factor(sekse), data, mean)
+means <- aggregate(IQ.you ~ factor(gender), data, mean)
 ```
 
 ```{r}
-aggregate(Eigen.IQ ~ factor(sekse), data, mean)
+aggregate(IQ.you ~ factor(gender), data, mean)
 ```
 
-We kunnen nu de $b$'s berekenen: $b_0 = `r means[1,2]`$ en $b_1 = `r means[2,2] - means[1,2]`$
+We can now calculate the $b$'s: $b_0 = `r means[1,2]`$ and $b_1 = `r means[2,2] - means[1,2]`$
 
 -----
 
-$$\text{Schatting eigen IQ}_i = b_0 + b_1 Sekse_i + error_i$$
+$$\text{IQ you}_i = b_0 + b_1 males_i + error_i$$
 
-Als we dan het regressie model invullen, krijgen we:
+If we apply this to the regression model we get:
 
 ```{r, echo=FALSE}
-fit <- lm(Eigen.IQ ~ factor(sekse), data)
-cbind(Eigen.IQ = data$Eigen.IQ, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], sekse = data$sekse, error = fit$residuals)[12:17,]
+fit <- lm(IQ.you ~ factor(gender), data)
+cbind(IQ.you = data$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], gender = data$gender, error = fit$residuals)[12:17,]
 ```
 
-De gemiddelden vormen dus indirect de parameters $b$'s in dit regressie model. Deze $b$'s zijn de schatters van de populatie $\beta$'s.
+The means indirectly represent the parameters $b$'s in this regression model. These $b$'s are the estimates of the population parameters $\beta$'s.
 
 -----
 
-En wat nou als deze gemiddelden niet zo goed zijn?
-
-Bijvoorbeeld omdat er extreme uitbijters tussen zitten.
+But what if these means are not correct, becouse of an extreme outlier.
 
 ```{r, echo=FALSE}
-boxplot(data$Eigen.IQ, horizontal = T, col= 'red', main=names(data)[3])
+boxplot(data$IQ.you, horizontal = T, col= 'red', main=names(data)[3])
 ```
 
-## Uitbijters {.subsection}
+## Outliers {.subsection}
 
 ```{r, echo=FALSE, fig.height=2.2, eval=FALSE}
-boxplot(data$Eigen.IQ, horizontal = T, col= 'red')
+boxplot(data$IQ.you, horizontal = T, col= 'red')
 ```
 
-Uitbijters kunnen grote invloed hebben op de gemiddelden.
+Outliers can have a huge impact on the estimations
 
-- **Trim** Verwijderen op basis van boxplot.
-- **Trim** Verwijderen op basis van 3 standaard deviaties.
-- **Trim** Trimmed mean: verwijder bovenste en onderste percentage.
-- **Winsorizing** Vervang met de hoogste score dat geen uitbeiter is.
+- **Trim** Delete based on boxplot.
+- **Trim** Delete based on 3 standard deviations.
+- **Trim** Trimmed mean: Delete upper and lower percentages.
+- **Winsorizing** Replace outliers with highest non outlier.
 
 -----
 
-Zonder deze outliers ziet het er net wat anders uit.
+Without these outliers the results look a bit different.
 
 ```{r, echo=FALSE}
-data2 <- subset(data,  Eigen.IQ > 100)
-data2 <- subset(data2, Eigen.IQ < 140)
+data2 <- subset(data,  IQ.you > 100)
+data2 <- subset(data2, IQ.you < 140)
 
-aggregate(Eigen.IQ ~ factor(sekse), data2, mean)
+aggregate(IQ.you ~ factor(gender), data2, mean)
 
-fit <- lm(Eigen.IQ ~ factor(sekse), data2)
-cbind(Eigen.IQ = data2$Eigen.IQ, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], sekse = data2$sekse, error = fit$residuals)[12:17,]
+fit <- lm(IQ.you ~ factor(gender), data2)
+cbind(IQ.you = data2$IQ.you, b.0 =fit$coefficients[1], b.1 = fit$coefficients[2], gender = data2$gender, error = fit$residuals)[12:17,]
 ```
 
-## Assumpties {.subsection}
+## Assumptions {.subsection}
 
-- Additiviteit en lineairiteit
-- Normaliteit
-- Homoscedasticiteit/homogeniteit van variantie
-- Onafhankelijkheid
+- Additivity and linearity
+- Normality
+- Homoscedasticity/homogenity of variance
+- Independence
 
-## Additiviteit en lineairiteit {.subsection}
+## Additivity and linearity {.subsection}
 
-De afhankelijke variabele is in werkelijkheid lineair gerelateerd aan de predictoren.
+The outcome variable is linearly related to the predictors.
 
 ![relations](../../../topics/bias/relationships.jpg)
 
 $$\text{MODEL}_i = b_1 X_{1i} + b_2 X_{2i} + \ldots + b_n X_{ni}$$
 
-## Additiviteit en lineairiteit
+## Additivity and linearity
 
-Dit is te controleren door te kijken naar het verband tussen de predictor variabelen en de outcome variabele.
+We can check this by looking at the scatterplot of the predictors with the outcome variable.
 
-## Normaliteit {.subsection}
+## Normality {.subsection}
 
-- Parameter schattingen $b$'s
-- Betrouwbaarheidsintervallen (SE * **1.196**)
-- Nul hypothese toetsing
-- Error
+- Parameter estimates $b$'s
+- Confidence intervals (SE * **1.196**)
+- “Null hypothesis significance testing”
+- Errors
 
-Het gaat niet om de normaliteit van de data maar van de populatie verdeling. Deze willen we testen aan de hand van de data.
+Not the normality of the sample but the normality of the parameter $\beta$ in the population. We will test this assumption based on the data, though with large samples the [centrel limit theorem](https://youtu.be/JNm3M9cqWyc) ensures that the parameters are bell shaped.
 
-Geen zorgen bij grote samples (Centrale limietstelling).
-
-## Centrale limietstelling
+## Centrel limit theorem
 
 <iframe style="width:750px; height:480px;" src="https://www.youtube.com/embed/aS8B2yY73g0" frameborder="0" allowfullscreen></iframe>
 
-## Normaliteit
+## Normality
 
-Te bekijken met:
+You can look at:
 
-- Skewness en Kurtosis
+- Skewness and Kurtosis
 
-Te toetsen met:
+We can test with:
 
 - Kolmogorov-Smirnof test
 - Shapiro-Wilk test
 
-Maar hoe groter de sample hoe kleiner de *p-waarde* bij gelijke toetsingsgrootheden. Dus dat bijt elkaar een beetje.
+But, the bigger the sample the smaller the $p$-value at equal test statistic. So we are losing power at large samples.
 
-- transformatie van de outcome variable.
+- We can also transform the variable
 
-## Homoscedasticiteit homogeniteit <br>van variantie {.subsection}
+## Homoscedasticity/homogenity <br> of variance {.subsection}
 
-Van invloed op:
+Influences:
 
 - Parameters $b$'s
 - NHT
 
-De assumptie van de nul hypothese is dat de nul verdeling waar is. Dus bij verschillende samples uit die verdeling, laten we zeggen mannen en vrouwen op IQ, verwachten we dat de variantie van beide groepen identiek is. Anders zou onze assumptie niet gelden.
+The null hypothesis assumes the null distribution to be true. Therefore, different sampples from that districution should have equal variances. Otherwise the assumption could not hold.
 
-In algemene termen kunnen we dus zeggen dat op elk niveau van de predictorvariabele de varianties gelijk moeten zijn.
+In general, we can say that on every value of the predictor variable the variances in the outcome variable should be equal.
 
 -----
 
 Dit is te controleren door een plot te maken van de gestandaardiseerde error/residu en de gestandaardiseerde verwachte uitkomst/model.
+
+We can check this by plotting the standardised error/resiual and the standardised expected outcome/model.
 
 ```{r, echo=FALSE, fig.height=4}
 plot(scale(fit$fitted.values), scale(fit$residuals), ylab="(e - mean e) / sd e", xlab="(m - mean m) / sd m")
@@ -180,9 +178,9 @@ lines(c(0,0),c(-10,10), col='red')
 
 <iframe style="width:750px; height:480px;" src="http://www.youtube.com/embed/V5BUIy6cThw?rel=0" frameborder="0" allowfullscreen></iframe>
 
-## Onafhankelijkheid {.subsection}
+## Independence {.subsection}
 
-De observaties die gedaan zijn, lees: de rijen in SPSS of de proefpersonen in je onderzoek moeten onafhankelijk van alkaar een reactie gegeven hebben op de outcome variable. Het antwoord van persoon B moet niet afhangen van die van pesoon A.
+The observed outcome (rows in SPSS or participants in your research) should be independent from each other. The answer of person B should not depend on the answer of person A.
 
 ![Whisper](../../../topics/bias/whisper-clipart.png)
 
