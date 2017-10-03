@@ -8,7 +8,8 @@ output:
     smaller        : FALSE
     css            : http://shklinkenberg.github.io/statistics-lectures/styles/style.css
     includes       :
-      in_header    : ../../../TOC/TOC_generator.js.wrapper
+      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
+                      "../../../GA_Script/GA_Script.html"]
     self_contained : true
 ---
 
