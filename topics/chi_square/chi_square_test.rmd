@@ -93,6 +93,8 @@ myCsv <- getURL(google.url)
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
+# data <- data[grep("2017", data$Timestamp),]
+
 # install.packages("DT")
 library("DT")
 datatable(data)
