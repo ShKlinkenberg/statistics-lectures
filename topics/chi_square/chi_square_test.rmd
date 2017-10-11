@@ -68,7 +68,7 @@ legend("topright", legend = paste("k =",df), col = col, lty = 1, bty = "n")
 
 ## Example
 
-<iframe style="height: 450px;;" src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829"></iframe>
+<iframe style="height: 450px;" src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829"></iframe>
 
 ## Experiment {.flexbox .vcenter}
 
