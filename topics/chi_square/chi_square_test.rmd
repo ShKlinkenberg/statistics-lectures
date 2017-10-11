@@ -68,7 +68,7 @@ legend("topright", legend = paste("k =",df), col = col, lty = 1, bty = "n")
 
 ## Example
 
-<iframe style="height: 450px;" src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829"></iframe>
+<iframe src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829" style="height: 450px;" ></iframe>
 
 [Simon](http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829)
 
@@ -259,7 +259,7 @@ $$OR = \frac{\text{wistle}}{\text{can't wistle}} = \frac{`r odds[1,1] / odds[1,2
 
 ## Simulation {.subsection .smaller}
 
-```{r}
+```{r, warning=FALSE}
 chi.values = vector()
 
 for(i in 1:1000) {
