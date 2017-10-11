@@ -18,6 +18,38 @@ x.e = c(-.78,-.86,-1.35,-1.48,-1.52,-2.04,-2.83      ) # Eyes
 x   = c( x.c, x.k, x.e )                               # Conditions combined
 ```
 
+```{r, echo=FALSE}
+lab = c("Control", "Knee", "Eyes") 
+
+k_v  = c(rep(1,length(x.c)), 
+         rep(2,length(x.k)), 
+         rep(3,length(x.e)))       # vector met 1, 2 en 3 corresponderend met de scores.
+
+plot(k_v,x, 
+     col="red",
+     main='Response to light treatment',
+     ylab="Shift in circadian rhythm (h)",
+     xlab="Light treatment",
+     xlim=c(.5,3.5),
+     xaxt="n")
+axis(1,at=1:3,labels=lab)
+
+lines(c(1,1.2,1.1,1.1,1,1.2),
+      c(rep((mean(x.c)-((sd(x.c)/sqrt(length(x.c))))),3),
+        rep((mean(x.c)+((sd(x.c)/sqrt(length(x.c))))),3))
+     )
+lines(c(2,2.2,2.1,2.1,2,2.2),
+      c(rep((mean(x.k)-((sd(x.k)/sqrt(length(x.k))))),3),
+        rep((mean(x.k)+((sd(x.k)/sqrt(length(x.k))))),3))
+     )
+lines(c(3,3.2,3.1,3.1,3,3.2),
+      c(rep((mean(x.e)-((sd(x.e)/sqrt(length(x.e))))),3),
+        rep((mean(x.e)+((sd(x.e)/sqrt(length(x.e))))),3))
+     )
+points(c(1,2,3)+.1,c(mean(x.c),mean(x.k),mean(x.e)),bg="red",pch=21)
+```
+
+
 ## Total variance {.subsection}
 
 $${MS}_{total} = s_x^2$$
@@ -209,3 +241,209 @@ library("visualize")
 visualize.f(F, df.m,df.e,section="upper")
 ```
 
+## Contrasts
+
+Planned comparisons
+
+* Exploring differences of theoretical interest
+* Higher precision
+* Higher power
+
+## Contrasts
+
+* Only use chunks once
+* Values add up to 0
+
+<img src="../../../topics/ANOVA_one-way_independent/pie2.png" style="height:200px;" >
+<img src="../../../topics/ANOVA_one-way_independent/pie1.png" style="height:200px;" >
+
+------
+
+<img src="../../../topics/ANOVA_one-way_independent/pie3.png" style="height:200px;" >
+
+* AB-CDEF &rarr; A-B &rarr; CD-EF &rarr; C-D &rarr; E-F
+* A-BCDEF &rarr; A-B &rarr; A-C
+* A-BCDEG &rarr; BC-DEF &rarr; B-C &rarr; B-DEF
+* ABC-DEF &rarr; BC-DEF &rarr; B-C
+
+-------
+
+Assign values that combine to one. Same values define chunk.
+
+* AB-CDEF &rarr; A-B &rarr; CD-EF &rarr; C-D &rarr; E-F
+
+|            |A|B|C|D|E|F
+|------------|-|-|-|-|-|-
+| Contrast 1 | | | | | |
+| Contrast 2 | | | | | |
+| Contrast 3 | | | | | |
+| Contrast 4 | | | | | |
+
+
+```{r, echo=FALSE, fig.height=6}
+# ANOVA 
+# Concept van verklaarde variantie
+
+layout(matrix(1:3,3,1))
+
+# Laten we eerst wat data genereren
+
+set.seed(1)           # om ervoor te zorgen dat we elke keer dezelfde getallen krijgen
+n = 1:9               # aantal proefpersonen
+f = rep(1:3,each = 3) # aantal categorien
+x = rnorm(n,5,1)      # behaalde scores
+
+# Losse variabelen in een data frame stoppen
+data = data.frame(n,f,x)
+
+# Data even bekijken
+# data
+
+# en ook in een plot
+plot(data[,c('n','x')],main='variance explained')
+
+# Om te weten hoeveel variantie er in totaal is hebben we het gemiddelde nodig
+
+data$meanx <- mean(x)
+
+# Laten we ook het gemiddelde van x plotten
+lines(data$n,data$meanx,col='grey',lty=2)
+
+# De hoeveelheid variatie van alle datapunten x ten opzichte van het gemiddelde van x kan worden aangegeven met de afstand tussen de datapunten en het gemiddelde
+
+for(r in 1:9) {
+row = data[r,]
+lines(rep(row$n,2),c(row$x,row$meanx), col='blue')
+}
+
+# De blauwe lijnen
+
+# We kunnen deze variantie proberen te verklaren met het groepslidmaatschap. Met andere woorden de categorien / factoren.
+
+# Hiervoor hebben we de gemiddelden in de drie groepen nodig.
+
+mean_f1 = colMeans(subset(data, f == 1, select = 'x')); 
+mean_f2 = colMeans(subset(data, f == 2, select = 'x')); 
+mean_f3 = colMeans(subset(data, f == 3, select = 'x')); 
+
+# Laten we deze groepsgemiddelden toevoegen aan de dataset
+data$groupmean <- c(rep(mean_f1,3),rep(mean_f2,3),rep(mean_f3,3))
+
+# en vervolgens toevoegen aan de plot
+
+lines(1:3, rep(mean_f1,3), col='grey', lwd=2)
+lines(4:6, rep(mean_f2,3), col='grey', lwd=2)
+lines(7:9, rep(mean_f3,3), col='grey', lwd=2)
+
+# De totale variantie wordt dus voor een deel door het groepslidmaatschap (de groene lijn) veklaard. Het overige onverklaarde deel zijn de afstanden van x tot de groepsgemiddelden.
+
+for(r in 1:9) {
+row = data[r,]
+lines(rep(row$n,2)+.05,c(row$groupmean,row$x),     col='red' )
+lines(rep(row$n,2)-.05,c(row$groupmean,row$meanx), col='green')
+}
+
+# De totale variantie van de blauwe lijnen bestaat dus uit de afstand van het totale gemiddelde tot de groepsgemiddelden plus de afstand van de groepsgemiddelden tot de afzonderlijke x-en.
+
+# blauw = groen + rood
+# SS_T  = SS_M  + SS_E
+# MS_T  = MS_M  + MS_E
+
+# De F waarde die we toetsen bestaat uit de verhouding verklaarde variantie door het model en de onverklaarde variantie van de error.
+
+# F = MS_M / MS_E
+
+##############
+# Contrasten #
+##############
+
+# Een goed contrast overschreidt nooit de hoeveelheid totale variantie.
+
+# Stel dat we de eerste twee factoren willen contrasteren met de derde en daarna de eerste twee met elkaar. 
+
+# We kunnen dan: MS_T = MS_M + MS_E ook schrijven als:
+
+# MS_T = MS_mg1  + MS_eg1 +
+#        MS_mg23 + MS_mg2 + MS_eg2 +
+#                  MS_mg3 + MS_eg3
+
+# In grafiek:
+
+## Contrast 1
+
+# datapunten
+plot(data[,c('n','x')],main='Contranst 1+2 with 3')
+# totaal gemiddelde van x
+lines(data$n,data$meanx,col='grey',lty=2)
+# totale variantie
+for(r in 1:9) {
+row = data[r,]
+lines(rep(row$n,2),c(row$x,row$meanx), col='blue')
+}
+# groep gemiddelden
+lines(7:9, rep(mean_f3,3), col='grey', lwd=2)
+
+# gemiddelde van contrast vergelijking factor 1 en 2
+mean_f12 = colMeans(subset(data, f <= 2 , select = 'x')); 
+
+# toevoegen aan grafiek
+lines(1:6, rep(mean_f12,6), col='grey', lwd=2)
+
+# variantie componenten
+for(r in 1:6) {
+row = data[r,]
+# lines(rep(row$n,2)+.05,c(row$groupmean,row$x),    col='red'  )
+lines(rep(row$n,2)+.05,c(row$x,    mean_f12), col='red')
+lines(rep(row$n,2)-.05,c(row$meanx,mean_f12), col='green')
+}
+# variantie componenten
+for(r in 7:9) {
+row = data[r,]
+lines(rep(row$n,2)+.05,c(row$groupmean,row$x),     col='red' )
+lines(rep(row$n,2)-.05,c(row$groupmean,row$meanx), col='green')
+}
+
+## Contrast 2
+
+# datapunten
+plot(data[,c('n','x')],main='Contranst 1 with 2')
+
+lines(data$n,data$meanx,col='grey',lty=2)
+
+# groep gemiddelden
+lines(1:3, rep(mean_f1,3), col='grey', lwd=2)
+lines(4:6, rep(mean_f2,3), col='grey', lwd=2)
+
+
+# gemiddelde van contrast vergelijking factor 1 en 2
+mean_f12 = colMeans(subset(data, f <= 2 , select = 'x')); 
+
+# totale variantie
+for(r in 1:6) {
+row = data[r,]
+lines(rep(row$n,2),c(row$x,row$meanx), col='blue')
+}
+
+# toevoegen aan grafiek
+lines(1:6, rep(mean_f12,6), col='grey', lwd=2)
+
+# variantie componenten
+for(r in 1:6) {
+row = data[r,]
+lines(rep(row$n,2)+.05,c(row$groupmean,row$x),    col='red'  )
+lines(rep(row$n,2)-.05,c(row$groupmean,mean_f12), col='green')
+}
+```
+
+## Post-hoc
+
+Unplanned comparisons
+
+* Exploring all possible differences
+* Adjust T value for inflated type 1 error
+
+| |C|K|E
+|-|-|-|-
+|C| |2|3 
+|K|4| |6 
+|E|7|8|  
