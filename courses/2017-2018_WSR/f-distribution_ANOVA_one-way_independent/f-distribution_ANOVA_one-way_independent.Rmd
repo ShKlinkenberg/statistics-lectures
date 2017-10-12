@@ -1,8 +1,8 @@
 ---
-title: "ANOVA"
-subtitle: "One-way independent & F-distribution"
-author: "Klinkenberg"
-date: "13 okt 2017"
+title    : "ANOVA"
+subtitle : "One-way independent & F-distribution"
+author   : "Klinkenberg"
+date     : "13 okt 2017"
 output: 
   ioslides_presentation:
     logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png
