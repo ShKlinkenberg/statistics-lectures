@@ -104,18 +104,24 @@ multiple.k  = c(2, 4, 6)
 multiple.df.model = multiple.k - 1
 multiple.df.error = multiple.n - multiple.k
 col         = rainbow(length(multiple.df.model) * length(multiple.df.error))
-F = seq(0, 6, .01)
+F = seq(0, 10, .01)
 
 plot(F,  df(F, multiple.df.model[1], multiple.df.error[1]), type = "l", 
-     xlim = c(0,6), ylim = c(0,.85), 
+     xlim = c(0,10), ylim = c(0,.85), 
      xlab = "F", ylab="density", 
-     col = col[1], main="F-distributions" )
+     col  = col[1], main="F-distributions" )
 
 dfs = expand.grid(multiple.df.model, multiple.df.error)
 
 for(i in 2:dim(dfs)[1]) { 
   
   lines(F, df(F, dfs[i,1], dfs[i,2]), col=col[i])
+  
+  critical.f <- qf(.95, dfs[i,1], dfs[i,2])
+  
+  f.alpha <- seq(critical.f, 1000, .01)
+  
+  polygon(c(f.alpha, rev(f.alpha)), c(df(f.alpha, dfs[i,1], dfs[i,2]), f.alpha*0 ), col= rgb(1,.66,0, .5), border = col[i])
         
   } 
 legend("topright", legend = paste("df model =",dfs[,1], "df error =", dfs[,2]), lty=1, col = col, cex=.75)
