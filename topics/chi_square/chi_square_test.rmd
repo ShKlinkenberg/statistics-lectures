@@ -191,18 +191,9 @@ visualize.chisq(chi.squared,df,section='upper')
 
 ## Fisher's exact test {.subsection}
 
-Calculates axact $\chi^2$ for small samples
+Calculates axact $\chi^2$ for small samples.
 
-## Likelihood ratio {.subsection}
-
-$$L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$$
-
-```{r}
-# ln is log
-lx2 = 2 * sum(observed * log(observed / model) ); lx2
-
-visualize.chisq(lx2,df,section='upper')
-```
+* Cell size < 5
 
 ## Yates's correction {.subsection}
 
@@ -215,6 +206,19 @@ $$\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\
 chi.squared.yates <- sum((abs(observed - model) - .5)^2/model)
 chi.squared.yates
 visualize.chisq(chi.squared.yates,df,section='upper')
+```
+
+## Likelihood ratio {.subsection}
+
+Alternatieve to Pearson's $\chi^2$. 
+
+$$L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)$$
+
+```{r}
+# ln is log
+lx2 = 2 * sum(observed * log(observed / model) ); lx2
+
+visualize.chisq(lx2,df,section='upper')
 ```
 
 ## Standardized residuals {.subsection}
@@ -257,9 +261,9 @@ Is the ratio of these odds.
 
 $$OR = \frac{\text{wistle}}{\text{can't wistle}} = \frac{`r odds[1,1] / odds[1,2]`}{`r odds[2,1] / odds[2,2]`} = `r (odds[1,1] / odds[1,2]) / (odds[2,1] / odds[2,2])`$$
 
+```{r, warning=FALSE, echo=FALSE, eval=FALSE}
 ## Simulation {.subsection .smaller}
 
-```{r, warning=FALSE}
 chi.values = vector()
 
 for(i in 1:1000) {
