@@ -60,7 +60,7 @@ F
 
 ## More samples {.smaller .subsection}
 
-let's take more samples and calculate the t-value every time.
+let's take more samples and calculate the F-value every time.
 
 ```{r}
 n.samples = 1000
