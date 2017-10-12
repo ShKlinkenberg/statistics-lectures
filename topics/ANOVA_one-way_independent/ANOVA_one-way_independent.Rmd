@@ -2,6 +2,17 @@
 
 Compare 2 or more independent groups.
 
+## Assumptions
+
+Assuming th $H_0$ hypothesis to be true, the following should hold:
+
+* Continuous variable
+* Random sample
+* Normaly distributed
+    * Shapiro-Wilk test
+* Equal variance within groups
+    * Levene's test
+
 ## Jet lag
 
 Wright and Czeisler (2002) performed an experiment where they measured the circadian rhythm by the daily cycle of melatonin production in 22 subjects randomly assigned to one of three light treatments.
@@ -49,6 +60,15 @@ lines(c(3,3.2,3.1,3.1,3,3.2),
 points(c(1,2,3)+.1,c(mean(x.c),mean(x.k),mean(x.e)),bg="red",pch=21)
 ```
 
+## Variance components
+
+Variance | Sum of Squares | DF | Mean Squares | F-ratio
+---------|----------------|----|--------------|---------
+Model    | ${MS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2$ | $k-1$ | $\frac{{MS}_{model}}{{df}_{model}}$ | $\frac{{MS}_{model}}{{MS}_{error}}$
+Error    | ${MS}_{error} = \sum s_k^2 (n_k - 1)$            | $N-k$ | $\frac{{MS}_{error}}{{df}_{error}}$ | 
+Total    | ${MS}_{total} = {MS}_{model} + {MS}_{error}$     | $N-1$ | $\frac{{MS}_{total}}{{df}_{total}}$ | 
+
+Where $N$ is the total sample size, $n_k$ is the sample size per category and $k$ is the number of categories. Finally $s_k^2$ is the variance per category.
 
 ## Total variance {.subsection}
 
@@ -446,4 +466,4 @@ Unplanned comparisons
 |-|-|-|-
 |C| |2|3 
 |K|4| |6 
-|E|7|8|  
+|E|7|8| 
