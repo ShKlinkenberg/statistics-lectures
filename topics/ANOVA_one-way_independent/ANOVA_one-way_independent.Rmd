@@ -64,9 +64,9 @@ points(c(1,2,3)+.1,c(mean(x.c),mean(x.k),mean(x.e)),bg="red",pch=21)
 
 Variance | Sum of Squares | DF | Mean Squares | F-ratio
 ---------|----------------|----|--------------|---------
-Model    | ${MS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2$ | $k-1$ | $\frac{{MS}_{model}}{{df}_{model}}$ | $\frac{{MS}_{model}}{{MS}_{error}}$
-Error    | ${MS}_{error} = \sum s_k^2 (n_k - 1)$            | $N-k$ | $\frac{{MS}_{error}}{{df}_{error}}$ | 
-Total    | ${MS}_{total} = {MS}_{model} + {MS}_{error}$     | $N-1$ | $\frac{{MS}_{total}}{{df}_{total}}$ | 
+Model    | ${SS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2$ | $k-1$ | $\frac{{SS}_{model}}{{df}_{model}}$ | $\frac{{MS}_{model}}{{MS}_{error}}$
+Error    | ${SS}_{error} = \sum s_k^2 (n_k - 1)$            | $N-k$ | $\frac{{SS}_{error}}{{df}_{error}}$ | 
+Total    | ${SS}_{total} = {SS}_{model} + {SS}_{error}$     | $N-1$ | $\frac{{SS}_{total}}{{df}_{total}}$ | 
 
 Where $N$ is the total sample size, $n_k$ is the sample size per category and $k$ is the number of categories. Finally $s_k^2$ is the variance per category.
 
