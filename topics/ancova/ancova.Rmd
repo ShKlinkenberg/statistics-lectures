@@ -19,6 +19,26 @@ Analysis of covariance (ANCOVA) is a general linear model which blends ANOVA and
 
 [WIKIPEDIA](https://en.wikipedia.org/wiki/Analysis_of_covariance)
 
+## ANCOVA
+
+Determine main effect while correcting for covariate
+
+* 1 dependent variable
+* 1 or more independent variables
+* 1 or more covariates
+
+A covariate is a variable can be a confounding variable biasing your results. By adding a covariate we reduce error/residual in the model.
+
+## Assumptions
+
+* Same as ANOVA
+* Independence of the covariate and treatment effect §12.3.1.
+    * No difference on ANOVA with covar and independent variable
+    * Matching experimental groups on the covariate
+* Homogeneity of regression slopes §12.3.2.
+    * Visual: scatterplot dep var * covar per condition
+    * Testing: interaction indep. var * covar
+
 ## Data example
 
 We want to test the difference in national extraversion but want to controll for openness to experience.
@@ -102,7 +122,7 @@ datatable(data,
                             paging    = F, 
                             info      = F,
                             dom       = 'Bfrtip',
-                            buttons   = c('csv', 'excel')),
+                            buttons   = c('csv')),
            )
 ```
 
@@ -219,10 +239,10 @@ plot + ggtitle("Both group and covariate variance")
 ## Error variance with covariate {.subsection}
 
 ```{r}
-plot + geom_segment(aes(x = n-.1, 
-                        y = outcome, 
-                        xend = n-.1, 
-                        yend = data$model, 
+plot + geom_segment(aes(x      = n-.1, 
+                        y      = outcome, 
+                        xend   = n-.1, 
+                        yend   = data$model, 
                         colour = "purple")) + 
        ggtitle("Error variance")
 ```
