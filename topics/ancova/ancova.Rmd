@@ -56,10 +56,10 @@ We want to test the difference in national extraversion but want to controll for
 # Simulate data
 n = 20
 k = 3
-group = round(runif(n,1,k),0)
+group       = round(runif(n,1,k),0)
 mu.covar    = 8
 sigma.covar = 1
-covar = round(rnorm(n,mu.covar,sigma.covar),2)
+covar       = round(rnorm(n,mu.covar,sigma.covar),2)
 
 # Create dummy variables
 dummy.1 <- ifelse(group == 2, 1, 0)
@@ -250,7 +250,8 @@ plot + geom_segment(aes(x      = n-.1,
 ## Sums of squares {.subsection}
 
 ```{r}
-SS.model = with(data, sum((model       - grand.mean)^2))
+SS.model = with(data, sum((model - grand.mean)^2))
+SS.error = with(data, sum((outcome - model)^2))
 
 # Sums of squares for individual effects
 SS.model.group = with(data, sum((model.group - grand.mean)^2))
@@ -263,6 +264,47 @@ SS.group = SS.model - SS.model.covar; SS.group ## SS.group corrected for covar
 ## F-ratio {.subsection}
 
 $$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
+
+```{r}
+n = 20
+k = 3
+df.model = k - 1
+df.error = n - k - 1
+
+MS.model = SS.group / df.model
+MS.error = SS.error / df.error
+  
+F = MS.model / MS.error
+F
+```
+
+## $P$-value
+
+```{r}
+library("visualize")
+visualize.f(F, df.model, df.error, section = "upper") 
+```
+
+## Alpha & Power
+
+```{r}
+F.values = seq(0, 30, .01)
+
+plot(F.values, df(F.values, df.model, df.error), type = "l", ylab="density", main = "H0 and HA F-distribution")
+
+critical.value = qf(.95, df.model, df.error)
+
+critical.range = seq(critical.value, 30, .01)
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, df.model, df.error, ncp = 15))), col = "green")
+
+lines(F.values, df(F.values, df.model, df.error, ncp = 15))
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, df.model, df.error))), col = "red")
+```
+
 
 ## Adjusted means {.smaller .subsection}
 
