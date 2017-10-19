@@ -7,7 +7,7 @@ output:
     toc: true
     toc_float:
       collapsed: false
-      smooth_scroll: false
+      smooth_scroll: TRUE
     includes       :
       in_header    : "../../../GA_Script/GA_Script.html"
 ---
