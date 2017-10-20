@@ -194,15 +194,15 @@ SS.error
 ```
 
 ```{r}
-v.k1 = var(subset(data, speed == "none"   & alcohol == "none",   select = "accidents")$accidents)
-v.k2 = var(subset(data, speed == "none"   & alcohol == "some", select = "accidents")$accidents)
-v.k3 = var(subset(data, speed == "none"   & alcohol == "much",   select = "accidents")$accidents)
-v.k4 = var(subset(data, speed == "some" & alcohol == "none",   select = "accidents")$accidents)
+v.k1 = var(subset(data, speed == "none" & alcohol == "none", select = "accidents")$accidents)
+v.k2 = var(subset(data, speed == "none" & alcohol == "some", select = "accidents")$accidents)
+v.k3 = var(subset(data, speed == "none" & alcohol == "much", select = "accidents")$accidents)
+v.k4 = var(subset(data, speed == "some" & alcohol == "none", select = "accidents")$accidents)
 v.k5 = var(subset(data, speed == "some" & alcohol == "some", select = "accidents")$accidents)
-v.k6 = var(subset(data, speed == "some" & alcohol == "much",   select = "accidents")$accidents)
-v.k7 = var(subset(data, speed == "much"   & alcohol == "none",   select = "accidents")$accidents)
-v.k8 = var(subset(data, speed == "much"   & alcohol == "some", select = "accidents")$accidents)
-v.k9 = var(subset(data, speed == "much"   & alcohol == "much",   select = "accidents")$accidents)
+v.k6 = var(subset(data, speed == "some" & alcohol == "much", select = "accidents")$accidents)
+v.k7 = var(subset(data, speed == "much" & alcohol == "none", select = "accidents")$accidents)
+v.k8 = var(subset(data, speed == "much" & alcohol == "some", select = "accidents")$accidents)
+v.k9 = var(subset(data, speed == "much" & alcohol == "much", select = "accidents")$accidents)
 ```
 
 ---------
@@ -402,7 +402,7 @@ df.error = N - k.model
 ms.error = ss.error / df.error
 ```
 
------
+## $P$-value
 
 ```{r}
 F.speed.alcohol = ms.speed.alcohol / ms.error
@@ -429,12 +429,12 @@ polygon(c(critical.range,rev(critical.range)),
 lines(F.values, df(F.values, df.speed.alcohol, df.error, ncp = 5))
 
 polygon(c(critical.range,rev(critical.range)), 
-        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error))), col = "red")
+        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error))), col = rgb(1,0,0,1), density = 40, angle = -45)
 
 p.range = seq(F.speed.alcohol, 10, .01)
 
 polygon(c(p.range,rev(p.range)), 
-        c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.5), density = 40)
+        c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20)
 ```
 
 ## Contrast
