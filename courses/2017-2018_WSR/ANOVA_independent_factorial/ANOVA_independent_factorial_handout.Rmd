@@ -1,0 +1,30 @@
+---
+title: "ANOVA"
+subtitle: "Independent factiorial"
+author: "Klinkenberg"
+date: "20 oct 2017"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA.rmd"}
+```
+
+# END
+
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+
+<ul>
+<li><i class="fa fa-twitter" aria-hidden="true" style="color:black;"></i>  <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;">@shklinkenberg</a></li>
+<li><i class="fa fa-linkedin-square" aria-hidden="true" style="color:black"></i>  <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a></li>
+<li><i class="fa fa-envelope-o" aria-hidden="true" style="color:black"></i>  <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a></li>
+<li><i class="fa fa-github" aria-hidden="true" style="color:black"></i>  <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a></li>
+</ul>
