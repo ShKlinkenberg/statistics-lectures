@@ -8,6 +8,49 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
+## One-way repeated measures ANOVA {.section}
+
+The one-way repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.
+
+* 1 dependent/outcome variable
+* 1 independent/predictor variable
+    * 2 or more levels
+* All with same subjects
+
+## Assumptions {.subsection}
+
+* Uni- or Multivariate
+* Continuous dependent variable
+* Normaly distributed
+    * Shapiro-Wilk
+* Equality of variance within groups
+    * Mauchly's test of Sphericity
+    
+## Uni- or Multi- descision tree {.smaller}
+
+<img src="../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:left; width:350px; margin-right:20px;">
+
+
+1. Field: 14.2.3 p 546, Output 14.2 p 560
+2. Field: Output 14.4 p 562
+3. Field: Jane Superbrain 14.2 p 548, Output 14.2 p 560. GG and HF.
+4. Field: Jane Superbrain 14.2 p 548. Sample size $n$ is larger than $a$ (number of levels) + 10
+5. Field: 14.2.5 p 548, Output 14.2 p 560
+6. Field: 14.2.5 p 548, Output 14.4 p 562
+7. Field: 14.2.5 p 548, Output 14.4 p 562
+
+## Formulas {.smaller .subsection}
+
+Variance | Sum of Squares | df | Mean Squares | F-ratio
+---------|----------------|----|--------------|---------
+Between  | ${SS}_{{between}} = {SS}_{{total}} - {SS}_{{within}}$ | ${DF}_{{total}}-{DF}_{{within}}$ | $\frac{{SS}_{{between}}}{{DF}_{{between}}}$ | &nbsp;
+Within  | ${SS}_{{within}} = \sum{s_i^2(n_i-1)}$ | $(n_i-1)n$ | $\frac{{SS}_{{within}}}{{DF}_{{within}}}$ | &nbsp;
+• Model | ${SS}_{{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k-1$ | $\frac{{SS}_{{model}}}{{DF}_{{model}}}$ | $\frac{{MS}_{{model}}}{{MS}_{{error}}}$ | &nbsp;
+• Error  | ${SS}_{{error}} = {SS}_{{within}} - {SS}_{{model}}$ | $(n-1)(k-1)$ | $\frac{{SS}_{{error}}}{{DF}_{{error}}}$ | &nbsp;
+Total | ${SS}_{{total}} = s_{grand}^2(N-1)$ | $N-1$ | $\frac{{SS}_{{total}}}{{DF}_{{total}}}$ | &nbsp;
+
+Where $n_i$ is the number of observations per person and $k$ is the number of conditions. These two are equal for a one-way repeated ANOVA. Furthermore $n$ is the number of subjects per condition and $N$ is the total number of data points $n \times k$.
+
 ## Example
 
 Measure driving ability in a driving simulator. Test in three conditions.
@@ -26,19 +69,7 @@ names(data) <- c('pp', 'none_alc', 'some_alc', 'much_alc')
 datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Formulas {.smaller}
-
-Variance | Sum of Squares | df | Mean Squares | F-ratio
----------|----------------|----|--------------|---------
-Between  | ${SS}_{{between}} = {SS}_{{total}} - {SS}_{{within}}$ | ${DF}_{{total}}-{DF}_{{within}}$ | $\frac{{SS}_{{between}}}{{DF}_{{between}}}$ | &nbsp;
-Within  | ${SS}_{{within}} = \sum{s_i^2(n_i-1)}$ | $(n_i-1)n$ | $\frac{{SS}_{{within}}}{{DF}_{{within}}}$ | &nbsp;
-• Model | ${SS}_{{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}$ | $k-1$ | $\frac{{SS}_{{model}}}{{DF}_{{model}}}$ | $\frac{{MS}_{{model}}}{{MS}_{{error}}}$ | &nbsp;
-• Error  | ${SS}_{{error}} = {SS}_{{within}} - {SS}_{{model}}$ | $(n-1)(k-1)$ | $\frac{{SS}_{{error}}}{{DF}_{{error}}}$ | &nbsp;
-Total | ${SS}_{{total}} = s_{grand}^2(N-1)$ | $N-1$ | $\frac{{SS}_{{total}}}{{DF}_{{total}}}$ | &nbsp;
-
-Where $n_i$ is the number of observations per person and $k$ is the number of conditions. These two are equal for a one-way repeated ANOVA. Furthermore $n$ is the number of subjects per condition and $N$ is the total number of data points $n \times k$.
-
-## ${MS}_{total}$
+## ${MS}_{total}$ {.subsection}
 
 ```{r}
 # Assign to individual variables
@@ -110,7 +141,7 @@ segments(1:21-.5, 3, 1:21-.5, 7.5, col='grey')
 p <- recordPlot()
 ```
 
-## ${MS}_{within}$
+## ${MS}_{within}$ {.subsection}
 
 $${MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}} \\
 {DF}_{within} = (n_i-1)n$$
@@ -165,7 +196,7 @@ for(i in 1:n) { text(i-(offset/2), mean_pp[i], expression(bar(X)[i]), pos=2, cex
 p <- recordPlot()
 ```
 
-## ${MS}_{between}$
+## ${MS}_{between}$ {.subsection}
 
 $${MS}_{between} = \frac{{SS}_{{between}}}{{DF}_{{between}}}$$
 
@@ -180,7 +211,7 @@ DF_between = DF_total - DF_within
 DF_between
 ```
 
-## ${MS}_{model}$
+## ${MS}_{model}$ {.subsection}
 
 $${MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}} \\
 {DF}_{model} = k-1$$
@@ -234,7 +265,7 @@ segments(1:n+offset, mean(total), 1:n+offset, mean(much_alc),   col='blue')
 p <- recordPlot()
 ```
 
-## ${MS}_{error}$
+## ${MS}_{error}$ {.subsection}
 
 $$\frac{{SS}_{error}}{{DF}_{error}} \\
 {DF}_{error} = (n-1)(k-1)$$
@@ -254,7 +285,7 @@ SS_error = SS_within - SS_model
 SS_error
 ```
 
-## F ratio
+## F ratio {.subsection}
 
 $$F = \frac{{MS}_{{model}}}{{MS}_{{error}}}$$
 
@@ -274,3 +305,55 @@ F
 library('visualize')
 visualize.f(F, DF_model, DF_error, section="upper")
 ```
+
+------
+
+```{r}
+F.values = seq(0, 100, .01)
+
+plot(F.values, df(F.values, DF_model, DF_error), type = "l", ylab="density", main = "H0 and HA F-distribution")
+
+critical.value = qf(.95, DF_model, DF_error)
+
+critical.range = seq(critical.value, 100, .01)
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, DF_model, DF_error, ncp = 5))), col = "green")
+
+lines(F.values, df(F.values, DF_model, DF_error, ncp = 5))
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, DF_model, DF_error))), col = rgb(1,0,0,1), density = 40, angle = -45)
+
+p.range = seq(F, 100, .01)
+
+polygon(c(p.range,rev(p.range)), 
+        c(p.range*0, rev(df(p.range, DF_model, DF_error))), col = rgb(0,0,1,.6), density = 20)
+```
+
+## Contrast {.subsection}
+
+Planned comparisons
+
+* Exploring differences of theoretical interest
+* Higher precision
+* Higher power
+
+## Post-Hoc {.subsection}
+
+Unplanned comparisons
+
+* Exploring all possible differences
+* Adjust T value for inflated type 1 error
+
+## Effect size {.subsection}
+
+General effect size measures
+
+* Amount of explained variance $R^2$ also called eta squared $\eta^2$.
+* Omega squared $\omega^2$
+
+Effect sizes of contrasts or post-hoc comparisons
+
+* Cohen's $r$ gives the effect size for a specific comparison
+    * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$

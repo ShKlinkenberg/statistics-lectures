@@ -1,0 +1,9 @@
+graph TB
+A[1: Mauchly] --> |p>.05| B(2: Sphericity Assumed)
+A --> |p<.05| C(3: Epsilon)
+C --> |<.7| D[4: n > a + 10]
+D --> |True| H[MANOVA]
+D --> |False| E
+C --> |>.7| E[5: Greenhouse-Geiser]
+E --> |<.75| F[6: Greenhouse-Geiser correction]
+E --> |>.75| G[7: Huynh--Feldt correction]
