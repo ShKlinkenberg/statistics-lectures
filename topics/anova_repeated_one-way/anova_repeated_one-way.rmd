@@ -355,3 +355,4 @@ Effect sizes of contrasts or post-hoc comparisons
 
 * Cohen's $r$ gives the effect size for a specific comparison
     * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$
+    * $r_{Contrast} = \sqrt{\frac{F(1,{df}_R)}{F(1,{df}_R)+{df}_R}}$
