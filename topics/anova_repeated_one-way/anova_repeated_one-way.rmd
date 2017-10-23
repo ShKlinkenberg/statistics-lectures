@@ -51,7 +51,7 @@ Where $n_i$ is the number of observations per person and $k$ is the number of co
 
 ## Example
 
-Measure driving ability in a driving simulator. Test in three conditions.
+Measure driving ability in a driving simulator. Test in three consecutive conditions where participants come back to attend the next condition.
 
 * Alcohol none
 * Alcohol some
