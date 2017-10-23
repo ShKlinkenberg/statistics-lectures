@@ -1,6 +1,6 @@
 ---
 title: "ANOVA"
-subtitle: "One-way repeated"
+subtitle: "Repeated & Mixed"
 author: "Klinkenberg"
 date: "24 okt 2017"
 output: 
@@ -35,6 +35,13 @@ local({
 
 ```{r child="../../../topics/ANOVA_repeated_one-way/ANOVA_repeated_one-way.rmd"}
 ```
+
+```{r child="../../../topics/ANOVA_repeated_factorial/ANOVA_repeated_factorial.Rmd"}
+```
+
+```{r child="../../../topics/ANOVA_mixed/ANOVA_mixed.Rmd"}
+```
+
 
 # END
 

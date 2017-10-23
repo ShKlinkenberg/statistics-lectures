@@ -1,7 +1,5 @@
 # ANOVA<br>One-way repeated
 
-Compare subjects on 2 or more repeated measures
-
 ```{r, echo=FALSE}
 rm(list=ls())
 if(!"DT" %in% installed.packages()) { install.packages("DT") }

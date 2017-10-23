@@ -1,0 +1,62 @@
+# ANOVA factorial repeated
+
+```{r, echo=FALSE}
+rm(list=ls())
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Factorial repeated measures ANOVA {.section}
+
+The factorial repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.
+
+* 1 dependent/outcome variable
+* 2 or more independent/predictor variable
+    * 2 or more levels
+* All with same subjects
+
+## Assumptions
+
+Same as one-way repeated measures ANOVA
+
+## Example {.smaller}
+
+In this example we will again look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol. But this time we lat participants partake in all conditions. Every week subjects returned for a different experimental condition.
+
+* Dependent variable
+    * Accidents
+* Independent variables
+    * Speed
+        * None
+        * Small
+        * Large
+    * Alcohol
+        * None
+        * Small
+        * Large
+        
+## {.smaller}
+
+person | 1_1 | 1_2 | 1_3 | 2_1 | 2_2 | 2_3 | 3_1 | 3_2 | 3_3
+-------|-----|-----|-----|-----|-----|-----|-----|-----|----
+1      | 1   |     |     |     |     |     |     |     |
+2      |     | 2   |     |     |     |     |     |     |
+3      |     |     | 3   |     |     |     |     |     |
+4      |     |     |     | 4   |     |     |     |     |
+5      |     |     |     |     | 5   |     |     |     |
+6      |     |     |     |     |     | 6   |     |     |
+7      |     |     |     |     |     |     | 7   |     |
+8      |     |     |     |     |     |     |     | 8   |
+9      |     |     |     |     |     |     |     |     | 9
+
+## Data {.smaller}
+
+```{r, echo=FALSE}
+data <- read.csv(file = "ANOVA REP alcohol_speed.csv", header = T)
+
+data[,-1] <- round(data[,-1],2)
+
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+
