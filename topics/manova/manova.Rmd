@@ -1,7 +1,5 @@
 # MANOVA
 
-Compare multiple independent variables on multiple dependent variables.
-
 ```{r, echo=FALSE}
 rm(list=ls())
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
@@ -10,11 +8,41 @@ library("DT")
 
 ## MANOVA {.section}
 
-Multivariate analysis of variance. We are looking for the multivariate signal to noise ratio.
+Multivariate analysis of variance. We are looking for the multivariate signal to noise ratio. It is used to measure the effects of an independent variable on two or more dependent variables that measure the same construct.
 
-## Example {.smaller}
+### Independent one-way MANOVA
 
-We will use the data from Field's chapter 16 about behavioural and cognitive neurosis. Let's first load the data and have a look.
+* Two or more dependent/outcome variables
+* One independent/predictor variable
+    * Two ore more levels/factors
+
+## Assumptions
+
+* Same as ANOVA's
+* Multivariate normality (not in SPSS)
+* Homogeneity of covariance matrices:
+    * Box's test
+        * p > .05 good
+        * p < .05 not good
+
+## Example
+
+We will use the data from Field's chapter 16 about behavioural and cognitive neurosis.
+
+Effect of:
+
+* Cognitive behaviour therapy (CBT)
+* Behaviour therapy (BT) 
+* Control
+
+Obsessive compulsive disorder (OCD):
+
+* Obsession-related behaviours (Actions)
+* Obsession-related cognitions (Thoughts)
+
+## Data {.smaller}
+
+Let's load the data and have a look.
 
 ```{r, echo=FALSE}
 data <- read.csv("MANOVA gedrags therapie.csv")
@@ -44,13 +72,13 @@ n.act = length(actions)
 ##  And more means {.smaller}
 
 ```{r}
-cbt.tho = subset(data, group == "cognitieve gedrags therapie", select="thoughts")$thoughts
-bet.tho = subset(data, group == "gedrags therapie",            select="thoughts")$thoughts
-con.tho = subset(data, group == "Controle groep",              select="thoughts")$thoughts
+cbt.tho = subset(data, group == "Cognitive behaviour therapy", select="thoughts")$thoughts
+bet.tho = subset(data, group == "Behaviour therapy",            select="thoughts")$thoughts
+con.tho = subset(data, group == "no treatment",              select="thoughts")$thoughts
 
-cbt.act = subset(data, group == "cognitieve gedrags therapie", select="actions")$actions
-bet.act = subset(data, group == "gedrags therapie",            select="actions")$actions
-con.act = subset(data, group == "Controle groep",              select="actions")$actions
+cbt.act = subset(data, group == "Cognitive behaviour therapy", select="actions")$actions
+bet.act = subset(data, group == "Behaviour therapy",            select="actions")$actions
+con.act = subset(data, group == "no treatment",              select="actions")$actions
         
 n.cbt.tho = length(cbt.tho)
 n.bet.tho = length(bet.tho)
@@ -287,8 +315,6 @@ Finaly we can calculate the test statistic for our $H_0$ hypothesis testing.
 
 > Pillai’s trace is the sum of the proportion of explained variance on the discriminant functions.
 
-Excerpt From: Field, Andy. “Discovering Statistics Using IBM SPSS Statistics 4th c2013 Andy Field.”. 
-
 $$V = \sum_{i=1}^s \frac{\lambda_i}{1 + \lambda_i}$$
 
 ```{r}
@@ -300,8 +326,6 @@ P.B.trace
 
 > The Hotelling–Lawley trace&hellip; &hellip;is simply the sum of the eigenvalues for each variate
 
-Excerpt From: Field, Andy. “Discovering Statistics Using IBM SPSS Statistics 4th c2013 Andy Field.”. 
-
 $$T = \sum_{i=1}^s \lambda_i$$
 
 ```{r}  
@@ -312,8 +336,6 @@ H.L.trace
 ## Wilks's lambda  {.subsection}
 
 > Wilks’s lambda is the product of the unexplained variance
-
-Excerpt From: Field, Andy. “Discovering Statistics Using IBM SPSS Statistics 4th c2013 Andy Field.”. 
 
 $$\Lambda = \prod_{i=1}^s \frac{1}{1 + \lambda_i}$$
 
@@ -340,3 +362,9 @@ HE^{-1} &=& \begin{pmatrix} \dots & \dots \\ \dots & \dots \end{pmatrix} \\
 HE^{-1}_{variate} &=& \begin{pmatrix} \dots & 0 \\ 0 & \dots \end{pmatrix} \\
 ```
 
+## Follow-up Analysis
+
+* Single ANOVA's
+    * Contrasts
+    * Posthoc
+* Discriminant Analysis (Not part of this course)
