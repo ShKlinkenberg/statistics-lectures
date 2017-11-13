@@ -77,7 +77,10 @@ Outliers
     * Mahalonobis (< 11 at N = 30)
     * Laverage (The average leverage value is defined as (k + 1)/n)
     
-```{r}
+```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+x[1] =  2
+y[1] = -2
+
 plot(x,y, 
      las  = 1, 
      ylab = "outcome", 
@@ -86,18 +89,35 @@ plot(x,y,
      ylim = c(-2,2), 
      xlim = c(-2,2))
   
-  abline(fit, col = "red")
-  x[1] = -2
-  y[1] = 1
-  fit2 <- lm(y ~ x)
-  abline(fit2, col = "blue")
+abline(fit, col = "red")
+
+fit2 <- lm(y ~ x)
+abline(fit2, col = "blue")
+  
+r   = round(cor(x,y), 2)
+r.2 = round(r^2, 2)
+
+text(x[1], y[1], paste("r =", r," r2 = ", r.2), pos = 2, col = "blue")
 ```
 
     
 ## Homoscedasticity
 
 * Variance of residual should be equal across all expected values
-* Look at scatterplot of standardized: expected values $\times$ residuals. Roughly round shape is needed.
+     * Look at scatterplot of standardized: expected values $\times$ residuals. Roughly round shape is needed.
+
+```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+ZPRED  = scale(fit$fitted.values)
+ZREDID = scale(fit$residuals)
+
+plot(ZPRED, ZREDID)
+abline(h = 0, v = 0, lwd=2)
+
+#install.packages("plotrix")
+library("plotrix")
+draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
+```
+
 
 ## Simulation
 
@@ -167,23 +187,39 @@ b0
 
 ## The slope
 
-```{r}
+```{r, fig.align='center', fig.width=8, fig.height=6}
 # Extra
 
 plot(IQ,grade, xlim=c(0, 160), ylim=c(0,10))
 abline(lm(grade~IQ))
-lines(c(2,2),c(0,200),col='red')
-lines(c(3,3),c(0,200),col='red')
-lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
-lines(c(0,10),rep(b0 + b1 * 2, 2),col='red')
-lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
-lines(c(0,10),rep(b0 + b1 * 3, 2),col='red')
+abline(v=c(2,3),col='red')
+abline(h=b0 + b1 * c(2, 3),col='red')
 
-text(2.5, (b0 + b1 * 2),1, pos=1, cex=2)
+lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
+lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
+
+text(2.5, (b0 + b1 * 2),1, pos=1, cex=1)
 text(3  , (b0 + b1 * 2.5),
-     (b0 + b1 * 3)-(b0 + b1 * 2), 
+     round((b0 + b1 * 3)-(b0 + b1 * 2), 2), 
      pos=4, 
-     cex=2)
+     cex=1)
+```
+
+```{r, fig.align='center', fig.width=8, fig.height=6}
+# Extra
+
+plot(IQ,grade, xlim=c(1, 4), ylim=c(0.4,.6))
+abline(lm(grade~IQ))
+abline(v=c(2,3),col='red')
+abline(h=b0 + b1 * c(2, 3),col='red')
+
+lines(c(3,3),c(b0 + b1 * 2,b0 + b1 * 3),col='green',lwd=3)
+lines(c(2,3), rep(b0 + b1 * 2, 2),col='blue',lwd=3)
+text(2.5, (b0 + b1 * 2),1, pos=1, cex=1)
+text(3  , (b0 + b1 * 2.5),
+     round((b0 + b1 * 3)-(b0 + b1 * 2), 2), 
+     pos=4, 
+     cex=1)
 ```
 
 ## Calculate t-values for b's {.smaller .subsection}
@@ -251,7 +287,8 @@ $$\widehat{grade} = {model} = b_0 + b_1 {IQ}$$
 So now we can add the expected grade based on this model
 
 ```{r}
-data$expgrade = b0 + b1 * IQ
+data$model = b0 + b1 * IQ
+data$model <- round(data$model, 2)
 ```
 
 ## Expected values {.smaller .subsection}
@@ -267,9 +304,9 @@ datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 37
 And lets have a look at this relation between expectation and reality
 
 ```{r, fig.height=5, fig.width=5, fig.align='center'}
-expgrade <- data$expgrade
+model <- data$model
 
-plot(expgrade,grade, xlim = c(0,10), ylim = c(0,10))
+plot(model,grade, xlim = c(0,10), ylim = c(0,10))
 lines(c(0,10), c(0,10), col='red')
 ```
 
@@ -278,7 +315,8 @@ lines(c(0,10), c(0,10), col='red')
 The error / residual is the difference between expected and reality
 
 ```{r}
-data$error = grade - expgrade
+data$error = grade - model
+data$error <- round(data$error, 2)
 ```
 
 ```{r, echo=FALSE}
@@ -290,7 +328,7 @@ datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 30
 The fit of the model is the amount of error, which can be viewed in the correlation ($r$).
 
 ```{r}
-r = cor(expgrade,grade)
+r = cor(model,grade)
 r
 ```
 
@@ -312,10 +350,10 @@ lines(1:n,rep(mean(grade),n),col='blue',lwd=2)
 segments(1:n, grade, 1:n, mean(grade), col='blue')
 
 # The model predicts the grade scores
-points(1:n,expgrade, col='red')
+points(1:n,model, col='red')
 
 # The part of the variation that overlaps is the 'explained' variance. 
-segments(1:n, expgrade, 1:n, mean(grade), col='red')
+segments(1:n, model, 1:n, mean(grade), col='red')
 ```
 
 The part that does not overlap is therefore 'unexplained' variance. And because $r^2$ is the explained variance, $1 - r^2$ is the unexplained variance.
@@ -341,8 +379,8 @@ Given the description of explained variance, F can again be seen as a proportion
 df.model = p # n = rows, p = predictors
 df.error = n-p-1
 
-SS_model = sum((expgrade - mean(grade))^2)
-SS_error = sum((grade - expgrade)^2)
+SS_model = sum((model - mean(grade))^2)
+SS_error = sum((grade - model)^2)
 MS_model = SS_model / df.model
 MS_error = SS_error / df.error
 F = MS_model / MS_error 
