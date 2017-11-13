@@ -1,13 +1,9 @@
-# Regression one predictior {.section}
+# Regression (one predictior) {.section}
 
 ```{r, echo=FALSE}
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
-
-## Regression {.smaller}
-
-$$y_i = b_0 + b_1 x_i + \epsilon_i$$
 
 ```{r, echo=FALSE, eval=FALSE}
 # Install if nesserary and load RCurl package
@@ -28,6 +24,82 @@ names(data)[2:4] <- c('IQ', 'cijfers', 'betrouwbaar')
 
 write.table(data, "cijfers.csv", row.names=FALSE, col.names=TRUE, dec='.')
 ```
+
+## Regression {.smaller}
+
+$$\LARGE{\text{outcome} = \text{model} + \text{error}}$$
+
+In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.
+
+$$\LARGE{y_i = b_0 + b_1 x_i + \epsilon_i}$$
+
+In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.
+
+Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
+
+## Outcome vs Model
+
+```{r, fig.align='center', fig.asp=.5}
+error = c(2, 1, .5, .1)
+n = 100
+
+layout(matrix(1:4,1,4))
+for(e in error) {
+  
+  x = rnorm(n)
+  y = x + rnorm(n, 0 , e)
+  
+  r   = round(cor(x,y), 2)
+  r.2 = round(r^2, 2)
+  
+  plot(x,y, las = 1, ylab = "outcome", xlab = "model", main = paste("r =", r," r2 = ", r.2), ylim=c(-2,2), xlim=c(-2,2))
+  fit <- lm(y ~ x)
+  abline(fit, col = "red")
+  
+}
+
+```
+
+
+## Assumptions
+
+A selection from Field:
+
+* Sensitivity
+* Homoscedasticity
+
+## Sensitivity
+
+Outliers
+
+* Extreme residuals
+    * Cook's distance (< 1)
+    * Mahalonobis (< 11 at N = 30)
+    * Laverage (The average leverage value is defined as (k + 1)/n)
+    
+```{r}
+plot(x,y, 
+     las  = 1, 
+     ylab = "outcome", 
+     xlab = "model", 
+     main = paste("r =", r," r2 = ", r.2), 
+     ylim = c(-2,2), 
+     xlim = c(-2,2))
+  
+  abline(fit, col = "red")
+  x[1] = -2
+  y[1] = 1
+  fit2 <- lm(y ~ x)
+  abline(fit2, col = "blue")
+```
+
+    
+## Homoscedasticity
+
+* Variance of residual should be equal across all expected values
+* Look at scatterplot of standardized: expected values $\times$ residuals. Roughly round shape is needed.
+
+## Simulation
 
 ```{r}
 set.seed(28736)
@@ -147,6 +219,13 @@ df.b1 = n - p - 1
 ```
 
 ## P-values of $b_0$
+
+$$\begin{aligned}
+t_{n-p-1} &= \frac{b - \mu_b}{{SE}_b} \\
+df &= n - p - 1 \\
+\end{aligned}$$
+
+Where $b$ is het beta coeficient ${SE}$ is the standard error of the beta coefficient, $n$ is the number of subjects and $p$ the nubmer of predictors.
 
 ```{r}
 if (!"visualize" %in% installed.packages()) { 

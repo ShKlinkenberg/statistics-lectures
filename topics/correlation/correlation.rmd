@@ -196,11 +196,18 @@ text(mean.grade-.7, mean.IQ+.7, "- x +", cex = 2, col = "red")
 $$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
 {df} = N - 2$$
 
+$$
+  \begin{aligned}
+  H_0 &: t_r = 0 \\
+  H_A &: t_r \neq 0 \\
+  H_A &: t_r > 0 \\
+  H_A &: t_r < 0 \\
+  \end{aligned}$$
+
 ```{r}
 df = N-2
-df
 t.r = ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
-t.r
+cbind(t.r, df)
 ```
 
 ## Viualize
@@ -237,7 +244,7 @@ draw.triple.venn(area1 = 100, area2 = 100, area3 = 100,
 
 ## Partial correlation {.smaller}
 
-$$r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}$$
+$$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}$$
 
 ```{r}
 motivation = data$motivation
