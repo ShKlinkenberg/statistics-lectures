@@ -31,7 +31,7 @@ $$\LARGE{\text{outcome} = \text{model} + \text{error}}$$
 
 In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.
 
-$$\LARGE{y_i = b_0 + b_1 x_i + \epsilon_i}$$
+$$\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}$$
 
 In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.
 
