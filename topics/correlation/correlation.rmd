@@ -42,8 +42,6 @@ Where $S$ is sthe standard deviation and $COV$ is the covariance.
 
 $${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
 
-[Guess the correlation](http://guessthecorrelation.com)
-
 ## Plot correlation
 
 ```{r, fig.width=5, fig.height=5, fig.align='center'}
@@ -77,6 +75,12 @@ text(m.x+.7, m.y-.7, "+ x -", cex = 2)
 text(m.x-.7, m.y+.7, "- x +", cex = 2)
 ```
 $$(x_i - \bar{x})(y_i - \bar{y})$$
+
+## Guess the correlation {.flexbox .vcenter}
+
+![](../../../topics/correlation/qrcode.png)
+
+http://guessthecorrelation.com
 
 ## Simulate data
 
