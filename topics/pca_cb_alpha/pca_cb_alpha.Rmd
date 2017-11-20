@@ -233,13 +233,23 @@ pcor = ( r.xy - (r.xz * r.yz) ) / ( sqrt(1-r.xz^2) * sqrt(1-r.yz^2) )
 pcor
 ```
 
-# KTT  
+# Classical Test Theory  
 
-## Klassieke Test Theorie (KTT) {.section}
+## CTT {.section}
 
-Observed score = True score + Error
+In Dutch: "Klassieke Test Theorie (KTT)"
 
-$$X = T + E$$
+Classical test theory (CTT) is a body of related psychometric theory that predicts outcomes of psychological testing such as the difficulty of items or the ability of test-takers. It is a theory of testing based on the idea that a person’s observed or obtained score on a test is the sum of a true score (error-free score) and an error score. Generally speaking, the aim of classical test theory is to understand and improve the reliability of psychological tests.
+
+Classical test theory as we know it today was codified by Novick (1966) and described in classic texts such as Lord & Novick (1968) and Allen & Yen (1979/2002).
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Classical_test_theory)
+
+## T = X + E
+
+True score = Observed score + Error
+
+$$T = X + E$$
 
 ```{r}
 X = apply(data[,2:7], 1, sum)
@@ -276,6 +286,8 @@ $$\alpha = \frac{N}{N-1} \left(1-\frac{\sum_{i=1}^N \sigma_{Y_i}^2}{\sigma_X^2}\
 - $N$ = number of items. $K$ is also used some times
 - $\sigma_{Y_i}^2$ = variances of individual items
 - $\sigma_X^2$ = variance of observed sum score
+
+This formula deviates from Field for it's a clearer notation and corresponds to use in earlier courses.
 
 ## CB $\alpha$ calculations {.subsection}
 

@@ -435,13 +435,23 @@ pcor</pre>
 
 <pre >## [1] -0.09116893</pre>
 
-</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>KTT</h2></hgroup><article  id="ktt">
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Classical Test Theory</h2></hgroup><article  id="classical-test-theory">
 
-</article></slide><slide class=''><hgroup><h2>Klassieke Test Theorie (KTT)</h2></hgroup><article  id="klassieke-test-theorie-ktt" class="section">
+</article></slide><slide class=''><hgroup><h2>CTT</h2></hgroup><article  id="ctt" class="section">
 
-<p>Observed score = True score + Error</p>
+<p>In Dutch: &quot;Klassieke Test Theorie (KTT)&quot;</p>
 
-<p>\[X = T + E\]</p>
+<p>Classical test theory (CTT) is a body of related psychometric theory that predicts outcomes of psychological testing such as the difficulty of items or the ability of test-takers. It is a theory of testing based on the idea that a person’s observed or obtained score on a test is the sum of a true score (error-free score) and an error score. Generally speaking, the aim of classical test theory is to understand and improve the reliability of psychological tests.</p>
+
+<p>Classical test theory as we know it today was codified by Novick (1966) and described in classic texts such as Lord &amp; Novick (1968) and Allen &amp; Yen (1979/2002).</p>
+
+<p>Source: <a href='https://en.wikipedia.org/wiki/Classical_test_theory' title=''>Wikipedia</a></p>
+
+</article></slide><slide class=''><hgroup><h2>T = X + E</h2></hgroup><article  id="t-x-e">
+
+<p>True score = Observed score + Error</p>
+
+<p>\[T = X + E\]</p>
 
 <pre class = 'prettyprint lang-r'>X = apply(data[,2:7], 1, sum)
 T = trait.con</pre>
@@ -484,6 +494,8 @@ summary(scale(E))</pre>
 <li>\(\sigma_{Y_i}^2\) = variances of individual items</li>
 <li>\(\sigma_X^2\) = variance of observed sum score</li>
 </ul>
+
+<p>This formula deviates from Field for it&#39;s a clearer notation and corresponds to use in earlier courses.</p>
 
 </article></slide><slide class=''><hgroup><h2>CB \(\alpha\) calculations</h2></hgroup><article  id="cb-alpha-calculations" class="subsection">
 
