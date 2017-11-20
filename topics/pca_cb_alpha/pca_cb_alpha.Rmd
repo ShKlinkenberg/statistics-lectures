@@ -69,7 +69,7 @@ Principal component analysis can be used in multiple ways.
 
 <iframe width="560" height="315" style="width:560px; height:315px;" src="https://www.youtube.com/embed/njgD1AO0Z6k" frameborder="2" allowfullscreen></iframe>
 
-[Interactive rotations](http://demonstrations.wolfram.com/PairwiseAxesRotationsInFactorAnalysis/)
+[Interactive rotations](http://demonstrations.wolfram.com/PairwiseAxesRotationsInFactorAnalysis/) by Steve Hunka.
 
 ## Simulate latent traits {.subsection}
 
