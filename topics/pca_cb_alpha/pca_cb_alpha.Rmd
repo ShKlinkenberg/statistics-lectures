@@ -16,6 +16,61 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
+## Principal component analysis {.smaller}
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg" style="height:200px; margin:0 20px 20px 0; float: left;">
+
+<img src="https://upload.wikimedia.org/wikipedia/en/4/49/Harold_Hotelling.jpg" style="height:200px; margin:0 20px 20px 0; float: left;">
+
+Principal component analysis (PCA) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components.
+
+PCA was invented in 1901 by Karl Pearson, as an analogue of the principal axis theorem in mechanics; it was later independently developed and named by Harold Hotelling in the 1930s.
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Principal_component_analysis)
+
+## Data reduction method {.flexbox .vcenter}
+
+<iframe width="560" height="315" style="width:560px; height:315px;" src="https://www.youtube.com/embed/fIbAs_VXcqc?rel=0" frameborder="2" gesture="media" allowfullscreen></iframe>
+
+## Reflective vs Formative {.flexbox .vcenter}
+
+![](../../../topics/pca_cb_alpha/Reflective_Formative.png)
+
+## Usage
+
+Principal component analysis can be used in multiple ways.
+
+* To use factor scores
+* To solve multicollinearity
+* To test construct validity
+
+## Interpretation
+
+* Eigenvalues
+    * Criterion: Eigenvalue $\geq$ 1
+* Cumulative explained variance
+* Factor loadings
+
+## Assumptions
+
+* Good collinearity (correlation between items)
+    * Not to high (singular)
+    * Not to low
+* Bartlett's test (correlation should not only be with itself)
+    * $H_0$: Indentity matrix (>.05 not good)
+    * $H_A$: Non IM (<.05 is good)
+* Normality of variables
+* Adequacy of sample size
+    * KMO < .5 not good
+    * KMO of 1 is good
+    * Both general and specific
+
+## Varimax Rotation
+
+<iframe width="560" height="315" style="width:560px; height:315px;" src="https://www.youtube.com/embed/njgD1AO0Z6k" frameborder="2" allowfullscreen></iframe>
+
+[Interactive rotations](http://demonstrations.wolfram.com/PairwiseAxesRotationsInFactorAnalysis/)
+
 ## Simulate latent traits {.subsection}
 
 * Conscientiousness
