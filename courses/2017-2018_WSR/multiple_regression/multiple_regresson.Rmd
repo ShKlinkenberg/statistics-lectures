@@ -1,0 +1,47 @@
+---
+title: "Multiple regression"
+author: "Klinkenberg"
+date: "24 nov 2017"
+output: 
+  ioslides_presentation:
+    logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png
+    smaller        : FALSE
+    css            : https://shklinkenberg.github.io/uva_style/ioslides_style.css
+    includes       :
+      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
+                      "../../../GA_Script/GA_Script.html"]
+    self_contained : true
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/regression_multiple_predictors/regression_multiple_predictors.rmd"}
+```
+
+# END
+
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+
+<ul class="fa-ul" style="color:white;">
+<li><i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:white; border-bottom:none;">@shklinkenberg</a></li>
+<li><i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:white; border-bottom:none;">Klinkenberg</a></li>
+<li><i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:white" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a></li>
+<li><i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:white; border-bottom:none;">ShKlinkenberg</a></li>
+</ul>
