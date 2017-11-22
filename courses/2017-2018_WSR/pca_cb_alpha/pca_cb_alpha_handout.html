@@ -652,6 +652,32 @@ cb.alpha = (N/(N-1)) * prop.covar
 cb.alpha</code></pre>
 <pre><code>## [1] 0.3932538</code></pre>
 </div>
+<div id="field" class="section level2">
+<h2>Field</h2>
+<p>Field defines <span class="math inline">\(\alpha\)</span> as:</p>
+<p><span class="math display">\[\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}\]</span></p>
+<pre class="r"><code>cov.matrix = cov(data[,2:7])
+cov.only = c(cov.matrix[upper.tri(cov.matrix)],
+             cov.matrix[lower.tri(cov.matrix)])
+
+N^2 * mean(cov.only) / (sum(variance.per.column) + sum(cov.only))</code></pre>
+<pre><code>## [1] 0.3932538</code></pre>
+</div>
+<div id="why" class="section level2">
+<h2>Why?</h2>
+<p><span class="math display">\[\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}\]</span> It’s the same.</p>
+<p><span class="math display">\[N^2 \overline{cov} = N^2 \times \frac{\sum {cav}_{item}}{N} = \frac{N}{N-1} \sum {cav}_{item}\]</span></p>
+<pre class="r"><code>N^2 * mean(cov.only) == (N/(N-1)) * sum(cov.only)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>and</p>
+<hr />
+<p><span class="math display">\[\sum s^2_{item} + \sum {cav}_{item} = \sigma^2_x\]</span></p>
+<p>so</p>
+<pre class="r"><code>( N^2 * mean(cov.only) )  / ( sum(variance.per.column) + sum(cov.only) )</code></pre>
+<pre><code>## [1] 0.3932538</code></pre>
+<pre class="r"><code>(N/(N-1)) * (sum(cov.only) / (sum(variance.per.column) + sum(cov.only)))</code></pre>
+<pre><code>## [1] 0.3932538</code></pre>
+</div>
 </div>
 <div id="end" class="section level1">
 <h1>END</h1>
