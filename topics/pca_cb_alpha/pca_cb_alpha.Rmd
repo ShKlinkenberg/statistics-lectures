@@ -44,6 +44,14 @@ Principal component analysis can be used in multiple ways.
 * To solve multicollinearity
 * To test construct validity
 
+## Example {.flexbox .vcenter}
+
+![https://goo.gl/JhLY4M](../../../topics/pca_cb_alpha/SAQ.png)
+
+## Data
+
+<iframe style="height:450px;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR4DA7VR87rzR8eXVizQGPFabnFy9rkapO5LSdAqrCOycG5JiNmZ-eVdSnZWo6EwN9fLl5ZUN2SjncU/pubhtml?widget=true&amp;headers=false"></iframe>
+
 ## Interpretation
 
 * Eigenvalues
