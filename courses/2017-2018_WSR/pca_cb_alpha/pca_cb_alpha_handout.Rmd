@@ -2,7 +2,7 @@
 title: "PCA & CB alpha"
 subtitle: "Principal component analysis & <br>Cronbach's alpha"
 author: "Klinkenberg"
-date: "20 nov 2017"
+date: "23 nov 2017"
 output:
   html_document:
     toc: true
