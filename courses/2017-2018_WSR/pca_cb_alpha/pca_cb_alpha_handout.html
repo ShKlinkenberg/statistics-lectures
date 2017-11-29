@@ -11,7 +11,7 @@
 
 <meta name="author" content="Klinkenberg" />
 
-<meta name="date" content="2017-11-20" />
+<meta name="date" content="2017-11-23" />
 
 <title>PCA &amp; CB alpha</title>
 
@@ -238,7 +238,7 @@ div.tocify {
 <h1 class="title toc-ignore">PCA &amp; CB alpha</h1>
 <h3 class="subtitle"><em>Principal component analysis &amp; <br>Cronbach’s alpha</em></h3>
 <h4 class="author"><em>Klinkenberg</em></h4>
-<h4 class="date"><em>20 nov 2017</em></h4>
+<h4 class="date"><em>23 nov 2017</em></h4>
 
 </div>
 
@@ -650,6 +650,45 @@ N = 6
 cb.alpha = (N/(N-1)) * prop.covar
 
 cb.alpha</code></pre>
+<pre><code>## [1] 0.3932538</code></pre>
+</div>
+<div id="field" class="section level2">
+<h2>Field</h2>
+<p>Field defines <span class="math inline">\(\alpha\)</span> as:</p>
+<p><span class="math display">\[\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}\]</span></p>
+<pre class="r"><code>cov.matrix = cov(data[,2:7])
+cov.only = c(cov.matrix[upper.tri(cov.matrix)],
+             cov.matrix[lower.tri(cov.matrix)])
+
+N^2 * mean(cov.only) / (sum(variance.per.column) + sum(cov.only))</code></pre>
+<pre><code>## [1] 0.3932538</code></pre>
+</div>
+<div id="section" class="section level2 smaller">
+<h2></h2>
+<pre class="r"><code>cov.matrix</code></pre>
+<pre><code>##           item.1     item.2     item.3    item.4     item.5    item.6
+## item.1 32.271077  3.3464717  2.5531628  3.996913 -2.5533054  4.225280
+## item.2  3.346472 29.7685145  3.1660031  8.363533 -0.7578805  4.023593
+## item.3  2.553163  3.1660031 34.9579222  7.448160 -0.1633207  7.373498
+## item.4  3.996913  8.3635333  7.4481599 37.995527  1.4905516  3.877734
+## item.5 -2.553305 -0.7578805 -0.1633207  1.490552 26.6313139  1.356926
+## item.6  4.225280  4.0235928  7.3734981  3.877734  1.3569261 34.279468</code></pre>
+<p><span class="math display">\[\large{
+\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}} }\]</span></p>
+</div>
+<div id="why" class="section level2">
+<h2>Why?</h2>
+<p><span class="math display">\[\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}\]</span> It’s the same.</p>
+<p><span class="math display">\[N^2 \overline{cov} = N^2 \times \frac{\sum {cav}_{item}}{N} = \frac{N}{N-1} \sum {cav}_{item}\]</span></p>
+<pre class="r"><code>N^2 * mean(cov.only) == (N/(N-1)) * sum(cov.only)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>and</p>
+<hr />
+<p><span class="math display">\[\sum s^2_{item} + \sum {cav}_{item} = \sigma^2_x\]</span></p>
+<p>so</p>
+<pre class="r"><code>( N^2 * mean(cov.only) )  / ( sum(variance.per.column) + sum(cov.only) )</code></pre>
+<pre><code>## [1] 0.3932538</code></pre>
+<pre class="r"><code>(N/(N-1)) * (sum(cov.only) / (sum(variance.per.column) + sum(cov.only)))</code></pre>
 <pre><code>## [1] 0.3932538</code></pre>
 </div>
 </div>

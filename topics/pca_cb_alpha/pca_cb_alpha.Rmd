@@ -417,3 +417,55 @@ cb.alpha = (N/(N-1)) * prop.covar
 
 cb.alpha
 ```
+
+## Field
+
+Field defines $\alpha$ as: 
+
+$$\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}$$
+
+```{r}
+cov.matrix = cov(data[,2:7])
+cov.only = c(cov.matrix[upper.tri(cov.matrix)],
+             cov.matrix[lower.tri(cov.matrix)])
+
+N^2 * mean(cov.only) / (sum(variance.per.column) + sum(cov.only))
+```
+
+## {.smaller}
+
+```{r}
+cov.matrix
+```
+
+$$\large{
+\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}} }$$
+
+## Why?
+
+$$\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}$$
+It's the same.
+
+$$N^2 \overline{cov} = N^2 \times \frac{\sum {cav}_{item}}{N} = \frac{N}{N-1} \sum {cav}_{item}$$
+
+```{r}
+N^2 * mean(cov.only) == (N/(N-1)) * sum(cov.only)
+```
+
+
+and
+
+--------
+
+$$\sum s^2_{item} + \sum {cav}_{item} = \sigma^2_x$$
+
+so
+
+```{r}
+( N^2 * mean(cov.only) )  / ( sum(variance.per.column) + sum(cov.only) )
+```
+
+```{r}
+(N/(N-1)) * (sum(cov.only) / (sum(variance.per.column) + sum(cov.only)))
+```
+
