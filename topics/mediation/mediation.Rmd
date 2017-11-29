@@ -5,11 +5,37 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
-## Onderzoek
+## Mediation {.smaller}
 
-Gaat de snelheid van genezing sneller bij het gebruik van homeopathische middelen of wordt dit gemedieerd door een gezonde leefstijl?
+<img style="float:right;" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Mediation.jpg">
 
-![Homeopatisch](http://www.kidneyabc.com/uploads/allimg/130404/2-13040414233CW.jpg)
+In statistics, a mediation model is one that seeks to identify and explain the mechanism or process that underlies an observed relationship between an independent variable and a dependent variable via the inclusion of a third hypothetical variable, known as a mediator variable (also a mediating variable, intermediary variable, or intervening variable).
+
+Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
+
+## Example
+
+Does the speed of recovery after sickness improve with the use of homeopatics of is this effect mediated by a healthy lifestyle?
+
+![](http://www.kidneyabc.com/uploads/allimg/130404/2-13040414233CW.jpg)
+
+## Mediaton paths  {.flexbox .vcenter}
+
+<!-- 1. $\widehat{\text{Outcome}} = b_0 + b_c \text{Predictor}_i$ -->
+<!-- 2. $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$ -->
+<!-- 3. $\widehat{\text{Outcome}} = b_0 + b_{c`} \text{Predictor}_i + b_b \text{Mediator}_i$ -->
+
+<!-- ![Mediation Path](../../../topics/mediation/mediation.jpeg) -->
+
+![Mediation Path](../../../topics/mediation/mediation_regressions_relation.png)
+
+```{r, echo=FALSE, eval=FALSE}
+# library("DiagrammeR")
+
+# mermaid("mediation.mmd")
+
+# grViz("mediation.gv", width = 400)
+```
 
 ## Simulate data {.subsection}
 
@@ -97,18 +123,82 @@ b.c
 b.c.accent
 ```
 
-## Mediaton paths  {.flexbox .vcenter}
+## Visual {.subsection}
 
-1. $\widehat{\text{Outcome}} = b_0 + b_c \text{Predictor}_i$
-2. $\widehat{\text{Mediator}} = b_0 + b_a \text{Predictor}_i$
-3. $\widehat{\text{Outcome}} = b_0 + b_{c`} \text{Predictor}_i + b_b \text{Mediator}_i$
+```{r, fig.asp=1, fig.width=5, fig.align='center'}
+plot(data$gebruik.homeopathisch.middel, data$snelheid.van.genezing, col = 'red', xlab="homeo", ylab="rocov")
 
-![Mediation Path](../../../topics/mediation/mediation.jpeg)
+fit.1 <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel, data)
 
-```{r, echo=FALSE, eval=FALSE}
-library("DiagrammeR")
+abline(fit.1, col = 'green')
+```
 
-mermaid("mediation.mmd")
+## 3D Visual
+
+```{r, echo=FALSE, warning=FALSE}
+## 3d plot package rgl
+## install.packages('rgl')
+library("rgl")
+
+library(knitr)
+knit_hooks$set(webgl = hook_webgl)
+
+min.var <- apply(data, 2, min)
+max.var <- apply(data, 2, max)
+
+#1 #D scatter 
+
+plot3d(data$gebruik.homeopathisch.middel, data$gezonde.leefstijl, data$snelheid.van.genezin,
+       col  = "red",
+       xlab = "homeo", 
+       ylab = "healt",
+       zlab = "rocov",
+       size = 8)
+
+#2 Add gebruik.homeopathisch.middel value planes 
+
+quantiles <- as.vector(quantile(data$gebruik.homeopathisch.middel,seq(.1,.9,.1)))
+sds       <- c(mean(data$gezonde.leefstijl)+(sd(data$gezonde.leefstijl)*c(-1,0,1)))
+# sds       <- 1:4
+
+planes3d(a = 0,
+         b = 1,
+         c = 0,
+         #d = c(1,2,3,4),
+         d = -sds,
+         alpha=0.7,
+         color = c("blue"))
+
+#3 Add regression model surface
+
+## Fit model
+fit <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel + gezonde.leefstijl, data)
+
+## Create xyz coordinates
+regeq <- function(gebruik.homeopathisch.middel, gezonde.leefstijl) { 
+    fit$coefficients[1] + 
+    fit$coefficients[2]*gebruik.homeopathisch.middel + 
+    fit$coefficients[3]*gezonde.leefstijl
+}
+
+
+x.pre <- seq(min.var[1], max.var[1],length.out=30)
+y.mod <- seq(min.var[2], max.var[2] ,length.out=30)
+
+z.pre <- outer(x.pre, y.mod, FUN='regeq')
+
+# z.pre[z.pre > 4] = 4
+# z.pre[z.pre < 1] = 1
+
+
+## Add 3D regression plane to scatter plot 
+surface3d(x.pre, y.mod, z.pre, color = c("green"))
+
+aspect3d(1,1,1)
+# view3d(theta = 5)
+# view3d(theta = -10, phi = -90)
+# play3d(spin3d(axis = c(0, 0, 1), rpm = 30), duration = 5)
+rglwidget()
 ```
 
 ## Calculate indirect effect {.subsection}
@@ -167,28 +257,8 @@ R2_out.med - (R2_out.pre.med - R2_out.pre)
 
 ## Calculate $\kappa^2$ {.subsection}
 
+PROCESS version 2.16 no longer produces Preacher and Kelley’s kappa- squared as a measure of effect size for the indirect effect. This feature in earlier releases was disabled in version 2.16 in response to a recent article by [Wen and Fan (2015, Psychological Methods)](https://www.google.nl/search?client=safari&rls=en&q=Wen+and+Fan+(2015,+Psychological+Methods)&ie=UTF-8&oe=UTF-8&gfe_rd=cr&dcr=0&ei=BcYeWr2xEYeGtgeLgpmICg) pointing out computational errors in its derivation.
+
 $$\frac{ab}{max(ab)} = \frac{b_a b_b}{max(b_a b_b)}$$
 
 What is $max(ab)$?
-
-I am speculating here.
-
-## Calculate $\kappa^2$ {.smaller}
-
-```{r}
-summary(m.1.out.pre)
-```
-
-## Calculate $\kappa^2$ {.smaller}
-
-```{r}
-summary(m.3.out.pre.med)
-```
-
-## Calculate $\kappa^2$
-
-$$\frac{ab}{max(ab)} = \frac{b_a b_b}{max(b_a b_b)}$$
-
-```{r}
-b.a*b.b/max(rnorm(1000, b.a*b.b, 0.14+0.24))
-```

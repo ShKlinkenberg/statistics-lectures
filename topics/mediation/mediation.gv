@@ -1,0 +1,29 @@
+digraph Mediation {
+
+
+# nodeEdge0 [fixedsize=true, shape=diamond, label=".Nojjjj label.", fillcolor=red, style=filled]
+
+  # a 'graph' statement
+  graph [overlap = true, fontsize = 6, layout = dot, splines=ortho, style=rounded]
+
+  # several 'node' statements
+  node [shape = box, fontsize = 6, fontname = Helvetica, fillcolor = red, style=filled, fontcolor=white, width= 2]
+  
+  P [label = 'Predictor']
+  M [label = 'Mediator']
+  O [label = 'Outcome']
+ 
+
+  # several 'edge' statements
+  edge [color = grey]
+  
+
+  subgraph {
+rank = max; rankdir = M; P; O;
+}
+
+    P->M   
+    P->O  
+    M->O
+
+}
