@@ -201,6 +201,8 @@ aspect3d(1,1,1)
 rglwidget()
 ```
 
+Interactive, give it a spin.
+
 ## Calculate indirect effect {.subsection}
 
 $$a \times b = b_a \times b_b$$
