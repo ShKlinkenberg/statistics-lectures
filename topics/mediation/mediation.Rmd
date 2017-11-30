@@ -15,7 +15,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 
 ## Example
 
-Does the speed of recovery after sickness improve with the use of homeopatics of is this effect mediated by a healthy lifestyle?
+Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?
 
 ![](http://www.kidneyabc.com/uploads/allimg/130404/2-13040414233CW.jpg)
 
@@ -126,7 +126,7 @@ b.c.accent
 ## Visual {.subsection}
 
 ```{r, fig.asp=1, fig.width=5, fig.align='center'}
-plot(data$gebruik.homeopathisch.middel, data$snelheid.van.genezing, col = 'red', xlab="homeo", ylab="rocov")
+plot(data$gebruik.homeopathisch.middel, data$snelheid.van.genezing, col = 'red', xlab="alter", ylab="rocov")
 
 fit.1 <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel, data)
 
@@ -150,7 +150,7 @@ max.var <- apply(data, 2, max)
 
 plot3d(data$gebruik.homeopathisch.middel, data$gezonde.leefstijl, data$snelheid.van.genezin,
        col  = "red",
-       xlab = "homeo", 
+       xlab = "alter", 
        ylab = "healt",
        zlab = "rocov",
        size = 8)
