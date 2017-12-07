@@ -121,7 +121,15 @@ planes3d(a = 0,
          alpha=0.7,
          color = c("blue"))
 
-rglwidget()
+# rglwidget()
+
+M <- r3dDefaults$userMatrix
+fn <- par3dinterp(time = (0:2)*0.75, userMatrix = list(M,
+                                      rotate3d(M, pi/2, 0, 0, 1),
+                                      rotate3d(M, pi/2, 0, 0, 0)) )
+rglwidget() %>%
+playwidget(par3dinterpControl(fn, 0, 3, steps=15),
+       step = 0.01, loop = TRUE, rate = 0.5)
 ```
 
 ## Fit model {.smaller .subsection}
