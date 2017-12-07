@@ -1,4 +1,4 @@
-# Moderation
+# Moderation {.section}
 
 <!-- Allow color highlighting in mathjax -->
 <script type="text/x-mathjax-config">
@@ -11,12 +11,29 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
-## Model
+## Moderation
+
+In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction.
+
+Source [WIKIPEDIA](https://en.wikipedia.org/wiki/Moderation_(statistics))
+
+## Model {.subsection .flexbox .vcenter}
 
 $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}Out_i = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}+ \epsilon_i$$
 
-## Simulate data.
+![](../../../topics/moderation/moderation.png)
+
+
+## Example {.smaller}
+
+Video games are among the favourite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain. 
+
+Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behaviour, callous unemotional traits, and the number of hours per week they play video games.
+
+Source: Field 10.3.1
+
+## Simulate data
 
 ```{r}
 set.seed(283) ## Mooie seed :-)
@@ -48,10 +65,10 @@ write.csv(data, "moderation.csv")
 ## View data {.smaller}
 
 ```{r, echo=FALSE}
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(round(data,2), rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## Scatterplots
+## Scatterplots {.subsection}
 
 ```{r}
 plot(data)
@@ -65,7 +82,7 @@ cor(data)
 
 ## 3D plot
 
-```{r, eval=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ## 3d plot package rgl
 ## install.packages('rgl')
 library(rgl)
@@ -74,44 +91,13 @@ attach(data)
 plot3d(predictor, moderator, outcome, 
        #col  = rainbow(100), 
        col  = "red",
-       size = 8)
+       size = 8) -> my.plot
+
+my.plot
+rglwidget()
 ```
 
--------
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(ggplot2)
-library(plotly)
-library(reshape2)
-
-#Graph Resolution (more important for more complex shapes)
-graph_reso <- 0.05
-
-#Setup Axis
-axis_x <- seq(min(data$predictor), max(data$predictor), by = graph_reso)
-axis_y <- seq(min(data$moderator), max(data$moderator), by = graph_reso)
-
-#Sample points
-#petal_lm_surface              <- expand.grid(Sepal.Length = axis_x,Sepal.Width = axis_y,KEEP.OUT.ATTRS = F)
-#petal_lm_surface$Petal.Length <- predict.lm(petal_lm, newdata = petal_lm_surface)
-#petal_lm_surface              <- acast(petal_lm_surface, Sepal.Width ~ Sepal.Length, value.var = "Petal.Length") #y ~ x
-
-plot3D <- plot_ly(data, 
-                  x = predictor, 
-                  y = moderator, 
-                  z = outcome,
-                  text = "Moderation", 
-                  type = "scatter3d", 
-                  mode = "markers") %>% 
-          layout(title = "Moderation",
-                 scene = list(xaxis = list(title = "predictor"), 
-                              yaxis = list(title = "moderator"), 
-                              zaxis = list(title = "outcome")
-                              )
-                 )
-
-plot3D
-```
+Take it for a spin (does not work on tablet)
 
 ## 1 SD planes
 
@@ -120,7 +106,13 @@ quantiles <- as.vector(quantile(moderator,seq(.1,.9,.1)))
 sds       <- c(mean(moderator)+(sd(moderator)*c(-1,0,1)))  
 ```
 
-```{r, eval=FALSE}
+--------
+
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+my.plot
+
+par3d(mouseMode = "zAxis")
+
 planes3d(a = 0, 
          b = 1, 
          c = 0,
@@ -128,27 +120,15 @@ planes3d(a = 0,
          #d = -quantiles,
          alpha=0.7,
          color = c("blue"))
+
+rglwidget()
 ```
 
-
-```{r, eval=FALSE, echo=FALSE}
-x <- c(18,18,14,14)
-y <- c(10,10,10,10)
-z <- c(0, 20, 0,20)
-
-cbind(x,y,z)
-
-plot3D <- add_surface(z = ~z, opacity = 0.98)
-plot3D
-```
-
-
-## Fit model {.smaller}
+## Fit model {.smaller .subsection}
 
 ```{r}
 #fit2 <- lm(outcome ~ predictor + moderator)
-fit <- lm(outcome ~ predictor + moderator + predictor*moderator)
-summary(fit)
+fit <- lm(outcome ~ predictor + moderator + predictor*moderator); summary(fit)
 ```
 
 ## Regression equation
@@ -181,11 +161,31 @@ save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
 
 ## Expected surface
 
-```{r, eval=FALSE}
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+my.plot
+
 surface3d(x.pre,y.mod,z.pre, color = c("green"))
+
+aspect3d(1,1,1)
+
+subid <- currentSubscene3d()
+rglwidget(elementId="plot3drgl2")
+
+# rglwidget()
 ```
 
-## Expected values
+<script type="text/javascript">
+var rotate = function(angle) {
+  var rgl = document.getElementById("plot3drgl2").rglinstance;
+  rgl.getObj(`r subid`).par3d.userMatrix.rotate(angle, 1,0,0);
+  rgl.drawScene();
+};
+</script>
+
+<button type="button" onclick="rotate(-10)">Down</button>
+<button type="button" onclick="rotate(10)">Up</button>
+
+## Expected values {.subsection}
 
 ```{r}
 data$exp <- fit$fitted.values
