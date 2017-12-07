@@ -1,0 +1,46 @@
+---
+title: "Moderation"
+author: "Klinkenberg"
+date: "8 dec 2017"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/moderation/moderation.rmd"}
+```
+
+# END
+
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+
+<ul class="fa-ul" style="color:black;">
+<li><i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;">@shklinkenberg</a></li>
+<li><i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a></li>
+<li><i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a></li>
+<li><i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a></li>
+</ul>
