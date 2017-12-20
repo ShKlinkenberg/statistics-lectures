@@ -308,8 +308,8 @@ data$R &lt;- rank(data$depres)</pre>
 
 </article></slide><slide class=''><hgroup><h2>Example</h2></hgroup><article  id="example">
 
-<div id="htmlwidget-752925baedba5da19b99" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-752925baedba5da19b99">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol"],[29,28,25,24,28,28,28,27,29,28,25,31,24,29,29,27,27,30,28,30],[15.5,10.5,3.5,1.5,10.5,10.5,10.5,6,15.5,10.5,3.5,20,1.5,15.5,15.5,6,6,18.5,10.5,18.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bd554cd577947924ec75" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bd554cd577947924ec75">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol"],[25,28,30,25,29,30,23,26,27,28,27,29,27,30,28,26,31,29,27,26],[2.5,12,18,2.5,15,18,1,5,8.5,12,8.5,15,8.5,18,12,5,20,15,8.5,5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Calculate the sum of ranks per group</h2></hgroup><article  id="calculate-the-sum-of-ranks-per-group" class="subsection">
 
@@ -458,8 +458,8 @@ data &lt;- data.frame(Ecstasy, Alcohol)</pre>
 
 </article></slide><slide class=''><hgroup><h2>Example</h2></hgroup><article  id="example-1">
 
-<div id="htmlwidget-6a3d953cd8ba3cee16b0" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6a3d953cd8ba3cee16b0">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-117a43f43f3821fda0c5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-117a43f43f3821fda0c5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Calculate T</h2></hgroup><article  id="calculate-t" class="smaller subsection">
 
@@ -479,7 +479,7 @@ data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0
 <pre class = 'prettyprint lang-r'># Calculate difference in scores between first and second measure
 data$difference = data$Ecstasy - data$Alcohol
 
-# Calculate difference in scores between first and second measure
+# Calculate absolute difference in scores between first and second measure
 data$abs.difference = abs(data$Ecstasy - data$Alcohol)
 
 # Create rank variable with place holder NA
@@ -498,8 +498,8 @@ data$rank_neg = with(data, ifelse(sign == -1, rank, 0   ))</pre>
 
 </article></slide><slide class=''><hgroup><h2>The data</h2></hgroup><article  id="the-data" class="smaller">
 
-<div id="htmlwidget-6943e161f6ade1d14b8c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6943e161f6ade1d14b8c">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28],[1,-3,1,0,1,0,2,2,-1,0],[1,3,1,0,1,0,2,2,1,0],[2.5,7,2.5,null,2.5,null,5.5,5.5,2.5,null],[1,-1,1,0,1,0,1,1,-1,0],[2.5,0,2.5,0,2.5,0,5.5,5.5,0,0],[0,7,0,0,0,0,0,0,2.5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n      <th>difference<\/th>\n      <th>abs.difference<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n      <th>rank_pos<\/th>\n      <th>rank_neg<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d5eb2a3adb20ddd99228" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d5eb2a3adb20ddd99228">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28],[1,-3,1,0,1,0,2,2,-1,0],[1,3,1,0,1,0,2,2,1,0],[2.5,7,2.5,null,2.5,null,5.5,5.5,2.5,null],[1,-1,1,0,1,0,1,1,-1,0],[2.5,0,2.5,0,2.5,0,5.5,5.5,0,0],[0,7,0,0,0,0,0,0,2.5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n      <th>difference<\/th>\n      <th>abs.difference<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n      <th>rank_pos<\/th>\n      <th>rank_neg<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Calculate \(T_+\)</h2></hgroup><article  id="calculate-t_">
 
@@ -594,8 +594,8 @@ data$ranks = rank(data$depres)</pre>
 
 </article></slide><slide class=''><hgroup><h2>The data</h2></hgroup><article  id="the-data-1">
 
-<div id="htmlwidget-e3df82a23a411fd74f8d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e3df82a23a411fd74f8d">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","control","control","control","control","control","control","control","control","control","control"],[22,22,24,25,21,24,21,23,21,23,27,23,24,24,21,26,23,24,23,24,23,22,21,22,22,25,22,22,22,23],[9.5,9.5,23.5,27.5,3,23.5,3,17,3,17,30,17,23.5,23.5,3,29,17,23.5,17,23.5,17,9.5,3,9.5,9.5,27.5,9.5,9.5,9.5,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>ranks<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bd580b5c25220a3dee99" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bd580b5c25220a3dee99">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","control","control","control","control","control","control","control","control","control","control"],[22,22,24,25,21,24,21,23,21,23,27,23,24,24,21,26,23,24,23,24,23,22,21,22,22,25,22,22,22,23],[9.5,9.5,23.5,27.5,3,23.5,3,17,3,17,30,17,23.5,23.5,3,29,17,23.5,17,23.5,17,9.5,3,9.5,9.5,27.5,9.5,9.5,9.5,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>ranks<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Calculate H</h2></hgroup><article  id="calculate-h">
 
@@ -687,8 +687,8 @@ data &lt;- data.frame(ecstasy, alcohol, control)</pre>
 
 </article></slide><slide class=''><hgroup><h2>The data</h2></hgroup><article  id="the-data-2">
 
-<div id="htmlwidget-7ae43ae17c7e718d5c34" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ae43ae17c7e718d5c34">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[23,24,27,27,25,21,22,21,23,24],[22,24,24,21,25,22,22,25,24,24],[24,27,25,21,21,23,24,21,23,21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a1aa532d628618da066d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a1aa532d628618da066d">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[23,24,27,27,25,21,22,21,23,24],[22,24,24,21,25,22,22,25,24,24],[24,27,25,21,21,23,24,21,23,21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Assign ranks</h2></hgroup><article  id="assign-ranks-1">
 
@@ -699,8 +699,8 @@ ranks = t(apply(data, 1, rank))</pre>
 
 </article></slide><slide class=''><hgroup><h2>The data with ranks</h2></hgroup><article  id="the-data-with-ranks">
 
-<div id="htmlwidget-356416dac0f0f50e85f8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-356416dac0f0f50e85f8">{"x":{"filter":"none","data":[[2,1.5,3,3,2.5,1,1.5,1.5,1.5,2.5],[1,1.5,1,1.5,2.5,2,1.5,3,3,2.5],[3,3,2,1.5,1,3,3,1.5,1.5,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a66e00520e9a4d3556cb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a66e00520e9a4d3556cb">{"x":{"filter":"none","data":[[2,1.5,3,3,2.5,1,1.5,1.5,1.5,2.5],[1,1.5,1,1.5,2.5,2,1.5,3,3,2.5],[3,3,2,1.5,1,3,3,1.5,1.5,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Calculate \(F_r\)</h2></hgroup><article  id="calculate-f_r" class="subsection">
 
