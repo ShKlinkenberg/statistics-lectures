@@ -18,7 +18,7 @@ Paired >2 samples
 
 Created by [William Frederick Friedman](http://en.wikipedia.org/wiki/William_F._Friedman) the Friedman's ANOVA is a nonparametric alternative to the repeated one-way ANOVA.
 
-Just like the Kruskal-Wallis test, Friedman's ANOVA, subtracts the expected mean ranking from the calculated oberved mean ranking, which is also $\chi^2$ distributed.
+Just like the Kruskal-Wallis test, Friedman's ANOVA, subtracts the expected mean ranking from the calculated observed mean ranking, which is also $\chi^2$ distributed.
 
 ## Simulate data
 
@@ -56,7 +56,7 @@ data <- data.frame(ecstasy, alcohol, control)
 datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
 
 # Write data for use in SPSS
-write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ parametric/Friedman.csv", row.names=FALSE)
+write.csv(data, "Friedman.csv", row.names=FALSE)
 ```
 
 ## Assign ranks

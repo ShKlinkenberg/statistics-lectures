@@ -54,7 +54,7 @@ data$ranks = rank(data$depres)
 datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 415, paging = F, info = F))
 
 # Write data for use in SPSS
-write.csv(data, "~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture\ Non\ parametric/kruskal-Wallisk.csv", row.names=FALSE)
+write.csv(data, "kruskal-Wallisk.csv", row.names=FALSE)
 ```
 
 ## Calculate H
