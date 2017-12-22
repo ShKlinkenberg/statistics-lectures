@@ -26,6 +26,39 @@ local({
 })
 ```
 
+------
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE, fig.align='center', eval=FALSE}
+# install.packages("emojifont")
+
+library(emojifont)
+
+set.seed(3647)
+
+n = 145
+x = rnorm(n,0, 1)
+
+y = dt(x, 19) - runif(n, 0, dt(x, 19))
+
+par(mar=c(0.2,0.2,0.2,0.2))
+plot(x, y, 
+     cex  = 0, 
+     xlim = c(-3,3),
+     xaxt = 'n',
+     yaxt = 'n')
+
+text(x, y, labels=emoji('christmas_tree'), cex=3, col=rgb(0,runif(n,0,1),0), family='EmojiOne')
+
+y = dt(x, 19) - runif(n, 0, dt(x, 19))
+text(x, y, labels=emoji('snowflake'), cex=1, col=rainbow(n), family='EmojiOne')
+```
+
+## {.flexbox .vcenter}
+
+![](christmas_tree.jpg)
+
+
+
 ## Inhoud
 
 <div id="toc"></div>
