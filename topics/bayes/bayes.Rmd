@@ -1,0 +1,75 @@
+# Bayes
+
+## Is it a fair coin?
+
+## Theta all mighty
+
+The true value of $theta$ for our binomial distribution.
+
+$$\Huge \theta = .68$$
+
+The data driver!
+
+## My ten tosses
+
+My ten tosses landed heads 2 times.
+
+$$\begin{aligned}
+  k &= 2 \\
+  n &= 10
+  \end{aligned}$$
+  
+```{r}
+k = 2
+n = 10
+```
+
+## Likelihood
+
+How likeli is the data assuming the data represents the parameter value:
+
+<style>
+#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217,164,65), 0 0 8px rgb(192,168,104); }
+</style>
+
+$$\theta = \frac{2}{10} = `r k/n`$$
+```{r}
+theta.given.data = k/n
+```
+
+## Likelihood function
+
+How likely is 2 out of 10 for all possible $\theta$ values?
+
+```{r}
+thetas = seq(0, 1, .01)
+
+likelihood =  dbinom(k, n, thetas)
+
+plot(thetas, dbinom(k, n, thetas), type='l', ylab = "Likelihood", las = 1)
+abline(v=theta.given.data, lty='dashed')
+```
+
+## Prior
+
+What is our expectation of what $theta$ could really be?
+
+It could be anything. We therefore could assign all passible values of $theta$ equally likely.
+
+```{r}
+prior = dbeta(thetas, 1,1)
+
+plot(thetas,prior, type='l', ylab = "density", las = 1)
+```
+
+## Posterior
+
+Now we can update our belief about the posible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.
+
+$$\begin{aligned}
+  {Posterior} &\propto {Likelihood} \times {Prior} \\
+  P(\theta | D) &\propto P(D|\theta) \times P(\theta)
+  \end{aligned}
+$$
+
+
