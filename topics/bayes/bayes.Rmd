@@ -6,6 +6,10 @@
 
 The true value of $theta$ for our binomial distribution.
 
+<style>
+#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217, 164, 65), 0 0 8px rgb(192, 168, 104); }
+</style>
+
 $$\Huge \theta = .68$$
 
 The data driver!
