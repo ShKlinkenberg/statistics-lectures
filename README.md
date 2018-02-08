@@ -18,4 +18,4 @@ In this folder courses are added and in each course, lectures are available. I p
 
 ## View content
 
-[Lectures and topics](http://shklinkenberg.github.io/statistics-lectures/)
+[Lectures and topics](http://shklinkenberg.github.io/statistics-lectures/) hosted on GitHub.
