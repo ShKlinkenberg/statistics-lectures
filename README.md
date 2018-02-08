@@ -15,3 +15,7 @@ This folder contains all topics covered in my teaching. New topics can be added 
 ## Courses
 
 In this folder courses are added and in each course, lectures are available. I plan to copy the current course for the next year and change course content where nessesary.
+
+## View content
+
+[Lectures and topics](http://shklinkenberg.github.io/statistics-lectures/)
