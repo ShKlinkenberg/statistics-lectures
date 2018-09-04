@@ -42,6 +42,8 @@ local({
 ```{r child="../../../topics/NHST/NHST.Rmd"}
 ```
 
+<!-- Footer insert below -->
+
 ```{r child="../../../footer.md"}
 ```
 
