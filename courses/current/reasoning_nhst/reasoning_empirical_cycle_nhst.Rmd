@@ -2,7 +2,7 @@
 title: "WSR"
 subtitle: "Statistical Reasoning"
 author: "Klinkenberg"
-date: "07 sep 2017"
+date: "06 sep 2018"
 output: 
   ioslides_presentation:
     logo           : http://shklinkenberg.github.io/statistics-lectures/template/logo_uva.png
