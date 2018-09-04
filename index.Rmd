@@ -46,8 +46,6 @@ table1 <- data.frame(data     = lectures.dates,
                      slides   = slides.links,
                      handouts = lectures.links)
 
-# install.packages("DT")
-# library("DT")
-# datatable(table1, escape = F, rownames = F)
+# Print table with kable as set in YAML
 table1
 ```
