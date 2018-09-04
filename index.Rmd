@@ -1,20 +1,47 @@
 ---
-title: "Lectures and topics"
+title: "Lectures Scientific and Statistical Reasoning"
 ---
 
-Below you can find the links to my lecture slides and topics. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
+Below you can find the links to my current lecture slides for Scientific and Statistical Reasoning. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# install.packages("rvest")
+library(rvest)
+
 rm(list = ls())
-lectures <- list.files(path = "courses/2017-2018_WSR/", pattern = "*.html", recursive = T)
+lectures <- list.files(path = "courses/current", pattern = "*handout.html", recursive = T, full.names = TRUE)
+
+n <- length(lectures)
+
+lectures.names = vector()
+lectures.dates = vector()
+lectures.links = vector()
+slides.links   = vector()
+
+for(i in 1:n) {
+
+lecture_html <- read_html(lectures[i])
+
+lectures.names[i] <- lecture_html %>% html_nodes(".title") %>% html_text()
+lectures.dates[i] <- lecture_html %>% html_nodes(".date") %>% html_text()
+lectures.links[i] <- paste0('<a href="https://shklinkenberg.github.io/statistics-lectures/',
+                            lectures[i],
+                            '" target="_blank">',
+                            'handout',
+                            's</a>')
+slides.links[i]  <- gsub("_handout", "_IOslides", lectures.links[i])
+slides.links[i]  <- gsub("handout", "slide", slides.links[i])
+}
 
 #links <- sprintf('topics/%s', topics)
 
-lectures.names <- gsub("_|(.html)|.*/", " ", lectures)
 
-links <- sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/%s" target="_blank">%s</a>', lectures, lectures.names)
+# links <- sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/courses/current/%s" target="_blank">%s</a>', lectures, lectures.names)
 
-table1 <- data.frame(item = "Lecture slide", links)
+table1 <- data.frame(data    = lectures.dates, 
+                     lecture = lectures.names,
+                     slides  = slides.links,
+                     handout = lectures.links)
 
 # install.packages("DT")
 #library("DT")

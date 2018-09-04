@@ -1,6 +1,6 @@
 ---
-title: "WSR"
-subtitle: "Statistical Reasoning"
+title: "Statistical Reasoning"
+subtitle: "WSR"
 author: "Klinkenberg"
 date: "06 sep 2018"
 output: 

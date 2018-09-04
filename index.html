@@ -11,7 +11,7 @@
 
 
 
-<title>Lectures and topics</title>
+<title>Lectures Scientific and Statistical Reasoning</title>
 
 <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,13 +20,16 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
-<script src="site_libs/htmlwidgets-0.9/htmlwidgets.js"></script>
-<script src="site_libs/datatables-binding-0.2/datatables.js"></script>
-<link href="site_libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="site_libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="site_libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.4/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -36,10 +39,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -199,14 +204,14 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Lectures and topics</h1>
+<h1 class="title toc-ignore">Lectures Scientific and Statistical Reasoning</h1>
 
 </div>
 
 
-<p>Below you can find the links to my lecture slides and topics. The source code can be found at the <a href="https://github.com/ShKlinkenberg/statistics-lectures">GitHub repository</a>.</p>
-<div id="htmlwidget-96200fe1e7afccdebec6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-96200fe1e7afccdebec6">{"x":{"filter":"none","data":[["Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide","Lecture slide"],["<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/ANCOVA/ANCOVA_long.html\" target=\"_blank\"> ANCOVA long <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/ANCOVA/ANCOVA.html\" target=\"_blank\"> ANCOVA <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/ANOVA_independent_factorial/ANOVA_independent_factorial_handout.html\" target=\"_blank\"> ANOVA independent factorial handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/ANOVA_independent_factorial/ANOVA_independent_factorial.html\" target=\"_blank\"> ANOVA independent factorial <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed_handout.html\" target=\"_blank\"> ANOVA repeated and mixed handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.html\" target=\"_blank\"> ANOVA repeated and mixed <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/chi_squared_test/chi_squared_test.html\" target=\"_blank\"> chi squared test <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/coin_experiment/coin_experiment.html\" target=\"_blank\"> coin experiment <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/correlation_and_simple_regression/correlation_simple_regression_handout.html\" target=\"_blank\"> correlation simple regression handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/correlation_and_simple_regression/correlation_simple_regression.html\" target=\"_blank\"> correlation simple regression <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/f-distribution_ANOVA_one-way_independent/f-distribution_ANOVA_one-way_independent.html\" target=\"_blank\"> f-distribution ANOVA one-way independent <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/MANOVA/manova_handout.html\" target=\"_blank\"> manova handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/MANOVA/manova.html\" target=\"_blank\"> manova <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/mediation/mediation_handout.html\" target=\"_blank\"> mediation handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/mediation/mediation.html\" target=\"_blank\"> mediation <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/moderation/moderation_handout.html\" target=\"_blank\"> moderation handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/moderation/moderation.html\" target=\"_blank\"> moderation <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/multiple_regression/multiple_regresson_handout.html\" target=\"_blank\"> multiple regresson handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/multiple_regression/multiple_regresson.html\" target=\"_blank\"> multiple regresson <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/nhst/nhst.html\" target=\"_blank\"> nhst <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/non-parametric_tests/non-parametric_tests_handout.html\" target=\"_blank\"> non-parametric tests handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/non-parametric_tests/non-parametric_tests.html\" target=\"_blank\"> non-parametric tests <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/paired_and_independent_t-test/paired_and_independent_t-test.html\" target=\"_blank\"> paired and independent t-test <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/pca_cb_alpha/pca_cb_alpha_handout.html\" target=\"_blank\"> pca cb alpha handout <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/pca_cb_alpha/pca_cb_alpha.html\" target=\"_blank\"> pca cb alpha <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/reasoning_nhst/reasoning_empirical_cycle_nhst.html\" target=\"_blank\"> reasoning empirical cycle nhst <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/t-distribution_and_one_sample_t-test/t-distribution_and_one_sample_t-test.html\" target=\"_blank\"> t-distribution and one sample t-test <\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/2017-2018_WSR/the_beast_of_bias/the_beast_of_bias.html\" target=\"_blank\"> the beast of bias <\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>item<\/th>\n      <th>links<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>Below you can find the links to my current lecture slides for Scientific and Statistical Reasoning. The source code can be found at the <a href="https://github.com/ShKlinkenberg/statistics-lectures">GitHub repository</a>.</p>
+<div id="htmlwidget-025bc9ed36186cdd4f92" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-025bc9ed36186cdd4f92">{"x":{"filter":"none","data":[["06 sep 2018","06 sep 2018"],["Experiment","Statistical Reasoning"],["<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/current/coin_experiment/coin_experiment_IOslides.html\" target=\"_blank\">slides<\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/current/reasoning_nhst/reasoning_empirical_cycle_nhst_IOslides.html\" target=\"_blank\">slides<\/a>"],["<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/current/coin_experiment/coin_experiment_handout.html\" target=\"_blank\">handouts<\/a>","<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/current/reasoning_nhst/reasoning_empirical_cycle_nhst_handout.html\" target=\"_blank\">handouts<\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>data<\/th>\n      <th>lecture<\/th>\n      <th>slides<\/th>\n      <th>handout<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 
 
