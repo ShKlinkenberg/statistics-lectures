@@ -4,9 +4,9 @@ author: "Klinkenberg"
 date: "06 sep 2018"
 output: 
   ioslides_presentation:
-    logo           : http://shklinkenberg.github.io/statistics-lectures/template/logo_uva.png
+    logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png
     smaller        : FALSE
-    css            : http://shklinkenberg.github.io/statistics-lectures/styles/style.css
+    css            : https://shklinkenberg.github.io/uva_style/ioslides_style.css
     includes       :
       in_header    : ["../../../TOC/TOC_generator.js.wrapper",
                       "../../../GA_Script/GA_Script.html"]
