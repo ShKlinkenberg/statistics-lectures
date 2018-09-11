@@ -41,10 +41,13 @@ slides.links[i]  <- gsub("handout", "slide", slides.links[i])
 }
 
 # Add vectors to table
-table1 <- data.frame(data     = lectures.dates, 
+table1 <- data.frame(date     = lectures.dates, 
                      lecture  = lectures.names,
                      slides   = slides.links,
                      handouts = lectures.links)
+
+# Sort on date
+table1 <- table1[order(table1$date, decreasing = T),] 
 
 # Print table with kable as set in YAML
 table1
