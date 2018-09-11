@@ -173,6 +173,8 @@ barplot( p_kp,
          col='beige',
          ylim=c(0,.3) )
 
+abline(v = c(2.5,10.9), lty=2, col='red')
+
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
@@ -206,6 +208,8 @@ barplot( p_kp2,
          col="beige",
          ylim=c(0,.3) 
          )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
 
 text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 }
@@ -262,6 +266,8 @@ barplot( p_kp,
          col=col,
          ylim=c(0,.3) )
 
+abline(v = c(2.5,10.9), lty=2, col='red')
+
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
@@ -297,6 +303,8 @@ barplot( p_kp,
          ylab="P(%)", 
          col=col,
          ylim=c(0,.3) )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
@@ -336,6 +344,8 @@ barplot( rbind(dbinom(0:10, 10, .5),
          #legend.text = c("H0", "HA")
          )
 
+abline(v = c(6.5,27.5), lty=2, col='red')
+
 legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 ```
@@ -373,6 +383,8 @@ barplot( p_kp,
          col=col,
          ylim=c(0,.3) )
 
+abline(v = c(2.5,10.9), lty=2, col='red')
+
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
@@ -408,6 +420,8 @@ barplot( p_kp,
          col=col,
          ylim=c(0,.3) )
 
+abline(v = c(2.5,10.9), lty=2, col='red')
+
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
@@ -418,7 +432,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 Reject $H_0$ when:
 
 * $p$-value <= $alpha$
-* test statistic more extreme than your critical value
+* test statistic less extreme than your critical value
 
 ```{r, echo=FALSE}
 n = 10   # Sample size
@@ -443,6 +457,8 @@ barplot( p_kp,
          ylab="P(%)", 
          col=col,
          ylim=c(0,.3) )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```

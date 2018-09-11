@@ -21,9 +21,11 @@ RenderMultipleOutput <- function(path) {
 
 }
 
+# Week 1
 RenderMultipleOutput("courses/current/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
 RenderMultipleOutput("courses/current/coin_experiment/coin_experiment.Rmd")
 
-
+# Week 2
+RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
 
 
