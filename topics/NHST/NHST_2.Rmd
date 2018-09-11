@@ -326,30 +326,6 @@ For each type of effect size, a larger absolute value always indicates a stronge
 
 Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
-```{r, echo=FALSE}
-
-title = "Both distributions"
-
-colh0 = 'darkgreen'
-colha = 'darkorange'
-
-barplot( rbind(dbinom(0:10, 10, .5),
-               dbinom(0:10, 10, .2)), 
-         main=title, 
-         names.arg=0:10, 
-         xlab="number of head", 
-         ylab="P(%)", 
-         col = rbind(colh0,colha),
-         beside=TRUE
-         #legend.text = c("H0", "HA")
-         )
-
-abline(v = c(6.5,27.5), lty=2, col='red')
-
-legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
-
-```
-
 ## Effect size {.flexbox .vcenter}
 
 ![](../../../topics/NHST/effec_size.png)
@@ -423,6 +399,31 @@ barplot( p_kp,
 abline(v = c(2.5,10.9), lty=2, col='red')
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+
+```{r, echo=FALSE}
+
+title = "Both distributions"
+
+colh0 = 'darkgreen'
+colha = 'darkorange'
+
+barplot( rbind(dbinom(0:10, 10, .5),
+               dbinom(0:10, 10, .2)), 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col = rbind(colh0,colha),
+         beside=TRUE
+         #legend.text = c("H0", "HA")
+         )
+
+abline(v = c(6.5,27.5), lty=2, col='red')
+
+legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
+
 ```
 
 ## P-value {.subsection}
