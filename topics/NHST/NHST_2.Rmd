@@ -138,9 +138,9 @@ percentage = (1/iterations)*sum(mu_in_ci)
 
 ## Binomial $H_0$ distribution
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 n = 10   # Sample size
-k = 0:10 # Discrete probability space
+k = 0:n  # Discrete probability space
 p = .5   # Probability of head
 
 munt = 0:1
