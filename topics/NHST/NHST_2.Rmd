@@ -145,25 +145,16 @@ p = .5   # Probability of head
 
 munt = 0:1
 
-# alle_mogelijkheden = expand.grid(munt,munt,munt,munt,munt,munt,munt,munt,munt,munt)
-# 
-# sommen = rowSums(alle_mogelijkheden)
-
-# table(sommen)
-
 permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
 # permutations
 
 p_k  = p^k * (1-p)^(n-k)  # Probability of single event
 p_kp = p_k * permutations # Probability of event times 
                           # the occurrence of that event
-# sample = 90
-# freq_munt = round(p_kp*sample)
-# cbind(k,permutations,p_k,p_kp,freq_munt)
 
 title = "Binomial Null distribution"
 
-col=c(rep("red",2),rep("beige",7),rep("red",2))
+# col=c(rep("red",2),rep("beige",7),rep("red",2))
 
 barplot( p_kp, 
          main=title, 
@@ -173,7 +164,7 @@ barplot( p_kp,
          col='beige',
          ylim=c(0,.3) )
 
-abline(v = c(2.5,10.9), lty=2, col='red')
+# abline(v = c(2.5,10.9), lty=2, col='red')
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
@@ -209,7 +200,7 @@ barplot( p_kp2,
          ylim=c(0,.3) 
          )
 
-abline(v = c(2.5,10.9), lty=2, col='red')
+# abline(v = c(2.5,10.9), lty=2, col='red')
 
 text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 }
