@@ -424,7 +424,6 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 Reject $H_0$ when:
 
 * $p$-value <= $alpha$
-* test statistic less extreme than your critical value
 
 ```{r, echo=FALSE}
 n = 10   # Sample size
