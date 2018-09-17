@@ -28,4 +28,5 @@ RenderMultipleOutput("courses/current/coin_experiment/coin_experiment.Rmd")
 # Week 2
 RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
 
-
+# Week 3
+RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")

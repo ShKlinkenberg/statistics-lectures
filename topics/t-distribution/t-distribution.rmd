@@ -60,7 +60,8 @@ mean(x)
 $$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s^2_x / \sqrt{n}}$$
 
 ```{r}
-t = (mean(x) - mu) / (sd(x) / sqrt(n)); t
+t = (mean(x) - mu) / (sd(x) / sqrt(n))
+t
 ```
 
 ## More samples

@@ -33,7 +33,7 @@ myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSv
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-IQ.next.to.you = data[grep("2017", as.character(data$Timestamp)),"IQ.van.je.buur"]
+IQ.next.to.you = data[grep("2017|2018", as.character(data$Timestamp)),"IQ.van.je.buur"]
 ```
 
 
