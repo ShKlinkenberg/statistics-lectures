@@ -364,3 +364,5 @@ legend("topright", c(expression(alpha),'POWER'),density=c(10,10),angle=c(90,45))
 --------
 
 <iframe src="http://rpsychologist.com/d3/NHST/#viz"></iframe>
+
+[R-Psychologist](http://rpsychologist.com/d3/NHST/#viz)
