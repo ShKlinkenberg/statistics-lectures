@@ -17,7 +17,7 @@ RenderMultipleOutput <- function(path) {
   rmarkdown::render(input         = path, 
                     output_format = "html_document",
                     output_file   = gsub("....$", "_handout.html", file)
-  )
+                    )
 
 }
 
