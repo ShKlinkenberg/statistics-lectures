@@ -34,8 +34,8 @@ RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
 RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
 
 # Week 4
-<<<<<<< HEAD
-RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
-=======
+
 RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
->>>>>>> 5cf4f20bce37500b7daab9eedc726d240a8f6fc7
+
+RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
+
