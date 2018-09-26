@@ -1,3 +1,5 @@
+# The BEAST
+
 ## What is BIAS {.section}
 
 <quote style="font-style:italic;">Things that lead us to the wrong conclusions (Field)</quote>
