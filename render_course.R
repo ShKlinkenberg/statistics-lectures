@@ -36,6 +36,5 @@ RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_dis
 # Week 4
 
 RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
-
 RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
 
