@@ -1,7 +1,7 @@
 ---
-title: "T-distribution and the <br>One-sample t-test"
+title: "Paired and Independent<br> t-test"
 author: "Klinkenberg"
-date: "20 sep 2018"
+date: "27 sep 2018"
 output: 
   ioslides_presentation:
     logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png
@@ -39,10 +39,10 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/t-distribution/t-distribution.rmd"}
+```{r child="../../../topics/t-test_paired/t-test_paired.rmd"}
 ```
 
-```{r child="../../../topics/t-test_one-sample/One-sample_t-test.rmd"}
+```{r child="../../../topics/t-test_independent/t-test_independent.rmd"}
 ```
 
 <!-- Footer insert below -->
