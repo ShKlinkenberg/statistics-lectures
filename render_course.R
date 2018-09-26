@@ -1,4 +1,6 @@
 # Render course rmd
+rm(list = ls())
+
 
 # NOT RUN {
 library(rmarkdown)
@@ -30,3 +32,6 @@ RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
 
 # Week 3
 RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
+
+# Week 4
+RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")

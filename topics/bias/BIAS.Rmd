@@ -163,8 +163,6 @@ In general, we can say that on every value of the predictor variable the varianc
 
 -----
 
-Dit is te controleren door een plot te maken van de gestandaardiseerde error/residu en de gestandaardiseerde verwachte uitkomst/model.
-
 We can check this by plotting the standardised error/resiual and the standardised expected outcome/model.
 
 ```{r, echo=FALSE, fig.height=4}
