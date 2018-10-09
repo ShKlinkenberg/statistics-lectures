@@ -95,7 +95,7 @@ myCsv <- getURL(google.url)
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-data <- data[grep("2017", data$Timestamp),]
+data <- data[grep("2017|2018", data$Timestamp),]
 
 # install.packages("DT")
 library("DT")
