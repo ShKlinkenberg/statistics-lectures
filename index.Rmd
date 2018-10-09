@@ -47,8 +47,12 @@ table1 <- data.frame(date     = lectures.dates,
                      handouts = lectures.links)
 
 # Sort on date
-table1 <- table1[order(table1$date, decreasing = T),] 
+library("lubridate")
+library("dplyr")
+
+table1$date <- lubridate::dmy(table1$date)
+
 
 # Print table with kable as set in YAML
-table1
+dplyr::arrange(table1, desc(date))
 ```
