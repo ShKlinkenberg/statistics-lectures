@@ -274,12 +274,12 @@ Planned comparisons
 * Only use chunks once
 * Values add up to 0
 
-<img src="../../../topics/ANOVA_one-way_independent/pie2.png" style="height:200px;" >
-<img src="../../../topics/ANOVA_one-way_independent/pie1.png" style="height:200px;" >
+<img src="../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" >
+<img src="../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" >
 
 ------
 
-<img src="../../../topics/ANOVA_one-way_independent/pie3.png" style="height:200px;" >
+<img src="../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" >
 
 * AB-CDEF &rarr; A-B &rarr; CD-EF &rarr; C-D &rarr; E-F
 * A-BCDEF &rarr; A-B &rarr; A-C
