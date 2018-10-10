@@ -122,8 +122,17 @@ for(i in 2:dim(dfs)[1]) {
   f.alpha <- seq(critical.f, 1000, .01)
   
   polygon(c(f.alpha, rev(f.alpha)), c(df(f.alpha, dfs[i,1], dfs[i,2]), f.alpha*0 ), col= rgb(1,.66,0, .5), border = col[i])
+  
+  lines(c(critical.f+.1, 5), c(.02, .2), col=col[i])
         
-  } 
+}
+
+text(5,.2, expression(paste(alpha, "= 5%")), pos =3)
+
 legend("topright", legend = paste("df model =",dfs[,1], "df error =", dfs[,2]), lty=1, col = col, cex=.75)
 ```
+
+## F-distribution {.flexbox .vcenter}
+
+<img src="../../../topics/f_distribution/f_distributions.gif" style="height:400px;" >
 

@@ -1,0 +1,57 @@
+---
+title: "F-distributions"
+author: "Klinkenberg"
+date: "10/10/2018"
+output: html_document
+---
+
+
+
+```{r, echo=FALSE, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.1, message=FALSE, warning=FALSE}
+multiple.n  = c(5, 15, 30)
+multiple.k  = c(2, 4, 6)
+multiple.df.model = multiple.k - 1
+multiple.df.error = multiple.n - multiple.k
+col         = rainbow(length(multiple.df.model) * length(multiple.df.error))
+F = seq(0, 10, .01)
+
+dfs = expand.grid(multiple.df.model, multiple.df.error)
+
+n = c(5:15, rev(6:14))
+k = 3:7
+
+kaas = rep(k, each=length(n))
+nsss = rep(n, length(k))
+
+dfs = data.frame(kaas, nsss)
+
+#c(1:8,rev(1:9))
+
+for(i in 1:dim(dfs)[1]) { 
+
+plot(F,  df(F, dfs[i,1], dfs[i,2]), type = "l", 
+     xlim = c(0,10), ylim = c(0,.85), 
+     xlab = "F", ylab="density", 
+     col  = col[1],
+     main = "F-distribution with alpha 5%")
+
+
+  # lines(F, df(F, dfs[i,1], dfs[i,2]), col=col[i])
+  
+  critical.f <- qf(.95, dfs[i,1], dfs[i,2])
+  
+  f.alpha <- seq(critical.f, 1000, .01)
+  
+  polygon(c(f.alpha, rev(f.alpha)), c(df(f.alpha, dfs[i,1], dfs[i,2]), f.alpha*0 ), col= rgb(1,.66,0, .5), border = col[1])
+  
+  # lines(c(critical.f+.1, 5), c(.02, .2), col=col[i])
+  
+  text(9,.8, paste("df model =",dfs[i,1]))
+   text(9,.7, paste("df error =",dfs[i,2]))
+        
+}
+
+# text(5,.2, expression(paste(alpha, "= 5%")), pos =3)
+# 
+# legend("topright", legend = paste("df model =",dfs[,1], "df error =", dfs[,2]), lty=1, col = col, cex=.75)
+```
