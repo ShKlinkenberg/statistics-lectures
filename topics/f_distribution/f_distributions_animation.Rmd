@@ -5,9 +5,7 @@ date: "10/10/2018"
 output: html_document
 ---
 
-
-
-```{r, echo=FALSE, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.1, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.2, message=FALSE, warning=FALSE}
 multiple.n  = c(5, 15, 30)
 multiple.k  = c(2, 4, 6)
 multiple.df.model = multiple.k - 1
@@ -36,19 +34,35 @@ plot(F,  df(F, dfs[i,1], dfs[i,2]), type = "l",
      main = "F-distribution with alpha 5%")
 
 
-  # lines(F, df(F, dfs[i,1], dfs[i,2]), col=col[i])
+
   
   critical.f <- qf(.95, dfs[i,1], dfs[i,2])
   
   f.alpha <- seq(critical.f, 1000, .01)
+  f.p <- seq(4, 1000, .01)
   
+  # Alsternative distribution
+  lines(F, df(F, dfs[i,1], dfs[i,2], ncp = 6), col=col[3])
+  # Power
+  polygon(c(f.alpha, rev(f.alpha)), c(df(f.alpha, dfs[i,1], dfs[i,2], ncp = 6), f.alpha*0 ), col= rgb(.66,1,0, .5), border = col[3])
+  
+  
+  # P-values
+  polygon(c(f.p, rev(f.p)), c(df(f.p, dfs[i,1], dfs[i,2]), f.p*0 ), col= rgb(0,1,.66, .5), border = col[6])
+  
+  # alpha
   polygon(c(f.alpha, rev(f.alpha)), c(df(f.alpha, dfs[i,1], dfs[i,2]), f.alpha*0 ), col= rgb(1,.66,0, .5), border = col[1])
   
   # lines(c(critical.f+.1, 5), c(.02, .2), col=col[i])
   
-  text(9,.8, paste("df model =",dfs[i,1]))
-   text(9,.7, paste("df error =",dfs[i,2]))
-        
+  text(9,.6, paste("df model =",dfs[i,1]))
+   text(9,.5, paste("df error =",dfs[i,2]))
+  
+   legend("topright", legend = c("Alpha", "Power", "P-value"), fill = c(rgb(1,.66,0, .5), 
+                                                                        rgb(.66,1,0, .5), 
+                                                                        rgb(0,1,.66, .5)), box.lwd = "0")
+
+  
 }
 
 # text(5,.2, expression(paste(alpha, "= 5%")), pos =3)
