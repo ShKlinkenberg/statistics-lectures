@@ -48,10 +48,8 @@ RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
 # Blok II
 
 # Week 6
-
 RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
 RenderMultipleOutput("courses/current/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
 
 # Week 7
-
 RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
