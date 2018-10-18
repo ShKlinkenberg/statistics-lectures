@@ -1,7 +1,7 @@
 ---
 title: "ANCOVA"
 author: "Klinkenberg"
-date: "17 oct 2018"
+date: "18 oct 2018"
 output: 
   ioslides_presentation:
     logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png
