@@ -27,7 +27,9 @@ for(i in 1:n) {
 lecture_html <- read_html(lectures[i])
 
 # Extract title and date from HTML
-lectures.names[i] <- lecture_html %>% html_nodes(".title") %>% html_text()
+title    <- lecture_html %>% html_nodes(".title") %>% html_text()
+subtitle <- lecture_html %>% html_nodes(".subtitle") %>% html_text()
+lectures.names[i] <- paste(title, subtitle)
 lectures.dates[i] <- lecture_html %>% html_nodes(".date") %>% html_text()
 # Define HTML link to handout
 lectures.links[i] <- paste0('<a href="https://shklinkenberg.github.io/statistics-lectures/',
