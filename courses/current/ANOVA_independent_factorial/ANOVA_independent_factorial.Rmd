@@ -1,6 +1,6 @@
 ---
 title: "ANOVA"
-subtitle: "Independent factiorial"
+subtitle: "Independent factorial"
 author: "Klinkenberg"
 date: "19 oct 2018"
 output: 
