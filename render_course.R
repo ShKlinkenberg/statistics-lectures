@@ -57,3 +57,6 @@ RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independ
 
 # Week 8
 RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
+
+# Week 9
+RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
