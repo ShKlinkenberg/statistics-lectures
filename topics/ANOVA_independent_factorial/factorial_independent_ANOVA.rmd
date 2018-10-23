@@ -138,15 +138,15 @@ n.k1 = n.k2 = n.k3 = n.k4 = n.k5 = n.k6 = n.k7 = n.k8 = n.k9 = 20
 ---------
 
 ```{r}
-ss.m.k1 = sum(n.k1 * (m.k1 - mean(accidents))^2 )
-ss.m.k2 = sum(n.k2 * (m.k2 - mean(accidents))^2 )
-ss.m.k3 = sum(n.k3 * (m.k3 - mean(accidents))^2 )
-ss.m.k4 = sum(n.k4 * (m.k4 - mean(accidents))^2 )
-ss.m.k5 = sum(n.k5 * (m.k5 - mean(accidents))^2 )
-ss.m.k6 = sum(n.k6 * (m.k6 - mean(accidents))^2 )
-ss.m.k7 = sum(n.k7 * (m.k7 - mean(accidents))^2 )
-ss.m.k8 = sum(n.k8 * (m.k8 - mean(accidents))^2 )
-ss.m.k9 = sum(n.k9 * (m.k9 - mean(accidents))^2 )
+ss.m.k1 = n.k1 * (m.k1 - mean(accidents))^2
+ss.m.k2 = n.k2 * (m.k2 - mean(accidents))^2
+ss.m.k3 = n.k3 * (m.k3 - mean(accidents))^2
+ss.m.k4 = n.k4 * (m.k4 - mean(accidents))^2
+ss.m.k5 = n.k5 * (m.k5 - mean(accidents))^2
+ss.m.k6 = n.k6 * (m.k6 - mean(accidents))^2
+ss.m.k7 = n.k7 * (m.k7 - mean(accidents))^2
+ss.m.k8 = n.k8 * (m.k8 - mean(accidents))^2
+ss.m.k9 = n.k9 * (m.k9 - mean(accidents))^2
 
 ss.model = sum(ss.m.k1,ss.m.k2,ss.m.k3,ss.m.k4,ss.m.k5,ss.m.k6,ss.m.k7,ss.m.k8,ss.m.k9)
 ss.model
@@ -273,9 +273,9 @@ n.s1 = n.s2 = n.s3 = 60
 -------
 
 ```{r}
-ss.s1 = sum(n.s1 * (m.s1 - mean(accidents))^2 )
-ss.s2 = sum(n.s2 * (m.s2 - mean(accidents))^2 )
-ss.s3 = sum(n.s3 * (m.s3 - mean(accidents))^2 )
+ss.s1 = n.s1 * (m.s1 - mean(accidents))^2
+ss.s2 = n.s2 * (m.s2 - mean(accidents))^2
+ss.s3 = n.s3 * (m.s3 - mean(accidents))^2
 
 ss.speed = sum(ss.s1,ss.s2,ss.s3)
 ss.speed
@@ -331,9 +331,9 @@ n.a1 = n.a2 = n.a3 = 60
 ------
 
 ```{r}
-ss.a1 = sum(n.a1 * (m.a1 - mean(accidents))^2 )
-ss.a2 = sum(n.a2 * (m.a2 - mean(accidents))^2 )
-ss.a3 = sum(n.a3 * (m.a3 - mean(accidents))^2 )
+ss.a1 = n.a1 * (m.a1 - mean(accidents))^2 
+ss.a2 = n.a2 * (m.a2 - mean(accidents))^2 
+ss.a3 = n.a3 * (m.a3 - mean(accidents))^2 
 
 ss.alcohol = sum(ss.a1,ss.a2,ss.a3)
 ss.alcohol
