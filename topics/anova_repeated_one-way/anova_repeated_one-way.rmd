@@ -231,9 +231,9 @@ n_k2 = length(some_alc)
 n_k3 = length(much_alc)
 
 # Calculate sums of squares for the model
-SS_k1 = n_k1 * (mean(none_alc)   - mean(total))^2
+SS_k1 = n_k1 * (mean(none_alc) - mean(total))^2
 SS_k2 = n_k2 * (mean(some_alc) - mean(total))^2
-SS_k3 = n_k3 * (mean(much_alc)   - mean(total))^2
+SS_k3 = n_k3 * (mean(much_alc) - mean(total))^2
 
 SS_model = sum(SS_k1, SS_k2, SS_k3)
 SS_model
@@ -316,12 +316,12 @@ critical.value = qf(.95, DF_model, DF_error)
 critical.range = seq(critical.value, 100, .01)
 
 polygon(c(critical.range,rev(critical.range)), 
-        c(critical.range*0, rev(df(critical.range, DF_model, DF_error, ncp = 5))), col = "green")
+        c(critical.range*0, rev(df(critical.range, DF_model, DF_error, ncp = 5))), col = "darkorange")
 
 lines(F.values, df(F.values, DF_model, DF_error, ncp = 5))
 
 polygon(c(critical.range,rev(critical.range)), 
-        c(critical.range*0, rev(df(critical.range, DF_model, DF_error))), col = rgb(1,0,0,1), density = 40, angle = -45)
+        c(critical.range*0, rev(df(critical.range, DF_model, DF_error))), col = rgb(0,1,0,1), density = 40, angle = -45)
 
 p.range = seq(F, 100, .01)
 
