@@ -214,7 +214,7 @@ t.r = ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
 cbind(t.r, df)
 ```
 
-## Viualize
+## Visualize
 
 One-sample t-test
 
@@ -263,10 +263,10 @@ data.frame(cor.grade.IQ, cor.grade.motivation, cor.IQ.motivation)
 ------
 
 ```{r}
-teller = cor.grade.IQ - (cor.grade.motivation * cor.IQ.motivation)
-noemer = sqrt( (1-cor.grade.motivation^2)*(1-cor.IQ.motivation^2) )
+numerator   = cor.grade.IQ - (cor.grade.motivation * cor.IQ.motivation)
+denominator = sqrt( (1-cor.grade.motivation^2)*(1-cor.IQ.motivation^2) )
 
-partial.correlation = teller / noemer
+partial.correlation = numerator / denominator
 
 partial.correlation
 ```

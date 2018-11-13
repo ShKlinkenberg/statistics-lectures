@@ -64,4 +64,4 @@ RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
 # Blok III
 
 # Week 11
-RenderMultipleOutput("courses/current/correlation_and_simple_regression/correlation_simple_regression.rmd")
+RenderMultipleOutput("courses/current/correlation_and_simple_regression/correlation_simple_regression.Rmd")

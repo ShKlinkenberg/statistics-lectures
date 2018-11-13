@@ -1,4 +1,4 @@
-# Regression (one predictior) {.section}
+# Regression (one predictor) {.section}
 
 ```{r, echo=FALSE}
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
@@ -312,7 +312,7 @@ lines(c(0,10), c(0,10), col='red')
 
 ## Error {.smaller}
 
-The error / residual is the difference between expected and reality
+The error / residual is the difference between the model expectation and reality
 
 ```{r}
 data$error = grade - model
