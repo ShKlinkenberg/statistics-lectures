@@ -60,3 +60,8 @@ RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mi
 
 # Week 9
 RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
+
+# Blok III
+
+# Week 11
+RenderMultipleOutput("courses/current/correlation_and_simple_regression/correlation_simple_regression.rmd")
