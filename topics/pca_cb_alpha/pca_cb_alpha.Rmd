@@ -253,11 +253,11 @@ Classical test theory as we know it today was codified by Novick (1966) and desc
 
 Source: [Wikipedia](https://en.wikipedia.org/wiki/Classical_test_theory)
 
-## T = X + E
+## X = T + E
 
-True score = Observed score + Error
+Observed score = True score + Error
 
-$$T = X + E$$
+$$X = T + E$$
 
 ```{r}
 X = apply(data[,2:7], 1, sum)
@@ -422,7 +422,7 @@ cb.alpha
 
 Field defines $\alpha$ as: 
 
-$$\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}$$
+$$\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cov}_{item}}$$
 
 ```{r}
 cov.matrix = cov(data[,2:7])
@@ -439,14 +439,14 @@ cov.matrix
 ```
 
 $$\large{
-\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}} }$$
+\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cov}_{item}} }$$
 
 ## Why?
 
-$$\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cav}_{item}}$$
+$$\alpha = \frac{N^2 \overline{cov}}{\sum s^2_{item} + \sum {cov}_{item}}$$
 It's the same.
 
-$$N^2 \overline{cov} = N^2 \times \frac{\sum {cav}_{item}}{N} = \frac{N}{N-1} \sum {cav}_{item}$$
+$$N^2 \overline{cov} = N^2 \times \frac{\sum {cov}_{item}}{N} = \frac{N}{N-1} \sum {cov}_{item}$$
 
 ```{r}
 N^2 * mean(cov.only) == (N/(N-1)) * sum(cov.only)
@@ -457,7 +457,7 @@ and
 
 --------
 
-$$\sum s^2_{item} + \sum {cav}_{item} = \sigma^2_x$$
+$$\sum s^2_{item} + \sum {cov}_{item} = \sigma^2_x$$
 
 so
 
