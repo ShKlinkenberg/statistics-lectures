@@ -69,3 +69,6 @@ RenderMultipleOutput("courses/current/correlation_and_simple_regression/correlat
 # Week 12
 RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd")
 RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")
+
+# Week 13
+RenderMultipleOutput("courses/current/mediation/mediation.Rmd")
