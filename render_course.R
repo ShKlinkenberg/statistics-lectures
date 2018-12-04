@@ -72,3 +72,6 @@ RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")
 
 # Week 13
 RenderMultipleOutput("courses/current/mediation/mediation.Rmd")
+
+# Week 14
+RenderMultipleOutput("courses/current/moderation/moderation.Rmd")
