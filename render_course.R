@@ -75,3 +75,5 @@ RenderMultipleOutput("courses/current/mediation/mediation.Rmd")
 
 # Week 14
 RenderMultipleOutput("courses/current/moderation/moderation.Rmd")
+
+# Blok IV
