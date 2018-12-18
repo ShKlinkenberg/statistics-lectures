@@ -77,3 +77,4 @@ RenderMultipleOutput("courses/current/mediation/mediation.Rmd")
 RenderMultipleOutput("courses/current/moderation/moderation.Rmd")
 
 # Blok IV
+RenderMultipleOutput("courses/current/non_parametric_tests/non_parametric_tests.Rmd")
