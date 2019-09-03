@@ -477,6 +477,15 @@ alpha = .05 # Selected type I error
 # Color areas red for selected alpha
 area <- dbinom(0:N, N, H0) < alpha/2
 
+barplot(dbinom(0:N,N, HA)) -> x.values
+
+x.values
+lb <- x.values[c(qbinom(alpha/2, N+1, H0), qbinom(alpha/2, N+1, H0)+1 )]
+ub <- x.values[c(qbinom(1-(alpha/2), N+1, H0), qbinom(1-(alpha/2), N+1, H0)+1 )]
+
+mlb <- mean(lb)
+mub <- mean(ub)
+
 col = rep("beige", N+1)
 col[area] = "red"
 
@@ -508,6 +517,10 @@ barplot(dbinom(0:N,N, H0),
         names.arg = 0:N, 
         cex.names = 0.7)
 
+
+abline(v = mlb, col="red", lwd=3, lty=2)
+abline(v = mub, col="red", lwd=3, lty=2)
+
 barplot(dbinom(0:N,N, HA), 
         col  = col, 
         yaxt = 'n', 
@@ -531,6 +544,7 @@ barplot(dbinom(0:N,N, HA),
         main = 'Beta / Type II error', 
         names.arg = 0:N, 
         cex.names = 0.7)
+
 ```
 
 ## Reasoning Scheme {.flexbox .vcenter .subsection}
