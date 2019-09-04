@@ -74,6 +74,8 @@ barplot( p_kp,
          ylim=c(0,.3) )
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
 ```
 
 ## Testing {.section}
@@ -136,51 +138,11 @@ barplot( p_kp2,
          )
 
 text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
 ```
 
 ## $H_0$ and $H_A$ distribution
-
-<style>
-.container {
-  position: relative;
-  width: 50%;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 200px;
-  right: 0;
-  height: 100%;
-  width: 360px;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: rgba(255,0,0,.5);
-}
-
-.container:hover .overlay {
-  opacity: 1;
-}
-
-.text {
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-}
-</style>
-
-<div class="container">
 
 ```{r, echo=FALSE}
 
@@ -201,12 +163,9 @@ barplot( rbind(p_kp,p_kp2),
 
 legend("topright", legend=c("H0","HA"), fill=c("darkgreen","darkorange"))
 
-```
+abline(v = c(6.5,27.5), col="red", lwd=3, lty="dotted")
 
-  <div class="overlay">
-    Not reject H0
-  </div>
-</div>
+```
 
 ## Power and more
 
@@ -254,12 +213,17 @@ barplot(dbinom(0:N,N, H0),
         main = 'Alpha / Type I error', 
         names.arg = 0:N, 
         cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
 barplot(dbinom(0:N,N, HA), 
         col  = col, 
         yaxt = 'n', 
         main = 'Power', 
         names.arg = 0:N, 
         cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
 
 plot.new()
 text(0.5,0.5,"Accept H0",cex=2)
@@ -271,11 +235,15 @@ barplot(dbinom(0:N,N, H0),
         names.arg = 0:N, 
         cex.names = 0.7)
 
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
 barplot(dbinom(0:N,N, HA), 
         col  = col2, 
         yaxt = 'n', 
         main = 'Beta / Type II error', 
         names.arg = 0:N, 
         cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
 ```
 

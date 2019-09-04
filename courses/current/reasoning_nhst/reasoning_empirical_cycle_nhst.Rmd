@@ -36,7 +36,10 @@ local({
 
 ## Content
 
-<div id="toc"></div>
+* Statistical Reasoning
+* Empirical cycle
+* The Null distribution
+* Conclusions from premisses
 
 ## Learning
 
