@@ -26,12 +26,12 @@ output:
 # smaller in the above YAML must be off to make this work.
 
 library(knitr)
-local({
-  hook_plot = knit_hooks$get('plot')
-  knit_hooks$set(plot = function(x, options) {
-    paste0('\n\n----\n\n', hook_plot(x, options))
-  })
-})
+# local({
+#   hook_plot = knit_hooks$get('plot')
+#   knit_hooks$set(plot = function(x, options) {
+#     paste0('\n\n----\n\n', hook_plot(x, options))
+#   })
+# })
 ```
 
 ## Content

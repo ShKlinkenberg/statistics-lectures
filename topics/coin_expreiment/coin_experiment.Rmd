@@ -76,31 +76,12 @@ barplot( p_kp,
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Probabilities
-
-```{r, echo=FALSE}
-barplot( p_kp, 
-         main=title, 
-         names.arg=0:10, 
-         xlab="number of head", 
-         ylab="P(%)", 
-         col='darkgreen',
-         ylim=c(0,.3) )
-
-text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
-abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
-```
-
-
 ## Testing
 
-I landed 2 times head. Can we conclude that the diagnose PTSS? 
+I landed 2 times head. Can we conclude PTSS? 
 
 * As you can see from the distribution of healthy coins, we cannot conclude that by definition.
-
 * What we can do is indicate how rare 2 is in a healthy population.
-
-* We can see that a percentage of 5% is very rare.
 
 ## Testing {.smaller}
 
@@ -118,6 +99,21 @@ I landed 2 times head. Can we conclude that the diagnose PTSS?
 * I tossed 2 times head. That is more frequent than 5%.
 * Therefore, we conclude that our patient is probably healthy but we can never be sure.
 * My coin could still be part of the unbalenced population.
+
+## Null distribution
+
+```{r, echo=FALSE}
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col='darkgreen',
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+```
 
 ## Alternative Distribution {.smaller .build .subsection}
 
