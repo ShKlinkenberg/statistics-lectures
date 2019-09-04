@@ -1,4 +1,4 @@
-# Experiment
+# Experiment {.section}
 
 ## Heads
 
@@ -19,7 +19,7 @@
 * **Testing** Choose $\alpha$ and Power
 * **Evaluation** Make a decision
 
-## Null distribution
+## Null distribution {.subsection}
 
 Let's analyse the null distribution of the results.
 
@@ -40,7 +40,7 @@ k = 0:10 # Discrete probability space
 p = .5   # Probability of head
 ```
 
-## Probabilities {.section}
+## Probabilities
 
 ```{r, echo=FALSE}
 munt = 0:1
@@ -74,11 +74,25 @@ barplot( p_kp,
          ylim=c(0,.3) )
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
 
+## Probabilities
+
+```{r, echo=FALSE}
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col='darkgreen',
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
 ```
 
-## Testing {.section}
+
+## Testing
 
 I landed 2 times head. Can we conclude that the diagnose PTSS? 
 
@@ -105,7 +119,7 @@ I landed 2 times head. Can we conclude that the diagnose PTSS?
 * Therefore, we conclude that our patient is probably healthy but we can never be sure.
 * My coin could still be part of the unbalenced population.
 
-## Alternative Distribution {.smaller .build}
+## Alternative Distribution {.smaller .build .subsection}
 
 But we have no clue of what this distribution could look like. 
 
@@ -167,7 +181,7 @@ abline(v = c(6.5,27.5), col="red", lwd=3, lty="dotted")
 
 ```
 
-## Power and more
+## Power and more {.section}
 
 ```{r, echo=FALSE}
 N     = 10  # Sample size
