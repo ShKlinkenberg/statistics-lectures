@@ -34,7 +34,7 @@ local({
 })
 ```
 
-## Inhoud
+## Content
 
 <div id="toc"></div>
 
