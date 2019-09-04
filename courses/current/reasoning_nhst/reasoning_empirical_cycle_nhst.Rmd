@@ -38,6 +38,10 @@ local({
 
 <div id="toc"></div>
 
+## Learning
+
+<iframe style="height:400px;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <!-- Add the required topics below -->
 
 ```{r child="../../../topics/statistical_reasoning/statistical_reasoning.Rmd"}
@@ -46,7 +50,7 @@ local({
 ```{r child="../../../topics/empirical_cycle/empirical_cycle.Rmd"}
 ```
 
-```{r child="../../../topics/NHST/NHST.Rmd"}
+```{r child="../../../topics/coin_expreiment/coin_experiment.Rmd"}
 ```
 
 <!-- Footer insert below -->

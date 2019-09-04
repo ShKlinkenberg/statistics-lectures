@@ -1,24 +1,25 @@
 # Experiment
 
-## Heads {.flexbox .vcenter}
+## Heads
 
-<div>
+<div style="text-align:center;">
 
-![bit.ly/2j54A2U](../../../topics/coin_expreiment/QR_heads.png)
+<img style="width:60%;" src="../../../topics/coin_expreiment/QR_heads.png">
+<p>bit.ly/2j54A2U</p>
 
 </div>
 
 ## Emperical Cycle {.section}
 
 * **Observation** Patiënt is showing post traumatic symptoms
-* **Induction** Intherapy works
+* **Induction** Can we diagnose PTSS
 * **Deduction** $H_0$: P: fair coin &rarr; C: patiënt is balanced
 * **Deduction** $H_A$: P: Unfair coin &rarr; C: patiënt is unbalanced
 * **Deduction** $H_A$: P: data $\neq$ EV &rarr; C: is unbalanced
 * **Testing** Choose $\alpha$ and Power
 * **Evaluation** Make a decision
 
-## Nul distribution
+## Null distribution
 
 Let's analyse the null distribution of the results.
 
@@ -77,7 +78,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Testing {.section}
 
-I landed 2 times head. Can we conclude that the therapy worked? 
+I landed 2 times head. Can we conclude that the diagnose PTSS? 
 
 * As you can see from the distribution of healthy coins, we cannot conclude that by definition.
 
@@ -90,7 +91,7 @@ I landed 2 times head. Can we conclude that the therapy worked?
 * Based on the null distribution we can see that the expected value (EV is 5.)
 * We can now define the $H_0$ hypothesis: $H_0 = 5$
 * What is the alternative hypothesis?
-* The alternative hypothesis describes a situation where the therapy worked.
+* The alternative hypothesis describes a situation where PTSS is pressent.
 * We could say that the alternative hypothesis is not 5.
   * $H_A \ne 5$
 * We could also formulate our $H_0$ and $H_A$ more abstract:
