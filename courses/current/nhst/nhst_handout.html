@@ -11,6 +11,7 @@
 
 <meta name="author" content="Klinkenberg" />
 
+<meta name="date" content="2019-09-10" />
 
 <title>Null Hypothesis Testing</title>
 
@@ -1746,7 +1747,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Null Hypothesis Testing</h1>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">1 sep 2019</h4>
+<h4 class="date">10 sep 2019</h4>
 
 </div>
 
@@ -1994,7 +1995,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)</code></pre>
 </div>
 <div id="decision-table" class="section level2 flexbox vcenter subsection">
 <h2>Decision table</h2>
-<table style="border: none;">
+<table style="border: none;  transform: scale(1);">
 <col width="150px">
 <col width="225px">
 <col width="225px">
@@ -2034,6 +2035,43 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </div>
 <div id="alpha-alpha" class="section level2 subsection">
 <h2>Alpha <span class="math inline">\(\alpha\)</span></h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid blue; padding: 10px; z-indes:1; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
 <ul>
 <li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
 <li>Type I error</li>
@@ -2046,6 +2084,43 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </div>
 <div id="power" class="section level2 subsection">
 <h2>Power</h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid blue; padding: 10px; z-indes:1; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
 <ul>
 <li>Correctly reject <span class="math inline">\(H_0\)</span></li>
 <li>True positive</li>
@@ -2082,6 +2157,43 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </div>
 <div id="alpha" class="section level2 subsection">
 <h2>1 - alpha</h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
 <ul>
 <li>Correctly accept <span class="math inline">\(H_0\)</span></li>
 <li>True negative</li>
@@ -2091,6 +2203,43 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </div>
 <div id="beta" class="section level2 subsection">
 <h2>Beta</h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td>
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid blue; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
 <ul>
 <li>Incorrectly accept <span class="math inline">\(H_0\)</span></li>
 <li>Type II error</li>

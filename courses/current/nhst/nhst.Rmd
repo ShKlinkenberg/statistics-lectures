@@ -1,7 +1,7 @@
 ---
 title: "Null Hypothesis Testing"
 author: "Klinkenberg"
-date: "1 sep 2019"
+date: "10 sep 2019"
 output: 
   ioslides_presentation:
     logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png

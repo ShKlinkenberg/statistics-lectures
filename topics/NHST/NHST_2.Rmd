@@ -347,7 +347,7 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 
 ## Decision table {.flexbox .vcenter .subsection}
 
-<table style="border: none;">
+<table style="border: none;  transform: scale(1);">
   <col width="150px">
   <col width="225px">
   <col width="225px">
@@ -366,11 +366,29 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 
 ## Alpha $\alpha$ {.subsection}
 
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+  <col width="150px">
+  <col width="225px">
+  <col width="225px">
+<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
+<tr height="150px">
+<td>Decide to<br>reject $H_0$</td>
+<td style = "border: 5px solid blue; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
+</tr>
+<tr height="150px">
+<td>Decide not<br>to reject $H_0$</td>   
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
+</tr>
+</table>
+
 * Incorrectly reject $H_0$
 * Type I error
 * False Positive
 * Criteria often 5%
 * Distribution depends on sample size
+
 
 ```{r, echo=FALSE}
 n = 10   # Sample size
@@ -402,6 +420,24 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
 ## Power {.subsection}
+
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+  <col width="150px">
+  <col width="225px">
+  <col width="225px">
+<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
+<tr height="150px">
+<td>Decide to<br>reject $H_0$</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
+<td style = "border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
+</tr>
+<tr height="150px">
+<td>Decide not<br>to reject $H_0$</td>   
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
+</tr>
+</table>
+
 
 * Correctly reject $H_0$
 * True positive
@@ -462,6 +498,24 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## 1 - alpha {.subsection}
 
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+  <col width="150px">
+  <col width="225px">
+  <col width="225px">
+<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
+<tr height="150px">
+<td>Decide to<br>reject $H_0$</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
+</tr>
+<tr height="150px">
+<td>Decide not<br>to reject $H_0$</td>   
+<td style = "border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
+</tr>
+</table>
+
+
 * Correctly accept $H_0$
 * True negative
 
@@ -496,11 +550,29 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Beta {.subsection}
 
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+  <col width="150px">
+  <col width="225px">
+  <col width="225px">
+<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
+<tr height="150px">
+<td>Decide to<br>reject $H_0$</td>
+<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
+</tr>
+<tr height="150px">
+<td>Decide not<br>to reject $H_0$</td>   
+<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
+<td style = "border: 5px solid blue; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
+</tr>
+</table>
+
 * Incorrectly accept $H_0$
 * Type II error
 * False Negative
 * Criteria often 20%
 * Distribution depends on sample size
+
 
 ```{r, echo=FALSE}
 n = 10   # Sample size
