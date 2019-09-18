@@ -53,10 +53,10 @@ myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSv
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-data = data[grep("2017", as.character(data$Timestamp)),c("IQ.van.je.buur", "Eigen.IQ")]
+data = data[grep("2017", as.character(data$Timestamp)),c("IQ.next.to.you", "Own.IQ")]
 
-IQ.next.to.you = data$IQ.van.je.buur
-IQ.you           = data$Eigen.IQ
+IQ.next.to.you = data$IQ.next.to.you
+IQ.you         = data$Own.IQ
 
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")

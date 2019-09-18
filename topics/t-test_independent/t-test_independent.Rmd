@@ -63,7 +63,7 @@ myCsv <- getURL("https://docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSv
 # Read csv and assing to data object
 data <- read.csv(textConnection(myCsv))
 
-data <- data[grep("2014", as.character(data$Timestamp)),c("IQ.van.je.buur","Eigen.IQ")]
+data <- data[grep("2014", as.character(data$Timestamp)),c("IQ.next.to.you","Own.IQ")]
 
 names(data) <- c('IQ.next.to.you', 'IQ.you')
 ```
