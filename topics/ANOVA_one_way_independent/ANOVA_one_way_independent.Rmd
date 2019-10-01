@@ -185,8 +185,7 @@ $${SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x
 ss.e.c = var(x.c) * (n.c - 1)
 ss.e.k = var(x.k) * (n.k - 1)
 ss.e.e = var(x.e) * (n.e - 1)
-
-ss.e = sum(ss.e.c, ss.e.k, ss.e.e); ss.e
+ss.e   = sum(ss.e.c, ss.e.k, ss.e.e); ss.e
 ```
 
 -----

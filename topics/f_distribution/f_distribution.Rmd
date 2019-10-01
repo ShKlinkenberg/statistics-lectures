@@ -2,7 +2,7 @@
 
 ## Ronald Fisher {.smaller .subsection}
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/46/R._A._Fischer.jpg" style="float: left; width: 150px; margin: 0 20px 0 0;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" style="float: left; width: 150px; margin: 0 20px 0 0;">
 
 The F-distribution, also known as Snedecor's F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.
 
