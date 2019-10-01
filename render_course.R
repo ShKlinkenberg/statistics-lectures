@@ -48,12 +48,14 @@ RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_i
 
 # Blok II
 
-# Week 6
+# Week 5
 # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
 RenderMultipleOutput("courses/current/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
+RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
+
 
 # Week 7
-RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
+
 RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
 
 # Week 8
