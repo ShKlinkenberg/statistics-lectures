@@ -29,13 +29,13 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 <img src="../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:left; width:350px; margin-right:20px;">
 
 
-1. Field: 14.2.3 p 546, Output 14.2 p 560
-2. Field: Output 14.4 p 562
-3. Field: Jane Superbrain 14.2 p 548, Output 14.2 p 560. GG and HF.
-4. Field: Jane Superbrain 14.2 p 548. Sample size $n$ is larger than $a$ (number of levels) + 10
-5. Field: 14.2.5 p 548, Output 14.2 p 560
-6. Field: 14.2.5 p 548, Output 14.4 p 562
-7. Field: 14.2.5 p 548, Output 14.4 p 562
+1. Field: 15.5.2, Output 15.2
+2. Field: Output 15.4
+3. Field: Jane Superbrain 15.2, Output 15.2 GG and HF.
+4. Field: Jane Superbrain 15.2, Sample size $n$ is larger than $a$ (number of levels) + 10
+5. Field: 15.5.4, Output 15.2
+6. Field: 15.5.4, Output 15.4
+7. Field: 15.5.4, Output 15.4
 
 ## Formulas {.smaller .subsection}
 
