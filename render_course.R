@@ -57,7 +57,7 @@ RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mi
 
 # Week 8
 RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
-
+RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
 
 
 # Blok III
