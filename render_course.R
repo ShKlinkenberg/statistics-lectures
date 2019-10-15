@@ -41,9 +41,6 @@ RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_dis
 RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
 
 
-# Week 4
-
-
 # RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
 
 # Blok II
@@ -53,17 +50,15 @@ RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_i
 RenderMultipleOutput("courses/current/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
 RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
 
-
 # Week 6
 RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
 RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
 
 
 # Week 8
-
-
-# Week 9
 RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
+
+
 
 # Blok III
 
