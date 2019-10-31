@@ -114,6 +114,7 @@ plot(ZPRED, ZREDID)
 abline(h = 0, v = 0, lwd=2)
 
 #install.packages("plotrix")
+if(!"plotrix" %in% installed.packages()) { install.packages("plotrix") };
 library("plotrix")
 draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
 ```

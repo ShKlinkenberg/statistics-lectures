@@ -230,8 +230,8 @@ visualize.t(c(-t.r, t.r),df,section='tails')
 ## Venn diagram{.smaller}
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# install.packages('VennDiagram')
-library(VennDiagram)
+if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
+library("VennDiagram")
 ```
 
 ```{r, warning=FALSE, message=FALSE}
