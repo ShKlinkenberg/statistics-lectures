@@ -283,4 +283,3 @@ t.pr
 
 visualize.t(c(-t.pr,t.pr),df,section='tails')
 ```
-
