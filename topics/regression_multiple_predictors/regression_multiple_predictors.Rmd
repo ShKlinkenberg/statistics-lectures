@@ -126,9 +126,9 @@ fit <- lm(study.outcome ~ IQ + motivation)
 ```{r}
 fit$coefficients
 
-b.0 = fit$coefficients[1] ## Intercept
-b.1 = fit$coefficients[2] ## Beta coefficient for IQ
-b.2 = fit$coefficients[3] ## Beta coefficient for motivation
+b.0 = round(fit$coefficients[1], 2) ## Intercept
+b.1 = round(fit$coefficients[2], 2) ## Beta coefficient for IQ
+b.2 = round(fit$coefficients[3], 2) ## Beta coefficient for motivation
 ```
 
 De beta coëfficients are: 
@@ -142,6 +142,7 @@ De beta coëfficients are:
 ```{r, echo=FALSE, warning=FALSE}
 ## 3d plot package rgl
 ## install.packages('rgl')
+if(!"rgl" %in% installed.packages()) { install.packages("rgl") };
 library("rgl")
 
 library(knitr)
