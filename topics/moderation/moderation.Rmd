@@ -31,7 +31,7 @@ Video games are among the favourite online activities for young people: two-thir
 
 Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behaviour, callous unemotional traits, and the number of hours per week they play video games.
 
-Source: Field 10.3.1
+Source: Field 11.3.1
 
 ## Simulate data
 
@@ -65,7 +65,15 @@ write.csv(data, "moderation.csv")
 ## View data {.smaller}
 
 ```{r, echo=FALSE}
-datatable(round(data,2), rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(round(data,2), 
+          rownames   = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 350, 
+                         paging    = F, 
+                         info      = F,                          
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv')))
 ```
 
 ## Scatterplots {.subsection}
