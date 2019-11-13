@@ -84,10 +84,19 @@ data <- round(data, 4)
 write.csv(data, "mediation.csv", row.names=FALSE)
 ```
 
-## The data {.subsection}
+## The data {.subsection .smaller}
 
 ```{r, echo=FALSE}
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, rownames = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 300, 
+                         paging    = F, 
+                         info      = F,
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv')
+                         )
+          )
 ```
 
 ## Apply 3 models {.smaller}
