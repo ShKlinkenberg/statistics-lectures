@@ -17,7 +17,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 
 Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?
 
-![](http://www.kidneyabc.com/uploads/allimg/130404/2-13040414233CW.jpg)
+![<a style="font-size:50%;" href="https://www.pexels.com/photo/green-purple-flower-163186/" target="_blank">Photo by Pixabay from Pexels</a>](../../../topics/mediation/green-purple-flower-163186.jpg)
 
 ## Mediaton paths  {.flexbox .vcenter}
 
@@ -48,7 +48,7 @@ n     = 100
 mu    = 10
 sigma = 2
 ## Predictor
-gebruik.homeopathisch.middel = rnorm(n, mu, sigma)
+use.homeopathic.remedies = rnorm(n, mu, sigma)
 ```
 
 ## Mediator 
@@ -59,7 +59,7 @@ Create mediator
 b0    = 2
 b1    = 1.2
 error = rnorm(n,0,.7)
-gezonde.leefstijl = b0 + b1*gebruik.homeopathisch.middel + error
+healthy.lifestyle = b0 + b1*use.homeopathic.remedies + error
 ```
 
 ## Specify model 
@@ -71,12 +71,11 @@ b0    = 6
 b1    = 1.2
 b2    = 3
 error = rnorm(n,0,1.4)
-snelheid.van.genezing = b0 + b1*gebruik.homeopathisch.middel +
-                             b2*gezonde.leefstijl + error
+speed.of.healing = b0 + b1*use.homeopathic.remedies + b2*healthy.lifestyle + error
 
-data <- data.frame(gebruik.homeopathisch.middel, 
-                   gezonde.leefstijl, 
-                   snelheid.van.genezing)
+data <- data.frame(use.homeopathic.remedies, 
+                   healthy.lifestyle, 
+                   speed.of.healing)
 data <- round(data, 4)
 ```
 
@@ -94,10 +93,9 @@ datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 41
 ## Apply 3 models {.smaller}
 
 ```{r}
-m.1.out.pre     <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel)
-m.2.med.pre     <- lm(gezonde.leefstijl     ~ gebruik.homeopathisch.middel)
-m.3.out.pre.med <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel + 
-                                              gezonde.leefstijl)
+m.1.out.pre     <- lm(speed.of.healing ~ use.homeopathic.remedies)
+m.2.med.pre     <- lm(healthy.lifestyle ~ use.homeopathic.remedies)
+m.3.out.pre.med <- lm(speed.of.healing ~ use.homeopathic.remedies + healthy.lifestyle)
 ```
 
 ## Extract beta coëfficients
@@ -126,9 +124,9 @@ b.c.accent
 ## Visual {.subsection}
 
 ```{r, fig.asp=1, fig.width=5, fig.align='center'}
-plot(data$gebruik.homeopathisch.middel, data$snelheid.van.genezing, col = 'red', xlab="alter", ylab="rocov")
+plot(data$use.homeopathic.remedies, data$speed.of.healing, col = 'red', xlab="alter", ylab="rocov")
 
-fit.1 <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel, data)
+fit.1 <- lm(speed.of.healing ~ use.homeopathic.remedies, data)
 
 abline(fit.1, col = 'green')
 ```
@@ -148,17 +146,17 @@ max.var <- apply(data, 2, max)
 
 #1 #D scatter 
 
-plot3d(data$gebruik.homeopathisch.middel, data$gezonde.leefstijl, data$snelheid.van.genezin,
+plot3d(data$use.homeopathic.remedies, data$healthy.lifestyle, data$speed.of.healing,
        col  = "red",
-       xlab = "alter", 
-       ylab = "healt",
-       zlab = "rocov",
+       xlab = "Homeopathic", 
+       ylab = "Lifestyle",
+       zlab = "Healing",
        size = 8)
 
-#2 Add gebruik.homeopathisch.middel value planes 
+#2 Add use.homeopathic.remedies value planes 
 
-quantiles <- as.vector(quantile(data$gebruik.homeopathisch.middel,seq(.1,.9,.1)))
-sds       <- c(mean(data$gezonde.leefstijl)+(sd(data$gezonde.leefstijl)*c(-1,0,1)))
+quantiles <- as.vector(quantile(data$use.homeopathic.remedies, seq(.1,.9,.1)))
+sds       <- c(mean(data$healthy.lifestyle)+(sd(data$healthy.lifestyle)*c(-1,0,1)))
 # sds       <- 1:4
 
 planes3d(a = 0,
@@ -172,27 +170,27 @@ planes3d(a = 0,
 #3 Add regression model surface
 
 ## Fit model
-fit <- lm(snelheid.van.genezing ~ gebruik.homeopathisch.middel + gezonde.leefstijl, data)
+fit <- lm(speed.of.healing ~ use.homeopathic.remedies + healthy.lifestyle, data)
 
 ## Create xyz coordinates
-regeq <- function(gebruik.homeopathisch.middel, gezonde.leefstijl) { 
+regeq <- function(predictor, mediator) { 
     fit$coefficients[1] + 
-    fit$coefficients[2]*gebruik.homeopathisch.middel + 
-    fit$coefficients[3]*gezonde.leefstijl
+    fit$coefficients[2]*predictor + 
+    fit$coefficients[3]*mediator
 }
 
 
-x.pre <- seq(min.var[1], max.var[1],length.out=30)
-y.mod <- seq(min.var[2], max.var[2] ,length.out=30)
+x.pre <- seq(min.var[1], max.var[1], length.out=30)
+y.med <- seq(min.var[2], max.var[2], length.out=30)
 
-z.pre <- outer(x.pre, y.mod, FUN='regeq')
+z.pre <- outer(x.pre, y.med, FUN='regeq')
 
 # z.pre[z.pre > 4] = 4
 # z.pre[z.pre < 1] = 1
 
 
 ## Add 3D regression plane to scatter plot 
-surface3d(x.pre, y.mod, z.pre, color = c("green"))
+surface3d(x.pre, y.med, z.pre, color = c("green"))
 
 aspect3d(1,1,1)
 # view3d(theta = 5)
@@ -217,7 +215,7 @@ b.c - b.c.accent
 $$\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$$
 
 ```{r}
-b.a*b.b/sd(snelheid.van.genezing)
+b.a*b.b/sd(speed.of.healing)
 ```
 
 ## Calculate indirect effect (standardized) {.subsection}
@@ -225,7 +223,7 @@ b.a*b.b/sd(snelheid.van.genezing)
 $$\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}$$
 
 ```{r}
-b.a*b.b/sd(snelheid.van.genezing)*sd(gebruik.homeopathisch.middel)
+b.a*b.b/sd(speed.of.healing)*sd(use.homeopathic.remedies)
 ```
 
 ## Calculate $P_M$ {.subsection}
@@ -249,10 +247,10 @@ b.a*b.b/b.c.accent
 $$R^2_{out,med} − (R^2_{out,pre \times med} − R^2_{out,pre})$$
 
 ```{r}
-m.4.out.med <- lm(snelheid.van.genezing ~ gezonde.leefstijl)
-R2_out.med     = cor(m.4.out.med$fitted.values, snelheid.van.genezing)^2
-R2_out.pre.med = cor(m.3.out.pre.med$fitted.values, snelheid.van.genezing)^2
-R2_out.pre     = cor(m.1.out.pre$fitted.values, snelheid.van.genezing)^2
+m.4.out.med <- lm(speed.of.healing ~ healthy.lifestyle)
+R2_out.med     = cor(m.4.out.med$fitted.values, speed.of.healing)^2
+R2_out.pre.med = cor(m.3.out.pre.med$fitted.values, speed.of.healing)^2
+R2_out.pre     = cor(m.1.out.pre$fitted.values, speed.of.healing)^2
 
 R2_out.med - (R2_out.pre.med - R2_out.pre)
 ```
