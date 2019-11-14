@@ -96,6 +96,8 @@ cor(data)
 library(rgl)
 attach(data)
 
+par3d(mouseMode = "trackball")
+
 plot3d(predictor, moderator, outcome, 
        #col  = rainbow(100), 
        col  = "red",
