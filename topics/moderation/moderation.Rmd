@@ -212,12 +212,12 @@ data$exp <- fit$fitted.values
 ```{r, echo=FALSE}
 ## This is all the data
 n=nrow(data)
-plot(data$outcome,xlab='participants')
+plot(data$outcome,xlab='participants', col='red')
 ## With the mean
-lines(1:n,rep(mean(data$outcome),n),col='blue',lwd=2)
+lines(1:n,rep(mean(data$outcome),n),col='black',lwd=2)
 
 ## The blue lines are the total variance, the deviation from the mean.
-segments(1:n, mean(data$outcome), 1:n, data$outcome, col='blue')
+segments(1:n, mean(data$outcome), 1:n, data$outcome, col='black')
 
 p <- recordPlot()
 ```
@@ -226,9 +226,9 @@ p <- recordPlot()
 p
 
 ## The model predicts the IQ scores
-points(1:n, data$exp, col='red')
+points(1:n, data$exp, col='green')
 
 ## The part of the variation that overlaps is the 'explained' variance. 
 #for(i in 1:n) {lines(c(i,i),c(mean(data$exp), data$exp[i]), col='red')}
-segments(1:n, mean(data$exp), 1:n, data$exp, col='red')
+segments(1:n, mean(data$exp), 1:n, data$exp, col='green')
 ```
