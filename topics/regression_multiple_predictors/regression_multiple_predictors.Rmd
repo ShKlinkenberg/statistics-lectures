@@ -268,9 +268,9 @@ segments(1:n, study.outcome, 1:n, model, col='purple', lwd=3)
 
 The explained variance is the deviation of the estimated model outcome compared to the total mean.
 
-To get a percentage of explained variance, it must be compared to the total variance. In terms of $F$-values:
+To get a percentage of explained variance, it must be compared to the total variance. In terms of squares:
 
-$$\frac{{MS}_{model}}{{MS}_{total}}$$
+$$\frac{{SS}_{model}}{{SS}_{total}}$$
 
 We also call this: $r^2$ of $R^2$.
 
