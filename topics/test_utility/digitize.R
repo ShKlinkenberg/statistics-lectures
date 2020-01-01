@@ -2,3 +2,5 @@
 
 install.packages("digitize")
 library("digitize")
+
+dat <- digitize("topics/test_utility/scatterplot.png")
