@@ -13,13 +13,14 @@ The relationship between the costs and benefits are determined by the psychometr
 
 These properties can be emperically tested. We will show you the reasoning process in this lecture.
 
-## Predictive use of tests
+## Predictive Validity
+
+### Also called criterion validity
 
 * Often we want to predict based on testscores, how an individual will perform at a later time.
 * The thing we want to predict is called the **criterion**
     * Example: Selection of good employees or good students
 * For a good prediction it is important to have a high correlation between the testscore and the criterion.
-* This is called predictive validity / criterion validity
 
 **NOTE:** This is no different than the $R$ and $R^2$ in regular regression, the relation between the outcome and the model.
 
