@@ -1,9 +1,11 @@
 ```{r,echo=FALSE}
 set.seed(12)
 
-a = round(rnorm(100, 200, 40),0)
-b = round(a + rnorm(100, 0, 60), 0)
+a = round(rnorm(100, 200, 60),0)
+b = round(a + rnorm(100, 0, 40), 0)
 b = 400 - b
+
+correlation <- cor(a,b)
 ```
 
 
@@ -42,23 +44,20 @@ p.draw = function() {
   p.rect(lm, tm, w-(lm+rm), h-(tm+bm) );
   
   
-  p.strokeWeight(.5);
-  p.text('Predictor', w/2, h);
+  // set axis labels
+  // apply rotation only to text hence push and pop
   
   p.push();
+  p.strokeWeight(0);
+  p.stroke('black');
+  p.text('Predictor', w/2, h);
+  
   p.translate(10, h/2);
   p.rotate(3.1415/-2);
   p.text('Criterion',0,0);
   p.pop();
     
-  p.stroke('black');
-  p.strokeWeight(5);
-    
-  let i = 0;
-  while (i <= 100) {
-  p.point(x[i], y[i]);
-  i = i +1;
-  }
+  // determine if mouse is within plot area
     
   let mX = p.mouseX;
   let mY = p.mouseY; 
@@ -68,13 +67,13 @@ p.draw = function() {
         
         p.strokeWeight(2);
         
-        p.fill(255,0,0, 80);
+        p.fill("red");
         p.rect(lm, tm, mX-lm, mY-tm);
-        p.fill(0,255,0, 80);
+        p.fill("green");
         p.rect(w-rm, tm, mX-w+rm, mY-tm);
-        p.fill(0,255,0, 80);
+        p.fill("green");
         p.rect(lm, h-bm, mX-lm, mY-h+bm);
-        p.fill(255,0,0, 80);
+        p.fill("red");
         p.rect(w-rm, h-bm, mX-w+rm, mY-h+bm);
         
       let tl = 0;
@@ -102,7 +101,16 @@ p.draw = function() {
      document.getElementById('c2').innerHTML = tr + br;
      document.getElementById('to').innerHTML = 100; 
 
-        } // end mouse over    
+        } // end mouse over   
+  
+  p.stroke('black');
+  p.strokeWeight(5);
+        
+  let i = 0;
+  while (i <= 100) {
+  p.point(x[i], y[i]);
+  i = i +1;
+  }
     
 }
 
@@ -139,10 +147,12 @@ new p5(sketch, 'container');
 
 **What is the:**
 
+* Correlation = `r round(-correlation, 3)`
 * Hit rate
 * Base rate
 * Sensitivity
 * Specificity
+
 
 </div>
 </div>
