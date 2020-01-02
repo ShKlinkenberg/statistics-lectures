@@ -24,6 +24,10 @@ These properties can be emperically tested. We will show you the reasoning proce
 
 **NOTE:** This is no different than the $R$ and $R^2$ in regular regression, the relation between the outcome and the model.
 
+## 
+
+With a corelation of zero, you're no predicting hero
+
 ## Utility
 
 ```{r, child="utility_interactive_scatterplot.Rmd"}
