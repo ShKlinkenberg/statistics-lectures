@@ -25,39 +25,44 @@ p.setup = function() {
 
 p.draw = function() {
     
-    let w = 400;
-    let h = 400;
+  let w = 400;
+  let h = 400;
 
-    let tm = 10;
-    let lm = 10;
-    let rm = 10;
-    let bm = 10;  
+  let tm = 10;
+  let lm = 20;
+  let rm = 10;
+  let bm = 20;  
+  
+  let x = [`r a`];
+  let y = [`r b`];  
     
-    let x = [`r a`];
-    let y = [`r b`];  
+  p.stroke('black');
+  p.strokeWeight(2);
     
-    p.stroke('black');
-    p.strokeWeight(2);
+  p.rect(lm, tm, w-(lm+rm), h-(tm+bm) );
+  
+  
+  p.strokeWeight(.5);
+  p.text('Predictor', w/2, h);
+  
+  p.push();
+  p.translate(10, h/2);
+  p.rotate(3.1415/-2);
+  p.text('Criterion',0,0);
+  p.pop();
     
-    p.rect(tm, lm, w-(2*rm), h-(2*bm) );
+  p.stroke('black');
+  p.strokeWeight(5);
     
+  let i = 0;
+  while (i <= 100) {
+  p.point(x[i], y[i]);
+  i = i +1;
+  }
     
-    p.text('Criterion', 0, h/2);
-    p.text('Predictor', w/2, h);
-    
-    p.stroke('black');
-    p.strokeWeight(5);
-    
-    let i = 0;
-    while (i <= 100) {
-    p.point(x[i], y[i]);
-    i = i +1;
-    }
-    
-      let mX = p.mouseX;
-      let mY = p.mouseY; 
+  let mX = p.mouseX;
+  let mY = p.mouseY; 
 
-    
         if (mX < w-rm && mX > lm && 
             mY < h-bm && mY > tm) {  
         
