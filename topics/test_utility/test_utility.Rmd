@@ -40,3 +40,25 @@ Admission test (NL: selectie aan de poort)
 * Because of this, we can determine the effectiveness of a supposed admissions procedure.
 * We can calculate how much beter our results would be if we had actually selected.
 * This comparison will show us how much ther is to gain and the price we have to pay
+
+## Hit Rate
+
+## Base Rate
+
+## Specificity
+
+## Sensitivity
+
+
+## Taylor Russell Tables
+
+```{r}
+# install.packages("readxl")
+library("readxl")
+library("DT")
+tr.table <- read_excel("TaylorRusselTable.xlsx")
+datatable(tr.table)
+```
+
+
+[Taylor, H, and Russell, J. “The Relationship of Validity Coefficients to the Practical Effectiveness of Tests in Selection: Discussion and Tables.” Journal of Applied Psychology 23 (1939): n. pag. Web.](https://lib.uva.nl/permalink/31UKB_UAM1_INST/h37vvk/proquest1290354749)
