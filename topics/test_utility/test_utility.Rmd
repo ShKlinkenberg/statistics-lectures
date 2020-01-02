@@ -57,7 +57,13 @@ Admission test (NL: selectie aan de poort)
 library("readxl")
 library("DT")
 tr.table <- read_excel("TaylorRusselTable.xlsx")
-datatable(tr.table)
+datatable(tr.table, extensions = 'FixedColumns', rownames = F,
+  options = list(
+    pageLength = 21,
+    dom = 't',
+    scrollX = TRUE,
+    fixedColumns = TRUE
+  ) )
 ```
 
 
