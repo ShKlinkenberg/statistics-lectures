@@ -1,0 +1,143 @@
+```{r,echo=FALSE}
+set.seed(12)
+
+a = round(rnorm(100, 200, 40),0)
+b = round(a + rnorm(100, 0, 60), 0)
+b = 400 - b
+```
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+
+
+
+<script>
+let sketch = function(p) {
+
+p.setup = function() {
+
+  p.createCanvas(400, 400);
+  p.background('white');
+
+  }
+
+p.draw = function() {
+    
+    let w = 400;
+    let h = 400;
+
+    let tm = 10;
+    let lm = 10;
+    let rm = 10;
+    let bm = 10;  
+    
+    let x = [`r a`];
+    let y = [`r b`];  
+    
+    p.stroke('black');
+    p.strokeWeight(2);
+    
+    p.rect(tm, lm, w-(2*rm), h-(2*bm) );
+    
+    
+    p.text('Criterion', 0, h/2);
+    p.text('Predictor', w/2, h);
+    
+    p.stroke('black');
+    p.strokeWeight(5);
+    
+    let i = 0;
+    while (i <= 100) {
+    p.point(x[i], y[i]);
+    i = i +1;
+    }
+    
+      let mX = p.mouseX;
+      let mY = p.mouseY; 
+
+    
+        if (mX < w-rm && mX > lm && 
+            mY < h-bm && mY > tm) {  
+        
+        p.strokeWeight(2);
+        
+        p.fill(255,0,0, 80);
+        p.rect(lm, tm, mX-lm, mY-tm);
+        p.fill(0,255,0, 80);
+        p.rect(w-rm, tm, mX-w+rm, mY-tm);
+        p.fill(0,255,0, 80);
+        p.rect(lm, h-bm, mX-lm, mY-h+bm);
+        p.fill(255,0,0, 80);
+        p.rect(w-rm, h-bm, mX-w+rm, mY-h+bm);
+        
+      let tl = 0;
+      let tr = 0;
+      let bl = 0;
+      let br = 0;
+      
+      for (let i = -1; i <= x.length; i++) {
+      
+         if(x[i] <= mX && y[i] >  mY) { bl++ } // bl
+         if(x[i] <= mX && y[i] <= mY) { tl++ } // tl
+         if(x[i] >  mX && y[i] >  mY) { br++ } // br
+         if(x[i] >  mX && y[i] <= mY) { tr++ } // tr
+      
+      }
+    
+     document.getElementById('tl').innerHTML = tl;
+     document.getElementById('tr').innerHTML = tr;  
+     document.getElementById('bl').innerHTML = bl;  
+     document.getElementById('br').innerHTML = br;
+     
+     document.getElementById('r1').innerHTML = tl + tr;
+     document.getElementById('r2').innerHTML = bl + br;  
+     document.getElementById('c1').innerHTML = tl + bl;  
+     document.getElementById('c2').innerHTML = tr + br;
+     document.getElementById('to').innerHTML = 100; 
+
+        } // end mouse over    
+    
+}
+
+}
+
+new p5(sketch, 'container');
+</script>
+
+<div style="width:100%;">
+
+<div id='container' style="float:left;"></div>
+
+<div style="float:right; width: 45%;">
+
+### Counts and margins
+
+<table style="width: 150px; height:150px; text-align:center;">
+<tr>
+<td style="background-color:red;   width: 50px; color:white;" id="tl">0</td>
+<td style="background-color:green; width: 50px; color:white;" id="tr">0</td>
+<td style="width: 50px;" id="r1">0</td>
+</tr>
+<tr>
+<td style="background-color:green; width: 50px; color:white;" id="bl">0</td>
+<td style="background-color:red;   width: 50px; color:white;" id="br">0</td>
+<td style="width: 50px;" id="r2">0</td>
+</tr>
+<tr>
+<td style="width: 50px;" id="c1">0</td>
+<td style="width: 50px;" id="c2">0</td>
+<td style="width: 50px;" id="to">0</td>
+</tr>
+</table>
+
+**What is the:**
+
+* Hit rate
+* Base rate
+* Sensitivity
+* Specificity
+
+</div>
+</div>
