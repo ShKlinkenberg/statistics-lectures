@@ -28,6 +28,8 @@ These properties can be emperically tested. We will show you the reasoning proce
 
 With a corelation of zero, you're no predicting hero
 
+https://www.flickr.com/photos/paulussie/15582506882
+
 ## Utility
 
 ```{r, child="utility_interactive_scatterplot.Rmd"}
