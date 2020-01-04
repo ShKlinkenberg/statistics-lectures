@@ -58,7 +58,7 @@ Admission test (NL: selectie aan de poort)
 
 ## Taylor Russell Tables {.subsection}
 
-```{r}
+```{r, echo=FALSE}
 # install.packages("readxl")
 library("readxl")
 library("DT")
