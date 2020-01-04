@@ -24,11 +24,10 @@ These properties can be emperically tested. We will show you the reasoning proce
 
 **NOTE:** This is no different than the $R$ and $R^2$ in regular regression, the relation between the outcome and the model.
 
-## {data-background=tile.jpg data-background-size=cover}
+## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
 
-With a corelation of zero,<br>you're no predicting hero
+<p style="color:darkblue; font-size:200%; text-align: center;">A corelation of zero,<br>is no predicting hero</p> <!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) -->
 
-https://www.flickr.com/photos/paulussie/15582506882
 
 ## Utility
 
@@ -58,7 +57,15 @@ Admission test (NL: selectie aan de poort)
 
 ## Taylor Russell Tables {.subsection}
 
-```{r, echo=FALSE}
+
+[Taylor, H, and Russell, J. “The Relationship of Validity Coefficients to the Practical Effectiveness of Tests in Selection: Discussion and Tables.” Journal of Applied Psychology 23 (1939): n. pag. Web.](https://lib.uva.nl/permalink/31UKB_UAM1_INST/h37vvk/proquest1290354749)
+
+
+##
+
+<div style="font-size:30%;">
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # install.packages("readxl")
 library("readxl")
 library("DT")
@@ -72,5 +79,4 @@ datatable(tr.table, extensions = 'FixedColumns', rownames = F,
   ) )
 ```
 
-
-[Taylor, H, and Russell, J. “The Relationship of Validity Coefficients to the Practical Effectiveness of Tests in Selection: Discussion and Tables.” Journal of Applied Psychology 23 (1939): n. pag. Web.](https://lib.uva.nl/permalink/31UKB_UAM1_INST/h37vvk/proquest1290354749)
+</div>
