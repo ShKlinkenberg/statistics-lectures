@@ -73,8 +73,14 @@ RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd
 RenderMultipleOutput("courses/current/mediation/mediation.Rmd")
 RenderMultipleOutput("courses/current/moderation/moderation.Rmd")
 
-# Week 14
-
-
 # Blok IV
+
+# Week 15
 RenderMultipleOutput("courses/current/non_parametric_tests/non_parametric_tests.Rmd")
+
+# Block V
+
+# Week 16
+RenderMultipleOutput("courses/current/test_utility/test_utility.Rmd")
+
+
