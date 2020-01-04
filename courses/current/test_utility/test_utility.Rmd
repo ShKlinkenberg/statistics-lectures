@@ -10,7 +10,7 @@ output:
     includes       :
       in_header    : ["../../../TOC/TOC_generator.js.wrapper",
                       "../../../GA_Script/GA_Script.html"]
-    self_contained : TRUE
+    self_contained : FALSE
   html_document:
     toc            : TRUE
     toc_float:
