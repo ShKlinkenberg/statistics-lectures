@@ -1,6 +1,6 @@
-# What is Test Utility
+# Test Utility
 
-## Test Utility
+## What is Test Utility {.subsection}
 
 Test Utility, litterally refers to using a test as a utility, as a tool.
 
@@ -13,7 +13,7 @@ The relationship between the costs and benefits are determined by the psychometr
 
 These properties can be emperically tested. We will show you the reasoning process in this lecture.
 
-## Predictive Validity
+## Predictive Validity {.subsection}
 
 ### Also called criterion validity
 
@@ -24,9 +24,9 @@ These properties can be emperically tested. We will show you the reasoning proce
 
 **NOTE:** This is no different than the $R$ and $R^2$ in regular regression, the relation between the outcome and the model.
 
-## 
+## {data-background=tile.jpg data-background-size=cover}
 
-With a corelation of zero, you're no predicting hero
+With a corelation of zero,<br>you're no predicting hero
 
 https://www.flickr.com/photos/paulussie/15582506882
 
@@ -47,16 +47,16 @@ Admission test (NL: selectie aan de poort)
 * We can calculate how much beter our results would be if we had actually selected.
 * This comparison will show us how much ther is to gain and the price we have to pay
 
-## Hit Rate
+## Hit Rate {.subsection}
 
-## Base Rate
+## Base Rate {.subsection}
 
-## Specificity
+## Specificity {.subsection}
 
-## Sensitivity
+## Sensitivity {.subsection}
 
 
-## Taylor Russell Tables
+## Taylor Russell Tables {.subsection}
 
 ```{r}
 # install.packages("readxl")
