@@ -50,7 +50,32 @@ Admission test (NL: selectie aan de poort)
 * The data was gathered before we actually had admission tests (all students where admitted).
 * Because of this, we can determine the effectiveness of a supposed admissions procedure.
 * We can calculate how much beter our results would be if we had actually selected.
-* This comparison will show us how much ther is to gain and the price we have to pay
+* This comparison will show us how much there is to gain and the price we have to pay
+
+## CASE STUDY:
+
+```{r, fig.asp=1/3, echo=FALSE}
+load("data.Rdata")
+names(dat) <- c("Motivation", "StudyResults")
+
+avg.mot <- mean(dat$Motivation)
+pass.mark <- 6
+correlation <- cor(dat)[1,2]
+
+layout(matrix(1:3, 1, 3))
+hist(dat$Motivation, col = "orange", xlab = "z-scores", main = "Motivation")
+abline(v=avg.mot, lwd = 2)
+hist(dat$StudyResults, col = "orange", xlab = "average grades", main = "Study Results")
+abline(v=pass.mark, lwd = 2)
+plot(dat, col = "orange", ylab = "average grades", main = "Correlation")
+abline(h=pass.mark, v=avg.mot, lwd = 2)
+
+
+```
+
+* Average Motivation: `r round(avg.mot,3)`
+* Pass mark: 6
+* Correlation: `r round(correlation,3)`
 
 ## Hit Rate {.subsection}
 
