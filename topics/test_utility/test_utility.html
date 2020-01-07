@@ -2752,21 +2752,18 @@ summary {
 <p>These properties can be emperically tested. We will show you the reasoning process in this lecture.</p>
 </div>
 </div>
-<div id="predictive-validity" class="section level2 subsection">
-<h2>Predictive Validity</h2>
-<div id="also-called-criterion-validity" class="section level3">
-<h3>Also called criterion validity</h3>
+<div id="predictive-criterion-validity" class="section level2 subsection">
+<h2>Predictive / Criterion Validity</h2>
+<p>Often we want to predict based on testscores how an individual will perform at a later time.</p>
 <ul>
-<li>Often we want to predict based on testscores how an individual will perform at a later time.</li>
 <li>The thing we want to predict is called the <strong>criterion</strong>
 <ul>
 <li>Example: Selection of good employees or good students</li>
 </ul></li>
 <li>The test we use to predict is obviously called the <strong>predictor</strong></li>
-<li>The predictive validity is defined as the correlation between the <strong>predictor</strong> / testscore and the <strong>criterion</strong>.</li>
 </ul>
+<p>The predictive validity is defined as the correlation between the <strong>predictor</strong> / testscore and the <strong>criterion</strong>.</p>
 <p><strong>NOTE:</strong> This is no different than the <span class="math inline">\(R\)</span> in regular regression analysis, the correlation between the outcome and the model.</p>
-</div>
 </div>
 <div id="section" class="section level2 flexbox vcenter" data-background="../../../topics/test_utility/tile.jpg" data-background-size="contain">
 <h2></h2>
@@ -2907,8 +2904,8 @@ p.draw = function() {
      
      document.getElementById('HR').innerHTML = (TP + TN) / 100;
      document.getElementById('BR').innerHTML = (FN + TP) / 100;
-     document.getElementById('SEN').innerHTML = (TP / (TP + FP)).toFixed(2);
-     document.getElementById('SPE').innerHTML = (TN / (TN + FN)).toFixed(2);
+     document.getElementById('SEN').innerHTML = (TP / (TP + FN)).toFixed(2);
+     document.getElementById('SPE').innerHTML = (TN / (TN + FP)).toFixed(2);
 
         } // end mouse over   
   
@@ -2999,6 +2996,22 @@ FP
 <p>Percentage of correct conclusions.</p>
 <p><span class="math display">\[\definecolor{green}{RGB}{0,128,0}
 \text{Hit Rate} = \frac{{\color{green}\text{TP}} + \color{green}\text{TN}}{N}\]</span></p>
+<table style="width: 150px; height:150px; text-align:center;">
+<tr>
+<td style="background-color:red;   width: 50px; color:white;">
+FN
+</td>
+<td style="background-color:green; width: 50px; color:white;" ">TP</td>
+</tr>
+<tr>
+<td style="background-color:green; width: 50px; color:white;">
+TN
+</td>
+<td style="background-color:red;   width: 50px; color:white;">
+FP
+</td>
+</tr>
+</table>
 </div>
 <div id="base-rate" class="section level2 subsection">
 <h2>Base Rate</h2>
@@ -3015,12 +3028,12 @@ FP
 <h2>Sensitivity</h2>
 <p>We can determine the efficiency of selection by calculating the sensitivity and specificity of a test.</p>
 <p><strong>Sensitivity:</strong> Percentage of eligible candidates that will be selected.</p>
-<p><span class="math display">\[\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{green}\text{TP}} + \color{red}\text{FP}}\]</span></p>
+<p><span class="math display">\[\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \color{green}\text{TP}}\]</span></p>
 </div>
 <div id="specificity" class="section level2 subsection">
 <h2>Specificity</h2>
 <p><strong>Specificity:</strong> Percentage of inapt candidates that will be rejected.</p>
-<p><span class="math display">\[\text{Specificity} = \frac{\color{green}\text{TN}}{{\color{green}\text{TN}} + \color{red}\text{FN}}\]</span></p>
+<p><span class="math display">\[\text{Specificity} = \frac{\color{green}\text{TN}}{{\color{green}\text{TN}} + \color{red}\text{FP}}\]</span></p>
 </div>
 <div id="taylor-russell-tables" class="section level2 subsection">
 <h2>Taylor Russell Tables</h2>

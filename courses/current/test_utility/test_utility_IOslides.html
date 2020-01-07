@@ -202,7 +202,7 @@ slide:not(.current) .plotly.html-widget{
   MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
 
-</article></slide><slide class=""><hgroup><h2>What is Test Utility</h2></hgroup><article  id="what-is-test-utility" class="subsection">
+</article></slide><slide class=""><hgroup><h2>What is Test Utility</h2></hgroup><article  class="subsection" id="what-is-test-utility">
 
 <p>Test Utility, litterally refers to using a test as a utility, as a tool.</p>
 
@@ -217,7 +217,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>These properties can be emperically tested. We will show you the reasoning process in this lecture.</p>
 
-</article></slide><slide class=""><hgroup><h2>Predictive / Criterion Validity</h2></hgroup><article  id="predictive-criterion-validity" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Predictive / Criterion Validity</h2></hgroup><article  class="subsection" id="predictive-criterion-validity">
 
 <p>Often we want to predict based on testscores how an individual will perform at a later time.</p>
 
@@ -234,7 +234,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p><strong>NOTE:</strong> This is no different than the \(R\) in regular regression analysis, the correlation between the outcome and the model.</p>
 
-</article></slide><slide class="fill nobackground" style="background-image: url(../../../topics/test_utility/tile.jpg); background-size: contain; background-position: center;"><hgroup><h2></h2></hgroup><article  id="section" class="flexbox vcenter">
+</article></slide><slide class="fill nobackground" style="background-image: url(../../../topics/test_utility/tile.jpg); background-size: contain; background-position: center;"><hgroup><h2></h2></hgroup><article  class="flexbox vcenter" id="section">
 
 <p style="color:darkblue; font-size:200%; text-align: center;">
 
@@ -469,14 +469,78 @@ FP
 <li>This comparison will show us how much ther is to gain and the price we have to pay</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Hit Rate</h2></hgroup><article  id="hit-rate" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Hit Rate</h2></hgroup><article  class="subsection" id="hit-rate">
+
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+
+<tr>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FN
+
+</td>
+
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+
+</tr>
+
+<tr>
+
+<td style="background-color:green; width: 50px; color:white;">
+
+TN
+
+</td>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FP
+
+</td>
+
+</tr>
+
+</table>
 
 <p>Percentage of correct conclusions.</p>
 
 <p>\[\definecolor{green}{RGB}{0,128,0}
 \text{Hit Rate} = \frac{{\color{green}\text{TP}} + \color{green}\text{TN}}{N}\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Base Rate</h2></hgroup><article  id="base-rate" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Base Rate</h2></hgroup><article  class="subsection" id="base-rate">
+
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+
+<tr>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FN
+
+</td>
+
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+
+</tr>
+
+<tr>
+
+<td style="background-color:green; width: 50px; color:white;">
+
+TN
+
+</td>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FP
+
+</td>
+
+</tr>
+
+</table>
 
 <p>Percentage of correct conclusions when not selecting.</p>
 
@@ -489,7 +553,39 @@ FP
 
 <p>\[\text{Hit Rate} - \text{Base Rate} = \text{Benefit}\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Sensitivity</h2></hgroup><article  id="sensitivity" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Sensitivity</h2></hgroup><article  class="subsection" id="sensitivity">
+
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+
+<tr>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FN
+
+</td>
+
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+
+</tr>
+
+<tr>
+
+<td style="background-color:green; width: 50px; color:white;">
+
+TN
+
+</td>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FP
+
+</td>
+
+</tr>
+
+</table>
 
 <p>We can determine the efficiency of selection by calculating the sensitivity and specificity of a test.</p>
 
@@ -497,21 +593,53 @@ FP
 
 <p>\[\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \color{green}\text{TP}}\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Specificity</h2></hgroup><article  id="specificity" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Specificity</h2></hgroup><article  class="subsection" id="specificity">
+
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+
+<tr>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FN
+
+</td>
+
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+
+</tr>
+
+<tr>
+
+<td style="background-color:green; width: 50px; color:white;">
+
+TN
+
+</td>
+
+<td style="background-color:red;   width: 50px; color:white;">
+
+FP
+
+</td>
+
+</tr>
+
+</table>
 
 <p><strong>Specificity:</strong> Percentage of inapt candidates that will be rejected.</p>
 
 <p>\[\text{Specificity} = \frac{\color{green}\text{TN}}{{\color{green}\text{TN}} + \color{red}\text{FP}}\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Taylor Russell Tables</h2></hgroup><article  id="taylor-russell-tables" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Taylor Russell Tables</h2></hgroup><article  class="subsection" id="taylor-russell-tables">
 
 <p><a href='https://lib.uva.nl/permalink/31UKB_UAM1_INST/h37vvk/proquest1290354749' title=''>Taylor, H, and Russell, J. &ldquo;The Relationship of Validity Coefficients to the Practical Effectiveness of Tests in Selection: Discussion and Tables.&rdquo; Journal of Applied Psychology 23 (1939): n. pag. Web.</a></p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
 
 <div style="font-size:30%;">
-<div id="htmlwidget-0271f30fe0323050d3bc" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0271f30fe0323050d3bc">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[[0,0.5,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],[0.6,0.64,0.68,0.71,0.75,0.78,0.82,0.85,0.88,0.9,0.93,0.95,0.96,0.98,0.99,0.99,1,1,1,1,1],[0.6,0.63,0.67,0.7,0.73,0.76,0.79,0.82,0.85,0.87,0.9,0.92,0.94,0.96,0.97,0.99,0.99,1,1,1,1],[0.6,0.63,0.65,0.68,0.71,0.73,0.76,0.78,0.81,0.83,0.86,0.88,0.9,0.92,0.94,0.96,0.98,0.99,1,1,1],[0.6,0.62,0.64,0.67,0.69,0.71,0.73,0.75,0.78,0.8,0.82,0.84,0.87,0.89,0.91,0.93,0.95,0.97,0.99,1,1],[0.6,0.62,0.64,0.66,0.67,0.69,0.71,0.73,0.75,0.77,0.79,0.81,0.83,0.85,0.87,0.9,0.92,0.95,0.97,0.99,1],[0.6,0.62,0.63,0.65,0.66,0.68,0.69,0.71,0.73,0.74,0.76,0.78,0.8,0.82,0.84,0.86,0.88,0.91,0.94,0.97,1],[0.6,0.61,0.63,0.64,0.65,0.66,0.68,0.69,0.7,0.72,0.73,0.75,0.76,0.78,0.8,0.81,0.83,0.86,0.88,0.92,1],[0.6,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68,0.69,0.7,0.71,0.73,0.74,0.75,0.77,0.78,0.8,0.82,0.84,0.86],[0.6,0.61,0.61,0.62,0.63,0.63,0.64,0.65,0.66,0.66,0.67,0.68,0.69,0.7,0.71,0.71,0.72,0.73,0.74,0.75,0.75],[0.6,0.6,0.61,0.61,0.62,0.62,0.62,0.63,0.63,0.64,0.64,0.64,0.65,0.65,0.66,0.66,0.66,0.66,0.67,0.67,0.67],[0.6,0.6,0.6,0.61,0.61,0.61,0.61,0.62,0.62,0.62,0.62,0.62,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>...1<\/th>\n      <th>0.05<\/th>\n      <th>0.1<\/th>\n      <th>0.2<\/th>\n      <th>0.3<\/th>\n      <th>0.4<\/th>\n      <th>0.5<\/th>\n      <th>0.6<\/th>\n      <th>0.7<\/th>\n      <th>0.8<\/th>\n      <th>0.9<\/th>\n      <th>0.95<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":21,"dom":"t","scrollX":true,"fixedColumns":true,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10,11]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,21,25,50,100]}},"evals":[],"jsHooks":[]}</script></div>
+<div id="htmlwidget-6b92249b9aaf37700542" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6b92249b9aaf37700542">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[[0,0.5,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],[0.6,0.64,0.68,0.71,0.75,0.78,0.82,0.85,0.88,0.9,0.93,0.95,0.96,0.98,0.99,0.99,1,1,1,1,1],[0.6,0.63,0.67,0.7,0.73,0.76,0.79,0.82,0.85,0.87,0.9,0.92,0.94,0.96,0.97,0.99,0.99,1,1,1,1],[0.6,0.63,0.65,0.68,0.71,0.73,0.76,0.78,0.81,0.83,0.86,0.88,0.9,0.92,0.94,0.96,0.98,0.99,1,1,1],[0.6,0.62,0.64,0.67,0.69,0.71,0.73,0.75,0.78,0.8,0.82,0.84,0.87,0.89,0.91,0.93,0.95,0.97,0.99,1,1],[0.6,0.62,0.64,0.66,0.67,0.69,0.71,0.73,0.75,0.77,0.79,0.81,0.83,0.85,0.87,0.9,0.92,0.95,0.97,0.99,1],[0.6,0.62,0.63,0.65,0.66,0.68,0.69,0.71,0.73,0.74,0.76,0.78,0.8,0.82,0.84,0.86,0.88,0.91,0.94,0.97,1],[0.6,0.61,0.63,0.64,0.65,0.66,0.68,0.69,0.7,0.72,0.73,0.75,0.76,0.78,0.8,0.81,0.83,0.86,0.88,0.92,1],[0.6,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68,0.69,0.7,0.71,0.73,0.74,0.75,0.77,0.78,0.8,0.82,0.84,0.86],[0.6,0.61,0.61,0.62,0.63,0.63,0.64,0.65,0.66,0.66,0.67,0.68,0.69,0.7,0.71,0.71,0.72,0.73,0.74,0.75,0.75],[0.6,0.6,0.61,0.61,0.62,0.62,0.62,0.63,0.63,0.64,0.64,0.64,0.65,0.65,0.66,0.66,0.66,0.66,0.67,0.67,0.67],[0.6,0.6,0.6,0.61,0.61,0.61,0.61,0.62,0.62,0.62,0.62,0.62,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>...1<\/th>\n      <th>0.05<\/th>\n      <th>0.1<\/th>\n      <th>0.2<\/th>\n      <th>0.3<\/th>\n      <th>0.4<\/th>\n      <th>0.5<\/th>\n      <th>0.6<\/th>\n      <th>0.7<\/th>\n      <th>0.8<\/th>\n      <th>0.9<\/th>\n      <th>0.95<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":21,"dom":"t","scrollX":true,"fixedColumns":true,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10,11]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,21,25,50,100]}},"evals":[],"jsHooks":[]}</script></div>
 
 <!-- Footer insert below -->
 

@@ -54,12 +54,34 @@ Admission test (NL: selectie aan de poort)
 
 ## Hit Rate {.subsection}
 
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+<tr>
+<td style="background-color:red;   width: 50px; color:white;">FN</td>
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+</tr>
+<tr>
+<td style="background-color:green; width: 50px; color:white;">TN</td>
+<td style="background-color:red;   width: 50px; color:white;">FP</td>
+</tr>
+</table>
+
 Percentage of correct conclusions.
 
 $$\definecolor{green}{RGB}{0,128,0}
 \text{Hit Rate} = \frac{{\color{green}\text{TP}} + \color{green}\text{TN}}{N}$$
 
 ## Base Rate {.subsection}
+
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+<tr>
+<td style="background-color:red;   width: 50px; color:white;">FN</td>
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+</tr>
+<tr>
+<td style="background-color:green; width: 50px; color:white;">TN</td>
+<td style="background-color:red;   width: 50px; color:white;">FP</td>
+</tr>
+</table>
 
 Percentage of correct conclusions when not selecting.
 
@@ -74,6 +96,17 @@ $$\text{Hit Rate} - \text{Base Rate} = \text{Benefit}$$
 
 ## Sensitivity {.subsection}
 
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+<tr>
+<td style="background-color:red;   width: 50px; color:white;">FN</td>
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+</tr>
+<tr>
+<td style="background-color:green; width: 50px; color:white;">TN</td>
+<td style="background-color:red;   width: 50px; color:white;">FP</td>
+</tr>
+</table>
+
 We can determine the efficiency of selection by calculating the sensitivity and specificity of a test.
 
 **Sensitivity:** Percentage of eligible candidates that will be selected.
@@ -81,6 +114,17 @@ We can determine the efficiency of selection by calculating the sensitivity and 
 $$\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \color{green}\text{TP}}$$
 
 ## Specificity {.subsection}
+
+<table style="width: 150px; height:150px; text-align:center; float:right;">
+<tr>
+<td style="background-color:red;   width: 50px; color:white;">FN</td>
+<td style="background-color:green; width: 50px; color:white;"">TP</td>
+</tr>
+<tr>
+<td style="background-color:green; width: 50px; color:white;">TN</td>
+<td style="background-color:red;   width: 50px; color:white;">FP</td>
+</tr>
+</table>
 
 **Specificity:** Percentage of inapt candidates that will be rejected.
 
