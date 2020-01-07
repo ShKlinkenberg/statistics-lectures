@@ -1,5 +1,10 @@
 # Test Utility
 
+<!-- Allow color highlighting in mathjax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
 ## What is Test Utility {.subsection}
 
 Test Utility, litterally refers to using a test as a utility, as a tool.
@@ -13,23 +18,24 @@ The relationship between the costs and benefits are determined by the psychometr
 
 These properties can be emperically tested. We will show you the reasoning process in this lecture.
 
-## Predictive Validity {.subsection}
+## Predictive / Criterion Validity {.subsection}
 
-### Also called criterion validity
+Often we want to predict based on testscores how an individual will perform at a later time.
 
-* Often we want to predict based on testscores, how an individual will perform at a later time.
 * The thing we want to predict is called the **criterion**
     * Example: Selection of good employees or good students
-* For a good prediction it is important to have a high correlation between the **predictor** / testscore and the criterion.
+* The test we use to predict is obviously called the **predictor**
 
-**NOTE:** This is no different than the $R$ and $R^2$ in regular regression, the relation between the outcome and the model.
+The predictive validity is defined as the correlation between the **predictor** / testscore and the **criterion**.
+
+**NOTE:** This is no different than the $R$ in regular regression analysis, the correlation between the outcome and the model.
 
 ## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
 
 <p style="color:darkblue; font-size:200%; text-align: center;">A corelation of zero,<br>is no predicting hero</p> <!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) -->
 
 
-## Utility
+## Utility (interactive)
 
 ```{r, child="utility_interactive_scatterplot.Rmd"}
 ```
@@ -48,12 +54,37 @@ Admission test (NL: selectie aan de poort)
 
 ## Hit Rate {.subsection}
 
+Percentage of correct conclusions.
+
+$$\definecolor{green}{RGB}{0,128,0}
+\text{Hit Rate} = \frac{{\color{green}\text{TP}} + \color{green}\text{TN}}{N}$$
+
 ## Base Rate {.subsection}
 
-## Specificity {.subsection}
+Percentage of correct conclusions when not selecting.
+
+$$\definecolor{red}{RGB}{255,0,0}
+\text{Base Rate} = \frac{{\color{green}\text{TP}} + \color{red}\text{FN}}{N}$$
+
+## Hit Rate - Base Rate
+
+To determine the benefit of selection we need to know what the hit rate is compared to the base rate.
+
+$$\text{Hit Rate} - \text{Base Rate} = \text{Benefit}$$
 
 ## Sensitivity {.subsection}
 
+We can determine the efficiency of selection by calculating the sensitivity and specificity of a test.
+
+**Sensitivity:** Percentage of eligible candidates that will be selected.
+
+$$\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \color{green}\text{TP}}$$
+
+## Specificity {.subsection}
+
+**Specificity:** Percentage of inapt candidates that will be rejected.
+
+$$\text{Specificity} = \frac{\color{green}\text{TN}}{{\color{green}\text{TN}} + \color{red}\text{FP}}$$
 
 ## Taylor Russell Tables {.subsection}
 

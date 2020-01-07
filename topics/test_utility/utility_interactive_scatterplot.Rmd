@@ -76,30 +76,35 @@ p.draw = function() {
         p.fill("red");
         p.rect(w-rm, h-bm, mX-w+rm, mY-h+bm);
         
-      let tl = 0;
-      let tr = 0;
-      let bl = 0;
-      let br = 0;
+      let FN = 0; // tl
+      let TP = 0; // tr
+      let TN = 0; // bl
+      let FP = 0; // br
       
       for (let i = -1; i <= x.length; i++) {
       
-         if(x[i] <= mX && y[i] >  mY) { bl++ } // bl
-         if(x[i] <= mX && y[i] <= mY) { tl++ } // tl
-         if(x[i] >  mX && y[i] >  mY) { br++ } // br
-         if(x[i] >  mX && y[i] <= mY) { tr++ } // tr
+         if(x[i] <= mX && y[i] >  mY) { TN++ } // TN
+         if(x[i] <= mX && y[i] <= mY) { FN++ } // FN
+         if(x[i] >  mX && y[i] >  mY) { FP++ } // FP
+         if(x[i] >  mX && y[i] <= mY) { TP++ } // TP
       
       }
     
-     document.getElementById('tl').innerHTML = tl;
-     document.getElementById('tr').innerHTML = tr;  
-     document.getElementById('bl').innerHTML = bl;  
-     document.getElementById('br').innerHTML = br;
+     document.getElementById('FN').innerHTML = FN;
+     document.getElementById('TP').innerHTML = TP;  
+     document.getElementById('TN').innerHTML = TN;  
+     document.getElementById('FP').innerHTML = FP;
      
-     document.getElementById('r1').innerHTML = tl + tr;
-     document.getElementById('r2').innerHTML = bl + br;  
-     document.getElementById('c1').innerHTML = tl + bl;  
-     document.getElementById('c2').innerHTML = tr + br;
+     document.getElementById('r1').innerHTML = FN + TP;
+     document.getElementById('r2').innerHTML = TN + FP;  
+     document.getElementById('c1').innerHTML = FN + TN;  
+     document.getElementById('c2').innerHTML = TP + FP;
      document.getElementById('to').innerHTML = 100; 
+     
+     document.getElementById('HR').innerHTML = (TP + TN) / 100;
+     document.getElementById('BR').innerHTML = (FN + TP) / 100;
+     document.getElementById('SEN').innerHTML = (TP / (TP + FN)).toFixed(2);
+     document.getElementById('SPE').innerHTML = (TN / (TN + FP)).toFixed(2);
 
         } // end mouse over   
   
@@ -129,13 +134,13 @@ new p5(sketch, 'container');
 
 <table style="width: 150px; height:150px; text-align:center;">
 <tr>
-<td style="background-color:red;   width: 50px; color:white;" id="tl">0</td>
-<td style="background-color:green; width: 50px; color:white;" id="tr">0</td>
+<td style="background-color:red;   width: 50px; color:white;" id="FN">FN</td>
+<td style="background-color:green; width: 50px; color:white;" id="TP">TP</td>
 <td style="width: 50px;" id="r1">0</td>
 </tr>
 <tr>
-<td style="background-color:green; width: 50px; color:white;" id="bl">0</td>
-<td style="background-color:red;   width: 50px; color:white;" id="br">0</td>
+<td style="background-color:green; width: 50px; color:white;" id="TN">TN</td>
+<td style="background-color:red;   width: 50px; color:white;" id="FP">FP</td>
 <td style="width: 50px;" id="r2">0</td>
 </tr>
 <tr>
@@ -148,10 +153,10 @@ new p5(sketch, 'container');
 **What is the:**
 
 * Correlation = `r round(-correlation, 3)`
-* Hit rate
-* Base rate
-* Sensitivity
-* Specificity
+* Hit Rate <span id="HR"></span>
+* Base Rate <span id="BR"></span>
+* Sensitivity <span id="SEN"></span>
+* Specificity <span id="SPE"></span>
 
 
 </div>

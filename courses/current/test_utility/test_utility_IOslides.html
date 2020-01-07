@@ -105,10 +105,10 @@
   <script src="test_utility_IOslides_files/ioslides-13.5.1/js/hammer.js"></script>
   <script src="test_utility_IOslides_files/ioslides-13.5.1/js/slide-controller.js"></script>
   <script src="test_utility_IOslides_files/ioslides-13.5.1/js/slide-deck.js"></script>
-  <script src="test_utility_IOslides_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+  <script src="test_utility_IOslides_files/htmlwidgets-1.3/htmlwidgets.js"></script>
   <script src="test_utility_IOslides_files/jquery-1.12.4/jquery.min.js"></script>
   <link href="test_utility_IOslides_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-  <script src="test_utility_IOslides_files/datatables-binding-0.11/datatables.js"></script>
+  <script src="test_utility_IOslides_files/datatables-binding-0.9/datatables.js"></script>
   <link href="test_utility_IOslides_files/dt-core-1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link href="test_utility_IOslides_files/dt-core-1.10.19/css/jquery.dataTables.extra.css" rel="stylesheet" />
   <script src="test_utility_IOslides_files/dt-core-1.10.19/js/jquery.dataTables.min.js"></script>
@@ -168,7 +168,7 @@ slide:not(.current) .plotly.html-widget{
     }
   </style>
 
-  <link rel="stylesheet" href="https:\\shklinkenberg.github.io\uva_style\new_uva_style.css" type="text/css" />
+  <link rel="stylesheet" href="https://shklinkenberg.github.io/uva_style/new_uva_style.css" type="text/css" />
 
 </head>
 
@@ -196,7 +196,13 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Test Utility</h2></hgroup><article  id="test-utility">
 
-</article></slide><slide class=""><hgroup><h2>What is Test Utility</h2></hgroup><article  class="subsection" id="what-is-test-utility">
+<!-- Allow color highlighting in mathjax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+</article></slide><slide class=""><hgroup><h2>What is Test Utility</h2></hgroup><article  id="what-is-test-utility" class="subsection">
 
 <p>Test Utility, litterally refers to using a test as a utility, as a tool.</p>
 
@@ -211,23 +217,24 @@ slide:not(.current) .plotly.html-widget{
 
 <p>These properties can be emperically tested. We will show you the reasoning process in this lecture.</p>
 
-</article></slide><slide class=""><hgroup><h2>Predictive Validity</h2></hgroup><article  class="subsection" id="predictive-validity">
+</article></slide><slide class=""><hgroup><h2>Predictive / Criterion Validity</h2></hgroup><article  id="predictive-criterion-validity" class="subsection">
 
-<h3>Also called criterion validity</h3>
+<p>Often we want to predict based on testscores how an individual will perform at a later time.</p>
 
 <ul>
-<li>Often we want to predict based on testscores, how an individual will perform at a later time.</li>
 <li>The thing we want to predict is called the <strong>criterion</strong>
 
 <ul>
 <li>Example: Selection of good employees or good students</li>
 </ul></li>
-<li>For a good prediction it is important to have a high correlation between the <strong>predictor</strong> / testscore and the criterion.</li>
+<li>The test we use to predict is obviously called the <strong>predictor</strong></li>
 </ul>
 
-<p><strong>NOTE:</strong> This is no different than the \(R\) and \(R^2\) in regular regression, the relation between the outcome and the model.</p>
+<p>The predictive validity is defined as the correlation between the <strong>predictor</strong> / testscore and the <strong>criterion</strong>.</p>
 
-</article></slide><slide class="fill nobackground" style="background-image: url(../../../topics/test_utility/tile.jpg); background-size: contain; background-position: center;"><hgroup><h2></h2></hgroup><article  class="flexbox vcenter" id="section">
+<p><strong>NOTE:</strong> This is no different than the \(R\) in regular regression analysis, the correlation between the outcome and the model.</p>
+
+</article></slide><slide class="fill nobackground" style="background-image: url(../../../topics/test_utility/tile.jpg); background-size: contain; background-position: center;"><hgroup><h2></h2></hgroup><article  id="section" class="flexbox vcenter">
 
 <p style="color:darkblue; font-size:200%; text-align: center;">
 
@@ -237,7 +244,7 @@ A corelation of zero,<br>is no predicting hero
 
 <p><!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) --></p>
 
-</article></slide><slide class=""><hgroup><h2>Utility</h2></hgroup><article  id="utility">
+</article></slide><slide class=""><hgroup><h2>Utility (interactive)</h2></hgroup><article  id="utility-interactive">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
 
@@ -306,30 +313,35 @@ p.draw = function() {
         p.fill("red");
         p.rect(w-rm, h-bm, mX-w+rm, mY-h+bm);
         
-      let tl = 0;
-      let tr = 0;
-      let bl = 0;
-      let br = 0;
+      let FN = 0; // tl
+      let TP = 0; // tr
+      let TN = 0; // bl
+      let FP = 0; // br
       
       for (let i = -1; i <= x.length; i++) {
       
-         if(x[i] <= mX && y[i] >  mY) { bl++ } // bl
-         if(x[i] <= mX && y[i] <= mY) { tl++ } // tl
-         if(x[i] >  mX && y[i] >  mY) { br++ } // br
-         if(x[i] >  mX && y[i] <= mY) { tr++ } // tr
+         if(x[i] <= mX && y[i] >  mY) { TN++ } // TN
+         if(x[i] <= mX && y[i] <= mY) { FN++ } // FN
+         if(x[i] >  mX && y[i] >  mY) { FP++ } // FP
+         if(x[i] >  mX && y[i] <= mY) { TP++ } // TP
       
       }
     
-     document.getElementById('tl').innerHTML = tl;
-     document.getElementById('tr').innerHTML = tr;  
-     document.getElementById('bl').innerHTML = bl;  
-     document.getElementById('br').innerHTML = br;
+     document.getElementById('FN').innerHTML = FN;
+     document.getElementById('TP').innerHTML = TP;  
+     document.getElementById('TN').innerHTML = TN;  
+     document.getElementById('FP').innerHTML = FP;
      
-     document.getElementById('r1').innerHTML = tl + tr;
-     document.getElementById('r2').innerHTML = bl + br;  
-     document.getElementById('c1').innerHTML = tl + bl;  
-     document.getElementById('c2').innerHTML = tr + br;
+     document.getElementById('r1').innerHTML = FN + TP;
+     document.getElementById('r2').innerHTML = TN + FP;  
+     document.getElementById('c1').innerHTML = FN + TN;  
+     document.getElementById('c2').innerHTML = TP + FP;
      document.getElementById('to').innerHTML = 100; 
+     
+     document.getElementById('HR').innerHTML = (TP + TN) / 100;
+     document.getElementById('BR').innerHTML = (FN + TP) / 100;
+     document.getElementById('SEN').innerHTML = (TP / (TP + FN)).toFixed(2);
+     document.getElementById('SPE').innerHTML = (TN / (TN + FP)).toFixed(2);
 
         } // end mouse over   
   
@@ -350,7 +362,7 @@ new p5(sketch, 'container');
 </script>
 
 <div style="width:100%;">
-<div style="float:left;" id="container">
+<div id="container" style="float:left;">
 </div>
 
 <div style="float:right; width: 45%;">
@@ -360,15 +372,15 @@ new p5(sketch, 'container');
 
 <tr>
 
-<td style="background-color:red;   width: 50px; color:white;" id="tl">
+<td style="background-color:red;   width: 50px; color:white;" id="FN">
 
-0
+FN
 
 </td>
 
-<td style="background-color:green; width: 50px; color:white;" id="tr">
+<td style="background-color:green; width: 50px; color:white;" id="TP">
 
-0
+TP
 
 </td>
 
@@ -382,15 +394,15 @@ new p5(sketch, 'container');
 
 <tr>
 
-<td style="background-color:green; width: 50px; color:white;" id="bl">
+<td style="background-color:green; width: 50px; color:white;" id="TN">
 
-0
+TN
 
 </td>
 
-<td style="background-color:red;   width: 50px; color:white;" id="br">
+<td style="background-color:red;   width: 50px; color:white;" id="FP">
 
-0
+FP
 
 </td>
 
@@ -430,10 +442,14 @@ new p5(sketch, 'container');
 
 <ul>
 <li>Correlation = 0.796</li>
-<li>Hit rate</li>
-<li>Base rate</li>
-<li>Sensitivity</li>
-<li>Specificity</li>
+<li>Hit Rate <span id="HR">
+</span></li>
+<li>Base Rate <span id="BR">
+</span></li>
+<li>Sensitivity <span id="SEN">
+</span></li>
+<li>Specificity <span id="SPE">
+</span></li>
 </ul></div></div>
 
 </article></slide><slide class=""><hgroup><h2>CASE STUDY:</h2></hgroup><article  id="case-study">
@@ -453,23 +469,49 @@ new p5(sketch, 'container');
 <li>This comparison will show us how much ther is to gain and the price we have to pay</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Hit Rate</h2></hgroup><article  class="subsection" id="hit-rate">
+</article></slide><slide class=""><hgroup><h2>Hit Rate</h2></hgroup><article  id="hit-rate" class="subsection">
 
-</article></slide><slide class=""><hgroup><h2>Base Rate</h2></hgroup><article  class="subsection" id="base-rate">
+<p>Percentage of correct conclusions.</p>
 
-</article></slide><slide class=""><hgroup><h2>Specificity</h2></hgroup><article  class="subsection" id="specificity">
+<p>\[\definecolor{green}{RGB}{0,128,0}
+\text{Hit Rate} = \frac{{\color{green}\text{TP}} + \color{green}\text{TN}}{N}\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Sensitivity</h2></hgroup><article  class="subsection" id="sensitivity">
+</article></slide><slide class=""><hgroup><h2>Base Rate</h2></hgroup><article  id="base-rate" class="subsection">
 
-</article></slide><slide class=""><hgroup><h2>Taylor Russell Tables</h2></hgroup><article  class="subsection" id="taylor-russell-tables">
+<p>Percentage of correct conclusions when not selecting.</p>
 
-<p><a href='https://lib.uva.nl/permalink/31UKB_UAM1_INST/h37vvk/proquest1290354749' title=''>Taylor, H, and Russell, J. &ldquo;The Relationship of Validity Coefficients to the Practical Effectiveness of Tests in Selection: Discussion and Tables.&rdquo; Journal of Applied Psychology 23 (1939): n. pag. Web.</a></p>
+<p>\[\definecolor{red}{RGB}{255,0,0}
+\text{Base Rate} = \frac{{\color{green}\text{TP}} + \color{red}\text{FN}}{N}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Hit Rate - Base Rate</h2></hgroup><article  id="hit-rate---base-rate">
+
+<p>To determine the benefit of selection we need to know what the hit rate is compared to the base rate.</p>
+
+<p>\[\text{Hit Rate} - \text{Base Rate} = \text{Benefit}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Sensitivity</h2></hgroup><article  id="sensitivity" class="subsection">
+
+<p>We can determine the efficiency of selection by calculating the sensitivity and specificity of a test.</p>
+
+<p><strong>Sensitivity:</strong> Percentage of eligible candidates that will be selected.</p>
+
+<p>\[\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \color{green}\text{TP}}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Specificity</h2></hgroup><article  id="specificity" class="subsection">
+
+<p><strong>Specificity:</strong> Percentage of inapt candidates that will be rejected.</p>
+
+<p>\[\text{Specificity} = \frac{\color{green}\text{TN}}{{\color{green}\text{TN}} + \color{red}\text{FP}}\]</p>
+
+</article></slide><slide class=""><hgroup><h2>Taylor Russell Tables</h2></hgroup><article  id="taylor-russell-tables" class="subsection">
+
+<p><a href='https://lib.uva.nl/permalink/31UKB_UAM1_INST/h37vvk/proquest1290354749' title=''>Taylor, H, and Russell, J. &ldquo;The Relationship of Validity Coefficients to the Practical Effectiveness of Tests in Selection: Discussion and Tables.&rdquo; Journal of Applied Psychology 23 (1939): n. pag. Web.</a></p>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
 
 <div style="font-size:30%;">
-<div id="htmlwidget-9be3578e3eb5cfb4cdde" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9be3578e3eb5cfb4cdde">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[[0,0.5,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],[0.6,0.64,0.68,0.71,0.75,0.78,0.82,0.85,0.88,0.9,0.93,0.95,0.96,0.98,0.99,0.99,1,1,1,1,1],[0.6,0.63,0.67,0.7,0.73,0.76,0.79,0.82,0.85,0.87,0.9,0.92,0.94,0.96,0.97,0.99,0.99,1,1,1,1],[0.6,0.63,0.65,0.68,0.71,0.73,0.76,0.78,0.81,0.83,0.86,0.88,0.9,0.92,0.94,0.96,0.98,0.99,1,1,1],[0.6,0.62,0.64,0.67,0.69,0.71,0.73,0.75,0.78,0.8,0.82,0.84,0.87,0.89,0.91,0.93,0.95,0.97,0.99,1,1],[0.6,0.62,0.64,0.66,0.67,0.69,0.71,0.73,0.75,0.77,0.79,0.81,0.83,0.85,0.87,0.9,0.92,0.95,0.97,0.99,1],[0.6,0.62,0.63,0.65,0.66,0.68,0.69,0.71,0.73,0.74,0.76,0.78,0.8,0.82,0.84,0.86,0.88,0.91,0.94,0.97,1],[0.6,0.61,0.63,0.64,0.65,0.66,0.68,0.69,0.7,0.72,0.73,0.75,0.76,0.78,0.8,0.81,0.83,0.86,0.88,0.92,1],[0.6,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68,0.69,0.7,0.71,0.73,0.74,0.75,0.77,0.78,0.8,0.82,0.84,0.86],[0.6,0.61,0.61,0.62,0.63,0.63,0.64,0.65,0.66,0.66,0.67,0.68,0.69,0.7,0.71,0.71,0.72,0.73,0.74,0.75,0.75],[0.6,0.6,0.61,0.61,0.62,0.62,0.62,0.63,0.63,0.64,0.64,0.64,0.65,0.65,0.66,0.66,0.66,0.66,0.67,0.67,0.67],[0.6,0.6,0.6,0.61,0.61,0.61,0.61,0.62,0.62,0.62,0.62,0.62,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>...1<\/th>\n      <th>0.05<\/th>\n      <th>0.1<\/th>\n      <th>0.2<\/th>\n      <th>0.3<\/th>\n      <th>0.4<\/th>\n      <th>0.5<\/th>\n      <th>0.6<\/th>\n      <th>0.7<\/th>\n      <th>0.8<\/th>\n      <th>0.9<\/th>\n      <th>0.95<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":21,"dom":"t","scrollX":true,"fixedColumns":true,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10,11]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,21,25,50,100]}},"evals":[],"jsHooks":[]}</script></div>
+<div id="htmlwidget-0271f30fe0323050d3bc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0271f30fe0323050d3bc">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[[0,0.5,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1],[0.6,0.64,0.68,0.71,0.75,0.78,0.82,0.85,0.88,0.9,0.93,0.95,0.96,0.98,0.99,0.99,1,1,1,1,1],[0.6,0.63,0.67,0.7,0.73,0.76,0.79,0.82,0.85,0.87,0.9,0.92,0.94,0.96,0.97,0.99,0.99,1,1,1,1],[0.6,0.63,0.65,0.68,0.71,0.73,0.76,0.78,0.81,0.83,0.86,0.88,0.9,0.92,0.94,0.96,0.98,0.99,1,1,1],[0.6,0.62,0.64,0.67,0.69,0.71,0.73,0.75,0.78,0.8,0.82,0.84,0.87,0.89,0.91,0.93,0.95,0.97,0.99,1,1],[0.6,0.62,0.64,0.66,0.67,0.69,0.71,0.73,0.75,0.77,0.79,0.81,0.83,0.85,0.87,0.9,0.92,0.95,0.97,0.99,1],[0.6,0.62,0.63,0.65,0.66,0.68,0.69,0.71,0.73,0.74,0.76,0.78,0.8,0.82,0.84,0.86,0.88,0.91,0.94,0.97,1],[0.6,0.61,0.63,0.64,0.65,0.66,0.68,0.69,0.7,0.72,0.73,0.75,0.76,0.78,0.8,0.81,0.83,0.86,0.88,0.92,1],[0.6,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68,0.69,0.7,0.71,0.73,0.74,0.75,0.77,0.78,0.8,0.82,0.84,0.86],[0.6,0.61,0.61,0.62,0.63,0.63,0.64,0.65,0.66,0.66,0.67,0.68,0.69,0.7,0.71,0.71,0.72,0.73,0.74,0.75,0.75],[0.6,0.6,0.61,0.61,0.62,0.62,0.62,0.63,0.63,0.64,0.64,0.64,0.65,0.65,0.66,0.66,0.66,0.66,0.67,0.67,0.67],[0.6,0.6,0.6,0.61,0.61,0.61,0.61,0.62,0.62,0.62,0.62,0.62,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63,0.63]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>...1<\/th>\n      <th>0.05<\/th>\n      <th>0.1<\/th>\n      <th>0.2<\/th>\n      <th>0.3<\/th>\n      <th>0.4<\/th>\n      <th>0.5<\/th>\n      <th>0.6<\/th>\n      <th>0.7<\/th>\n      <th>0.8<\/th>\n      <th>0.9<\/th>\n      <th>0.95<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":21,"dom":"t","scrollX":true,"fixedColumns":true,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10,11]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,21,25,50,100]}},"evals":[],"jsHooks":[]}</script></div>
 
 <!-- Footer insert below -->
 
