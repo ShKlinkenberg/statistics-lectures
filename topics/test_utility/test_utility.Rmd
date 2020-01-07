@@ -180,3 +180,7 @@ datatable(tr.table, extensions = 'FixedColumns', rownames = F,
 ```
 
 </div>
+
+## Taylor-Russell Table 60
+
+![TR60](TaylorRussell.png)
