@@ -52,8 +52,6 @@ Admission test (NL: selectie aan de poort)
 * We can calculate how much beter our results would be if we had actually selected.
 * This comparison will show us how much there is to gain and the price we have to pay
 
-## CASE STUDY:
-
 ```{r, fig.asp=1/3, echo=FALSE}
 load("data.Rdata")
 names(dat) <- c("Motivation", "StudyResults")
@@ -62,15 +60,28 @@ avg.mot <- mean(dat$Motivation)
 pass.mark <- 6
 correlation <- cor(dat)[1,2]
 
+cross.tabs <- table(data.frame(dat$StudyResults > pass.mark,
+                               dat$Motivation > avg.mot))
+
+TP <- cross.tabs[2,2]
+FN <- cross.tabs[2,1]
+FP <- cross.tabs[1,2]
+TN <- cross.tabs[1,1]
+N <- sum(cross.tabs)
+
+
 layout(matrix(1:3, 1, 3))
 hist(dat$Motivation, col = "orange", xlab = "z-scores", main = "Motivation")
 abline(v=avg.mot, lwd = 2)
 hist(dat$StudyResults, col = "orange", xlab = "average grades", main = "Study Results")
 abline(v=pass.mark, lwd = 2)
 plot(dat, col = "orange", ylab = "average grades", main = "Correlation")
+expand = 2
+text(avg.mot + expand, pass.mark + expand, TP, cex = 2)
+text(avg.mot - expand, pass.mark + expand, FN, cex = 2)
+text(avg.mot - expand, pass.mark - expand, TN, cex = 2)
+text(avg.mot + expand, pass.mark - expand, FP, cex = 2)
 abline(h=pass.mark, v=avg.mot, lwd = 2)
-
-
 ```
 
 * Average Motivation: `r round(avg.mot,3)`
@@ -81,12 +92,12 @@ abline(h=pass.mark, v=avg.mot, lwd = 2)
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 <tr>
-<td style="background-color:red;   width: 50px; color:white;">FN</td>
-<td style="background-color:green; width: 50px; color:white;"">TP</td>
+<td style="background-color:red;   width: 50px; color:white;">FN<br><span style="font-size:60%;">`r FN`</span></td>
+<td style="background-color:green; width: 50px; color:white;"">TP<br><span style="font-size:60%;">`r TP`</span></td>
 </tr>
 <tr>
-<td style="background-color:green; width: 50px; color:white;">TN</td>
-<td style="background-color:red;   width: 50px; color:white;">FP</td>
+<td style="background-color:green; width: 50px; color:white;">TN<br><span style="font-size:60%;">`r TN`</span></td>
+<td style="background-color:red;   width: 50px; color:white;">FP<br><span style="font-size:60%;">`r FP`</span></td>
 </tr>
 </table>
 
@@ -95,16 +106,20 @@ Percentage of correct conclusions.
 $$\definecolor{green}{RGB}{0,128,0}
 \text{Hit Rate} = \frac{{\color{green}\text{TP}} + \color{green}\text{TN}}{N}$$
 
+<br><br>
+
+$$\frac{`r TP` + `r TN`}{`r N`} = `r HR = round( (TP+TN)/N, 2); HR`$$
+
 ## Base Rate {.subsection}
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 <tr>
-<td style="background-color:red;   width: 50px; color:white;">FN</td>
-<td style="background-color:green; width: 50px; color:white;"">TP</td>
+<td style="background-color:red;   width: 50px; color:white;">FN<br><span style="font-size:60%;">`r FN`</span></td>
+<td style="background-color:green; width: 50px; color:white;"">TP<br><span style="font-size:60%;">`r TP`</span></td>
 </tr>
 <tr>
-<td style="background-color:green; width: 50px; color:white;">TN</td>
-<td style="background-color:red;   width: 50px; color:white;">FP</td>
+<td style="background-color:green; width: 50px; color:white;">TN<br><span style="font-size:60%;">`r TN`</span></td>
+<td style="background-color:red;   width: 50px; color:white;">FP<br><span style="font-size:60%;">`r FP`</span></td>
 </tr>
 </table>
 
@@ -113,22 +128,30 @@ Percentage of correct conclusions when not selecting.
 $$\definecolor{red}{RGB}{255,0,0}
 \text{Base Rate} = \frac{{\color{green}\text{TP}} + \color{red}\text{FN}}{N}$$
 
+<br><br>
+
+$$\frac{`r TP` + `r FN`}{`r N`} = `r BR = round( (TP+FN)/N, 2); BR`$$
+
 ## Hit Rate - Base Rate
 
 To determine the benefit of selection we need to know what the hit rate is compared to the base rate.
 
 $$\text{Hit Rate} - \text{Base Rate} = \text{Benefit}$$
 
+<br><br>
+
+$$`r HR` - `r BR` = `r HR - BR`$$
+
 ## Sensitivity {.subsection}
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 <tr>
-<td style="background-color:red;   width: 50px; color:white;">FN</td>
-<td style="background-color:green; width: 50px; color:white;"">TP</td>
+<td style="background-color:red;   width: 50px; color:white;">FN<br><span style="font-size:60%;">`r FN`</span></td>
+<td style="background-color:green; width: 50px; color:white;"">TP<br><span style="font-size:60%;">`r TP`</span></td>
 </tr>
 <tr>
-<td style="background-color:green; width: 50px; color:white;">TN</td>
-<td style="background-color:red;   width: 50px; color:white;">FP</td>
+<td style="background-color:green; width: 50px; color:white;">TN<br><span style="font-size:60%;">`r TN`</span></td>
+<td style="background-color:red;   width: 50px; color:white;">FP<br><span style="font-size:60%;">`r FP`</span></td>
 </tr>
 </table>
 
@@ -138,16 +161,20 @@ We can determine the efficiency of selection by calculating the sensitivity and 
 
 $$\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \color{green}\text{TP}}$$
 
+<br><br>
+
+$$\frac{`r TP`}{`r FN` + `r TP`} = `r sen = round( TP/(FN+TP), 2); sen`$$
+
 ## Specificity {.subsection}
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 <tr>
-<td style="background-color:red;   width: 50px; color:white;">FN</td>
-<td style="background-color:green; width: 50px; color:white;"">TP</td>
+<td style="background-color:red;   width: 50px; color:white;">FN<br><span style="font-size:60%;">`r FN`</span></td>
+<td style="background-color:green; width: 50px; color:white;"">TP<br><span style="font-size:60%;">`r TP`</span></td>
 </tr>
 <tr>
-<td style="background-color:green; width: 50px; color:white;">TN</td>
-<td style="background-color:red;   width: 50px; color:white;">FP</td>
+<td style="background-color:green; width: 50px; color:white;">TN<br><span style="font-size:60%;">`r TN`</span></td>
+<td style="background-color:red;   width: 50px; color:white;">FP<br><span style="font-size:60%;">`r FP`</span></td>
 </tr>
 </table>
 
@@ -155,17 +182,34 @@ $$\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \c
 
 $$\text{Specificity} = \frac{\color{green}\text{TN}}{{\color{green}\text{TN}} + \color{red}\text{FP}}$$
 
-## Taylor Russell Tables {.subsection}
+<br><br>
 
+$$\frac{`r TN`}{`r TN` + `r FP`} = `r spe = round( TN/(TN+FP), 2); spe`$$
 
+## Steps to determine efficiency
+
+1. Select predictor and criterion
+2. Calculate the correlation in unselected sample
+3. Determine the efficiency based on possible cut-off scores
+
+## Taylor-Russell Tables {.subsection}
+
+So, what if you do not have the resources to conduct emperical research?
+
+In that case you can resort to using Taylor-Russell tables. Which provide estimates of the percentage of eligible candidates of those selected.
+
+* TABLE: Base Rate
+* Y-AXIS: Predictive validity
+* X-AXIS: Selection ratio
+* CELLS: Proportion satisfactory among those selected = $\frac{\color{green}\text{TP}}{{\color{green}\text{TP}} + \color{red}\text{FP}}$ 
+
+<div style="font-size:50%;">
 [Taylor, H, and Russell, J. “The Relationship of Validity Coefficients to the Practical Effectiveness of Tests in Selection: Discussion and Tables.” Journal of Applied Psychology 23 (1939): n. pag. Web.](https://lib.uva.nl/permalink/31UKB_UAM1_INST/h37vvk/proquest1290354749)
-
-
-##
+</div>
 
 <div style="font-size:30%;">
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 # install.packages("readxl")
 library("readxl")
 library("DT")
@@ -181,6 +225,37 @@ datatable(tr.table, extensions = 'FixedColumns', rownames = F,
 
 </div>
 
-## Taylor-Russell Table 60
+## {.flexbox .vcenter}
 
-![TR60](TaylorRussell.png)
+<img style="width:80%;" src="../../../topics/test_utility/TaylorRussell.png">
+
+## Influential factors
+
+The two factors influencing the cell values "The proportion satisfactory among those selected" are:
+
+<img style="width:60%; float:right;" src="../../../topics/test_utility/TR_colors.png">
+
+* Predictive validity
+* Selection ratio
+
+## Increase efficiency
+
+So, there are two ways to increase efficience.
+
+* Increase predictive validity
+* Use more extreme selection ratio
+
+```{r, fig.asp=1/2, echo=FALSE}
+set.seed(12345)
+
+x = rnorm(100)
+y.1 = x + rnorm(100, 0, .7)
+y.2 = x + rnorm(100, 0, 2)
+y.3 = x + rnorm(100, 0, 3)
+
+layout(matrix(1:3, 1, 3))
+plot(x, y.1, col = "orange", ylab = "average grades", xlab = "motivation", main = "Correlation", xaxt="n", yaxt="n")
+plot(x, y.2, col = "orange", ylab = "", xlab = "motivation", main = "Correlation", xaxt="n", yaxt="n")
+plot(x, y.3, col = "orange", ylab = "", xlab = "motivation", main = "Correlation", xaxt="n", yaxt="n")
+```
+
