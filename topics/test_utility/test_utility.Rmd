@@ -32,7 +32,7 @@ The predictive validity is defined as the correlation between the **predictor** 
 
 ## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
 
-<p style="color:darkblue; font-size:200%; text-align: center;">A corelation of zero,<br>is no predicting hero</p> <!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) -->
+<p style="color:darkblue; font-size:200%; text-align: center;">With a corelation of zero,<br>selection is useless</p> <!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) -->
 
 
 ## Utility (interactive)
@@ -165,6 +165,10 @@ $$\text{Sensitivity} = \frac{\color{green}\text{TP}}{{\color{red}\text{FN}} + \c
 
 $$\frac{`r TP`}{`r FN` + `r TP`} = `r sen = round( TP/(FN+TP), 2); sen`$$
 
+## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
+
+<p style="color:darkblue; font-size:200%; text-align: center;">THe lower the sensitivity<br>The more frustrated<br>parents and students</p>
+
 ## Specificity {.subsection}
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
@@ -191,6 +195,10 @@ $$\frac{`r TN`}{`r TN` + `r FP`} = `r spe = round( TN/(TN+FP), 2); spe`$$
 1. Select predictor and criterion
 2. Calculate the correlation in unselected sample
 3. Determine the efficiency based on possible cut-off scores
+
+## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
+
+<p style="color:darkblue; font-size:200%; text-align: center;">Only if you select everyone<br>you can determine the quality of the procedure</p>
 
 ## Taylor-Russell Tables {.subsection}
 
