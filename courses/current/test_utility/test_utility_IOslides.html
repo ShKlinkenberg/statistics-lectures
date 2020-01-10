@@ -191,7 +191,7 @@ slide:not(.current) .plotly.html-widget{
   MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
 
-</article></slide><slide class=""><hgroup><h2>What is Test Utility</h2></hgroup><article  id="what-is-test-utility" class="subsection">
+</article></slide><slide class=""><hgroup><h2>What is Test Utility</h2></hgroup><article  class="subsection" id="what-is-test-utility">
 
 <p>Test Utility, litterally refers to using a test as a utility, as a tool.</p>
 
@@ -206,7 +206,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>These properties can be emperically tested. We will show you the reasoning process in this lecture.</p>
 
-</article></slide><slide class=""><hgroup><h2>Predictive / Criterion Validity</h2></hgroup><article  id="predictive-criterion-validity" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Predictive / Criterion Validity</h2></hgroup><article  class="subsection" id="predictive-criterion-validity">
 
 <p>Often we want to predict based on testscores how an individual will perform at a later time.</p>
 
@@ -468,7 +468,7 @@ FP
 <li>Correlation: 0.407</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Hit Rate</h2></hgroup><article  id="hit-rate" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Hit Rate</h2></hgroup><article  class="subsection" id="hit-rate">
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 
@@ -514,7 +514,7 @@ FP<br><span style="font-size:60%;">
 
 <p>\[\frac{162 + 163}{512} = 0.63\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Base Rate</h2></hgroup><article  id="base-rate" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Base Rate</h2></hgroup><article  class="subsection" id="base-rate">
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 
@@ -570,7 +570,7 @@ FP<br><span style="font-size:60%;">
 
 <p>\[0.63 - 0.52 = 0.11\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Sensitivity</h2></hgroup><article  id="sensitivity" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Sensitivity</h2></hgroup><article  class="subsection" id="sensitivity">
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 
@@ -617,7 +617,7 @@ FP<br><span style="font-size:60%;">
 
 <p>\[\frac{162}{102 + 162} = 0.61\]</p>
 
-</article></slide><slide class=""><hgroup><h2>Specificity</h2></hgroup><article  id="specificity" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Specificity</h2></hgroup><article  class="subsection" id="specificity">
 
 <table style="width: 150px; height:150px; text-align:center; float:right;">
 
@@ -670,7 +670,7 @@ FP<br><span style="font-size:60%;">
 <li>Determine the efficiency based on possible cut-off scores</li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Taylor-Russell Tables</h2></hgroup><article  id="taylor-russell-tables" class="subsection">
+</article></slide><slide class=""><hgroup><h2>Taylor-Russell Tables</h2></hgroup><article  class="subsection" id="taylor-russell-tables">
 
 <p>So, what if you do not have the resources to conduct emperical research?</p>
 
@@ -689,7 +689,7 @@ FP<br><span style="font-size:60%;">
 <div style="font-size:30%;">
 </div>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1" class="flexbox vcenter">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="flexbox vcenter" id="section-1">
 
 <p><img style="width:80%;" src="../../../topics/test_utility/TaylorRussell.png"></p>
 
@@ -715,7 +715,57 @@ FP<br><span style="font-size:60%;">
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
 
-<p><img src="test_utility_IOslides_files/figure-html/unnamed-chunk-6-1.png" width="720" /></p>
+<p><img src="test_utility_IOslides_files/figure-html/unnamed-chunk-6-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Threats to validity</h2></hgroup><article  id="threats-to-validity">
+
+<p>Criterion validity is threatened by all factors that reduces the relation between predictor and criterion.</p>
+
+<ul>
+<li>Unreliable tests: noise reduces the relation.</li>
+<li>Wrong predictor</li>
+<li>Restriction of range: restrictions in testscores results in lower correlation.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Problems with selection in NL</h2></hgroup><article  id="problems-with-selection-in-nl">
+
+<ul>
+<li>Correlation between predictors and succes is low</li>
+<li>We have a bad selection ratio</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Why selection works in US</h2></hgroup><article  id="why-selection-works-in-us">
+
+<ul>
+<li>High correlation
+
+<ul>
+<li>More variation vs NL</li>
+<li>NL has restriction of range (VWO/HAVO/VMBO) vs high school</li>
+</ul></li>
+<li>Good universities have good selection ratio
+
+<ul>
+<li>They select very few students; Harvard selects 10% highests SAT</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Wrap-up</h2></hgroup><article  id="wrap-up">
+
+<ul>
+<li>Good selection needs high criterion validity</li>
+<li>The higher the correlation the higher the gain</li>
+<li>The efficency can be determined in advance.
+
+<ul>
+<li>When selection is implemented, you can not determine the efficiency</li>
+</ul></li>
+<li>If criterion validity suffer rextricion of range, then the efficientcy argument does not hold.
+
+<ul>
+<li>Than policy schould not be based on psychometric argumentation.</li>
+</ul></li>
+</ul>
 
 <!-- Footer insert below -->
 
