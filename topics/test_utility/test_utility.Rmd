@@ -7,32 +7,32 @@
 
 ## What is Test Utility {.subsection}
 
-Test Utility, litterally refers to using a test as a utility, as a tool.
+Test Utility literally refers to using a test as a utility, as a tool.
 
 ### Costs and benefits
 
-* monotary
-* non-monotary
+* monetary
+* non-monetary
 
-The relationship between the costs and benefits are determined by the psychometric properties of the test.
+The psychometric properties of the test determine the relationship between costs and benefits.
 
-These properties can be emperically tested. We will show you the reasoning process in this lecture.
+These properties can be empirically tested. We will show you the reasoning process in this lecture.
 
 ## Predictive / Criterion Validity {.subsection}
 
-Often we want to predict based on testscores how an individual will perform at a later time.
+Often we want to predict based on test scores how an individual will perform at a later time.
 
 * The thing we want to predict is called the **criterion**
     * Example: Selection of good employees or good students
 * The test we use to predict is obviously called the **predictor**
 
-The predictive validity is defined as the correlation between the **predictor** / testscore and the **criterion**.
+The predictive validity is defined as the correlation between the **predictor** / test score and the **criterion**.
 
-**NOTE:** This is no different than the $R$ in regular regression analysis, the correlation between the outcome and the model.
+**NOTE:** This is no different than the $R$ in regular regression analysis; the correlation between the outcome and the model.
 
 ## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
 
-<p style="color:darkblue; font-size:200%; text-align: center;">With a corelation of zero,<br>selection is useless</p> <!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) -->
+<p style="color:darkblue; font-size:200%; text-align: center;">With a correlation of zero,<br>selection is useless</p> <!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) -->
 
 
 ## Utility (interactive)
@@ -44,12 +44,12 @@ The predictive validity is defined as the correlation between the **predictor** 
 
 Admission test (NL: selectie aan de poort)
 
-* Testweek data from UvA Psychology students
+* Test week data from UvA Psychology students
     * Motivation
     * Study results
 * The data was gathered before we actually had admission tests (all students where admitted).
 * Because of this, we can determine the effectiveness of a supposed admissions procedure.
-* We can calculate how much beter our results would be if we had actually selected.
+* We can calculate how much better our results would be if we had actually selected.
 * This comparison will show us how much there is to gain and the price we have to pay
 
 ```{r, fig.asp=1/3, echo=FALSE}
@@ -134,7 +134,7 @@ $$\frac{`r TP` + `r FN`}{`r N`} = `r BR = round( (TP+FN)/N, 2); BR`$$
 
 ## Hit Rate - Base Rate
 
-To determine the benefit of selection we need to know what the hit rate is compared to the base rate.
+To determine the benefit of selection, we need to know what the hit rate is compared to the base rate.
 
 $$\text{Hit Rate} - \text{Base Rate} = \text{Benefit}$$
 
@@ -193,7 +193,7 @@ $$\frac{`r TN`}{`r TN` + `r FP`} = `r spe = round( TN/(TN+FP), 2); spe`$$
 ## Steps to determine efficiency
 
 1. Select predictor and criterion
-2. Calculate the correlation in unselected sample
+2. Calculate the correlation in an unselected sample
 3. Determine the efficiency based on possible cut-off scores
 
 ## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
@@ -202,9 +202,9 @@ $$\frac{`r TN`}{`r TN` + `r FP`} = `r spe = round( TN/(TN+FP), 2); spe`$$
 
 ## Taylor-Russell Tables {.subsection}
 
-So, what if you do not have the resources to conduct emperical research?
+So, what if you do not have the resources to conduct empirical research?
 
-In that case you can resort to using Taylor-Russell tables. Which provide estimates of the percentage of eligible candidates of those selected.
+In that case, you can resort to using Taylor-Russell tables, hhich provide estimates of the percentage of eligible candidates of those selected.
 
 * TABLE: Base Rate
 * Y-AXIS: Predictive validity
@@ -248,7 +248,7 @@ The two factors influencing the cell values "The proportion satisfactory among t
 
 ## Increase efficiency {.subsection}
 
-So, there are two ways to increase efficience.
+So, there are two ways to increase efficiency
 
 * Increase predictive validity
 * Use more extreme selection ratio
@@ -274,7 +274,7 @@ Criterion validity is threatened by all factors that reduce the relation between
 * Unreliable tests: noise reduces the relation.
 * Other validity issues
 * Wrong predictor
-* Restriction of range: restrictions in testscores results in lower correlation.
+* Restriction of range: restrictions in test scores results in lower correlation.
 
 ```{r, fig.align="center", asp=1/3, echo=FALSE}
 x = seq(-4,4,.01)
@@ -293,11 +293,11 @@ Criterion validity can be increased by all measures that increase the correlatio
 
 ## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
 
-<p style="color:darkblue; font-size:200%; text-align: center;">Just wanting selection<br>to work, does not<br>influence the quality<br>of selection</p>
+<p style="color:darkblue; font-size:200%; text-align: center;">Just wanting selection<br>to work does not<br>influence the quality<br>of selection</p>
 
 ## Problems with selection in NL
 
-* Correlation between predictors and succes is low
+* Correlation between predictors and success is low
 * We have a bad selection ratio
 
 ## Why selection works in US
@@ -306,14 +306,14 @@ Criterion validity can be increased by all measures that increase the correlatio
     * More variation vs NL
     * NL has restriction of range (VWO/HAVO/VMBO) vs high school in US
 * Prestigious Ivy League universities have good selection ratio
-    * They select very few students; Harvard selects 10% highests SAT
+    * They select very few students; Harvard selects 10% highest SAT
     
 ## Wrap-up
 
 * Good selection needs high criterion validity
 * The higher the correlation the higher the gain
-* The efficency can be determined in advance.
+* The efficiency can be determined in advance.
    * When selection is implemented, you can not determine the efficiency
-* If criterion validity suffers from restriction of range, then the efficientcy argument does not hold.
-   * Policy schould not be based on psychometric argumentation.
+* If criterion validity suffers from restriction of range, then the efficiency argument does not hold.
+   * Policy should not be based on psychometric argumentation.
    
