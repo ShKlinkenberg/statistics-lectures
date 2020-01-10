@@ -167,7 +167,7 @@ $$\frac{`r TP`}{`r FN` + `r TP`} = `r sen = round( TP/(FN+TP), 2); sen`$$
 
 ## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
 
-<p style="color:darkblue; font-size:200%; text-align: center;">THe lower the sensitivity<br>The more frustrated<br>parents and students</p>
+<p style="color:darkblue; font-size:200%; text-align: center;">The lower the sensitivity<br>The more frustrated<br>parents and students</p>
 
 ## Specificity {.subsection}
 
@@ -198,7 +198,7 @@ $$\frac{`r TN`}{`r TN` + `r FP`} = `r spe = round( TN/(TN+FP), 2); spe`$$
 
 ## {data-background=../../../topics/test_utility/tile.jpg data-background-size=contain .flexbox .vcenter}
 
-<p style="color:darkblue; font-size:200%; text-align: center;">Only if you select everyone<br>you can determine the quality of the procedure</p>
+<p style="color:darkblue; font-size:200%; text-align: center;">Only if you select everyone<br>you can determine<br>the quality of the procedure</p>
 
 ## Taylor-Russell Tables {.subsection}
 
