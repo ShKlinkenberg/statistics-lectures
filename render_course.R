@@ -82,5 +82,5 @@ RenderMultipleOutput("courses/current/non_parametric_tests/non_parametric_tests.
 
 # Week 16
 RenderMultipleOutput("courses/current/test_utility/test_utility.Rmd")
-
+RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")
 
