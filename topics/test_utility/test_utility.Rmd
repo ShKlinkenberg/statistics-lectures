@@ -287,10 +287,26 @@ Criterion validity is threatened by all factors that reduce the relation between
 * Wrong predictor
 * Restriction of range: restrictions in test scores results in lower correlation.
 
-```{r, fig.align="center", asp=1/3, echo=FALSE}
+```{r, fig.align="center", asp=1/3, echo=FALSE, eval=FALSE}
 x = seq(-4,4,.01)
 plot(dnorm(x), type="l", xaxt= "n", yaxt="n", ylab="", xlab="")
 
+```
+
+## Restriction of range
+
+```{r, fig.align="center", asp=1/3, echo=FALSE, warning=FALSE, message=FALSE}
+## install.packages("plotly")
+library(plotly)
+
+x = rnorm(1000)
+y = x + rnorm(1000, 0, 2)
+
+d <- data.frame(x,y)
+
+p <- plot_ly(data = d, x = x, y = y)
+
+p
 ```
 
 
