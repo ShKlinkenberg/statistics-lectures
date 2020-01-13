@@ -7,7 +7,7 @@
 
 ## What is Test Utility {.subsection}
 
-Test Utility literally refers to using a test as a utility, as a tool.
+Test Utility literally refers to using a test as a utility, as a tool. And in our context we mean using tests as a toal for selection.
 
 ### Costs and benefits
 
@@ -23,7 +23,7 @@ These properties can be empirically tested. We will show you the reasoning proce
 Often we want to predict based on test scores how an individual will perform at a later time.
 
 * The thing we want to predict is called the **criterion**
-    * Example: Selection of good employees or good students
+    * Example: good employees or good students
 * The test we use to predict is obviously called the **predictor**
 
 The predictive validity is defined as the correlation between the **predictor** / test score and the **criterion**.
@@ -34,6 +34,17 @@ The predictive validity is defined as the correlation between the **predictor** 
 
 <p style="color:darkblue; font-size:200%; text-align: center;">With a correlation of zero,<br>selection is useless</p> <!-- [Dutch Tile](https://www.flickr.com/photos/paulussie/15582506882) -->
 
+## Cut-off scores
+
+Based on our criterion and predictor we need to determine:
+
+> 1. When we trully know someone is competent.
+> 2. At what predictor score we want to select someone.
+
+That means setting a:
+
+> * Cut-off for the criterion (Base Rate)
+> * Cut-off for the predictor (Selection Ratio)
 
 ## Utility (interactive)
 
