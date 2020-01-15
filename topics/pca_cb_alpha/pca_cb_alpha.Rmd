@@ -42,7 +42,10 @@ Principal component analysis can be used in multiple ways.
 
 * To use factor scores
 * To solve multicollinearity
+* Item reduction
 * To test construct validity
+    * Content Validity (Sanity check)
+    * Internal structure (labels)
 
 ## Example {.flexbox .vcenter}
 
