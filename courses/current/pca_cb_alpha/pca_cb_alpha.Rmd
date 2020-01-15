@@ -38,6 +38,19 @@ local({
 
 <div id="toc"></div>
 
+<div class="notes">
+### Outline
+
+[Weblecture](https://webcolleges.uva.nl/Mediasite/Play/d15f85f4caf64d22901a8af1655226321d)
+
+* 0:00 Conceptual PCA
+* 0:24 Collect data on SPSS anxiety 
+* 0:30 Example in SPSS (alternate SPSS and assumptions)
+* 1:20 Simulations of big 5
+* 1:30 Conceptual CBA
+* 1:35 Calculations CBA
+</div>
+
 <!-- Add the required topics below -->
 
 ```{r child="../../../topics/pca_cb_alpha/pca_cb_alpha.Rmd"}
