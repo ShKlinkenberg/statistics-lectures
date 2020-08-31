@@ -39,7 +39,7 @@ lectures.links[i] <- paste0('<a href="https://shklinkenberg.github.io/statistics
                             'handout',
                             '</a>')
 # Change HTML link to slide
-slides.links[i]  <- gsub("_handout", "_IOslides", lectures.links[i])
+slides.links[i]  <- gsub("_handout", "_reveal", lectures.links[i])
 slides.links[i]  <- gsub("handout", "slide", slides.links[i])
 }
 
