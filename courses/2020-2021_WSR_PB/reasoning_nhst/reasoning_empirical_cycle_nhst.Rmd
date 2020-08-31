@@ -17,6 +17,7 @@ output:
                       "../../../GA_Script/GA_Script.html"]
   html_document:
     toc            : TRUE
+    self_contained : false
     toc_float:
       collapsed    : FALSE
       smooth_scroll: TRUE

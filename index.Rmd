@@ -1,8 +1,9 @@
 ---
-title: "Lectures Scientific and Statistical Reasoning"
+title: "2020-2021 Wetenschapsfilosophie & Statistisch Redeneren"
 output:
   html_document:
     df_print: kable
+    pandoc_args: ["--output=2020-2021_WSR-PB.html"] 
 ---
 
 Below you can find the links to my current lecture slides for Scientific and Statistical Reasoning. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
@@ -12,7 +13,7 @@ Below you can find the links to my current lecture slides for Scientific and Sta
 library(rvest)
 
 rm(list = ls())
-lectures <- list.files(path = "courses/current", pattern = "*handout.html", recursive = T, full.names = TRUE)
+lectures <- list.files(path = "courses/2020-2021_WSR_PB/", pattern = "*handout.html", recursive = T, full.names = TRUE)
 
 n <- length(lectures)
 

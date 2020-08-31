@@ -9,7 +9,7 @@ library(stringr)
 RenderOutput <- function(path, format_type = 1) {
   
   if(format_type == 1) { format = "html_document";         suffix = "_handout.html"  }
-  if(format_type == 2) { format = "ioslides_presentation"; suffix = "_IOslides.html" }
+  if(format_type == 2) { format = "revealjs::revealjs_presentation"; suffix = "_reveal.html" }
   
   file = str_extract(path, "\\w+.Rmd$")
     
@@ -31,56 +31,56 @@ RenderMultipleOutput <- function(path) {
 # Blok I
 
 # Week 1
-RenderMultipleOutput("courses/current/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
+RenderMultipleOutput("courses/2020-2021_WSR_PB/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
 
-# Week 2
-RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
-
-# Week 3
-RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
-RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
-
-
-# RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
-
-# Blok II
-
-# Week 5
+# # Week 2
+# RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
+# 
+# # Week 3
+# RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
+# RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
+# 
+# 
+# # RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
+# 
+# # Blok II
+# 
+# # Week 5
+# # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
+# RenderMultipleOutput("courses/current/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
+# RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
+# 
+# # Week 6
+# RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
+# RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
+# 
+# 
+# # Week 8
+# RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
 # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
-RenderMultipleOutput("courses/current/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
-RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
-
-# Week 6
-RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
-RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
-
-
-# Week 8
-RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
-RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
-
-
-# Blok III
-
-# Week 11
-RenderMultipleOutput("courses/current/correlation_and_simple_regression/correlation_simple_regression.Rmd")
-
-# Week 12
-RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd")
+# 
+# 
+# # Blok III
+# 
+# # Week 11
+# RenderMultipleOutput("courses/current/correlation_and_simple_regression/correlation_simple_regression.Rmd")
+# 
+# # Week 12
+# RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd")
+# # RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")
+# 
+# # Week 13
+# RenderMultipleOutput("courses/current/mediation/mediation.Rmd")
+# RenderMultipleOutput("courses/current/moderation/moderation.Rmd")
+# 
+# # Blok IV
+# 
+# # Week 15
+# RenderMultipleOutput("courses/current/non_parametric_tests/non_parametric_tests.Rmd")
+# 
+# # Block V
+# 
+# # Week 16
+# RenderMultipleOutput("courses/current/test_utility/test_utility.Rmd")
 # RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")
-
-# Week 13
-RenderMultipleOutput("courses/current/mediation/mediation.Rmd")
-RenderMultipleOutput("courses/current/moderation/moderation.Rmd")
-
-# Blok IV
-
-# Week 15
-RenderMultipleOutput("courses/current/non_parametric_tests/non_parametric_tests.Rmd")
-
-# Block V
-
-# Week 16
-RenderMultipleOutput("courses/current/test_utility/test_utility.Rmd")
-RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")
-
+# 
