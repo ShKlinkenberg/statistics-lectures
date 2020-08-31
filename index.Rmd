@@ -1,12 +1,12 @@
 ---
-title: "2020-2021 Wetenschapsfilosophie & Statistisch Redeneren"
+title: "2020-2021 Wetenschapsfilosofie en Statistisch Redeneren"
 output:
   html_document:
     df_print: kable
     pandoc_args: ["--output=2020-2021_WSR-PB.html"] 
 ---
 
-Below you can find the links to my current lecture slides for Scientific and Statistical Reasoning. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
+Below you can find the links to my current lecture slides for this course. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # install.packages("rvest")
