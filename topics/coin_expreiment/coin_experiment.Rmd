@@ -1,10 +1,12 @@
 # Experiment {.section}
 
+[Video registration](https://webcolleges.uva.nl/Mediasite/Play/ed1e63e0cd204dcf9d2a144603ce342b1d?playFrom=3708000)
+
 ## Heads
 
 <div style="text-align:center;">
 
-<img style="width:60%;" src="../../../topics/coin_expreiment/QR_heads.png">
+<img style="width:40%;" src="../../../topics/coin_expreiment/QR_heads.png">
 <p>bit.ly/2j54A2U</p>
 
 </div>
@@ -26,6 +28,35 @@ Let's analyse the null distribution of the results.
 <iframe style="height:400px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pubhtml?gid=1329884255&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
 
 [Google sheet](https://docs.google.com/spreadsheets/d/150iSLUXqZbsetzDMjYlY5CAcjIzTanTm2tOFfn_ConA/edit?usp=sharing)
+
+<!--
+
+
+-->
+
+## Samples distribution
+
+```{r, eval=FALSE}
+# install.packages("curl")
+library("curl")
+
+url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pub?output=csv"
+
+data <- read.csv(curl(url))
+```
+```{r, echo=FALSE, eval=FALSE}
+
+names(data)[2] <- "heads"
+data$heads <- as.numeric(data$heads)
+data[which(data$heads>=0 & data$heads <= 10),] -> data.cleaned
+
+freq.table <- table(data.cleaned$heads)
+barplot(freq.table)
+
+barplot(table(factor(data.cleaned$heads, levels=0:10)))
+```
+
+
 
 ## Binomial distribution
 
@@ -85,20 +116,24 @@ I landed 2 times head. Can we conclude PTSS?
 
 ## Testing {.smaller}
 
-* Based on the null distribution we can see that the expected value (EV is 5.)
-* We can now define the $H_0$ hypothesis: $H_0 = 5$
-* What is the alternative hypothesis?
-* The alternative hypothesis describes a situation where PTSS is pressent.
-* We could say that the alternative hypothesis is not 5.
-  * $H_A \ne 5$
-* We could also formulate our $H_0$ and $H_A$ more abstract:
-  * $H_0:$ the patient is balenced
-  * $H_A:$ the patient is unbalenced
-* What criterium should we use to conclude that one would be unbalenced?
-* In the social sciences this $\alpha$ criteria is often 5%.
-* I tossed 2 times head. That is more frequent than 5%.
-* Therefore, we conclude that our patient is probably healthy but we can never be sure.
-* My coin could still be part of the unbalenced population.
+<small>
+
+> * Based on the null distribution we can see that the expected value (EV is 5.)
+> * We can now define the $H_0$ hypothesis: $H_0 = 5$
+> * What is the alternative hypothesis?
+> * The alternative hypothesis describes a situation where PTSS is pressent.
+> * We could say that the alternative hypothesis is not 5.
+>   * $H_A \ne 5$
+> * We could also formulate our $H_0$ and $H_A$ more abstract:
+>   * $H_0:$ the patient is balenced
+>   * $H_A:$ the patient is unbalenced
+> * What criterium should we use to conclude that one would be unbalenced?
+> * In the social sciences this $\alpha$ criteria is often 5%.
+> * I tossed 2 times head. That is more frequent than 5%.
+> * Therefore, we conclude that our patient is probably healthy but we can never be sure.
+> * My coin could still be part of the unbalenced population.
+
+</small>
 
 ## Null distribution
 
