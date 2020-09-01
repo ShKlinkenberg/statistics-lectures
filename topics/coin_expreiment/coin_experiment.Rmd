@@ -212,9 +212,11 @@ abline(v = c(6.5,27.5), col="red", lwd=3, lty="dotted")
 
 ```
 
+<!--
+
 ## Power and more {.section}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 N     = 10  # Sample size
 H0    = .5  # Kop 50/50
 HA    = .25 # Aternatieve verdeling
@@ -292,3 +294,4 @@ barplot(dbinom(0:N,N, HA),
 abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
 ```
 
+-->

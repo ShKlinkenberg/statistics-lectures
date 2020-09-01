@@ -641,7 +641,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## Effect size {.flexbox .vcenter}
 
-![](../../../topics/NHST/effec_size.png)
+![](/topics/NHST/effec_size.png)
 
 
 
