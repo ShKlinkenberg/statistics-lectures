@@ -494,7 +494,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## Effect size {.flexbox .vcenter}
 
-![](../../../topics/NHST/effec_size.png)
+![](effec_size.png)
 
 ## 1 - alpha {.subsection}
 
