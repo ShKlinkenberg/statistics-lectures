@@ -34,7 +34,7 @@ Let's analyse the null distribution of the results.
 
 -->
 
-## Samples distribution
+## Distributions
 
 What is the difference between
 
