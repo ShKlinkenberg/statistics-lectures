@@ -36,6 +36,12 @@ Let's analyse the null distribution of the results.
 
 ## Samples distribution
 
+What is the difference between
+
+* Population distribution
+* Sample distribution
+* Samples distribution
+
 ```{r, eval=FALSE}
 # install.packages("curl")
 library("curl")
