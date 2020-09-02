@@ -51,10 +51,10 @@ url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUf
 data <- read.csv(curl(url))
 ```
 ```{r, echo=FALSE, eval=FALSE}
-
+na
 names(data)[2] <- "heads"
 data$heads <- as.numeric(data$heads)
-data[which(data$heads>=0 & data$heads <= 10),] -> data.cleaned
+data[which(data$heads>=0 & data$heads <= 10), ] -> data.cleaned
 
 freq.table <- table(data.cleaned$heads)
 barplot(freq.table)
