@@ -1,0 +1,61 @@
+---
+title: "2020-2021 Scientific and Statistical Reasoning"
+output:
+  html_document:
+    df_print: kable
+    pandoc_args: ["--output=2020-2021_SSR.html"] 
+---
+
+Below you can find the links to my current lecture slides for this course. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# install.packages("rvest")
+library(rvest)
+
+rm(list = ls())
+lectures <- list.files(path = "courses/2020-2021_SSR/", pattern = "*handout.html", recursive = T, full.names = TRUE)
+
+n <- length(lectures)
+
+lectures.names = vector()
+lectures.dates = vector()
+lectures.links = vector()
+slides.links   = vector()
+
+for(i in 1:n) {
+
+# Read HTML file to extract title and date
+lecture_html <- read_html(lectures[i])
+
+# Extract title and date from HTML
+title    <- lecture_html %>% html_nodes(".title") %>% html_text()
+subtitle <- lecture_html %>% html_nodes(".subtitle") %>% html_text()
+lectures.names[i] <- paste(title, subtitle)
+lectures.dates[i] <- lecture_html %>% html_nodes(".date") %>% html_text()
+# Define HTML link to handout
+lectures.links[i] <- paste0('<a href="https://shklinkenberg.github.io/statistics-lectures/',
+                            lectures[i],
+                            '" target="_blank">',
+                            'handout',
+                            '</a>')
+# Change HTML link to slide
+slides.links[i]  <- gsub("_handout", "_reveal", lectures.links[i])
+slides.links[i]  <- gsub("handout", "slide", slides.links[i])
+}
+
+# Add vectors to table
+table1 <- data.frame(date     = lectures.dates, 
+                     lecture  = lectures.names,
+                     slides   = slides.links,
+                     handouts = lectures.links)
+
+# Sort on date
+library("lubridate")
+library("dplyr")
+
+table1$date <- lubridate::dmy(table1$date)
+
+
+# Print table with kable as set in YAML
+dplyr::arrange(table1, desc(date))
+```
