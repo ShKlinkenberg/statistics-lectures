@@ -1,0 +1,68 @@
+---
+title: "Statistical Reasoning"
+subtitle: "Null Hypothesis Testisn"
+author: "Klinkenberg"
+date: "03 sep 2020"
+output: 
+  revealjs::revealjs_presentation:
+    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    theme: white #simple #black
+    highlight: pygments
+    transition: slide #fade #slide
+    background_transition: slide
+    center: true
+    self_contained: false
+    includes       :
+      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
+                      "../../../GA_Script/GA_Script.html"]
+  html_document:
+    toc            : TRUE
+    self_contained : false
+    toc_float:
+      collapsed    : FALSE
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Content
+
+<div style="font-size: 50%;" id="toc"></div>
+
+## Learning
+
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/statistical_reasoning/statistical_reasoning.Rmd"}
+```
+
+```{r child="../../../topics/empirical_cycle/empirical_cycle.Rmd"}
+```
+
+```{r child="../../../topics/coin_expreiment/coin_experiment.Rmd"}
+```
+
+```{r child="../../../topics/nhst/NHST_2.rmd"}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../footer.md"}
+```
+

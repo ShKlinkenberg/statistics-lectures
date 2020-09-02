@@ -33,6 +33,9 @@ RenderMultipleOutput <- function(path) {
 # Week 1
 RenderMultipleOutput("courses/2020-2021_WSR_PB/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
 
+RenderMultipleOutput("courses/2020-2021_SSR/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
+
+
 # # Week 2
 # RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
 # 
