@@ -57,9 +57,6 @@ local({
 ```{r child="../../../topics/coin_expreiment/coin_experiment.Rmd"}
 ```
 
-```{r child="../../../topics/nhst/NHST_2.rmd"}
-```
-
 
 <!-- Footer insert below -->
 

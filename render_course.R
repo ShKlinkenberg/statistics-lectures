@@ -31,8 +31,11 @@ RenderMultipleOutput <- function(path) {
 # Blok I
 
 # Week 1
+
+# WSR
 RenderMultipleOutput("courses/2020-2021_WSR_PB/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
 
+# SSR
 RenderMultipleOutput("courses/2020-2021_SSR/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
 
 
