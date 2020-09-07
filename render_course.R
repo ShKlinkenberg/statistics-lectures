@@ -41,7 +41,8 @@ RenderMultipleOutput("courses/2020-2021_SSR/reasoning_nhst/reasoning_empirical_c
 
 # # Week 2
 
-
+# WSR
+RenderMultipleOutput("courses/2020-2021_WSR_PB/nhst/nhst.Rmd")
 # SSR
 RenderMultipleOutput("courses/2020-2021_SSR/nhst/nhst.Rmd")
 
