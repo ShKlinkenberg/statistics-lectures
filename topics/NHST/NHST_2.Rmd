@@ -3,8 +3,7 @@
 [Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman)-[Pearson](https://en.wikipedia.org/wiki/Egon_Pearson) Paradigm
 
 <style>
-.np { mix-blend-mode: overlay;
-      height: 400px;
+.np { height: 400px;
       float: left;
 
 }
