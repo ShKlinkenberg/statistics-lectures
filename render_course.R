@@ -40,7 +40,11 @@ RenderMultipleOutput("courses/2020-2021_SSR/reasoning_nhst/reasoning_empirical_c
 
 
 # # Week 2
-# RenderMultipleOutput("courses/current/nhst/nhst.Rmd")
+
+
+# SSR
+RenderMultipleOutput("courses/2020-2021_SSR/nhst/nhst.Rmd")
+
 # 
 # # Week 3
 # RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
