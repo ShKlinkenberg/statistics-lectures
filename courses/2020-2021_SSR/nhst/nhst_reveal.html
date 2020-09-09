@@ -562,8 +562,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
     
       gtag('config', 'UA-107432294-1');
     </script>
-    <link href="nhst_reveal_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-    <link href="nhst_reveal_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 </head>
 <body>
   <div class="reveal">
@@ -582,7 +580,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </div>
 <!-- Add the required topics below -->
 </section>
-<section><section id="null-hypothesis-significance-testing" class="title-slide slide level1 section"><h1>Null Hypothesis<br>Significance Testing</h1></section><section id="h_0-and-h_a" class="slide level2 subsection">
+<section><section id="null-hypothesis-significance-testing" class="title-slide slide level1 section"><h1>Null Hypothesis<br>Significance Testing</h1></section><section id="neyman-pearson-paradigm" class="slide level2">
+<h2>Neyman-Pearson Paradigm</h2>
+<p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a>-<a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a> Paradigm</p>
+<style>
+.np { height: 400px;
+      float: left;
+    }
+</style>
+<p><img class="np" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg"></p>
+<p><img class="np" src="http://www-history.mcs.st-and.ac.uk/BigPictures/Pearson_Egon_4.jpeg"></p>
+</section><section id="h_0-and-h_a" class="slide level2 subsection">
 <h2><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></h2>
 <table style="width:100%; border: none;">
 <tr>
@@ -1169,7 +1177,24 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p>Source: <a href="http://rpsychologist.com/d3/NHST/">Kristoffer Magnusson</a></p>
 <!-- Footer insert below -->
 </section></section>
-<section id="end" class="title-slide slide level1"><h1>End</h1></section>
+<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</section></section>
     </div>
   </div>
 
@@ -1192,20 +1217,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 
 
 
-        chalkboard: {
-        },
-
-        keyboard: {
-          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
-          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
-          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
-           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
-          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
-        },
-
         // Optional reveal.js plugins
         dependencies: [
-          { src: 'nhst_reveal_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>

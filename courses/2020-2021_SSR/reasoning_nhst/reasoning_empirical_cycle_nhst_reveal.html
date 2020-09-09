@@ -13,9 +13,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -25,16 +25,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -43,9 +41,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -588,7 +586,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </iframe>
 <!-- Add the required topics below -->
 </section>
-<section><section id="reasoning-in-statistics" class="title-slide slide level1 section"><h1>Reasoning in statistics</h1><p>Source: <a href="https://apps3.cehd.umn.edu/artist/glossary.html">ARTIST</a></p></section><section id="statistical-literacy" class="slide level2 subsection">
+<section><section id="reasoning-in-statistics" class="title-slide slide level1 section"><h1>Reasoning in statistics</h1></section><section id="statistical-literacy" class="slide level2 subsection">
 <h2>Statistical Literacy</h2>
 <ul>
 <li>Knowledge (Basic understanding of concepts)
@@ -672,7 +670,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <iframe style="height:450px; width:100%;" src="https://www.youtube.com/embed/D8N1I-FmMvU?rel=0&amp;controls=1" frameborder="0" allowfullscreen>
 </iframe>
 </section></section>
-<section><section id="experiment" class="title-slide slide level1 section"><h1>Experiment</h1><p><a href="https://webcolleges.uva.nl/Mediasite/Play/ed1e63e0cd204dcf9d2a144603ce342b1d?playFrom=3708000">Video registration</a></p></section><section id="heads" class="slide level2">
+<section><section id="experiment" class="title-slide slide level1 section"><h1>Experiment</h1></section><section id="heads" class="slide level2">
 <h2>Heads</h2>
 <div style="text-align:center;">
 <img style="width:40%;" src="https://shklinkenberg.github.io/statistics-lectures/topics/coin_expreiment/QR_heads.png">
@@ -709,20 +707,20 @@ bit.ly/2j54A2U
 <li>Sample distribution</li>
 <li>Samples distribution</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages(&quot;curl&quot;)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(<span class="st">&quot;curl&quot;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>url =<span class="st"> &quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pub?output=csv&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">curl</span>(url))</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages(&quot;curl&quot;)</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;curl&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">url =<span class="st"> &quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pub?output=csv&quot;</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">curl</span>(url))</a></code></pre></div>
 </section><section id="binomial-distribution" class="slide level2">
 <h2>Binomial distribution</h2>
 <p><span class="math display">\[ {n\choose k}p^k(1-p)^{n-k} \\
  {n\choose k} = \frac{n!}{k!(n-k)!} \]</span></p>
 <p>With values:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>n =<span class="st"> </span><span class="dv">10</span>   <span class="co"># Sample size</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>k =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">10</span> <span class="co"># Discrete probability space</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>p =<span class="st"> </span><span class="fl">.5</span>   <span class="co"># Probability of head</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">n =<span class="st"> </span><span class="dv">10</span>   <span class="co"># Sample size</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">k =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">10</span> <span class="co"># Discrete probability space</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">p =<span class="st"> </span><span class="fl">.5</span>   <span class="co"># Probability of head</span></a></code></pre></div>
 </section><section id="probabilities" class="slide level2">
 <h2>Probabilities</h2>
 </section><section class="slide level2">
@@ -785,21 +783,23 @@ bit.ly/2j54A2U
 -->
 <!-- Footer insert below -->
 </section></section>
-<section id="end" class="title-slide slide level1"><h1>End</h1><script src="https://use.fontawesome.com/23c1d38eea.js"></script>
-<ul class="fa-ul" style="color:lightgrey;">
+<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="section" class="slide level2">
+<h2></h2>
+<ul class="fa-ul" style="list-style: none; color:black">
 <li>
-<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:lightgrey; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
 </li>
 <li>
-<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:lightgrey; border-bottom:none;">Klinkenberg</a>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
 </li>
 <li>
-<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:lightgrey" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
 </li>
 <li>
-<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:lightgrey; border-bottom:none;">ShKlinkenberg</a>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
-</ul></section>
+</ul>
+</section></section>
     </div>
   </div>
 
