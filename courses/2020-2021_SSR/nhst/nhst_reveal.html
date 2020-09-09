@@ -13,9 +13,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -25,16 +25,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -43,9 +41,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -564,6 +562,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     
       gtag('config', 'UA-107432294-1');
     </script>
+    <link href="nhst_reveal_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="nhst_reveal_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 </head>
 <body>
   <div class="reveal">
@@ -582,16 +582,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </div>
 <!-- Add the required topics below -->
 </section>
-<section><section id="null-hypothesis-significance-testing" class="title-slide slide level1 section"><h1>Null Hypothesis<br>Significance Testing</h1><p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a>-<a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a> Paradigm</p>
-<style>
-.np { height: 400px;
-      float: left;
-
-}
-
-</style>
-<p><img class="np" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg"></p>
-<p><img class="np" src="http://www-history.mcs.st-and.ac.uk/BigPictures/Pearson_Egon_4.jpeg"></p></section><section id="h_0-and-h_a" class="slide level2 subsection">
+<section><section id="null-hypothesis-significance-testing" class="title-slide slide level1 section"><h1>Null Hypothesis<br>Significance Testing</h1></section><section id="h_0-and-h_a" class="slide level2 subsection">
 <h2><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></h2>
 <table style="width:100%; border: none;">
 <tr>
@@ -633,9 +624,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Lowerbound = <span class="math inline">\(\bar{x} - 1.96 \times SE\)</span></li>
 <li>Upperbound = <span class="math inline">\(\bar{x} + 1.96 \times SE\)</span></li>
 </ul>
-</section><section class="slide level2">
-
-<p><img src="nhst_reveal_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" height="600" /></p>
 </section><section id="standard-error-1" class="slide level2 flexbox vcenter">
 <h2>Standard Error</h2>
 <style>
@@ -771,36 +759,39 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 }
 </script>
 </div>
+</section><section class="slide level2">
+
+<p><img src="nhst_reveal_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" height="600" /></p>
 </section><section id="binomial-h_0-distribution" class="slide level2">
 <h2>Binomial <span class="math inline">\(H_0\)</span> distribution</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>n =<span class="st"> </span><span class="dv">10</span>   <span class="co"># Sample size</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>k =<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n  <span class="co"># Discrete probability space</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>p =<span class="st"> </span><span class="fl">.5</span>   <span class="co"># Probability of head</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>munt =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>permutations =<span class="st"> </span><span class="kw">factorial</span>(n) <span class="op">/</span><span class="st"> </span>( <span class="kw">factorial</span>(k) <span class="op">*</span><span class="st"> </span><span class="kw">factorial</span>(n<span class="op">-</span>k) )</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># permutations</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a>p_k  =<span class="st"> </span>p<span class="op">^</span>k <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">^</span>(n<span class="op">-</span>k)  <span class="co"># Probability of single event</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>p_kp =<span class="st"> </span>p_k <span class="op">*</span><span class="st"> </span>permutations <span class="co"># Probability of event times </span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>                          <span class="co"># the occurrence of that event</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>title =<span class="st"> &quot;Binomial Null distribution&quot;</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co"># col=c(rep(&quot;red&quot;,2),rep(&quot;beige&quot;,7),rep(&quot;red&quot;,2))</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">barplot</span>( p_kp, </span>
-<span id="cb1-19"><a href="#cb1-19"></a>         <span class="dt">main=</span>title, </span>
-<span id="cb1-20"><a href="#cb1-20"></a>         <span class="dt">names.arg=</span><span class="dv">0</span><span class="op">:</span>n, </span>
-<span id="cb1-21"><a href="#cb1-21"></a>         <span class="dt">xlab=</span><span class="st">&quot;number of head&quot;</span>, </span>
-<span id="cb1-22"><a href="#cb1-22"></a>         <span class="dt">ylab=</span><span class="st">&quot;P(%)&quot;</span>, </span>
-<span id="cb1-23"><a href="#cb1-23"></a>         <span class="dt">col=</span><span class="st">&#39;beige&#39;</span>,</span>
-<span id="cb1-24"><a href="#cb1-24"></a>         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">3</span>) )</span>
-<span id="cb1-25"><a href="#cb1-25"></a></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co"># abline(v = c(2.5,10.9), lty=2, col=&#39;red&#39;)</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="kw">text</span>(.<span class="dv">6</span><span class="op">:</span><span class="fl">10.6</span><span class="op">*</span><span class="fl">1.2</span>,p_kp,<span class="kw">round</span>(p_kp,<span class="dv">3</span>),<span class="dt">pos=</span><span class="dv">3</span>,<span class="dt">cex=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">n =<span class="st"> </span><span class="dv">10</span>   <span class="co"># Sample size</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">k =<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n  <span class="co"># Discrete probability space</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">p =<span class="st"> </span><span class="fl">.5</span>   <span class="co"># Probability of head</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">munt =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">permutations =<span class="st"> </span><span class="kw">factorial</span>(n) <span class="op">/</span><span class="st"> </span>( <span class="kw">factorial</span>(k) <span class="op">*</span><span class="st"> </span><span class="kw">factorial</span>(n<span class="op">-</span>k) )</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># permutations</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">p_k  =<span class="st"> </span>p<span class="op">^</span>k <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">^</span>(n<span class="op">-</span>k)  <span class="co"># Probability of single event</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">p_kp =<span class="st"> </span>p_k <span class="op">*</span><span class="st"> </span>permutations <span class="co"># Probability of event times </span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">                          <span class="co"># the occurrence of that event</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">title =<span class="st"> &quot;Binomial Null distribution&quot;</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co"># col=c(rep(&quot;red&quot;,2),rep(&quot;beige&quot;,7),rep(&quot;red&quot;,2))</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="kw">barplot</span>( p_kp, </a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">         <span class="dt">main=</span>title, </a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">         <span class="dt">names.arg=</span><span class="dv">0</span><span class="op">:</span>n, </a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">         <span class="dt">xlab=</span><span class="st">&quot;number of head&quot;</span>, </a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">         <span class="dt">ylab=</span><span class="st">&quot;P(%)&quot;</span>, </a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">         <span class="dt">col=</span><span class="st">&#39;beige&#39;</span>,</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">3</span>) )</a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co"># abline(v = c(2.5,10.9), lty=2, col=&#39;red&#39;)</span></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="kw">text</span>(.<span class="dv">6</span><span class="op">:</span><span class="fl">10.6</span><span class="op">*</span><span class="fl">1.2</span>,p_kp,<span class="kw">round</span>(p_kp,<span class="dv">3</span>),<span class="dt">pos=</span><span class="dv">3</span>,<span class="dt">cex=</span>.<span class="dv">5</span>)</a></code></pre></div>
 </section><section class="slide level2">
 
 <p><img src="nhst_reveal_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
@@ -1091,81 +1082,81 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </ul>
 </section><section id="decision-table-1" class="slide level2 flexbox vcenter smaller">
 <h2>Decision Table</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>N     =<span class="st"> </span><span class="dv">10</span>  <span class="co"># Sample size</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>H0    =<span class="st"> </span><span class="fl">.5</span>  <span class="co"># Probability of head under H0 50/50</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>HA    =<span class="st"> </span><span class="fl">.2</span>  <span class="co"># Aternative expected value</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>alpha =<span class="st"> </span><span class="fl">.05</span> <span class="co"># Selected type I error</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Color areas red for selected alpha</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>area &lt;-<span class="st"> </span><span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N, N, H0) <span class="op">&lt;</span><span class="st"> </span>alpha<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># barplot(dbinom(0:N,N, HA)) -&gt; x.values</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># x.values</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co"># lb &lt;- x.values[c(qbinom(alpha/2, N+1, H0), qbinom(alpha/2, N+1, H0)+1 )]</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># ub &lt;- x.values[c(qbinom(1-(alpha/2), N+1, H0), qbinom(1-(alpha/2), N+1, H0)+1 )]</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># </span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># mlb &lt;- mean(lb)</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># mub &lt;- mean(ub)</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a>col =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;beige&quot;</span>, N<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb2-19"><a href="#cb2-19"></a>col[area] =<span class="st"> &quot;red&quot;</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-21"><a href="#cb2-21"></a>col2 =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, N<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb2-22"><a href="#cb2-22"></a>col2[area] =<span class="st"> &quot;beige&quot;</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Delete # to not color the plots</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co"># col = col2  = &quot;beige&quot;</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,<span class="dv">3</span>,<span class="dv">3</span>, <span class="dt">byrow=</span>T))</span>
-<span id="cb2-28"><a href="#cb2-28"></a></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="kw">plot.new</span>()</span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;Binomial Distribution&quot;</span>,<span class="dt">cex=</span><span class="fl">1.5</span>)</span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co"># text(0.5,0.1,paste(&quot;N:&quot;,N),cex=1.5)</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="kw">plot.new</span>()</span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;H0 True&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-35"><a href="#cb2-35"></a></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="kw">plot.new</span>()</span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;H0 False&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-38"><a href="#cb2-38"></a></span>
-<span id="cb2-39"><a href="#cb2-39"></a><span class="kw">plot.new</span>()</span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;Reject H0&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, H0), </span>
-<span id="cb2-43"><a href="#cb2-43"></a>        <span class="dt">col  =</span> col, </span>
-<span id="cb2-44"><a href="#cb2-44"></a>        <span class="co"># yaxt = &#39;n&#39;, </span></span>
-<span id="cb2-45"><a href="#cb2-45"></a>        <span class="dt">main =</span> <span class="st">&#39;Alpha / Type I error&#39;</span>, </span>
-<span id="cb2-46"><a href="#cb2-46"></a>        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </span>
-<span id="cb2-47"><a href="#cb2-47"></a>        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</span>
-<span id="cb2-48"><a href="#cb2-48"></a></span>
-<span id="cb2-49"><a href="#cb2-49"></a></span>
-<span id="cb2-50"><a href="#cb2-50"></a><span class="co"># abline(v = mlb, col=&quot;red&quot;, lwd=3, lty=2)</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a><span class="co"># abline(v = mub, col=&quot;red&quot;, lwd=3, lty=2)</span></span>
-<span id="cb2-52"><a href="#cb2-52"></a></span>
-<span id="cb2-53"><a href="#cb2-53"></a><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, HA), </span>
-<span id="cb2-54"><a href="#cb2-54"></a>        <span class="dt">col  =</span> col, </span>
-<span id="cb2-55"><a href="#cb2-55"></a>        <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>, </span>
-<span id="cb2-56"><a href="#cb2-56"></a>        <span class="dt">main =</span> <span class="st">&#39;Power&#39;</span>, </span>
-<span id="cb2-57"><a href="#cb2-57"></a>        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </span>
-<span id="cb2-58"><a href="#cb2-58"></a>        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</span>
-<span id="cb2-59"><a href="#cb2-59"></a></span>
-<span id="cb2-60"><a href="#cb2-60"></a><span class="kw">plot.new</span>()</span>
-<span id="cb2-61"><a href="#cb2-61"></a><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;Accept H0&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb2-62"><a href="#cb2-62"></a></span>
-<span id="cb2-63"><a href="#cb2-63"></a><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, H0), </span>
-<span id="cb2-64"><a href="#cb2-64"></a>        <span class="dt">col  =</span> col2, </span>
-<span id="cb2-65"><a href="#cb2-65"></a>        <span class="co"># yaxt = &#39;n&#39;, </span></span>
-<span id="cb2-66"><a href="#cb2-66"></a>        <span class="dt">main =</span> <span class="st">&#39;1 - alpha&#39;</span>, </span>
-<span id="cb2-67"><a href="#cb2-67"></a>        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </span>
-<span id="cb2-68"><a href="#cb2-68"></a>        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</span>
-<span id="cb2-69"><a href="#cb2-69"></a></span>
-<span id="cb2-70"><a href="#cb2-70"></a><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, HA), </span>
-<span id="cb2-71"><a href="#cb2-71"></a>        <span class="dt">col  =</span> col2, </span>
-<span id="cb2-72"><a href="#cb2-72"></a>        <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>, </span>
-<span id="cb2-73"><a href="#cb2-73"></a>        <span class="dt">main =</span> <span class="st">&#39;Beta / Type II error&#39;</span>, </span>
-<span id="cb2-74"><a href="#cb2-74"></a>        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </span>
-<span id="cb2-75"><a href="#cb2-75"></a>        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">N     =<span class="st"> </span><span class="dv">10</span>  <span class="co"># Sample size</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">H0    =<span class="st"> </span><span class="fl">.5</span>  <span class="co"># Probability of head under H0 50/50</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">HA    =<span class="st"> </span><span class="fl">.2</span>  <span class="co"># Aternative expected value</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">alpha =<span class="st"> </span><span class="fl">.05</span> <span class="co"># Selected type I error</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># Color areas red for selected alpha</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">area &lt;-<span class="st"> </span><span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N, N, H0) <span class="op">&lt;</span><span class="st"> </span>alpha<span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># barplot(dbinom(0:N,N, HA)) -&gt; x.values</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co"># x.values</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co"># lb &lt;- x.values[c(qbinom(alpha/2, N+1, H0), qbinom(alpha/2, N+1, H0)+1 )]</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co"># ub &lt;- x.values[c(qbinom(1-(alpha/2), N+1, H0), qbinom(1-(alpha/2), N+1, H0)+1 )]</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co"># </span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co"># mlb &lt;- mean(lb)</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co"># mub &lt;- mean(ub)</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">col =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;beige&quot;</span>, N<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">col[area] =<span class="st"> &quot;red&quot;</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">col2 =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;red&quot;</span>, N<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">col2[area] =<span class="st"> &quot;beige&quot;</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co"># Delete # to not color the plots</span></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co"># col = col2  = &quot;beige&quot;</span></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,<span class="dv">3</span>,<span class="dv">3</span>, <span class="dt">byrow=</span>T))</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;Binomial Distribution&quot;</span>,<span class="dt">cex=</span><span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co"># text(0.5,0.1,paste(&quot;N:&quot;,N),cex=1.5)</span></a>
+<a class="sourceLine" id="cb2-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;H0 True&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;H0 False&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;Reject H0&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, H0), </a>
+<a class="sourceLine" id="cb2-43" data-line-number="43">        <span class="dt">col  =</span> col, </a>
+<a class="sourceLine" id="cb2-44" data-line-number="44">        <span class="co"># yaxt = &#39;n&#39;, </span></a>
+<a class="sourceLine" id="cb2-45" data-line-number="45">        <span class="dt">main =</span> <span class="st">&#39;Alpha / Type I error&#39;</span>, </a>
+<a class="sourceLine" id="cb2-46" data-line-number="46">        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </a>
+<a class="sourceLine" id="cb2-47" data-line-number="47">        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb2-48" data-line-number="48"></a>
+<a class="sourceLine" id="cb2-49" data-line-number="49"></a>
+<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="co"># abline(v = mlb, col=&quot;red&quot;, lwd=3, lty=2)</span></a>
+<a class="sourceLine" id="cb2-51" data-line-number="51"><span class="co"># abline(v = mub, col=&quot;red&quot;, lwd=3, lty=2)</span></a>
+<a class="sourceLine" id="cb2-52" data-line-number="52"></a>
+<a class="sourceLine" id="cb2-53" data-line-number="53"><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, HA), </a>
+<a class="sourceLine" id="cb2-54" data-line-number="54">        <span class="dt">col  =</span> col, </a>
+<a class="sourceLine" id="cb2-55" data-line-number="55">        <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>, </a>
+<a class="sourceLine" id="cb2-56" data-line-number="56">        <span class="dt">main =</span> <span class="st">&#39;Power&#39;</span>, </a>
+<a class="sourceLine" id="cb2-57" data-line-number="57">        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </a>
+<a class="sourceLine" id="cb2-58" data-line-number="58">        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb2-59" data-line-number="59"></a>
+<a class="sourceLine" id="cb2-60" data-line-number="60"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb2-61" data-line-number="61"><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;Accept H0&quot;</span>,<span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-62" data-line-number="62"></a>
+<a class="sourceLine" id="cb2-63" data-line-number="63"><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, H0), </a>
+<a class="sourceLine" id="cb2-64" data-line-number="64">        <span class="dt">col  =</span> col2, </a>
+<a class="sourceLine" id="cb2-65" data-line-number="65">        <span class="co"># yaxt = &#39;n&#39;, </span></a>
+<a class="sourceLine" id="cb2-66" data-line-number="66">        <span class="dt">main =</span> <span class="st">&#39;1 - alpha&#39;</span>, </a>
+<a class="sourceLine" id="cb2-67" data-line-number="67">        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </a>
+<a class="sourceLine" id="cb2-68" data-line-number="68">        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb2-69" data-line-number="69"></a>
+<a class="sourceLine" id="cb2-70" data-line-number="70"><span class="kw">barplot</span>(<span class="kw">dbinom</span>(<span class="dv">0</span><span class="op">:</span>N,N, HA), </a>
+<a class="sourceLine" id="cb2-71" data-line-number="71">        <span class="dt">col  =</span> col2, </a>
+<a class="sourceLine" id="cb2-72" data-line-number="72">        <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>, </a>
+<a class="sourceLine" id="cb2-73" data-line-number="73">        <span class="dt">main =</span> <span class="st">&#39;Beta / Type II error&#39;</span>, </a>
+<a class="sourceLine" id="cb2-74" data-line-number="74">        <span class="dt">names.arg =</span> <span class="dv">0</span><span class="op">:</span>N, </a>
+<a class="sourceLine" id="cb2-75" data-line-number="75">        <span class="dt">cex.names =</span> <span class="fl">0.7</span>)</a></code></pre></div>
 </section><section class="slide level2">
 
 <p><img src="nhst_reveal_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" /></p>
@@ -1178,21 +1169,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p>Source: <a href="http://rpsychologist.com/d3/NHST/">Kristoffer Magnusson</a></p>
 <!-- Footer insert below -->
 </section></section>
-<section id="end" class="title-slide slide level1"><h1>End</h1><script src="https://use.fontawesome.com/23c1d38eea.js"></script>
-<ul class="fa-ul" style="color:lightgrey;">
-<li>
-<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:lightgrey; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
-</li>
-<li>
-<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:lightgrey; border-bottom:none;">Klinkenberg</a>
-</li>
-<li>
-<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:lightgrey" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
-</li>
-<li>
-<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:lightgrey; border-bottom:none;">ShKlinkenberg</a>
-</li>
-</ul></section>
+<section id="end" class="title-slide slide level1"><h1>End</h1></section>
     </div>
   </div>
 
@@ -1215,8 +1192,20 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 
 
 
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
         // Optional reveal.js plugins
         dependencies: [
+          { src: 'nhst_reveal_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
         ]
       });
     </script>

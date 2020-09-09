@@ -11,6 +11,7 @@ output:
     background_transition: slide
     center: true
     self_contained: false
+    reveal_plugins: ["chalkboard"]
     includes       :
       in_header    : ["../../../TOC/TOC_generator.js.wrapper",
                       "../../../GA_Script/GA_Script.html"]
