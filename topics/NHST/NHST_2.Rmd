@@ -755,7 +755,9 @@ barplot(dbinom(0:N,N, HA),
         cex.names = 0.7)
 ```
 
-## Reasoning Scheme {.subsection data-background=../../../../topics/NHST/NHST_descision_scheme.png data-background-size=contain}
+## Reasoning Scheme {.subsection .flexbox .vcenter}
+
+![](../../../../topics/NHST/NHST_descision_scheme.png)
 
 ## R<-PSYCHOLOGIST {.smaller}
 
