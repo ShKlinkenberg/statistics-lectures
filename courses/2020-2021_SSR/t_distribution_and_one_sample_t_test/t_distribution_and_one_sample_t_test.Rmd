@@ -1,18 +1,23 @@
 ---
 title: "T-distribution and the <br>One-sample t-test"
 author: "Klinkenberg"
-date: "17 sep 2019"
+date: "15 sep 2020"
 output: 
-  ioslides_presentation:
-    logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png
-    smaller        : FALSE
-    css            : https://shklinkenberg.github.io/uva_style/new_uva_style.css
+  revealjs::revealjs_presentation:
+    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    theme: white #simple #black
+    highlight: pygments
+    transition: slide #fade #slide
+    background_transition: slide
+    center: true
+    self_contained: false
+
     includes       :
       in_header    : ["../../../TOC/TOC_generator.js.wrapper",
                       "../../../GA_Script/GA_Script.html"]
-    self_contained : true
   html_document:
     toc            : TRUE
+    self_contained : false
     toc_float:
       collapsed    : FALSE
       smooth_scroll: TRUE
