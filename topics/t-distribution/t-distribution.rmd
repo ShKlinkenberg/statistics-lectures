@@ -201,14 +201,14 @@ tp975 = qt(.975,10)
 tp25  = qt(.025,10)
 
 pol_left = seq(-4,tp25,length=20)
-polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="blue", angle=-45, density=15, lwd=2)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=-45, density=15, lwd=2)
 
 pol_left = seq(tp975,4,length=20)
-polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="blue", angle=-45, density=15, lwd=2)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=-45, density=15, lwd=2)
 
 # label alpha
-text(-3,dt(tp25 , df = 10),expression(paste("½",alpha       ," = 2.5%",sep="")),pos=3, col='blue')
-text( 3,dt(tp975, df = 10),expression(paste("½",alpha       ," = 2.5%",sep="")),pos=3, col='blue')
+text(-3,dt(tp25 , df = 10),expression(paste("½",alpha       ," = 2.5%",sep="")),pos=3, col='red')
+text( 3,dt(tp975, df = 10),expression(paste("½",alpha       ," = 2.5%",sep="")),pos=3, col='red')
 
 xbracket = seq(-4,tp25,length=39)
 ybracket = dt(tp25 , df = 10)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
@@ -229,10 +229,10 @@ plot(function(x) dt(x, df = 10), -4, 4,
      lwd=1.5)
 
 pol_left = seq(tp95,4,length=20)
-polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="blue", angle=-45, density=15, lwd=2)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=-45, density=15, lwd=2)
 
 # label alpha
-text( 3,dt(tp95 , df = 10),expression(paste(    alpha[right]," = 5%"  ,sep="")),pos=3, col='blue')
+text( 3,dt(tp95 , df = 10),expression(paste(    alpha[right]," = 5%"  ,sep="")),pos=3, col='red')
 
 # add p-value
 #pol_left = seq(-4,-t,length=20)
