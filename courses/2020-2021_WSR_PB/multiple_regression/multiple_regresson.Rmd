@@ -39,10 +39,11 @@ local({
 ```
 
 ## Inhoud
-
+<small>
 <div id="toc"></div>
 
 <div class="notes">
+</small>
 ### Outline
 
 [Weblecture](https://webcolleges.uva.nl/Mediasite/Play/e4e7ff7ca4794e85b8dbcc55f1d7524a1d)
