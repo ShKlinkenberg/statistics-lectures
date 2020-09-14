@@ -38,7 +38,7 @@ data <- read.csv(textConnection(myCsv))
 IQ.next.to.you = data[grep("2017|2019", as.character(data$Timestamp)),"IQ.next.to.you"]
 ```
 
-```{r}
+```{r, message=FALSE, eval=FALSE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
 data <- gsheet2tbl('docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing')

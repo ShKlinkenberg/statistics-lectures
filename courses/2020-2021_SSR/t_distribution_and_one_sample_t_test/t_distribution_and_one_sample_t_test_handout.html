@@ -318,7 +318,7 @@ for(i in 1:n.samples) {
   
 }</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="t-statistic" class="section level2 subsection">
 <h2>T-statistic</h2>
@@ -329,24 +329,24 @@ for(i in 1:n.samples) {
 <h2>A sample</h2>
 <p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
 <pre class="r"><code>x = rnorm(n, mu, sigma); x</code></pre>
-<pre><code>##  [1]  87.73788  97.26494 114.99209  93.34892 108.39829 100.42866 114.97336  77.40509
-##  [9] 113.30179 134.68970  87.31959  95.01365  99.77399  63.79705 121.76014  91.00754
-## [17]  76.25440  85.27630 111.01575 101.32124 111.61703 106.00468  71.99539  84.78446
-## [25]  89.84452  88.43719 105.26756 104.50460  76.31219 123.14224  92.38051 118.56094
-## [33] 114.75157 108.93015 102.07836 114.16291 104.02805  99.89410  92.07527  71.42357
-## [41]  91.70964  88.13998 108.50219  88.84774 122.51788 107.81812 114.99461 118.28335
-## [49] 100.64175 149.77287 106.15731  93.19208  93.73059  89.43289 115.96941  88.92230</code></pre>
+<pre><code>##  [1] 100.82842 105.99063 115.74751 107.59631  99.68577 115.90681  64.36742 105.16886 108.20981
+## [10]  92.95073  86.94531 102.57286  85.52973  97.52516 127.03334 102.86277 102.62946 107.79473
+## [19] 112.61784 115.43209 137.94923  86.42458 112.04399 107.72441 118.93123 107.59450 103.42977
+## [28] 103.33183 103.72808 124.10531 103.82727  84.60451 108.09648 105.97669  73.90956 103.01811
+## [37]  99.32207  97.73191 122.73530 128.62263  80.96029  85.56083  83.95240  75.82119 123.34690
+## [46] 108.02645  80.88734  94.19615 122.55714  96.17455 101.82859  92.00955  82.74748  85.00940
+## [55]  94.27317 115.06962</code></pre>
 <pre class="r"><code>hist(x, main = &quot;Sample distribution&quot;, col = &quot;beige&quot;)
 text(80, 10, round(mean(x),2))</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="t-value" class="section level2">
 <h2>t-value</h2>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <pre class="r"><code>t = (mean(x) - mu) / (sd(x) / sqrt(n))
 t</code></pre>
-<pre><code>## [1] 0.2786896</code></pre>
+<pre><code>## [1] 1.004189</code></pre>
 </div>
 <div id="more-samples" class="section level2">
 <h2>More samples</h2>
@@ -365,12 +365,12 @@ for(i in 1:n.samples) {
 <h2>Mean and SE for all samples</h2>
 <pre class="r"><code>head(cbind(mean.x.values, se.x.values))</code></pre>
 <pre><code>##      mean.x.values se.x.values
-## [1,]     102.37683    2.026855
-## [2,]     100.29753    2.205740
-## [3,]      97.75054    2.393744
-## [4,]      98.01434    1.811400
-## [5,]     102.09968    1.950649
-## [6,]     103.04742    2.020122</code></pre>
+## [1,]      98.38093    1.768494
+## [2,]      99.18549    1.841916
+## [3,]     101.06792    1.945989
+## [4,]     100.20936    2.020558
+## [5,]      99.89105    1.705099
+## [6,]     101.93793    2.159960</code></pre>
 </div>
 <div id="sampling-distribution" class="section level2">
 <h2>Sampling distribution</h2>
@@ -379,7 +379,7 @@ for(i in 1:n.samples) {
      main = &quot;Sampling distribution&quot;, 
      xlab = &quot;all sample means&quot;)</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="calculate-t-values" class="section level2">
 <h2>Calculate t-values</h2>
@@ -387,13 +387,13 @@ for(i in 1:n.samples) {
 <pre class="r"><code>t.values = (mean.x.values - mu) / se.x.values
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values))</code></pre>
-<pre><code>##         mean.x.values  mu se.x.values    t.values
-##  [995,]     101.40908 100    2.044447  0.68922140
-##  [996,]     100.03204 100    1.959709  0.01634938
-##  [997,]     102.87803 100    1.831609  1.57131367
-##  [998,]     100.33156 100    1.966711  0.16858797
-##  [999,]      97.41663 100    1.958686 -1.31892912
-## [1000,]      98.52913 100    2.225011 -0.66106083</code></pre>
+<pre><code>##         mean.x.values  mu se.x.values   t.values
+##  [995,]      97.77423 100    1.864399 -1.1938271
+##  [996,]     101.04838 100    1.976267  0.5304873
+##  [997,]     102.10051 100    1.973808  1.0641919
+##  [998,]      96.92572 100    1.763007 -1.7437702
+##  [999,]     101.78495 100    2.018905  0.8841171
+## [1000,]      99.39342 100    2.182543 -0.2779226</code></pre>
 </div>
 <div id="sampled-t-values" class="section level2">
 <h2>Sampled t-values</h2>
@@ -408,7 +408,7 @@ T = seq(-4, 4, .01)
 lines(T, dt(T,df), col = &quot;red&quot;)
 legend(&quot;topright&quot;, lty = 1, col=&quot;red&quot;, legend = &quot;T-distribution&quot;)</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="t-distribution-1" class="section level2 smaller">
 <h2>T-distribution</h2>
@@ -420,7 +420,7 @@ legend(&quot;topright&quot;, lty = 1, col=&quot;red&quot;, legend = &quot;T-dist
 <p>Source: <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">wikipedia</a></p>
 <p></small></p>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="one-or-two-sided" class="section level2 subsection">
 <h2>One or two sided</h2>
@@ -434,7 +434,7 @@ legend(&quot;topright&quot;, lty = 1, col=&quot;red&quot;, legend = &quot;T-dist
 <li><span class="math inline">\(H_A: \bar{x} &lt; \mu\)</span></li>
 </ul>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="effect-size" class="section level2 subsection">
 <h2>Effect-size</h2>
@@ -451,16 +451,16 @@ r</code></pre>
 <pre class="r"><code>r = sqrt(t.values^2/(t.values^2 + df))
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values, r))</code></pre>
-<pre><code>##         mean.x.values  mu se.x.values    t.values           r
-##  [995,]     101.40908 100    2.044447  0.68922140 0.092535846
-##  [996,]     100.03204 100    1.959709  0.01634938 0.002204545
-##  [997,]     102.87803 100    1.831609  1.57131367 0.207274543
-##  [998,]     100.33156 100    1.966711  0.16858797 0.022726526
-##  [999,]      97.41663 100    1.958686 -1.31892912 0.175096885
-## [1000,]      98.52913 100    2.225011 -0.66106083 0.088785401</code></pre>
+<pre><code>##         mean.x.values  mu se.x.values   t.values          r
+##  [995,]      97.77423 100    1.864399 -1.1938271 0.15892961
+##  [996,]     101.04838 100    1.976267  0.5304873 0.07134860
+##  [997,]     102.10051 100    1.973808  1.0641919 0.14204068
+##  [998,]      96.92572 100    1.763007 -1.7437702 0.22888788
+##  [999,]     101.78495 100    2.018905  0.8841171 0.11837611
+## [1000,]      99.39342 100    2.182543 -0.2779226 0.03744879</code></pre>
 <pre class="r"><code>hist(r, main = &quot;effect-size distribution&quot;, col = &quot;beige&quot;)</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Cohen (1988)</p>
 <ul>
 <li>Small: 0 &lt;= .1</li>
@@ -538,7 +538,7 @@ lines( c(critical_t+.01,6),c(0,0),col=&quot;green&quot;,lwd=4)
 # Legend
 legend(&quot;topright&quot;, c(expression(alpha),&#39;POWER&#39;),density=c(10,10),angle=c(90,45))</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-16-1.png" width="768" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-18-1.png" width="768" /></p>
 <hr />
 <iframe src="http://rpsychologist.com/d3/NHST/#viz">
 </iframe>
@@ -563,19 +563,19 @@ legend(&quot;topright&quot;, c(expression(alpha),&#39;POWER&#39;),density=c(10,1
 <p>Let’s take a different sample of n = 43 and calculate the mean of this sample.</p>
 <pre class="r"><code>if(!&#39;gsheet&#39; %in% installed.packages()) { install.packages(&#39;gsheet&#39;) }
 library(&quot;gsheet&quot;)
-data &lt;- gsheet2tbl(&#39;docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing&#39;)</code></pre>
-<pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
-<pre class="r"><code>IQ.next.to.you = data[grep(&quot;2017|2020&quot;, as.character(data$Timestamp)),&quot;IQ.next.to.you&quot;]
+data &lt;- gsheet2tbl(&#39;docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing&#39;)
+
+IQ.next.to.you = data[grep(&quot;2017|2020&quot;, as.character(data$Timestamp)),&quot;IQ.next.to.you&quot;]
 IQ.next.to.you &lt;- as.numeric(IQ.next.to.you$IQ.next.to.you)</code></pre>
 <pre class="r"><code>mu     = 120
 n      = length(IQ.next.to.you)
 x      = IQ.next.to.you
 mean_x = mean(x, na.rm = T)</code></pre>
-<pre><code>## Warning in if (na.rm) x &lt;- x[!is.na(x)]: the condition has length &gt; 1 and only the first
-## element will be used</code></pre>
+<pre><code>## Warning in if (na.rm) x &lt;- x[!is.na(x)]: the condition has length &gt; 1 and only the first element
+## will be used</code></pre>
 <pre class="r"><code>sd_x   = sd(x, na.rm = T)</code></pre>
-<pre><code>## Warning in if (na.rm) &quot;na.or.complete&quot; else &quot;everything&quot;: the condition has length &gt; 1 and
-## only the first element will be used</code></pre>
+<pre><code>## Warning in if (na.rm) &quot;na.or.complete&quot; else &quot;everything&quot;: the condition has length &gt; 1 and only the
+## first element will be used</code></pre>
 <pre class="r"><code>cbind(n, mean_x, sd_x)</code></pre>
 <pre><code>##       n   mean_x     sd_x
 ## [1,] 49 122.3265 7.684909</code></pre>
@@ -633,13 +633,13 @@ library(&quot;visualize&quot;)
 
 visualize.t(t, df, section = &quot;upper&quot;)</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="p-value-two-sided" class="section level2 subsection">
 <h2><em>P</em>-value two sided</h2>
 <pre class="r"><code>visualize.t(c(-t, t), df, section = &quot;tails&quot;)</code></pre>
 <hr />
-<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 <div id="effect-size-1" class="section level2">
 <h2>Effect-size</h2>

@@ -624,13 +624,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>A sample</h2>
 <p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x =<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma); x</span></code></pre></div>
-<pre><code>##  [1]  94.16157  97.91372 100.57781  81.82761  92.57438  81.05797  85.67348 111.93756
-##  [9] 134.29134 102.97438  69.79762 132.07558  95.63448  77.74945 123.18244 110.04850
-## [17] 117.69091  66.78893 101.48762 105.54789 119.15864  91.72866 106.47077 104.74910
-## [25]  81.31858 103.06585  87.91547 109.03850 115.17858  98.47799  97.09389  90.32296
-## [33]  81.42883 111.30633  93.62707 116.96391  82.59083  98.34519 100.79453 106.74749
-## [41]  95.73390  93.23953  89.18981 106.24802  98.34803 103.68882  88.88267 102.77291
-## [49]  98.89618 108.03474 125.88877 107.19401 104.50331 133.92967 100.32330 108.70458</code></pre>
+<pre><code>##  [1]  82.81026  95.94916  92.05375 115.41637  71.97280 123.42109  92.06340  98.89365 121.17193
+## [10]  89.95541 112.74287 104.75460  92.83991  97.55308 102.57859  93.44194 109.46590 106.32735
+## [19]  90.89225  96.36227 106.58596 151.66244  97.86085 139.38823  96.33530  78.51836  94.85824
+## [28]  97.83060  98.36387  92.20428 108.34090 110.30141 105.67627  62.51811  82.33491 120.28289
+## [37] 111.21511 100.17230 110.59957  92.96912 117.16135 120.59524 104.06785  99.16146 103.06039
+## [46] 103.78880 102.62969 102.34665  93.23618  81.20367 114.55723 119.52676 108.32375  80.02052
+## [55]  91.97091 107.69900</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">hist</span>(x, <span class="dt">main =</span> <span class="st">&quot;Sample distribution&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;beige&quot;</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">text</span>(<span class="dv">80</span>, <span class="dv">10</span>, <span class="kw">round</span>(<span class="kw">mean</span>(x),<span class="dv">2</span>))</span></code></pre></div>
 </section><section class="slide level2">
@@ -641,7 +641,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>t =<span class="st"> </span>(<span class="kw">mean</span>(x) <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>(<span class="kw">sd</span>(x) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n))</span>
 <span id="cb5-2"><a href="#cb5-2"></a>t</span></code></pre></div>
-<pre><code>## [1] 0.4096095</code></pre>
+<pre><code>## [1] 0.8612859</code></pre>
 </section><section id="more-samples" class="slide level2">
 <h2>More samples</h2>
 <p>let’s take more samples.</p>
@@ -658,12 +658,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Mean and SE for all samples</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">head</span>(<span class="kw">cbind</span>(mean.x.values, se.x.values))</span></code></pre></div>
 <pre><code>##      mean.x.values se.x.values
-## [1,]     102.97108    1.974135
-## [2,]     101.98300    2.050674
-## [3,]     100.38691    2.277383
-## [4,]     101.88505    1.958406
-## [5,]     101.66874    1.912006
-## [6,]      96.66619    1.820032</code></pre>
+## [1,]      95.84576    1.950689
+## [2,]      98.22120    1.481093
+## [3,]     101.44862    2.237287
+## [4,]     103.18707    2.013745
+## [5,]      96.63896    2.224002
+## [6,]      99.18493    2.055387</code></pre>
 </section><section id="sampling-distribution" class="slide level2">
 <h2>Sampling distribution</h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">hist</span>(mean.x.values, </span>
@@ -679,13 +679,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>t.values =<span class="st"> </span>(mean.x.values <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>se.x.values</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="kw">tail</span>(<span class="kw">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code></pre></div>
-<pre><code>##         mean.x.values  mu se.x.values    t.values
-##  [995,]      97.38098 100    1.939317 -1.35048569
-##  [996,]      99.71640 100    1.892124 -0.14988550
-##  [997,]     100.12517 100    2.138856  0.05851982
-##  [998,]     100.18179 100    1.811892  0.10033298
-##  [999,]     100.96932 100    1.984201  0.48852100
-## [1000,]     101.43668 100    2.005705  0.71629486</code></pre>
+<pre><code>##         mean.x.values  mu se.x.values   t.values
+##  [995,]     101.16105 100    2.010755  0.5774209
+##  [996,]     102.43611 100    2.145939  1.1352208
+##  [997,]     102.78312 100    1.880549  1.4799492
+##  [998,]      99.44939 100    1.682294 -0.3273001
+##  [999,]      97.27733 100    1.986080 -1.3708737
+## [1000,]      96.89224 100    1.941735 -1.6005053</code></pre>
 </section><section id="sampled-t-values" class="slide level2">
 <h2>Sampled t-values</h2>
 <p>What is the distribution of all these t-values?</p>
@@ -741,13 +741,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>r =<span class="st"> </span><span class="kw">sqrt</span>(t.values<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t.values<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df))</span>
 <span id="cb16-2"><a href="#cb16-2"></a></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="kw">tail</span>(<span class="kw">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code></pre></div>
-<pre><code>##         mean.x.values  mu se.x.values    t.values           r
-##  [995,]      97.38098 100    1.939317 -1.35048569 0.179153297
-##  [996,]      99.71640 100    1.892124 -0.14988550 0.020206431
-##  [997,]     100.12517 100    2.138856  0.05851982 0.007890566
-##  [998,]     100.18179 100    1.811892  0.10033298 0.013527659
-##  [999,]     100.96932 100    1.984201  0.48852100 0.065729707
-## [1000,]     101.43668 100    2.005705  0.71629486 0.096137799</code></pre>
+<pre><code>##         mean.x.values  mu se.x.values   t.values          r
+##  [995,]     101.16105 100    2.010755  0.5774209 0.07762449
+##  [996,]     102.43611 100    2.145939  1.1352208 0.15131070
+##  [997,]     102.78312 100    1.880549  1.4799492 0.19569774
+##  [998,]      99.44939 100    1.682294 -0.3273001 0.04409021
+##  [999,]      97.27733 100    1.986080 -1.3708737 0.18176922
+## [1000,]      96.89224 100    1.941735 -1.6005053 0.21095539</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">hist</span>(r, <span class="dt">main =</span> <span class="st">&quot;effect-size distribution&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;beige&quot;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
@@ -849,20 +849,20 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>Let’s take a different sample of n = 43 and calculate the mean of this sample.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&#39;gsheet&#39;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&#39;gsheet&#39;</span>) }</span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="kw">library</span>(<span class="st">&quot;gsheet&quot;</span>)</span>
-<span id="cb20-3"><a href="#cb20-3"></a>data &lt;-<span class="st"> </span><span class="kw">gsheet2tbl</span>(<span class="st">&#39;docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing&#39;</span>)</span></code></pre></div>
-<pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>IQ.next.to.you =<span class="st"> </span>data[<span class="kw">grep</span>(<span class="st">&quot;2017|2020&quot;</span>, <span class="kw">as.character</span>(data<span class="op">$</span>Timestamp)),<span class="st">&quot;IQ.next.to.you&quot;</span>]</span>
-<span id="cb22-2"><a href="#cb22-2"></a>IQ.next.to.you &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(IQ.next.to.you<span class="op">$</span>IQ.next.to.you)</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>mu     =<span class="st"> </span><span class="dv">120</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>n      =<span class="st"> </span><span class="kw">length</span>(IQ.next.to.you)</span>
-<span id="cb23-3"><a href="#cb23-3"></a>x      =<span class="st"> </span>IQ.next.to.you</span>
-<span id="cb23-4"><a href="#cb23-4"></a>mean_x =<span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> T)</span></code></pre></div>
-<pre><code>## Warning in if (na.rm) x &lt;- x[!is.na(x)]: the condition has length &gt; 1 and only the first
-## element will be used</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>sd_x   =<span class="st"> </span><span class="kw">sd</span>(x, <span class="dt">na.rm =</span> T)</span></code></pre></div>
-<pre><code>## Warning in if (na.rm) &quot;na.or.complete&quot; else &quot;everything&quot;: the condition has length &gt; 1 and
-## only the first element will be used</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">cbind</span>(n, mean_x, sd_x)</span></code></pre></div>
+<span id="cb20-3"><a href="#cb20-3"></a>data &lt;-<span class="st"> </span><span class="kw">gsheet2tbl</span>(<span class="st">&#39;docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing&#39;</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a>IQ.next.to.you =<span class="st"> </span>data[<span class="kw">grep</span>(<span class="st">&quot;2017|2020&quot;</span>, <span class="kw">as.character</span>(data<span class="op">$</span>Timestamp)),<span class="st">&quot;IQ.next.to.you&quot;</span>]</span>
+<span id="cb20-6"><a href="#cb20-6"></a>IQ.next.to.you &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(IQ.next.to.you<span class="op">$</span>IQ.next.to.you)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>mu     =<span class="st"> </span><span class="dv">120</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>n      =<span class="st"> </span><span class="kw">length</span>(IQ.next.to.you)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>x      =<span class="st"> </span>IQ.next.to.you</span>
+<span id="cb21-4"><a href="#cb21-4"></a>mean_x =<span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> T)</span></code></pre></div>
+<pre><code>## Warning in if (na.rm) x &lt;- x[!is.na(x)]: the condition has length &gt; 1 and only the first element
+## will be used</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>sd_x   =<span class="st"> </span><span class="kw">sd</span>(x, <span class="dt">na.rm =</span> T)</span></code></pre></div>
+<pre><code>## Warning in if (na.rm) &quot;na.or.complete&quot; else &quot;everything&quot;: the condition has length &gt; 1 and only the
+## first element will be used</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">cbind</span>(n, mean_x, sd_x)</span></code></pre></div>
 <pre><code>##       n   mean_x     sd_x
 ## [1,] 49 122.3265 7.684909</code></pre>
 <p>Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>?</p>
@@ -892,7 +892,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>T-statistic</h2>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{122.33 - 120 }{7.68 / \sqrt{49}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>t =<span class="st"> </span>(mean_x <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>(sd_x <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n)); t</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>t =<span class="st"> </span>(mean_x <span class="op">-</span><span class="st"> </span>mu) <span class="op">/</span><span class="st"> </span>(sd_x <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n)); t</span></code></pre></div>
 <pre><code>## [1] 2.119181</code></pre>
 </section><section id="type-1-error" class="slide level2 subsection">
 <h2>Type 1 error</h2>
@@ -903,27 +903,27 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="p-value-one-sided" class="slide level2 subsection">
 <h2><em>P</em>-value one sided</h2>
 <p>Finally we have to calculate our <em>p</em>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>df =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>; df</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>df =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>; df</span></code></pre></div>
 <pre><code>## [1] 48</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
-<span id="cb33-3"><a href="#cb33-3"></a></span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="kw">visualize.t</span>(t, df, <span class="dt">section =</span> <span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb31-3"><a href="#cb31-3"></a></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="kw">visualize.t</span>(t, df, <span class="dt">section =</span> <span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
 <p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
 </section><section id="p-value-two-sided" class="slide level2 subsection">
 <h2><em>P</em>-value two sided</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t, t), df, <span class="dt">section =</span> <span class="st">&quot;tails&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t, t), df, <span class="dt">section =</span> <span class="st">&quot;tails&quot;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
 <p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-22-1.png" width="768" /></p>
 </section><section id="effect-size-1" class="slide level2">
 <h2>Effect-size</h2>
 <p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>r =<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df))</span>
-<span id="cb35-2"><a href="#cb35-2"></a></span>
-<span id="cb35-3"><a href="#cb35-3"></a>r</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>r =<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df))</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a>r</span></code></pre></div>
 <pre><code>## [1] 0.2925001</code></pre>
 <!-- Footer insert below -->
 </section></section>
