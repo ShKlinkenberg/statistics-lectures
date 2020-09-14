@@ -62,7 +62,7 @@ local({
 ```{r child="../../../topics/t-test_one-sample/One-sample_t-test.Rmd"}
 ```
 
-```{r child="../../../topics/regression_multiple_predictors/regression_multiple_predictors.Rmd"}
+```{r child="../../../topics/regression_multiple_predictors/regression_multiple_predictors_PB_in_R.Rmd"}
 ```
 
 <!-- Footer insert below -->

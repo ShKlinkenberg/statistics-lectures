@@ -53,6 +53,59 @@ For multiple regressin
 * Multicollinearity
 * Linearity
 
+## Sensitivity
+
+Outliers
+
+* Extreme residuals
+    * Cook's distance (< 1)
+    * Mahalonobis (< 11 at N = 30)
+    * Laverage (The average leverage value is defined as (k + 1)/n)
+    
+```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+x[1] =  2
+y[1] = -2
+
+plot(x,y, 
+     las  = 1, 
+     ylab = "outcome", 
+     xlab = "model", 
+     main = paste("r =", r," r2 = ", r.2), 
+     ylim = c(-2,2), 
+     xlim = c(-2,2))
+  
+abline(fit, col = "red")
+
+fit2 <- lm(y ~ x)
+abline(fit2, col = "blue")
+  
+r   = round(cor(x,y), 2)
+r.2 = round(r^2, 2)
+
+text(x[1], y[1], paste("r =", r," r2 = ", r.2), pos = 2, col = "blue")
+```
+
+## Homoscedasticity
+
+* Variance of residual should be equal across all expected values
+     * Look at scatterplot of standardized: expected values $\times$ residuals. Roughly round shape is needed.
+
+```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+fit <- lm(x[2:n] ~ y[2:n])
+
+ZPRED  = scale(fit$fitted.values)
+ZREDID = scale(fit$residuals)
+
+plot(ZPRED, ZREDID)
+abline(h = 0, v = 0, lwd=2)
+
+#install.packages("plotrix")
+if(!"plotrix" %in% installed.packages()) { install.packages("plotrix") };
+library("plotrix")
+draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
+```
+
+
 ## Multicollinearity
 
 <img class="shadow" style="float:right; width:250px;" src="../../../../topics/regression_multiple_predictors/pinguins.jpg">
