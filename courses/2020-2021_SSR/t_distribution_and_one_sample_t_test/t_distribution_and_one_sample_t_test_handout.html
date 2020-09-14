@@ -329,13 +329,13 @@ for(i in 1:n.samples) {
 <h2>A sample</h2>
 <p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
 <pre class="r"><code>x = rnorm(n, mu, sigma); x</code></pre>
-<pre><code>##  [1]  90.51016 101.16480  94.92502  86.06866 115.09797  96.43774 101.04681 137.65171 119.66889
-## [10]  94.84335 108.75063 106.34414  83.14934  81.78539 111.10440 103.55524  89.27323 123.68869
-## [19]  93.64828  59.77954 105.18172 104.37688  94.22584 103.90144  66.26008  94.99329 105.86573
-## [28] 104.53662  90.38902  74.50135  73.56612  93.78079 114.56605  83.56902 108.10363  64.36580
-## [37] 109.44024  82.95905 126.40673 107.50969 124.10399  97.85034 131.05859 111.35334  88.48276
-## [46] 104.60590  89.28268 103.54148 131.33135  87.55978  96.91265  90.23557  82.88881 122.46896
-## [55] 111.61067  87.25521</code></pre>
+<pre><code>##  [1]  96.78919 103.93358  86.25808  70.58842  88.05506 102.46356  91.16543 119.35861 108.15350
+## [10]  88.81947  80.51293 112.74056  84.69007  90.12988 112.87540  96.32997 115.30615 109.50697
+## [19]  77.61810  96.81091  81.43380 104.22861 129.00936 106.02079  75.69900  85.24595 103.85484
+## [28] 104.45636  94.60163 115.27368  97.95943  69.44513 111.92039  75.09198  78.60849 101.30184
+## [37] 111.00758 118.97560 102.58675 112.65457 111.16735 103.88558 100.25489 111.01627 130.34761
+## [46]  71.61187 124.00247 100.52663 107.62713 109.18940  94.50916 123.70550 111.18556  99.22677
+## [55] 121.28910  88.34717</code></pre>
 <pre class="r"><code>hist(x, main = &quot;Sample distribution&quot;, col = &quot;beige&quot;)
 text(80, 10, round(mean(x),2))</code></pre>
 <hr />
@@ -346,7 +346,7 @@ text(80, 10, round(mean(x),2))</code></pre>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <pre class="r"><code>t = (mean(x) - mu) / (sd(x) / sqrt(n))
 t</code></pre>
-<pre><code>## [1] -0.2575259</code></pre>
+<pre><code>## [1] 0.1689038</code></pre>
 </div>
 <div id="more-samples" class="section level2">
 <h2>More samples</h2>
@@ -365,12 +365,12 @@ for(i in 1:n.samples) {
 <h2>Mean and SE for all samples</h2>
 <pre class="r"><code>head(cbind(mean.x.values, se.x.values))</code></pre>
 <pre><code>##      mean.x.values se.x.values
-## [1,]      97.80148    2.058823
-## [2,]     107.73420    2.092620
-## [3,]     100.14699    2.187660
-## [4,]     102.63304    1.866385
-## [5,]     102.70998    1.980412
-## [6,]     101.07697    2.087270</code></pre>
+## [1,]      93.31409    2.005943
+## [2,]      97.48448    2.075779
+## [3,]     101.03458    1.849435
+## [4,]      97.65456    2.040036
+## [5,]      99.99982    1.926790
+## [6,]     101.70299    2.038116</code></pre>
 </div>
 <div id="sampling-distribution" class="section level2">
 <h2>Sampling distribution</h2>
@@ -387,13 +387,13 @@ for(i in 1:n.samples) {
 <pre class="r"><code>t.values = (mean.x.values - mu) / se.x.values
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values))</code></pre>
-<pre><code>##         mean.x.values  mu se.x.values    t.values
-##  [995,]     100.10709 100    2.251806  0.04755756
-##  [996,]      97.92625 100    1.788580 -1.15943763
-##  [997,]     100.78829 100    2.167220  0.36373449
-##  [998,]     100.46998 100    2.022490  0.23237926
-##  [999,]      98.46366 100    2.232258 -0.68824474
-## [1000,]     100.72427 100    1.920569  0.37711423</code></pre>
+<pre><code>##         mean.x.values  mu se.x.values   t.values
+##  [995,]     103.58298 100    2.172455  1.6492791
+##  [996,]      99.21149 100    1.928798 -0.4088075
+##  [997,]      96.34768 100    2.192600 -1.6657495
+##  [998,]      98.58431 100    1.869398 -0.7572983
+##  [999,]      99.70327 100    2.442117 -0.1215062
+## [1000,]      98.05873 100    2.035746 -0.9535900</code></pre>
 </div>
 <div id="sampled-t-values" class="section level2">
 <h2>Sampled t-values</h2>
@@ -451,13 +451,13 @@ r</code></pre>
 <pre class="r"><code>r = sqrt(t.values^2/(t.values^2 + df))
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values, r))</code></pre>
-<pre><code>##         mean.x.values  mu se.x.values    t.values           r
-##  [995,]     100.10709 100    2.251806  0.04755756 0.006412529
-##  [996,]      97.92625 100    1.788580 -1.15943763 0.154462270
-##  [997,]     100.78829 100    2.167220  0.36373449 0.048987064
-##  [998,]     100.46998 100    2.022490  0.23237926 0.031318642
-##  [999,]      98.46366 100    2.232258 -0.68824474 0.092405837
-## [1000,]     100.72427 100    1.920569  0.37711423 0.050784457</code></pre>
+<pre><code>##         mean.x.values  mu se.x.values   t.values          r
+##  [995,]     103.58298 100    2.172455  1.6492791 0.21708536
+##  [996,]      99.21149 100    1.928798 -0.4088075 0.05504003
+##  [997,]      96.34768 100    2.192600 -1.6657495 0.21914964
+##  [998,]      98.58431 100    1.869398 -0.7572983 0.10158583
+##  [999,]      99.70327 100    2.442117 -0.1215062 0.01638169
+## [1000,]      98.05873 100    2.035746 -0.9535900 0.12753210</code></pre>
 <pre class="r"><code>hist(r, main = &quot;effect-size distribution&quot;, col = &quot;beige&quot;)</code></pre>
 <hr />
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
@@ -560,7 +560,7 @@ legend(&quot;topright&quot;, c(expression(alpha),&#39;POWER&#39;),density=c(10,1
 <div id="compare-sample-mean" class="section level2 smaller">
 <h2>Compare sample mean</h2>
 <p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</p>
-<p>Let’s take a different sample of n = 43 and calculate the mean of this sample.</p>
+<p>Let’s take a different sample of n = 43 and calculate the mean of this sample. </small></p>
 <pre class="r"><code>mu     = 120
 n      = length(IQ.next.to.you)
 x      = IQ.next.to.you
@@ -569,7 +569,7 @@ sd_x   = sd(x, na.rm = T)
 cbind(n, mean_x, sd_x)</code></pre>
 <pre><code>##       n   mean_x     sd_x
 ## [1,] 49 122.3265 7.684909</code></pre>
-<p>Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
+<p><small> Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
 </div>
 <div id="hypothesis" class="section level2 subsection">
 <h2>Hypothesis</h2>
