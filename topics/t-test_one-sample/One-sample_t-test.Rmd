@@ -2,7 +2,7 @@
 
 ## IQ next to you {.flexbox .vcenter}
 
-![http://goo.gl/T6Lo2s](../../../topics/t-test_one-sample/QR_iq.png)
+![http://goo.gl/T6Lo2s](../../../../topics/t-test_one-sample/QR_iq.png)
 
 ## Models {.flexbox .vcenter}
 
