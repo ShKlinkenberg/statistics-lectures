@@ -78,6 +78,9 @@ Outliers
     * Laverage (The average leverage value is defined as (k + 1)/n)
     
 ```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+n = 100
+x = 
+
 x[1] =  2
 y[1] = -2
 
