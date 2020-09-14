@@ -1,0 +1,71 @@
+---
+title: "Multiple regression"
+author: "Klinkenberg"
+date: "16 sep 2020"
+output: 
+  revealjs::revealjs_presentation:
+    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    theme: white #simple #black
+    highlight: pygments
+    transition: slide #fade #slide
+    background_transition: slide
+    center: true
+    self_contained: false
+
+    includes       :
+      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
+                      "../../../GA_Script/GA_Script.html"]
+  html_document:
+    toc            : TRUE
+    self_contained : false
+    toc_float:
+      collapsed    : FALSE
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div id="toc"></div>
+
+<div class="notes">
+### Outline
+
+[Weblecture](https://webcolleges.uva.nl/Mediasite/Play/e4e7ff7ca4794e85b8dbcc55f1d7524a1d)
+
+* 0:00 Test analysis
+* 0:40 Regression
+* 1:00 Example in SPSS (enter method with 2 blocks)
+* 1:20 Regression slides (regression plane)
+</div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/t-distribution/t-distribution.rmd"}
+```
+
+```{r child="../../../topics/t-test_one-sample/One-sample_t-test.Rmd"}
+```
+
+```{r child="../../../topics/regression_multiple_predictors/regression_multiple_predictors.Rmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../footer.md"}
+```
+

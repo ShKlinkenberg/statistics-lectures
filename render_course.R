@@ -46,11 +46,15 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/nhst/nhst.Rmd")
 # SSR
 RenderMultipleOutput("courses/2020-2021_SSR/nhst/nhst.Rmd")
 
-# 
-# # Week 3
-# RenderMultipleOutput("courses/current/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
+
+# Week 3
+
+# WSR
+RenderMultipleOutput("courses/2020-2021_WSR_PB/multiple_regression/multiple_regresson.Rmd")
+
+# SSR
 # RenderMultipleOutput("courses/current/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
-# 
+
 # 
 # # RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
 # 
