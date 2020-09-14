@@ -116,7 +116,7 @@ This can be assessed through:
 
 * Correlations
 * Matrix scatterplot
-* VIF: max < 10, mean < 1
+<!-- * VIF: max < 10, mean < 1 -->
 * Tolerance > 0.2
 
 ## Linearity
