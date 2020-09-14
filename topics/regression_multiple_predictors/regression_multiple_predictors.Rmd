@@ -55,7 +55,7 @@ For multiple regressin
 
 ## Multicollinearity
 
-<img class="shadow" style="float:right; width:250px;" src="../../../../topics/regression_multiple_predictors/pinguins.jpg">
+<img class="shadow" style="float:right; width:250px;" src="../../../../../topics/regression_multiple_predictors/pinguins.jpg">
 
 To adhere to the multicollinearity assumptien, there must not be a too high linear relation between the predictor variables.
 
