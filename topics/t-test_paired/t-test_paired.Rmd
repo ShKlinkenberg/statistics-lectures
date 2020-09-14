@@ -38,7 +38,7 @@ Let's take a look at the data.
 
 ## IQ estimates
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 set.seed(7845)
 
 # Remove all objects from workspace
@@ -61,6 +61,22 @@ IQ.you         = data$Own.IQ
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
+
+```{r, warning=FALSE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data <- gsheet2tbl('docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing')
+
+data = data[grep("2017", as.character(data$Timestamp)),c("IQ.next.to.you", "Own.IQ")]
+
+IQ.next.to.you = data$IQ.next.to.you
+IQ.you         = data$Own.IQ
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+
 
 ```{r, echo=FALSE}
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))

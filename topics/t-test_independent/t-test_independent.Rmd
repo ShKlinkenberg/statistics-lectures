@@ -42,7 +42,7 @@ Specificly for independent sample $t$-test.
 
 We are going to use the IQ estimates we collected last week again. You had to gues the IQ of the one sitting next to you and your own IQ. But we are going to add gender to the data set. We did not register this so we are going to simulate some genders.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 set.seed(7845)
 
 # Remove all objects from workspace
@@ -67,6 +67,17 @@ data <- data[grep("2014", as.character(data$Timestamp)),c("IQ.next.to.you","Own.
 
 names(data) <- c('IQ.next.to.you', 'IQ.you')
 ```
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data <- gsheet2tbl('docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing')
+
+data = data[grep("2017", as.character(data$Timestamp)),c("IQ.next.to.you", "Own.IQ")]
+
+names(data) <- c('IQ.next.to.you', 'IQ.you')
+```
+
 
 ```{r}
 gender = sample(c("male", "female"), dim(data)[1], replace = TRUE)
