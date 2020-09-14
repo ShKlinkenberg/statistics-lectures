@@ -329,13 +329,13 @@ for(i in 1:n.samples) {
 <h2>A sample</h2>
 <p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
 <pre class="r"><code>x = rnorm(n, mu, sigma); x</code></pre>
-<pre><code>##  [1]  96.78919 103.93358  86.25808  70.58842  88.05506 102.46356  91.16543 119.35861 108.15350
-## [10]  88.81947  80.51293 112.74056  84.69007  90.12988 112.87540  96.32997 115.30615 109.50697
-## [19]  77.61810  96.81091  81.43380 104.22861 129.00936 106.02079  75.69900  85.24595 103.85484
-## [28] 104.45636  94.60163 115.27368  97.95943  69.44513 111.92039  75.09198  78.60849 101.30184
-## [37] 111.00758 118.97560 102.58675 112.65457 111.16735 103.88558 100.25489 111.01627 130.34761
-## [46]  71.61187 124.00247 100.52663 107.62713 109.18940  94.50916 123.70550 111.18556  99.22677
-## [55] 121.28910  88.34717</code></pre>
+<pre><code>##  [1]  96.48840  86.30457 105.43482 114.55189 106.53954  88.55588 108.29491  94.27125 104.46672
+## [10]  70.43229 103.88444  99.18170  94.47696  78.78681  98.04135 112.31517 122.46559  71.05220
+## [19]  81.85262 130.18445  97.95251 124.61946 102.79958  90.06182 126.90885  90.03485  89.00779
+## [28]  93.34513  98.36934  84.11706 106.90337  82.18229  84.48047  64.53439  99.12368  99.62937
+## [37] 107.56579 115.75632 117.83657  99.07264 115.46097 100.92994  81.41287  90.90320 115.83579
+## [46]  93.71389 105.24351  93.65247  95.01201  82.29839 104.41553 131.00651 124.78444 108.26930
+## [55] 124.10514  92.14009</code></pre>
 <pre class="r"><code>hist(x, main = &quot;Sample distribution&quot;, col = &quot;beige&quot;)
 text(80, 10, round(mean(x),2))</code></pre>
 <hr />
@@ -346,7 +346,7 @@ text(80, 10, round(mean(x),2))</code></pre>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <pre class="r"><code>t = (mean(x) - mu) / (sd(x) / sqrt(n))
 t</code></pre>
-<pre><code>## [1] 0.1689038</code></pre>
+<pre><code>## [1] 0.009285428</code></pre>
 </div>
 <div id="more-samples" class="section level2">
 <h2>More samples</h2>
@@ -365,12 +365,12 @@ for(i in 1:n.samples) {
 <h2>Mean and SE for all samples</h2>
 <pre class="r"><code>head(cbind(mean.x.values, se.x.values))</code></pre>
 <pre><code>##      mean.x.values se.x.values
-## [1,]      93.31409    2.005943
-## [2,]      97.48448    2.075779
-## [3,]     101.03458    1.849435
-## [4,]      97.65456    2.040036
-## [5,]      99.99982    1.926790
-## [6,]     101.70299    2.038116</code></pre>
+## [1,]     100.97893    1.805681
+## [2,]      96.86122    1.897046
+## [3,]     102.23517    1.907898
+## [4,]      99.60212    1.943256
+## [5,]      99.74744    1.710730
+## [6,]      96.63373    2.197717</code></pre>
 </div>
 <div id="sampling-distribution" class="section level2">
 <h2>Sampling distribution</h2>
@@ -388,12 +388,12 @@ for(i in 1:n.samples) {
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values   t.values
-##  [995,]     103.58298 100    2.172455  1.6492791
-##  [996,]      99.21149 100    1.928798 -0.4088075
-##  [997,]      96.34768 100    2.192600 -1.6657495
-##  [998,]      98.58431 100    1.869398 -0.7572983
-##  [999,]      99.70327 100    2.442117 -0.1215062
-## [1000,]      98.05873 100    2.035746 -0.9535900</code></pre>
+##  [995,]      99.14841 100    2.068428 -0.4117095
+##  [996,]      96.61590 100    2.068412 -1.6360874
+##  [997,]     102.55820 100    2.109882  1.2124863
+##  [998,]      99.51389 100    1.979735 -0.2455446
+##  [999,]     101.66226 100    1.917703  0.8667972
+## [1000,]     101.30855 100    1.909058  0.6854451</code></pre>
 </div>
 <div id="sampled-t-values" class="section level2">
 <h2>Sampled t-values</h2>
@@ -452,12 +452,12 @@ r</code></pre>
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values, r))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values   t.values          r
-##  [995,]     103.58298 100    2.172455  1.6492791 0.21708536
-##  [996,]      99.21149 100    1.928798 -0.4088075 0.05504003
-##  [997,]      96.34768 100    2.192600 -1.6657495 0.21914964
-##  [998,]      98.58431 100    1.869398 -0.7572983 0.10158583
-##  [999,]      99.70327 100    2.442117 -0.1215062 0.01638169
-## [1000,]      98.05873 100    2.035746 -0.9535900 0.12753210</code></pre>
+##  [995,]      99.14841 100    2.068428 -0.4117095 0.05542955
+##  [996,]      96.61590 100    2.068412 -1.6360874 0.21542990
+##  [997,]     102.55820 100    2.109882  1.2124863 0.16134944
+##  [998,]      99.51389 100    1.979735 -0.2455446 0.03309110
+##  [999,]     101.66226 100    1.917703  0.8667972 0.11608868
+## [1000,]     101.30855 100    1.909058  0.6854451 0.09203314</code></pre>
 <pre class="r"><code>hist(r, main = &quot;effect-size distribution&quot;, col = &quot;beige&quot;)</code></pre>
 <hr />
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
@@ -560,7 +560,7 @@ legend(&quot;topright&quot;, c(expression(alpha),&#39;POWER&#39;),density=c(10,1
 <div id="compare-sample-mean" class="section level2 smaller">
 <h2>Compare sample mean</h2>
 <p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</p>
-<p>Let’s take a different sample of n = 43 and calculate the mean of this sample. </small></p>
+<p>Let’s take a different sample and calculate the mean of this sample. </small></p>
 <pre class="r"><code>mu     = 120
 n      = length(IQ.next.to.you)
 x      = IQ.next.to.you
