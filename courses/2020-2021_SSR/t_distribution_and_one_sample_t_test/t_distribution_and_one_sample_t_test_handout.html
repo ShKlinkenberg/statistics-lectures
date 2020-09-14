@@ -329,13 +329,13 @@ for(i in 1:n.samples) {
 <h2>A sample</h2>
 <p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
 <pre class="r"><code>x = rnorm(n, mu, sigma); x</code></pre>
-<pre><code>##  [1]  80.08087 101.57051  90.15876  81.43079  65.21759 112.63953  93.55058  98.80254  99.94001
-## [10]  66.92700  50.08868  87.07240 138.85297 111.13817 118.36721  97.35474 113.76512 134.73461
-## [19]  72.35606 116.57085 105.36497 121.67954 119.36322  99.12851  86.67926 100.94898 103.70891
-## [28]  87.49627  98.54939  71.36409 109.64073  79.42872 122.40847 110.34232  77.73824 129.04845
-## [37] 104.03622  91.49534 116.44884 116.46132 122.50375 101.84451  99.39177  79.40856  95.57980
-## [46]  96.81267  88.75931  93.85771 117.11632  94.95132 104.18018  90.17930 115.27684 118.26197
-## [55]  93.67133  61.95949</code></pre>
+<pre><code>##  [1]  90.51016 101.16480  94.92502  86.06866 115.09797  96.43774 101.04681 137.65171 119.66889
+## [10]  94.84335 108.75063 106.34414  83.14934  81.78539 111.10440 103.55524  89.27323 123.68869
+## [19]  93.64828  59.77954 105.18172 104.37688  94.22584 103.90144  66.26008  94.99329 105.86573
+## [28] 104.53662  90.38902  74.50135  73.56612  93.78079 114.56605  83.56902 108.10363  64.36580
+## [37] 109.44024  82.95905 126.40673 107.50969 124.10399  97.85034 131.05859 111.35334  88.48276
+## [46] 104.60590  89.28268 103.54148 131.33135  87.55978  96.91265  90.23557  82.88881 122.46896
+## [55] 111.61067  87.25521</code></pre>
 <pre class="r"><code>hist(x, main = &quot;Sample distribution&quot;, col = &quot;beige&quot;)
 text(80, 10, round(mean(x),2))</code></pre>
 <hr />
@@ -346,7 +346,7 @@ text(80, 10, round(mean(x),2))</code></pre>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <pre class="r"><code>t = (mean(x) - mu) / (sd(x) / sqrt(n))
 t</code></pre>
-<pre><code>## [1] -0.3173172</code></pre>
+<pre><code>## [1] -0.2575259</code></pre>
 </div>
 <div id="more-samples" class="section level2">
 <h2>More samples</h2>
@@ -365,12 +365,12 @@ for(i in 1:n.samples) {
 <h2>Mean and SE for all samples</h2>
 <pre class="r"><code>head(cbind(mean.x.values, se.x.values))</code></pre>
 <pre><code>##      mean.x.values se.x.values
-## [1,]     100.46168    2.009330
-## [2,]     100.56330    2.168084
-## [3,]      96.39373    2.265464
-## [4,]     103.53235    2.381730
-## [5,]     102.87476    2.175106
-## [6,]     103.48875    2.183639</code></pre>
+## [1,]      97.80148    2.058823
+## [2,]     107.73420    2.092620
+## [3,]     100.14699    2.187660
+## [4,]     102.63304    1.866385
+## [5,]     102.70998    1.980412
+## [6,]     101.07697    2.087270</code></pre>
 </div>
 <div id="sampling-distribution" class="section level2">
 <h2>Sampling distribution</h2>
@@ -388,12 +388,12 @@ for(i in 1:n.samples) {
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values    t.values
-##  [995,]      97.91111 100    2.268065 -0.92099982
-##  [996,]      98.02503 100    2.139448 -0.92311992
-##  [997,]     100.06020 100    1.855579  0.03244155
-##  [998,]     104.07801 100    2.034453  2.00447236
-##  [999,]      97.37346 100    1.798945 -1.46004684
-## [1000,]      99.58525 100    1.923220 -0.21565327</code></pre>
+##  [995,]     100.10709 100    2.251806  0.04755756
+##  [996,]      97.92625 100    1.788580 -1.15943763
+##  [997,]     100.78829 100    2.167220  0.36373449
+##  [998,]     100.46998 100    2.022490  0.23237926
+##  [999,]      98.46366 100    2.232258 -0.68824474
+## [1000,]     100.72427 100    1.920569  0.37711423</code></pre>
 </div>
 <div id="sampled-t-values" class="section level2">
 <h2>Sampled t-values</h2>
@@ -452,12 +452,12 @@ r</code></pre>
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values, r))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values    t.values           r
-##  [995,]      97.91111 100    2.268065 -0.92099982 0.123240882
-##  [996,]      98.02503 100    2.139448 -0.92311992 0.123520253
-##  [997,]     100.06020 100    1.855579  0.03244155 0.004374377
-##  [998,]     104.07801 100    2.034453  2.00447236 0.260920475
-##  [999,]      97.37346 100    1.798945 -1.46004684 0.193164838
-## [1000,]      99.58525 100    1.923220 -0.21565327 0.029066394</code></pre>
+##  [995,]     100.10709 100    2.251806  0.04755756 0.006412529
+##  [996,]      97.92625 100    1.788580 -1.15943763 0.154462270
+##  [997,]     100.78829 100    2.167220  0.36373449 0.048987064
+##  [998,]     100.46998 100    2.022490  0.23237926 0.031318642
+##  [999,]      98.46366 100    2.232258 -0.68824474 0.092405837
+## [1000,]     100.72427 100    1.920569  0.37711423 0.050784457</code></pre>
 <pre class="r"><code>hist(r, main = &quot;effect-size distribution&quot;, col = &quot;beige&quot;)</code></pre>
 <hr />
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
@@ -559,7 +559,7 @@ legend(&quot;topright&quot;, c(expression(alpha),&#39;POWER&#39;),density=c(10,1
 </div>
 <div id="compare-sample-mean" class="section level2 smaller">
 <h2>Compare sample mean</h2>
-<p>We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</p>
+<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</p>
 <p>Let’s take a different sample of n = 43 and calculate the mean of this sample.</p>
 <pre class="r"><code>mu     = 120
 n      = length(IQ.next.to.you)
@@ -569,7 +569,7 @@ sd_x   = sd(x, na.rm = T)
 cbind(n, mean_x, sd_x)</code></pre>
 <pre><code>##       n   mean_x     sd_x
 ## [1,] 49 122.3265 7.684909</code></pre>
-<p>Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>?</p>
+<p>Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
 </div>
 <div id="hypothesis" class="section level2 subsection">
 <h2>Hypothesis</h2>
