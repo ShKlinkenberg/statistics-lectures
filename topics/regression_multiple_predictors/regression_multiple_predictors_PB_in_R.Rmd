@@ -90,7 +90,7 @@ text(x[1], y[1], paste("r =", r," r2 = ", r.2), pos = 2, col = "blue")
 * Variance of residual should be equal across all expected values
      * Look at scatterplot of standardized: expected values $\times$ residuals. Roughly round shape is needed.
 
-```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
+```{r, fig.align='center', fig.width=5, fig.height=5, echo=TRUE}
 fit <- lm(x[2:n] ~ y[2:n])
 
 ZPRED  = scale(fit$fitted.values)
