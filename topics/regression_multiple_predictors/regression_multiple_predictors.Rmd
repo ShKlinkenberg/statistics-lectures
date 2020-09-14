@@ -2,6 +2,8 @@
 
 ## Multiple regression {.smaller}
 
+<small>
+
 $$\LARGE{\text{outcome} = \text{model} + \text{error}}$$
 
 In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X.
@@ -11,6 +13,8 @@ $$\LARGE{Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \dotso + \beta_n X_{n
 In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters $\beta$'s are estimated from the data.
 
 Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
+
+</small>
 
 ## Outcome vs Model
 
@@ -77,7 +81,7 @@ Perdict study outcome based on IQ and motivation.
 
 ## Read data {.smaller}
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=FALSE, eval=FALSE, warning=FALSE, message=FALSE}
 set.seed(273645)
 n = 89
 
@@ -103,7 +107,7 @@ head(data, 10)
 ```
 
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 data <- read.csv('IQ.csv', header=T)
 
 head(data)
