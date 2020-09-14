@@ -203,12 +203,35 @@ var rotate = function(angle) {
 <button type="button" onclick="rotate(-10)">Down</button>
 <button type="button" onclick="rotate(10)">Up</button>
 
-## Slopes
+## Simple Slopes
+
+https://cran.r-project.org/web/packages/interactions/vignettes/interactions.html#simple_slopes_analysis_and_johnson-neyman_intervals
 
 ```{r}
 if(!"interactions" %in% installed.packages()) { install.packages("interactions") };
+if(!"sandwich" %in% installed.packages()) { install.packages("sandwich") };
+library("sandwich")
+
 library("interactions")
-# sim.slopes
+sim_slopes(fit, pred = predictor, modx = moderator, johnson_neyman = FALSE)
+```
+
+## Visual
+
+```{r}
+interact_plot(fit, pred = predictor, modx = moderator, johnson_neyman = FALSE)
+```
+
+
+## Johnson-Neyman intervals
+
+```{r}
+sim_slopes(fit, pred = predictor, modx = moderator, johnson_neyman = T)
+```
+## Visual
+
+```{r}
+johnson_neyman(fit, pred = predictor, modx = moderator, alpha = .05)
 ```
 
 
