@@ -49,7 +49,7 @@ IQ.next.to.you <- as.numeric(IQ.next.to.you$IQ.next.to.you)
 
 
 
-```{r, message=FALSE, eval=FALSE}
+```{r, message=FALSE, warning=FALSE}
 mu     = 120
 n      = length(IQ.next.to.you)
 x      = IQ.next.to.you

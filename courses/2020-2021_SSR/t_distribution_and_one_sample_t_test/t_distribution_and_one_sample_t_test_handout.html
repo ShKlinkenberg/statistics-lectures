@@ -329,13 +329,13 @@ for(i in 1:n.samples) {
 <h2>A sample</h2>
 <p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
 <pre class="r"><code>x = rnorm(n, mu, sigma); x</code></pre>
-<pre><code>##  [1] 109.86553  94.12094  99.45283 134.15623  80.66265  98.23498  82.45884 103.63413 121.58350
-## [10]  97.96481 136.65680 108.03016 123.15364 110.79051 108.84560  81.60904  94.49812 119.71761
-## [19] 104.91624  69.69939  72.84604  99.55506 117.85379  89.27776 116.59569 112.55993 119.77955
-## [28] 102.75345  96.22772 110.44733  96.71935  75.69896  91.84131  91.32015 123.23429 106.22838
-## [37] 124.48246  92.40210  84.52040  65.69183 112.15677  60.97462 105.47068  87.57473 120.73063
-## [46] 105.30688  96.52935 126.66864  94.34150 104.06820 100.45803  92.04915 110.28665 102.98511
-## [55] 120.84018  96.62972</code></pre>
+<pre><code>##  [1]  80.08087 101.57051  90.15876  81.43079  65.21759 112.63953  93.55058  98.80254  99.94001
+## [10]  66.92700  50.08868  87.07240 138.85297 111.13817 118.36721  97.35474 113.76512 134.73461
+## [19]  72.35606 116.57085 105.36497 121.67954 119.36322  99.12851  86.67926 100.94898 103.70891
+## [28]  87.49627  98.54939  71.36409 109.64073  79.42872 122.40847 110.34232  77.73824 129.04845
+## [37] 104.03622  91.49534 116.44884 116.46132 122.50375 101.84451  99.39177  79.40856  95.57980
+## [46]  96.81267  88.75931  93.85771 117.11632  94.95132 104.18018  90.17930 115.27684 118.26197
+## [55]  93.67133  61.95949</code></pre>
 <pre class="r"><code>hist(x, main = &quot;Sample distribution&quot;, col = &quot;beige&quot;)
 text(80, 10, round(mean(x),2))</code></pre>
 <hr />
@@ -346,7 +346,7 @@ text(80, 10, round(mean(x),2))</code></pre>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <pre class="r"><code>t = (mean(x) - mu) / (sd(x) / sqrt(n))
 t</code></pre>
-<pre><code>## [1] 0.857677</code></pre>
+<pre><code>## [1] -0.3173172</code></pre>
 </div>
 <div id="more-samples" class="section level2">
 <h2>More samples</h2>
@@ -365,12 +365,12 @@ for(i in 1:n.samples) {
 <h2>Mean and SE for all samples</h2>
 <pre class="r"><code>head(cbind(mean.x.values, se.x.values))</code></pre>
 <pre><code>##      mean.x.values se.x.values
-## [1,]     101.36007    1.890441
-## [2,]      99.27414    1.672174
-## [3,]      98.08358    1.888536
-## [4,]      95.59520    2.100532
-## [5,]     100.60001    2.117496
-## [6,]      98.67836    1.932030</code></pre>
+## [1,]     100.46168    2.009330
+## [2,]     100.56330    2.168084
+## [3,]      96.39373    2.265464
+## [4,]     103.53235    2.381730
+## [5,]     102.87476    2.175106
+## [6,]     103.48875    2.183639</code></pre>
 </div>
 <div id="sampling-distribution" class="section level2">
 <h2>Sampling distribution</h2>
@@ -388,12 +388,12 @@ for(i in 1:n.samples) {
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values    t.values
-##  [995,]      99.90487 100    1.859135 -0.05116635
-##  [996,]      98.22912 100    1.714744 -1.03273976
-##  [997,]      99.71878 100    2.052440 -0.13701532
-##  [998,]     102.09921 100    2.102286  0.99853766
-##  [999,]     101.53815 100    2.129598  0.72227050
-## [1000,]     102.47385 100    1.816398  1.36195391</code></pre>
+##  [995,]      97.91111 100    2.268065 -0.92099982
+##  [996,]      98.02503 100    2.139448 -0.92311992
+##  [997,]     100.06020 100    1.855579  0.03244155
+##  [998,]     104.07801 100    2.034453  2.00447236
+##  [999,]      97.37346 100    1.798945 -1.46004684
+## [1000,]      99.58525 100    1.923220 -0.21565327</code></pre>
 </div>
 <div id="sampled-t-values" class="section level2">
 <h2>Sampled t-values</h2>
@@ -452,12 +452,12 @@ r</code></pre>
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values, r))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values    t.values           r
-##  [995,]      99.90487 100    1.859135 -0.05116635 0.006899105
-##  [996,]      98.22912 100    1.714744 -1.03273976 0.137923725
-##  [997,]      99.71878 100    2.052440 -0.13701532 0.018471990
-##  [998,]     102.09921 100    2.102286  0.99853766 0.133438690
-##  [999,]     101.53815 100    2.129598  0.72227050 0.096932317
-## [1000,]     102.47385 100    1.816398  1.36195391 0.180625221</code></pre>
+##  [995,]      97.91111 100    2.268065 -0.92099982 0.123240882
+##  [996,]      98.02503 100    2.139448 -0.92311992 0.123520253
+##  [997,]     100.06020 100    1.855579  0.03244155 0.004374377
+##  [998,]     104.07801 100    2.034453  2.00447236 0.260920475
+##  [999,]      97.37346 100    1.798945 -1.46004684 0.193164838
+## [1000,]      99.58525 100    1.923220 -0.21565327 0.029066394</code></pre>
 <pre class="r"><code>hist(r, main = &quot;effect-size distribution&quot;, col = &quot;beige&quot;)</code></pre>
 <hr />
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
@@ -567,7 +567,9 @@ x      = IQ.next.to.you
 mean_x = mean(x, na.rm = T)
 sd_x   = sd(x, na.rm = T)
 cbind(n, mean_x, sd_x)</code></pre>
-<p>Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 100\)</span>?</p>
+<pre><code>##       n   mean_x     sd_x
+## [1,] 49 122.3265 7.684909</code></pre>
+<p>Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>?</p>
 </div>
 <div id="hypothesis" class="section level2 subsection">
 <h2>Hypothesis</h2>
@@ -599,10 +601,10 @@ cbind(n, mean_x, sd_x)</code></pre>
 </div>
 <div id="t-statistic-1" class="section level2">
 <h2>T-statistic</h2>
-<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{122.33 - 100 }{7.68 / \sqrt{56}}\]</span></p>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{122.33 - 120 }{7.68 / \sqrt{49}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
 <pre class="r"><code>t = (mean_x - mu) / (sd_x / sqrt(n)); t</code></pre>
-<pre><code>## [1] 21.74085</code></pre>
+<pre><code>## [1] 2.119181</code></pre>
 </div>
 <div id="type-1-error" class="section level2 subsection">
 <h2>Type 1 error</h2>
@@ -615,7 +617,7 @@ cbind(n, mean_x, sd_x)</code></pre>
 <h2><em>P</em>-value one sided</h2>
 <p>Finally we have to calculate our <em>p</em>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
 <pre class="r"><code>df = n - 1; df</code></pre>
-<pre><code>## [1] 55</code></pre>
+<pre><code>## [1] 48</code></pre>
 <pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { install.packages(&quot;visualize&quot;) }
 library(&quot;visualize&quot;)
 
@@ -635,7 +637,7 @@ visualize.t(t, df, section = &quot;upper&quot;)</code></pre>
 <pre class="r"><code>r = sqrt(t^2/(t^2 + df))
 
 r</code></pre>
-<pre><code>## [1] 0.9464497</code></pre>
+<pre><code>## [1] 0.2925001</code></pre>
 <!-- Footer insert below -->
 </div>
 </div>
