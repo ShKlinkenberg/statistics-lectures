@@ -194,6 +194,13 @@ De beta coëfficients are:
 * $b_1$ = `r b.1`
 * $b_2$ = `r b.2`.
 
+## Model summaries
+
+```{r}
+summary(fit)
+```
+
+
 ## Visual
 
 ```{r, echo=FALSE, warning=FALSE}
@@ -333,11 +340,22 @@ $$\frac{{SS}_{model}}{{SS}_{total}}$$
 
 We also call this: $r^2$ of $R^2$.
 
-Why?
+</small>
 
 ```{r}
 r = cor(study.outcome, model)
 r^2
 ```
 
-</small>
+## Compare models
+
+```{r}
+fit1 <- lm(study.outcome ~ motivation, data)
+fit2 <- lm(study.outcome ~ motivation + IQ, data)
+
+# summary(fit1)
+# summary(fit2)
+
+anova(fit1, fit2)
+```
+
