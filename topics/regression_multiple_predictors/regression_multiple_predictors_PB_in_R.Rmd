@@ -161,8 +161,8 @@ head(data, 10)
 
 
 ```{r, warning=FALSE, message=FALSE}
-data <- read.csv('IQ.csv', header=T)
-
+# data <- read.csv('IQ.csv', header=T)
+data <- read.csv('http://shklinkenberg.github.io/statistics-lectures/topics/regression_multiple_predictors/IQ.csv', header=T)
 head(data)
 
 IQ            = data$IQ
