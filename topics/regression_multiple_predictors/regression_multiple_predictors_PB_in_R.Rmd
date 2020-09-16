@@ -263,8 +263,22 @@ aspect3d(1,1,1)
 # view3d(theta = 5)
 # view3d(theta = -10, phi = -90)
 # play3d(spin3d(axis = c(0, 0, 1), rpm = 30), duration = 5)
-rglwidget()
+
+subid <- currentSubscene3d()
+rglwidget(elementId="plot3drgl2")
+
 ```
+
+<script type="text/javascript">
+var rotate = function(angle) {
+  var rgl = document.getElementById("plot3drgl2").rglinstance;
+  rgl.getObj(`r subid`).par3d.userMatrix.rotate(angle, 0,1,0);
+  rgl.drawScene();
+};
+</script>
+
+<button type="button" onclick="rotate(-10)">Lef</button>
+<button type="button" onclick="rotate(10)">Right</button>
 
 ## What are the expected values based on this model
 
