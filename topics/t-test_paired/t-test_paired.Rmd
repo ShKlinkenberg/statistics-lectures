@@ -62,7 +62,7 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
-```{r, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
 if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
 library("gsheet")
 data <- gsheet2tbl('docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing')
