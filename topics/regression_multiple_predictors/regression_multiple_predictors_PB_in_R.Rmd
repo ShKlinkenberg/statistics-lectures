@@ -340,12 +340,12 @@ $$\frac{{SS}_{model}}{{SS}_{total}}$$
 
 We also call this: $r^2$ of $R^2$.
 
-</small>
-
 ```{r}
 r = cor(study.outcome, model)
 r^2
 ```
+
+</small>
 
 ## Compare models
 
