@@ -40,6 +40,7 @@ local({
 
 ## Table of content
 
+<!--
 <div class="notes">
 ### Lecture outline
 
@@ -56,6 +57,7 @@ local({
 * 1:30 Explained variance
 
 </div>
+-->
 
 <div id="toc"></div>
 
