@@ -56,7 +56,12 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/multiple_regression/multiple_regr
 RenderMultipleOutput("courses/2020-2021_SSR/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
 RenderMultipleOutput("courses/2020-2021_SSR/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
 
-# 
+# Week 4
+
+# WSR
+RenderMultipleOutput("courses/2020-2021_WSR_PB/moderation/moderation.Rmd")
+
+
 # # RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
 # 
 # # Blok II

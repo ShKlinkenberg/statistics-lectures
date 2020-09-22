@@ -24,14 +24,13 @@ $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 
 ![](../../../topics/moderation/moderation.png)
 
-
 ## Example {.smaller}
 
-Video games are among the favourite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain. 
+<small>Video games are among the favourite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain. 
 
 Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behaviour, callous unemotional traits, and the number of hours per week they play video games.
 
-Source: Field 11.3.1
+Source: Field 11.3.1</small>
 
 ## Simulate data
 
@@ -62,7 +61,7 @@ save(data, file="moderation.rdata")
 write.csv(data, "moderation.csv")
 ```
 
-## View data {.smaller}
+## View data {.smaller .subsection}
 
 ```{r, echo=FALSE}
 datatable(round(data,2), 
@@ -109,7 +108,70 @@ rglwidget()
 
 Take it for a spin (does not work on tablet)
 
-## 1 SD planes
+## Fit model {.smaller .subsection}
+
+```{r}
+#fit2 <- lm(outcome ~ predictor + moderator)
+fit <- lm(outcome ~ predictor + moderator + predictor*moderator); summary(fit)
+```
+
+## Regression equation
+
+$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}$$
+
+$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
+\color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times Pred_i + `r round(fit$coefficients[3],2)` \times Mod_i + \color{red} `r round(fit$coefficients[4],2)` \times Pred_i \times Mod_i \color{black}$$
+
+```{r}
+regeq <- function(model, predictor, moderator) { 
+    fit$coefficients[1] + 
+    fit$coefficients[2]*predictor + 
+    fit$coefficients[3]*moderator + 
+    fit$coefficients[4]*predictor*moderator
+}
+
+x.pre <- seq(10,21,length.out=30)
+y.mod <- seq( 0,16,length.out=30)
+
+z.pre <- outer(x.pre, y.mod, FUN='regeq', model=fit)
+```
+
+## Simple Slopes {.subsection}
+
+<small>We use the [interactions packaage](https://cran.r-project.org/web/packages/interactions/vignettes/interactions.html#simple_slopes_analysis_and_johnson-neyman_intervals)
+
+```{r}
+if(!"interactions" %in% installed.packages()) { install.packages("interactions") };
+if(!"sandwich" %in% installed.packages()) { install.packages("sandwich") };
+library("sandwich")
+
+library("interactions")
+sim_slopes(fit, pred = predictor, modx = moderator, johnson_neyman = FALSE)
+```
+</small>
+
+## Visual
+
+```{r}
+interact_plot(fit, pred = predictor, modx = moderator, johnson_neyman = FALSE)
+```
+
+
+## Johnson-Neyman intervals {.subsection}
+
+```{r}
+sim_slopes(fit, pred = predictor, modx = moderator, johnson_neyman = T)
+```
+## Visual
+
+```{r}
+johnson_neyman(fit, pred = predictor, modx = moderator, alpha = .05)
+```
+
+## Plot 3D {.subsection}
+
+### 1 SD planes
 
 ```{r}
 quantiles <- as.vector(quantile(moderator,seq(.1,.9,.1)))
@@ -142,41 +204,6 @@ playwidget(par3dinterpControl(fn, 0, 3, steps=15),
        step = 0.01, loop = TRUE, rate = 0.5)
 ```
 
-## Fit model {.smaller .subsection}
-
-```{r}
-#fit2 <- lm(outcome ~ predictor + moderator)
-fit <- lm(outcome ~ predictor + moderator + predictor*moderator); summary(fit)
-```
-
-## Regression equation
-
-$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
-\color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}$$
-
-$$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
-\color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times Pred_i + `r round(fit$coefficients[3],2)` \times Mod_i + \color{red} `r round(fit$coefficients[4],2)` \times Pred_i \times Mod_i \color{black}$$
-
-```{r}
-regeq <- function(model, predictor, moderator) { 
-    fit$coefficients[1] + 
-    fit$coefficients[2]*predictor + 
-    fit$coefficients[3]*moderator + 
-    fit$coefficients[4]*predictor*moderator
-}
-
-x.pre <- seq(10,21,length.out=30)
-y.mod <- seq( 0,16,length.out=30)
-
-z.pre <- outer(x.pre, y.mod, FUN='regeq', model=fit)
-```
-
-```{r, echo=FALSE}
-colnames(z.pre) <- x.pre
-rownames(z.pre) <- y.mod
-save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
-```
-
 ## Expected surface
 
 ```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
@@ -203,46 +230,13 @@ var rotate = function(angle) {
 <button type="button" onclick="rotate(-10)">Down</button>
 <button type="button" onclick="rotate(10)">Up</button>
 
-## Simple Slopes
-
-https://cran.r-project.org/web/packages/interactions/vignettes/interactions.html#simple_slopes_analysis_and_johnson-neyman_intervals
-
-```{r}
-if(!"interactions" %in% installed.packages()) { install.packages("interactions") };
-if(!"sandwich" %in% installed.packages()) { install.packages("sandwich") };
-library("sandwich")
-
-library("interactions")
-sim_slopes(fit, pred = predictor, modx = moderator, johnson_neyman = FALSE)
-```
-
-## Visual
-
-```{r}
-interact_plot(fit, pred = predictor, modx = moderator, johnson_neyman = FALSE)
-```
 
 
-## Johnson-Neyman intervals
-
-```{r}
-sim_slopes(fit, pred = predictor, modx = moderator, johnson_neyman = T)
-```
-## Visual
-
-```{r}
-johnson_neyman(fit, pred = predictor, modx = moderator, alpha = .05)
-```
-
-
-
-## Expected values {.subsection}
-
-```{r}
+```{r, echo=FALSE}
 data$exp <- fit$fitted.values
 ```
 
-## Explained variance {.smaller}
+## Total variance
 
 ```{r, echo=FALSE}
 ## This is all the data
@@ -257,6 +251,8 @@ segments(1:n, mean(data$outcome), 1:n, data$outcome, col='black')
 p <- recordPlot()
 ```
 
+## Explained variance {.smaller .subsection}
+
 ```{r, echo=FALSE}
 p
 
@@ -266,4 +262,10 @@ points(1:n, data$exp, col='green')
 ## The part of the variation that overlaps is the 'explained' variance. 
 #for(i in 1:n) {lines(c(i,i),c(mean(data$exp), data$exp[i]), col='red')}
 segments(1:n, mean(data$exp), 1:n, data$exp, col='green')
+```
+
+```{r, echo=FALSE}
+colnames(z.pre) <- x.pre
+rownames(z.pre) <- y.mod
+save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
 ```
