@@ -17,6 +17,10 @@ By first ranking $x$ and then sum these ranks per group one would expect, under 
 
 After standardising this difference one can test using a standard normal distribution.
 
+## Sum the ranks
+
+[Sum the ranks example for height for males and females.]https://webcolleges.uva.nl/Mediasite/Play/b40cac063f17441ea073977924ff07eb1d?playFrom=1435000)
+
 ## Simulate data
 
 ```{r}
