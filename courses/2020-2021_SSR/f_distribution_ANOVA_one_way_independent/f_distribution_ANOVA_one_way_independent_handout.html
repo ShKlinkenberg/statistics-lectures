@@ -295,6 +295,10 @@ div.tocify {
 <p><a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Wikipedia</a></p>
 <p></small></p>
 </div>
+<div id="analysing-variance" class="section level2">
+<h2>Analysing variance</h2>
+<p><a href="https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000">Decomposing variance example of height for males and females.</a></p>
+</div>
 <div id="population-distribution" class="section level2 smaller subsection">
 <h2>Population distribution</h2>
 <pre class="r"><code>layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
@@ -336,7 +340,7 @@ data &lt;- data.frame(group = rep(c(&quot;s1&quot;, &quot;s2&quot;), each=n), sc
     
 F = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
 F</code></pre>
-<pre><code>## [1] 0.3441866</code></pre>
+<pre><code>## [1] 1.775447</code></pre>
 </div>
 <div id="more-samples" class="section level2 smaller subsection">
 <h2>More samples</h2>

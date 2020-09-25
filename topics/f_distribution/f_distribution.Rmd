@@ -16,6 +16,10 @@ Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. 
 
 </small>
 
+## Analysing variance
+
+[Decomposing variance example of height for males and females.](https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000)
+
 ## Population distribution {.smaller .subsection}
 
 ```{r}
