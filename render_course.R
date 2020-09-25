@@ -66,7 +66,7 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/moderation/moderation.Rmd")
 # Week 5
 # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
 RenderMultipleOutput("courses/2020-2021_SSR/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
-# RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/non_parametric_tests/non_parametric_tests.Rmd")
 # 
 # # Week 6
 # RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")

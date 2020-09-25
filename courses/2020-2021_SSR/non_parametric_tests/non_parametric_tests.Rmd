@@ -1,0 +1,100 @@
+---
+title: "Non-parametric tests"
+author: "Klinkenberg"
+date: "29 dec 2019"
+output: 
+  revealjs::revealjs_presentation:
+    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    theme: white #simple #black
+    highlight: pygments
+    transition: slide #fade #slide
+    background_transition: slide
+    center: true
+    self_contained: false
+
+    includes       :
+      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
+                      "../../../GA_Script/GA_Script.html"]
+  html_document:
+    toc            : TRUE
+    self_contained : false
+    toc_float:
+      collapsed    : FALSE
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/non_parametric_concept/non_parametric_concept.Rmd", eval=TRUE}
+```
+
+```{r child="../../../topics/wilcoxon_rank_sum_test/wilcoxon_rank_sum_test.Rmd", eval=T}
+```
+
+```{r child="../../../topics/wilcoxon_signed_rank_test/wilcoxon_signed_rank_test.Rmd", eval=T}
+```
+
+```{r child="../../../topics/kruskal_wallis_test/kruskal_wallis_test.Rmd", eval=T}
+```
+
+```{r child="../../../topics/friedman_anova/friedman_anova.Rmd", eval=T}
+```
+
+# Extra
+
+--------
+
+```{r eval=F, echo=TRUE, fig.align='center', message=FALSE, warning=FALSE}
+# install.packages("emojifont")
+require('sysfonts')
+library('emojifont')
+
+set.seed(3647)
+
+n = 145
+x = rnorm(n,0, 1)
+
+y = dt(x, 19) - runif(n, 0, dt(x, 19))
+
+par(mar=c(0.2,0.2,0.2,0.2))
+plot(x, y, 
+     cex  = 0, 
+     xlim = c(-3,3),
+     xaxt = 'n',
+     yaxt = 'n',
+     bty  = 'n')
+
+text(x, y, labels=emoji('christmas_tree'), cex=3, col=rgb(0,runif(n,0,1),0), family='EmojiOne')
+
+y = dt(x, 19) - runif(n, 0, dt(x, 19))
+text(x, y, labels=emoji('snowflake'), cex=1, col=rainbow(n), family='EmojiOne')
+```
+
+## happy holidays {.flexbox .vcenter}
+
+![](christmas_tree.jpg)
+
+<!-- Footer insert below -->
+
+```{r child="../../../footer.md"}
+```
+
