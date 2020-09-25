@@ -2,7 +2,7 @@
 title    : "ANOVA"
 subtitle : "F-distribution & One-way independent"
 author   : "Klinkenberg"
-date     : "3 oct 2019"
+date     : "2 oct 2020"
 output: 
   revealjs::revealjs_presentation:
     css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"

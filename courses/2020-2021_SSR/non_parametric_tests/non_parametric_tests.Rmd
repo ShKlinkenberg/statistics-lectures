@@ -1,7 +1,7 @@
 ---
 title: "Non-parametric tests"
 author: "Klinkenberg"
-date: "29 dec 2019"
+date: "3 okt 2019"
 output: 
   revealjs::revealjs_presentation:
     css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
@@ -58,40 +58,6 @@ local({
 
 ```{r child="../../../topics/friedman_anova/friedman_anova.Rmd", eval=T}
 ```
-
-# Extra
-
---------
-
-```{r eval=F, echo=TRUE, fig.align='center', message=FALSE, warning=FALSE}
-# install.packages("emojifont")
-require('sysfonts')
-library('emojifont')
-
-set.seed(3647)
-
-n = 145
-x = rnorm(n,0, 1)
-
-y = dt(x, 19) - runif(n, 0, dt(x, 19))
-
-par(mar=c(0.2,0.2,0.2,0.2))
-plot(x, y, 
-     cex  = 0, 
-     xlim = c(-3,3),
-     xaxt = 'n',
-     yaxt = 'n',
-     bty  = 'n')
-
-text(x, y, labels=emoji('christmas_tree'), cex=3, col=rgb(0,runif(n,0,1),0), family='EmojiOne')
-
-y = dt(x, 19) - runif(n, 0, dt(x, 19))
-text(x, y, labels=emoji('snowflake'), cex=1, col=rainbow(n), family='EmojiOne')
-```
-
-## happy holidays {.flexbox .vcenter}
-
-![](christmas_tree.jpg)
 
 <!-- Footer insert below -->
 
