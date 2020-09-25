@@ -61,14 +61,11 @@ RenderMultipleOutput("courses/2020-2021_SSR/paired_and_independent_t_test/paired
 # WSR
 RenderMultipleOutput("courses/2020-2021_WSR_PB/moderation/moderation.Rmd")
 
+# Blok II
 
-# # RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
-# 
-# # Blok II
-# 
-# # Week 5
-# # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
-# RenderMultipleOutput("courses/current/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
+# Week 5
+# RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
 # RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
 # 
 # # Week 6
