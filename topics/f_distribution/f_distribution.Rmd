@@ -2,6 +2,8 @@
 
 ## Ronald Fisher {.smaller .subsection}
 
+<small>
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" style="float: left; width: 150px; margin: 0 20px 0 0;">
 
 The F-distribution, also known as Snedecor's F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.
@@ -11,6 +13,8 @@ The F-distribution, also known as Snedecor's F distribution or the Fisher–Sned
 Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.
 
 [Wikipedia](https://en.wikipedia.org/wiki/Ronald_Fisher)
+
+</small>
 
 ## Population distribution {.smaller .subsection}
 
