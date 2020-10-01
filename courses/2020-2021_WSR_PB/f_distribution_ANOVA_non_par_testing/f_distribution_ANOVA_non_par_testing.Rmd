@@ -1,6 +1,6 @@
 ---
 title    : "ANOVA"
-subtitle : "F-distribution & One-way independent"
+subtitle : "F-distribution & Non-parametric tests"
 author   : "Klinkenberg"
 date     : "30 sep 2020"
 output: 
