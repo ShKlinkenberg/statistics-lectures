@@ -111,7 +111,11 @@ data.long$pp      <- as.factor(data.long$pp)
 data.long$sekse   <- as.factor(data.long$sekse)
 data.long$speed   <- as.factor(data.long$speed)
 data.long$alcohol <- as.factor(data.long$alcohol)
+```
 
+## Data long
+
+```{r}
 data.long
 ```
 
