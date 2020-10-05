@@ -48,6 +48,8 @@ Effects and interactions:
 
 ## Example {.smaller}
 
+<small>
+
 In this example we will look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol.
 
 * Dependent variable
@@ -61,6 +63,8 @@ In this example we will look at the amount of accidents in a car driving simulat
         * None
         * Small
         * Large
+
+</small>
         
 ## {.smaller}
 
