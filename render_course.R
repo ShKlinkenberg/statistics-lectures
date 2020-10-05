@@ -79,7 +79,9 @@ RenderMultipleOutput("courses/2020-2021_SSR/ANCOVA/ANCOVA.Rmd")
 RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
 
 # WSR 
-# 
+RenderMultipleOutput("courses/2020-2021_WSR_PB/ANOVA_independent_factorial_repeated_mixed/ANOVA_independent_factorial.Rmd")
+
+
 # # Week 8
 # RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
 # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
