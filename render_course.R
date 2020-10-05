@@ -73,9 +73,12 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/f_distribution_ANOVA_non_par_test
 
 # 
 # # Week 6
-# RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
-# RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
-# 
+
+# SSR
+RenderMultipleOutput("courses/2020-2021_SSR/ANCOVA/ANCOVA.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
+
+# WSR 
 # 
 # # Week 8
 # RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
