@@ -40,7 +40,7 @@ local({
 
 ## Inhoud
 
-<div id="toc"></div>
+<div style="font-size:60%; text-align:left;" id="toc"></div>
 
 <!-- Add the required topics below -->
 
