@@ -121,7 +121,13 @@ data.long
 if(!"ez" %in% installed.packages()) { install.packages("ez") }
 library("ez")
 
-Accidents.aov <- ezANOVA(data = data.long, dv = Accidents, wid = pp, within = c(speed,alcohol), between = sekse, type = 3 , return_aov = TRUE)
+Accidents.aov <- ezANOVA(data       = data.long, 
+                         dv         = Accidents, 
+                         wid        = pp, 
+                         within     = c(speed,alcohol), 
+                         between    = sekse, 
+                         type       = 3, 
+                         return_aov = TRUE)
 ```
 
 ## Results
@@ -133,5 +139,21 @@ Accidents.aov
 
 ```{r}
 Accidents.aov$`Mauchly's Test for Sphericity`
+```
+
+## Visualize results
+
+```{r}
+ezPlot(data    = data.long,
+       x       = .(speed),
+       col     = .(sekse),
+       split   = .(alcohol),
+       dv      = .(Accidents), 
+       wid     = .(pp), 
+       within  = .(speed,alcohol), 
+       between = .(sekse) 
+       )
+
+
 ```
 
