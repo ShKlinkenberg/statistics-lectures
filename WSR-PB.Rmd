@@ -10,6 +10,10 @@ Below you can find the links to my current lecture slides for this course. The s
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # install.packages("rvest")
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(rvest)
 
 rm(list = ls())

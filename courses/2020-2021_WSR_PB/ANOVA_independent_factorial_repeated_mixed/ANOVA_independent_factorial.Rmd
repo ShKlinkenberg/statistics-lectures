@@ -51,7 +51,7 @@ local({
 ```{r child="../../../topics/ANOVA_repeated_one-way/anova_repeated_one-way.rmd", eval=TRUE}
 ```
 
-```{r child="../../../topics/ANOVA_mixed/ANOVA_mixed.Rmd"}
+```{r child="../../../topics/ANOVA_mixed/ANOVA_mixed_PB.Rmd"}
 ```
 
 <!-- Footer insert below -->
