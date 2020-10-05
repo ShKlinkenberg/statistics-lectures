@@ -22,6 +22,8 @@ Same as repeated measures ANOVA and same as factorial ANOVA.
 
 ## Example {.smaller}
 
+<small>
+
 * Dependent variable
     * Accidents
 * Independent variables
@@ -36,8 +38,12 @@ Same as repeated measures ANOVA and same as factorial ANOVA.
     * Gender
         * Males
         * Females
+
+</small>
         
 ## {.smaller}
+
+<small>
 
 person | gender  | 1_1 | 1_2 | 1_3 | 2_1 | 2_2 | 2_3 | 3_1 | 3_2 | 3_3
 -------|---------|-----|-----|-----|-----|-----|-----|-----|-----|----
@@ -60,6 +66,7 @@ person | gender  | 1_1 | 1_2 | 1_3 | 2_1 | 2_2 | 2_3 | 3_1 | 3_2 | 3_3
 18     | females |     |     |     |     |     |     |     | 8   |
 20     | females |     |     |     |     |     |     |     |     | 9
 
+</small>
 
 ## Data {.smaller}
 
