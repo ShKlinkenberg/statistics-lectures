@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klinkenberg" />
+
+<meta name="date" content="2020-10-14" />
+
+<title>Bayes</title>
+
+<script src="bayes_handout_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="bayes_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="bayes_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="bayes_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="bayes_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="bayes_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="bayes_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="bayes_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="bayes_handout_files/navigation-1.1/tabsets.js"></script>
+<link href="bayes_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="bayes_handout_files/highlightjs-9.12.0/highlight.js"></script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107432294-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Bayes</h1>
+<h3 class="subtitle"><small>Parameter estimation &amp; hypothesis testing</small></h3>
+<h4 class="author">Klinkenberg</h4>
+<h4 class="date">14 oct 2020</h4>
+
+</div>
+
+
+<div id="inhoud" class="section level2">
+<h2>Inhoud</h2>
+<div id="toc" style="font-size:60%; text-align:left;">
+
+</div>
+<!-- Add the required topics below -->
+</div>
+<div id="bayesian-parameter-estimation" class="section level1 section">
+<h1>Bayesian parameter estimation</h1>
+<p><span class="math display">\[\Huge P(H | D) = \frac{P(D|H) \times P(H)}{P(D)}\]</span></p>
+<div id="is-it-a-fair-coin" class="section level2">
+<h2>Is it a fair coin?</h2>
+</div>
+<div id="theta-all-mighty" class="section level2">
+<h2>Theta all mighty</h2>
+<p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
+<style>
+#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217, 164, 65), 0 0 8px rgb(192, 168, 104); }
+</style>
+<p><span class="math display">\[\Huge \theta = .68\]</span></p>
+<p>The data driver!</p>
+</div>
+<div id="my-ten-tosses" class="section level2">
+<h2>My ten tosses</h2>
+<p>My ten tosses landed heads 2 times.</p>
+<p><span class="math display">\[\begin{aligned}
+  k &amp;= 2 \\
+  n &amp;= 10
+  \end{aligned}\]</span></p>
+<pre class="r"><code>k = 2
+n = 10</code></pre>
+</div>
+<div id="likelihood" class="section level2">
+<h2>Likelihood</h2>
+<p>How likely is the data assuming the data represents the parameter value:</p>
+<style>
+#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217,164,65), 0 0 8px rgb(192,168,104); }
+</style>
+<p><span class="math display">\[\theta = \frac{2}{10} = 0.2\]</span></p>
+<pre class="r"><code>theta.given.data = k/n</code></pre>
+</div>
+<div id="likelihood-function" class="section level2">
+<h2>Likelihood function</h2>
+<p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
+<pre class="r"><code>thetas = seq(0, 1, .01)
+
+likelihood =  dbinom(k, n, thetas)
+
+plot(thetas, dbinom(k, n, thetas), type=&#39;l&#39;, ylab = &quot;Likelihood&quot;, las = 1)
+abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="prior" class="section level2">
+<h2>Prior</h2>
+<p>What is our expectation of what <span class="math inline">\(theta\)</span> could really be?</p>
+<p>It could be anything. We therefore could assign all passible values of <span class="math inline">\(theta\)</span> equally likely.</p>
+<pre class="r"><code>prior = dbeta(thetas, 1,1)
+
+plot(thetas,prior, type=&#39;l&#39;, ylab = &quot;density&quot;, las = 1)</code></pre>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="posterior" class="section level2">
+<h2>Posterior</h2>
+<p>Now we can update our belief about the posible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
+<p><span class="math display">\[\begin{aligned}
+  {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
+  P(\theta | D) &amp;\propto P(D|\theta) \times P(\theta)
+  \end{aligned}\]</span></p>
+</div>
+</div>
+<div id="bayesian-hypothesis-testing" class="section level1 section">
+<h1>Bayesian hypothesis testing</h1>
+<!-- Footer insert below -->
+</div>
+<div id="end" class="section level1">
+<h1>End</h1>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
