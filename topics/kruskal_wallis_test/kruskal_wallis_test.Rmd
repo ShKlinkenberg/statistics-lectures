@@ -8,7 +8,7 @@ library("visualize")
 set.seed(2348586)
 ```
 
-# Kruskal–Wallis test
+# Kruskal–Wallis test {.section}
 
 Independent >2 samples
 
@@ -41,7 +41,7 @@ depres  = round(depres)
 data <- data.frame(factor, depres)
 ```
 
-## Assign ranks
+## Assign ranks {.subsection}
 
 ```{r}
 # Assign ranks
@@ -57,7 +57,7 @@ datatable(data, options = list(iDisplayLength = 7, searching = FALSE, scrollY = 
 write.csv(data, "kruskal-Wallisk.csv", row.names=FALSE)
 ```
 
-## Calculate H
+## Calculate H {.subsection}
 
 $$H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)$$
 
@@ -97,7 +97,7 @@ k  = 3
 df = k - 1
 ```
 
-## Test for significance
+## Test for significance {.subsection}
 
 ```{r, fig.align='center', warning=FALSE}
 visualize.chisq(H, df, section="upper")

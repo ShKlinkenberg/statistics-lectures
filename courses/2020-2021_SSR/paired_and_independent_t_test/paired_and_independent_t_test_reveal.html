@@ -644,63 +644,52 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>Let’s take a look at the data.</p>
 </section><section id="iq-estimates" class="slide level2">
 <h2>IQ estimates</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&#39;gsheet&#39;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&#39;gsheet&#39;</span>) }</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(<span class="st">&quot;gsheet&quot;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>data &lt;-<span class="st"> </span><span class="kw">gsheet2tbl</span>(<span class="st">&#39;docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing&#39;</span>)</span></code></pre></div>
-<pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>data =<span class="st"> </span>data[<span class="kw">grep</span>(<span class="st">&quot;2017&quot;</span>, <span class="kw">as.character</span>(data<span class="op">$</span>Timestamp)),<span class="kw">c</span>(<span class="st">&quot;IQ.next.to.you&quot;</span>, <span class="st">&quot;Own.IQ&quot;</span>)]</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>IQ.next.to.you =<span class="st"> </span>data<span class="op">$</span>IQ.next.to.you</span>
-<span id="cb3-4"><a href="#cb3-4"></a>IQ.you         =<span class="st"> </span>data<span class="op">$</span>Own.IQ</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;DT&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;DT&quot;</span>) }</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">library</span>(<span class="st">&quot;DT&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-cb89c8059a50452ca29a" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cb89c8059a50452ca29a">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-43f55be091b55b59b90c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-43f55be091b55b59b90c">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </section><section id="calculate-d" class="slide level2 smaller subsection">
 <h2>Calculate <span class="math inline">\(D\)</span></h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>D =<span class="st"> </span>IQ.next.to.you <span class="op">-</span><span class="st"> </span>IQ.you</span></code></pre></div>
-<div id="htmlwidget-e0c90da67fc0621d2976" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e0c90da67fc0621d2976">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120],[5,0,-1,-10,5,0,9,0,8,0,0,5,4,-4,1,0,-16,-5,-5,0,7,0,5,10,5,0,13,0,5,-4,-7,0,5,22,5,10,-5,0,9,0,0,2,0,9,12,1,12,4,-20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n      <th>D<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>D =<span class="st"> </span>IQ.next.to.you <span class="op">-</span><span class="st"> </span>IQ.you</span></code></pre></div>
+<div id="htmlwidget-84f750cadb10d37549fd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-84f750cadb10d37549fd">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120],[5,0,-1,-10,5,0,9,0,8,0,0,5,4,-4,1,0,-16,-5,-5,0,7,0,5,10,5,0,13,0,5,-4,-7,0,5,22,5,10,-5,0,9,0,0,2,0,9,12,1,12,4,-20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n      <th>D<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </section><section id="calculate-bard" class="slide level2">
 <h2>Calculate <span class="math inline">\(\bar{D}\)</span></h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>D      =<span class="st"> </span><span class="kw">na.omit</span>(D) <span class="co"># get rid of all missing values</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>D.mean =<span class="st"> </span><span class="kw">mean</span>(D)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>D.mean</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>D      =<span class="st"> </span><span class="kw">na.omit</span>(D) <span class="co"># get rid of all missing values</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>D.mean =<span class="st"> </span><span class="kw">mean</span>(D)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>D.mean</span></code></pre></div>
 <pre><code>## [1] 1.959184</code></pre>
 <p>And we also need n.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>n =<span class="st"> </span><span class="kw">length</span>(D)</span>
-<span id="cb7-2"><a href="#cb7-2"></a>n</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n =<span class="st"> </span><span class="kw">length</span>(D)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>n</span></code></pre></div>
 <pre><code>## [1] 49</code></pre>
 </section><section id="calculate-t-value" class="slide level2 subsection">
 <h2>Calculate t-value</h2>
 <p><span class="math display">\[t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }\]</span></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mu =<span class="st"> </span><span class="dv">0</span>                <span class="co"># Define mu</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a>D.sd =<span class="st"> </span><span class="kw">sd</span>(D)          <span class="co"># Calculate standard deviation</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>D.se =<span class="st"> </span>D.sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n) <span class="co"># Calculate standard error</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a>df   =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>          <span class="co"># Calculate degrees of freedom</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># Calculate t</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>t =<span class="st"> </span>( D.mean <span class="op">-</span><span class="st"> </span>mu ) <span class="op">/</span><span class="st"> </span>D.se</span>
-<span id="cb9-10"><a href="#cb9-10"></a>t</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mu =<span class="st"> </span><span class="dv">0</span>                <span class="co"># Define mu</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>D.sd =<span class="st"> </span><span class="kw">sd</span>(D)          <span class="co"># Calculate standard deviation</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>D.se =<span class="st"> </span>D.sd <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n) <span class="co"># Calculate standard error</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>df   =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>          <span class="co"># Calculate degrees of freedom</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># Calculate t</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>t =<span class="st"> </span>( D.mean <span class="op">-</span><span class="st"> </span>mu ) <span class="op">/</span><span class="st"> </span>D.se</span>
+<span id="cb6-10"><a href="#cb6-10"></a>t</span></code></pre></div>
 <pre><code>## [1] 1.915726</code></pre>
 </section><section id="test-for-significance" class="slide level2 subsection">
 <h2>Test for significance</h2>
 <p>Two tailed</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t,t), df, <span class="dt">section=</span><span class="st">&quot;tails&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t,t), df, <span class="dt">section=</span><span class="st">&quot;tails&quot;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
 <p><img src="paired_and_independent_t_test_reveal_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" /></p>
 </section><section id="effect-size" class="slide level2 subsection">
 <h2>Effect-size</h2>
 <p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>r =<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df))</span>
-<span id="cb12-2"><a href="#cb12-2"></a>r</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>r =<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df))</span>
+<span id="cb9-2"><a href="#cb9-2"></a>r</span></code></pre></div>
 <pre><code>## [1] 0.2665104</code></pre>
 </section><section id="confidence-interval" class="slide level2 smaller subsection">
 <h2>Confidence interval</h2>
@@ -782,34 +771,34 @@ EXECUTE.</code></pre>
 </section><section id="example" class="slide level2">
 <h2>Example</h2>
 <p>We are going to use the IQ estimates we collected last week again. You had to gues the IQ of the one sitting next to you and your own IQ. But we are going to add gender to the data set. We did not register this so we are going to simulate some genders.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>gender =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>), <span class="kw">dim</span>(data)[<span class="dv">1</span>], <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>gender =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>), <span class="kw">dim</span>(data)[<span class="dv">1</span>], <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 </section><section id="the-data" class="slide level2">
 <h2>The data</h2>
-<div id="htmlwidget-ac0d00fe928879200689" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ac0d00fe928879200689">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],["female","female","male","female","female","male","female","female","male","female","male","female","male","male","male","female","male","female","female","male","female","female","male","female","female","male","female","male","male","male","female","female","male","female","male","male","male","female","male","female","female","female","female","female","male","male","male","male","male"],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>gender<\/th>\n      <th>IQ.you<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-96fc97e622ff10554a1a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-96fc97e622ff10554a1a">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],["female","male","male","female","male","male","female","male","female","male","male","female","female","male","female","female","female","male","male","female","female","male","male","male","female","male","male","female","female","male","female","male","male","male","male","female","female","female","female","female","female","female","male","female","female","male","male","male","female"],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>gender<\/th>\n      <th>IQ.you<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </section><section id="calculate-means" class="slide level2 subsection">
 <h2>Calculate means</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>IQ.you.male   =<span class="st"> </span><span class="kw">subset</span>(data, gender <span class="op">==</span><span class="st"> &quot;male&quot;</span>,   <span class="dt">select =</span> IQ.you)<span class="op">$</span>IQ.you</span>
-<span id="cb16-2"><a href="#cb16-2"></a>IQ.you.female =<span class="st"> </span><span class="kw">subset</span>(data, gender <span class="op">==</span><span class="st"> &quot;female&quot;</span>, <span class="dt">select =</span> IQ.you)<span class="op">$</span>IQ.you</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a>IQ.you.male.mean   =<span class="st"> </span><span class="kw">mean</span>(IQ.you.male,   <span class="dt">na.rm =</span> T)</span>
-<span id="cb16-5"><a href="#cb16-5"></a>IQ.you.female.mean =<span class="st"> </span><span class="kw">mean</span>(IQ.you.female, <span class="dt">na.rm =</span> T)</span>
-<span id="cb16-6"><a href="#cb16-6"></a></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">rbind</span>(IQ.you.male.mean, IQ.you.female.mean)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>IQ.you.male   =<span class="st"> </span><span class="kw">subset</span>(data, gender <span class="op">==</span><span class="st"> &quot;male&quot;</span>,   <span class="dt">select =</span> IQ.you)<span class="op">$</span>IQ.you</span>
+<span id="cb13-2"><a href="#cb13-2"></a>IQ.you.female =<span class="st"> </span><span class="kw">subset</span>(data, gender <span class="op">==</span><span class="st"> &quot;female&quot;</span>, <span class="dt">select =</span> IQ.you)<span class="op">$</span>IQ.you</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a>IQ.you.male.mean   =<span class="st"> </span><span class="kw">mean</span>(IQ.you.male,   <span class="dt">na.rm =</span> T)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>IQ.you.female.mean =<span class="st"> </span><span class="kw">mean</span>(IQ.you.female, <span class="dt">na.rm =</span> T)</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="kw">rbind</span>(IQ.you.male.mean, IQ.you.female.mean)</span></code></pre></div>
 <pre><code>##                        [,1]
-## IQ.you.male.mean   120.8333
-## IQ.you.female.mean 119.9200</code></pre>
+## IQ.you.male.mean   121.9583
+## IQ.you.female.mean 118.8400</code></pre>
 </section><section id="calculate-variance" class="slide level2 smaller subsection">
 <h2>Calculate variance</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>IQ.you.male.var   =<span class="st"> </span><span class="kw">var</span>(IQ.you.male,   <span class="dt">na.rm =</span> T)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>IQ.you.female.var =<span class="st"> </span><span class="kw">var</span>(IQ.you.female, <span class="dt">na.rm =</span> T)</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">rbind</span>(IQ.you.male.var, IQ.you.female.var)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>IQ.you.male.var   =<span class="st"> </span><span class="kw">var</span>(IQ.you.male,   <span class="dt">na.rm =</span> T)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>IQ.you.female.var =<span class="st"> </span><span class="kw">var</span>(IQ.you.female, <span class="dt">na.rm =</span> T)</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">rbind</span>(IQ.you.male.var, IQ.you.female.var)</span></code></pre></div>
 <pre><code>##                       [,1]
-## IQ.you.male.var   72.49275
-## IQ.you.female.var 44.41000</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>IQ.you.male.n   =<span class="st"> </span><span class="kw">length</span>(IQ.you.male)   <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>IQ.you.female.n =<span class="st"> </span><span class="kw">length</span>(IQ.you.female) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">rbind</span>(IQ.you.male.n, IQ.you.female.n)</span></code></pre></div>
+## IQ.you.male.var   59.25906
+## IQ.you.female.var 52.55667</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>IQ.you.male.n   =<span class="st"> </span><span class="kw">length</span>(IQ.you.male)   <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>IQ.you.female.n =<span class="st"> </span><span class="kw">length</span>(IQ.you.female) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">rbind</span>(IQ.you.male.n, IQ.you.female.n)</span></code></pre></div>
 <pre><code>##                 [,1]
 ## IQ.you.male.n     23
 ## IQ.you.female.n   24</code></pre>
@@ -824,44 +813,44 @@ EXECUTE.</code></pre>
 </section><section id="calculate-pooled-variance" class="slide level2 subsection">
 <h2>Calculate pooled variance</h2>
 <p><span class="math display">\[S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}\]</span></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df =<span class="st"> </span>IQ.you.male.n <span class="op">+</span><span class="st"> </span>IQ.you.female.n <span class="op">-</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>s2.p =<span class="st"> </span>( (IQ.you.male.n<span class="dv">-1</span>)<span class="op">*</span>IQ.you.male.var <span class="op">+</span><span class="st"> </span>(IQ.you.female.n<span class="dv">-1</span>)<span class="op">*</span>IQ.you.female.var ) <span class="op">/</span><span class="st"> </span>df</span>
-<span id="cb22-4"><a href="#cb22-4"></a></span>
-<span id="cb22-5"><a href="#cb22-5"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df =<span class="st"> </span>IQ.you.male.n <span class="op">+</span><span class="st"> </span>IQ.you.female.n <span class="op">-</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a>s2.p =<span class="st"> </span>( (IQ.you.male.n<span class="dv">-1</span>)<span class="op">*</span>IQ.you.male.var <span class="op">+</span><span class="st"> </span>(IQ.you.female.n<span class="dv">-1</span>)<span class="op">*</span>IQ.you.female.var ) <span class="op">/</span><span class="st"> </span>df</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a>df</span></code></pre></div>
 <pre><code>## [1] 45</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>s2.p</span></code></pre></div>
-<pre><code>## [1] 58.13935</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>s2.p</span></code></pre></div>
+<pre><code>## [1] 55.83339</code></pre>
 </section><section id="calculate-pooled-se" class="slide level2 subsection">
 <h2>Calculate pooled SE</h2>
 <p><span class="math display">\[{SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}\]</span></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>se.p    =<span class="st"> </span><span class="kw">sqrt</span>( ((s2.p<span class="op">/</span>IQ.you.male.n) <span class="op">+</span><span class="st"> </span>(s2.p<span class="op">/</span>IQ.you.female.n)) )</span>
-<span id="cb26-2"><a href="#cb26-2"></a>se.p</span></code></pre></div>
-<pre><code>## [1] 2.22492</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>se.p    =<span class="st"> </span><span class="kw">sqrt</span>( ((s2.p<span class="op">/</span>IQ.you.male.n) <span class="op">+</span><span class="st"> </span>(s2.p<span class="op">/</span>IQ.you.female.n)) )</span>
+<span id="cb23-2"><a href="#cb23-2"></a>se.p</span></code></pre></div>
+<pre><code>## [1] 2.180351</code></pre>
 </section><section id="calculate-t-value-2" class="slide level2 subsection">
 <h2>Calculate t-value</h2>
 <p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>t =<span class="st"> </span>( IQ.you.male.mean <span class="op">-</span><span class="st"> </span>IQ.you.female.mean ) <span class="op">/</span><span class="st"> </span>se.p</span>
-<span id="cb28-2"><a href="#cb28-2"></a></span>
-<span id="cb28-3"><a href="#cb28-3"></a>t</span></code></pre></div>
-<pre><code>## [1] 0.4105016</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>t =<span class="st"> </span>( IQ.you.male.mean <span class="op">-</span><span class="st"> </span>IQ.you.female.mean ) <span class="op">/</span><span class="st"> </span>se.p</span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a>t</span></code></pre></div>
+<pre><code>## [1] 1.430198</code></pre>
 </section><section id="test-for-significance-1" class="slide level2">
 <h2>Test for significance</h2>
 <p>Two tailed</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
-<span id="cb30-3"><a href="#cb30-3"></a></span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t,t), df, <span class="dt">section=</span><span class="st">&quot;tails&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb27-3"><a href="#cb27-3"></a></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t,t), df, <span class="dt">section=</span><span class="st">&quot;tails&quot;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
 <p><img src="paired_and_independent_t_test_reveal_files/figure-revealjs/unnamed-chunk-23-1.png" width="768" /></p>
 </section><section id="effect-size-1" class="slide level2">
 <h2>Effect-size</h2>
 <p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>r =<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df))</span>
-<span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a>r</span></code></pre></div>
-<pre><code>## [1] 0.06107971</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>r =<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>df))</span>
+<span id="cb28-2"><a href="#cb28-2"></a></span>
+<span id="cb28-3"><a href="#cb28-3"></a>r</span></code></pre></div>
+<pre><code>## [1] 0.208515</code></pre>
 <!-- Footer insert below -->
 </section></section>
 <section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">

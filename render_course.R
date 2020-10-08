@@ -56,21 +56,32 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/multiple_regression/multiple_regr
 RenderMultipleOutput("courses/2020-2021_SSR/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
 RenderMultipleOutput("courses/2020-2021_SSR/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
 
-# 
-# # RenderMultipleOutput("courses/current/the_beast_of_bias/the_beast_of_bias.Rmd")
-# 
-# # Blok II
-# 
-# # Week 5
-# # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
-# RenderMultipleOutput("courses/current/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
-# RenderMultipleOutput("courses/current/ANCOVA/ANCOVA.Rmd")
+# Week 4
+
+# WSR
+RenderMultipleOutput("courses/2020-2021_WSR_PB/moderation/moderation.Rmd")
+
+# Blok II
+
+# Week 5
+# RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/non_parametric_tests/non_parametric_tests.Rmd")
+
+# WSR
+RenderMultipleOutput("courses/2020-2021_WSR_PB/f_distribution_ANOVA_non_par_testing/f_distribution_ANOVA_non_par_testing.Rmd")
+
 # 
 # # Week 6
-# RenderMultipleOutput("courses/current/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
-# RenderMultipleOutput("courses/current/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
-# 
-# 
+
+# SSR
+RenderMultipleOutput("courses/2020-2021_SSR/ANCOVA/ANCOVA.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
+
+# WSR 
+RenderMultipleOutput("courses/2020-2021_WSR_PB/ANOVA_independent_factorial_repeated_mixed/ANOVA_independent_factorial.Rmd")
+
+
 # # Week 8
 # RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
 # RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")

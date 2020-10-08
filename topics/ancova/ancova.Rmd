@@ -134,6 +134,8 @@ aggregate(outcome ~ group, data, mean)
 
 ## Model fit no covar {.smaller .subsection}
 
+<small>
+
 What are the beta coëfficients based on the data without the covariate?
 
 ```{r}
@@ -142,6 +144,7 @@ fit.group$coefficients[2:3] + fit.group$coefficients[1]
 ```
 
 $${Dutch} = `r  fit.group$coefficients[1]` \> {German} = `r fit.group$coefficients[2] + fit.group$coefficients[1]` \> {Belgian} = `r fit.group$coefficients[3] + fit.group$coefficients[1]`$$
+</small>
 
 ## Model fit only covar {.subsection}
 

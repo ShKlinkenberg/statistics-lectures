@@ -1,0 +1,163 @@
+# Mixed design ANOVA {.section}
+
+```{r, echo=FALSE}
+rm(list=ls())
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+## Mixed design 
+
+The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.
+
+* 1 dependent/outcome variable
+* 2 or more independent/predictor variable with different subjects
+    * 2 or more levels
+* 2 or more independent/predictor variable with same subjects
+    * 2 or more levels
+
+## Assumptions
+
+Same as repeated measures ANOVA and same as factorial ANOVA.
+
+## Example {.smaller}
+
+<small>
+
+* Dependent variable
+    * Accidents
+* Independent variables
+    * Speed (same subjects)
+        * None
+        * Small
+        * Large
+    * Alcohol (same subjects)
+        * None
+        * Small
+        * Large
+    * Gender
+        * Males
+        * Females
+
+</small>
+        
+## {.smaller}
+
+<small>
+
+person | gender  | 1_1 | 1_2 | 1_3 | 2_1 | 2_2 | 2_3 | 3_1 | 3_2 | 3_3
+-------|---------|-----|-----|-----|-----|-----|-----|-----|-----|----
+1      | males   | 1   |     |     |     |     |     |     |     |
+2      | males   |     | 2   |     |     |     |     |     |     |
+3      | males   |     |     | 3   |     |     |     |     |     |
+4      | males   |     |     |     | 4   |     |     |     |     |
+5      | males   |     |     |     |     | 5   |     |     |     |
+6      | males   |     |     |     |     |     | 6   |     |     |
+7      | males   |     |     |     |     |     |     | 7   |     |
+8      | males   |     |     |     |     |     |     |     | 8   |
+9      | males   |     |     |     |     |     |     |     |     | 9
+10     | females | 1   |     |     |     |     |     |     |     |
+12     | females |     | 2   |     |     |     |     |     |     |
+13     | females |     |     | 3   |     |     |     |     |     |
+14     | females |     |     |     | 4   |     |     |     |     |
+15     | females |     |     |     |     | 5   |     |     |     |
+16     | females |     |     |     |     |     | 6   |     |     |
+17     | females |     |     |     |     |     |     | 7   |     |
+18     | females |     |     |     |     |     |     |     | 8   |
+20     | females |     |     |     |     |     |     |     |     | 9
+
+</small>
+
+## Data {.smaller}
+
+```{r, echo=FALSE}
+data <- read.csv(file = "ANOVA_mixed.csv", header = T)
+
+data[,-1] <- round(data[,-1],2)
+
+datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Reshape data
+
+```{r}
+data.long <- reshape(data,
+                     idvar     = "pp",
+                     varying   = list(3:11),
+                     v.names   = "Accidents",
+                     direction = "long")
+
+data.long[which(data.long$time == 1), "time"] = "1_1"
+data.long[which(data.long$time == 2), "time"] = "1_2"
+data.long[which(data.long$time == 3), "time"] = "1_3"
+data.long[which(data.long$time == 4), "time"] = "2_1"
+data.long[which(data.long$time == 5), "time"] = "2_2"
+data.long[which(data.long$time == 6), "time"] = "2_3"
+data.long[which(data.long$time == 7), "time"] = "3_1"
+data.long[which(data.long$time == 8), "time"] = "3_2"
+data.long[which(data.long$time == 9), "time"] = "3_3"
+
+data.long$speed = NA
+data.long$speed[grep("^1", data.long$time)] = "none"
+data.long$speed[grep("^2", data.long$time)] = "small"
+data.long$speed[grep("^3", data.long$time)] = "large"
+
+data.long$alcohol = NA
+data.long$alcohol[grep("_1$", data.long$time)] = "none"
+data.long$alcohol[grep("_2$", data.long$time)] = "small"
+data.long$alcohol[grep("_3$", data.long$time)] = "large"
+
+data.long$pp      <- as.factor(data.long$pp)
+data.long$sekse   <- as.factor(data.long$sekse)
+data.long$speed   <- as.factor(data.long$speed)
+data.long$alcohol <- as.factor(data.long$alcohol)
+```
+
+## Data long
+
+```{r}
+data.long
+```
+
+## ezANOVA
+
+```{r}
+if(!"ez" %in% installed.packages()) { install.packages("ez") }
+library("ez")
+
+Accidents.aov <- ezANOVA(data       = data.long, 
+                         dv         = Accidents, 
+                         wid        = pp, 
+                         within     = c(speed,alcohol), 
+                         between    = sekse, 
+                         type       = 3, 
+                         return_aov = TRUE)
+```
+
+## Results
+
+```{r}
+Accidents.aov
+```
+## Mauchly's Test for Sphericity
+
+```{r}
+Accidents.aov$`Mauchly's Test for Sphericity`
+```
+
+## Visualize results
+
+```{r}
+ezPlot(data    = data.long,
+       x       = .(speed),
+       col     = .(sekse),
+       split   = .(alcohol),
+       dv      = .(Accidents), 
+       wid     = .(pp), 
+       within  = .(speed,alcohol), 
+       between = .(sekse) 
+       )
+
+
+```
+

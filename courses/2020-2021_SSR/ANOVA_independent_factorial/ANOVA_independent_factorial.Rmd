@@ -1,0 +1,54 @@
+---
+title: "ANOVA"
+subtitle: "Independent factorial"
+author: "Klinkenberg"
+date: "9 oct 2020"
+output: 
+  revealjs::revealjs_presentation:
+    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    theme: white #simple #black
+    highlight: pygments
+    transition: slide #fade #slide
+    background_transition: slide
+    center: true
+    self_contained: false
+
+    includes       :
+      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
+                      "../../../GA_Script/GA_Script.html"]
+  html_document:
+    toc            : TRUE
+    self_contained : false
+    toc_float:
+      collapsed    : FALSE
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div style="font-size:60%; text-align:left;" id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA.rmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../footer.md"}
+```

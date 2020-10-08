@@ -17,17 +17,19 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 
 ## Assumptions {.subsection}
 
-* Uni- or Multivariate
+<!-- * Uni- or Multivariate -->
 * Continuous dependent variable
 * Normaly distributed
     * Shapiro-Wilk
 * Equality of variance within groups
     * Mauchly's test of Sphericity
-    
+
+<!--    
 ## Uni- or Multi- descision tree {.smaller}
 
-<img src="../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:left; width:350px; margin-right:20px;">
+<img src="../../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:right; width:350px; margin-right:20px;">
 
+<small>
 
 1. Field: 15.5.2, Output 15.2
 2. Field: Output 15.4
@@ -36,6 +38,10 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 5. Field: 15.5.4, Output 15.2
 6. Field: 15.5.4, Output 15.4
 7. Field: 15.5.4, Output 15.4
+
+</small>
+
+-->
 
 ## Formulas {.smaller .subsection}
 
