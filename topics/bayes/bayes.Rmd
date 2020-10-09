@@ -1,4 +1,6 @@
-# Bayes
+# Bayesian parameter estimation {.section}
+
+$$\Huge P(H | D) = \frac{P(D|H) \times P(H)}{P(D)}$$
 
 ## Is it a fair coin?
 
@@ -30,7 +32,7 @@ n = 10
 
 ## Likelihood
 
-How likeli is the data assuming the data represents the parameter value:
+How likely is the data assuming the data represents the parameter value:
 
 <style>
 #MathJax-Span-8 { text-shadow: 0 0 3px rgb(217,164,65), 0 0 8px rgb(192,168,104); }
@@ -73,7 +75,6 @@ Now we can update our belief about the posible values of theta based on the data
 $$\begin{aligned}
   {Posterior} &\propto {Likelihood} \times {Prior} \\
   P(\theta | D) &\propto P(D|\theta) \times P(\theta)
-  \end{aligned}
-$$
+  \end{aligned}$$
 
-
+# Bayesian hypothesis testing {.section}

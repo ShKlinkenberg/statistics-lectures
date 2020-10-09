@@ -81,6 +81,12 @@ RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_independent_factorial/ANOVA_in
 # WSR 
 RenderMultipleOutput("courses/2020-2021_WSR_PB/ANOVA_independent_factorial_repeated_mixed/ANOVA_independent_factorial.Rmd")
 
+# Week 7
+
+# WSR
+RenderMultipleOutput("courses/2020-2021_WSR_PB/bayes/bayes.Rmd")
+
+
 
 # # Week 8
 # RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
