@@ -26,7 +26,7 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 
 ## Uni- or Multi- descision tree {.smaller}
 
-<img src="../../../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:right; width:350px; margin-right:20px;">
+<img class="shadow" style="float:right; width:250px;" src="../../../../topics/anova_repeated_one-way/uni_multi_descicion.png">
 
 <small>
 
