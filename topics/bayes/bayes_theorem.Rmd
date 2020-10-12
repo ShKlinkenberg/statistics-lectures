@@ -135,7 +135,7 @@ $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
 
 ## Posterior Likelihood Prior
 
-$$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mid H)}{P(D)}$$
+$$P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mid H)}{P(D)}$$
 
 * $P(H)$, the $prior$, is the initial degree of belief in $A$.
 * $P(H \mid D)$, the $posterior$, is the degree of belief after incorporating news that $B$ is true.
