@@ -64,7 +64,6 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/moderation/moderation.Rmd")
 # Blok II
 
 # Week 5
-# RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
 RenderMultipleOutput("courses/2020-2021_SSR/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
 RenderMultipleOutput("courses/2020-2021_SSR/non_parametric_tests/non_parametric_tests.Rmd")
 
@@ -86,7 +85,9 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/ANOVA_independent_factorial_repea
 # WSR
 RenderMultipleOutput("courses/2020-2021_WSR_PB/bayes/bayes.Rmd")
 
-
+# SSR
+RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
+# RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
 
 # # Week 8
 # RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")

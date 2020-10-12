@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Klinkenberg" />
+  <meta name="dcterms.date" content="2020-10-13" />
+  <title>ANOVA</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="ANOVA_repeated_and_mixed_reveal_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="ANOVA_repeated_and_mixed_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      TableOfContents();
+    }
+    );                        
+    
+    function TableOfContents(container, output) {
+    
+    var output = output || '#toc';
+    
+    // Get all elements with class: section or subsection
+    idfromclass = document.querySelectorAll('.section, .subsection');
+    
+        // Create the list element:
+        var list = document.createElement('ul');
+    
+        // Iterate through all found elements
+        for(var i = 0; i < idfromclass.length; i++) {
+          
+            // Create the list item:
+            var item = document.createElement('li');
+    
+            // Set its contents:
+            var id = idfromclass[i].id
+            
+            // Replace - in id with whitespace
+            var titleText = id.replace(/-/gi, " ");
+            
+            // Add text to list element
+            item.appendChild(document.createTextNode(titleText));
+            
+            // Add subsection class
+            item.className = idfromclass[i].className
+            
+            // Add it to the list:
+            list.appendChild(item);
+        }
+    
+    // Return generated HTML to toc div in slide
+    document.querySelector(output).innerHTML = list.innerHTML;
+    
+    // Generate instruction message if no classes are defined
+    if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
+    
+    };</script>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-107432294-1');
+    </script>
+    <script src="ANOVA_repeated_and_mixed_reveal_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="ANOVA_repeated_and_mixed_reveal_files/jquery-1.12.4/jquery.min.js"></script>
+    <link href="ANOVA_repeated_and_mixed_reveal_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="ANOVA_repeated_and_mixed_reveal_files/datatables-binding-0.15/datatables.js"></script>
+    <link href="ANOVA_repeated_and_mixed_reveal_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="ANOVA_repeated_and_mixed_reveal_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="ANOVA_repeated_and_mixed_reveal_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="ANOVA_repeated_and_mixed_reveal_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="ANOVA_repeated_and_mixed_reveal_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">ANOVA</h1>
+  <h1 class="subtitle">Repeated &amp; Mixed</h1>
+    <h2 class="author">Klinkenberg</h2>
+    <h3 class="date">13 oct 2020</h3>
+</section>
+
+<section id="inhoud" class="slide level2">
+<h2>Inhoud</h2>
+<div id="toc" style="font-size:60%; text-align:left;">
+
+</div>
+<!-- Add the required topics below -->
+</section>
+<section><section id="anova-one-way-repeated" class="title-slide slide level1"><h1>ANOVA<br>One-way repeated</h1></section><section id="one-way-repeated-measures-anova" class="slide level2 section">
+<h2>One-way repeated measures ANOVA</h2>
+<p>The one-way repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>1 independent/predictor variable
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>All with same subjects</li>
+</ul>
+</section><section id="assumptions" class="slide level2 subsection">
+<h2>Assumptions</h2>
+<ul>
+<li>Uni- or Multivariate</li>
+<li>Continuous dependent variable</li>
+<li>Normaly distributed
+<ul>
+<li>Shapiro-Wilk</li>
+</ul></li>
+<li>Equality of variance within groups
+<ul>
+<li>Mauchly’s test of Sphericity</li>
+</ul></li>
+</ul>
+</section><section id="uni--or-multi--descision-tree" class="slide level2 smaller">
+<h2>Uni- or Multi- descision tree</h2>
+<p><img src="../../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:right; width:350px; margin-right:20px;"></p>
+<p><small></p>
+<ol type="1">
+<li>Field: 15.5.2, Output 15.2</li>
+<li>Field: Output 15.4</li>
+<li>Field: Jane Superbrain 15.2, Output 15.2 GG and HF.</li>
+<li>Field: Jane Superbrain 15.2, Sample size <span class="math inline">\(n\)</span> is larger than <span class="math inline">\(a\)</span> (number of levels) + 10</li>
+<li>Field: 15.5.4, Output 15.2</li>
+<li>Field: 15.5.4, Output 15.4</li>
+<li>Field: 15.5.4, Output 15.4</li>
+</ol>
+<p></small></p>
+</section><section id="formulas" class="slide level2 smaller subsection">
+<h2>Formulas</h2>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 30%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Between</td>
+<td><span class="math inline">\({SS}_{{between}} = {SS}_{{total}} - {SS}_{{within}}\)</span></td>
+<td><span class="math inline">\({DF}_{{total}}-{DF}_{{within}}\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{between}}}{{DF}_{{between}}}\)</span></td>
+<td> </td>
+</tr>
+<tr class="even">
+<td>Within</td>
+<td><span class="math inline">\({SS}_{{within}} = \sum{s_i^2(n_i-1)}\)</span></td>
+<td><span class="math inline">\((n_i-1)n\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{within}}}{{DF}_{{within}}}\)</span></td>
+<td> </td>
+</tr>
+<tr class="odd">
+<td>• Model</td>
+<td><span class="math inline">\({SS}_{{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{model}}}{{DF}_{{model}}}\)</span></td>
+<td><span class="math inline">\(\frac{{MS}_{{model}}}{{MS}_{{error}}}\)</span></td>
+</tr>
+<tr class="even">
+<td>• Error</td>
+<td><span class="math inline">\({SS}_{{error}} = {SS}_{{within}} - {SS}_{{model}}\)</span></td>
+<td><span class="math inline">\((n-1)(k-1)\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{error}}}{{DF}_{{error}}}\)</span></td>
+<td> </td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\({SS}_{{total}} = s_{grand}^2(N-1)\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{total}}}{{DF}_{{total}}}\)</span></td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(n_i\)</span> is the number of observations per person and <span class="math inline">\(k\)</span> is the number of conditions. These two are equal for a one-way repeated ANOVA. Furthermore <span class="math inline">\(n\)</span> is the number of subjects per condition and <span class="math inline">\(N\)</span> is the total number of data points <span class="math inline">\(n \times k\)</span>.</p>
+</section><section id="example" class="slide level2">
+<h2>Example</h2>
+<p>Measure driving ability in a driving simulator. Test in three consecutive conditions where participants come back to attend the next condition.</p>
+<ul>
+<li>Alcohol none</li>
+<li>Alcohol some</li>
+<li>Alcohol much</li>
+</ul>
+</section><section id="the-data" class="slide level2 smaller">
+<h2>The data</h2>
+<div id="htmlwidget-b916f4a0df360939c838" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b916f4a0df360939c838">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section><section id="ms_total" class="slide level2 subsection">
+<h2><span class="math inline">\({MS}_{total}\)</span></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Assign to individual variables</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>none_alc =<span class="st"> </span>data<span class="op">$</span>none_alc</span>
+<span id="cb1-3"><a href="#cb1-3"></a>some_alc =<span class="st"> </span>data<span class="op">$</span>some_alc</span>
+<span id="cb1-4"><a href="#cb1-4"></a>much_alc =<span class="st"> </span>data<span class="op">$</span>much_alc</span>
+<span id="cb1-5"><a href="#cb1-5"></a>total    =<span class="st"> </span><span class="kw">c</span>(none_alc,some_alc,much_alc)</span></code></pre></div>
+<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2\]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>MS_total =<span class="st"> </span><span class="kw">var</span>(total); MS_total</span></code></pre></div>
+<pre><code>## [1] 0.9410458</code></pre>
+</section><section id="ss_total" class="slide level2">
+<h2><span class="math inline">\({SS}_{total}\)</span></h2>
+<p><span class="math display">\[{DF_{total}} = N-1 \\
+{SS}_{{total}} = s_{grand}^2(N-1)\]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>N =<span class="st"> </span><span class="kw">length</span>(total)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>DF_total =<span class="st"> </span>N <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>SS_total =<span class="st"> </span>MS_total <span class="op">*</span><span class="st"> </span>DF_total; SS_total</span></code></pre></div>
+<pre><code>## [1] 55.5217</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">sum</span>((total <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(total))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 55.5217</code></pre>
+</section><section id="ss_total-visual" class="slide level2 smaller">
+<h2><span class="math inline">\({SS}_{total}\)</span> visual</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Set offset</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>offset =<span class="st"> </span><span class="fl">.2</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Calculate n</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>n =<span class="st"> </span><span class="kw">length</span>(none_alc)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Create plot</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">plot</span>(none_alc,</span>
+<span id="cb8-9"><a href="#cb8-9"></a>     <span class="dt">xlab =</span> <span class="st">&#39;participants&#39;</span>,</span>
+<span id="cb8-10"><a href="#cb8-10"></a>     <span class="dt">ylab =</span> <span class="st">&#39;Brokken&#39;</span>,</span>
+<span id="cb8-11"><a href="#cb8-11"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(.<span class="dv">5</span>,<span class="dv">22</span>),</span>
+<span id="cb8-12"><a href="#cb8-12"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="fl">7.5</span>),</span>
+<span id="cb8-13"><a href="#cb8-13"></a>     <span class="dt">col=</span><span class="st">&#39;green&#39;</span>)</span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="kw">points</span>((<span class="dv">1</span><span class="op">:</span>n)<span class="op">-</span>offset, some_alc, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="kw">points</span>((<span class="dv">1</span><span class="op">:</span>n)<span class="op">+</span>offset, much_alc,   <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb8-16"><a href="#cb8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co"># Add the total mean</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="kw">lines</span>(<span class="kw">c</span>((<span class="dv">1</span><span class="op">-</span>offset),(n<span class="op">+</span>offset)),<span class="kw">rep</span>(<span class="kw">mean</span>(total),<span class="dv">2</span>),<span class="dt">col=</span><span class="st">&#39;black&#39;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb8-19"><a href="#cb8-19"></a></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n,        <span class="kw">mean</span>(total), <span class="dv">1</span><span class="op">:</span>n,        none_alc)</span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n<span class="op">-</span>offset, <span class="kw">mean</span>(total), <span class="dv">1</span><span class="op">:</span>n<span class="op">-</span>offset, some_alc)</span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n<span class="op">+</span>offset, <span class="kw">mean</span>(total), <span class="dv">1</span><span class="op">:</span>n<span class="op">+</span>offset, much_alc)</span>
+<span id="cb8-23"><a href="#cb8-23"></a></span>
+<span id="cb8-24"><a href="#cb8-24"></a><span class="kw">text</span>(n<span class="op">+</span>offset,<span class="kw">mean</span>(total),<span class="kw">expression</span>(<span class="kw">bar</span>(X)[grand]),<span class="dt">pos=</span><span class="dv">4</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_repeated_and_mixed_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>p &lt;-<span class="st"> </span><span class="kw">recordPlot</span>()</span></code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>p</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># add grid</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">21</span><span class="fl">-.5</span>, <span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">21</span><span class="fl">-.5</span>, <span class="fl">7.5</span>, <span class="dt">col=</span><span class="st">&#39;grey&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_repeated_and_mixed_reveal_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p &lt;-<span class="st"> </span><span class="kw">recordPlot</span>()</span></code></pre></div>
+</section><section id="ms_within" class="slide level2 subsection">
+<h2><span class="math inline">\({MS}_{within}\)</span></h2>
+<p><span class="math display">\[{MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}} \\
+{DF}_{within} = (n_i-1)n\]</span></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>n.i =<span class="st"> </span><span class="dv">3</span>  <span class="co"># Number of mesurements per individual (none, some, much)</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>n   =<span class="st"> </span><span class="dv">20</span> <span class="co"># Number of mesurements per group</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a>DF_within =<span class="st"> </span>(n.i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>n</span>
+<span id="cb12-5"><a href="#cb12-5"></a>DF_within</span></code></pre></div>
+<pre><code>## [1] 40</code></pre>
+</section><section id="ss_within" class="slide level2 smaller">
+<h2><span class="math inline">\({SS}_{within}\)</span></h2>
+<p><span class="math display">\[{SS}_{{within}} = \sum{s_i^2(n_i-1)}\]</span></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>var_pp =<span class="st"> </span><span class="kw">apply</span>(<span class="kw">cbind</span>(none_alc, some_alc, much_alc),<span class="dv">1</span>,var)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>ss_pp  =<span class="st"> </span>var_pp <span class="op">*</span><span class="st"> </span>(n.i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a>SS_within =<span class="st"> </span><span class="kw">sum</span>(ss_pp); SS_within</span></code></pre></div>
+<pre><code>## [1] 48.45032</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>mean_pp =<span class="st"> </span><span class="kw">apply</span>(<span class="kw">cbind</span>(none_alc, some_alc, much_alc),<span class="dv">1</span>,mean)</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">sum</span>(<span class="kw">c</span>((none_alc <span class="op">-</span><span class="st"> </span>mean_pp)<span class="op">^</span><span class="dv">2</span>, </span>
+<span id="cb16-4"><a href="#cb16-4"></a>      (some_alc <span class="op">-</span><span class="st"> </span>mean_pp)<span class="op">^</span><span class="dv">2</span>,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>      (much_alc <span class="op">-</span><span class="st"> </span>mean_pp)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 48.45032</code></pre>
+</section><section id="ss_within-data" class="slide level2">
+<h2><span class="math inline">\({SS}_{within}\)</span> data</h2>
+<div id="htmlwidget-6a0120146418d9225868" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6a0120146418d9225868">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155],[5.192,5.199,5.96,5.388,5.763,5.558,5.766,5.953,5.292,4.825,5.591,5.538,5.812,5.305,5.348,5.993,5.176,5.196,5.764,6.172],[5.192,1.51,1.805,1.248,1.792,1.316,3.071,0.563,1.326,6.198,1.045,1.881,0.38,2.507,2.328,1.996,2.828,6.767,2.834,1.859]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section><section id="ss_within-visual" class="slide level2">
+<h2><span class="math inline">\({SS}_{within}\)</span> visual</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>p</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># Personal means</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n<span class="op">-</span>offset, mean_pp, <span class="dv">1</span><span class="op">:</span>n<span class="op">+</span>offset, mean_pp, <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>, <span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># The lines show the within deviation from the personal mean.</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n<span class="op">-</span>offset, mean_pp, <span class="dv">1</span><span class="op">:</span>n<span class="op">-</span>offset, some_alc, <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>, <span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, mean_pp,        <span class="dv">1</span><span class="op">:</span>n,        none_alc,   <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>, <span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n<span class="op">+</span>offset, mean_pp, <span class="dv">1</span><span class="op">:</span>n<span class="op">+</span>offset, much_alc,   <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>, <span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="co"># Add personal means symbols</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) { <span class="kw">text</span>(i<span class="op">-</span>(offset<span class="op">/</span><span class="dv">2</span>), mean_pp[i], <span class="kw">expression</span>(<span class="kw">bar</span>(X)[i]), <span class="dt">pos=</span><span class="dv">2</span>, <span class="dt">cex=</span>.<span class="dv">5</span>)}</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_repeated_and_mixed_reveal_files/figure-revealjs/unnamed-chunk-15-1.png" width="768" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>p &lt;-<span class="st"> </span><span class="kw">recordPlot</span>()</span></code></pre></div>
+</section><section id="ms_between" class="slide level2 subsection">
+<h2><span class="math inline">\({MS}_{between}\)</span></h2>
+<p><span class="math display">\[{MS}_{between} = \frac{{SS}_{{between}}}{{DF}_{{between}}}\]</span></p>
+<p><span class="math display">\[{DF}_{between}-{DF}_{{within}} \\
+{SS}_{between} = {SS}_{total} - {SS}_{within}\]</span></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>SS_between =<span class="st"> </span>SS_total <span class="op">-</span><span class="st"> </span>SS_within</span>
+<span id="cb20-2"><a href="#cb20-2"></a>SS_between</span></code></pre></div>
+<pre><code>## [1] 7.071382</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>DF_between =<span class="st"> </span>DF_total <span class="op">-</span><span class="st"> </span>DF_within</span>
+<span id="cb22-2"><a href="#cb22-2"></a>DF_between</span></code></pre></div>
+<pre><code>## [1] 19</code></pre>
+</section><section id="ms_model" class="slide level2 subsection">
+<h2><span class="math inline">\({MS}_{model}\)</span></h2>
+<p><span class="math display">\[{MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}} \\
+{DF}_{model} = k-1\]</span></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>k =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>DF_model =<span class="st"> </span>k <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>DF_model</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</section><section id="ss_model" class="slide level2">
+<h2><span class="math inline">\({SS}_{model}\)</span></h2>
+<p><span class="math display">\[{SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}\]</span></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># SS model</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>n_k1 =<span class="st"> </span><span class="kw">length</span>(none_alc)</span>
+<span id="cb26-3"><a href="#cb26-3"></a>n_k2 =<span class="st"> </span><span class="kw">length</span>(some_alc)</span>
+<span id="cb26-4"><a href="#cb26-4"></a>n_k3 =<span class="st"> </span><span class="kw">length</span>(much_alc)</span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co"># Calculate sums of squares for the model</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>SS_k1 =<span class="st"> </span>n_k1 <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(none_alc) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(total))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>SS_k2 =<span class="st"> </span>n_k2 <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(some_alc) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(total))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>SS_k3 =<span class="st"> </span>n_k3 <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(much_alc) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(total))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a></span>
+<span id="cb26-11"><a href="#cb26-11"></a>SS_model =<span class="st"> </span><span class="kw">sum</span>(SS_k1, SS_k2, SS_k3)</span>
+<span id="cb26-12"><a href="#cb26-12"></a>SS_model</span></code></pre></div>
+<pre><code>## [1] 38.63266</code></pre>
+</section><section id="ss_model-visual" class="slide level2">
+<h2><span class="math inline">\({SS}_{model}\)</span> visual</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>p</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="co"># Add the no alcohol mean</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="kw">lines</span>(<span class="kw">c</span>((<span class="dv">1</span>),(n)),<span class="kw">rep</span>(<span class="kw">mean</span>(none_alc),<span class="dv">2</span>),<span class="dt">col=</span><span class="st">&#39;green&#39;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">text</span>(n<span class="op">+</span>offset,<span class="kw">mean</span>(none_alc),<span class="kw">expression</span>(<span class="kw">bar</span>(X)[none]),<span class="dt">pos=</span><span class="dv">4</span>)</span>
+<span id="cb28-5"><a href="#cb28-5"></a></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="co"># With the bit alcohol mean</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="kw">lines</span>(<span class="kw">c</span>((<span class="dv">1</span><span class="op">-</span>offset),(n<span class="op">-</span>offset)),<span class="kw">rep</span>(<span class="kw">mean</span>(some_alc),<span class="dv">2</span>),<span class="dt">col=</span><span class="st">&#39;red&#39;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="kw">text</span>(n<span class="op">+</span>offset,<span class="kw">mean</span>(some_alc),<span class="kw">expression</span>(<span class="kw">bar</span>(X)[some]),<span class="dt">pos=</span><span class="dv">4</span>)</span>
+<span id="cb28-9"><a href="#cb28-9"></a></span>
+<span id="cb28-10"><a href="#cb28-10"></a><span class="co"># With the much alcohol mean</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a><span class="kw">lines</span>(<span class="kw">c</span>((<span class="dv">1</span><span class="op">+</span>offset),(n<span class="op">+</span>offset)),<span class="kw">rep</span>(<span class="kw">mean</span>(much_alc),<span class="dv">2</span>),<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb28-12"><a href="#cb28-12"></a><span class="kw">text</span>(n<span class="op">+</span>offset,<span class="kw">mean</span>(much_alc),<span class="kw">expression</span>(<span class="kw">bar</span>(X)[much]),<span class="dt">pos=</span><span class="dv">4</span>)</span>
+<span id="cb28-13"><a href="#cb28-13"></a></span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="co"># The lines show the model deviation from the total mean.</span></span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n,        <span class="kw">mean</span>(total), <span class="dv">1</span><span class="op">:</span>n,        <span class="kw">mean</span>(none_alc),   <span class="dt">col=</span><span class="st">&#39;green&#39;</span>)</span>
+<span id="cb28-16"><a href="#cb28-16"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n<span class="op">-</span>offset, <span class="kw">mean</span>(total), <span class="dv">1</span><span class="op">:</span>n<span class="op">-</span>offset, <span class="kw">mean</span>(some_alc), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb28-17"><a href="#cb28-17"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n<span class="op">+</span>offset, <span class="kw">mean</span>(total), <span class="dv">1</span><span class="op">:</span>n<span class="op">+</span>offset, <span class="kw">mean</span>(much_alc),   <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_repeated_and_mixed_reveal_files/figure-revealjs/unnamed-chunk-19-1.png" width="768" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>p &lt;-<span class="st"> </span><span class="kw">recordPlot</span>()</span></code></pre></div>
+</section><section id="ms_error" class="slide level2 subsection">
+<h2><span class="math inline">\({MS}_{error}\)</span></h2>
+<p><span class="math display">\[\frac{{SS}_{error}}{{DF}_{error}} \\
+{DF}_{error} = (n-1)(k-1)\]</span></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>DF_error =<span class="st"> </span>DF_within <span class="op">-</span><span class="st"> </span>DF_model</span>
+<span id="cb30-2"><a href="#cb30-2"></a>DF_error</span></code></pre></div>
+<pre><code>## [1] 38</code></pre>
+</section><section id="ss_error" class="slide level2">
+<h2><span class="math inline">\({SS}_{error}\)</span></h2>
+<p><span class="math display">\[{SS}_{error} = {SS}_{within} - {SS}_{model}\]</span></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>SS_error =<span class="st"> </span>SS_within <span class="op">-</span><span class="st"> </span>SS_model</span>
+<span id="cb32-2"><a href="#cb32-2"></a>SS_error</span></code></pre></div>
+<pre><code>## [1] 9.817655</code></pre>
+</section><section id="f-ratio" class="slide level2 subsection">
+<h2>F ratio</h2>
+<p><span class="math display">\[F = \frac{{MS}_{{model}}}{{MS}_{{error}}}\]</span></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Calculate mean squares</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>MS_model =<span class="st"> </span>SS_model <span class="op">/</span><span class="st"> </span>DF_model</span>
+<span id="cb34-3"><a href="#cb34-3"></a>MS_error =<span class="st"> </span>SS_error <span class="op">/</span><span class="st"> </span>DF_error</span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="co"># Calculate F statistic</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>F =<span class="st"> </span>MS_model <span class="op">/</span><span class="st"> </span>MS_error</span>
+<span id="cb34-7"><a href="#cb34-7"></a>F</span></code></pre></div>
+<pre><code>## [1] 74.76537</code></pre>
+</section><section id="visualize" class="slide level2">
+<h2>Visualize</h2>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">library</span>(<span class="st">&#39;visualize&#39;</span>)</span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="kw">visualize.f</span>(F, DF_model, DF_error, <span class="dt">section=</span><span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_repeated_and_mixed_reveal_files/figure-revealjs/unnamed-chunk-23-1.png" width="768" /></p>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>F.values =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="fl">.01</span>)</span>
+<span id="cb37-2"><a href="#cb37-2"></a></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">plot</span>(F.values, <span class="kw">df</span>(F.values, DF_model, DF_error), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;H0 and HA F-distribution&quot;</span>)</span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a>critical.value =<span class="st"> </span><span class="kw">qf</span>(.<span class="dv">95</span>, DF_model, DF_error)</span>
+<span id="cb37-6"><a href="#cb37-6"></a></span>
+<span id="cb37-7"><a href="#cb37-7"></a>critical.range =<span class="st"> </span><span class="kw">seq</span>(critical.value, <span class="dv">100</span>, <span class="fl">.01</span>)</span>
+<span id="cb37-8"><a href="#cb37-8"></a></span>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="kw">polygon</span>(<span class="kw">c</span>(critical.range,<span class="kw">rev</span>(critical.range)), </span>
+<span id="cb37-10"><a href="#cb37-10"></a>        <span class="kw">c</span>(critical.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(critical.range, DF_model, DF_error, <span class="dt">ncp =</span> <span class="dv">5</span>))), <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</span>
+<span id="cb37-11"><a href="#cb37-11"></a></span>
+<span id="cb37-12"><a href="#cb37-12"></a><span class="kw">lines</span>(F.values, <span class="kw">df</span>(F.values, DF_model, DF_error, <span class="dt">ncp =</span> <span class="dv">5</span>))</span>
+<span id="cb37-13"><a href="#cb37-13"></a></span>
+<span id="cb37-14"><a href="#cb37-14"></a><span class="kw">polygon</span>(<span class="kw">c</span>(critical.range,<span class="kw">rev</span>(critical.range)), </span>
+<span id="cb37-15"><a href="#cb37-15"></a>        <span class="kw">c</span>(critical.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(critical.range, DF_model, DF_error))), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">density =</span> <span class="dv">40</span>, <span class="dt">angle =</span> <span class="dv">-45</span>)</span>
+<span id="cb37-16"><a href="#cb37-16"></a></span>
+<span id="cb37-17"><a href="#cb37-17"></a>p.range =<span class="st"> </span><span class="kw">seq</span>(F, <span class="dv">100</span>, <span class="fl">.01</span>)</span>
+<span id="cb37-18"><a href="#cb37-18"></a></span>
+<span id="cb37-19"><a href="#cb37-19"></a><span class="kw">polygon</span>(<span class="kw">c</span>(p.range,<span class="kw">rev</span>(p.range)), </span>
+<span id="cb37-20"><a href="#cb37-20"></a>        <span class="kw">c</span>(p.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(p.range, DF_model, DF_error))), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">6</span>), <span class="dt">density =</span> <span class="dv">20</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_repeated_and_mixed_reveal_files/figure-revealjs/unnamed-chunk-24-1.png" width="768" /></p>
+</section><section id="contrast" class="slide level2 subsection">
+<h2>Contrast</h2>
+<p>Planned comparisons</p>
+<ul>
+<li>Exploring differences of theoretical interest</li>
+<li>Higher precision</li>
+<li>Higher power</li>
+</ul>
+</section><section id="post-hoc" class="slide level2 subsection">
+<h2>Post-Hoc</h2>
+<p>Unplanned comparisons</p>
+<ul>
+<li>Exploring all possible differences</li>
+<li>Adjust T value for inflated type 1 error</li>
+</ul>
+</section><section id="effect-size" class="slide level2 subsection">
+<h2>Effect size</h2>
+<p>General effect size measures</p>
+<ul>
+<li>Amount of explained variance <span class="math inline">\(R^2\)</span> also called eta squared <span class="math inline">\(\eta^2\)</span>.</li>
+<li>Omega squared <span class="math inline">\(\omega^2\)</span></li>
+</ul>
+<p>Effect sizes of contrasts or post-hoc comparisons</p>
+<ul>
+<li>Cohen’s <span class="math inline">\(r\)</span> gives the effect size for a specific comparison
+<ul>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\)</span></li>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{F(1,{df}_R)}{F(1,{df}_R)+{df}_R}}\)</span></li>
+</ul></li>
+</ul>
+</section></section>
+<section><section id="anova-factorial-repeated" class="title-slide slide level1"><h1>ANOVA factorial repeated</h1></section><section id="factorial-repeated-measures-anova" class="slide level2 section">
+<h2>Factorial repeated measures ANOVA</h2>
+<p>The factorial repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>2 or more independent/predictor variable
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>All with same subjects</li>
+</ul>
+</section><section id="assumptions-1" class="slide level2">
+<h2>Assumptions</h2>
+<p>Same as one-way repeated measures ANOVA</p>
+</section><section id="example-1" class="slide level2 smaller">
+<h2>Example</h2>
+<p><small></p>
+<p>In this example we will again look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol. But this time we lat participants partake in all conditions. Every week subjects returned for a different experimental condition.</p>
+<ul>
+<li>Dependent variable
+<ul>
+<li>Accidents</li>
+</ul></li>
+<li>Independent variables
+<ul>
+<li>Speed
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Alcohol
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+</ul></li>
+</ul>
+<p></small></p>
+</section><section id="section" class="slide level2 smaller">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th>person</th>
+<th>1_1</th>
+<th>1_2</th>
+<th>1_3</th>
+<th>2_1</th>
+<th>2_2</th>
+<th>2_3</th>
+<th>3_1</th>
+<th>3_2</th>
+<th>3_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+</section><section id="data" class="slide level2 smaller">
+<h2>Data</h2>
+<div id="htmlwidget-0b3c0b74fee03ed610cc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0b3c0b74fee03ed610cc">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.43,4.23,5.28,4.63,5.29,5.02,4.5,5.36,4.49,3.59,5.55,4.76,5.36,4.42,4.23,5.53,4.29,3.43,5.02,5.23],[4.11,5.47,5.56,5.32,5.15,5.16,5.83,6.12,5.26,4.05,4.89,5.23,6.23,4.93,5.43,5.31,4.71,5.06,5.14,6.13],[7.04,5.9,7.04,6.21,6.85,6.49,6.97,6.38,6.12,6.84,6.33,6.62,5.85,6.56,6.38,7.14,6.53,7.1,7.14,7.15],[2.97,3.28,3.45,3.3,2.72,2.62,4.77,3.34,3.28,3.19,3.53,2.32,3.24,3.43,3.76,3.22,2.51,3.1,2.51,4.04],[5.21,4.39,6.45,5.62,5.81,5.94,5.08,6.41,5.37,4.59,5.34,6.38,5.52,5.35,5.04,6.13,4.68,5.05,5.89,6.74],[7.39,7.94,7.98,7.24,8.76,8.12,7.45,8.11,7.23,6.69,7.9,7.92,8.68,7.13,7.25,8.63,8.33,7.44,8.89,7.73]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>geen_alc<\/th>\n      <th>beetje_alc<\/th>\n      <th>veel_alc<\/th>\n      <th>geen_spe<\/th>\n      <th>beetje_spe<\/th>\n      <th>veel_spe<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section></section>
+<section><section id="mixed-design-anova" class="title-slide slide level1 section"><h1>Mixed design ANOVA</h1></section><section id="mixed-design" class="slide level2">
+<h2>Mixed design</h2>
+<p>The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>2 or more independent/predictor variable with different subjects
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>2 or more independent/predictor variable with same subjects
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+</ul>
+</section><section id="assumptions-2" class="slide level2">
+<h2>Assumptions</h2>
+<p>Same as repeated measures ANOVA and same as factorial ANOVA.</p>
+</section><section id="example-2" class="slide level2 smaller">
+<h2>Example</h2>
+<p><small></p>
+<ul>
+<li>Dependent variable
+<ul>
+<li>Accidents</li>
+</ul></li>
+<li>Independent variables
+<ul>
+<li>Speed (same subjects)
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Alcohol (same subjects)
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Gender
+<ul>
+<li>Males</li>
+<li>Females</li>
+</ul></li>
+</ul></li>
+</ul>
+<p></small></p>
+</section><section id="section-1" class="slide level2 smaller">
+<h2></h2>
+<p><small></p>
+<table>
+<thead>
+<tr class="header">
+<th>person</th>
+<th>gender</th>
+<th>1_1</th>
+<th>1_2</th>
+<th>1_3</th>
+<th>2_1</th>
+<th>2_2</th>
+<th>2_3</th>
+<th>3_1</th>
+<th>3_2</th>
+<th>3_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>males</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>males</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>females</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>females</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p></small></p>
+</section><section id="data-1" class="slide level2 smaller">
+<h2>Data</h2>
+<div id="htmlwidget-f8e44a133627f4c7fc68" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f8e44a133627f4c7fc68">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.24,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.13,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.35,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.33,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.21,8.74,6.8,5.98,6.66,7.94,9.22,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.99,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.53,6.33,5.64,7.66],[9.51,10.71,9.49,9.39,9.83,10.78,8.59,9.26,9.29,9.14,9.96,9.52,9.12,9.48,9.54,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>sekse<\/th>\n      <th>v1_1<\/th>\n      <th>v1_2<\/th>\n      <th>v1_3<\/th>\n      <th>v2_1<\/th>\n      <th>v2_2<\/th>\n      <th>v2_3<\/th>\n      <th>v3_1<\/th>\n      <th>v3_2<\/th>\n      <th>v3_3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<!-- Footer insert below -->
+</section></section>
+<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="ANOVA_repeated_and_mixed_reveal_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="ANOVA_repeated_and_mixed_reveal_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
