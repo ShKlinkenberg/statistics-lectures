@@ -48,6 +48,9 @@ local({
 ```{r child="../../../topics/bayes/bayes_theorem.Rmd"}
 ```
 
+```{r child="../../../topics/bayes/bayesian_parameter_estimation.Rmd"}
+```
+
 <!-- Footer insert below -->
 
 ```{r child="../../../footer.md"}

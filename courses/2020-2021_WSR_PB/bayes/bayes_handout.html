@@ -447,6 +447,106 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li><a href="https://youtu.be/HZGCoVF3YvM">Bayes theorem - 3Blue1Brown</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia</a></li>
 </ul>
+</div>
+</div>
+<div id="bayesian-parameter-estimation" class="section level1 section">
+<h1>Bayesian parameter estimation</h1>
+<div id="updating-belief" class="section level2">
+<h2>Updating belief</h2>
+<blockquote>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Posterior</p>
+</blockquote>
+</div>
+<div id="so-what-is-your-belief" class="section level2">
+<h2>So what is your belief</h2>
+<p>In lecture one we I tossed ten times. with a coin that was supposedly healed after hamering it straight.</p>
+<p>I arbitrarily assumed my <span class="math inline">\(H_A: \theta=.25\)</span>.</p>
+<p>Considering all possible values of <span class="math inline">\(\theta\)</span></p>
+<p><span class="math inline">\([0,1] \Rightarrow \{\theta\in\Bbb R:0\le \theta\le 1\}\)</span></p>
+</div>
+<div id="draw-your-belief" class="section level2">
+<h2>Draw your belief</h2>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="prior-distribution" class="section level2">
+<h2>Prior distribution</h2>
+<p>You have assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span>.</p>
+<blockquote>
+<p>This is your prior</p>
+</blockquote>
+<p>Now we normally do not draw our priors, but we could.</p>
+</div>
+<div id="priors" class="section level2">
+<h2>Priors</h2>
+<p>We can choose a flat prior, or a beta distributed prior with different parameter values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<pre class="r"><code>theta = seq(0,1, .001)
+layout(matrix(1:4,2,2))
+plot(theta, dunif(theta),           type=&quot;l&quot;, ylab = &quot;likelihood&quot;)
+plot(theta, dbeta(theta, 3, 5),     type=&quot;l&quot;, ylab = &quot;likelihood&quot;)
+plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;)
+plot(theta, dbeta(theta, 2, 2),     type=&quot;l&quot;, ylab = &quot;likelihood&quot;)</code></pre>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="choose-prior" class="section level2">
+<h2>Choose prior</h2>
+<p>Binomial distribution</p>
+<p><span class="math inline">\(P^k (1-P)^{n-k}\)</span> <span class="math inline">\(P^25 (P-1)^{100-25}\)</span></p>
+</div>
+<div id="now-what-is-the-data-saying" class="section level2">
+<h2>Now what is the data saying</h2>
+<div id="my-ten-tosses" class="section level3">
+<h3>My ten tosses</h3>
+<p><span class="math display">\[\begin{aligned}
+  k &amp;= 2 \\
+  n &amp;= 10
+  \end{aligned}\]</span></p>
+<pre class="r"><code>k = 2
+n = 10</code></pre>
+</div>
+</div>
+<div id="likelihood" class="section level2">
+<h2>Likelihood</h2>
+<p>How likely is the data assuming the data represents the parameter value:</p>
+<p><span class="math display">\[\theta = \frac{2}{10} = 0.2\]</span></p>
+<pre class="r"><code>theta.given.data = k/n
+
+theta.given.data</code></pre>
+<pre><code>## [1] 0.2</code></pre>
+</div>
+<div id="likelihood-function" class="section level2">
+<h2>Likelihood function</h2>
+<p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
+<p><span class="math inline">\(P^k (1-P)^{n-k}\)</span></p>
+<pre class="r"><code>thetas = seq(0, 1, .01)
+
+likelihood =  dbinom(k, n, thetas)
+
+plot(thetas, dbinom(k, n, thetas),
+     main = &quot;Likelihood function&quot;,
+     type=&#39;l&#39;, 
+     ylab = &quot;Likelihood&quot;, 
+     las = 1)
+abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<hr />
+<p><img src="../../../../topics/bayes/likelihood_function.gif" /></p>
+</div>
+<div id="posterior" class="section level2">
+<h2>Posterior</h2>
+<p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
+<p><span class="math display">\[\begin{aligned}
+  {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
+  P(\theta | D) &amp;\propto P(D|\theta) \times P(\theta)
+  \end{aligned}\]</span></p>
+</div>
+<div id="theta-all-mighty" class="section level2">
+<h2>Theta all mighty</h2>
+<p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
+<p><span class="math display">\[\Huge \theta = .68\]</span></p>
+<p>The data driver!</p>
 <!-- Footer insert below -->
 </div>
 </div>

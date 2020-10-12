@@ -50,7 +50,8 @@ plot(theta, dbeta(theta, 2, 2),     type="l", ylab = "likelihood")
 
 Binomial distribution
 
-$P^25 (P-1)^{100}$
+$P^k (1-P)^{n-k}$
+$P^25 (P-1)^{100-25}$
 
 ## Now what is the data saying
 
@@ -81,7 +82,7 @@ theta.given.data
 
 How likely is 2 out of 10 for all possible $\theta$ values?
 
-$P^2 (1-)^{10}$
+$P^k (1-P)^{n-k}$
 
 ```{r}
 thetas = seq(0, 1, .01)
@@ -95,6 +96,10 @@ plot(thetas, dbinom(k, n, thetas),
      las = 1)
 abline(v=theta.given.data, lty='dashed')
 ```
+
+-----
+
+![](../../../../topics/bayes/likelihood_function.gif)
 
 ## Posterior
 
