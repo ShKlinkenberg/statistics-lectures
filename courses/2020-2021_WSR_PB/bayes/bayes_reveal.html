@@ -837,54 +837,96 @@ P^{25} (P-1)^{100-25}\]</span></p>
 <p>The data driver!</p>
 </section><section id="see-our-prior-update" class="slide level2">
 <h2>See our prior update</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>real.theta =<span class="st"> </span><span class="fl">.68</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a>old.k =<span class="st"> </span><span class="dv">27</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>old.n =<span class="st"> </span><span class="dv">83</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</span>
-<span id="cb7-8"><a href="#cb7-8"></a>  </span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="co"># Choose a random sample size between 10 and 100</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>  sample.size.n =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">10</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb7-11"><a href="#cb7-11"></a>  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>  number.of.heads.k =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, sample.size, real.theta)</span>
-<span id="cb7-13"><a href="#cb7-13"></a>  </span>
-<span id="cb7-14"><a href="#cb7-14"></a>  new.k =<span class="st"> </span>old.k <span class="op">+</span><span class="st"> </span>number.of.heads.k</span>
-<span id="cb7-15"><a href="#cb7-15"></a>  new.n =<span class="st"> </span>old.n <span class="op">+</span><span class="st"> </span>sample.size.n</span>
-<span id="cb7-16"><a href="#cb7-16"></a>  </span>
-<span id="cb7-17"><a href="#cb7-17"></a>  <span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb7-18"><a href="#cb7-18"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(new.k, new.n,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
-<span id="cb7-19"><a href="#cb7-19"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
-<span id="cb7-20"><a href="#cb7-20"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(old.k, old.n, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span>
-<span id="cb7-21"><a href="#cb7-21"></a>  </span>
-<span id="cb7-22"><a href="#cb7-22"></a>  old.k =<span class="st"> </span>new.k</span>
-<span id="cb7-23"><a href="#cb7-23"></a>  old.n =<span class="st"> </span>new.n</span>
-<span id="cb7-24"><a href="#cb7-24"></a>  </span>
-<span id="cb7-25"><a href="#cb7-25"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">set.seed</span>(<span class="dv">25</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>real.theta =<span class="st"> </span><span class="fl">.68</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>old.k =<span class="st"> </span><span class="dv">27</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>old.n =<span class="st"> </span><span class="dv">83</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  </span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="co"># Choose a random sample size between 10 and 100</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  sample.size.n =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">30</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  number.of.heads.k =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</span>
+<span id="cb7-14"><a href="#cb7-14"></a>  </span>
+<span id="cb7-15"><a href="#cb7-15"></a>  <span class="co"># sample.size.n</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="co"># number.of.heads.k</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>  </span>
+<span id="cb7-18"><a href="#cb7-18"></a>  new.k =<span class="st"> </span>old.k <span class="op">+</span><span class="st"> </span>number.of.heads.k</span>
+<span id="cb7-19"><a href="#cb7-19"></a>  new.n =<span class="st"> </span>old.n <span class="op">+</span><span class="st"> </span>sample.size.n</span>
+<span id="cb7-20"><a href="#cb7-20"></a>  </span>
+<span id="cb7-21"><a href="#cb7-21"></a>  <span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb7-22"><a href="#cb7-22"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(new.k, new.n,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
+<span id="cb7-23"><a href="#cb7-23"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
+<span id="cb7-24"><a href="#cb7-24"></a>  <span class="kw">text</span>(.<span class="dv">8</span>,.<span class="dv">1</span>, number.of.heads.k<span class="op">/</span>number.of.heads.k)</span>
+<span id="cb7-25"><a href="#cb7-25"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(old.k, old.n, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span>
+<span id="cb7-26"><a href="#cb7-26"></a>  </span>
+<span id="cb7-27"><a href="#cb7-27"></a>  old.k =<span class="st"> </span>new.k</span>
+<span id="cb7-28"><a href="#cb7-28"></a>  old.n =<span class="st"> </span>new.n</span>
+<span id="cb7-29"><a href="#cb7-29"></a>  </span>
+<span id="cb7-30"><a href="#cb7-30"></a>}</span></code></pre></div>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-2.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-3.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-4.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-5.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-6.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-7.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-8.png" width="768" /></p>
 </section><section class="slide level2">
 
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-9.png" width="768" /></p>
 </section><section class="slide level2">
 
-<video width="768"  controls loop>
-<source src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10.webm" />
-</video>
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-10.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-11.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-12.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-13.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-14.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-15.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-16.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-17.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-18.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-19.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-20.png" width="768" /></p>
 <!-- Footer insert below -->
 </section></section>
 <section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">

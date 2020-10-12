@@ -560,18 +560,22 @@ plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&
 </div>
 <div id="see-our-prior-update" class="section level2">
 <h2>See our prior update</h2>
-<pre class="r"><code>## Run multiple samples with our real theta of .68 as our driving force.
+<pre class="r"><code>set.seed(25)
+## Run multiple samples with our real theta of .68 as our driving force.
 real.theta = .68
 
 old.k = 27
 old.n = 83
 
-for(i in 1:10) {
+for(i in 1:20) {
   
   # Choose a random sample size between 10 and 100
-  sample.size.n = sample(10:100, 1)
+  sample.size.n = sample(30:100, 1)
   # Sample number of heads based on sample size and fixed real parameter value
-  number.of.heads.k = rbinom(1, sample.size, real.theta)
+  number.of.heads.k = rbinom(1, sample.size.n, real.theta)
+  
+  # sample.size.n
+  # number.of.heads.k
   
   new.k = old.k + number.of.heads.k
   new.n = old.n + sample.size.n
@@ -579,6 +583,7 @@ for(i in 1:10) {
   layout(matrix(1:3,1,3))
   plot(theta, dbinom(new.k, new.n,  theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Posterior&quot;)
   plot(theta, dbinom(number.of.heads.k, sample.size.n,   theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Likelihood&quot;)
+  text(.8,.1, number.of.heads.k/number.of.heads.k)
   plot(theta, dbinom(old.k, old.n, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Prior&quot;)
   
   old.k = new.k
@@ -586,18 +591,45 @@ for(i in 1:10) {
   
 }</code></pre>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-4.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-5.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-6.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-7.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-8.png" width="672" /></p>
 <hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-9.png" width="672" /></p>
 <hr />
-<video width="672"  controls loop>
-<source src="bayes_handout_files/figure-html/unnamed-chunk-10.webm" />
-</video>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-10.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-11.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-12.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-13.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-14.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-15.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-16.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-17.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-18.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-19.png" width="672" /></p>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-20.png" width="672" /></p>
 <!-- Footer insert below -->
 </div>
 </div>
