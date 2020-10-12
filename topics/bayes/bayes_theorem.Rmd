@@ -3,6 +3,7 @@
 ## Bayes rule
 
 $$\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}$$
+
 ## NHST Table
 
 <table style="border: none;  transform: scale(1);">
@@ -130,9 +131,13 @@ $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
 
 ## With legos
 
-![]("../../../../topics/bayes/lego_bayes.jpg")
+![](../../../../topics/bayes/lego_bayes.jpg)
 
-# Resources
+## Example
+
+
+
+## Resources
 
 * [The quick proof of Bayes' theorem - 3Bleu1Brown](https://youtu.be/U_85TaXbeIo)
 * [Bayes theorem - 3Blue1Brown](https://youtu.be/HZGCoVF3YvM)
