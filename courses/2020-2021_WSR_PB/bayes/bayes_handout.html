@@ -459,7 +459,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </div>
 <div id="so-what-is-your-belief" class="section level2">
 <h2>So what is your belief</h2>
-<p>In lecture one we I tossed ten times. with a coin that was supposedly healed after hamering it straight.</p>
+<p>In lecture one I tossed ten times. with a coin that was supposedly healed after hamering it flat.</p>
 <p>I arbitrarily assumed my <span class="math inline">\(H_A: \theta=.25\)</span>.</p>
 <p>Considering all possible values of <span class="math inline">\(\theta\)</span></p>
 <p><span class="math inline">\([0,1] \Rightarrow \{\theta\in\Bbb R:0\le \theta\le 1\}\)</span></p>
@@ -467,7 +467,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <div id="draw-your-belief" class="section level2">
 <h2>Draw your belief</h2>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="prior-distribution" class="section level2">
 <h2>Prior distribution</h2>
@@ -487,12 +487,13 @@ plot(theta, dbeta(theta, 3, 5),     type=&quot;l&quot;, ylab = &quot;likelihood&
 plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;)
 plot(theta, dbeta(theta, 2, 2),     type=&quot;l&quot;, ylab = &quot;likelihood&quot;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="choose-prior" class="section level2">
 <h2>Choose prior</h2>
 <p>Binomial distribution</p>
-<p><span class="math inline">\(P^k (1-P)^{n-k}\)</span> <span class="math inline">\(P^25 (P-1)^{100-25}\)</span></p>
+<p><span class="math display">\[P^k (1-P)^{n-k} \\
+P^{25} (P-1)^{100-25}\]</span></p>
 </div>
 <div id="now-what-is-the-data-saying" class="section level2">
 <h2>Now what is the data saying</h2>
@@ -530,7 +531,7 @@ plot(thetas, dbinom(k, n, thetas),
      las = 1)
 abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <hr />
 <p><img src="../../../../topics/bayes/likelihood_function.gif" /></p>
 </div>
@@ -539,8 +540,17 @@ abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
 <p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
 <p><span class="math display">\[\begin{aligned}
   {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
-  P(\theta | D) &amp;\propto P(D|\theta) \times P(\theta)
+  P^{27}(1-P)^{83} &amp;= P^{2} (P-1)^{10-2} \times P^{25} (P-1)^{100-25}
   \end{aligned}\]</span></p>
+</div>
+<div id="visual-1" class="section level2">
+<h2>Visual</h2>
+<pre class="r"><code>layout(matrix(1:3,1,3))
+plot(theta, dbinom(27, 83, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Posterior&quot;)
+plot(theta, dbinom(2, 10, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Likelihood&quot;)
+plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Prior&quot;)</code></pre>
+<hr />
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="theta-all-mighty" class="section level2">
 <h2>Theta all mighty</h2>

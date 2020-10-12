@@ -744,7 +744,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </blockquote>
 </section><section id="so-what-is-your-belief" class="slide level2">
 <h2>So what is your belief</h2>
-<p>In lecture one we I tossed ten times. with a coin that was supposedly healed after hamering it straight.</p>
+<p>In lecture one I tossed ten times. with a coin that was supposedly healed after hamering it flat.</p>
 <p>I arbitrarily assumed my <span class="math inline">\(H_A: \theta=.25\)</span>.</p>
 <p>Considering all possible values of <span class="math inline">\(\theta\)</span></p>
 <p><span class="math inline">\([0,1] \Rightarrow \{\theta\in\Bbb R:0\le \theta\le 1\}\)</span></p>
@@ -775,7 +775,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </section><section id="choose-prior" class="slide level2">
 <h2>Choose prior</h2>
 <p>Binomial distribution</p>
-<p><span class="math inline">\(P^k (1-P)^{n-k}\)</span> <span class="math inline">\(P^25 (P-1)^{100-25}\)</span></p>
+<p><span class="math display">\[P^k (1-P)^{n-k} \\
+P^{25} (P-1)^{100-25}\]</span></p>
 </section><section id="now-what-is-the-data-saying" class="slide level2">
 <h2>Now what is the data saying</h2>
 <h3 id="my-ten-tosses">My ten tosses</h3>
@@ -818,8 +819,17 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
 <p><span class="math display">\[\begin{aligned}
   {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
-  P(\theta | D) &amp;\propto P(D|\theta) \times P(\theta)
+  P^{27}(1-P)^{83} &amp;= P^{2} (P-1)^{10-2} \times P^{25} (P-1)^{100-25}
   \end{aligned}\]</span></p>
+</section><section id="visual-1" class="slide level2">
+<h2>Visual</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">27</span>, <span class="dv">83</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dv">10</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
 </section><section id="theta-all-mighty" class="slide level2">
 <h2>Theta all mighty</h2>
 <p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>

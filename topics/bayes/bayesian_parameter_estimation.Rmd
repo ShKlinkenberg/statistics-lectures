@@ -6,7 +6,7 @@
 
 ## So what is your belief
 
-In lecture one we I tossed ten times. with a coin that was supposedly healed after hamering it straight. 
+In lecture one I tossed ten times. with a coin that was supposedly healed after hamering it flat. 
 
 I arbitrarily assumed my $H_A: \theta=.25$.
 
@@ -50,8 +50,8 @@ plot(theta, dbeta(theta, 2, 2),     type="l", ylab = "likelihood")
 
 Binomial distribution
 
-$P^k (1-P)^{n-k}$
-$P^25 (P-1)^{100-25}$
+$$P^k (1-P)^{n-k} \\
+P^{25} (P-1)^{100-25}$$
 
 ## Now what is the data saying
 
@@ -107,8 +107,18 @@ Now we can update our belief about the possible values of theta based on the dat
 
 $$\begin{aligned}
   {Posterior} &\propto {Likelihood} \times {Prior} \\
-  P(\theta | D) &\propto P(D|\theta) \times P(\theta)
+  P^{27}(1-P)^{83} &= P^{2} (P-1)^{10-2} \times P^{25} (P-1)^{100-25}
   \end{aligned}$$
+
+## Visual
+
+```{r}
+layout(matrix(1:3,1,3))
+plot(theta, dbinom(27, 83, theta), type="l", ylab = "likelihood", main = "Posterior")
+plot(theta, dbinom(2, 10, theta), type="l", ylab = "likelihood", main = "Likelihood")
+plot(theta, dbinom(25, 100, theta), type="l", ylab = "likelihood", main = "Prior")
+```
+
 
 ## Theta all mighty
 
