@@ -45,7 +45,7 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/bayes/bayes.Rmd"}
+```{r child="../../../topics/bayes/bayes_theorem.Rmd"}
 ```
 
 <!-- Footer insert below -->

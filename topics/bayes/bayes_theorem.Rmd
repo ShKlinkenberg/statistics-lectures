@@ -127,6 +127,11 @@ $P(B \mid \neg A)$
 ## Date | Hypothesis
 
 $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
+
+## With legos
+
+![]("../../../../topics/bayes/lego_bayes.jpg")
+
 # Resources
 
 * [The quick proof of Bayes' theorem - 3Bleu1Brown](https://youtu.be/U_85TaXbeIo)
