@@ -1,30 +1,66 @@
 # Bayesian parameter estimation {.section}
 
-$$\Huge P(H | D) = \frac{P(D|H) \times P(H)}{P(D)}$$
+## Updating belief
 
-## Is it a fair coin?
+> Posterior $\propto$ Likelihood $\times$ Posterior
 
-## Theta all mighty
+## So what is your belief
 
-The true value of $theta$ for our binomial distribution.
+In lecture one we I tossed ten times. with a coin that was supposedly healed after hamering it straight. 
 
-<style>
-#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217, 164, 65), 0 0 8px rgb(192, 168, 104); }
-</style>
+I arbitrarily assumed my $H_A: \theta=.25$.
 
-$$\Huge \theta = .68$$
+Considering all possible values of $\theta$
 
-The data driver!
+$[0,1] \Rightarrow  \{\theta\in\Bbb R:0\le \theta\le 1\}$
 
-## My ten tosses
+## Draw your belief
 
-My ten tosses landed heads 2 times.
+```{r, echo=FALSE}
+plot(.5,.5, 
+     ylab = "likelihood",
+     xlab = "Theta",
+     ylim = c(0,1),
+     xlim = c(0,1),
+     type = "n")
+```
+
+## Prior distribution
+
+You have assigned a prior probability distribution to the parameter $\theta$.
+
+> This is your prior
+
+Now we normally do not draw our priors, but we could. 
+
+## Priors
+
+We can choose a flat prior, or a beta distributed prior with different parameter values $a$ and $b$.
+
+```{r}
+theta = seq(0,1, .001)
+layout(matrix(1:4,2,2))
+plot(theta, dunif(theta),           type="l", ylab = "likelihood")
+plot(theta, dbeta(theta, 3, 5),     type="l", ylab = "likelihood")
+plot(theta, dbinom(25, 100, theta), type="l", ylab = "likelihood")
+plot(theta, dbeta(theta, 2, 2),     type="l", ylab = "likelihood")
+```
+
+## Choose prior
+
+Binomial distribution
+
+$P^25 (P-1)^{100}$
+
+## Now what is the data saying
+
+### My ten tosses
 
 $$\begin{aligned}
   k &= 2 \\
   n &= 10
   \end{aligned}$$
-  
+
 ```{r}
 k = 2
 n = 10
@@ -34,47 +70,45 @@ n = 10
 
 How likely is the data assuming the data represents the parameter value:
 
-<style>
-#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217,164,65), 0 0 8px rgb(192,168,104); }
-</style>
-
 $$\theta = \frac{2}{10} = `r k/n`$$
 ```{r}
 theta.given.data = k/n
+
+theta.given.data
 ```
 
 ## Likelihood function
 
 How likely is 2 out of 10 for all possible $\theta$ values?
 
+$P^2 (1-)^{10}$
+
 ```{r}
 thetas = seq(0, 1, .01)
 
 likelihood =  dbinom(k, n, thetas)
 
-plot(thetas, dbinom(k, n, thetas), type='l', ylab = "Likelihood", las = 1)
+plot(thetas, dbinom(k, n, thetas),
+     main = "Likelihood function",
+     type='l', 
+     ylab = "Likelihood", 
+     las = 1)
 abline(v=theta.given.data, lty='dashed')
-```
-
-## Prior
-
-What is our expectation of what $theta$ could really be?
-
-It could be anything. We therefore could assign all passible values of $theta$ equally likely.
-
-```{r}
-prior = dbeta(thetas, 1,1)
-
-plot(thetas,prior, type='l', ylab = "density", las = 1)
 ```
 
 ## Posterior
 
-Now we can update our belief about the posible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.
+Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.
 
 $$\begin{aligned}
   {Posterior} &\propto {Likelihood} \times {Prior} \\
   P(\theta | D) &\propto P(D|\theta) \times P(\theta)
   \end{aligned}$$
 
-# Bayesian hypothesis testing {.section}
+## Theta all mighty
+
+The true value of $theta$ for our binomial distribution.
+
+$$\Huge \theta = .68$$
+
+The data driver!
