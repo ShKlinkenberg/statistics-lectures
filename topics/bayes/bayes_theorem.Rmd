@@ -141,7 +141,16 @@ $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{
 * $P(H \mid D)$, the $posterior$, is the degree of belief after incorporating news that $B$ is true.
 * the quotient $\frac{P(D \mid H)}{P(D)}$ represents the support $D$ provides for $H$.
 
+Posterior $\propto$ Likelihood $\times$ Posterior
+
+## Bayes is about
+
+* Quantified belief
+* Updating belief in light of new evidence
+* Yesterdays posteriors are todays priors
+
 ## Resources
 
 * [The quick proof of Bayes' theorem - 3Bleu1Brown](https://youtu.be/U_85TaXbeIo)
 * [Bayes theorem - 3Blue1Brown](https://youtu.be/HZGCoVF3YvM)
+* [Wikipedia](https://en.wikipedia.org/wiki/Bayes%27_theorem)
