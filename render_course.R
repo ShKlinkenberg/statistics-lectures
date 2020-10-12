@@ -87,7 +87,7 @@ RenderMultipleOutput("courses/2020-2021_WSR_PB/bayes/bayes.Rmd")
 
 # SSR
 RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
-# RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/chi_squared_test/chi_squared_test.Rmd")
 
 # # Week 8
 # RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")

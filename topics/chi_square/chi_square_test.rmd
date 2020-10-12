@@ -4,11 +4,15 @@ Relation between categorical variables
 
 ## $\chi^2$ test {.smaller}
 
+<small>
+
 A '''chi-squared test''', also written as $\chi^2$ test, is any statistical hypothesis test wherein the sampling distribution of the test statistic is a chi-squared distribution when the null hypothesis is true. Without other qualification, 'chi-squared test' often is used as short for Pearson's chi-squared test.
 
 Chi-squared tests are often constructed from a Lack-of-fit sum of squares#Sums of squares|sum of squared errors, or through the Variance Distribution of the sample variance|sample variance. Test statistics that follow a chi-squared distribution arise from an assumption of independent normally distributed data, which is valid in many cases due to the central limit theorem. A chi-squared test can be used to attempt rejection of the null hypothesis that the data are independent.
 
 Source: [wikipedia](https://en.wikipedia.org/wiki/Chi-squared_test)
+
+</small>
 
 ## $\chi^2$ test statistic {.subsection}
 
@@ -42,6 +46,8 @@ $$\text{observed}_{ij} =
 
 ## $\chi^2$ distribution {.smaller .subsection}
 
+<small>
+
 The $\chi^2$ distribution describes the test statistic under the assumption of $H_0$, given the degrees of freedom. 
 
 $df = (r - 1) (c - 1)$ where $r$ is the number of rows and $c$ the amount of columns.
@@ -66,6 +72,8 @@ lines(chi, dchisq(chi, df[6]), lwd = 2, col = col[6], type="l")
 legend("topright", legend = paste("k =",df), col = col, lty = 1, bty = "n")
 ```
 
+</small>
+
 ## Example
 
 <iframe src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829" style="height: 450px;" ></iframe>
@@ -80,36 +88,31 @@ http://goo.gl/faj76B
 
 ## Data {.smaller}
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# Install if nesserary and load RCurl package
-if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
-library(RCurl)
+<small>
 
-key = "1yg31q0Q2sEcGq2Y3JaXEEcwsJ5DvDDGzjDbSfAvzZ2c"
+```{r, message=FALSE, eval=TRUE, echo=FALSE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+results <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1yg31q0Q2sEcGq2Y3JaXEEcwsJ5DvDDGzjDbSfAvzZ2c/edit?usp=sharing')
 
-# Set google url
-google.url <- paste("https://docs.google.com/spreadsheets/d/",key,"/export?format=csv&id=",key, sep='')
+results <- as.data.frame(results)
 
-# Load csv
-myCsv <- getURL(google.url)
-# Read csv and assing to data object
-data <- read.csv(textConnection(myCsv))
+results <- results[grep("2017|2019", results$Timestamp),]
 
-data <- data[grep("2017|2019", data$Timestamp),]
+results$sekse   <- as.factor(results$sekse)
+results$fluiten <- as.factor(results$fluiten)
 
 # install.packages("DT")
 library("DT")
-datatable(data)
+datatable(results)
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# setwd('~/Dropbox/UvA/Onderwijs/WSR/Lectures/Sharon/lecture 15 chi square and (partial) correlation')
+</small>
 
-# Correct variables
-data.spss <- data
 
-data.spss$sekse   <- factor(data.spss$sekse,   labels=c(1,2))
-data.spss$fluiten <- factor(data.spss$fluiten, labels=c(0,1))
+```{r, echo=FALSE, message=FALSE, warning=FALSE, eval=F}
+data.spss$sekse   <- factor(results$sekse,   labels=c(1,2))
+data.spss$fluiten <- factor(results$fluiten, labels=c(0,1))
 
 # Write data for use in SPSS
 write.table(data.spss, "data.csv", row.names=FALSE, col.names=TRUE, dec=',')
@@ -118,7 +121,7 @@ write.table(data.spss, "data.csv", row.names=FALSE, col.names=TRUE, dec=',')
 ## Calculating $\chi^2$ {.subsection}
 
 ```{r}
-observed <- table(data[,c('fluiten','sekse')])
+observed <- table(results[,c("fluiten","sekse")])
 observed
 ```
 
@@ -145,6 +148,8 @@ addmargins(observed)
 
 ## Calculating the model {.smaller}
 
+<small>
+
 $$\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }$$
 
 ```{r}
@@ -161,6 +166,8 @@ $$\text{model}_{ij} =
   `r model[1,1]` & `r model[1,2]` \\
   `r model[2,1]` & `r model[2,2]` \\
  \end{pmatrix}$$
+
+</small>
 
 ## observed - model {.subsection}
 
