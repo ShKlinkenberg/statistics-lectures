@@ -145,6 +145,8 @@ Posterior $\propto$ Likelihood $\times$ Posterior
 
 ## Bayes is about
 
+> Posterior $\propto$ Likelihood $\times$ Posterior
+
 * Quantified belief
 * Updating belief in light of new evidence
 * Yesterdays posteriors are todays priors
