@@ -467,7 +467,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <div id="draw-your-belief" class="section level2">
 <h2>Draw your belief</h2>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="prior-distribution" class="section level2">
 <h2>Prior distribution</h2>
@@ -487,7 +487,7 @@ plot(theta, dbeta(theta, 3, 5),     type=&quot;l&quot;, ylab = &quot;likelihood&
 plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;)
 plot(theta, dbeta(theta, 2, 2),     type=&quot;l&quot;, ylab = &quot;likelihood&quot;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="choose-prior" class="section level2">
 <h2>Choose prior</h2>
@@ -531,7 +531,7 @@ plot(thetas, dbinom(k, n, thetas),
      las = 1)
 abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <hr />
 <p><img src="../../../../topics/bayes/likelihood_function.gif" /></p>
 </div>
@@ -546,17 +546,58 @@ abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
 <div id="visual-1" class="section level2">
 <h2>Visual</h2>
 <pre class="r"><code>layout(matrix(1:3,1,3))
-plot(theta, dbinom(27, 83, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Posterior&quot;)
-plot(theta, dbinom(2, 10, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Likelihood&quot;)
+plot(theta, dbinom(27, 83,  theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Posterior&quot;)
+plot(theta, dbinom(2, 10,   theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Likelihood&quot;)
 plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Prior&quot;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="theta-all-mighty" class="section level2">
 <h2>Theta all mighty</h2>
 <p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
 <p><span class="math display">\[\Huge \theta = .68\]</span></p>
 <p>The data driver!</p>
+</div>
+<div id="see-our-prior-update" class="section level2">
+<h2>See our prior update</h2>
+<pre class="r"><code>## Run multiple samples with our real theta of .68 as our driving force.
+real.theta = .68
+
+old.k = 27
+old.n = 83
+
+for(i in 1:10) {
+  
+  # Choose a random sample size between 10 and 100
+  sample.size.n = sample(10:100, 1)
+  # Sample number of heads based on sample size and fixed real parameter value
+  number.of.heads.k = rbinom(1, sample.size, real.theta)
+  
+  new.k = old.k + number.of.heads.k
+  new.n = old.n + sample.size.n
+  
+  layout(matrix(1:3,1,3))
+  plot(theta, dbinom(new.k, new.n,  theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Posterior&quot;)
+  plot(theta, dbinom(number.of.heads.k, sample.size.n,   theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Likelihood&quot;)
+  plot(theta, dbinom(old.k, old.n, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Prior&quot;)
+  
+  old.k = new.k
+  old.n = new.n
+  
+}</code></pre>
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<video width="672"  controls loop>
+<source src="bayes_handout_files/figure-html/unnamed-chunk-10.webm" />
+</video>
 <!-- Footer insert below -->
 </div>
 </div>
