@@ -860,73 +860,15 @@ P^{25} (P-1)^{100-25}\]</span></p>
 <span id="cb7-21"><a href="#cb7-21"></a>  <span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
 <span id="cb7-22"><a href="#cb7-22"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(new.k, new.n,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
 <span id="cb7-23"><a href="#cb7-23"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
-<span id="cb7-24"><a href="#cb7-24"></a>  <span class="kw">text</span>(.<span class="dv">8</span>,.<span class="dv">1</span>, number.of.heads.k<span class="op">/</span>number.of.heads.k)</span>
-<span id="cb7-25"><a href="#cb7-25"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(old.k, old.n, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span>
-<span id="cb7-26"><a href="#cb7-26"></a>  </span>
-<span id="cb7-27"><a href="#cb7-27"></a>  old.k =<span class="st"> </span>new.k</span>
-<span id="cb7-28"><a href="#cb7-28"></a>  old.n =<span class="st"> </span>new.n</span>
-<span id="cb7-29"><a href="#cb7-29"></a>  </span>
-<span id="cb7-30"><a href="#cb7-30"></a>}</span></code></pre></div>
+<span id="cb7-24"><a href="#cb7-24"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(old.k, old.n, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span>
+<span id="cb7-25"><a href="#cb7-25"></a>  </span>
+<span id="cb7-26"><a href="#cb7-26"></a>  old.k =<span class="st"> </span>new.k</span>
+<span id="cb7-27"><a href="#cb7-27"></a>  old.n =<span class="st"> </span>new.n</span>
+<span id="cb7-28"><a href="#cb7-28"></a>  </span>
+<span id="cb7-29"><a href="#cb7-29"></a>}</span></code></pre></div>
 </section><section class="slide level2">
 
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-2.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-3.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-4.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-5.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-6.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-7.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-8.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-9.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-10.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-11.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-12.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-13.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-14.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-15.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-16.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-17.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-18.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-19.png" width="768" /></p>
-</section><section class="slide level2">
-
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-20.png" width="768" /></p>
+<p><img data-src="../../../../topics/bayes/bayes_in_action.gif" /></p>
 <!-- Footer insert below -->
 </section></section>
 <section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
