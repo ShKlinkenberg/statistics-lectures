@@ -9,14 +9,14 @@
 
 $$\huge \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
 
-## Bayes Factor
+## Bayes Factor {.subsection}
 
 $$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
 A ratio of the likelihood of the date under the alternative and the null.
 
 A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely onder the alternative than under the null.
 
-## Heuristics for BF
+## Heuristics for BF {.subsection}
 
 Heuristics for the Interpretation of the Bayes Factor by [Harold Jeffreys](https://en.wikipedia.org/wiki/Harold_Jeffreys)
 
@@ -39,3 +39,7 @@ BF       | Evidence
 -------
 
 ![](../../../../topics/bayesBF1.png)
+
+## interactive BF
+
+[A First Lesson in Bayesian Inference - Shiny App](https://tellmi.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd)
