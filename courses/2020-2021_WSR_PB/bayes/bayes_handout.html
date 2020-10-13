@@ -521,7 +521,7 @@ n = 10</code></pre>
 </div>
 <div id="likelihood" class="section level2">
 <h2>Likelihood</h2>
-<p>How likely is the data assuming the data represents the parameter value:</p>
+<p>What is the most likely parameter value <span class="math inline">\(\theta\)</span> assuming the data to be true:</p>
 <p><span class="math display">\[\theta = \frac{2}{10} = 0.2\]</span></p>
 <pre class="r"><code>theta.given.data = k/n
 
@@ -570,8 +570,8 @@ plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&
 <p><span class="math display">\[\Huge \theta = .68\]</span></p>
 <p>The data driver!</p>
 </div>
-<div id="see-our-prior-update" class="section level2">
-<h2>See our prior update</h2>
+<div id="see-the-prior-update" class="section level2">
+<h2>See the prior update</h2>
 <pre class="r"><code>set.seed(25)
 ## Run multiple samples with our real theta of .68 as our driving force.
 real.theta = .68
@@ -608,7 +608,7 @@ for(i in 1:20) {
 <h2>Take home message</h2>
 <ul>
 <li>Bayesians quantify uncertainty through distributions.</li>
-<li>he more peaked the distribution, the lower the uncertainty.</li>
+<li>The more peaked the distribution, the lower the uncertainty.</li>
 <li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
 </ul>
 </div>
@@ -624,7 +624,7 @@ for(i in 1:20) {
 </div>
 <div id="prior-belief" class="section level2">
 <h2>Prior Belief</h2>
-<p><span class="math display">\[\huge \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+<p><span class="math display">\[\Large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
 </div>
 <div id="bayes-factor" class="section level2 subsection">
 <h2>Bayes Factor</h2>

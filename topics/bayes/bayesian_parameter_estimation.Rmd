@@ -69,7 +69,7 @@ n = 10
 
 ## Likelihood
 
-How likely is the data assuming the data represents the parameter value:
+What is the most likely parameter value $\theta$ assuming the data to be true:
 
 $$\theta = \frac{2}{10} = `r k/n`$$
 ```{r}
@@ -128,7 +128,7 @@ $$\Huge \theta = .68$$
 
 The data driver!
 
-## See our prior update
+## See the prior update
 
 ```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.1, eval=FALSE}
 set.seed(25)
@@ -169,5 +169,5 @@ for(i in 1:20) {
 ## Take home message
 
 * Bayesians quantify uncertainty through distributions.
-* he more peaked the distribution, the lower the uncertainty.
+* The more peaked the distribution, the lower the uncertainty.
 * Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.

@@ -799,7 +799,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>n =<span class="st"> </span><span class="dv">10</span></span></code></pre></div>
 </section><section id="likelihood" class="slide level2">
 <h2>Likelihood</h2>
-<p>How likely is the data assuming the data represents the parameter value:</p>
+<p>What is the most likely parameter value <span class="math inline">\(\theta\)</span> assuming the data to be true:</p>
 <p><span class="math display">\[\theta = \frac{2}{10} = 0.2\]</span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>theta.given.data =<span class="st"> </span>k<span class="op">/</span>n</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
@@ -846,8 +846,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
 <p><span class="math display">\[\Huge \theta = .68\]</span></p>
 <p>The data driver!</p>
-</section><section id="see-our-prior-update" class="slide level2">
-<h2>See our prior update</h2>
+</section><section id="see-the-prior-update" class="slide level2">
+<h2>See the prior update</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">set.seed</span>(<span class="dv">25</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>real.theta =<span class="st"> </span><span class="fl">.68</span></span>
@@ -884,7 +884,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <h2>Take home message</h2>
 <ul>
 <li>Bayesians quantify uncertainty through distributions.</li>
-<li>he more peaked the distribution, the lower the uncertainty.</li>
+<li>The more peaked the distribution, the lower the uncertainty.</li>
 <li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
 </ul>
 </section></section>
@@ -896,7 +896,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </ul>
 </section><section id="prior-belief" class="slide level2">
 <h2>Prior Belief</h2>
-<p><span class="math display">\[\huge \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+<p><span class="math display">\[\Large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
 </section><section id="bayes-factor" class="slide level2 subsection">
 <h2>Bayes Factor</h2>
 <p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the likelihood of the date under the alternative and the null.</p>
