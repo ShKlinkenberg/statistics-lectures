@@ -57,4 +57,4 @@ BF       | Evidence
 ## JASP
 
 ![](https://jasp-stats.org/wp-content/themes/jasp/images/logo.svg)
-
+[JASP a fresh way to do statistics](https://jasp-stats.org)
