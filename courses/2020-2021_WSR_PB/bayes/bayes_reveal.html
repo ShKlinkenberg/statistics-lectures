@@ -726,9 +726,20 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </blockquote>
 <ul>
 <li>Quantified belief</li>
+<li>Common sense expressed in numbers</li>
 <li>Updating belief in light of new evidence</li>
 <li>Yesterdays posteriors are todays priors</li>
 </ul>
+</section><section id="generative-model" class="slide level2">
+<h2>Generative model</h2>
+<p>Frequentists</p>
+<blockquote>
+<p>State of the world → Data</p>
+</blockquote>
+<p>Bayesions</p>
+<blockquote>
+<p>Data → State of the world</p>
+</blockquote>
 </section><section id="resources" class="slide level2">
 <h2>Resources</h2>
 <ul>
@@ -746,13 +757,13 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <h2>So what is your belief</h2>
 <p>In lecture one I tossed ten times. with a coin that was supposedly healed after hamering it flat.</p>
 <p>I arbitrarily assumed my <span class="math inline">\(H_A: \theta=.25\)</span>.</p>
-<p>Considering all possible values of <span class="math inline">\(\theta\)</span></p>
+<p>Considering all possible values of <span class="math inline">\(\theta\)</span>, what is your belief?</p>
 <p><span class="math inline">\([0,1] \Rightarrow \{\theta\in\Bbb R:0\le \theta\le 1\}\)</span></p>
 </section><section id="draw-your-belief" class="slide level2">
 <h2>Draw your belief</h2>
 </section><section class="slide level2">
 
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
 </section><section id="prior-distribution" class="slide level2">
 <h2>Prior distribution</h2>
 <p>You have assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span>.</p>
@@ -771,12 +782,12 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
 </section><section id="choose-prior" class="slide level2">
 <h2>Choose prior</h2>
 <p>Binomial distribution</p>
-<p><span class="math display">\[P^k (1-P)^{n-k} \\
-P^{25} (P-1)^{100-25}\]</span></p>
+<p><span class="math display">\[\theta^k (1-\theta)^{n-k} \\
+\theta^{25} (1-\theta)^{100-25}\]</span></p>
 </section><section id="now-what-is-the-data-saying" class="slide level2">
 <h2>Now what is the data saying</h2>
 <h3 id="my-ten-tosses">My ten tosses</h3>
@@ -797,7 +808,7 @@ P^{25} (P-1)^{100-25}\]</span></p>
 </section><section id="likelihood-function" class="slide level2">
 <h2>Likelihood function</h2>
 <p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
-<p><span class="math inline">\(P^k (1-P)^{n-k}\)</span></p>
+<p><span class="math inline">\(\theta^k (1-\theta)^{n-k}\)</span></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>thetas =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">.01</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a>likelihood =<span class="st">  </span><span class="kw">dbinom</span>(k, n, thetas)</span>
@@ -810,7 +821,7 @@ P^{25} (P-1)^{100-25}\]</span></p>
 <span id="cb5-10"><a href="#cb5-10"></a><span class="kw">abline</span>(<span class="dt">v=</span>theta.given.data, <span class="dt">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" /></p>
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
 </section><section class="slide level2">
 
 <p><img data-src="../../../../topics/bayes/likelihood_function.gif" /></p>
@@ -819,7 +830,7 @@ P^{25} (P-1)^{100-25}\]</span></p>
 <p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
 <p><span class="math display">\[\begin{aligned}
   {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
-  P^{27}(1-P)^{83} &amp;= P^{2} (P-1)^{10-2} \times P^{25} (P-1)^{100-25}
+  \theta^{27}(1-\theta)^{83} &amp;= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}
   \end{aligned}\]</span></p>
 </section><section id="visual-1" class="slide level2">
 <h2>Visual</h2>
@@ -829,7 +840,7 @@ P^{25} (P-1)^{100-25}\]</span></p>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
 </section><section id="theta-all-mighty" class="slide level2">
 <h2>Theta all mighty</h2>
 <p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
@@ -869,6 +880,27 @@ P^{25} (P-1)^{100-25}\]</span></p>
 </section><section class="slide level2">
 
 <p><img data-src="../../../../topics/bayes/bayes_in_action.gif" /></p>
+</section><section id="take-home-message" class="slide level2">
+<h2>Take home message</h2>
+<ul>
+<li>Bayesians quantify uncertainty through distributions.</li>
+<li>he more peaked the distribution, the lower the uncertainty.</li>
+<li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
+</ul>
+</section></section>
+<section><section id="bayesian-hypothesis-testing" class="title-slide slide level1 section"><h1>Bayesian hypothesis testing</h1></section><section id="bayesion-hypothesis" class="slide level2">
+<h2>Bayesion Hypothesis</h2>
+<ul>
+<li><span class="math inline">\(H_0\)</span>, the null hypothesis. This is an invariance or “general law”. For instance <span class="math inline">\(\theta = 1\)</span> (all swans are white) or <span class="math inline">\(\theta = .5\)</span> (people cannot look into the future – performance is at chance).</li>
+<li><span class="math inline">\(H_A\)</span> is the hypothesis that relaxes the restriction imposed by <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+</section><section id="prior-belief" class="slide level2">
+<h2>Prior Belief</h2>
+<p><span class="math display">\[\huge \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+</section><section id="bayes-factor" class="slide level2">
+<h2>Bayes Factor</h2>
+<p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the likelihood of the date under the alternative and the null.</p>
+<p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely onder the alternative than under the null.</p>
 <!-- Footer insert below -->
 </section></section>
 <section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">

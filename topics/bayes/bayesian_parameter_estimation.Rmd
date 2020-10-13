@@ -10,7 +10,7 @@ In lecture one I tossed ten times. with a coin that was supposedly healed after 
 
 I arbitrarily assumed my $H_A: \theta=.25$.
 
-Considering all possible values of $\theta$
+Considering all possible values of $\theta$, what is your belief?
 
 $[0,1] \Rightarrow  \{\theta\in\Bbb R:0\le \theta\le 1\}$
 
@@ -50,8 +50,8 @@ plot(theta, dbeta(theta, 2, 2),     type="l", ylab = "likelihood")
 
 Binomial distribution
 
-$$P^k (1-P)^{n-k} \\
-P^{25} (P-1)^{100-25}$$
+$$\theta^k (1-\theta)^{n-k} \\
+\theta^{25} (1-\theta)^{100-25}$$
 
 ## Now what is the data saying
 
@@ -82,7 +82,7 @@ theta.given.data
 
 How likely is 2 out of 10 for all possible $\theta$ values?
 
-$P^k (1-P)^{n-k}$
+$\theta^k (1-\theta)^{n-k}$
 
 ```{r}
 thetas = seq(0, 1, .01)
@@ -107,7 +107,7 @@ Now we can update our belief about the possible values of theta based on the dat
 
 $$\begin{aligned}
   {Posterior} &\propto {Likelihood} \times {Prior} \\
-  P^{27}(1-P)^{83} &= P^{2} (P-1)^{10-2} \times P^{25} (P-1)^{100-25}
+  \theta^{27}(1-\theta)^{83} &= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}
   \end{aligned}$$
 
 ## Visual
@@ -165,3 +165,9 @@ for(i in 1:20) {
 -------
 
 ![](../../../../topics/bayes/bayes_in_action.gif)
+
+## Take home message
+
+* Bayesians quantify uncertainty through distributions.
+* he more peaked the distribution, the lower the uncertainty.
+* Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.

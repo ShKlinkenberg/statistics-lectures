@@ -51,6 +51,9 @@ local({
 ```{r child="../../../topics/bayes/bayesian_parameter_estimation.Rmd"}
 ```
 
+```{r child="../../../topics/bayes/bayesian_hypothesis_testing.Rmd"}
+```
+
 <!-- Footer insert below -->
 
 ```{r child="../../../footer.md"}

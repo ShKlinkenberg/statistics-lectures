@@ -148,8 +148,19 @@ Posterior $\propto$ Likelihood $\times$ Posterior
 > Posterior $\propto$ Likelihood $\times$ Posterior
 
 * Quantified belief
+* Common sense expressed in numbers
 * Updating belief in light of new evidence
 * Yesterdays posteriors are todays priors
+
+## Generative model
+
+Frequentists
+
+> State of the world → Data
+
+Bayesions
+
+> Data → State of the world
 
 ## Resources
 
