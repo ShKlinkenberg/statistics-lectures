@@ -36,6 +36,12 @@ BF       | Evidence
 30 – 100 | Very strong
 >100     | Extreme
 
+## Advantages of the Bayes Factor
+
+* Provides a continuous degree of evidence without requiring an all-or-none decision.
+* Allows evidence to be monitored during data collection.
+* Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).
+
 ## BF pizza
 
 ![](../../../../topics/bayesBF1.png)
@@ -47,4 +53,8 @@ BF       | Evidence
 -------
 
 ![](../../../../topics/bayesBF1.png)
+
+## JASP
+
+![](https://jasp-stats.org/wp-content/themes/jasp/images/logo.svg)
 
