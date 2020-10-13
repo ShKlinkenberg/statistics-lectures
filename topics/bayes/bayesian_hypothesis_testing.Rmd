@@ -44,17 +44,18 @@ BF       | Evidence
 
 ## BF pizza
 
-![](../../../../topics/bayesBF1.png)
+![](../../../../topics/bayes/BF1.png)
 
 -------
 
-![](../../../../topics/bayesBF1.png)
+![](../../../../topics/bayes/BF1.png)
 
 -------
 
-![](../../../../topics/bayesBF1.png)
+![](../../../../topics/bayes/BF1.png)
 
 ## JASP
 
 ![](https://jasp-stats.org/wp-content/themes/jasp/images/logo.svg)
-[JASP a fresh way to do statistics](https://jasp-stats.org)
+
+[A fresh way to do statistics](https://jasp-stats.org)
