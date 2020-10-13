@@ -16,6 +16,14 @@ A ratio of the likelihood of the date under the alternative and the null.
 
 A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely onder the alternative than under the null.
 
+## Simple BF explanation
+
+The special case of the Bayes Factor for null hypotheses testing can be visualised as the difference between the likelihood of the data at $H_A$ / $H_1$ and $H_0$ at the parameter value that represents the null.
+
+### interactive BF
+
+[A First Lesson in Bayesian Inference - Shiny App by EJ](https://tellmi.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd#section-do-the-test)
+
 ## Heuristics for BF {.subsection}
 
 Heuristics for the Interpretation of the Bayes Factor by [Harold Jeffreys](https://en.wikipedia.org/wiki/Harold_Jeffreys)
@@ -40,6 +48,3 @@ BF       | Evidence
 
 ![](../../../../topics/bayesBF1.png)
 
-## interactive BF
-
-[A First Lesson in Bayesian Inference - Shiny App](https://tellmi.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd)
