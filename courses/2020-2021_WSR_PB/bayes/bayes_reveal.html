@@ -13,9 +13,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -25,14 +25,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -41,9 +43,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -581,64 +583,384 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </div>
 <!-- Add the required topics below -->
 </section>
-<section><section id="bayesian-parameter-estimation" class="title-slide slide level1 section"><h1>Bayesian parameter estimation</h1></section><section id="is-it-a-fair-coin" class="slide level2">
-<h2>Is it a fair coin?</h2>
-</section><section id="theta-all-mighty" class="slide level2">
-<h2>Theta all mighty</h2>
-<p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
-<style>
-#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217, 164, 65), 0 0 8px rgb(192, 168, 104); }
-</style>
-<p><span class="math display">\[\Huge \theta = .68\]</span></p>
-<p>The data driver!</p>
-</section><section id="my-ten-tosses" class="slide level2">
-<h2>My ten tosses</h2>
-<p>My ten tosses landed heads 2 times.</p>
+<section><section id="bayes-theorem" class="title-slide slide level1 section"><h1>Bayes Theorem</h1></section><section id="bayes-rule" class="slide level2">
+<h2>Bayes rule</h2>
+<p><span class="math display">\[\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}\]</span></p>
+</section><section id="nhst-table" class="slide level2">
+<h2>NHST Table</h2>
+<table style="border: none;  transform: scale(1);">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
+</section><section id="bayes-descision-table" class="slide level2">
+<h2>Bayes descision table</h2>
+<p><span class="math inline">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
+<table style="border: none;  transform: scale(1);">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(A)\)</span>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(\neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(\neg B) = &amp; P(\neg B \mid A) P(A) + \\  &amp; P(\neg B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(\neg B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(\neg B \mid \neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(B) = &amp; P(B \mid A) P(A) + \\  &amp; P(B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(B \mid \neg A)\)</span>
+</td>
+</tr>
+</table>
+</section><section id="visual" class="slide level2">
+<h2>Visual</h2>
+<table style="border: none;  transform: scale(1);">
+<col width="150px">
+<col width="100px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(A)\)</span>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(\neg A)\)</span>
+</td>
+</tr>
+<tr height="80px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(\neg B) = &amp; P(\neg B \mid A) P(A) + \\  &amp; P(\neg B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(\neg B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(\neg B \mid \neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(B) = &amp; P(B \mid A) P(A) + \\  &amp; P(B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(B \mid \neg A)\)</span>
+</td>
+</tr>
+</table>
+</section><section id="date-hypothesis" class="slide level2">
+<h2>Date | Hypothesis</h2>
+<p><span class="math display">\[\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}\]</span></p>
+</section><section id="with-legos" class="slide level2">
+<h2>With legos</h2>
+<p><img data-src="../../../../topics/bayes/lego_bayes.jpg" /></p>
+</section><section id="posterior-likelihood-prior" class="slide level2">
+<h2>Posterior Likelihood Prior</h2>
+<p><span class="math display">\[P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mid H)}{P(D)}\]</span></p>
+<ul>
+<li><span class="math inline">\(P(H)\)</span>, the <span class="math inline">\(prior\)</span>, is the initial degree of belief in <span class="math inline">\(H\)</span>.</li>
+<li><span class="math inline">\(P(H \mid D)\)</span>, the <span class="math inline">\(posterior\)</span>, is the degree of belief after incorporating news that <span class="math inline">\(D\)</span> is true.</li>
+<li>the quotient <span class="math inline">\(\frac{P(D \mid H)}{P(D)}\)</span> represents the support <span class="math inline">\(D\)</span> provides for <span class="math inline">\(H\)</span>.</li>
+</ul>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Posterior</p>
+</section><section id="bayes-is-about" class="slide level2">
+<h2>Bayes is about</h2>
+<blockquote>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Posterior</p>
+</blockquote>
+<ul>
+<li>Quantified belief</li>
+<li>Common sense expressed in numbers</li>
+<li>Updating belief in light of new evidence</li>
+<li>Yesterdays posteriors are todays priors</li>
+</ul>
+</section><section id="generative-model" class="slide level2">
+<h2>Generative model</h2>
+<p>Frequentists</p>
+<blockquote>
+<p>State of the world → Data</p>
+</blockquote>
+<p>Bayesions</p>
+<blockquote>
+<p>Data → State of the world</p>
+</blockquote>
+</section><section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><a href="https://youtu.be/U_85TaXbeIo">The quick proof of Bayes’ theorem - 3Bleu1Brown</a></li>
+<li><a href="https://youtu.be/HZGCoVF3YvM">Bayes theorem - 3Blue1Brown</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia</a></li>
+</ul>
+</section></section>
+<section><section id="bayesian-parameter-estimation" class="title-slide slide level1 section"><h1>Bayesian parameter estimation</h1></section><section id="updating-belief" class="slide level2">
+<h2>Updating belief</h2>
+<blockquote>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Posterior</p>
+</blockquote>
+</section><section id="so-what-is-your-belief" class="slide level2">
+<h2>So what is your belief</h2>
+<p>In lecture one I tossed ten times. with a coin that was supposedly healed after hamering it flat.</p>
+<p>I arbitrarily assumed my <span class="math inline">\(H_A: \theta=.25\)</span>.</p>
+<p>Considering all possible values of <span class="math inline">\(\theta\)</span>, what is your belief?</p>
+<p><span class="math inline">\([0,1] \Rightarrow \{\theta\in\Bbb R:0\le \theta\le 1\}\)</span></p>
+</section><section id="draw-your-belief" class="slide level2">
+<h2>Draw your belief</h2>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
+</section><section id="prior-distribution" class="slide level2">
+<h2>Prior distribution</h2>
+<p>You have assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span>.</p>
+<blockquote>
+<p>This is your prior</p>
+</blockquote>
+<p>Now we normally do not draw our priors, but we could.</p>
+</section><section id="priors" class="slide level2">
+<h2>Priors</h2>
+<p>We can choose a flat prior, or a beta distributed prior with different parameter values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>theta =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">.001</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">plot</span>(theta, <span class="kw">dunif</span>(theta),           <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, <span class="dv">3</span>, <span class="dv">5</span>),     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
+</section><section id="choose-prior" class="slide level2">
+<h2>Choose prior</h2>
+<p>Binomial distribution</p>
+<p><span class="math display">\[\theta^k (1-\theta)^{n-k} \\
+\theta^{25} (1-\theta)^{100-25}\]</span></p>
+</section><section id="now-what-is-the-data-saying" class="slide level2">
+<h2>Now what is the data saying</h2>
+<h3 id="my-ten-tosses">My ten tosses</h3>
 <p><span class="math display">\[\begin{aligned}
   k &amp;= 2 \\
   n &amp;= 10
   \end{aligned}\]</span></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">k =<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">n =<span class="st"> </span><span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>k =<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>n =<span class="st"> </span><span class="dv">10</span></span></code></pre></div>
 </section><section id="likelihood" class="slide level2">
 <h2>Likelihood</h2>
-<p>How likely is the data assuming the data represents the parameter value:</p>
-<style>
-#MathJax-Span-8 { text-shadow: 0 0 3px rgb(217,164,65), 0 0 8px rgb(192,168,104); }
-</style>
+<p>What is the most likely parameter value <span class="math inline">\(\theta\)</span> assuming the data to be true:</p>
 <p><span class="math display">\[\theta = \frac{2}{10} = 0.2\]</span></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">theta.given.data =<span class="st"> </span>k<span class="op">/</span>n</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>theta.given.data =<span class="st"> </span>k<span class="op">/</span>n</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>theta.given.data</span></code></pre></div>
+<pre><code>## [1] 0.2</code></pre>
 </section><section id="likelihood-function" class="slide level2">
 <h2>Likelihood function</h2>
 <p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">thetas =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">.01</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">likelihood =<span class="st">  </span><span class="kw">dbinom</span>(k, n, thetas)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">plot</span>(thetas, <span class="kw">dbinom</span>(k, n, thetas), <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Likelihood&quot;</span>, <span class="dt">las =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">abline</span>(<span class="dt">v=</span>theta.given.data, <span class="dt">lty=</span><span class="st">&#39;dashed&#39;</span>)</a></code></pre></div>
+<p><span class="math inline">\(\theta^k (1-\theta)^{n-k}\)</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>thetas =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">.01</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>likelihood =<span class="st">  </span><span class="kw">dbinom</span>(k, n, thetas)</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">plot</span>(thetas, <span class="kw">dbinom</span>(k, n, thetas),</span>
+<span id="cb5-6"><a href="#cb5-6"></a>     <span class="dt">main =</span> <span class="st">&quot;Likelihood function&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>     <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, </span>
+<span id="cb5-8"><a href="#cb5-8"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Likelihood&quot;</span>, </span>
+<span id="cb5-9"><a href="#cb5-9"></a>     <span class="dt">las =</span> <span class="dv">1</span>)</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">abline</span>(<span class="dt">v=</span>theta.given.data, <span class="dt">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
 </section><section class="slide level2">
 
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
-</section><section id="prior" class="slide level2">
-<h2>Prior</h2>
-<p>What is our expectation of what <span class="math inline">\(theta\)</span> could really be?</p>
-<p>It could be anything. We therefore could assign all passible values of <span class="math inline">\(theta\)</span> equally likely.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">prior =<span class="st"> </span><span class="kw">dbeta</span>(thetas, <span class="dv">1</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">plot</span>(thetas,prior, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">ylab =</span> <span class="st">&quot;density&quot;</span>, <span class="dt">las =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
 </section><section class="slide level2">
 
-<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
+<p><img data-src="../../../../topics/bayes/likelihood_function.gif" /></p>
 </section><section id="posterior" class="slide level2">
 <h2>Posterior</h2>
-<p>Now we can update our belief about the posible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
+<p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
 <p><span class="math display">\[\begin{aligned}
   {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
-  P(\theta | D) &amp;\propto P(D|\theta) \times P(\theta)
+  \theta^{27}(1-\theta)^{83} &amp;= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}
   \end{aligned}\]</span></p>
+</section><section id="visual-1" class="slide level2">
+<h2>Visual</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">27</span>, <span class="dv">83</span>,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dv">10</span>,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
+</section><section id="theta-all-mighty" class="slide level2">
+<h2>Theta all mighty</h2>
+<p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
+<p><span class="math display">\[\Huge \theta = .68\]</span></p>
+<p>The data driver!</p>
+</section><section id="see-the-prior-update" class="slide level2">
+<h2>See the prior update</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">set.seed</span>(<span class="dv">25</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>real.theta =<span class="st"> </span><span class="fl">.68</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>old.k =<span class="st"> </span><span class="dv">27</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>old.n =<span class="st"> </span><span class="dv">83</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  </span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="co"># Choose a random sample size between 10 and 100</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  sample.size.n =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">30</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  number.of.heads.k =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</span>
+<span id="cb7-14"><a href="#cb7-14"></a>  </span>
+<span id="cb7-15"><a href="#cb7-15"></a>  <span class="co"># sample.size.n</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="co"># number.of.heads.k</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>  </span>
+<span id="cb7-18"><a href="#cb7-18"></a>  new.k =<span class="st"> </span>old.k <span class="op">+</span><span class="st"> </span>number.of.heads.k</span>
+<span id="cb7-19"><a href="#cb7-19"></a>  new.n =<span class="st"> </span>old.n <span class="op">+</span><span class="st"> </span>sample.size.n</span>
+<span id="cb7-20"><a href="#cb7-20"></a>  </span>
+<span id="cb7-21"><a href="#cb7-21"></a>  <span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb7-22"><a href="#cb7-22"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(new.k, new.n,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
+<span id="cb7-23"><a href="#cb7-23"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
+<span id="cb7-24"><a href="#cb7-24"></a>  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(old.k, old.n, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</span>
+<span id="cb7-25"><a href="#cb7-25"></a>  </span>
+<span id="cb7-26"><a href="#cb7-26"></a>  old.k =<span class="st"> </span>new.k</span>
+<span id="cb7-27"><a href="#cb7-27"></a>  old.n =<span class="st"> </span>new.n</span>
+<span id="cb7-28"><a href="#cb7-28"></a>  </span>
+<span id="cb7-29"><a href="#cb7-29"></a>}</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img data-src="../../../../topics/bayes/bayes_in_action.gif" /></p>
+</section><section id="take-home-message" class="slide level2">
+<h2>Take home message</h2>
+<ul>
+<li>Bayesians quantify uncertainty through distributions.</li>
+<li>The more peaked the distribution, the lower the uncertainty.</li>
+<li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
+</ul>
 </section></section>
-<section id="bayesian-hypothesis-testing" class="title-slide slide level1 section"><h1>Bayesian hypothesis testing</h1></section>
+<section><section id="bayesian-hypothesis-testing" class="title-slide slide level1 section"><h1>Bayesian hypothesis testing</h1></section><section id="bayesion-hypothesis" class="slide level2">
+<h2>Bayesion Hypothesis</h2>
+<ul>
+<li><span class="math inline">\(H_0\)</span>, the null hypothesis. This is an invariance or “general law”. For instance <span class="math inline">\(\theta = 1\)</span> (all swans are white) or <span class="math inline">\(\theta = .5\)</span> (people cannot look into the future – performance is at chance).</li>
+<li><span class="math inline">\(H_A\)</span> is the hypothesis that relaxes the restriction imposed by <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+</section><section id="prior-belief" class="slide level2">
+<h2>Prior Belief</h2>
+<p><span class="math display">\[\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+</section><section id="bayes-factor" class="slide level2 subsection">
+<h2>Bayes Factor</h2>
+<p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the likelihood of the date under the alternative and the null.</p>
+<p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely onder the alternative than under the null.</p>
+</section><section id="simple-bf-explanation" class="slide level2">
+<h2>Simple BF explanation</h2>
+<p>The special case of the Bayes Factor for null hypotheses testing can be visualised as the difference between the likelihood of the data at <span class="math inline">\(H_A\)</span> / <span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_0\)</span> at the parameter value that represents the null.</p>
+<h3 id="interactive-bf">interactive BF</h3>
+<p><a href="https://tellmi.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd#section-do-the-test">A First Lesson in Bayesian Inference - Shiny App by EJ</a></p>
+</section><section id="heuristics-for-bf" class="slide level2 subsection">
+<h2>Heuristics for BF</h2>
+<p>Heuristics for the Interpretation of the Bayes Factor by <a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>BF</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 – 3</td>
+<td>Anecdotal</td>
+</tr>
+<tr class="even">
+<td>3 – 10</td>
+<td>Moderate</td>
+</tr>
+<tr class="odd">
+<td>10 – 30</td>
+<td>Strong</td>
+</tr>
+<tr class="even">
+<td>30 – 100</td>
+<td>Very strong</td>
+</tr>
+<tr class="odd">
+<td>&gt;100</td>
+<td>Extreme</td>
+</tr>
+</tbody>
+</table>
+</section><section id="advantages-of-the-bayes-factor" class="slide level2">
+<h2>Advantages of the Bayes Factor</h2>
+<ul>
+<li>Provides a continuous degree of evidence without requiring an all-or-none decision.</li>
+<li>Allows evidence to be monitored during data collection.</li>
+<li>Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).</li>
+</ul>
+</section><section id="bf-pizza" class="slide level2">
+<h2>BF pizza</h2>
+<p><img data-src="../../../../topics/bayes/BF1.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="../../../../topics/bayes/BF1.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="../../../../topics/bayes/BF1.png" /></p>
+</section><section id="jasp" class="slide level2">
+<h2>JASP</h2>
+<p><img data-src="https://jasp-stats.org/wp-content/themes/jasp/images/logo.svg" /></p>
+<p><a href="https://jasp-stats.org">A fresh way to do statistics</a></p>
+<!-- Footer insert below -->
+</section></section>
 <section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
 <h2>Contact</h2>
 <script src="https://use.fontawesome.com/23c1d38eea.js"></script>

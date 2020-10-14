@@ -21,6 +21,8 @@ Same as one-way repeated measures ANOVA
 
 ## Example {.smaller}
 
+<small>
+
 In this example we will again look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol. But this time we lat participants partake in all conditions. Every week subjects returned for a different experimental condition.
 
 * Dependent variable
@@ -34,6 +36,8 @@ In this example we will again look at the amount of accidents in a car driving s
         * None
         * Small
         * Large
+        
+</small>
         
 ## {.smaller}
 

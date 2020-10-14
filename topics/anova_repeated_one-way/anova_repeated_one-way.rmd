@@ -17,19 +17,20 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 
 ## Assumptions {.subsection}
 
-<!-- * Uni- or Multivariate -->
+* Uni- or Multivariate
 * Continuous dependent variable
 * Normaly distributed
     * Shapiro-Wilk
 * Equality of variance within groups
     * Mauchly's test of Sphericity
 
-<!--    
 ## Uni- or Multi- descision tree {.smaller}
 
-<img src="../../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:right; width:350px; margin-right:20px;">
-
 <small>
+
+<img class="shadow" style="float:right; width:250px;" src="../../../../topics/ANOVA_repeated_one-way/uni_multi_descicion.png">
+
+
 
 1. Field: 15.5.2, Output 15.2
 2. Field: Output 15.4
@@ -40,8 +41,6 @@ The one-way repeated measures ANOVA analyses the variance of the model while red
 7. Field: 15.5.4, Output 15.4
 
 </small>
-
--->
 
 ## Formulas {.smaller .subsection}
 
@@ -170,9 +169,9 @@ SS_within = sum(ss_pp); SS_within
 
 mean_pp = apply(cbind(none_alc, some_alc, much_alc),1,mean)
 
-sum(c((none_alc   - mean_pp)^2, 
+sum(c((none_alc - mean_pp)^2, 
       (some_alc - mean_pp)^2,
-      (much_alc   - mean_pp)^2))
+      (much_alc - mean_pp)^2))
 ```
 
 ## ${SS}_{within}$ data

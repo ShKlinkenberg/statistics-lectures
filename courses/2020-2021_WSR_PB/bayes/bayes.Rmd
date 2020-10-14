@@ -26,7 +26,7 @@ output:
       in_header    : "../../../GA_Script/GA_Script.html"
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, eval=T}
 # Display plots on next slide in IOslides
 # smaller in the above YAML must be off to make this work.
 
@@ -45,7 +45,13 @@ local({
 
 <!-- Add the required topics below -->
 
-```{r child="../../../topics/bayes/bayes.Rmd"}
+```{r child="../../../topics/bayes/bayes_theorem.Rmd"}
+```
+
+```{r child="../../../topics/bayes/bayesian_parameter_estimation.Rmd"}
+```
+
+```{r child="../../../topics/bayes/bayesian_hypothesis_testing.Rmd"}
 ```
 
 <!-- Footer insert below -->
