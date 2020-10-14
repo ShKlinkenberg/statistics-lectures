@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Klinkenberg" />
+  <meta name="dcterms.date" content="2020-10-16" />
+  <title>Bayes</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="bayes_reveal_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="bayes_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      TableOfContents();
+    }
+    );                        
+    
+    function TableOfContents(container, output) {
+    
+    var output = output || '#toc';
+    
+    // Get all elements with class: section or subsection
+    idfromclass = document.querySelectorAll('.section, .subsection');
+    
+        // Create the list element:
+        var list = document.createElement('ul');
+    
+        // Iterate through all found elements
+        for(var i = 0; i < idfromclass.length; i++) {
+          
+            // Create the list item:
+            var item = document.createElement('li');
+    
+            // Set its contents:
+            var id = idfromclass[i].id
+            
+            // Replace - in id with whitespace
+            var titleText = id.replace(/-/gi, " ");
+            
+            // Add text to list element
+            item.appendChild(document.createTextNode(titleText));
+            
+            // Add subsection class
+            item.className = idfromclass[i].className
+            
+            // Add it to the list:
+            list.appendChild(item);
+        }
+    
+    // Return generated HTML to toc div in slide
+    document.querySelector(output).innerHTML = list.innerHTML;
+    
+    // Generate instruction message if no classes are defined
+    if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
+    
+    };</script>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-107432294-1');
+    </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Bayes</h1>
+  <h1 class="subtitle"><small>Parameter estimation &amp; hypothesis testing</small></h1>
+    <h2 class="author">Klinkenberg</h2>
+    <h3 class="date">16 oct 2020</h3>
+</section>
+
+<section id="inhoud" class="slide level2">
+<h2>Inhoud</h2>
+<div id="toc" style="font-size:60%; text-align:left;">
+
+</div>
+<!-- Add the required topics below -->
+</section>
+<section><section id="bayes-theorem" class="title-slide slide level1 section"><h1>Bayes Theorem</h1></section><section id="bayes-rule" class="slide level2">
+<h2>Bayes rule</h2>
+<p><span class="math display">\[\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}\]</span></p>
+</section><section id="nhst-table" class="slide level2">
+<h2>NHST Table</h2>
+<table style="border: none;  transform: scale(1);">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
+</section><section id="bayes-descision-table" class="slide level2">
+<h2>Bayes descision table</h2>
+<p><span class="math inline">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
+<table style="border: none;  transform: scale(1);">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(A)\)</span>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(\neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(\neg B) = &amp; P(\neg B \mid A) P(A) + \\  &amp; P(\neg B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(\neg B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(\neg B \mid \neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(B) = &amp; P(B \mid A) P(A) + \\  &amp; P(B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(B \mid \neg A)\)</span>
+</td>
+</tr>
+</table>
+</section><section id="visual" class="slide level2">
+<h2>Visual</h2>
+<table style="border: none;  transform: scale(1);">
+<col width="150px">
+<col width="100px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(A)\)</span>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(P(\neg A)\)</span>
+</td>
+</tr>
+<tr height="80px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(\neg B) = &amp; P(\neg B \mid A) P(A) + \\  &amp; P(\neg B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(\neg B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(\neg B \mid \neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(B) = &amp; P(B \mid A) P(A) + \\  &amp; P(B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(B \mid \neg A)\)</span>
+</td>
+</tr>
+</table>
+</section><section id="date-hypothesis" class="slide level2">
+<h2>Date | Hypothesis</h2>
+<p><span class="math display">\[\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}\]</span></p>
+</section><section id="with-legos" class="slide level2">
+<h2>With legos</h2>
+<p><img data-src="../../../../topics/bayes/lego_bayes.jpg" /></p>
+</section><section id="posterior-likelihood-prior" class="slide level2">
+<h2>Posterior Likelihood Prior</h2>
+<p><span class="math display">\[P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mid H)}{P(D)}\]</span></p>
+<ul>
+<li><span class="math inline">\(P(H)\)</span>, the <span class="math inline">\(prior\)</span>, is the initial degree of belief in <span class="math inline">\(H\)</span>.</li>
+<li><span class="math inline">\(P(H \mid D)\)</span>, the <span class="math inline">\(posterior\)</span>, is the degree of belief after incorporating news that <span class="math inline">\(D\)</span> is true.</li>
+<li>the quotient <span class="math inline">\(\frac{P(D \mid H)}{P(D)}\)</span> represents the support <span class="math inline">\(D\)</span> provides for <span class="math inline">\(H\)</span>.</li>
+</ul>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
+</section><section id="bayes-is-about" class="slide level2">
+<h2>Bayes is about</h2>
+<blockquote>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
+</blockquote>
+<ul>
+<li>Quantified belief</li>
+<li>Common sense expressed in numbers</li>
+<li>Updating belief in light of new evidence</li>
+<li>Yesterdays posteriors are todays priors</li>
+</ul>
+</section><section id="generative-model" class="slide level2">
+<h2>Generative model</h2>
+<p>Frequentists</p>
+<blockquote>
+<p>State of the world → Data</p>
+</blockquote>
+<p>Bayesions</p>
+<blockquote>
+<p>Data → State of the world</p>
+</blockquote>
+</section><section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><a href="https://youtu.be/U_85TaXbeIo">The quick proof of Bayes’ theorem - 3Bleu1Brown</a></li>
+<li><a href="https://youtu.be/HZGCoVF3YvM">Bayes theorem - 3Blue1Brown</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia</a></li>
+</ul>
+</section></section>
+<section><section id="bayesian-parameter-estimation" class="title-slide slide level1 section"><h1>Bayesian parameter estimation</h1></section><section id="updating-belief" class="slide level2">
+<h2>Updating belief</h2>
+<blockquote>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
+</blockquote>
+</section><section id="so-what-is-your-belief" class="slide level2">
+<h2>So what is your belief</h2>
+<p>In lecture one I tossed ten times. with a coin that was supposedly healed after hamering it flat.</p>
+<p>I arbitrarily assumed my <span class="math inline">\(H_A: \theta=.25\)</span>.</p>
+<p>Considering all possible values of <span class="math inline">\(\theta\)</span>, what is your belief?</p>
+<p><span class="math inline">\([0,1] \Rightarrow \{\theta\in\Bbb R:0\le \theta\le 1\}\)</span></p>
+</section><section id="draw-your-belief" class="slide level2">
+<h2>Draw your belief</h2>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
+</section><section id="prior-distribution" class="slide level2">
+<h2>Prior distribution</h2>
+<p>You have assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span>.</p>
+<blockquote>
+<p>This is your prior</p>
+</blockquote>
+<p>Now we normally do not draw our priors, but we could.</p>
+</section><section id="priors" class="slide level2">
+<h2>Priors</h2>
+<p>We can choose a flat prior, or a beta distributed prior with different parameter values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">theta =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">.001</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">plot</span>(theta, <span class="kw">dunif</span>(theta),           <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, <span class="dv">3</span>, <span class="dv">5</span>),     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
+</section><section id="choose-prior" class="slide level2">
+<h2>Choose prior</h2>
+<p>Binomial distribution</p>
+<p><span class="math display">\[\theta^k (1-\theta)^{n-k} \\
+\theta^{25} (1-\theta)^{100-25}\]</span></p>
+</section><section id="now-what-is-the-data-saying" class="slide level2">
+<h2>Now what is the data saying</h2>
+<h3 id="my-ten-tosses">My ten tosses</h3>
+<p><span class="math display">\[\begin{aligned}
+  k &amp;= 2 \\
+  n &amp;= 10
+  \end{aligned}\]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">k =<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">n =<span class="st"> </span><span class="dv">10</span></a></code></pre></div>
+</section><section id="likelihood" class="slide level2">
+<h2>Likelihood</h2>
+<p>What is the most likely parameter value <span class="math inline">\(\theta\)</span> assuming the data to be true:</p>
+<p><span class="math display">\[\theta = \frac{2}{10} = 0.2\]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">theta.given.data =<span class="st"> </span>k<span class="op">/</span>n</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">theta.given.data</a></code></pre></div>
+<pre><code>## [1] 0.2</code></pre>
+</section><section id="likelihood-function" class="slide level2">
+<h2>Likelihood function</h2>
+<p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
+<p><span class="math inline">\(\theta^k (1-\theta)^{n-k}\)</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">thetas =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">.01</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">likelihood =<span class="st">  </span><span class="kw">dbinom</span>(k, n, thetas)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">plot</span>(thetas, <span class="kw">dbinom</span>(k, n, thetas),</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">     <span class="dt">main =</span> <span class="st">&quot;Likelihood function&quot;</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">     <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, </a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">     <span class="dt">ylab =</span> <span class="st">&quot;Likelihood&quot;</span>, </a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">     <span class="dt">las =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">v=</span>theta.given.data, <span class="dt">lty=</span><span class="st">&#39;dashed&#39;</span>)</a></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="../../../../topics/bayes/likelihood_function.gif" /></p>
+</section><section id="posterior" class="slide level2">
+<h2>Posterior</h2>
+<p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
+<p><span class="math display">\[\begin{aligned}
+  {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
+  \theta^{27}(1-\theta)^{83} &amp;= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}
+  \end{aligned}\]</span></p>
+</section><section id="visual-1" class="slide level2">
+<h2>Visual</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">27</span>, <span class="dv">83</span>,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dv">10</span>,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</a></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
+</section><section id="theta-all-mighty" class="slide level2">
+<h2>Theta all mighty</h2>
+<p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
+<p><span class="math display">\[\Huge \theta = .68\]</span></p>
+<p>The data driver!</p>
+</section><section id="see-the-prior-update" class="slide level2">
+<h2>See the prior update</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">## Run multiple samples with our real theta of .68 as our driving force.</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">real.theta =<span class="st"> </span><span class="fl">.68</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">old.k =<span class="st"> </span><span class="dv">27</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">old.n =<span class="st"> </span><span class="dv">83</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">  <span class="co"># Choose a random sample size between 10 and 100</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">  sample.size.n =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">30</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">  number.of.heads.k =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">  </a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">  <span class="co"># sample.size.n</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">  <span class="co"># number.of.heads.k</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">  </a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">  new.k =<span class="st"> </span>old.k <span class="op">+</span><span class="st"> </span>number.of.heads.k</a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">  new.n =<span class="st"> </span>old.n <span class="op">+</span><span class="st"> </span>sample.size.n</a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">  </a>
+<a class="sourceLine" id="cb7-21" data-line-number="21">  <span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb7-22" data-line-number="22">  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(new.k, new.n,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</a>
+<a class="sourceLine" id="cb7-23" data-line-number="23">  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</a>
+<a class="sourceLine" id="cb7-24" data-line-number="24">  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(old.k, old.n, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</a>
+<a class="sourceLine" id="cb7-25" data-line-number="25">  </a>
+<a class="sourceLine" id="cb7-26" data-line-number="26">  old.k =<span class="st"> </span>new.k</a>
+<a class="sourceLine" id="cb7-27" data-line-number="27">  old.n =<span class="st"> </span>new.n</a>
+<a class="sourceLine" id="cb7-28" data-line-number="28">  </a>
+<a class="sourceLine" id="cb7-29" data-line-number="29">}</a></code></pre></div>
+</section><section class="slide level2">
+
+<p><img data-src="../../../../topics/bayes/bayes_in_action.gif" /></p>
+</section><section id="take-home-message" class="slide level2">
+<h2>Take home message</h2>
+<ul>
+<li>Bayesians quantify uncertainty through distributions.</li>
+<li>The more peaked the distribution, the lower the uncertainty.</li>
+<li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
+</ul>
+</section></section>
+<section><section id="bayesian-hypothesis-testing" class="title-slide slide level1 section"><h1>Bayesian hypothesis testing</h1></section><section id="bayesion-hypothesis" class="slide level2">
+<h2>Bayesion Hypothesis</h2>
+<ul>
+<li><span class="math inline">\(H_0\)</span>, the null hypothesis. This is an invariance or “general law”. For instance <span class="math inline">\(\theta = 1\)</span> (all swans are white) or <span class="math inline">\(\theta = .5\)</span> (people cannot look into the future – performance is at chance).</li>
+<li><span class="math inline">\(H_A\)</span> is the hypothesis that relaxes the restriction imposed by <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+</section><section id="prior-belief" class="slide level2">
+<h2>Prior Belief</h2>
+<p><span class="math display">\[\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
+</section><section id="bayes-factor" class="slide level2 subsection">
+<h2>Bayes Factor</h2>
+<p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the likelihood of the date under the alternative and the null.</p>
+<p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely onder the alternative than under the null.</p>
+</section><section id="simple-bf-explanation" class="slide level2">
+<h2>Simple BF explanation</h2>
+<p>The special case of the Bayes Factor for null hypotheses testing can be visualised as the difference between the likelihood of the data at <span class="math inline">\(H_A\)</span> / <span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_0\)</span> at the parameter value that represents the null.</p>
+<h3 id="interactive-bf">interactive BF</h3>
+<p><a href="https://tellmi.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd#section-do-the-test">A First Lesson in Bayesian Inference - Shiny App by EJ</a></p>
+</section><section id="heuristics-for-bf" class="slide level2 subsection">
+<h2>Heuristics for BF</h2>
+<p>Heuristics for the Interpretation of the Bayes Factor by <a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>BF</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 – 3</td>
+<td>Anecdotal</td>
+</tr>
+<tr class="even">
+<td>3 – 10</td>
+<td>Moderate</td>
+</tr>
+<tr class="odd">
+<td>10 – 30</td>
+<td>Strong</td>
+</tr>
+<tr class="even">
+<td>30 – 100</td>
+<td>Very strong</td>
+</tr>
+<tr class="odd">
+<td>&gt;100</td>
+<td>Extreme</td>
+</tr>
+</tbody>
+</table>
+</section><section id="advantages-of-the-bayes-factor" class="slide level2">
+<h2>Advantages of the Bayes Factor</h2>
+<ul>
+<li>Provides a continuous degree of evidence without requiring an all-or-none decision.</li>
+<li>Allows evidence to be monitored during data collection.</li>
+<li>Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).</li>
+</ul>
+</section><section id="bf-pizza" class="slide level2">
+<h2>BF pizza</h2>
+<p><img data-src="../../../../topics/bayes/BF1.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="../../../../topics/bayes/BF3.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="../../../../topics/bayes/BF13.png" /></p>
+</section><section id="jasp" class="slide level2">
+<h2>JASP</h2>
+<p><img data-src="https://jasp-stats.org/wp-content/themes/jasp/images/logo.svg" /></p>
+<p><a href="https://jasp-stats.org">A fresh way to do statistics</a></p>
+<!-- Footer insert below -->
+</section></section>
+<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="bayes_reveal_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="bayes_reveal_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
