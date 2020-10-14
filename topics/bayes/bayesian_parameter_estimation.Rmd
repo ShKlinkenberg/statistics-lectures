@@ -2,7 +2,7 @@
 
 ## Updating belief
 
-> Posterior $\propto$ Likelihood $\times$ Posterior
+> Posterior $\propto$ Likelihood $\times$ Prior
 
 ## So what is your belief
 

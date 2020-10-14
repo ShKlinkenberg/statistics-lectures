@@ -141,11 +141,11 @@ $$P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mi
 * $P(H \mid D)$, the $posterior$, is the degree of belief after incorporating news that $D$ is true.
 * the quotient $\frac{P(D \mid H)}{P(D)}$ represents the support $D$ provides for $H$.
 
-Posterior $\propto$ Likelihood $\times$ Posterior
+Posterior $\propto$ Likelihood $\times$ Prior
 
 ## Bayes is about
 
-> Posterior $\propto$ Likelihood $\times$ Posterior
+> Posterior $\propto$ Likelihood $\times$ Prior
 
 * Quantified belief
 * Common sense expressed in numbers
