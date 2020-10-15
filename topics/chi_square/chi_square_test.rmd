@@ -97,7 +97,7 @@ results <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1yg31q0Q2sEcGq2Y3J
 
 results <- as.data.frame(results)
 
-results <- results[grep("2017|2019", results$Timestamp),]
+results <- results[grep("2017|2020", results$Timestamp),]
 
 results$sekse   <- as.factor(results$sekse)
 results$fluiten <- as.factor(results$fluiten)

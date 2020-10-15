@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -27,14 +28,14 @@
 <script src="chi_squared_test_handout_files/navigation-1.1/tabsets.js"></script>
 <link href="chi_squared_test_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="chi_squared_test_handout_files/highlightjs-9.12.0/highlight.js"></script>
-<script src="chi_squared_test_handout_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="chi_squared_test_handout_files/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="chi_squared_test_handout_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="chi_squared_test_handout_files/datatables-binding-0.15/datatables.js"></script>
-<link href="chi_squared_test_handout_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="chi_squared_test_handout_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="chi_squared_test_handout_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="chi_squared_test_handout_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="chi_squared_test_handout_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<script src="chi_squared_test_handout_files/datatables-binding-0.9/datatables.js"></script>
+<link href="chi_squared_test_handout_files/dt-core-1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="chi_squared_test_handout_files/dt-core-1.10.19/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/dt-core-1.10.19/js/jquery.dataTables.min.js"></script>
+<link href="chi_squared_test_handout_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
 <script>
@@ -166,7 +167,6 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -354,7 +354,7 @@ lines(chi, dchisq(chi, df[6]), lwd = 2, col = col[6], type=&quot;l&quot;)
 
 legend(&quot;topright&quot;, legend = paste(&quot;k =&quot;,df), col = col, lty = 1, bty = &quot;n&quot;)</code></pre>
 <hr />
-<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p></small></p>
 </div>
 <div id="example" class="section level2">
@@ -371,8 +371,9 @@ legend(&quot;topright&quot;, legend = paste(&quot;k =&quot;,df), col = col, lty 
 <div id="data" class="section level2 smaller">
 <h2>Data</h2>
 <p><small></p>
-<div id="htmlwidget-2ad564755de3030b6622" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2ad564755de3030b6622">{"x":{"filter":"none","data":[["215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","399","400","401","402","403","404","405","406","407","408","409","410","411","412","413","414","415","416","417","418","419","420","421","422","423","424","425","426","427","428","429","430","431","432","433","434","435"],["05/10/2017 16:56:01","12/10/2017 09:50:53","12/10/2017 09:50:55","12/10/2017 09:50:57","12/10/2017 09:51:06","12/10/2017 09:51:10","12/10/2017 09:51:11","12/10/2017 09:51:12","12/10/2017 09:51:13","12/10/2017 09:51:15","12/10/2017 09:51:18","12/10/2017 09:51:19","12/10/2017 09:51:19","12/10/2017 09:51:20","12/10/2017 09:51:22","12/10/2017 09:51:22","12/10/2017 09:51:23","12/10/2017 09:51:24","12/10/2017 09:51:25","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:27","12/10/2017 09:51:28","12/10/2017 09:51:28","12/10/2017 09:51:30","12/10/2017 09:51:30","12/10/2017 09:51:33","12/10/2017 09:51:34","12/10/2017 09:51:34","12/10/2017 09:51:35","12/10/2017 09:51:40","12/10/2017 09:51:42","12/10/2017 09:51:42","12/10/2017 09:51:43","12/10/2017 09:51:44","12/10/2017 09:51:44","12/10/2017 09:51:46","12/10/2017 09:51:47","12/10/2017 09:51:47","12/10/2017 09:51:49","12/10/2017 09:51:49","12/10/2017 09:51:50","12/10/2017 09:51:52","12/10/2017 09:51:54","12/10/2017 09:51:55","12/10/2017 09:51:57","12/10/2017 09:52:00","12/10/2017 09:52:00","12/10/2017 09:52:04","12/10/2017 09:52:06","12/10/2017 09:52:07","12/10/2017 09:52:08","12/10/2017 09:52:10","12/10/2017 09:52:24","12/10/2017 09:52:35","16/10/2019 15:10:56","16/10/2019 15:32:03","16/10/2019 20:06:59","18/10/2019 11:29:38","18/10/2019 11:47:38","18/10/2019 11:47:39","18/10/2019 11:47:52","18/10/2019 11:47:58","18/10/2019 11:48:02","18/10/2019 11:48:03","18/10/2019 11:48:04","18/10/2019 11:48:04","18/10/2019 11:48:04","18/10/2019 11:48:05","18/10/2019 11:48:06","18/10/2019 11:48:06","18/10/2019 11:48:07","18/10/2019 11:48:08","18/10/2019 11:48:10","18/10/2019 11:48:10","18/10/2019 11:48:10","18/10/2019 11:48:12","18/10/2019 11:48:13","18/10/2019 11:48:14","18/10/2019 11:48:14","18/10/2019 11:48:16","18/10/2019 11:48:17","18/10/2019 11:48:17","18/10/2019 11:48:18","18/10/2019 11:48:18","18/10/2019 11:48:20","18/10/2019 11:48:21","18/10/2019 11:48:22","18/10/2019 11:48:23","18/10/2019 11:48:23","18/10/2019 11:48:23","18/10/2019 11:48:24","18/10/2019 11:48:24","18/10/2019 11:48:26","18/10/2019 11:48:26","18/10/2019 11:48:27","18/10/2019 11:48:28","18/10/2019 11:48:30","18/10/2019 11:48:31","18/10/2019 11:48:32","18/10/2019 11:48:32","18/10/2019 11:48:34","18/10/2019 11:48:34","18/10/2019 11:48:35","18/10/2019 11:48:35","18/10/2019 11:48:36","18/10/2019 11:48:36","18/10/2019 11:48:36","18/10/2019 11:48:36","18/10/2019 11:48:37","18/10/2019 11:48:37","18/10/2019 11:48:37","18/10/2019 11:48:38","18/10/2019 11:48:39","18/10/2019 11:48:39","18/10/2019 11:48:40","18/10/2019 11:48:40","18/10/2019 11:48:41","18/10/2019 11:48:41","18/10/2019 11:48:44","18/10/2019 11:48:44","18/10/2019 11:48:44","18/10/2019 11:48:45","18/10/2019 11:48:45","18/10/2019 11:48:46","18/10/2019 11:48:46","18/10/2019 11:48:48","18/10/2019 11:48:48","18/10/2019 11:48:49","18/10/2019 11:48:52","18/10/2019 11:48:52","18/10/2019 11:48:52","18/10/2019 11:48:53","18/10/2019 11:48:56","18/10/2019 11:48:56","18/10/2019 11:48:57","18/10/2019 11:49:03","18/10/2019 11:49:04","18/10/2019 11:49:04","18/10/2019 11:49:04","18/10/2019 11:49:05","18/10/2019 11:49:05","18/10/2019 11:49:10","18/10/2019 11:49:11","18/10/2019 11:49:13","18/10/2019 11:49:14","18/10/2019 11:49:15","18/10/2019 11:49:20","18/10/2019 11:49:22","18/10/2019 11:49:23","18/10/2019 11:49:24","18/10/2019 11:49:25","18/10/2019 11:49:36","18/10/2019 11:49:38","18/10/2019 11:50:20","18/10/2019 11:50:37","18/10/2019 11:53:04","18/10/2019 12:08:45","18/10/2019 13:59:49","18/10/2019 15:35:13","18/10/2019 18:11:10","20/10/2019 19:58:03","22/10/2019 01:10:01"],["Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Nee","Ja","Nee","Nee","Nee","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Nee","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Nee","Nee"],[3,0,1,2,0,0,50,0,7,5,0,0,17,0,10,38,0,0,5,5,30,0,20,0,1,2,0,0,8,150,3,2,0,1,5,4,3,0,90,1,0,2,15,25,0,2,1,2,90,200,1,8,0,0,60,5,0,2,25,1,9,1,25,5,0,5,1,2,0,0,120,0,0,0,3,10,0,0,0,100,30,0,120,50,6,2,3,0,56,0,45,1,1,0,0,1,0,2,2,0,15,1,6,18,0,3,0,0,20,0,18,0,0,5,0,1,1,0,10,0,4,1000000,15,6,0,15,2,9,1,10,1,0,0,8,24,4,3,2,3,0,15,3,31,0,60,0,25,2,13,4,200,1,0,10,2,0,2,0,2,10,1,10,0,0],[3,1,4,4,1,1,4,4,3,5,3,3,3,2,3,2,4,3,5,4,3,3,3,4,4,4,2,4,5,4,4,3,5,3,4,4,3,4,4,3,4,3,3,5,4,4,4,4,4,5,3,3,4,3,3,3,4,4,4,4,4,3,3,5,4,3,3,4,4,3,4,4,3,3,4,4,4,3,5,4,4,3,2,5,5,4,4,2,4,3,4,1,1,5,1,1,3,5,3,3,4,5,3,4,2,5,4,2,3,3,4,4,4,3,3,3,2,4,5,3,3,5,3,3,3,3,4,2,4,4,3,3,4,5,4,5,3,2,4,2,3,2,5,4,5,4,5,4,4,4,4,5,3,4,2,3,3,3,4,4,3,4,4,5],["Man","Man","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Man","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Man","Man","Man","Man","Vrouw","Vrouw","Man","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Man","Vrouw","Man","Man","Man","Man","Man","Vrouw","Vrouw","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Man"],[40,23,27,21,19,20,20,21,20,21,20,19,19,19,26,19,23,21,22,20,19,19,21,20,20,19,21,22,21,20,20,10,23,18,19,25,20,20,25,20,26,20,19,20,20,20,19,20,23,26,19,19,19,31,21,19,20,25,24,19,19,19,19,19,19,19,21,21,21,19,31,18,19,20,19,23,20,18,19,21,18,19,22,20,21,22,18,19,20,19,19,22,18,20,20,26,22,22,20,20,18,21,20,20,19,19,22,20,32,22,20,19,23,20,26,20,26,20,21,22,20,20,19,20,22,20,20,19,19,19,19,22,20,22,20,20,20,20,20,23,19,20,22,22,20,19,25,27,20,22,22,19,19,2000,20,21,25,19,21,2000,20,19,19,171]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Timestamp<\/th>\n      <th>fluiten<\/th>\n      <th>frequentie<\/th>\n      <th>assertief<\/th>\n      <th>sekse<\/th>\n      <th>leeftijd<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre><code>## Warning: package &#39;gsheet&#39; was built under R version 3.6.2</code></pre>
+<div id="htmlwidget-e3097c829f0482c41d23" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e3097c829f0482c41d23">{"x":{"filter":"none","data":[["215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","436"],["05/10/2017 16:56:01","12/10/2017 09:50:53","12/10/2017 09:50:55","12/10/2017 09:50:57","12/10/2017 09:51:06","12/10/2017 09:51:10","12/10/2017 09:51:11","12/10/2017 09:51:12","12/10/2017 09:51:13","12/10/2017 09:51:15","12/10/2017 09:51:18","12/10/2017 09:51:19","12/10/2017 09:51:19","12/10/2017 09:51:20","12/10/2017 09:51:22","12/10/2017 09:51:22","12/10/2017 09:51:23","12/10/2017 09:51:24","12/10/2017 09:51:25","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:27","12/10/2017 09:51:28","12/10/2017 09:51:28","12/10/2017 09:51:30","12/10/2017 09:51:30","12/10/2017 09:51:33","12/10/2017 09:51:34","12/10/2017 09:51:34","12/10/2017 09:51:35","12/10/2017 09:51:40","12/10/2017 09:51:42","12/10/2017 09:51:42","12/10/2017 09:51:43","12/10/2017 09:51:44","12/10/2017 09:51:44","12/10/2017 09:51:46","12/10/2017 09:51:47","12/10/2017 09:51:47","12/10/2017 09:51:49","12/10/2017 09:51:49","12/10/2017 09:51:50","12/10/2017 09:51:52","12/10/2017 09:51:54","12/10/2017 09:51:55","12/10/2017 09:51:57","12/10/2017 09:52:00","12/10/2017 09:52:00","12/10/2017 09:52:04","12/10/2017 09:52:06","12/10/2017 09:52:07","12/10/2017 09:52:08","12/10/2017 09:52:10","12/10/2017 09:52:24","12/10/2017 09:52:35","14/10/2020 16:15:10"],["Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee"],[3,0,1,2,0,0,50,0,7,5,0,0,17,0,10,38,0,0,5,5,30,0,20,0,1,2,0,0,8,150,3,2,0,1,5,4,3,0,90,1,0,2,15,25,0,2,1,2,90,200,1,8,0,0,60,5,0],[3,1,4,4,1,1,4,4,3,5,3,3,3,2,3,2,4,3,5,4,3,3,3,4,4,4,2,4,5,4,4,3,5,3,4,4,3,4,4,3,4,3,3,5,4,4,4,4,4,5,3,3,4,3,3,3,3],["Man","Man","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Man","Vrouw","Vrouw"],[40,23,27,21,19,20,20,21,20,21,20,19,19,19,26,19,23,21,22,20,19,19,21,20,20,19,21,22,21,20,20,10,23,18,19,25,20,20,25,20,26,20,19,20,20,20,19,20,23,26,19,19,19,31,21,19,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Timestamp<\/th>\n      <th>fluiten<\/th>\n      <th>frequentie<\/th>\n      <th>assertief<\/th>\n      <th>sekse<\/th>\n      <th>leeftijd<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p></small></p>
 </div>
 <div id="calculating-chi2" class="section level2 subsection">
@@ -381,12 +382,12 @@ legend(&quot;topright&quot;, legend = paste(&quot;k =&quot;,df), col = col, lty 
 observed</code></pre>
 <pre><code>##        sekse
 ## fluiten Man Vrouw
-##     Ja   44    78
-##     Nee  10    32</code></pre>
+##     Ja   17    26
+##     Nee   1    13</code></pre>
 <p><span class="math display">\[\text{observed}_{ij} = 
  \begin{pmatrix}
-  44 &amp; 78 \\
-  10 &amp; 32 \\
+  17 &amp; 26 \\
+  1 &amp; 13 \\
  \end{pmatrix}\]</span></p>
 </div>
 <div id="calculating-the-model" class="section level2 subsection">
@@ -401,9 +402,9 @@ rt2 = rowSums(observed)[2]
 addmargins(observed)</code></pre>
 <pre><code>##        sekse
 ## fluiten Man Vrouw Sum
-##     Ja   44    78 122
-##     Nee  10    32  42
-##     Sum  54   110 164</code></pre>
+##     Ja   17    26  43
+##     Nee   1    13  14
+##     Sum  18    39  57</code></pre>
 </div>
 <div id="calculating-the-model-1" class="section level2 smaller">
 <h2>Calculating the model</h2>
@@ -415,13 +416,13 @@ addmargins(observed)</code></pre>
                   (ct2*rt2)/n),2,2,byrow=T
           )
 model</code></pre>
-<pre><code>##          [,1]     [,2]
-## [1,] 40.17073 81.82927
-## [2,] 13.82927 28.17073</code></pre>
+<pre><code>##           [,1]      [,2]
+## [1,] 13.578947 29.421053
+## [2,]  4.421053  9.578947</code></pre>
 <p><span class="math display">\[\text{model}_{ij} = 
  \begin{pmatrix}
-  40.1707317 &amp; 81.8292683 \\
-  13.8292683 &amp; 28.1707317 \\
+  13.5789474 &amp; 29.4210526 \\
+  4.4210526 &amp; 9.5789474 \\
  \end{pmatrix}\]</span></p>
 <p></small></p>
 </div>
@@ -430,8 +431,8 @@ model</code></pre>
 <pre class="r"><code>observed - model</code></pre>
 <pre><code>##        sekse
 ## fluiten       Man     Vrouw
-##     Ja   3.829268 -3.829268
-##     Nee -3.829268  3.829268</code></pre>
+##     Ja   3.421053 -3.421053
+##     Nee -3.421053  3.421053</code></pre>
 </div>
 <div id="calculating-chi2-1" class="section level2">
 <h2>Calculating <span class="math inline">\(\chi^2\)</span></h2>
@@ -439,7 +440,7 @@ model</code></pre>
 <pre class="r"><code># Calculate chi squared
 chi.squared &lt;- sum((observed - model)^2/model)
 chi.squared</code></pre>
-<pre><code>## [1] 2.125042</code></pre>
+<pre><code>## [1] 5.128738</code></pre>
 </div>
 <div id="testing-for-significance" class="section level2 subsection">
 <h2>Testing for significance</h2>
@@ -449,7 +450,7 @@ chi.squared</code></pre>
 library(&#39;visualize&#39;)
 visualize.chisq(chi.squared,df,section=&#39;upper&#39;)</code></pre>
 <hr />
-<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="fishers-exact-test" class="section level2 subsection">
 <h2>Fisher’s exact test</h2>
@@ -465,10 +466,10 @@ visualize.chisq(chi.squared,df,section=&#39;upper&#39;)</code></pre>
 <pre class="r"><code># Calculate Yates&#39;s corrected chi squared
 chi.squared.yates &lt;- sum((abs(observed - model) - .5)^2/model)
 chi.squared.yates</code></pre>
-<pre><code>## [1] 1.606326</code></pre>
+<pre><code>## [1] 3.739123</code></pre>
 <pre class="r"><code>visualize.chisq(chi.squared.yates,df,section=&#39;upper&#39;)</code></pre>
 <hr />
-<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="likelihood-ratio" class="section level2 subsection">
 <h2>Likelihood ratio</h2>
@@ -476,10 +477,10 @@ chi.squared.yates</code></pre>
 <p><span class="math display">\[L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)\]</span></p>
 <pre class="r"><code># ln is log
 lx2 = 2 * sum(observed * log(observed / model) ); lx2</code></pre>
-<pre><code>## [1] 2.208912</code></pre>
+<pre><code>## [1] 6.178795</code></pre>
 <pre class="r"><code>visualize.chisq(lx2,df,section=&#39;upper&#39;)</code></pre>
 <hr />
-<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="standardized-residuals" class="section level2 subsection">
 <h2>Standardized residuals</h2>
@@ -487,8 +488,8 @@ lx2 = 2 * sum(observed * log(observed / model) ); lx2</code></pre>
 <pre class="r"><code>(observed - model) / sqrt(model)</code></pre>
 <pre><code>##        sekse
 ## fluiten        Man      Vrouw
-##     Ja   0.6041725 -0.4233129
-##     Nee -1.0297130  0.7214674</code></pre>
+##     Ja   0.9283820 -0.6307114
+##     Nee -1.6270351  1.1053527</code></pre>
 </div>
 <div id="effect-size" class="section level2 subsection">
 <h2>Effect size</h2>
@@ -496,30 +497,30 @@ lx2 = 2 * sum(observed * log(observed / model) ); lx2</code></pre>
 <pre class="r"><code>odds &lt;- round( observed, 2); odds</code></pre>
 <pre><code>##        sekse
 ## fluiten Man Vrouw
-##     Ja   44    78
-##     Nee  10    32</code></pre>
+##     Ja   17    26
+##     Nee   1    13</code></pre>
 <p><span class="math display">\[\begin{pmatrix}
   a &amp; b \\
   c &amp; d \\
  \end{pmatrix}\]</span></p>
-<p><span class="math display">\[OR = \frac{a \times d}{b \times c} = \frac{44 \times 32}{78 \times 10} = 1.8051282\]</span></p>
+<p><span class="math display">\[OR = \frac{a \times d}{b \times c} = \frac{17 \times 13}{26 \times 1} = 8.5\]</span></p>
 </div>
 <div id="odds" class="section level2">
 <h2>Odds</h2>
 <pre><code>##        sekse
 ## fluiten Man Vrouw
-##     Ja   44    78
-##     Nee  10    32</code></pre>
+##     Ja   17    26
+##     Nee   1    13</code></pre>
 <p>The man and women ratio of people that can whisle and the ratio of those who can’t whistle</p>
 <ul>
-<li>Can wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 44 }{ 78 }\)</span> = 0.5641026</li>
-<li>Can’t wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 10 }{ 32 }\)</span> = 0.3125</li>
+<li>Can wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 17 }{ 26 }\)</span> = 0.6538462</li>
+<li>Can’t wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 1 }{ 13 }\)</span> = 0.0769231</li>
 </ul>
 </div>
 <div id="odds-ratio" class="section level2">
 <h2>Odds ratio</h2>
 <p>Is the ratio of these odds.</p>
-<p><span class="math display">\[OR = \frac{\text{wistle}}{\text{can&#39;t wistle}} = \frac{0.5641026}{0.3125} = 1.8051282\]</span></p>
+<p><span class="math display">\[OR = \frac{\text{wistle}}{\text{can&#39;t wistle}} = \frac{0.6538462}{0.0769231} = 8.5\]</span></p>
 <!-- Footer insert below -->
 </div>
 </div>
@@ -595,7 +596,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
