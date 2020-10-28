@@ -5,26 +5,6 @@ if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
 ```
 
-```{r, echo=FALSE, eval=FALSE}
-# Install if nesserary and load RCurl package
-if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
-library(RCurl)
-
-key = "1foUIwXqvvAWRg7FKdRMAIBLakpLbnhUpYhiTYayaPfc" # cijfers cijfer
-
-# Set google url
-google.url <- paste("https://docs.google.com/spreadsheets/d/",key,"/export?format=csv&id=",key, sep='')
-
-# Load csv
-myCsv <- getURL(google.url)
-# Read csv and assing to data object
-data <- read.csv(textConnection(myCsv))
-# Change header names
-names(data)[2:4] <- c('IQ', 'cijfers', 'betrouwbaar')
-
-write.table(data, "cijfers.csv", row.names=FALSE, col.names=TRUE, dec='.')
-```
-
 ## Regression {.smaller}
 
 $$\LARGE{\text{outcome} = \text{model} + \text{error}}$$
@@ -79,7 +59,7 @@ Outliers
     
 ```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
 n = 100
-x = 
+# x = 
 
 x[1] =  2
 y[1] = -2
