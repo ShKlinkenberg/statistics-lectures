@@ -101,6 +101,9 @@ RenderMultipleOutput("courses/2020-2021_SSR/correlation_and_simple_regression/co
 # Week 10
 RenderMultipleOutput("courses/2020-2021_SSR/multiple_regression/multiple_regresson.Rmd")
 
+# Week 11
+RenderMultipleOutput("courses/2020-2021_SSR/mediation/mediation.Rmd")
+
 # Week 12
 # RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd")
 # # RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")

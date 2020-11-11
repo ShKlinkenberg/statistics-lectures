@@ -1,0 +1,67 @@
+---
+title: "Moderation"
+author: "Klinkenberg"
+date: "15 nov 2019"
+output: 
+  ioslides_presentation:
+    logo           : https://shklinkenberg.github.io/uva_style/images/logo_uva.png
+    smaller        : FALSE
+    css            : https://shklinkenberg.github.io/uva_style/new_uva_style.css
+    includes       :
+      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
+                      "../../../GA_Script/GA_Script.html"]
+    self_contained : TRUE
+  html_document:
+    toc            : TRUE
+    toc_float:
+      collapsed    : FALSE
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Table of content
+
+<div class="notes">
+### Lecture outline
+
+[Weblecture](https://webcolleges.uva.nl/Mediasite/Play/b6a75f34622f44aa8438e68afd191ceb1d)
+
+* 0:00 What is moderation
+* 0:20 Moderation in SPSS
+* 0:25 Mean centering
+* 1:00 Johnson-Neyman
+* 1:05 Simulation in R
+* 1:10 3D visual
+* 1:17 Regression in R
+* 1:25 Compare plane to SPSS
+* 1:30 Explained variance
+
+</div>
+
+<div id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/moderation/moderation.rmd"}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../footer.md"}
+```
+
