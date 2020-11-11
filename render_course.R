@@ -90,17 +90,22 @@ RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_repeated_mixed/ANOVA_repeated_
 RenderMultipleOutput("courses/2020-2021_SSR/chi_squared_test/chi_squared_test.Rmd")
 RenderMultipleOutput("courses/2020-2021_SSR/bayes/bayes.Rmd")
 
-# # Week 8
-# RenderMultipleOutput("courses/current/MANOVA/manova.Rmd")
-# RenderMultipleOutput("courses/current/chi_squared_test/chi_squared_test.Rmd")
-# 
-# 
-# # Blok III
-# 
-# # Week 11
-# RenderMultipleOutput("courses/current/correlation_and_simple_regression/correlation_simple_regression.Rmd")
-# 
-# # Week 12
+
+# Blok III
+
+## SSR
+
+# Week 9
+RenderMultipleOutput("courses/2020-2021_SSR/correlation_and_simple_regression/correlation_simple_regression.Rmd")
+
+# Week 10
+RenderMultipleOutput("courses/2020-2021_SSR/multiple_regression/multiple_regresson.Rmd")
+
+# Week 11
+RenderMultipleOutput("courses/2020-2021_SSR/mediation/mediation.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/moderation/moderation.Rmd")
+
+# Week 12
 # RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd")
 # # RenderMultipleOutput("courses/current/pca_cb_alpha/pca_cb_alpha.Rmd")
 # 

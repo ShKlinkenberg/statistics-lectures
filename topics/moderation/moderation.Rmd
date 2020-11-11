@@ -24,14 +24,17 @@ $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 
 ![](../../../topics/moderation/moderation.png)
 
-
 ## Example {.smaller}
+
+<small>
 
 Video games are among the favourite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain. 
 
 Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behaviour, callous unemotional traits, and the number of hours per week they play video games.
 
 Source: Field 11.3.1
+
+</small>
 
 ## Simulate data
 
