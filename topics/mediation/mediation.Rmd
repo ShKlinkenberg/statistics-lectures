@@ -102,9 +102,9 @@ datatable(data, rownames = FALSE,
 ## Apply 3 models {.smaller}
 
 ```{r}
-m.1.out.pre     <- lm(speed.of.healing ~ use.homeopathic.remedies)
+m.1.out.pre     <- lm(speed.of.healing  ~ use.homeopathic.remedies)
 m.2.med.pre     <- lm(healthy.lifestyle ~ use.homeopathic.remedies)
-m.3.out.pre.med <- lm(speed.of.healing ~ use.homeopathic.remedies + healthy.lifestyle)
+m.3.out.pre.med <- lm(speed.of.healing  ~ use.homeopathic.remedies + healthy.lifestyle)
 ```
 
 ## Extract beta coëfficients
