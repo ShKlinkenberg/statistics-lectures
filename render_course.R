@@ -103,6 +103,7 @@ RenderMultipleOutput("courses/2020-2021_SSR/multiple_regression/multiple_regress
 
 # Week 11
 RenderMultipleOutput("courses/2020-2021_SSR/mediation/mediation.Rmd")
+RenderMultipleOutput("courses/2020-2021_SSR/moderation/moderation.Rmd")
 
 # Week 12
 # RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd")
