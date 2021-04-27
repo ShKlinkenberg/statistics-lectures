@@ -18,6 +18,6 @@ In this folder courses are added and in each course, lectures are available. I p
 
 ## View content
 
-* [Lectures SSR 2019-2020](http://shklinkenberg.github.io/statistics-lectures/2019-2020_SSRt.html)
 * [Lectures WSR PB 2020-2021](http://shklinkenberg.github.io/statistics-lectures/2020-2021_WSR-PB.html)
 * [Lectures SSR 2020-2021](http://shklinkenberg.github.io/statistics-lectures/2020-2021_SSR.html)
+* [Lectures SSR 2019-2020](http://shklinkenberg.github.io/statistics-lectures/2019-2020_SSRt.html)
