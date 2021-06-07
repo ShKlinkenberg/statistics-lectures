@@ -27,12 +27,13 @@ p.setup = function() {
 
   p.createCanvas(400, 400);
   p.background('white');
-
+  
   }
 
 p.draw = function() {
 
-  let a = .5;
+  // let a = .5;
+  let a = document.getElementById("myRange").innerHTML / 100;
   let b = 1 - a;
     
   let w = 400;
@@ -45,15 +46,15 @@ p.draw = function() {
   
   let x = [`r x`];
   let e = [`r e`];
-  // let y = e
+  // let y = e;
   // let y = a * x + b * e;
   
   let r = 0;
   const y = [];
   while (r <= 100) {
-  y[r] = a * x[r] + b * e[r] - tm;
-  r = r +1;
+  y[r] = a * x[r] + b * e[r] - (tm - ((h-tm-bm)/2));
   x[r] += lm + ((w-lm-rm)/2);
+  r = r +1;
   }
 
   p.stroke('black');
@@ -176,6 +177,9 @@ new p5(sketch, 'container');
 * Sensitivity <span id="SEN"></span>
 * Specificity <span id="SPE"></span>
 
+<div class="slidecontainer">
+  <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+</div>
 
 </div>
 </div>
