@@ -32,7 +32,7 @@ p.setup = function() {
 
 p.draw = function() {
 
-  let a = 1;
+  let a = .5;
   let b = 1 - a;
     
   let w = 400;
@@ -45,11 +45,17 @@ p.draw = function() {
   
   let x = [`r x`];
   let e = [`r e`];
-  let y = a * x + b * e;
+  // let y = e
+  // let y = a * x + b * e;
   
-  x = x + 200;
-  y = y + 200;
-    
+  let r = 0;
+  const y = [];
+  while (r <= 100) {
+  y[r] = a * x[r] + b * e[r] - tm;
+  r = r +1;
+  x[r] += lm + ((w-lm-rm)/2);
+  }
+
   p.stroke('black');
   p.strokeWeight(2);
     
