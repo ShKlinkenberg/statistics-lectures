@@ -523,7 +523,9 @@ p.draw = function() {
      document.getElementById('SEN').innerHTML = (TP / (TP + FN)).toFixed(2);
      document.getElementById('SPE').innerHTML = (TN / (TN + FP)).toFixed(2);
 
-        } // end mouse over   
+        } // end mouse over
+    
+    document.getElementById('COR').innerHTML = a;
   
   p.stroke('black');
   p.strokeWeight(5);
@@ -583,14 +585,14 @@ FP
 </table>
 <p><strong>What is the:</strong></p>
 <ul>
-<li>Correlation = 0</li>
-<li>Hit Rate <span id="HR"></span></li>
-<li>Base Rate <span id="BR"></span></li>
-<li>Sensitivity <span id="SEN"></span></li>
-<li>Specificity <span id="SPE"></span></li>
+<li>Correlation: <span id="COR"></span></li>
+<li>Hit Rate: <span id="HR"></span></li>
+<li>Base Rate: <span id="BR"></span></li>
+<li>Sensitivity: <span id="SEN"></span></li>
+<li>Specificity: <span id="SPE"></span></li>
 </ul>
-<div class="slidecontainer">
-<p><input type="range" min="0" max="100" value="50" class="slider" id="myRange"></p>
+<div style="width:60%; display: inline;">
+<p>Correlation between 0 and 1: <input style="width:50%;" type="range" min="0" max="100" value="50" class="slider" id="myRange"></p>
 </div>
 </div>
 </div>
