@@ -179,9 +179,22 @@ new p5(sketch, 'container');
 * Sensitivity: <span id="SEN"></span>
 * Specificity: <span id="SPE"></span>
 
+<style>
+.slider::before {
+  content: "0";
+  margin-left: -10px;
+}
+
+.slider::after {
+  content: "1";
+  margin-right: -10px;
+}
+</style>
+
+
 <div style="width:60%; display: inline;">
-Correlation between 0 and 1:
-  <input style="width:50%;" type="range" min="0" max="100" value="50" class="slider" id="myRange">
+Correlation:
+  <input class="slider" style="width:50%; margin: 0 10px 0 10px;" type="range" min="0" max="100" value="50" id="myRange">
 </div>
 
 </div>
