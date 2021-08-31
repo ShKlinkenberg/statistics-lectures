@@ -492,7 +492,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## Effect size {.flexbox .vcenter}
 
-![](../../../../topics/NHST/effec_size.png)
+![](../../../topics/NHST/effec_size.png)
 
 ## 1 - alpha {.subsection}
 
@@ -757,7 +757,7 @@ barplot(dbinom(0:N,N, HA),
 
 ## Reasoning Scheme {.subsection .flexbox .vcenter}
 
-![](../../../../topics/NHST/NHST_descision_scheme.png)
+![](../../../topics/NHST/NHST_descision_scheme.png)
 
 ## R<-PSYCHOLOGIST {.smaller}
 
