@@ -1,6 +1,6 @@
 ---
 title: "Statistical Reasoning"
-subtitle: "Null Hypothesis Testisn"
+subtitle: "Null Hypothesis Testing"
 author: "Klinkenberg"
 date: "6 sep 2021"
 output: 
@@ -37,10 +37,6 @@ local({
   })
 })
 ```
-
-## Content
-
-<div style="font-size: 50%;" id="toc"></div>
 
 ## Learning
 
