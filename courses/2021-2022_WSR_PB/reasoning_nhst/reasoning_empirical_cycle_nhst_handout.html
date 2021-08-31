@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klinkenberg" />
+
+
+<title>Statistical Reasoning</title>
+
+<script src="reasoning_empirical_cycle_nhst_handout_files/header-attrs-2.10/header-attrs.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="reasoning_empirical_cycle_nhst_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="reasoning_empirical_cycle_nhst_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="reasoning_empirical_cycle_nhst_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/navigation-1.1/tabsets.js"></script>
+<link href="reasoning_empirical_cycle_nhst_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="reasoning_empirical_cycle_nhst_handout_files/highlightjs-9.12.0/highlight.js"></script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107432294-1');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Statistical Reasoning</h1>
+<h3 class="subtitle">Null Hypothesis Testisn</h3>
+<h4 class="author">Klinkenberg</h4>
+<h4 class="date">6 sep 2021</h4>
+
+</div>
+
+
+<div id="content" class="section level2">
+<h2>Content</h2>
+<div id="toc" style="font-size: 50%;">
+
+</div>
+</div>
+<div id="learning" class="section level2">
+<h2>Learning</h2>
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<!-- Add the required topics below -->
+</div>
+<div id="reasoning-in-statistics" class="section level1">
+<h1 class="section">Reasoning in statistics</h1>
+<p>Source: <a href="https://apps3.cehd.umn.edu/artist/glossary.html">ARTIST</a></p>
+<div id="statistical-literacy" class="section level2 subsection">
+<h2 class="subsection">Statistical Literacy</h2>
+<ul>
+<li>Knowledge (Basic understanding of concepts)
+<ul>
+<li>Identify</li>
+<li>Describe</li>
+</ul></li>
+<li>Skils (Ability to work with statistical tools)
+<ul>
+<li>Translate</li>
+<li>Interpret</li>
+<li>Read</li>
+<li>Compute</li>
+</ul></li>
+</ul>
+</div>
+<div id="statistical-reasoning" class="section level2 subsection">
+<h2 class="subsection">Statistical Reasoning</h2>
+<ul>
+<li>Understanding
+<ul>
+<li>Explain why</li>
+<li>Explain how</li>
+</ul></li>
+</ul>
+</div>
+<div id="statistical-thinking" class="section level2 subsection">
+<h2 class="subsection">Statistical thinking</h2>
+<ul>
+<li>Apply
+<ul>
+<li>What methods to use in a specific situation</li>
+</ul></li>
+<li>Critique
+<ul>
+<li>Comment and reflect on work of others</li>
+</ul></li>
+<li>Evaluate
+<ul>
+<li>Assigning value to work</li>
+</ul></li>
+<li>Generalize
+<ul>
+<li>What does variation mean in the large scheme of life</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="empirical-cycle" class="section level1">
+<h1 class="section">Empirical Cycle</h1>
+<div id="by-adriaan-de-groot" class="section level2">
+<h2>By Adriaan de Groot</h2>
+<iframe style="height:450px; width:100%;" id="iframe_container" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen src="https://prezi.com/embed/bpjkj8bz_kja/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI5a2svK0VieFZlK1cxOTFvS1ZwWVVBNFZRPT0&amp;landing_sign=T515ue0i-w4c7Sok6m5LPjV9-MucmIMETU_ItCafgr8">
+</iframe>
+</div>
+<div id="the-components" class="section level2 smaller">
+<h2 class="smaller">The components</h2>
+<p><small></p>
+<ul>
+<li>Observation
+<ul>
+<li>Idea for hypothesis</li>
+</ul></li>
+<li>Induction
+<ul>
+<li>General rule</li>
+<li>Hypothesis</li>
+</ul></li>
+<li>Deduction
+<ul>
+<li>Expectation / Prediction</li>
+<li>Operationalization</li>
+</ul></li>
+<li>Testing
+<ul>
+<li>Test hypothesis</li>
+<li>Compare data to prediction</li>
+</ul></li>
+<li>Evaluation
+<ul>
+<li>Interpret results in terms of hypothesis</li>
+</ul></li>
+</ul>
+<p></small></p>
+</div>
+<div id="explained-by-annemarie-zandscholten" class="section level2">
+<h2>Explained by Annemarie Zandscholten</h2>
+<iframe style="height:450px; width:100%;" src="https://www.youtube.com/embed/D8N1I-FmMvU?rel=0&amp;controls=1" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+</div>
+<div id="experiment" class="section level1">
+<h1 class="section">Experiment</h1>
+<p><a href="https://webcolleges.uva.nl/Mediasite/Play/ed1e63e0cd204dcf9d2a144603ce342b1d?playFrom=3708000">Video registration</a></p>
+<div id="heads" class="section level2">
+<h2>Heads</h2>
+<div style="text-align:center;">
+<img style="width:40%;" src="https://shklinkenberg.github.io/statistics-lectures/topics/coin_expreiment/QR_heads.png">
+<p>
+bit.ly/2j54A2U
+</p>
+</div>
+</div>
+<div id="emperical-cycle" class="section level2">
+<h2 class="section">Emperical Cycle</h2>
+<ul>
+<li><strong>Observation</strong> Patiënt is showing post traumatic symptoms</li>
+<li><strong>Induction</strong> Can we diagnose PTSS</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_0\)</span>: P: fair coin → C: patiënt is balanced</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: Unfair coin → C: patiënt is unbalanced</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: data <span class="math inline">\(\neq\)</span> EV → C: is unbalanced</li>
+<li><strong>Testing</strong> Choose <span class="math inline">\(\alpha\)</span> and Power</li>
+<li><strong>Evaluation</strong> Make a decision</li>
+</ul>
+</div>
+<div id="null-distribution" class="section level2 subsection">
+<h2 class="subsection">Null distribution</h2>
+<p>Let’s analyse the null distribution of the results.</p>
+<iframe style="height:400px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pubhtml?gid=1329884255&amp;single=true&amp;widget=true&amp;headers=false">
+</iframe>
+<p><a href="https://docs.google.com/spreadsheets/d/150iSLUXqZbsetzDMjYlY5CAcjIzTanTm2tOFfn_ConA/edit?usp=sharing">Google sheet</a></p>
+<!--
+
+
+-->
+</div>
+<div id="distributions" class="section level2">
+<h2>Distributions</h2>
+<p>What is the difference between</p>
+<ul>
+<li>Population distribution</li>
+<li>Sample distribution</li>
+<li>Samples distribution</li>
+</ul>
+<pre class="r"><code># install.packages(&quot;curl&quot;)
+library(&quot;curl&quot;)
+
+url = &quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pub?output=csv&quot;
+
+data &lt;- read.csv(curl(url))</code></pre>
+</div>
+<div id="binomial-distribution" class="section level2">
+<h2>Binomial distribution</h2>
+<p><span class="math display">\[ {n\choose k}p^k(1-p)^{n-k} \\
+ {n\choose k} = \frac{n!}{k!(n-k)!} \]</span></p>
+<p>With values:</p>
+<pre class="r"><code>n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head</code></pre>
+</div>
+<div id="probabilities" class="section level2">
+<h2>Probabilities</h2>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="testing" class="section level2">
+<h2>Testing</h2>
+<p>I landed 2 times head. Can we conclude PTSS?</p>
+<ul>
+<li>As you can see from the distribution of healthy coins, we cannot conclude that by definition.</li>
+<li>What we can do is indicate how rare 2 is in a healthy population.</li>
+</ul>
+</div>
+<div id="testing-1" class="section level2 smaller">
+<h2 class="smaller">Testing</h2>
+<p><small></p>
+<blockquote>
+<ul>
+<li>Based on the null distribution we can see that the expected value (EV is 5.)</li>
+<li>We can now define the <span class="math inline">\(H_0\)</span> hypothesis: <span class="math inline">\(H_0 = 5\)</span></li>
+<li>What is the alternative hypothesis?</li>
+<li>The alternative hypothesis describes a situation where PTSS is pressent.</li>
+<li>We could say that the alternative hypothesis is not 5.
+<ul>
+<li><span class="math inline">\(H_A \ne 5\)</span></li>
+</ul></li>
+<li>We could also formulate our <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span> more abstract:
+<ul>
+<li><span class="math inline">\(H_0:\)</span> the patient is balenced</li>
+<li><span class="math inline">\(H_A:\)</span> the patient is unbalenced</li>
+</ul></li>
+<li>What criterium should we use to conclude that one would be unbalenced?</li>
+<li>In the social sciences this <span class="math inline">\(\alpha\)</span> criteria is often 5%.</li>
+<li>I tossed 2 times head. That is more frequent than 5%.</li>
+<li>Therefore, we conclude that our patient is probably healthy but we can never be sure.</li>
+<li>My coin could still be part of the unbalenced population.</li>
+</ul>
+</blockquote>
+<p></small></p>
+</div>
+<div id="null-distribution-1" class="section level2">
+<h2>Null distribution</h2>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="alternative-distribution" class="section level2 smaller build subsection">
+<h2 class="smaller build subsection">Alternative Distribution</h2>
+<p>But we have no clue of what this distribution could look like.</p>
+<p>For now let’s assume the probability of landing heads for my coin is .25</p>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="h_0-and-h_a-distribution" class="section level2">
+<h2><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span> distribution</h2>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<!--
+
+## Power and more {.section}
+
+
+
+-->
+</div>
+</div>
+<div id="null-hypothesis-significance-testing" class="section level1">
+<h1 class="section">Null Hypothesis<br>Significance Testing</h1>
+<div id="neyman-pearson-paradigm" class="section level2">
+<h2>Neyman-Pearson Paradigm</h2>
+<p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a>-<a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a> Paradigm</p>
+<style>
+.np { height: 400px;
+      float: left;
+    }
+</style>
+<p><img class="np" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg"></p>
+<p><img class="np" src="http://www-history.mcs.st-and.ac.uk/BigPictures/Pearson_Egon_4.jpeg"></p>
+</div>
+<div id="h_0-and-h_a" class="section level2 subsection">
+<h2 class="subsection"><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></h2>
+<table style="width:100%; border: none;">
+<tr>
+<td>
+<p><span class="math inline">\(H_0\)</span></p>
+<ul>
+<li>Skeptical point of view</li>
+<li>No effect</li>
+<li>No preference</li>
+<li>No Correlation</li>
+<li>No difference</li>
+</ul>
+</td>
+<td>
+<p><span class="math inline">\(H_A\)</span></p>
+<ul>
+<li>Refute Skepticism</li>
+<li>Effect</li>
+<li>Preference</li>
+<li>Correlation</li>
+<li>Difference</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+<div id="frequentist-probability" class="section level2 subsection">
+<h2 class="subsection">Frequentist probability</h2>
+<ul>
+<li>Objective Probability</li>
+<li>Relative frequency in the long run</li>
+</ul>
+</div>
+<div id="standard-error" class="section level2 subsection">
+<h2 class="subsection">Standard Error</h2>
+<blockquote>
+<p>95% confidence interval</p>
+</blockquote>
+<p><span class="math display">\[SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}\]</span></p>
+<ul>
+<li>Lowerbound = <span class="math inline">\(\bar{x} - 1.96 \times SE\)</span></li>
+<li>Upperbound = <span class="math inline">\(\bar{x} + 1.96 \times SE\)</span></li>
+</ul>
+</div>
+<div id="standard-error-1" class="section level2 flexbox vcenter">
+<h2 class="flexbox vcenter">Standard Error</h2>
+<style>
+ul#menu li {
+    display:inline;
+}
+</style>
+<div onload="execute(10,10)">
+<ul id="menu">
+<li>
+n₁ = <input type="number" name="n_x1" id="n_x1" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/>
+</li>
+<li>
+n₂ = <input type="number" name="n_x2" id="n_x2" min="10" max="100" value="10" onclick="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)" onchange="execute(document.getElementById('n_x1').value,document.getElementById('n_x2').value)"/>
+</li>
+</ul>
+<canvas id="myCanvas" width="600" height="400" style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+<script type="text/javascript"  charset="utf-8">
+
+function execute(n_x1, n_x2) {
+    
+var c         = document.getElementById("myCanvas");
+var ctx       = c.getContext("2d");
+
+// clear canvas
+//ctx.clearRect(0,0,600,400);
+
+// Store the current transformation matrix
+ctx.save();
+
+// Use the identity matrix while clearing the canvas
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.clearRect(0, 0, 600, 400);
+ctx.beginPath();
+
+// Restore the transform
+ctx.restore();
+
+
+
+ctx.font      = "20pt Calibri";
+ctx.fillStyle = "#000000"; // text color
+ctx.fillText("The influence of n on the confidence interval", 50, 50);
+
+
+
+var mean_x1 = 5;
+var mean_x2 = 7;
+var   sd_x1 = 2.6;
+var   sd_x2 = 2.7;
+var    n_x1 = n_x1;
+var    n_x2 = n_x2;
+var   se_x1 = sd_x1/Math.sqrt(n_x1);
+var   se_x2 = sd_x2/Math.sqrt(n_x2);
+
+var text_x_pos = 50;
+var text_y_pos = 210;
+var text_guter = 20;
+
+ctx.font      = "14pt Calibri";
+ctx.fillStyle = "#000000"; // text color
+ctx.fillText("x̄₁ = "+mean_x1, text_x_pos, text_y_pos);
+ctx.fillText("x̄₂ = "+mean_x2, text_x_pos, text_y_pos+1*text_guter);
+ctx.fillText("σ₁ = "+sd_x1,  text_x_pos, text_y_pos+2*text_guter);
+ctx.fillText("σ₂ = "+sd_x2,  text_x_pos, text_y_pos+3*text_guter);
+ctx.fillText("n₁ = "+n_x1,    text_x_pos, text_y_pos+4*text_guter);
+ctx.fillText("n₂ = "+n_x2,    text_x_pos, text_y_pos+5*text_guter);
+ctx.fillText("se₁ = σ₁/√n₁ = "+sd_x1+"/√"+n_x1+" = "+se_x1.toFixed(2), text_x_pos, text_y_pos+6*text_guter);
+ctx.fillText("se₂ = σ₂/√n₂ = "+sd_x2+"/√"+n_x2+" = "+se_x2.toFixed(2), text_x_pos, text_y_pos+7*text_guter);
+
+var hight_x1 = (250/10)*mean_x1;
+var hight_x2 = (250/10)*mean_x2;
+
+var   sd_x1 = (250/10)*sd_x1;
+var   sd_x2 = (250/10)*sd_x2;
+
+var   se_x1 = 1.96*sd_x1/Math.sqrt(n_x1);
+var   se_x2 = 1.96*sd_x2/Math.sqrt(n_x2);
+
+var bar_x_pos  = 315;
+var bar_y_pos  = 350;
+var bar_width  = 100;
+var bar_gutter = 35;
+
+ctx.fillStyle = "#87ceeb";
+ctx.fillRect(bar_x_pos, bar_y_pos-hight_x1,  bar_width,hight_x1);
+
+ctx.fillStyle = "#87ceeb";
+ctx.fillRect(bar_x_pos+bar_width+bar_gutter, bar_y_pos-hight_x2,  bar_width,hight_x2);
+
+
+ctx.moveTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1+se_x1);
+ctx.lineTo(bar_x_pos+(bar_width/2), bar_y_pos-hight_x1-se_x1);
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1-se_x1); // upper bound 
+ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1); // upper bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+(bar_width/4),   bar_y_pos-hight_x1+se_x1); // lower bound 
+ctx.lineTo(bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1); // lower bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2+se_x2);
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/2), bar_y_pos-hight_x2-se_x2);
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2-se_x2); // upper bound 
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2); // upper bound
+ctx.stroke();
+
+ctx.moveTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4),   bar_y_pos-hight_x2+se_x2); // lower bound 
+ctx.lineTo(bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2); // lower bound
+ctx.stroke();
+
+// X in bar
+ctx.fillStyle = "#000";
+ctx.font      = "20pt Calibri";
+ctx.fillText("x₁", bar_x_pos+10,                      bar_y_pos-hight_x1+hight_x1-10);
+ctx.fillText("x₂", bar_x_pos+bar_width+bar_gutter+10, bar_y_pos-hight_x2+hight_x2-10);
+
+// upper and lower bound text
+ctx.fillStyle = "#000";
+ctx.font      = "10pt Calibri";
+ctx.fillText("1.96se₁+x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1-se_x1+2);
+ctx.fillText("1.96se₁-x̄₁", bar_x_pos+(bar_width/4*3), bar_y_pos-hight_x1+se_x1+2);
+
+ctx.fillText("1.96se₂+x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2-se_x2+2);
+ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3), bar_y_pos-hight_x2+se_x2+2);
+
+}
+</script>
+</div>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-14-1.png" width="672" height="600" /></p>
+</div>
+<div id="binomial-h_0-distribution" class="section level2">
+<h2>Binomial <span class="math inline">\(H_0\)</span> distribution</h2>
+<pre class="r"><code>n = 10   # Sample size
+k = 0:n  # Discrete probability space
+p = .5   # Probability of head
+
+munt = 0:1
+
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+# permutations
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+
+title = &quot;Binomial Null distribution&quot;
+
+# col=c(rep(&quot;red&quot;,2),rep(&quot;beige&quot;,7),rep(&quot;red&quot;,2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:n, 
+         xlab=&quot;number of head&quot;, 
+         ylab=&quot;P(%)&quot;, 
+         col=&#39;beige&#39;,
+         ylim=c(0,.3) )
+
+# abline(v = c(2.5,10.9), lty=2, col=&#39;red&#39;)
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)</code></pre>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="binomial-h_a-distribution" class="section level2">
+<h2>Binomial <span class="math inline">\(H_A\)</span> distribution</h2>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="decision-table" class="section level2 flexbox vcenter subsection">
+<h2 class="flexbox vcenter subsection">Decision table</h2>
+<table style="border: none;  transform: scale(1);">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
+</div>
+<div id="alpha-alpha" class="section level2 subsection">
+<h2 class="subsection">Alpha <span class="math inline">\(\alpha\)</span></h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid blue; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
+<ul>
+<li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
+<li>Type I error</li>
+<li>False Positive</li>
+<li>Criteria often 5%</li>
+<li>Distribution depends on sample size</li>
+</ul>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="power" class="section level2 subsection">
+<h2 class="subsection">Power</h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
+<ul>
+<li>Correctly reject <span class="math inline">\(H_0\)</span></li>
+<li>True positive</li>
+<li>Power equal to: 1 - Beta
+<ul>
+<li>Beta is Type II error</li>
+</ul></li>
+<li>Criteria often 80%</li>
+<li>Depends on sample size</li>
+</ul>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="post-hoc-power" class="section level2 subsection">
+<h2 class="subsection">Post-Hoc Power</h2>
+<ul>
+<li>Also known as: observed, retrospective, achieved, prospective and a priori power</li>
+<li>Specificly meaning:</li>
+</ul>
+<blockquote>
+<p>The power of a test assuming a population effect size equal to the observed effect size in the current sample.</p>
+</blockquote>
+<p>Source: <a href="http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf">O’Keefe (2007)</a></p>
+</div>
+<div id="effect-size" class="section level2 subsection">
+<h2 class="subsection">Effect size</h2>
+<p>In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.</p>
+<p>For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Effect_size">WIKIPEDIA</a></p>
+</div>
+<div id="effect-size-1" class="section level2 flexbox vcenter">
+<h2 class="flexbox vcenter">Effect size</h2>
+<p><img src="../../../../topics/NHST/effec_size.png" /></p>
+</div>
+<div id="alpha" class="section level2 subsection">
+<h2 class="subsection">1 - alpha</h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
+<ul>
+<li>Correctly accept <span class="math inline">\(H_0\)</span></li>
+<li>True negative</li>
+</ul>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="beta" class="section level2 subsection">
+<h2 class="subsection">Beta</h2>
+<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
+<col width="150px">
+<col width="225px">
+<col width="225px">
+<tr>
+<td>
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = True
+</td style="width: 300px;">
+<td>
+<span class="math inline">\(H_0\)</span> = False
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide to<br>reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br>True positive = Power
+</td>
+</tr>
+<tr height="150px">
+<td>
+Decide not<br>to reject <span class="math inline">\(H_0\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+Correct <br> True negative
+</td>
+<td style="border: 5px solid blue; padding: 10px; color: white; background-color: red;">
+Type II error <br>Beta <span class="math inline">\(\beta\)</span>
+</td>
+</tr>
+</table>
+<ul>
+<li>Incorrectly accept <span class="math inline">\(H_0\)</span></li>
+<li>Type II error</li>
+<li>False Negative</li>
+<li>Criteria often 20%</li>
+<li>Distribution depends on sample size</li>
+</ul>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="p-value" class="section level2 subsection">
+<h2 class="subsection">P-value</h2>
+<blockquote>
+<p>Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.</p>
+</blockquote>
+<p>Reject <span class="math inline">\(H_0\)</span> when:</p>
+<ul>
+<li><span class="math inline">\(p\)</span>-value &lt;= <span class="math inline">\(alpha\)</span></li>
+</ul>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="test-statistics" class="section level2">
+<h2>Test statistics</h2>
+<p>Some common test statistics</p>
+<ul>
+<li>Number of heads</li>
+<li>Sum of dice</li>
+<li>Difference</li>
+<li><span class="math inline">\(t\)</span>-statistic</li>
+<li><span class="math inline">\(F\)</span>-statistic</li>
+<li><span class="math inline">\(\chi^2\)</span>-statistic</li>
+<li>etc…</li>
+</ul>
+</div>
+<div id="decision-table-1" class="section level2 flexbox vcenter smaller">
+<h2 class="flexbox vcenter smaller">Decision Table</h2>
+<pre class="r"><code>N     = 10  # Sample size
+H0    = .5  # Probability of head under H0 50/50
+HA    = .2  # Aternative expected value
+alpha = .05 # Selected type I error
+
+# Color areas red for selected alpha
+area &lt;- dbinom(0:N, N, H0) &lt; alpha/2
+
+# barplot(dbinom(0:N,N, HA)) -&gt; x.values
+
+# x.values
+# lb &lt;- x.values[c(qbinom(alpha/2, N+1, H0), qbinom(alpha/2, N+1, H0)+1 )]
+# ub &lt;- x.values[c(qbinom(1-(alpha/2), N+1, H0), qbinom(1-(alpha/2), N+1, H0)+1 )]
+# 
+# mlb &lt;- mean(lb)
+# mub &lt;- mean(ub)
+
+col = rep(&quot;beige&quot;, N+1)
+col[area] = &quot;red&quot;
+
+col2 = rep(&quot;red&quot;, N+1)
+col2[area] = &quot;beige&quot;
+
+# Delete # to not color the plots
+# col = col2  = &quot;beige&quot;
+
+layout(matrix(1:9,3,3, byrow=T))
+
+plot.new()
+text(0.5,0.5,&quot;Binomial Distribution&quot;,cex=1.5)
+# text(0.5,0.1,paste(&quot;N:&quot;,N),cex=1.5)
+
+plot.new()
+text(0.5,0.5,&quot;H0 True&quot;,cex=2)
+
+plot.new()
+text(0.5,0.5,&quot;H0 False&quot;,cex=2)
+
+plot.new()
+text(0.5,0.5,&quot;Reject H0&quot;,cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col, 
+        # yaxt = &#39;n&#39;, 
+        main = &#39;Alpha / Type I error&#39;, 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+
+# abline(v = mlb, col=&quot;red&quot;, lwd=3, lty=2)
+# abline(v = mub, col=&quot;red&quot;, lwd=3, lty=2)
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col, 
+        yaxt = &#39;n&#39;, 
+        main = &#39;Power&#39;, 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+plot.new()
+text(0.5,0.5,&quot;Accept H0&quot;,cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col2, 
+        # yaxt = &#39;n&#39;, 
+        main = &#39;1 - alpha&#39;, 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col2, 
+        yaxt = &#39;n&#39;, 
+        main = &#39;Beta / Type II error&#39;, 
+        names.arg = 0:N, 
+        cex.names = 0.7)</code></pre>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="reasoning-scheme" class="section level2 subsection flexbox vcenter">
+<h2 class="subsection flexbox vcenter">Reasoning Scheme</h2>
+<p><img src="../../../../topics/NHST/NHST_descision_scheme.png" /></p>
+</div>
+<div id="r-psychologist" class="section level2 smaller">
+<h2 class="smaller">R&lt;-PSYCHOLOGIST</h2>
+<iframe style="height:450px;" src="http://rpsychologist.com/d3/NHST/">
+</iframe>
+<p>Source: <a href="http://rpsychologist.com/d3/NHST/">Kristoffer Magnusson</a></p>
+<!-- Footer insert below -->
+</div>
+</div>
+<div id="end" class="section level1">
+<h1>End</h1>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

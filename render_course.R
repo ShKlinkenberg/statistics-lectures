@@ -33,62 +33,62 @@ RenderMultipleOutput <- function(path) {
 # Week 1
 
 # WSR
-RenderMultipleOutput("courses/2020-2021_WSR_PB/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
+RenderMultipleOutput("courses/2021-2022_WSR_PB/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
 
 # SSR
-RenderMultipleOutput("courses/2020-2021_SSR/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/reasoning_nhst/reasoning_empirical_cycle_nhst.Rmd")
 
 
 # # Week 2
 
 # WSR
-RenderMultipleOutput("courses/2020-2021_WSR_PB/nhst/nhst.Rmd")
+RenderMultipleOutput("courses/2021-2022_WSR_PB/nhst/nhst.Rmd")
 # SSR
-RenderMultipleOutput("courses/2020-2021_SSR/nhst/nhst.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/nhst/nhst.Rmd")
 
 
 # Week 3
 
 # WSR
-RenderMultipleOutput("courses/2020-2021_WSR_PB/multiple_regression/multiple_regresson.Rmd")
+RenderMultipleOutput("courses/2021-2022_WSR_PB/multiple_regression/multiple_regresson.Rmd")
 
 # SSR
-RenderMultipleOutput("courses/2020-2021_SSR/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
-RenderMultipleOutput("courses/2020-2021_SSR/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/t_distribution_and_one_sample_t_test/t_distribution_and_one_sample_t_test.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/paired_and_independent_t_test/paired_and_independent_t_test.Rmd")
 
 # Week 4
 
 # WSR
-RenderMultipleOutput("courses/2020-2021_WSR_PB/moderation/moderation.Rmd")
+RenderMultipleOutput("courses/2021-2022_WSR_PB/moderation/moderation.Rmd")
 
 # Blok II
 
 # Week 5
-RenderMultipleOutput("courses/2020-2021_SSR/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
-RenderMultipleOutput("courses/2020-2021_SSR/non_parametric_tests/non_parametric_tests.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/f_distribution_ANOVA_one_way_independent/f_distribution_ANOVA_one_way_independent.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/non_parametric_tests/non_parametric_tests.Rmd")
 
 # WSR
-RenderMultipleOutput("courses/2020-2021_WSR_PB/f_distribution_ANOVA_non_par_testing/f_distribution_ANOVA_non_par_testing.Rmd")
+RenderMultipleOutput("courses/2021-2022_WSR_PB/f_distribution_ANOVA_non_par_testing/f_distribution_ANOVA_non_par_testing.Rmd")
 
 # 
 # # Week 6
 
 # SSR
-RenderMultipleOutput("courses/2020-2021_SSR/ANCOVA/ANCOVA.Rmd")
-RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/ANCOVA/ANCOVA.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/ANOVA_independent_factorial/ANOVA_independent_factorial.Rmd")
 
 # WSR 
-RenderMultipleOutput("courses/2020-2021_WSR_PB/ANOVA_independent_factorial_repeated_mixed/ANOVA_independent_factorial.Rmd")
+RenderMultipleOutput("courses/2021-2022_WSR_PB/ANOVA_independent_factorial_repeated_mixed/ANOVA_independent_factorial.Rmd")
 
 # Week 7
 
 # WSR
-RenderMultipleOutput("courses/2020-2021_WSR_PB/bayes/bayes.Rmd")
+RenderMultipleOutput("courses/2021-2022_WSR_PB/bayes/bayes.Rmd")
 
 # SSR
-RenderMultipleOutput("courses/2020-2021_SSR/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
-RenderMultipleOutput("courses/2020-2021_SSR/chi_squared_test/chi_squared_test.Rmd")
-RenderMultipleOutput("courses/2020-2021_SSR/bayes/bayes.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/ANOVA_repeated_mixed/ANOVA_repeated_and_mixed.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/chi_squared_test/chi_squared_test.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/bayes/bayes.Rmd")
 
 
 # Blok III
@@ -96,14 +96,14 @@ RenderMultipleOutput("courses/2020-2021_SSR/bayes/bayes.Rmd")
 ## SSR
 
 # Week 9
-RenderMultipleOutput("courses/2020-2021_SSR/correlation_and_simple_regression/correlation_simple_regression.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/correlation_and_simple_regression/correlation_simple_regression.Rmd")
 
 # Week 10
-RenderMultipleOutput("courses/2020-2021_SSR/multiple_regression/multiple_regresson.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/multiple_regression/multiple_regresson.Rmd")
 
 # Week 11
-RenderMultipleOutput("courses/2020-2021_SSR/mediation/mediation.Rmd")
-RenderMultipleOutput("courses/2020-2021_SSR/moderation/moderation.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/mediation/mediation.Rmd")
+RenderMultipleOutput("courses/2021-2022_SSR/moderation/moderation.Rmd")
 
 # Week 12
 # RenderMultipleOutput("courses/current/multiple_regression/multiple_regresson.Rmd")

@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klinkenberg" />
+
+
+<title>ANOVA</title>
+
+<script src="ANOVA_independent_factorial_handout_files/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="ANOVA_independent_factorial_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="ANOVA_independent_factorial_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="ANOVA_independent_factorial_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="ANOVA_independent_factorial_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="ANOVA_independent_factorial_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="ANOVA_independent_factorial_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="ANOVA_independent_factorial_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="ANOVA_independent_factorial_handout_files/navigation-1.1/tabsets.js"></script>
+<link href="ANOVA_independent_factorial_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="ANOVA_independent_factorial_handout_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="ANOVA_independent_factorial_handout_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="ANOVA_independent_factorial_handout_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="ANOVA_independent_factorial_handout_files/datatables-binding-0.15/datatables.js"></script>
+<link href="ANOVA_independent_factorial_handout_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="ANOVA_independent_factorial_handout_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="ANOVA_independent_factorial_handout_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="ANOVA_independent_factorial_handout_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="ANOVA_independent_factorial_handout_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107432294-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">ANOVA</h1>
+<h3 class="subtitle"><small>Independent factorial, repeated and mixed</small></h3>
+<h4 class="author">Klinkenberg</h4>
+<h4 class="date">7 oct 2020</h4>
+
+</div>
+
+
+<div id="inhoud" class="section level2">
+<h2>Inhoud</h2>
+<div id="toc" style="font-size:60%; text-align:left;">
+
+</div>
+<!-- Add the required topics below -->
+</div>
+<div id="independent-factorial-anova" class="section level1 section">
+<h1>Independent factorial ANOVA</h1>
+<p>Two or more independent variables with two or more categories. One dependent variable.</p>
+<div id="independent-factorial-anova-1" class="section level2">
+<h2>Independent factorial ANOVA</h2>
+<p>The independent factorial ANOVA analyses the variance of multiple independent variables (Factors) with two or more categories.</p>
+<p>Effects and interactions:</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>2 or more independent/predictor variables
+<ul>
+<li>2 or more cat./levels</li>
+</ul></li>
+</ul>
+</div>
+<div id="assumptions" class="section level2 subsection">
+<h2>Assumptions</h2>
+<ul>
+<li>Continuous variable</li>
+<li>Random sample</li>
+<li>Normaly distributed
+<ul>
+<li>Shapiro-Wilk test</li>
+</ul></li>
+<li>Equal variance within groups
+<ul>
+<li>Levene’s test</li>
+</ul></li>
+</ul>
+</div>
+<div id="formulas" class="section level2 subsection">
+<h2>Formulas</h2>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td><span class="math inline">\(\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_{model}-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hspace{2ex}A\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_A-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}B\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_B-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hspace{2ex}AB\)</span></td>
+<td><span class="math inline">\(\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}\)</span></td>
+<td><span class="math inline">\(df_A \times df_B\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Error</td>
+<td><span class="math inline">\(\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}\)</span></td>
+<td><span class="math inline">\(N-k_{model}\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td><span class="math inline">\(\text{SS}_{\text{total}} = \text{SS}_{\text{model}} + \text{SS}_{\text{error}}\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{total}}}{\text{df}_{\text{total}}}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example" class="section level2 smaller">
+<h2>Example</h2>
+<p><small></p>
+<p>In this example we will look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol.</p>
+<ul>
+<li>Dependent variable
+<ul>
+<li>Accidents</li>
+</ul></li>
+<li>Independent variables
+<ul>
+<li>Speed
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Alcohol
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+</ul></li>
+</ul>
+<p></small></p>
+</div>
+<div id="section" class="section level2 smaller">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th>person</th>
+<th>alcohol</th>
+<th>speed</th>
+<th>accidents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>2</td>
+<td>3</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>3</td>
+<td>1</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>3</td>
+<td>2</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>3</td>
+<td>3</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data" class="section level2 smaller">
+<h2>Data</h2>
+<div id="htmlwidget-c9b591b7f9ec840c5ce4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c9b591b7f9ec840c5ce4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180],["male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],[2.67,2.64,2.39,2.13,2.16,2.33,1.79,2.37,1.91,1.78,1.56,2.6,2.55,1.8,1.6,2.3,2.27,1.77,2.75,0.75,1.85,2.96,2.68,2.63,2.63,2.98,2.19,3.35,3.03,3.24,3.34,3.37,2.4,3.02,2.25,4.03,3.78,3.11,2.66,3.39,3.52,4.17,4.02,3.91,3.13,3.42,3.5,3.24,4.01,3.82,4.16,4.27,3.55,4.73,4.26,3.63,4.52,4.11,3.12,4.67,3.26,3.46,2.35,4.1,3.46,3.46,3.66,3.78,2.86,3.51,2.95,4.09,3.15,4.2,3.03,3.83,2.72,4.18,3.06,3.76,4.39,4.35,4.8,5.1,3.89,5.38,4.34,5.48,3.49,5.03,4.19,5.39,4.87,5.8,4.03,5.02,4.18,5.55,4.44,5.53,5.13,6.81,5.34,5.33,4.56,5.16,5.76,6.59,4.64,5.64,6.31,6.71,5.03,5.73,5.3,5.7,5.02,5.69,5.06,6.07,4.51,6.44,4.9,5.54,4.59,6.26,4.34,5.91,5.5,5.88,4.24,5.23,4.78,6.03,4.46,5.87,4.33,5.39,5.61,6.13,6.12,6.95,7,6.36,6.49,7.49,5.44,7.24,6.17,6.76,5.93,7.48,5.09,7.11,6,7.07,6.15,7.61,5.21,6.58,6.46,8.21,6.82,7.66,6.9,7.54,7.98,7.49,7.26,8.8,7.04,8.55,7.32,7.73,7.08,8.42,7.05,6.97,7.09,9.07],[70.29,66.44,59.2,58.86,77.26,81.83,70.88,52.06,72.28,67.53,64.4,73.64,72.48,68.63,68.32,66.63,69.16,62.63,76.68,58.42,59.55,66.79,66.96,63.59,62.45,71.04,61.39,57.23,72.62,59.37,58.39,66.02,69.87,61.53,66.9,76.7,60.2,81,83.61,68.68,61.75,67.18,63.66,82.57,63.88,73.03,72.77,67.43,67.99,71.74,62.88,58.85,47.64,51.83,67.21,63.39,50.41,77.41,70.36,71.99,81.49,81.37,86.11,79.56,80.99,83.1,79.47,77.73,82.39,75.9,84.2,79.17,79.88,77.24,86.64,77.43,82.2,78.44,83.06,82.27,77.73,80.27,75.62,72.07,77.64,72.28,78.46,72.67,80.13,77.64,78.24,74.34,75.51,72.55,76.91,77.31,79.21,74.63,77.1,75.61,72.89,69.11,70.99,75.12,73.1,76.05,68.22,65.15,75.24,70.86,67.81,67.99,72.31,73.22,72.77,74.24,74.95,73.29,77.22,71.58,77.03,68.44,76.99,70.09,73.42,71.49,75.33,74.91,71.53,69.8,76.3,70.21,74.68,72.52,76.37,75.3,76.67,74.44,71.58,73.61,71.78,67.37,67.1,67.1,70.96,62.57,72.28,68.46,69.74,69.12,72.51,61.26,72.14,66.07,67.91,66.37,71.02,63.87,78.07,68.64,69.14,59.88,63.16,62.91,68.65,67.27,62.66,63.42,63.71,61.86,67.32,58.06,66.78,61.65,67.53,59.66,66.67,68.63,66.03,61.84]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>subjects<\/th>\n      <th>gender<\/th>\n      <th>alcohol<\/th>\n      <th>speed<\/th>\n      <th>accidents<\/th>\n      <th>weight<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="ssmodel" class="section level2 subsection">
+<h2>SS<sub>model</sub></h2>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td><span class="math inline">\(\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_{model}-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<pre><code>##   speed alcohol accidents  n
+## 1  much    much    7.5720 20
+## 2  none    much    5.2970 20
+## 3  some    much    6.5125 20
+## 4  much    none    3.8880 20
+## 5  none    none    2.1060 20
+## 6  some    none    2.9445 20
+## 7  much    some    5.5790 20
+## 8  none    some    3.4435 20
+## 9  some    some    4.7625 20</code></pre>
+<hr />
+<div id="htmlwidget-6c54f5b4a803c04dac89" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6c54f5b4a803c04dac89">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],[2.67,2.64,2.39,2.13,2.16,2.33,1.79,2.37,1.91,1.78,1.56,2.6,2.55,1.8,1.6,2.3,2.27,1.77,2.75,0.75,1.85,2.96,2.68,2.63,2.63,2.98,2.19,3.35,3.03,3.24,3.34,3.37,2.4,3.02,2.25,4.03,3.78,3.11,2.66,3.39,3.52,4.17,4.02,3.91,3.13,3.42,3.5,3.24,4.01,3.82,4.16,4.27,3.55,4.73,4.26,3.63,4.52,4.11,3.12,4.67,3.26,3.46,2.35,4.1,3.46,3.46,3.66,3.78,2.86,3.51,2.95,4.09,3.15,4.2,3.03,3.83,2.72,4.18,3.06,3.76,4.39,4.35,4.8,5.1,3.89,5.38,4.34,5.48,3.49,5.03,4.19,5.39,4.87,5.8,4.03,5.02,4.18,5.55,4.44,5.53,5.13,6.81,5.34,5.33,4.56,5.16,5.76,6.59,4.64,5.64,6.31,6.71,5.03,5.73,5.3,5.7,5.02,5.69,5.06,6.07,4.51,6.44,4.9,5.54,4.59,6.26,4.34,5.91,5.5,5.88,4.24,5.23,4.78,6.03,4.46,5.87,4.33,5.39,5.61,6.13,6.12,6.95,7,6.36,6.49,7.49,5.44,7.24,6.17,6.76,5.93,7.48,5.09,7.11,6,7.07,6.15,7.61,5.21,6.58,6.46,8.21,6.82,7.66,6.9,7.54,7.98,7.49,7.26,8.8,7.04,8.55,7.32,7.73,7.08,8.42,7.05,6.97,7.09,9.07],[4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68],[2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>data.speed<\/th>\n      <th>data.alcohol<\/th>\n      <th>accidents<\/th>\n      <th>grand.mean<\/th>\n      <th>group.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<pre class="r"><code>SS.model &lt;- sum((exp.accidents - mean(data$accidents))^2); SS.model</code></pre>
+<pre><code>## [1] 494.2205</code></pre>
+<pre class="r"><code>m.k1 = mean(subset(data, speed == &quot;none&quot; &amp; alcohol == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+m.k2 = mean(subset(data, speed == &quot;none&quot; &amp; alcohol == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+m.k3 = mean(subset(data, speed == &quot;none&quot; &amp; alcohol == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)
+m.k4 = mean(subset(data, speed == &quot;some&quot; &amp; alcohol == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+m.k5 = mean(subset(data, speed == &quot;some&quot; &amp; alcohol == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+m.k6 = mean(subset(data, speed == &quot;some&quot; &amp; alcohol == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)
+m.k7 = mean(subset(data, speed == &quot;much&quot; &amp; alcohol == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+m.k8 = mean(subset(data, speed == &quot;much&quot; &amp; alcohol == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+m.k9 = mean(subset(data, speed == &quot;much&quot; &amp; alcohol == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)
+
+n.k1 = n.k2 = n.k3 = n.k4 = n.k5 = n.k6 = n.k7 = n.k8 = n.k9 = 20</code></pre>
+<hr />
+<pre class="r"><code>ss.m.k1 = n.k1 * (m.k1 - mean(accidents))^2
+ss.m.k2 = n.k2 * (m.k2 - mean(accidents))^2
+ss.m.k3 = n.k3 * (m.k3 - mean(accidents))^2
+ss.m.k4 = n.k4 * (m.k4 - mean(accidents))^2
+ss.m.k5 = n.k5 * (m.k5 - mean(accidents))^2
+ss.m.k6 = n.k6 * (m.k6 - mean(accidents))^2
+ss.m.k7 = n.k7 * (m.k7 - mean(accidents))^2
+ss.m.k8 = n.k8 * (m.k8 - mean(accidents))^2
+ss.m.k9 = n.k9 * (m.k9 - mean(accidents))^2
+
+ss.model = sum(ss.m.k1,ss.m.k2,ss.m.k3,ss.m.k4,ss.m.k5,ss.m.k6,ss.m.k7,ss.m.k8,ss.m.k9)
+ss.model</code></pre>
+<pre><code>## [1] 494.2205</code></pre>
+</div>
+<div id="ssmodel-visual" class="section level2 smaller">
+<h2>SS<sub>model</sub> visual</h2>
+<pre class="r"><code># Plot all data points
+plot(accidents,
+     xlab = &#39;participants&#39;)
+
+# With the mean
+lines(1:n,rep(mean(accidents),n),col=&#39;black&#39;,lwd=2)
+
+# The black lines are the total variance, the deviation from the mean.
+segments(1:n, mean(accidents), 1:n, accidents)
+
+# The model predicts the accidents scores
+points(1:n,exp.accidents, col=&#39;red&#39;)
+
+p &lt;- recordPlot()
+
+# The black lines are the total variance, the deviation from the mean.
+segments(1:n, exp.accidents, 1:n, mean(accidents), col = &quot;red&quot;)
+
+# Add legend to plot
+legend(&quot;topleft&quot;,
+       pch    = c(&quot;o&quot;),
+       col    = c(&quot;red&quot;),
+       legend = c(&quot;Full model&quot;) )</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="sserror" class="section level2 subsection">
+<h2>SS<sub>error</sub></h2>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Error</td>
+<td><span class="math inline">\(\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}\)</span></td>
+<td><span class="math inline">\(N-k\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<pre class="r"><code>v.k1 = var(subset(data, speed == &quot;none&quot; &amp; alcohol == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+v.k2 = var(subset(data, speed == &quot;none&quot; &amp; alcohol == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+v.k3 = var(subset(data, speed == &quot;none&quot; &amp; alcohol == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)
+v.k4 = var(subset(data, speed == &quot;some&quot; &amp; alcohol == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+v.k5 = var(subset(data, speed == &quot;some&quot; &amp; alcohol == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+v.k6 = var(subset(data, speed == &quot;some&quot; &amp; alcohol == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)
+v.k7 = var(subset(data, speed == &quot;much&quot; &amp; alcohol == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+v.k8 = var(subset(data, speed == &quot;much&quot; &amp; alcohol == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+v.k9 = var(subset(data, speed == &quot;much&quot; &amp; alcohol == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)</code></pre>
+<hr />
+<pre class="r"><code>ss.e.k1 = v.k1 * (n.k1 - 1)
+ss.e.k2 = v.k2 * (n.k2 - 1)
+ss.e.k3 = v.k3 * (n.k3 - 1)
+ss.e.k4 = v.k4 * (n.k4 - 1)
+ss.e.k5 = v.k5 * (n.k5 - 1)
+ss.e.k6 = v.k6 * (n.k6 - 1)
+ss.e.k7 = v.k7 * (n.k7 - 1)
+ss.e.k8 = v.k8 * (n.k8 - 1)
+ss.e.k9 = v.k9 * (n.k9 - 1)
+
+ss.error = sum(ss.e.k1,ss.e.k2,ss.e.k3,ss.e.k4,ss.e.k5,ss.e.k6,ss.e.k7,ss.e.k8,ss.e.k9)
+ss.error</code></pre>
+<pre><code>## [1] 66.34642</code></pre>
+</div>
+<div id="sserror-visual" class="section level2">
+<h2>SS<sub>error</sub> visual</h2>
+<pre class="r"><code>p
+
+# Now we can add the error of this model
+segments(1:n, accidents, 1:n, exp.accidents, col=&#39;purple&#39;)
+
+# Add legend to plot
+legend(&quot;topleft&quot;,
+       pch    = c(&quot;o&quot;, &quot;-&quot;),
+       col    = c(&quot;red&quot;, &quot;purple&quot;),
+       legend = c(&quot;Full model&quot;, &quot;error&quot;) )</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="ssa-speed" class="section level2 subsection">
+<h2>SS<sub>A</sub> Speed</h2>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}A\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_A-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<pre class="r"><code>m.s1 = mean(subset(data, speed == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+m.s2 = mean(subset(data, speed == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+m.s3 = mean(subset(data, speed == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)
+
+n.s1 = n.s2 = n.s3 = 60</code></pre>
+<hr />
+<pre class="r"><code>ss.s1 = n.s1 * (m.s1 - mean(accidents))^2
+ss.s2 = n.s2 * (m.s2 - mean(accidents))^2
+ss.s3 = n.s3 * (m.s3 - mean(accidents))^2
+
+ss.speed = sum(ss.s1,ss.s2,ss.s3)
+ss.speed</code></pre>
+<pre><code>## [1] 128.1639</code></pre>
+</div>
+<div id="ssa-speed-visual" class="section level2">
+<h2>SS<sub>A</sub> Speed Visual</h2>
+<pre class="r"><code>p
+# Deviation of speed
+points(1:n, data$means.speed,  col=&#39;green&#39;)
+segments(1:n, mean(accidents), 1:n, data$means.speed, col=&#39;green&#39;)
+
+# Add legend to plot
+legend(&quot;topleft&quot;,
+       pch    = c(&quot;o&quot;, &quot;o&quot;),
+       col    = c(&quot;green&quot;, &quot;red&quot;),
+       legend = c(&quot;speed&quot;, &quot;Full model&quot;) )</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="ssb-alcohol" class="section level2 subsection">
+<h2>SS<sub>B</sub> Alcohol</h2>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}B\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_B-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<pre class="r"><code>m.a1 = mean(subset(data, alcohol == &quot;none&quot;, select = &quot;accidents&quot;)$accidents)
+m.a2 = mean(subset(data, alcohol == &quot;some&quot;, select = &quot;accidents&quot;)$accidents)
+m.a3 = mean(subset(data, alcohol == &quot;much&quot;, select = &quot;accidents&quot;)$accidents)
+
+n.a1 = n.a2 = n.a3 = 60</code></pre>
+<hr />
+<pre class="r"><code>ss.a1 = n.a1 * (m.a1 - mean(accidents))^2 
+ss.a2 = n.a2 * (m.a2 - mean(accidents))^2 
+ss.a3 = n.a3 * (m.a3 - mean(accidents))^2 
+
+ss.alcohol = sum(ss.a1,ss.a2,ss.a3)
+ss.alcohol</code></pre>
+<pre><code>## [1] 364.1458</code></pre>
+</div>
+<div id="ssb-alcohol-visual" class="section level2">
+<h2>SS<sub>B</sub> Alcohol Visual</h2>
+<pre class="r"><code>p
+
+# Deviation of alcohol
+points(1:n, data$means.alcohol,col=&#39;orange&#39;,type=&quot;p&quot;)
+segments(1:n, mean(accidents), 1:n, data$means.alcohol, col=&#39;orange&#39;)
+
+# Add legend to plot
+legend(&quot;topleft&quot;,
+       pch    = c(&quot;o&quot;, &quot;o&quot;),
+       col    = c(&quot;orange&quot;, &quot;red&quot;),
+       legend = c(&quot;alcohol&quot;, &quot;Full model&quot;) )</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="ssab-alcohol-x-speed" class="section level2 subsection">
+<h2>SS<sub>AB</sub> Alcohol x Speed</h2>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}AB\)</span></td>
+<td><span class="math inline">\(\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}\)</span></td>
+<td><span class="math inline">\(df_A \times df_B\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<pre class="r"><code># Sums of squares for the interaction between speed and alcohol
+ss.speed.alcohol &lt;- ss.model - ss.speed - ss.alcohol
+ss.speed.alcohol</code></pre>
+<pre><code>## [1] 1.910727</code></pre>
+</div>
+<div id="mean-squares" class="section level2">
+<h2>Mean Squares</h2>
+<p>Mean squares for:</p>
+<ul>
+<li>Speed</li>
+<li>Alcohol</li>
+<li>Speed <span class="math inline">\(\times\)</span> Alcohol</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+F_{Speed} &amp;= \frac{{MS}_{Speed}}{{MS}_{error}} \\
+F_{Alcohol} &amp;= \frac{{MS}_{Alcohol}}{{MS}_{error}} \\
+F_{Alcohol \times Speed} &amp;= \frac{{MS}_{Alcohol \times Speed}}{{MS}_{error}} \\
+\end{aligned}\]</span></p>
+</div>
+<div id="interaction" class="section level2">
+<h2>Interaction</h2>
+<p><span class="math display">\[F_{Alcohol \times Speed}\]</span></p>
+<pre class="r"><code>N          = length(accidents)
+k.speed    = 3
+k.alcohol  = 3
+k.model    = 9
+df.speed   = k.speed   - 1
+df.alcohol = k.alcohol - 1
+df.speed.alcohol = df.speed * df.alcohol
+
+ms.speed.alcohol = ss.speed.alcohol / df.speed.alcohol
+
+df.error = N - k.model
+ms.error = ss.error / df.error</code></pre>
+</div>
+<div id="p-value" class="section level2">
+<h2><span class="math inline">\(P\)</span>-value</h2>
+<pre class="r"><code>F.speed.alcohol = ms.speed.alcohol / ms.error
+F.speed.alcohol</code></pre>
+<pre><code>## [1] 1.231168</code></pre>
+<pre class="r"><code>library(visualize)
+visualize.f(F.speed.alcohol, df.speed.alcohol, df.error, section = &quot;upper&quot;)</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<hr />
+<pre class="r"><code>F.values = seq(0, 10, .01)
+
+plot(F.values, df(F.values, df.speed.alcohol, df.error), type = &quot;l&quot;, ylab=&quot;density&quot;, main = &quot;H0 and HA F-distribution&quot;)
+
+critical.value = qf(.95, df.speed.alcohol, df.error)
+
+critical.range = seq(critical.value, 10, .01)
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error, ncp = 5))), col = &quot;green&quot;)
+
+lines(F.values, df(F.values, df.speed.alcohol, df.error, ncp = 5))
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, df.speed.alcohol, df.error))), col = rgb(1,0,0,1), density = 40, angle = -45)
+
+p.range = seq(F.speed.alcohol, 10, .01)
+
+polygon(c(p.range,rev(p.range)), 
+        c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20)</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+</div>
+<div id="contrast" class="section level2">
+<h2>Contrast</h2>
+<p>Planned comparisons</p>
+<ul>
+<li>Exploring differences of theoretical interest</li>
+<li>Higher precision</li>
+<li>Higher power</li>
+</ul>
+</div>
+<div id="post-hoc" class="section level2">
+<h2>Post-Hoc</h2>
+<p>Unplanned comparisons</p>
+<ul>
+<li>Exploring all possible differences</li>
+<li>Adjust T value for inflated type 1 error</li>
+</ul>
+</div>
+<div id="effect-size" class="section level2">
+<h2>Effect size</h2>
+<p>General effect size measures</p>
+<ul>
+<li>Amount of explained variance <span class="math inline">\(R^2\)</span> also called eta squared <span class="math inline">\(\eta^2\)</span>.</li>
+<li>Omega squared <span class="math inline">\(\omega^2\)</span></li>
+</ul>
+<p>Effect sizes of contrasts or post-hoc comparisons</p>
+<ul>
+<li>Cohen’s <span class="math inline">\(r\)</span> gives the effect size for a specific comparison
+<ul>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="anova-one-way-repeated" class="section level1">
+<h1>ANOVA<br>One-way repeated</h1>
+<div id="one-way-repeated-measures-anova" class="section level2 section">
+<h2>One-way repeated measures ANOVA</h2>
+<p>The one-way repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>1 independent/predictor variable
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>All with same subjects</li>
+</ul>
+</div>
+<div id="assumptions-1" class="section level2 subsection">
+<h2>Assumptions</h2>
+<!-- * Uni- or Multivariate -->
+<ul>
+<li>Continuous dependent variable</li>
+<li>Normaly distributed
+<ul>
+<li>Shapiro-Wilk</li>
+</ul></li>
+<li>Equality of variance within groups
+<ul>
+<li>Mauchly’s test of Sphericity</li>
+</ul></li>
+</ul>
+<!--    
+## Uni- or Multi- descision tree {.smaller}
+
+<img src="../../../../topics/anova_repeated_one-way/uni_multi_descicion.png" style="float:right; width:350px; margin-right:20px;">
+
+<small>
+
+1. Field: 15.5.2, Output 15.2
+2. Field: Output 15.4
+3. Field: Jane Superbrain 15.2, Output 15.2 GG and HF.
+4. Field: Jane Superbrain 15.2, Sample size $n$ is larger than $a$ (number of levels) + 10
+5. Field: 15.5.4, Output 15.2
+6. Field: 15.5.4, Output 15.4
+7. Field: 15.5.4, Output 15.4
+
+</small>
+
+-->
+</div>
+<div id="formulas-1" class="section level2 smaller subsection">
+<h2>Formulas</h2>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Between</td>
+<td><span class="math inline">\({SS}_{{between}} = {SS}_{{total}} - {SS}_{{within}}\)</span></td>
+<td><span class="math inline">\({DF}_{{total}}-{DF}_{{within}}\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{between}}}{{DF}_{{between}}}\)</span></td>
+<td> </td>
+</tr>
+<tr class="even">
+<td>Within</td>
+<td><span class="math inline">\({SS}_{{within}} = \sum{s_i^2(n_i-1)}\)</span></td>
+<td><span class="math inline">\((n_i-1)n\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{within}}}{{DF}_{{within}}}\)</span></td>
+<td> </td>
+</tr>
+<tr class="odd">
+<td>• Model</td>
+<td><span class="math inline">\({SS}_{{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{model}}}{{DF}_{{model}}}\)</span></td>
+<td><span class="math inline">\(\frac{{MS}_{{model}}}{{MS}_{{error}}}\)</span></td>
+</tr>
+<tr class="even">
+<td>• Error</td>
+<td><span class="math inline">\({SS}_{{error}} = {SS}_{{within}} - {SS}_{{model}}\)</span></td>
+<td><span class="math inline">\((n-1)(k-1)\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{error}}}{{DF}_{{error}}}\)</span></td>
+<td> </td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\({SS}_{{total}} = s_{grand}^2(N-1)\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{{total}}}{{DF}_{{total}}}\)</span></td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(n_i\)</span> is the number of observations per person and <span class="math inline">\(k\)</span> is the number of conditions. These two are equal for a one-way repeated ANOVA. Furthermore <span class="math inline">\(n\)</span> is the number of subjects per condition and <span class="math inline">\(N\)</span> is the total number of data points <span class="math inline">\(n \times k\)</span>.</p>
+</div>
+<div id="example-1" class="section level2">
+<h2>Example</h2>
+<p>Measure driving ability in a driving simulator. Test in three consecutive conditions where participants come back to attend the next condition.</p>
+<ul>
+<li>Alcohol none</li>
+<li>Alcohol some</li>
+<li>Alcohol much</li>
+</ul>
+</div>
+<div id="the-data" class="section level2 smaller">
+<h2>The data</h2>
+<div id="htmlwidget-88d4085a9e3bcbc741c7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-88d4085a9e3bcbc741c7">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="ms_total" class="section level2 subsection">
+<h2><span class="math inline">\({MS}_{total}\)</span></h2>
+<pre class="r"><code># Assign to individual variables
+none_alc = data$none_alc
+some_alc = data$some_alc
+much_alc = data$much_alc
+total    = c(none_alc,some_alc,much_alc)</code></pre>
+<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{{total}}}{{DF}_{{total}}} = s_{grand}^2\]</span></p>
+<pre class="r"><code>MS_total = var(total); MS_total</code></pre>
+<pre><code>## [1] 0.9410458</code></pre>
+</div>
+<div id="ss_total" class="section level2">
+<h2><span class="math inline">\({SS}_{total}\)</span></h2>
+<p><span class="math display">\[{DF_{total}} = N-1 \\
+{SS}_{{total}} = s_{grand}^2(N-1)\]</span></p>
+<pre class="r"><code>N = length(total)
+DF_total = N - 1
+SS_total = MS_total * DF_total; SS_total</code></pre>
+<pre><code>## [1] 55.5217</code></pre>
+<pre class="r"><code>sum((total - mean(total))^2)</code></pre>
+<pre><code>## [1] 55.5217</code></pre>
+</div>
+<div id="ss_total-visual" class="section level2 smaller">
+<h2><span class="math inline">\({SS}_{total}\)</span> visual</h2>
+<pre class="r"><code># Set offset
+offset = .2
+
+# Calculate n
+n = length(none_alc)
+
+# Create plot
+plot(none_alc,
+     xlab = &#39;participants&#39;,
+     ylab = &#39;Brokken&#39;,
+     xlim = c(.5,22),
+     ylim = c(3,7.5),
+     col=&#39;green&#39;)
+points((1:n)-offset, some_alc, col=&#39;red&#39;)
+points((1:n)+offset, much_alc,   col=&#39;blue&#39;)
+
+# Add the total mean
+lines(c((1-offset),(n+offset)),rep(mean(total),2),col=&#39;black&#39;,lwd=2)
+
+segments(1:n,        mean(total), 1:n,        none_alc)
+segments(1:n-offset, mean(total), 1:n-offset, some_alc)
+segments(1:n+offset, mean(total), 1:n+offset, much_alc)
+
+text(n+offset,mean(total),expression(bar(X)[grand]),pos=4)</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre class="r"><code>p &lt;- recordPlot()</code></pre>
+<hr />
+<pre class="r"><code>p
+
+# add grid
+segments(1:21-.5, 3, 1:21-.5, 7.5, col=&#39;grey&#39;)</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<pre class="r"><code>p &lt;- recordPlot()</code></pre>
+</div>
+<div id="ms_within" class="section level2 subsection">
+<h2><span class="math inline">\({MS}_{within}\)</span></h2>
+<p><span class="math display">\[{MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}} \\
+{DF}_{within} = (n_i-1)n\]</span></p>
+<pre class="r"><code>n.i = 3  # Number of mesurements per individual (none, some, much)
+n   = 20 # Number of mesurements per group
+
+DF_within = (n.i - 1) * n
+DF_within</code></pre>
+<pre><code>## [1] 40</code></pre>
+</div>
+<div id="ss_within" class="section level2 smaller">
+<h2><span class="math inline">\({SS}_{within}\)</span></h2>
+<p><span class="math display">\[{SS}_{{within}} = \sum{s_i^2(n_i-1)}\]</span></p>
+<pre class="r"><code>var_pp = apply(cbind(none_alc, some_alc, much_alc),1,var)
+ss_pp  = var_pp * (n.i - 1)
+
+SS_within = sum(ss_pp); SS_within</code></pre>
+<pre><code>## [1] 48.45032</code></pre>
+<pre class="r"><code>mean_pp = apply(cbind(none_alc, some_alc, much_alc),1,mean)
+
+sum(c((none_alc   - mean_pp)^2, 
+      (some_alc - mean_pp)^2,
+      (much_alc   - mean_pp)^2))</code></pre>
+<pre><code>## [1] 48.45032</code></pre>
+</div>
+<div id="ss_within-data" class="section level2">
+<h2><span class="math inline">\({SS}_{within}\)</span> data</h2>
+<div id="htmlwidget-d0aa26727d83733b27e2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d0aa26727d83733b27e2">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155],[5.192,5.199,5.96,5.388,5.763,5.558,5.766,5.953,5.292,4.825,5.591,5.538,5.812,5.305,5.348,5.993,5.176,5.196,5.764,6.172],[5.192,1.51,1.805,1.248,1.792,1.316,3.071,0.563,1.326,6.198,1.045,1.881,0.38,2.507,2.328,1.996,2.828,6.767,2.834,1.859]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="ss_within-visual" class="section level2">
+<h2><span class="math inline">\({SS}_{within}\)</span> visual</h2>
+<pre class="r"><code>p
+# Personal means
+segments(1:n-offset, mean_pp, 1:n+offset, mean_pp, col=&#39;orange&#39;, lwd=3)
+# The lines show the within deviation from the personal mean.
+segments(1:n-offset, mean_pp, 1:n-offset, some_alc, col=&#39;orange&#39;, lwd=3)
+segments(1:n, mean_pp,        1:n,        none_alc,   col=&#39;orange&#39;, lwd=3)
+segments(1:n+offset, mean_pp, 1:n+offset, much_alc,   col=&#39;orange&#39;, lwd=3)
+
+# Add personal means symbols
+for(i in 1:n) { text(i-(offset/2), mean_pp[i], expression(bar(X)[i]), pos=2, cex=.5)}</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<pre class="r"><code>p &lt;- recordPlot()</code></pre>
+</div>
+<div id="ms_between" class="section level2 subsection">
+<h2><span class="math inline">\({MS}_{between}\)</span></h2>
+<p><span class="math display">\[{MS}_{between} = \frac{{SS}_{{between}}}{{DF}_{{between}}}\]</span></p>
+<p><span class="math display">\[{DF}_{between}-{DF}_{{within}} \\
+{SS}_{between} = {SS}_{total} - {SS}_{within}\]</span></p>
+<pre class="r"><code>SS_between = SS_total - SS_within
+SS_between</code></pre>
+<pre><code>## [1] 7.071382</code></pre>
+<pre class="r"><code>DF_between = DF_total - DF_within
+DF_between</code></pre>
+<pre><code>## [1] 19</code></pre>
+</div>
+<div id="ms_model" class="section level2 subsection">
+<h2><span class="math inline">\({MS}_{model}\)</span></h2>
+<p><span class="math display">\[{MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}} \\
+{DF}_{model} = k-1\]</span></p>
+<pre class="r"><code>k = 3
+DF_model = k - 1
+DF_model</code></pre>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="ss_model" class="section level2">
+<h2><span class="math inline">\({SS}_{model}\)</span></h2>
+<p><span class="math display">\[{SS}_{model} = \sum{n_k(\bar{X}_k-\bar{X})^2}\]</span></p>
+<pre class="r"><code># SS model
+n_k1 = length(none_alc)
+n_k2 = length(some_alc)
+n_k3 = length(much_alc)
+
+# Calculate sums of squares for the model
+SS_k1 = n_k1 * (mean(none_alc) - mean(total))^2
+SS_k2 = n_k2 * (mean(some_alc) - mean(total))^2
+SS_k3 = n_k3 * (mean(much_alc) - mean(total))^2
+
+SS_model = sum(SS_k1, SS_k2, SS_k3)
+SS_model</code></pre>
+<pre><code>## [1] 38.63266</code></pre>
+</div>
+<div id="ss_model-visual" class="section level2">
+<h2><span class="math inline">\({SS}_{model}\)</span> visual</h2>
+<pre class="r"><code>p
+# Add the no alcohol mean
+lines(c((1),(n)),rep(mean(none_alc),2),col=&#39;green&#39;,lwd=2)
+text(n+offset,mean(none_alc),expression(bar(X)[none]),pos=4)
+
+# With the bit alcohol mean
+lines(c((1-offset),(n-offset)),rep(mean(some_alc),2),col=&#39;red&#39;,lwd=2)
+text(n+offset,mean(some_alc),expression(bar(X)[some]),pos=4)
+
+# With the much alcohol mean
+lines(c((1+offset),(n+offset)),rep(mean(much_alc),2),col=&#39;blue&#39;,lwd=2)
+text(n+offset,mean(much_alc),expression(bar(X)[much]),pos=4)
+
+# The lines show the model deviation from the total mean.
+segments(1:n,        mean(total), 1:n,        mean(none_alc),   col=&#39;green&#39;)
+segments(1:n-offset, mean(total), 1:n-offset, mean(some_alc), col=&#39;red&#39;)
+segments(1:n+offset, mean(total), 1:n+offset, mean(much_alc),   col=&#39;blue&#39;)</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<pre class="r"><code>p &lt;- recordPlot()</code></pre>
+</div>
+<div id="ms_error" class="section level2 subsection">
+<h2><span class="math inline">\({MS}_{error}\)</span></h2>
+<p><span class="math display">\[\frac{{SS}_{error}}{{DF}_{error}} \\
+{DF}_{error} = (n-1)(k-1)\]</span></p>
+<pre class="r"><code>DF_error = DF_within - DF_model
+DF_error</code></pre>
+<pre><code>## [1] 38</code></pre>
+</div>
+<div id="ss_error" class="section level2">
+<h2><span class="math inline">\({SS}_{error}\)</span></h2>
+<p><span class="math display">\[{SS}_{error} = {SS}_{within} - {SS}_{model}\]</span></p>
+<pre class="r"><code>SS_error = SS_within - SS_model
+SS_error</code></pre>
+<pre><code>## [1] 9.817655</code></pre>
+</div>
+<div id="f-ratio" class="section level2 subsection">
+<h2>F ratio</h2>
+<p><span class="math display">\[F = \frac{{MS}_{{model}}}{{MS}_{{error}}}\]</span></p>
+<pre class="r"><code># Calculate mean squares
+MS_model = SS_model / DF_model
+MS_error = SS_error / DF_error
+
+# Calculate F statistic
+F = MS_model / MS_error
+F</code></pre>
+<pre><code>## [1] 74.76537</code></pre>
+</div>
+<div id="visualize" class="section level2">
+<h2>Visualize</h2>
+<pre class="r"><code>library(&#39;visualize&#39;)
+visualize.f(F, DF_model, DF_error, section=&quot;upper&quot;)</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<hr />
+<pre class="r"><code>F.values = seq(0, 100, .01)
+
+plot(F.values, df(F.values, DF_model, DF_error), type = &quot;l&quot;, ylab=&quot;density&quot;, main = &quot;H0 and HA F-distribution&quot;)
+
+critical.value = qf(.95, DF_model, DF_error)
+
+critical.range = seq(critical.value, 100, .01)
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, DF_model, DF_error, ncp = 5))), col = &quot;darkorange&quot;)
+
+lines(F.values, df(F.values, DF_model, DF_error, ncp = 5))
+
+polygon(c(critical.range,rev(critical.range)), 
+        c(critical.range*0, rev(df(critical.range, DF_model, DF_error))), col = rgb(0,1,0,1), density = 40, angle = -45)
+
+p.range = seq(F, 100, .01)
+
+polygon(c(p.range,rev(p.range)), 
+        c(p.range*0, rev(df(p.range, DF_model, DF_error))), col = rgb(0,0,1,.6), density = 20)</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+</div>
+<div id="contrast-1" class="section level2 subsection">
+<h2>Contrast</h2>
+<p>Planned comparisons</p>
+<ul>
+<li>Exploring differences of theoretical interest</li>
+<li>Higher precision</li>
+<li>Higher power</li>
+</ul>
+</div>
+<div id="post-hoc-1" class="section level2 subsection">
+<h2>Post-Hoc</h2>
+<p>Unplanned comparisons</p>
+<ul>
+<li>Exploring all possible differences</li>
+<li>Adjust T value for inflated type 1 error</li>
+</ul>
+</div>
+<div id="effect-size-1" class="section level2 subsection">
+<h2>Effect size</h2>
+<p>General effect size measures</p>
+<ul>
+<li>Amount of explained variance <span class="math inline">\(R^2\)</span> also called eta squared <span class="math inline">\(\eta^2\)</span>.</li>
+<li>Omega squared <span class="math inline">\(\omega^2\)</span></li>
+</ul>
+<p>Effect sizes of contrasts or post-hoc comparisons</p>
+<ul>
+<li>Cohen’s <span class="math inline">\(r\)</span> gives the effect size for a specific comparison
+<ul>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\)</span></li>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{F(1,{df}_R)}{F(1,{df}_R)+{df}_R}}\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="mixed-design-anova" class="section level1 section">
+<h1>Mixed design ANOVA</h1>
+<div id="mixed-design" class="section level2">
+<h2>Mixed design</h2>
+<p>The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>2 or more independent/predictor variable with different subjects
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+<li>2 or more independent/predictor variable with same subjects
+<ul>
+<li>2 or more levels</li>
+</ul></li>
+</ul>
+</div>
+<div id="assumptions-2" class="section level2">
+<h2>Assumptions</h2>
+<p>Same as repeated measures ANOVA and same as factorial ANOVA.</p>
+</div>
+<div id="example-2" class="section level2 smaller">
+<h2>Example</h2>
+<p><small></p>
+<ul>
+<li>Dependent variable
+<ul>
+<li>Accidents</li>
+</ul></li>
+<li>Independent variables
+<ul>
+<li>Speed (same subjects)
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Alcohol (same subjects)
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Gender
+<ul>
+<li>Males</li>
+<li>Females</li>
+</ul></li>
+</ul></li>
+</ul>
+<p></small></p>
+</div>
+<div id="section-1" class="section level2 smaller">
+<h2></h2>
+<p><small></p>
+<table>
+<thead>
+<tr class="header">
+<th>person</th>
+<th>gender</th>
+<th>1_1</th>
+<th>1_2</th>
+<th>1_3</th>
+<th>2_1</th>
+<th>2_2</th>
+<th>2_3</th>
+<th>3_1</th>
+<th>3_2</th>
+<th>3_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>males</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>males</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>males</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>females</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>females</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>females</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p></small></p>
+</div>
+<div id="data-1" class="section level2 smaller">
+<h2>Data</h2>
+<div id="htmlwidget-bdce199960392d721a2f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bdce199960392d721a2f">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.24,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.13,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.35,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.33,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.21,8.74,6.8,5.98,6.66,7.94,9.22,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.99,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.53,6.33,5.64,7.66],[9.51,10.71,9.49,9.39,9.83,10.78,8.59,9.26,9.29,9.14,9.96,9.52,9.12,9.48,9.54,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>sekse<\/th>\n      <th>v1_1<\/th>\n      <th>v1_2<\/th>\n      <th>v1_3<\/th>\n      <th>v2_1<\/th>\n      <th>v2_2<\/th>\n      <th>v2_3<\/th>\n      <th>v3_1<\/th>\n      <th>v3_2<\/th>\n      <th>v3_3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="reshape-data" class="section level2">
+<h2>Reshape data</h2>
+<pre class="r"><code>data.long &lt;- reshape(data,
+                     idvar     = &quot;pp&quot;,
+                     varying   = list(3:11),
+                     v.names   = &quot;Accidents&quot;,
+                     direction = &quot;long&quot;)
+
+data.long[which(data.long$time == 1), &quot;time&quot;] = &quot;1_1&quot;
+data.long[which(data.long$time == 2), &quot;time&quot;] = &quot;1_2&quot;
+data.long[which(data.long$time == 3), &quot;time&quot;] = &quot;1_3&quot;
+data.long[which(data.long$time == 4), &quot;time&quot;] = &quot;2_1&quot;
+data.long[which(data.long$time == 5), &quot;time&quot;] = &quot;2_2&quot;
+data.long[which(data.long$time == 6), &quot;time&quot;] = &quot;2_3&quot;
+data.long[which(data.long$time == 7), &quot;time&quot;] = &quot;3_1&quot;
+data.long[which(data.long$time == 8), &quot;time&quot;] = &quot;3_2&quot;
+data.long[which(data.long$time == 9), &quot;time&quot;] = &quot;3_3&quot;
+
+data.long$speed = NA
+data.long$speed[grep(&quot;^1&quot;, data.long$time)] = &quot;none&quot;
+data.long$speed[grep(&quot;^2&quot;, data.long$time)] = &quot;small&quot;
+data.long$speed[grep(&quot;^3&quot;, data.long$time)] = &quot;large&quot;
+
+data.long$alcohol = NA
+data.long$alcohol[grep(&quot;_1$&quot;, data.long$time)] = &quot;none&quot;
+data.long$alcohol[grep(&quot;_2$&quot;, data.long$time)] = &quot;small&quot;
+data.long$alcohol[grep(&quot;_3$&quot;, data.long$time)] = &quot;large&quot;
+
+data.long$pp      &lt;- as.factor(data.long$pp)
+data.long$sekse   &lt;- as.factor(data.long$sekse)
+data.long$speed   &lt;- as.factor(data.long$speed)
+data.long$alcohol &lt;- as.factor(data.long$alcohol)</code></pre>
+</div>
+<div id="data-long" class="section level2">
+<h2>Data long</h2>
+<pre class="r"><code>data.long</code></pre>
+<pre><code>##      pp sekse time Accidents speed alcohol
+## 1.1   1     1  1_1      1.59  none    none
+## 2.1   2     2  1_1      2.18  none    none
+## 3.1   3     1  1_1      3.24  none    none
+## 4.1   4     2  1_1      2.18  none    none
+## 5.1   5     1  1_1      1.36  none    none
+## 6.1   6     2  1_1      2.18  none    none
+## 7.1   7     1  1_1      2.91  none    none
+## 8.1   8     2  1_1      4.26  none    none
+## 9.1   9     1  1_1      2.96  none    none
+## 10.1 10     2  1_1      1.67  none    none
+## 11.1 11     1  1_1      2.88  none    none
+## 12.1 12     2  1_1      1.24  none    none
+## 13.1 13     1  1_1      1.94  none    none
+## 14.1 14     2  1_1      3.29  none    none
+## 15.1 15     1  1_1      2.77  none    none
+## 16.1 16     2  1_1      2.79  none    none
+## 17.1 17     1  1_1      2.03  none    none
+## 18.1 18     2  1_1      1.33  none    none
+## 19.1 19     1  1_1      1.34  none    none
+## 20.1 20     2  1_1      1.10  none    none
+## 1.2   1     1  1_2      4.96  none   small
+## 2.2   2     2  1_2      4.66  none   small
+## 3.2   3     1  1_2      5.58  none   small
+## 4.2   4     2  1_2      5.70  none   small
+## 5.2   5     1  1_2      6.15  none   small
+## 6.2   6     2  1_2      5.83  none   small
+## 7.2   7     1  1_2      4.03  none   small
+## 8.2   8     2  1_2      5.48  none   small
+## 9.2   9     1  1_2      4.92  none   small
+## 10.2 10     2  1_2      4.13  none   small
+## 11.2 11     1  1_2      6.68  none   small
+## 12.2 12     2  1_2      6.74  none   small
+## 13.2 13     1  1_2      6.45  none   small
+## 14.2 14     2  1_2      4.52  none   small
+## 15.2 15     1  1_2      5.53  none   small
+## 16.2 16     2  1_2      5.41  none   small
+## 17.2 17     1  1_2      3.50  none   small
+## 18.2 18     2  1_2      3.73  none   small
+## 19.2 19     1  1_2      5.76  none   small
+## 20.2 20     2  1_2      6.40  none   small
+## 1.3   1     1  1_3      6.72  none   large
+## 2.3   2     2  1_3      5.84  none   large
+## 3.3   3     1  1_3      7.01  none   large
+## 4.3   4     2  1_3      6.02  none   large
+## 5.3   5     1  1_3      8.35  none   large
+## 6.3   6     2  1_3      7.07  none   large
+## 7.3   7     1  1_3      6.55  none   large
+## 8.3   8     2  1_3      6.34  none   large
+## 9.3   9     1  1_3      5.60  none   large
+## 10.3 10     2  1_3      4.96  none   large
+## 11.3 11     1  1_3      7.08  none   large
+## 12.3 12     2  1_3      6.30  none   large
+## 13.3 13     1  1_3      7.68  none   large
+## 14.3 14     2  1_3      5.46  none   large
+## 15.3 15     1  1_3      4.38  none   large
+## 16.3 16     2  1_3      8.40  none   large
+## 17.3 17     1  1_3      7.33  none   large
+## 18.3 18     2  1_3      5.23  none   large
+## 19.3 19     1  1_3      7.95  none   large
+## 20.3 20     2  1_3      8.18  none   large
+## 1.4   1     1  2_1      2.64 small    none
+## 2.4   2     2  2_1      4.43 small    none
+## 3.4   3     1  2_1      2.12 small    none
+## 4.4   4     2  2_1      3.00 small    none
+## 5.4   5     1  2_1      1.78 small    none
+## 6.4   6     2  2_1      3.06 small    none
+## 7.4   7     1  2_1      5.35 small    none
+## 8.4   8     2  2_1      2.89 small    none
+## 9.4   9     1  2_1      3.87 small    none
+## 10.4 10     2  2_1      2.52 small    none
+## 11.4 11     1  2_1      3.74 small    none
+## 12.4 12     2  2_1      1.72 small    none
+## 13.4 13     1  2_1      3.02 small    none
+## 14.4 14     2  2_1      2.53 small    none
+## 15.4 15     1  2_1      2.64 small    none
+## 16.4 16     2  2_1      1.84 small    none
+## 17.4 17     1  2_1     -0.06 small    none
+## 18.4 18     2  2_1      2.23 small    none
+## 19.4 19     1  2_1      1.54 small    none
+## 20.4 20     2  2_1      5.05 small    none
+## 1.5   1     1  2_2      3.74 small   small
+## 2.5   2     2  2_2      4.73 small   small
+## 3.5   3     1  2_2      7.12 small   small
+## 4.5   4     2  2_2      6.66 small   small
+## 5.5   5     1  2_2      5.57 small   small
+## 6.5   6     2  2_2      5.91 small   small
+## 7.5   7     1  2_2      4.93 small   small
+## 8.5   8     2  2_2      6.74 small   small
+## 9.5   9     1  2_2      5.12 small   small
+## 10.5 10     2  2_2      3.64 small   small
+## 11.5 11     1  2_2      4.27 small   small
+## 12.5 12     2  2_2      6.03 small   small
+## 13.5 13     1  2_2      6.44 small   small
+## 14.5 14     2  2_2      5.82 small   small
+## 15.5 15     1  2_2      5.84 small   small
+## 16.5 16     2  2_2      6.16 small   small
+## 17.5 17     1  2_2      6.01 small   small
+## 18.5 18     2  2_2      5.09 small   small
+## 19.5 19     1  2_2      6.28 small   small
+## 20.5 20     2  2_2      6.16 small   small
+## 1.6   1     1  2_3      5.93 small   large
+## 2.6   2     2  2_3      7.25 small   large
+## 3.6   3     1  2_3      7.43 small   large
+## 4.6   4     2  2_3      6.32 small   large
+## 5.6   5     1  2_3      8.10 small   large
+## 6.6   6     2  2_3      6.51 small   large
+## 7.6   7     1  2_3      7.21 small   large
+## 8.6   8     2  2_3      8.74 small   large
+## 9.6   9     1  2_3      6.80 small   large
+## 10.6 10     2  2_3      5.98 small   large
+## 11.6 11     1  2_3      6.66 small   large
+## 12.6 12     2  2_3      7.94 small   large
+## 13.6 13     1  2_3      9.22 small   large
+## 14.6 14     2  2_3      6.44 small   large
+## 15.6 15     1  2_3      7.82 small   large
+## 16.6 16     2  2_3      7.93 small   large
+## 17.6 17     1  2_3      8.19 small   large
+## 18.6 18     2  2_3      7.84 small   large
+## 19.6 19     1  2_3      7.60 small   large
+## 20.6 20     2  2_3      7.19 small   large
+## 1.7   1     1  3_1      4.68 large    none
+## 2.7   2     2  3_1      3.21 large    none
+## 3.7   3     1  3_1      4.99 large    none
+## 4.7   4     2  3_1      4.72 large    none
+## 5.7   5     1  3_1      5.03 large    none
+## 6.7   6     2  3_1      2.61 large    none
+## 7.7   7     1  3_1      6.06 large    none
+## 8.7   8     2  3_1      2.87 large    none
+## 9.7   9     1  3_1      3.01 large    none
+## 10.7 10     2  3_1      5.37 large    none
+## 11.7 11     1  3_1      3.97 large    none
+## 12.7 12     2  3_1      3.99 large    none
+## 13.7 13     1  3_1      4.76 large    none
+## 14.7 14     2  3_1      4.48 large    none
+## 15.7 15     1  3_1      5.87 large    none
+## 16.7 16     2  3_1      5.04 large    none
+## 17.7 17     1  3_1      5.57 large    none
+## 18.7 18     2  3_1      5.73 large    none
+## 19.7 19     1  3_1      4.65 large    none
+## 20.7 20     2  3_1      5.97 large    none
+## 1.8   1     1  3_2      6.93 large   small
+## 2.8   2     2  3_2      3.78 large   small
+## 3.8   3     1  3_2      6.66 large   small
+## 4.8   4     2  3_2      4.52 large   small
+## 5.8   5     1  3_2      5.71 large   small
+## 6.8   6     2  3_2      6.09 large   small
+## 7.8   7     1  3_2      6.27 large   small
+## 8.8   8     2  3_2      7.01 large   small
+## 9.8   9     1  3_2      6.06 large   small
+## 10.8 10     2  3_2      6.01 large   small
+## 11.8 11     1  3_2      5.07 large   small
+## 12.8 12     2  3_2      6.36 large   small
+## 13.8 13     1  3_2      3.67 large   small
+## 14.8 14     2  3_2      5.73 large   small
+## 15.8 15     1  3_2      3.74 large   small
+## 16.8 16     2  3_2      6.82 large   small
+## 17.8 17     1  3_2      4.53 large   small
+## 18.8 18     2  3_2      6.33 large   small
+## 19.8 19     1  3_2      5.64 large   small
+## 20.8 20     2  3_2      7.66 large   small
+## 1.9   1     1  3_3      9.51 large   large
+## 2.9   2     2  3_3     10.71 large   large
+## 3.9   3     1  3_3      9.49 large   large
+## 4.9   4     2  3_3      9.39 large   large
+## 5.9   5     1  3_3      9.83 large   large
+## 6.9   6     2  3_3     10.78 large   large
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 14 rows ]</code></pre>
+</div>
+<div id="ezanova" class="section level2">
+<h2>ezANOVA</h2>
+<pre class="r"><code>if(!&quot;ez&quot; %in% installed.packages()) { install.packages(&quot;ez&quot;) }
+library(&quot;ez&quot;)
+
+Accidents.aov &lt;- ezANOVA(data       = data.long, 
+                         dv         = Accidents, 
+                         wid        = pp, 
+                         within     = c(speed,alcohol), 
+                         between    = sekse, 
+                         type       = 3, 
+                         return_aov = TRUE)</code></pre>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<pre class="r"><code>Accidents.aov</code></pre>
+<pre><code>## $ANOVA
+##                Effect DFn DFd           F            p p&lt;.05          ges
+## 2               sekse   1  18   0.1077087 7.465548e-01       0.0007311564
+## 3               speed   2  36  72.4476990 2.397451e-13     * 0.4015560297
+## 5             alcohol   2  36 277.0168332 1.372975e-22     * 0.7868791099
+## 4         sekse:speed   2  36   0.3991618 6.738146e-01       0.0036833617
+## 6       sekse:alcohol   2  36   0.8712076 4.270814e-01       0.0114784599
+## 7       speed:alcohol   4  72   8.8294785 7.389026e-06     * 0.1877092126
+## 8 sekse:speed:alcohol   4  72   0.5055611 7.317469e-01       0.0130588199
+## 
+## $`Mauchly&#39;s Test for Sphericity`
+##                Effect         W         p p&lt;.05
+## 3               speed 0.8800059 0.3373864      
+## 4         sekse:speed 0.8800059 0.3373864      
+## 5             alcohol 0.8038784 0.1563573      
+## 6       sekse:alcohol 0.8038784 0.1563573      
+## 7       speed:alcohol 0.5663362 0.4095287      
+## 8 sekse:speed:alcohol 0.5663362 0.4095287      
+## 
+## $`Sphericity Corrections`
+##                Effect       GGe        p[GG] p[GG]&lt;.05       HFe        p[HF] p[HF]&lt;.05
+## 3               speed 0.8928619 3.800426e-12         * 0.9845876 3.566807e-13         *
+## 4         sekse:speed 0.8928619 6.510606e-01           0.9845876 6.706989e-01          
+## 5             alcohol 0.8360354 3.019302e-19         * 0.9116081 8.686650e-21         *
+## 6       sekse:alcohol 0.8360354 4.111469e-01           0.9116081 4.188997e-01          
+## 7       speed:alcohol 0.8325812 3.438992e-05         * 1.0442660 7.389026e-06         *
+## 8 sekse:speed:alcohol 0.8325812 6.988740e-01           1.0442660 7.317469e-01          
+## 
+## $aov
+## 
+## Call:
+## aov(formula = formula(aov_formula), data = data)
+## 
+## Grand Mean: 5.539611
+## 
+## Stratum 1: pp
+## 
+## Terms:
+##                     sekse Residuals
+## Sum of Squares   0.126405 21.124468
+## Deg. of Freedom         1        18
+## 
+## Residual standard error: 1.08332
+## 8 out of 9 effects not estimable
+## Estimated effects are balanced
+## 
+## Stratum 2: pp:speed
+## 
+## Terms:
+##                     speed sekse:speed Residuals
+## Sum of Squares  115.92016     0.63868  28.80096
+## Deg. of Freedom         2           2        36
+## 
+## Residual standard error: 0.894442
+## 8 out of 12 effects not estimable
+## Estimated effects may be unbalanced
+## 
+## Stratum 3: pp:alcohol
+## 
+## Terms:
+##                  alcohol sekse:alcohol Residuals
+## Sum of Squares  637.8497        2.0060   41.4462
+## Deg. of Freedom        2             2        36
+## 
+## Residual standard error: 1.072979
+## 8 out of 12 effects not estimable
+## Estimated effects may be unbalanced
+## 
+## Stratum 4: pp:speed:alcohol
+## 
+## Terms:
+##                 speed:alcohol sekse:speed:alcohol Residuals
+## Sum of Squares       39.92183             2.28586  81.38565
+## Deg. of Freedom             4                   4        72
+## 
+## Residual standard error: 1.063182
+## Estimated effects may be unbalanced</code></pre>
+</div>
+<div id="mauchlys-test-for-sphericity" class="section level2">
+<h2>Mauchly’s Test for Sphericity</h2>
+<pre class="r"><code>Accidents.aov$`Mauchly&#39;s Test for Sphericity`</code></pre>
+<pre><code>##                Effect         W         p p&lt;.05
+## 3               speed 0.8800059 0.3373864      
+## 4         sekse:speed 0.8800059 0.3373864      
+## 5             alcohol 0.8038784 0.1563573      
+## 6       sekse:alcohol 0.8038784 0.1563573      
+## 7       speed:alcohol 0.5663362 0.4095287      
+## 8 sekse:speed:alcohol 0.5663362 0.4095287</code></pre>
+</div>
+<div id="visualize-results" class="section level2">
+<h2>Visualize results</h2>
+<pre class="r"><code>ezPlot(data    = data.long,
+       x       = .(speed),
+       col     = .(sekse),
+       split   = .(alcohol),
+       dv      = .(Accidents), 
+       wid     = .(pp), 
+       within  = .(speed,alcohol), 
+       between = .(sekse) 
+       )</code></pre>
+<pre><code>## Warning: Mixed within-and-between-Ss effect requested; FLSD is only appropriate for within-Ss comparisons
+## (see warning in ?ezStats or ?ezPlot).</code></pre>
+<hr />
+<p><img src="ANOVA_independent_factorial_handout_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<!-- Footer insert below -->
+</div>
+</div>
+<div id="end" class="section level1">
+<h1>End</h1>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
