@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Klinkenberg" />
+  <meta name="dcterms.date" content="2020-10-29" />
+  <title>Correlation and Simple regression</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="correlation_simple_regression_reveal_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="correlation_simple_regression_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      TableOfContents();
+    }
+    );                        
+    
+    function TableOfContents(container, output) {
+    
+    var output = output || '#toc';
+    
+    // Get all elements with class: section or subsection
+    idfromclass = document.querySelectorAll('.section, .subsection');
+    
+        // Create the list element:
+        var list = document.createElement('ul');
+    
+        // Iterate through all found elements
+        for(var i = 0; i < idfromclass.length; i++) {
+          
+            // Create the list item:
+            var item = document.createElement('li');
+    
+            // Set its contents:
+            var id = idfromclass[i].id
+            
+            // Replace - in id with whitespace
+            var titleText = id.replace(/-/gi, " ");
+            
+            // Add text to list element
+            item.appendChild(document.createTextNode(titleText));
+            
+            // Add subsection class
+            item.className = idfromclass[i].className
+            
+            // Add it to the list:
+            list.appendChild(item);
+        }
+    
+    // Return generated HTML to toc div in slide
+    document.querySelector(output).innerHTML = list.innerHTML;
+    
+    // Generate instruction message if no classes are defined
+    if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
+    
+    };</script>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-107432294-1');
+    </script>
+    <script src="correlation_simple_regression_reveal_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="correlation_simple_regression_reveal_files/jquery-1.12.4/jquery.min.js"></script>
+    <link href="correlation_simple_regression_reveal_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="correlation_simple_regression_reveal_files/datatables-binding-0.15/datatables.js"></script>
+    <link href="correlation_simple_regression_reveal_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="correlation_simple_regression_reveal_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="correlation_simple_regression_reveal_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="correlation_simple_regression_reveal_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="correlation_simple_regression_reveal_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Correlation and Simple regression</h1>
+    <h2 class="author">Klinkenberg</h2>
+    <h3 class="date">29 oct 2020</h3>
+</section>
+
+<section id="topics" class="slide level2">
+<h2>Topics</h2>
+<div id="toc" style="font-size:60%; text-align:left;">
+
+</div>
+<!-- Add the required topics below -->
+</section>
+<section><section id="correlation" class="title-slide slide level1 section"><h1>Correlation</h1></section><section id="pearson-correlation" class="slide level2">
+<h2>Pearson Correlation</h2>
+<p><img style="float:left; width:150px; margin:0 20px 20px 0px;" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg"></p>
+<p>In statistics, the Pearson correlation coefficient, also referred to as the Pearson’s r, Pearson product-moment correlation coefficient (PPMCC) or bivariate correlation, is a measure of the linear correlation between two variables X and Y. It has a value between +1 and −1, where 1 is total positive linear correlation, 0 is no linear correlation, and −1 is total negative linear correlation. It is widely used in the sciences. It was developed by Karl Pearson from a related idea introduced by Francis Galton in the 1880s.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Wikipedia</a></p>
+</section><section id="pmcc" class="slide level2">
+<h2>PMCC</h2>
+<p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span> Where <span class="math inline">\(S\)</span> is sthe standard deviation and <span class="math inline">\(COV\)</span> is the covariance.</p>
+<p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
+</section><section id="plot-correlation" class="slide level2">
+<h2>Plot correlation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">set.seed</span>(<span class="dv">565433</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>x =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">plot</span>(x, y, <span class="dt">las =</span> <span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>m.x =<span class="st"> </span><span class="kw">mean</span>(x)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>m.y =<span class="st"> </span><span class="kw">mean</span>(y)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">polygon</span>(<span class="kw">c</span>(m.x,<span class="dv">8</span>,<span class="dv">8</span>,m.x),<span class="kw">c</span>(m.y,m.y,<span class="dv">8</span>,<span class="dv">8</span>), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">polygon</span>(<span class="kw">c</span>(m.x,<span class="dv">0</span>,<span class="dv">0</span>,m.x),<span class="kw">c</span>(m.y,m.y,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">polygon</span>(<span class="kw">c</span>(m.x,<span class="dv">0</span>,<span class="dv">0</span>,m.x),<span class="kw">c</span>(m.y,m.y,<span class="dv">8</span>,<span class="dv">8</span>), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">polygon</span>(<span class="kw">c</span>(m.x,<span class="dv">8</span>,<span class="dv">8</span>,m.x),<span class="kw">c</span>(m.y,m.y,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">points</span>(x,y)</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">abline</span>(<span class="dt">h =</span> m.y, <span class="dt">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">abline</span>(<span class="dt">v =</span> m.x, <span class="dt">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">segments</span>(x, m.y, x, y, <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>,    <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="kw">segments</span>(x, y, m.x, y, <span class="dt">col =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="kw">text</span>(m.x<span class="fl">+.7</span>, m.y<span class="fl">+.7</span>, <span class="st">&quot;+ x +&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="kw">text</span>(m.x<span class="fl">-.7</span>, m.y<span class="fl">-.7</span>, <span class="st">&quot;- x -&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="kw">text</span>(m.x<span class="fl">+.7</span>, m.y<span class="fl">-.7</span>, <span class="st">&quot;+ x -&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="kw">text</span>(m.x<span class="fl">-.7</span>, m.y<span class="fl">+.7</span>, <span class="st">&quot;- x +&quot;</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /> <span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+</section><section id="guess-the-correlation" class="slide level2 flexbox vcenter">
+<h2>Guess the correlation</h2>
+<p><img data-src="../../../topics/correlation/qrcode.png" /></p>
+<p><a href="http://guessthecorrelation.com" class="uri">http://guessthecorrelation.com</a></p>
+</section><section id="simulate-data" class="slide level2">
+<h2>Simulate data</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>n     =<span class="st"> </span><span class="dv">50</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>grade =<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">6</span>, <span class="fl">1.6</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>b<span class="fl">.0</span>   =<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>b<span class="fl">.1</span>   =<span class="st"> </span><span class="fl">.3</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>error =<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.7</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>IQ =<span class="st"> </span>b<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>b<span class="fl">.1</span> <span class="op">*</span><span class="st"> </span>grade <span class="op">+</span><span class="st"> </span>error</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#IQ = group(IQ)</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>error =<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.7</span>)</span>
+<span id="cb2-11"><a href="#cb2-11"></a>motivation =<span class="st"> </span><span class="fl">3.2</span> <span class="op">+</span><span class="st"> </span><span class="fl">.2</span> <span class="op">*</span><span class="st"> </span>IQ <span class="op">+</span><span class="st"> </span>error</span></code></pre></div>
+</section><section id="explaining-vairance" class="slide level2 subsection">
+<h2>Explaining vairance</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>grade      =<span class="st"> </span>data<span class="op">$</span>grade</span>
+<span id="cb3-2"><a href="#cb3-2"></a>IQ         =<span class="st"> </span>data<span class="op">$</span>IQ</span>
+<span id="cb3-3"><a href="#cb3-3"></a>mean.grade =<span class="st"> </span><span class="kw">mean</span>(grade)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>mean.IQ    =<span class="st"> </span><span class="kw">mean</span>(IQ)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>N          =<span class="st"> </span><span class="kw">length</span>(grade)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">plot</span>(data<span class="op">$</span>grade, <span class="dt">ylim=</span><span class="kw">summary</span>(<span class="kw">c</span>(data<span class="op">$</span>grade, data<span class="op">$</span>IQ))[<span class="kw">c</span>(<span class="st">&#39;Min.&#39;</span>,<span class="st">&#39;Max.&#39;</span>)], <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">points</span>(data<span class="op">$</span>IQ, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" /></p>
+</section><section id="standarize" class="slide level2 smaller">
+<h2>Standarize</h2>
+<p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>data[, <span class="kw">c</span>(<span class="st">&#39;z.grade&#39;</span>, <span class="st">&#39;z.IQ&#39;</span>)] =<span class="st"> </span><span class="kw">scale</span>(data[, <span class="kw">c</span>(<span class="st">&#39;grade&#39;</span>, <span class="st">&#39;IQ&#39;</span>)])</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>z.grade      =<span class="st"> </span>data<span class="op">$</span>z.grade</span>
+<span id="cb4-4"><a href="#cb4-4"></a>z.IQ         =<span class="st"> </span>data<span class="op">$</span>z.IQ</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>mean.z.grade =<span class="st"> </span><span class="kw">mean</span>(z.grade, <span class="dt">na.rm=</span>T)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>mean.z.IQ    =<span class="st"> </span><span class="kw">mean</span>(z.IQ,      <span class="dt">na.rm=</span>T)</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">plot</span>(z.grade, </span>
+<span id="cb4-10"><a href="#cb4-10"></a>     <span class="dt">ylim =</span> <span class="kw">summary</span>(<span class="kw">c</span>(z.grade, z.IQ))[<span class="kw">c</span>(<span class="st">&#39;Min.&#39;</span>,<span class="st">&#39;Max.&#39;</span>)], </span>
+<span id="cb4-11"><a href="#cb4-11"></a>     <span class="dt">col  =</span> <span class="st">&#39;orange&#39;</span>, </span>
+<span id="cb4-12"><a href="#cb4-12"></a>     <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;participants&quot;</span>)</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="kw">points</span>(z.IQ, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co"># Add mean lines</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="kw">lines</span>(<span class="kw">rep</span>(mean.z.grade, N), <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="kw">lines</span>(<span class="kw">rep</span>(mean.z.IQ,    N), <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lt=</span><span class="dv">2</span>)</span>
+<span id="cb4-19"><a href="#cb4-19"></a></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co"># Add vertical variance lines</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>N, mean.z.grade, <span class="dv">1</span><span class="op">:</span>N, z.grade, <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>N, mean.z.IQ, <span class="dv">1</span><span class="op">:</span>N, z.IQ, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
+</section><section id="covariance" class="slide level2 subsection">
+<h2>Covariance</h2>
+<p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mean.grade =<span class="st"> </span><span class="kw">mean</span>(grade, <span class="dt">na.rm=</span>T)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>mean.IQ    =<span class="st"> </span><span class="kw">mean</span>(IQ, <span class="dt">na.rm=</span>T)</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>delta.grade =<span class="st"> </span>grade <span class="op">-</span><span class="st"> </span>mean.grade</span>
+<span id="cb5-5"><a href="#cb5-5"></a>delta.IQ    =<span class="st"> </span>IQ      <span class="op">-</span><span class="st"> </span>mean.IQ</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>prod =<span class="st"> </span>(grade <span class="op">-</span><span class="st"> </span>mean.grade) <span class="op">*</span><span class="st"> </span>(IQ <span class="op">-</span><span class="st"> </span>mean.IQ)</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>covariance =<span class="st"> </span><span class="kw">sum</span>(prod) <span class="op">/</span><span class="st"> </span>(N <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+</section><section id="correlation-1" class="slide level2 smaller">
+<h2>Correlation</h2>
+<p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>correlation =<span class="st"> </span>covariance <span class="op">/</span><span class="st"> </span>( <span class="kw">sd</span>(grade) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(IQ) ); correlation</span></code></pre></div>
+<pre><code>## [1] 0.6207285</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">cor</span>(z.grade, z.IQ)</span></code></pre></div>
+<pre><code>## [1] 0.6207285</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">cor</span>(  grade,   IQ)</span></code></pre></div>
+<pre><code>## [1] 0.6207285</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">sum</span>( z.grade <span class="op">*</span><span class="st"> </span>z.IQ ) <span class="op">/</span><span class="st"> </span>(N <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6207285</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>,.<span class="dv">5</span>,<span class="op">-</span>.<span class="dv">5</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>y =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">cbind</span>(x,y,x<span class="op">*</span>y)</span></code></pre></div>
+<pre><code>##         x  y     
+## [1,]  1.0  1  1.0
+## [2,] -1.0 -1  1.0
+## [3,] -1.0  1 -1.0
+## [4,]  0.0  1  0.0
+## [5,]  0.5  1  0.5
+## [6,] -0.5  1 -0.5</code></pre>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" /></p>
+</section><section id="significance-of-a-correlation" class="slide level2 subsection">
+<h2>Significance of a correlation</h2>
+<p><span class="math display">\[t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
+{df} = N - 2\]</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+  H_0 &amp;: t_r = 0 \\
+  H_A &amp;: t_r \neq 0 \\
+  H_A &amp;: t_r &gt; 0 \\
+  H_A &amp;: t_r &lt; 0 \\
+  \end{aligned}\]</span></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df =<span class="st"> </span>N<span class="dv">-2</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>t.r =<span class="st"> </span>( correlation<span class="op">*</span><span class="kw">sqrt</span>(df) ) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">-</span>correlation<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">cbind</span>(t.r, df)</span></code></pre></div>
+<pre><code>##           t.r df
+## [1,] 5.485195 48</code></pre>
+</section><section id="visualize" class="slide level2">
+<h2>Visualize</h2>
+<p>One-sample t-test</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t.r, t.r),df,<span class="dt">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-15-1.png" width="768" /></p>
+</section></section>
+<section><section id="partial-correlation" class="title-slide slide level1 section"><h1>Partial correlation</h1></section><section id="venn-diagram" class="slide level2 smaller">
+<h2>Venn diagram</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">grid.newpage</span>()</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">draw.triple.venn</span>(<span class="dt">area1 =</span> <span class="dv">100</span>, <span class="dt">area2 =</span> <span class="dv">100</span>, <span class="dt">area3 =</span> <span class="dv">100</span>, </span>
+<span id="cb19-3"><a href="#cb19-3"></a>                 <span class="dt">n12  =</span> <span class="dv">50</span>, </span>
+<span id="cb19-4"><a href="#cb19-4"></a>                 <span class="dt">n23  =</span> <span class="dv">50</span>, </span>
+<span id="cb19-5"><a href="#cb19-5"></a>                 <span class="dt">n13  =</span> <span class="dv">50</span>, </span>
+<span id="cb19-6"><a href="#cb19-6"></a>                 <span class="dt">n123 =</span> <span class="dv">25</span>, </span>
+<span id="cb19-7"><a href="#cb19-7"></a>                 <span class="dt">category =</span> <span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Z&quot;</span>), <span class="dt">lty =</span> <span class="st">&quot;blank&quot;</span>, </span>
+<span id="cb19-8"><a href="#cb19-8"></a>    <span class="dt">fill =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;pink1&quot;</span>, <span class="st">&quot;mediumorchid&quot;</span>), <span class="dt">cat.prompts =</span> F)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
+<pre><code>## (polygon[GRID.polygon.225], polygon[GRID.polygon.226], polygon[GRID.polygon.227], polygon[GRID.polygon.228], polygon[GRID.polygon.229], polygon[GRID.polygon.230], text[GRID.text.231], text[GRID.text.232], text[GRID.text.233], text[GRID.text.234], text[GRID.text.235], text[GRID.text.236], text[GRID.text.237], text[GRID.text.238], text[GRID.text.239], text[GRID.text.240])</code></pre>
+</section><section id="partial-correlation-1" class="slide level2 smaller">
+<h2>Partial correlation</h2>
+<p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>motivation =<span class="st"> </span>data<span class="op">$</span>motivation</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a>cor.grade.IQ         =<span class="st"> </span><span class="kw">cor</span>(grade,IQ)</span>
+<span id="cb21-4"><a href="#cb21-4"></a>cor.grade.motivation =<span class="st"> </span><span class="kw">cor</span>(grade,motivation)</span>
+<span id="cb21-5"><a href="#cb21-5"></a>cor.IQ.motivation    =<span class="st"> </span><span class="kw">cor</span>(IQ,motivation)</span>
+<span id="cb21-6"><a href="#cb21-6"></a></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="kw">data.frame</span>(cor.grade.IQ, cor.grade.motivation, cor.IQ.motivation)</span></code></pre></div>
+<pre><code>##   cor.grade.IQ cor.grade.motivation cor.IQ.motivation
+## 1    0.6207285           -0.1100721         0.2311468</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>numerator   =<span class="st"> </span>cor.grade.IQ <span class="op">-</span><span class="st"> </span>(cor.grade.motivation <span class="op">*</span><span class="st"> </span>cor.IQ.motivation)</span>
+<span id="cb23-2"><a href="#cb23-2"></a>denominator =<span class="st"> </span><span class="kw">sqrt</span>( (<span class="dv">1</span><span class="op">-</span>cor.grade.motivation<span class="op">^</span><span class="dv">2</span>)<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>cor.IQ.motivation<span class="op">^</span><span class="dv">2</span>) )</span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a>partial.correlation =<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a>partial.correlation</span></code></pre></div>
+<pre><code>## [1] 0.6682178</code></pre>
+</section><section id="significance-of-parial-correlation" class="slide level2 subsection">
+<h2>Significance of parial correlation</h2>
+<p>One-sample t-test</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>df =<span class="st"> </span>N <span class="op">-</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a>t.pr =<span class="st"> </span>( partial.correlation<span class="op">*</span><span class="kw">sqrt</span>(df) ) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">-</span>partial.correlation<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb25-4"><a href="#cb25-4"></a>t.pr</span></code></pre></div>
+<pre><code>## [1] 6.157636</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t.pr,t.pr),df,<span class="dt">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-20-1.png" width="768" /></p>
+</section></section>
+<section><section id="regression-one-predictor" class="title-slide slide level1 section"><h1>Regression (one predictor)</h1></section><section id="regression" class="slide level2 smaller">
+<h2>Regression</h2>
+<p><span class="math display">\[\LARGE{\text{outcome} = \text{model} + \text{error}}\]</span></p>
+<p>In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.</p>
+<p><span class="math display">\[\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}\]</span></p>
+<p>In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Linear_regression">wikipedia</a></p>
+</section><section id="outcome-vs-model" class="slide level2">
+<h2>Outcome vs Model</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>error =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">.5</span>, <span class="fl">.1</span>)</span>
+<span id="cb28-2"><a href="#cb28-2"></a>n =<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">4</span>))</span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="cf">for</span>(e <span class="cf">in</span> error) {</span>
+<span id="cb28-6"><a href="#cb28-6"></a>  </span>
+<span id="cb28-7"><a href="#cb28-7"></a>  x =<span class="st"> </span><span class="kw">rnorm</span>(n)</span>
+<span id="cb28-8"><a href="#cb28-8"></a>  y =<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span> , e)</span>
+<span id="cb28-9"><a href="#cb28-9"></a>  </span>
+<span id="cb28-10"><a href="#cb28-10"></a>  r   =<span class="st"> </span><span class="kw">round</span>(<span class="kw">cor</span>(x,y), <span class="dv">2</span>)</span>
+<span id="cb28-11"><a href="#cb28-11"></a>  r<span class="fl">.2</span> =<span class="st"> </span><span class="kw">round</span>(r<span class="op">^</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb28-12"><a href="#cb28-12"></a>  </span>
+<span id="cb28-13"><a href="#cb28-13"></a>  <span class="kw">plot</span>(x,y, <span class="dt">las =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;outcome&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;model&quot;</span>, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;r =&quot;</span>, r,<span class="st">&quot; r2 = &quot;</span>, r<span class="fl">.2</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb28-14"><a href="#cb28-14"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb28-15"><a href="#cb28-15"></a>  <span class="kw">abline</span>(fit, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb28-16"><a href="#cb28-16"></a>  </span>
+<span id="cb28-17"><a href="#cb28-17"></a>}</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-22-1.png" width="768" style="display: block; margin: auto;" /></p>
+</section><section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<p>A selection from Field:</p>
+<ul>
+<li>Sensitivity</li>
+<li>Homoscedasticity</li>
+</ul>
+</section><section id="sensitivity" class="slide level2">
+<h2>Sensitivity</h2>
+<p>Outliers</p>
+<ul>
+<li>Extreme residuals
+<ul>
+<li>Cook’s distance (&lt; 1)</li>
+<li>Mahalonobis (&lt; 11 at N = 30)</li>
+<li>Laverage (The average leverage value is defined as (k + 1)/n)</li>
+</ul></li>
+</ul>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-23-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="homoscedasticity" class="slide level2">
+<h2>Homoscedasticity</h2>
+<ul>
+<li>Variance of residual should be equal across all expected values
+<ul>
+<li>Look at scatterplot of standardized: expected values <span class="math inline">\(\times\)</span> residuals. Roughly round shape is needed.</li>
+</ul></li>
+</ul>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-24-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="simulation" class="slide level2">
+<h2>Simulation</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">set.seed</span>(<span class="dv">28736</span>)</span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>N     =<span class="st"> </span><span class="dv">123</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>mu    =<span class="st"> </span><span class="dv">120</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>sigma =<span class="st"> </span><span class="dv">15</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>IQ    =<span class="st"> </span><span class="kw">rnorm</span>(N, mu, sigma)</span>
+<span id="cb29-7"><a href="#cb29-7"></a></span>
+<span id="cb29-8"><a href="#cb29-8"></a>b_<span class="dv">0</span>   =<span class="st">  </span><span class="dv">1</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a>b_<span class="dv">1</span>   =<span class="st"> </span><span class="fl">.04</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a>error =<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb29-11"><a href="#cb29-11"></a>  </span>
+<span id="cb29-12"><a href="#cb29-12"></a>grade =<span class="st"> </span>b_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>b_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>IQ <span class="op">+</span><span class="st"> </span>error</span>
+<span id="cb29-13"><a href="#cb29-13"></a></span>
+<span id="cb29-14"><a href="#cb29-14"></a>data =<span class="st"> </span><span class="kw">data.frame</span>(grade, IQ)</span>
+<span id="cb29-15"><a href="#cb29-15"></a>data =<span class="st"> </span><span class="kw">round</span>(data, <span class="dv">2</span>)</span>
+<span id="cb29-16"><a href="#cb29-16"></a></span>
+<span id="cb29-17"><a href="#cb29-17"></a><span class="co"># Write data for use in SPSS</span></span>
+<span id="cb29-18"><a href="#cb29-18"></a><span class="kw">write.table</span>(data, <span class="st">&quot;IQ.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">col.names=</span><span class="ot">TRUE</span>, <span class="dt">dec=</span><span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+</section><section id="the-data" class="slide level2 smaller">
+<h2>The data</h2>
+<div id="htmlwidget-82d1a184b63034190277" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-82d1a184b63034190277">{"x":{"filter":"none","data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section><section id="calculate-regression-parameters" class="slide level2 subsection">
+<h2>Calculate regression parameters</h2>
+<p><span class="math display">\[{grade}_i = b_0 + b_1 {IQ}_i + \epsilon_i\]</span></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>IQ    =<span class="st"> </span>data<span class="op">$</span>IQ</span>
+<span id="cb30-2"><a href="#cb30-2"></a>grade =<span class="st"> </span>data<span class="op">$</span>grade</span></code></pre></div>
+</section><section id="calculate-b_1" class="slide level2 subsection">
+<h2>Calculate <span class="math inline">\(b_1\)</span></h2>
+<p><span class="math display">\[b_1 = r_{xy} \frac{s_y}{s_x}\]</span></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Calculate b1</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a>cor.grade.IQ =<span class="st"> </span><span class="kw">cor</span>(grade,IQ)</span>
+<span id="cb31-4"><a href="#cb31-4"></a>sd.grade     =<span class="st"> </span><span class="kw">sd</span>(grade)</span>
+<span id="cb31-5"><a href="#cb31-5"></a>sd.IQ        =<span class="st"> </span><span class="kw">sd</span>(IQ)</span>
+<span id="cb31-6"><a href="#cb31-6"></a></span>
+<span id="cb31-7"><a href="#cb31-7"></a>b1 =<span class="st"> </span>cor.grade.IQ <span class="op">*</span><span class="st"> </span>( sd.grade <span class="op">/</span><span class="st"> </span>sd.IQ )</span>
+<span id="cb31-8"><a href="#cb31-8"></a>b1</span></code></pre></div>
+<pre><code>## [1] 0.04489104</code></pre>
+</section><section id="calculate-b_0" class="slide level2 subsection">
+<h2>Calculate <span class="math inline">\(b_0\)</span></h2>
+<p><span class="math display">\[b_0 = \bar{y} - b_1 \bar{x}\]</span></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>mean.grade =<span class="st"> </span><span class="kw">mean</span>(grade)</span>
+<span id="cb33-2"><a href="#cb33-2"></a>mean.IQ    =<span class="st"> </span><span class="kw">mean</span>(IQ)</span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a>b0 =<span class="st"> </span>mean.grade <span class="op">-</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span>mean.IQ</span>
+<span id="cb33-5"><a href="#cb33-5"></a>b0</span></code></pre></div>
+<pre><code>## [1] 0.4167131</code></pre>
+</section><section id="the-slope" class="slide level2">
+<h2>The slope</h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Extra</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="kw">plot</span>(IQ,grade, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">160</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="kw">abline</span>(<span class="kw">lm</span>(grade<span class="op">~</span>IQ))</span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="kw">abline</span>(<span class="dt">h=</span>b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb35-7"><a href="#cb35-7"></a></span>
+<span id="cb35-8"><a href="#cb35-8"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),<span class="kw">c</span>(b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">3</span>),<span class="dt">col=</span><span class="st">&#39;green&#39;</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="kw">rep</span>(b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">2</span>),<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb35-10"><a href="#cb35-10"></a></span>
+<span id="cb35-11"><a href="#cb35-11"></a><span class="kw">text</span>(<span class="fl">2.5</span>, (b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>),<span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="dv">1</span>)</span>
+<span id="cb35-12"><a href="#cb35-12"></a><span class="kw">text</span>(<span class="dv">3</span>  , (b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="fl">2.5</span>),</span>
+<span id="cb35-13"><a href="#cb35-13"></a>     <span class="kw">round</span>((b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">3</span>)<span class="op">-</span>(b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>), <span class="dv">2</span>), </span>
+<span id="cb35-14"><a href="#cb35-14"></a>     <span class="dt">pos=</span><span class="dv">4</span>, </span>
+<span id="cb35-15"><a href="#cb35-15"></a>     <span class="dt">cex=</span><span class="dv">1</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-30-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Extra</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="kw">plot</span>(IQ,grade, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.4</span>,.<span class="dv">6</span>))</span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="kw">abline</span>(<span class="kw">lm</span>(grade<span class="op">~</span>IQ))</span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="kw">abline</span>(<span class="dt">h=</span>b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),<span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb36-7"><a href="#cb36-7"></a></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),<span class="kw">c</span>(b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">3</span>),<span class="dt">col=</span><span class="st">&#39;green&#39;</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="kw">rep</span>(b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">2</span>),<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb36-10"><a href="#cb36-10"></a><span class="kw">text</span>(<span class="fl">2.5</span>, (b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>),<span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="dv">1</span>)</span>
+<span id="cb36-11"><a href="#cb36-11"></a><span class="kw">text</span>(<span class="dv">3</span>  , (b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="fl">2.5</span>),</span>
+<span id="cb36-12"><a href="#cb36-12"></a>     <span class="kw">round</span>((b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">3</span>)<span class="op">-</span>(b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>), <span class="dv">2</span>), </span>
+<span id="cb36-13"><a href="#cb36-13"></a>     <span class="dt">pos=</span><span class="dv">4</span>, </span>
+<span id="cb36-14"><a href="#cb36-14"></a>     <span class="dt">cex=</span><span class="dv">1</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-31-1.png" width="768" style="display: block; margin: auto;" /></p>
+</section><section id="calculate-t-values-for-bs" class="slide level2 smaller subsection">
+<h2>Calculate t-values for b’s</h2>
+<p><span class="math display">\[t_{n-p-1} = \frac{b - \mu_b}{{SE}_b}\]</span></p>
+<p>Where <span class="math inline">\(n\)</span> is the number of rows, <span class="math inline">\(p\)</span> is the number of predictors, <span class="math inline">\(b\)</span> is the beta coefficient and <span class="math inline">\({SE}_b\)</span> its standard error.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># Get Standard error&#39;s for b</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(grade<span class="op">~</span>IQ)</span>
+<span id="cb37-3"><a href="#cb37-3"></a>se =<span class="st"> </span><span class="kw">summary</span>(fit)[<span class="dv">4</span>]<span class="op">$</span>coefficients[,<span class="dv">2</span>]</span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a>se.b0 =<span class="st"> </span>se[<span class="dv">1</span>]</span>
+<span id="cb37-6"><a href="#cb37-6"></a>se.b1 =<span class="st"> </span>se[<span class="dv">2</span>]</span>
+<span id="cb37-7"><a href="#cb37-7"></a></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="kw">cbind</span>(se.b0, se.b1)</span></code></pre></div>
+<pre><code>##                 se.b0       se.b1
+## (Intercept) 0.8542378 0.006998539</code></pre>
+</section><section id="section" class="slide level2 smaller">
+<h2></h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Calculate t&#39;s</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>mu.b0 =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>mu.b1 =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a>t.b0  =<span class="st"> </span>(b0 <span class="op">-</span><span class="st"> </span>mu.b0) <span class="op">/</span><span class="st"> </span>se.b0; t.b0</span></code></pre></div>
+<pre><code>## (Intercept) 
+##   0.4878187</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>t.b1  =<span class="st"> </span>(b1 <span class="op">-</span><span class="st"> </span>mu.b1) <span class="op">/</span><span class="st"> </span>se.b1; t.b1</span></code></pre></div>
+<pre><code>##       IQ 
+## 6.414345</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>n     =<span class="st"> </span><span class="kw">nrow</span>(data) <span class="co"># number of rows</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>p     =<span class="st"> </span><span class="dv">1</span>          <span class="co"># number of predictors</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>df.b0 =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span>p <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>df.b1 =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span>p <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+</section><section id="p-values-of-b_0" class="slide level2">
+<h2>P-values of <span class="math inline">\(b_0\)</span></h2>
+<p><span class="math display">\[\begin{aligned}
+t_{n-p-1} &amp;= \frac{b - \mu_b}{{SE}_b} \\
+df &amp;= n - p - 1 \\
+\end{aligned}\]</span></p>
+<p>Where <span class="math inline">\(b\)</span> is het beta coeficient <span class="math inline">\({SE}\)</span> is the standard error of the beta coefficient, <span class="math inline">\(n\)</span> is the number of subjects and <span class="math inline">\(p\)</span> the nubmer of predictors.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { </span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>)} </span>
+<span id="cb44-3"><a href="#cb44-3"></a>  </span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb44-5"><a href="#cb44-5"></a></span>
+<span id="cb44-6"><a href="#cb44-6"></a><span class="co"># p-value for b0</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t.b0,t.b0),df.b0,<span class="dt">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-34-1.png" width="768" /></p>
+</section><section id="p-values-of-b_1" class="slide level2">
+<h2>P-values of <span class="math inline">\(b_1\)</span></h2>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># p-value for b1</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="kw">visualize.t</span>(<span class="kw">c</span>(<span class="op">-</span>t.b1,t.b1),df.b1,<span class="dt">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-35-1.png" width="768" /></p>
+</section><section id="define-regression-equation" class="slide level2">
+<h2>Define regression equation</h2>
+<p><span class="math display">\[\widehat{grade} = {model} = b_0 + b_1 {IQ}\]</span></p>
+<p>So now we can add the expected grade based on this model</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>data<span class="op">$</span>model =<span class="st"> </span>b0 <span class="op">+</span><span class="st"> </span>b1 <span class="op">*</span><span class="st"> </span>IQ</span>
+<span id="cb46-2"><a href="#cb46-2"></a>data<span class="op">$</span>model &lt;-<span class="st"> </span><span class="kw">round</span>(data<span class="op">$</span>model, <span class="dv">2</span>)</span></code></pre></div>
+</section><section id="expected-values" class="slide level2 smaller subsection">
+<h2>Expected values</h2>
+<p>Let’s have a look</p>
+<div id="htmlwidget-cd68e7558b57e2d0a0dc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd68e7558b57e2d0a0dc">{"x":{"filter":"none","data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section><section id="y-vs-haty" class="slide level2">
+<h2><span class="math inline">\(y\)</span> vs <span class="math inline">\(\hat{y}\)</span></h2>
+<p>And lets have a look at this relation between expectation and reality</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>model &lt;-<span class="st"> </span>data<span class="op">$</span>model</span>
+<span id="cb47-2"><a href="#cb47-2"></a></span>
+<span id="cb47-3"><a href="#cb47-3"></a><span class="kw">plot</span>(model,grade, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-38-1.png" width="480" style="display: block; margin: auto;" /></p>
+</section><section id="error" class="slide level2 smaller">
+<h2>Error</h2>
+<p>The error / residual is the difference between the model expectation and reality</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>data<span class="op">$</span>error =<span class="st"> </span>grade <span class="op">-</span><span class="st"> </span>model</span>
+<span id="cb48-2"><a href="#cb48-2"></a>data<span class="op">$</span>error &lt;-<span class="st"> </span><span class="kw">round</span>(data<span class="op">$</span>error, <span class="dv">2</span>)</span></code></pre></div>
+<div id="htmlwidget-e237f7e159db7998f183" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e237f7e159db7998f183">{"x":{"filter":"none","data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21],[-1.45,1.79,0.93,-1.4,0.94,0.56,-0.32,0.06,-2.35,0.48,0.8,0.43,2.01,0.03,0.48,1.21,-1.88,-2.06,0.05,-0.81,1.26,0.56,-0.09,1.26,0.21,1.26,0.52,0.39,0.41,0.84,-1.96,1.17,-0.23,-0.99,0.53,-1.1,-0.57,1.69,-0.04,0.59,-2.34,0.78,1.95,0.57,-0.03,2.37,-1.53,-1.19,0.18,0.37,-0.78,-0.25,-1.48,1.95,-1.18,-0.8,-1.71,-0.37,0.64,-0.71,-0.17,-0.77,0.07,0.09,0.44,-0.09,-0.62,-0.19,1.59,-0.95,-0.09,0.98,-0.18,-0.29,-1.02,1.27,1.59,-1.51,1.14,-0.37,-1,-2.47,1.64,-2.53,1.04,-0.29,-0.94,-0.08,-1.26,0.88,-0.55,0.39,1.63,-1.19,-0.93,1.84,0.15,0.91,-0.24,0.23,0.75,0.11,0.98,-0.34,0.72,-0.1,-1.64,-0.28,1.4,-0.2,-1.23,1.21,0.16,0.78,-1.83,-0.26,0.67,-0.69,1.35,-0.09,-0.52,-0.29,-0.46]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section><section id="model-fit" class="slide level2">
+<h2>Model fit</h2>
+<p>The fit of the model is the amount of error, which can be viewed in the correlation (<span class="math inline">\(r\)</span>).</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>r =<span class="st"> </span><span class="kw">cor</span>(model,grade)</span>
+<span id="cb49-2"><a href="#cb49-2"></a>r</span></code></pre></div>
+<pre><code>## [1] 0.5035925</code></pre>
+</section><section id="explained-variance" class="slide level2 subsection">
+<h2>Explained variance</h2>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>r<span class="op">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 0.2536054</code></pre>
+</section><section id="explained-variance-visually" class="slide level2">
+<h2>Explained variance visually</h2>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># This is all the grade data</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="kw">plot</span>(grade,<span class="dt">xlab=</span><span class="st">&#39;participants&#39;</span>)</span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="co"># With the mean</span></span>
+<span id="cb53-4"><a href="#cb53-4"></a><span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span>n,<span class="kw">rep</span>(<span class="kw">mean</span>(grade),n),<span class="dt">col=</span><span class="st">&#39;blue&#39;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb53-5"><a href="#cb53-5"></a></span>
+<span id="cb53-6"><a href="#cb53-6"></a><span class="co"># The blue lines are the total variance, the deviation from the mean.</span></span>
+<span id="cb53-7"><a href="#cb53-7"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, grade, <span class="dv">1</span><span class="op">:</span>n, <span class="kw">mean</span>(grade), <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb53-8"><a href="#cb53-8"></a></span>
+<span id="cb53-9"><a href="#cb53-9"></a><span class="co"># The model predicts the grade scores</span></span>
+<span id="cb53-10"><a href="#cb53-10"></a><span class="kw">points</span>(<span class="dv">1</span><span class="op">:</span>n,model, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb53-11"><a href="#cb53-11"></a></span>
+<span id="cb53-12"><a href="#cb53-12"></a><span class="co"># The part of the variation that overlaps is the &#39;explained&#39; variance. </span></span>
+<span id="cb53-13"><a href="#cb53-13"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, model, <span class="dv">1</span><span class="op">:</span>n, <span class="kw">mean</span>(grade), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-43-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>The part that does not overlap is therefore ‘unexplained’ variance. And because <span class="math inline">\(r^2\)</span> is the explained variance, <span class="math inline">\(1 - r^2\)</span> is the unexplained variance.</p>
+</section><section id="test-model-fit" class="slide level2">
+<h2>Test model fit</h2>
+<p>Compare model to mean Y (grade) as model</p>
+<p><span class="math display">\[F = \frac{(n-p-1) r^2}{p (1-r^2)}\]</span></p>
+<p>Where <span class="math inline">\({df}_{model} = n - p - 1 = N - K - 1\)</span>.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>F =<span class="st"> </span>( (n<span class="op">-</span>p<span class="dv">-1</span>)<span class="op">*</span>r<span class="op">^</span><span class="dv">2</span> ) <span class="op">/</span><span class="st"> </span>( p<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>r<span class="op">^</span><span class="dv">2</span>) )</span>
+<span id="cb54-2"><a href="#cb54-2"></a>F</span></code></pre></div>
+<pre><code>## [1] 41.11265</code></pre>
+</section><section id="signal-to-noise" class="slide level2">
+<h2>Signal to noise</h2>
+<p>Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>df.model =<span class="st"> </span>p <span class="co"># n = rows, p = predictors</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>df.error =<span class="st"> </span>n<span class="op">-</span>p<span class="dv">-1</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a></span>
+<span id="cb56-4"><a href="#cb56-4"></a>SS_model =<span class="st"> </span><span class="kw">sum</span>((model <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(grade))<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb56-5"><a href="#cb56-5"></a>SS_error =<span class="st"> </span><span class="kw">sum</span>((grade <span class="op">-</span><span class="st"> </span>model)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb56-6"><a href="#cb56-6"></a>MS_model =<span class="st"> </span>SS_model <span class="op">/</span><span class="st"> </span>df.model</span>
+<span id="cb56-7"><a href="#cb56-7"></a>MS_error =<span class="st"> </span>SS_error <span class="op">/</span><span class="st"> </span>df.error</span>
+<span id="cb56-8"><a href="#cb56-8"></a>F =<span class="st"> </span>MS_model <span class="op">/</span><span class="st"> </span>MS_error </span>
+<span id="cb56-9"><a href="#cb56-9"></a>F</span></code></pre></div>
+<pre><code>## [1] 41.1269</code></pre>
+</section><section id="section-1" class="slide level2 smaller">
+<h2></h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>SS_total =<span class="st"> </span><span class="kw">var</span>(grade) <span class="op">*</span><span class="st"> </span>(n<span class="dv">-1</span>)</span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="kw">rbind</span>(SS_total,</span>
+<span id="cb58-3"><a href="#cb58-3"></a>      SS_model,</span>
+<span id="cb58-4"><a href="#cb58-4"></a>      <span class="co"># Proportion explained variance</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a>      SS_model <span class="op">/</span><span class="st"> </span>SS_total,</span>
+<span id="cb58-6"><a href="#cb58-6"></a>      r<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##                 [,1]
+## SS_total 191.0732000
+## SS_model  48.4740000
+##            0.2536933
+##            0.2536054</code></pre>
+</section><section id="visualize-1" class="slide level2">
+<h2>Visualize</h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">visualize.f</span>(F, df.model, df.error, <span class="dt">section=</span><span class="st">&#39;upper&#39;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-47-1.png" width="768" /></p>
+<!-- Footer insert below -->
+</section></section>
+<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="correlation_simple_regression_reveal_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="correlation_simple_regression_reveal_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

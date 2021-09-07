@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Klinkenberg" />
+  <title>ANOVA</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="ANOVA_independent_factorial_reveal_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="ANOVA_independent_factorial_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      TableOfContents();
+    }
+    );                        
+    
+    function TableOfContents(container, output) {
+    
+    var output = output || '#toc';
+    
+    // Get all elements with class: section or subsection
+    idfromclass = document.querySelectorAll('.section, .subsection');
+    
+        // Create the list element:
+        var list = document.createElement('ul');
+    
+        // Iterate through all found elements
+        for(var i = 0; i < idfromclass.length; i++) {
+          
+            // Create the list item:
+            var item = document.createElement('li');
+    
+            // Set its contents:
+            var id = idfromclass[i].id
+            
+            // Replace - in id with whitespace
+            var titleText = id.replace(/-/gi, " ");
+            
+            // Add text to list element
+            item.appendChild(document.createTextNode(titleText));
+            
+            // Add subsection class
+            item.className = idfromclass[i].className
+            
+            // Add it to the list:
+            list.appendChild(item);
+        }
+    
+    // Return generated HTML to toc div in slide
+    document.querySelector(output).innerHTML = list.innerHTML;
+    
+    // Generate instruction message if no classes are defined
+    if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
+    
+    };</script>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-107432294-1');
+    </script>
+    <script src="ANOVA_independent_factorial_reveal_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="ANOVA_independent_factorial_reveal_files/jquery-1.12.4/jquery.min.js"></script>
+    <link href="ANOVA_independent_factorial_reveal_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="ANOVA_independent_factorial_reveal_files/datatables-binding-0.15/datatables.js"></script>
+    <link href="ANOVA_independent_factorial_reveal_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="ANOVA_independent_factorial_reveal_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="ANOVA_independent_factorial_reveal_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="ANOVA_independent_factorial_reveal_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="ANOVA_independent_factorial_reveal_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">ANOVA</h1>
+  <h1 class="subtitle">Independent factorial</h1>
+    <h2 class="author">Klinkenberg</h2>
+    <h3 class="date">9 oct 2020</h3>
+</section>
+
+<section id="inhoud" class="slide level2">
+<h2>Inhoud</h2>
+<div id="toc" style="font-size:60%; text-align:left;">
+
+</div>
+<!-- Add the required topics below -->
+</section>
+<section><section id="independent-factorial-anova" class="title-slide slide level1 section"><h1>Independent factorial ANOVA</h1><p>Two or more independent variables with two or more categories. One dependent variable.</p></section><section id="independent-factorial-anova-1" class="slide level2">
+<h2>Independent factorial ANOVA</h2>
+<p>The independent factorial ANOVA analyses the variance of multiple independent variables (Factors) with two or more categories.</p>
+<p>Effects and interactions:</p>
+<ul>
+<li>1 dependent/outcome variable</li>
+<li>2 or more independent/predictor variables
+<ul>
+<li>2 or more cat./levels</li>
+</ul></li>
+</ul>
+</section><section id="assumptions" class="slide level2 subsection">
+<h2>Assumptions</h2>
+<ul>
+<li>Continuous variable</li>
+<li>Random sample</li>
+<li>Normaly distributed
+<ul>
+<li>Shapiro-Wilk test</li>
+</ul></li>
+<li>Equal variance within groups
+<ul>
+<li>Levene’s test</li>
+</ul></li>
+</ul>
+</section><section id="formulas" class="slide level2 subsection">
+<h2>Formulas</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td><span class="math inline">\(\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_{model}-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hspace{2ex}A\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_A-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}B\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_B-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hspace{2ex}AB\)</span></td>
+<td><span class="math inline">\(\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}\)</span></td>
+<td><span class="math inline">\(df_A \times df_B\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Error</td>
+<td><span class="math inline">\(\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}\)</span></td>
+<td><span class="math inline">\(N-k_{model}\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td><span class="math inline">\(\text{SS}_{\text{total}} = \text{SS}_{\text{model}} + \text{SS}_{\text{error}}\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{total}}}{\text{df}_{\text{total}}}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section><section id="example" class="slide level2 smaller">
+<h2>Example</h2>
+<p><small></p>
+<p>In this example we will look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol.</p>
+<ul>
+<li>Dependent variable
+<ul>
+<li>Accidents</li>
+</ul></li>
+<li>Independent variables
+<ul>
+<li>Speed
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+<li>Alcohol
+<ul>
+<li>None</li>
+<li>Small</li>
+<li>Large</li>
+</ul></li>
+</ul></li>
+</ul>
+<p></small></p>
+</section><section id="section" class="slide level2 smaller">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th>person</th>
+<th>alcohol</th>
+<th>speed</th>
+<th>accidents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>2</td>
+<td>3</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>3</td>
+<td>1</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>3</td>
+<td>2</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>3</td>
+<td>3</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+</section><section id="data" class="slide level2 smaller">
+<h2>Data</h2>
+<div id="htmlwidget-78f161d799572858b1d4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-78f161d799572858b1d4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180],["male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female","male","female"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],[2.67,2.64,2.39,2.13,2.16,2.33,1.79,2.37,1.91,1.78,1.56,2.6,2.55,1.8,1.6,2.3,2.27,1.77,2.75,0.75,1.85,2.96,2.68,2.63,2.63,2.98,2.19,3.35,3.03,3.24,3.34,3.37,2.4,3.02,2.25,4.03,3.78,3.11,2.66,3.39,3.52,4.17,4.02,3.91,3.13,3.42,3.5,3.24,4.01,3.82,4.16,4.27,3.55,4.73,4.26,3.63,4.52,4.11,3.12,4.67,3.26,3.46,2.35,4.1,3.46,3.46,3.66,3.78,2.86,3.51,2.95,4.09,3.15,4.2,3.03,3.83,2.72,4.18,3.06,3.76,4.39,4.35,4.8,5.1,3.89,5.38,4.34,5.48,3.49,5.03,4.19,5.39,4.87,5.8,4.03,5.02,4.18,5.55,4.44,5.53,5.13,6.81,5.34,5.33,4.56,5.16,5.76,6.59,4.64,5.64,6.31,6.71,5.03,5.73,5.3,5.7,5.02,5.69,5.06,6.07,4.51,6.44,4.9,5.54,4.59,6.26,4.34,5.91,5.5,5.88,4.24,5.23,4.78,6.03,4.46,5.87,4.33,5.39,5.61,6.13,6.12,6.95,7,6.36,6.49,7.49,5.44,7.24,6.17,6.76,5.93,7.48,5.09,7.11,6,7.07,6.15,7.61,5.21,6.58,6.46,8.21,6.82,7.66,6.9,7.54,7.98,7.49,7.26,8.8,7.04,8.55,7.32,7.73,7.08,8.42,7.05,6.97,7.09,9.07],[70.29,66.44,59.2,58.86,77.26,81.83,70.88,52.06,72.28,67.53,64.4,73.64,72.48,68.63,68.32,66.63,69.16,62.63,76.68,58.42,59.55,66.79,66.96,63.59,62.45,71.04,61.39,57.23,72.62,59.37,58.39,66.02,69.87,61.53,66.9,76.7,60.2,81,83.61,68.68,61.75,67.18,63.66,82.57,63.88,73.03,72.77,67.43,67.99,71.74,62.88,58.85,47.64,51.83,67.21,63.39,50.41,77.41,70.36,71.99,81.49,81.37,86.11,79.56,80.99,83.1,79.47,77.73,82.39,75.9,84.2,79.17,79.88,77.24,86.64,77.43,82.2,78.44,83.06,82.27,77.73,80.27,75.62,72.07,77.64,72.28,78.46,72.67,80.13,77.64,78.24,74.34,75.51,72.55,76.91,77.31,79.21,74.63,77.1,75.61,72.89,69.11,70.99,75.12,73.1,76.05,68.22,65.15,75.24,70.86,67.81,67.99,72.31,73.22,72.77,74.24,74.95,73.29,77.22,71.58,77.03,68.44,76.99,70.09,73.42,71.49,75.33,74.91,71.53,69.8,76.3,70.21,74.68,72.52,76.37,75.3,76.67,74.44,71.58,73.61,71.78,67.37,67.1,67.1,70.96,62.57,72.28,68.46,69.74,69.12,72.51,61.26,72.14,66.07,67.91,66.37,71.02,63.87,78.07,68.64,69.14,59.88,63.16,62.91,68.65,67.27,62.66,63.42,63.71,61.86,67.32,58.06,66.78,61.65,67.53,59.66,66.67,68.63,66.03,61.84]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>subjects<\/th>\n      <th>gender<\/th>\n      <th>alcohol<\/th>\n      <th>speed<\/th>\n      <th>accidents<\/th>\n      <th>weight<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section><section id="ssmodel" class="slide level2 subsection">
+<h2>SS<sub>model</sub></h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td><span class="math inline">\(\text{SS}_{\text{model}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_{model}-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{model}}}{\text{df}_{\text{model}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{model}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<pre><code>##   speed alcohol accidents  n
+## 1  much    much    7.5720 20
+## 2  none    much    5.2970 20
+## 3  some    much    6.5125 20
+## 4  much    none    3.8880 20
+## 5  none    none    2.1060 20
+## 6  some    none    2.9445 20
+## 7  much    some    5.5790 20
+## 8  none    some    3.4435 20
+## 9  some    some    4.7625 20</code></pre>
+</section><section class="slide level2">
+
+<div id="htmlwidget-630c99ce6efd37f52572" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-630c99ce6efd37f52572">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","some","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much","much"],[2.67,2.64,2.39,2.13,2.16,2.33,1.79,2.37,1.91,1.78,1.56,2.6,2.55,1.8,1.6,2.3,2.27,1.77,2.75,0.75,1.85,2.96,2.68,2.63,2.63,2.98,2.19,3.35,3.03,3.24,3.34,3.37,2.4,3.02,2.25,4.03,3.78,3.11,2.66,3.39,3.52,4.17,4.02,3.91,3.13,3.42,3.5,3.24,4.01,3.82,4.16,4.27,3.55,4.73,4.26,3.63,4.52,4.11,3.12,4.67,3.26,3.46,2.35,4.1,3.46,3.46,3.66,3.78,2.86,3.51,2.95,4.09,3.15,4.2,3.03,3.83,2.72,4.18,3.06,3.76,4.39,4.35,4.8,5.1,3.89,5.38,4.34,5.48,3.49,5.03,4.19,5.39,4.87,5.8,4.03,5.02,4.18,5.55,4.44,5.53,5.13,6.81,5.34,5.33,4.56,5.16,5.76,6.59,4.64,5.64,6.31,6.71,5.03,5.73,5.3,5.7,5.02,5.69,5.06,6.07,4.51,6.44,4.9,5.54,4.59,6.26,4.34,5.91,5.5,5.88,4.24,5.23,4.78,6.03,4.46,5.87,4.33,5.39,5.61,6.13,6.12,6.95,7,6.36,6.49,7.49,5.44,7.24,6.17,6.76,5.93,7.48,5.09,7.11,6,7.07,6.15,7.61,5.21,6.58,6.46,8.21,6.82,7.66,6.9,7.54,7.98,7.49,7.26,8.8,7.04,8.55,7.32,7.73,7.08,8.42,7.05,6.97,7.09,9.07],[4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68,4.68],[2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.11,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,2.94,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.89,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,3.44,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,4.76,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.58,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,5.3,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,6.51,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57,7.57]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>data.speed<\/th>\n      <th>data.alcohol<\/th>\n      <th>accidents<\/th>\n      <th>grand.mean<\/th>\n      <th>group.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>SS.model &lt;-<span class="st"> </span><span class="kw">sum</span>((exp.accidents <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(data<span class="op">$</span>accidents))<span class="op">^</span><span class="dv">2</span>); SS.model</span></code></pre></div>
+<pre><code>## [1] 494.2205</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>m.k1 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;none&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>m.k2 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;none&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>m.k3 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;none&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>m.k4 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;some&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>m.k5 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;some&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>m.k6 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;some&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>m.k7 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;much&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-8"><a href="#cb4-8"></a>m.k8 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;much&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>m.k9 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;much&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a>n.k1 =<span class="st"> </span>n.k2 =<span class="st"> </span>n.k3 =<span class="st"> </span>n.k4 =<span class="st"> </span>n.k5 =<span class="st"> </span>n.k6 =<span class="st"> </span>n.k7 =<span class="st"> </span>n.k8 =<span class="st"> </span>n.k9 =<span class="st"> </span><span class="dv">20</span></span></code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ss.m.k1 =<span class="st"> </span>n.k1 <span class="op">*</span><span class="st"> </span>(m.k1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>ss.m.k2 =<span class="st"> </span>n.k2 <span class="op">*</span><span class="st"> </span>(m.k2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>ss.m.k3 =<span class="st"> </span>n.k3 <span class="op">*</span><span class="st"> </span>(m.k3 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>ss.m.k4 =<span class="st"> </span>n.k4 <span class="op">*</span><span class="st"> </span>(m.k4 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>ss.m.k5 =<span class="st"> </span>n.k5 <span class="op">*</span><span class="st"> </span>(m.k5 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>ss.m.k6 =<span class="st"> </span>n.k6 <span class="op">*</span><span class="st"> </span>(m.k6 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>ss.m.k7 =<span class="st"> </span>n.k7 <span class="op">*</span><span class="st"> </span>(m.k7 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>ss.m.k8 =<span class="st"> </span>n.k8 <span class="op">*</span><span class="st"> </span>(m.k8 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>ss.m.k9 =<span class="st"> </span>n.k9 <span class="op">*</span><span class="st"> </span>(m.k9 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a>ss.model =<span class="st"> </span><span class="kw">sum</span>(ss.m.k1,ss.m.k2,ss.m.k3,ss.m.k4,ss.m.k5,ss.m.k6,ss.m.k7,ss.m.k8,ss.m.k9)</span>
+<span id="cb5-12"><a href="#cb5-12"></a>ss.model</span></code></pre></div>
+<pre><code>## [1] 494.2205</code></pre>
+</section><section id="ssmodel-visual" class="slide level2 smaller">
+<h2>SS<sub>model</sub> visual</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Plot all data points</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">plot</span>(accidents,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>     <span class="dt">xlab =</span> <span class="st">&#39;participants&#39;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># With the mean</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span>n,<span class="kw">rep</span>(<span class="kw">mean</span>(accidents),n),<span class="dt">col=</span><span class="st">&#39;black&#39;</span>,<span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co"># The black lines are the total variance, the deviation from the mean.</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="kw">mean</span>(accidents), <span class="dv">1</span><span class="op">:</span>n, accidents)</span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co"># The model predicts the accidents scores</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="kw">points</span>(<span class="dv">1</span><span class="op">:</span>n,exp.accidents, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a>p &lt;-<span class="st"> </span><span class="kw">recordPlot</span>()</span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co"># The black lines are the total variance, the deviation from the mean.</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, exp.accidents, <span class="dv">1</span><span class="op">:</span>n, <span class="kw">mean</span>(accidents), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co"># Add legend to plot</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb7-21"><a href="#cb7-21"></a>       <span class="dt">pch    =</span> <span class="kw">c</span>(<span class="st">&quot;o&quot;</span>),</span>
+<span id="cb7-22"><a href="#cb7-22"></a>       <span class="dt">col    =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>),</span>
+<span id="cb7-23"><a href="#cb7-23"></a>       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Full model&quot;</span>) )</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_independent_factorial_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
+</section><section id="sserror" class="slide level2 subsection">
+<h2>SS<sub>error</sub></h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Error</td>
+<td><span class="math inline">\(\text{SS}_{\text{error}} = \sum{s_k^2(n_k-1)}\)</span></td>
+<td><span class="math inline">\(N-k\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{error}}}{\text{df}_{\text{error}}}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>v.k1 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;none&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>v.k2 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;none&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>v.k3 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;none&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>v.k4 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;some&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>v.k5 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;some&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>v.k6 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;some&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>v.k7 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;much&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>v.k8 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;much&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>v.k9 =<span class="st"> </span><span class="kw">var</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;much&quot;</span> <span class="op">&amp;</span><span class="st"> </span>alcohol <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span></code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>ss.e.k1 =<span class="st"> </span>v.k1 <span class="op">*</span><span class="st"> </span>(n.k1 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>ss.e.k2 =<span class="st"> </span>v.k2 <span class="op">*</span><span class="st"> </span>(n.k2 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>ss.e.k3 =<span class="st"> </span>v.k3 <span class="op">*</span><span class="st"> </span>(n.k3 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>ss.e.k4 =<span class="st"> </span>v.k4 <span class="op">*</span><span class="st"> </span>(n.k4 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>ss.e.k5 =<span class="st"> </span>v.k5 <span class="op">*</span><span class="st"> </span>(n.k5 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a>ss.e.k6 =<span class="st"> </span>v.k6 <span class="op">*</span><span class="st"> </span>(n.k6 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>ss.e.k7 =<span class="st"> </span>v.k7 <span class="op">*</span><span class="st"> </span>(n.k7 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a>ss.e.k8 =<span class="st"> </span>v.k8 <span class="op">*</span><span class="st"> </span>(n.k8 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-9"><a href="#cb9-9"></a>ss.e.k9 =<span class="st"> </span>v.k9 <span class="op">*</span><span class="st"> </span>(n.k9 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>ss.error =<span class="st"> </span><span class="kw">sum</span>(ss.e.k1,ss.e.k2,ss.e.k3,ss.e.k4,ss.e.k5,ss.e.k6,ss.e.k7,ss.e.k8,ss.e.k9)</span>
+<span id="cb9-12"><a href="#cb9-12"></a>ss.error</span></code></pre></div>
+<pre><code>## [1] 66.34642</code></pre>
+</section><section id="sserror-visual" class="slide level2">
+<h2>SS<sub>error</sub> visual</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p</span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co"># Now we can add the error of this model</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, accidents, <span class="dv">1</span><span class="op">:</span>n, exp.accidents, <span class="dt">col=</span><span class="st">&#39;purple&#39;</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># Add legend to plot</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>       <span class="dt">pch    =</span> <span class="kw">c</span>(<span class="st">&quot;o&quot;</span>, <span class="st">&quot;-&quot;</span>),</span>
+<span id="cb11-9"><a href="#cb11-9"></a>       <span class="dt">col    =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;purple&quot;</span>),</span>
+<span id="cb11-10"><a href="#cb11-10"></a>       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Full model&quot;</span>, <span class="st">&quot;error&quot;</span>) )</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_independent_factorial_reveal_files/figure-revealjs/unnamed-chunk-14-1.png" width="768" /></p>
+</section><section id="ssa-speed" class="slide level2 subsection">
+<h2>SS<sub>A</sub> Speed</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}A\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{A}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_A-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{A}}}{\text{df}_{\text{A}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{A}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>m.s1 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>m.s2 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>m.s3 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, speed <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>n.s1 =<span class="st"> </span>n.s2 =<span class="st"> </span>n.s3 =<span class="st"> </span><span class="dv">60</span></span></code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>ss.s1 =<span class="st"> </span>n.s1 <span class="op">*</span><span class="st"> </span>(m.s1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>ss.s2 =<span class="st"> </span>n.s2 <span class="op">*</span><span class="st"> </span>(m.s2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>ss.s3 =<span class="st"> </span>n.s3 <span class="op">*</span><span class="st"> </span>(m.s3 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a>ss.speed =<span class="st"> </span><span class="kw">sum</span>(ss.s1,ss.s2,ss.s3)</span>
+<span id="cb13-6"><a href="#cb13-6"></a>ss.speed</span></code></pre></div>
+<pre><code>## [1] 128.1639</code></pre>
+</section><section id="ssa-speed-visual" class="slide level2">
+<h2>SS<sub>A</sub> Speed Visual</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>p</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># Deviation of speed</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">points</span>(<span class="dv">1</span><span class="op">:</span>n, data<span class="op">$</span>means.speed,  <span class="dt">col=</span><span class="st">&#39;green&#39;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="kw">mean</span>(accidents), <span class="dv">1</span><span class="op">:</span>n, data<span class="op">$</span>means.speed, <span class="dt">col=</span><span class="st">&#39;green&#39;</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># Add legend to plot</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>       <span class="dt">pch    =</span> <span class="kw">c</span>(<span class="st">&quot;o&quot;</span>, <span class="st">&quot;o&quot;</span>),</span>
+<span id="cb15-9"><a href="#cb15-9"></a>       <span class="dt">col    =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
+<span id="cb15-10"><a href="#cb15-10"></a>       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;speed&quot;</span>, <span class="st">&quot;Full model&quot;</span>) )</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_independent_factorial_reveal_files/figure-revealjs/unnamed-chunk-19-1.png" width="768" /></p>
+</section><section id="ssb-alcohol" class="slide level2 subsection">
+<h2>SS<sub>B</sub> Alcohol</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}B\)</span></td>
+<td><span class="math inline">\(\text{SS}_{\text{B}} = \sum{n_k(\bar{X}_k-\bar{X})^2}\)</span></td>
+<td><span class="math inline">\(k_B-1\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{B}}}{\text{df}_{\text{B}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{B}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>m.a1 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, alcohol <span class="op">==</span><span class="st"> &quot;none&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>m.a2 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, alcohol <span class="op">==</span><span class="st"> &quot;some&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>m.a3 =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">subset</span>(data, alcohol <span class="op">==</span><span class="st"> &quot;much&quot;</span>, <span class="dt">select =</span> <span class="st">&quot;accidents&quot;</span>)<span class="op">$</span>accidents)</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a>n.a1 =<span class="st"> </span>n.a2 =<span class="st"> </span>n.a3 =<span class="st"> </span><span class="dv">60</span></span></code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>ss.a1 =<span class="st"> </span>n.a1 <span class="op">*</span><span class="st"> </span>(m.a1 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>ss.a2 =<span class="st"> </span>n.a2 <span class="op">*</span><span class="st"> </span>(m.a2 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span> </span>
+<span id="cb17-3"><a href="#cb17-3"></a>ss.a3 =<span class="st"> </span>n.a3 <span class="op">*</span><span class="st"> </span>(m.a3 <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(accidents))<span class="op">^</span><span class="dv">2</span> </span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a>ss.alcohol =<span class="st"> </span><span class="kw">sum</span>(ss.a1,ss.a2,ss.a3)</span>
+<span id="cb17-6"><a href="#cb17-6"></a>ss.alcohol</span></code></pre></div>
+<pre><code>## [1] 364.1458</code></pre>
+</section><section id="ssb-alcohol-visual" class="slide level2">
+<h2>SS<sub>B</sub> Alcohol Visual</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>p</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co"># Deviation of alcohol</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">points</span>(<span class="dv">1</span><span class="op">:</span>n, data<span class="op">$</span>means.alcohol,<span class="dt">col=</span><span class="st">&#39;orange&#39;</span>,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="kw">mean</span>(accidents), <span class="dv">1</span><span class="op">:</span>n, data<span class="op">$</span>means.alcohol, <span class="dt">col=</span><span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb19-6"><a href="#cb19-6"></a></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co"># Add legend to plot</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb19-9"><a href="#cb19-9"></a>       <span class="dt">pch    =</span> <span class="kw">c</span>(<span class="st">&quot;o&quot;</span>, <span class="st">&quot;o&quot;</span>),</span>
+<span id="cb19-10"><a href="#cb19-10"></a>       <span class="dt">col    =</span> <span class="kw">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
+<span id="cb19-11"><a href="#cb19-11"></a>       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;Full model&quot;</span>) )</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_independent_factorial_reveal_files/figure-revealjs/unnamed-chunk-24-1.png" width="768" /></p>
+</section><section id="ssab-alcohol-x-speed" class="slide level2 subsection">
+<h2>SS<sub>AB</sub> Alcohol x Speed</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}AB\)</span></td>
+<td><span class="math inline">\(\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}\)</span></td>
+<td><span class="math inline">\(df_A \times df_B\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Sums of squares for the interaction between speed and alcohol</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>ss.speed.alcohol &lt;-<span class="st"> </span>ss.model <span class="op">-</span><span class="st"> </span>ss.speed <span class="op">-</span><span class="st"> </span>ss.alcohol</span>
+<span id="cb20-3"><a href="#cb20-3"></a>ss.speed.alcohol</span></code></pre></div>
+<pre><code>## [1] 1.910727</code></pre>
+</section><section id="mean-squares" class="slide level2">
+<h2>Mean Squares</h2>
+<p>Mean squares for:</p>
+<ul>
+<li>Speed</li>
+<li>Alcohol</li>
+<li>Speed <span class="math inline">\(\times\)</span> Alcohol</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+F_{Speed} &amp;= \frac{{MS}_{Speed}}{{MS}_{error}} \\
+F_{Alcohol} &amp;= \frac{{MS}_{Alcohol}}{{MS}_{error}} \\
+F_{Alcohol \times Speed} &amp;= \frac{{MS}_{Alcohol \times Speed}}{{MS}_{error}} \\
+\end{aligned}\]</span></p>
+</section><section id="interaction" class="slide level2">
+<h2>Interaction</h2>
+<p><span class="math display">\[F_{Alcohol \times Speed}\]</span></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>N          =<span class="st"> </span><span class="kw">length</span>(accidents)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>k.speed    =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>k.alcohol  =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>k.model    =<span class="st"> </span><span class="dv">9</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>df.speed   =<span class="st"> </span>k.speed   <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>df.alcohol =<span class="st"> </span>k.alcohol <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>df.speed.alcohol =<span class="st"> </span>df.speed <span class="op">*</span><span class="st"> </span>df.alcohol</span>
+<span id="cb22-8"><a href="#cb22-8"></a></span>
+<span id="cb22-9"><a href="#cb22-9"></a>ms.speed.alcohol =<span class="st"> </span>ss.speed.alcohol <span class="op">/</span><span class="st"> </span>df.speed.alcohol</span>
+<span id="cb22-10"><a href="#cb22-10"></a></span>
+<span id="cb22-11"><a href="#cb22-11"></a>df.error =<span class="st"> </span>N <span class="op">-</span><span class="st"> </span>k.model</span>
+<span id="cb22-12"><a href="#cb22-12"></a>ms.error =<span class="st"> </span>ss.error <span class="op">/</span><span class="st"> </span>df.error</span></code></pre></div>
+</section><section id="p-value" class="slide level2">
+<h2><span class="math inline">\(P\)</span>-value</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>F.speed.alcohol =<span class="st"> </span>ms.speed.alcohol <span class="op">/</span><span class="st"> </span>ms.error</span>
+<span id="cb23-2"><a href="#cb23-2"></a>F.speed.alcohol</span></code></pre></div>
+<pre><code>## [1] 1.231168</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">library</span>(visualize)</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">visualize.f</span>(F.speed.alcohol, df.speed.alcohol, df.error, <span class="dt">section =</span> <span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_independent_factorial_reveal_files/figure-revealjs/unnamed-chunk-27-1.png" width="768" /></p>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>F.values =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">.01</span>)</span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="kw">plot</span>(F.values, <span class="kw">df</span>(F.values, df.speed.alcohol, df.error), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;H0 and HA F-distribution&quot;</span>)</span>
+<span id="cb26-4"><a href="#cb26-4"></a></span>
+<span id="cb26-5"><a href="#cb26-5"></a>critical.value =<span class="st"> </span><span class="kw">qf</span>(.<span class="dv">95</span>, df.speed.alcohol, df.error)</span>
+<span id="cb26-6"><a href="#cb26-6"></a></span>
+<span id="cb26-7"><a href="#cb26-7"></a>critical.range =<span class="st"> </span><span class="kw">seq</span>(critical.value, <span class="dv">10</span>, <span class="fl">.01</span>)</span>
+<span id="cb26-8"><a href="#cb26-8"></a></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="kw">polygon</span>(<span class="kw">c</span>(critical.range,<span class="kw">rev</span>(critical.range)), </span>
+<span id="cb26-10"><a href="#cb26-10"></a>        <span class="kw">c</span>(critical.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(critical.range, df.speed.alcohol, df.error, <span class="dt">ncp =</span> <span class="dv">5</span>))), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb26-11"><a href="#cb26-11"></a></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="kw">lines</span>(F.values, <span class="kw">df</span>(F.values, df.speed.alcohol, df.error, <span class="dt">ncp =</span> <span class="dv">5</span>))</span>
+<span id="cb26-13"><a href="#cb26-13"></a></span>
+<span id="cb26-14"><a href="#cb26-14"></a><span class="kw">polygon</span>(<span class="kw">c</span>(critical.range,<span class="kw">rev</span>(critical.range)), </span>
+<span id="cb26-15"><a href="#cb26-15"></a>        <span class="kw">c</span>(critical.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(critical.range, df.speed.alcohol, df.error))), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">density =</span> <span class="dv">40</span>, <span class="dt">angle =</span> <span class="dv">-45</span>)</span>
+<span id="cb26-16"><a href="#cb26-16"></a></span>
+<span id="cb26-17"><a href="#cb26-17"></a>p.range =<span class="st"> </span><span class="kw">seq</span>(F.speed.alcohol, <span class="dv">10</span>, <span class="fl">.01</span>)</span>
+<span id="cb26-18"><a href="#cb26-18"></a></span>
+<span id="cb26-19"><a href="#cb26-19"></a><span class="kw">polygon</span>(<span class="kw">c</span>(p.range,<span class="kw">rev</span>(p.range)), </span>
+<span id="cb26-20"><a href="#cb26-20"></a>        <span class="kw">c</span>(p.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(p.range, df.speed.alcohol, df.error))), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">6</span>), <span class="dt">density =</span> <span class="dv">20</span>)</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="ANOVA_independent_factorial_reveal_files/figure-revealjs/unnamed-chunk-28-1.png" width="768" /></p>
+</section><section id="contrast" class="slide level2">
+<h2>Contrast</h2>
+<p>Planned comparisons</p>
+<ul>
+<li>Exploring differences of theoretical interest</li>
+<li>Higher precision</li>
+<li>Higher power</li>
+</ul>
+</section><section id="post-hoc" class="slide level2">
+<h2>Post-Hoc</h2>
+<p>Unplanned comparisons</p>
+<ul>
+<li>Exploring all possible differences</li>
+<li>Adjust T value for inflated type 1 error</li>
+</ul>
+</section><section id="effect-size" class="slide level2">
+<h2>Effect size</h2>
+<p>General effect size measures</p>
+<ul>
+<li>Amount of explained variance <span class="math inline">\(R^2\)</span> also called eta squared <span class="math inline">\(\eta^2\)</span>.</li>
+<li>Omega squared <span class="math inline">\(\omega^2\)</span></li>
+</ul>
+<p>Effect sizes of contrasts or post-hoc comparisons</p>
+<ul>
+<li>Cohen’s <span class="math inline">\(r\)</span> gives the effect size for a specific comparison
+<ul>
+<li><span class="math inline">\(r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\)</span></li>
+</ul></li>
+</ul>
+<!-- Footer insert below -->
+</section></section>
+<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="ANOVA_independent_factorial_reveal_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="ANOVA_independent_factorial_reveal_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

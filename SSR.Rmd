@@ -1,9 +1,9 @@
 ---
-title: "2020-2021 Scientific and Statistical Reasoning"
+title: "2021-2022 Scientific and Statistical Reasoning"
 output:
   html_document:
     df_print: kable
-    pandoc_args: ["--output=2020-2021_SSR.html"] 
+    pandoc_args: ["--output=2021-2022_SSR.html"] 
 ---
 
 Below you can find the links to my current lecture slides for this course. The source code can be found at the [GitHub repository](https://github.com/ShKlinkenberg/statistics-lectures). 
@@ -13,7 +13,7 @@ Below you can find the links to my current lecture slides for this course. The s
 library(rvest)
 
 rm(list = ls())
-lectures <- list.files(path = "courses/2020-2021_SSR/", pattern = "*handout.html", recursive = T, full.names = TRUE)
+lectures <- list.files(path = "courses/2021-2022_SSR/", pattern = "*handout.html", recursive = T, full.names = TRUE)
 
 n <- length(lectures)
 
