@@ -1,7 +1,7 @@
 ---
 title: "Null Hypothesis Testing"
 author: "Klinkenberg"
-date: "10 sep 2020"
+date: "16 sep 2021"
 output: 
   revealjs::revealjs_presentation:
     template: http://shklinkenberg.github.io/uva_style/UvAtemplate.html
