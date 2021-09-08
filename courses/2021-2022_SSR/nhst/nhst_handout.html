@@ -11,16 +11,26 @@
 
 <meta name="author" content="Klinkenberg" />
 
-<meta name="date" content="2020-09-10" />
+<meta name="date" content="2021-09-16" />
 
 <title>Null Hypothesis Testing</title>
 
+<script src="nhst_handout_files/header-attrs-2.10/header-attrs.js"></script>
 <script src="nhst_handout_files/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="nhst_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="nhst_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="nhst_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="nhst_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="nhst_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="nhst_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="nhst_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
@@ -37,12 +47,16 @@
   gtag('config', 'UA-107432294-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -55,32 +69,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -90,10 +79,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -110,6 +95,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -122,7 +110,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -254,7 +241,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -265,26 +252,19 @@ div.tocify {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Null Hypothesis Testing</h1>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">10 sep 2020</h4>
+<h4 class="date">16 sep 2021</h4>
 
 </div>
 
 
-<div id="content" class="section level2">
-<h2>Content</h2>
-<div id="toc" style="font-size: 50%;">
-
-</div>
-<!-- Add the required topics below -->
-</div>
-<div id="null-hypothesis-significance-testing" class="section level1 section">
-<h1>Null Hypothesis<br>Significance Testing</h1>
+<div id="null-hypothesis-significance-testing" class="section level1">
+<h1 class="section">Null Hypothesis<br>Significance Testing</h1>
 <div id="neyman-pearson-paradigm" class="section level2">
 <h2>Neyman-Pearson Paradigm</h2>
 <p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a>-<a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a> Paradigm</p>
@@ -297,7 +277,7 @@ div.tocify {
 <p><img class="np" src="http://www-history.mcs.st-and.ac.uk/BigPictures/Pearson_Egon_4.jpeg"></p>
 </div>
 <div id="h_0-and-h_a" class="section level2 subsection">
-<h2><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></h2>
+<h2 class="subsection"><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></h2>
 <table style="width:100%; border: none;">
 <tr>
 <td>
@@ -324,14 +304,14 @@ div.tocify {
 </table>
 </div>
 <div id="frequentist-probability" class="section level2 subsection">
-<h2>Frequentist probability</h2>
+<h2 class="subsection">Frequentist probability</h2>
 <ul>
 <li>Objective Probability</li>
 <li>Relative frequency in the long run</li>
 </ul>
 </div>
 <div id="standard-error" class="section level2 subsection">
-<h2>Standard Error</h2>
+<h2 class="subsection">Standard Error</h2>
 <blockquote>
 <p>95% confidence interval</p>
 </blockquote>
@@ -342,7 +322,7 @@ div.tocify {
 </ul>
 </div>
 <div id="standard-error-1" class="section level2 flexbox vcenter">
-<h2>Standard Error</h2>
+<h2 class="flexbox vcenter">Standard Error</h2>
 <style>
 ul#menu li {
     display:inline;
@@ -518,7 +498,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)</code></pre>
 <p><img src="nhst_handout_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="decision-table" class="section level2 flexbox vcenter subsection">
-<h2>Decision table</h2>
+<h2 class="flexbox vcenter subsection">Decision table</h2>
 <table style="border: none;  transform: scale(1);">
 <col width="150px">
 <col width="225px">
@@ -558,7 +538,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </table>
 </div>
 <div id="alpha-alpha" class="section level2 subsection">
-<h2>Alpha <span class="math inline">\(\alpha\)</span></h2>
+<h2 class="subsection">Alpha <span class="math inline">\(\alpha\)</span></h2>
 <table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
 <col width="150px">
 <col width="225px">
@@ -607,7 +587,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p><img src="nhst_handout_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="power" class="section level2 subsection">
-<h2>Power</h2>
+<h2 class="subsection">Power</h2>
 <table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
 <col width="150px">
 <col width="225px">
@@ -659,7 +639,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p><img src="nhst_handout_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="post-hoc-power" class="section level2 subsection">
-<h2>Post-Hoc Power</h2>
+<h2 class="subsection">Post-Hoc Power</h2>
 <ul>
 <li>Also known as: observed, retrospective, achieved, prospective and a priori power</li>
 <li>Specificly meaning:</li>
@@ -670,17 +650,17 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p>Source: <a href="http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf">O’Keefe (2007)</a></p>
 </div>
 <div id="effect-size" class="section level2 subsection">
-<h2>Effect size</h2>
+<h2 class="subsection">Effect size</h2>
 <p>In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.</p>
 <p>For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Effect_size">WIKIPEDIA</a></p>
 </div>
 <div id="effect-size-1" class="section level2 flexbox vcenter">
-<h2>Effect size</h2>
-<p><img src="../../../../topics/NHST/effec_size.png" /></p>
+<h2 class="flexbox vcenter">Effect size</h2>
+<p><img src="../../../topics/NHST/effec_size.png" /></p>
 </div>
 <div id="alpha" class="section level2 subsection">
-<h2>1 - alpha</h2>
+<h2 class="subsection">1 - alpha</h2>
 <table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
 <col width="150px">
 <col width="225px">
@@ -726,7 +706,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p><img src="nhst_handout_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="beta" class="section level2 subsection">
-<h2>Beta</h2>
+<h2 class="subsection">Beta</h2>
 <table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
 <col width="150px">
 <col width="225px">
@@ -777,7 +757,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p><img src="nhst_handout_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="p-value" class="section level2 subsection">
-<h2>P-value</h2>
+<h2 class="subsection">P-value</h2>
 <blockquote>
 <p>Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.</p>
 </blockquote>
@@ -802,7 +782,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </ul>
 </div>
 <div id="decision-table-1" class="section level2 flexbox vcenter smaller">
-<h2>Decision Table</h2>
+<h2 class="flexbox vcenter smaller">Decision Table</h2>
 <pre class="r"><code>N     = 10  # Sample size
 H0    = .5  # Probability of head under H0 50/50
 HA    = .2  # Aternative expected value
@@ -882,11 +862,11 @@ barplot(dbinom(0:N,N, HA),
 <p><img src="nhst_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="reasoning-scheme" class="section level2 subsection flexbox vcenter">
-<h2>Reasoning Scheme</h2>
-<p><img src="../../../../topics/NHST/NHST_descision_scheme.png" /></p>
+<h2 class="subsection flexbox vcenter">Reasoning Scheme</h2>
+<p><img src="../../../topics/NHST/NHST_descision_scheme.png" /></p>
 </div>
 <div id="r-psychologist" class="section level2 smaller">
-<h2>R&lt;-PSYCHOLOGIST</h2>
+<h2 class="smaller">R&lt;-PSYCHOLOGIST</h2>
 <iframe style="height:450px;" src="http://rpsychologist.com/d3/NHST/">
 </iframe>
 <p>Source: <a href="http://rpsychologist.com/d3/NHST/">Kristoffer Magnusson</a></p>
@@ -926,7 +906,7 @@ barplot(dbinom(0:N,N, HA),
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -944,7 +924,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -953,6 +933,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
