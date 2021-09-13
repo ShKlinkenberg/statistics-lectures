@@ -12,7 +12,7 @@
 
 <img class="np" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg">
 
-<img class="np" src="http://www-history.mcs.st-and.ac.uk/BigPictures/Pearson_Egon_4.jpeg">
+<img class="np" src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg">
 
 ## $H_0$ and $H_A$ {.subsection}
 
