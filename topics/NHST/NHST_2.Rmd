@@ -14,6 +14,8 @@
 
 <img class="np" src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg">
 
+<br>
+
 ## $H_0$ and $H_A$ {.subsection}
 
 <table style="width:100%; border: none;">
