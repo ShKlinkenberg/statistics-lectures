@@ -11,30 +11,40 @@
 
 <meta name="author" content="Klinkenberg" />
 
-<meta name="date" content="2020-09-17" />
+<meta name="date" content="2021-09-24" />
 
 <title>Paired and Independent  t-test</title>
 
-<script src="paired_and_independent_t_test_handout_files/jquery-1.12.4/jquery.min.js"></script>
+<script src="paired_and_independent_t_test_handout_files/header-attrs-2.10/header-attrs.js"></script>
+<script src="paired_and_independent_t_test_handout_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="paired_and_independent_t_test_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="paired_and_independent_t_test_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="paired_and_independent_t_test_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="paired_and_independent_t_test_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="paired_and_independent_t_test_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="paired_and_independent_t_test_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="paired_and_independent_t_test_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="paired_and_independent_t_test_handout_files/navigation-1.1/tabsets.js"></script>
 <link href="paired_and_independent_t_test_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="paired_and_independent_t_test_handout_files/highlightjs-9.12.0/highlight.js"></script>
-<script src="paired_and_independent_t_test_handout_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="paired_and_independent_t_test_handout_files/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="paired_and_independent_t_test_handout_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="paired_and_independent_t_test_handout_files/datatables-binding-0.15/datatables.js"></script>
+<script src="paired_and_independent_t_test_handout_files/datatables-binding-0.19/datatables.js"></script>
 <link href="paired_and_independent_t_test_handout_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="paired_and_independent_t_test_handout_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="paired_and_independent_t_test_handout_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="paired_and_independent_t_test_handout_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="paired_and_independent_t_test_handout_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="paired_and_independent_t_test_handout_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="paired_and_independent_t_test_handout_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
 <script>
@@ -45,12 +55,16 @@
   gtag('config', 'UA-107432294-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -63,32 +77,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -98,10 +87,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -118,6 +103,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -130,7 +118,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -262,7 +249,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -273,26 +260,19 @@ div.tocify {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Paired and Independent<br> t-test</h1>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">17 sep 2020</h4>
+<h4 class="date">24 sep 2021</h4>
 
 </div>
 
 
-<div id="toc" class="section level2">
-<h2>TOC</h2>
-<div id="toc">
-
-</div>
-<!-- Add the required topics below -->
-</div>
-<div id="paired-samples-t-test" class="section level1 section">
-<h1>Paired-samples t-test</h1>
+<div id="paired-samples-t-test" class="section level1">
+<h1 class="section">Paired-samples t-test</h1>
 <p>Paired 2 samples</p>
 <div id="paired-samples-t-test-1" class="section level2">
 <h2>Paired-samples t-test</h2>
@@ -351,14 +331,14 @@ div.tocify {
 </div>
 <div id="iq-estimates" class="section level2">
 <h2>IQ estimates</h2>
-<div id="htmlwidget-847d4d35f9250a0afe8e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-847d4d35f9250a0afe8e">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-655630b14eb2590b2c80" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-655630b14eb2590b2c80">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-d" class="section level2 smaller subsection">
-<h2>Calculate <span class="math inline">\(D\)</span></h2>
+<h2 class="smaller subsection">Calculate <span class="math inline">\(D\)</span></h2>
 <pre class="r"><code>D = IQ.next.to.you - IQ.you</code></pre>
-<div id="htmlwidget-2848df15c3eeaffc75bc" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2848df15c3eeaffc75bc">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120],[5,0,-1,-10,5,0,9,0,8,0,0,5,4,-4,1,0,-16,-5,-5,0,7,0,5,10,5,0,13,0,5,-4,-7,0,5,22,5,10,-5,0,9,0,0,2,0,9,12,1,12,4,-20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n      <th>D<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6de4b3150dddd997c732" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6de4b3150dddd997c732">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120],[5,0,-1,-10,5,0,9,0,8,0,0,5,4,-4,1,0,-16,-5,-5,0,7,0,5,10,5,0,13,0,5,-4,-7,0,5,22,5,10,-5,0,9,0,0,2,0,9,12,1,12,4,-20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ.next.to.you<\/th>\n      <th>Own.IQ<\/th>\n      <th>D<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-bard" class="section level2">
 <h2>Calculate <span class="math inline">\(\bar{D}\)</span></h2>
@@ -372,7 +352,7 @@ n</code></pre>
 <pre><code>## [1] 49</code></pre>
 </div>
 <div id="calculate-t-value" class="section level2 subsection">
-<h2>Calculate t-value</h2>
+<h2 class="subsection">Calculate t-value</h2>
 <p><span class="math display">\[t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }\]</span></p>
 <pre class="r"><code>mu = 0                # Define mu
 
@@ -387,7 +367,7 @@ t</code></pre>
 <pre><code>## [1] 1.915726</code></pre>
 </div>
 <div id="test-for-significance" class="section level2 subsection">
-<h2>Test for significance</h2>
+<h2 class="subsection">Test for significance</h2>
 <p>Two tailed</p>
 <pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { install.packages(&quot;visualize&quot;) }
 library(&quot;visualize&quot;)
@@ -397,14 +377,14 @@ visualize.t(c(-t,t), df, section=&quot;tails&quot;)</code></pre>
 <p><img src="paired_and_independent_t_test_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="effect-size" class="section level2 subsection">
-<h2>Effect-size</h2>
+<h2 class="subsection">Effect-size</h2>
 <p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
 <pre class="r"><code>r = sqrt(t^2/(t^2 + df))
 r</code></pre>
 <pre><code>## [1] 0.2665104</code></pre>
 </div>
 <div id="confidence-interval" class="section level2 smaller subsection">
-<h2>Confidence interval</h2>
+<h2 class="smaller subsection">Confidence interval</h2>
 <p>To display correct conficance intervals in SPSS we need to correct the original scores for whithin subject variation.</p>
 <pre><code>** SPSS SYNTAX
 
@@ -424,8 +404,8 @@ COMPUTE IQ.you             = IQ.you         + adjustment.
 EXECUTE.</code></pre>
 </div>
 </div>
-<div id="independent-samples-t-test" class="section level1 section">
-<h1>Independent-samples t-test</h1>
+<div id="independent-samples-t-test" class="section level1">
+<h1 class="section">Independent-samples t-test</h1>
 <p>Compare 2 independent samples</p>
 <div id="independent-samples-t-test-1" class="section level2">
 <h2>Independent-samples t-test</h2>
@@ -495,11 +475,11 @@ EXECUTE.</code></pre>
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
-<div id="htmlwidget-c885573a9434004225da" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c885573a9434004225da">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],["male","female","female","female","female","female","male","male","male","male","male","male","female","female","female","male","female","male","female","male","male","female","female","male","male","male","male","male","female","male","female","female","female","male","female","female","female","female","female","male","male","female","male","male","female","male","female","female","female"],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>gender<\/th>\n      <th>IQ.you<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5bac49faad2376e05585" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5bac49faad2376e05585">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],["male","male","male","female","male","female","male","male","male","female","male","female","female","male","male","female","female","female","female","male","male","female","male","female","female","male","male","female","male","female","male","female","female","male","female","male","male","male","female","female","female","female","female","female","male","male","male","female","male"],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>gender<\/th>\n      <th>IQ.you<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-means" class="section level2 subsection">
-<h2>Calculate means</h2>
+<h2 class="subsection">Calculate means</h2>
 <pre class="r"><code>IQ.you.male   = subset(data, gender == &quot;male&quot;,   select = IQ.you)$IQ.you
 IQ.you.female = subset(data, gender == &quot;female&quot;, select = IQ.you)$IQ.you
 
@@ -508,23 +488,23 @@ IQ.you.female.mean = mean(IQ.you.female, na.rm = T)
 
 rbind(IQ.you.male.mean, IQ.you.female.mean)</code></pre>
 <pre><code>##                        [,1]
-## IQ.you.male.mean   119.3478
-## IQ.you.female.mean 121.2692</code></pre>
+## IQ.you.male.mean   119.0800
+## IQ.you.female.mean 121.7083</code></pre>
 </div>
 <div id="calculate-variance" class="section level2 smaller subsection">
-<h2>Calculate variance</h2>
+<h2 class="smaller subsection">Calculate variance</h2>
 <pre class="r"><code>IQ.you.male.var   = var(IQ.you.male,   na.rm = T)
 IQ.you.female.var = var(IQ.you.female, na.rm = T)
 rbind(IQ.you.male.var, IQ.you.female.var)</code></pre>
 <pre><code>##                       [,1]
-## IQ.you.male.var   35.32806
-## IQ.you.female.var 76.84462</code></pre>
+## IQ.you.male.var   58.57667
+## IQ.you.female.var 54.47645</code></pre>
 <pre class="r"><code>IQ.you.male.n   = length(IQ.you.male)   - 1
 IQ.you.female.n = length(IQ.you.female) - 1
 rbind(IQ.you.male.n, IQ.you.female.n)</code></pre>
 <pre><code>##                 [,1]
-## IQ.you.male.n     22
-## IQ.you.female.n   25</code></pre>
+## IQ.you.male.n     24
+## IQ.you.female.n   23</code></pre>
 </div>
 <div id="calculate-t-value-1" class="section level2">
 <h2>Calculate t-value</h2>
@@ -536,7 +516,7 @@ rbind(IQ.you.male.n, IQ.you.female.n)</code></pre>
 <p>Where <span class="math inline">\(s^2\)</span> is the variance and <span class="math inline">\(n\)</span> the sample size.</p>
 </div>
 <div id="calculate-pooled-variance" class="section level2 subsection">
-<h2>Calculate pooled variance</h2>
+<h2 class="subsection">Calculate pooled variance</h2>
 <p><span class="math display">\[S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}\]</span></p>
 <pre class="r"><code>df = IQ.you.male.n + IQ.you.female.n - 2
 
@@ -545,22 +525,22 @@ s2.p = ( (IQ.you.male.n-1)*IQ.you.male.var + (IQ.you.female.n-1)*IQ.you.female.v
 df</code></pre>
 <pre><code>## [1] 45</code></pre>
 <pre class="r"><code>s2.p</code></pre>
-<pre><code>## [1] 57.47022</code></pre>
+<pre><code>## [1] 56.57212</code></pre>
 </div>
 <div id="calculate-pooled-se" class="section level2 subsection">
-<h2>Calculate pooled SE</h2>
+<h2 class="subsection">Calculate pooled SE</h2>
 <p><span class="math display">\[{SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}\]</span></p>
 <pre class="r"><code>se.p    = sqrt( ((s2.p/IQ.you.male.n) + (s2.p/IQ.you.female.n)) )
 se.p</code></pre>
-<pre><code>## [1] 2.216098</code></pre>
+<pre><code>## [1] 2.194727</code></pre>
 </div>
 <div id="calculate-t-value-2" class="section level2 subsection">
-<h2>Calculate t-value</h2>
+<h2 class="subsection">Calculate t-value</h2>
 <p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
 <pre class="r"><code>t = ( IQ.you.male.mean - IQ.you.female.mean ) / se.p
 
 t</code></pre>
-<pre><code>## [1] -0.8670214</code></pre>
+<pre><code>## [1] -1.197567</code></pre>
 </div>
 <div id="test-for-significance-1" class="section level2">
 <h2>Test for significance</h2>
@@ -578,7 +558,7 @@ visualize.t(c(-t,t), df, section=&quot;tails&quot;)</code></pre>
 <pre class="r"><code>r = sqrt(t^2/(t^2 + df))
 
 r</code></pre>
-<pre><code>## [1] 0.1281817</code></pre>
+<pre><code>## [1] 0.1757442</code></pre>
 <!-- Footer insert below -->
 </div>
 </div>
@@ -615,7 +595,7 @@ r</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -633,7 +613,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -642,6 +622,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
