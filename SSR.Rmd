@@ -13,7 +13,7 @@ Below you can find the links to my current lecture slides for this course. The s
 library(rvest)
 
 rm(list = ls())
-lectures <- list.files(path = "courses/2021-2022_SSR/", pattern = "*handout.html", recursive = T, full.names = TRUE)
+lectures <- list.files(path = "courses/2021-2022_SSR", pattern = "*handout.html", recursive = T, full.names = TRUE)
 
 n <- length(lectures)
 

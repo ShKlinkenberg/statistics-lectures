@@ -1,5 +1,5 @@
 ---
-title: "Null Hypothesis Testing"
+title: "Null Hypothesis Significance Testing"
 author: "Klinkenberg"
 date: "16 sep 2021"
 output: 
@@ -23,7 +23,7 @@ output:
       in_header    : "../../../GA_Script/GA_Script.html"
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, echo=FALSE}
 # Display plots on next slide in IOslides
 # smaller in the above YAML must be off to make this work.
 
@@ -35,6 +35,7 @@ local({
   })
 })
 ```
+
 
 
 

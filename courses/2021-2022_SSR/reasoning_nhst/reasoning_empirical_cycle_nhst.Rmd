@@ -13,8 +13,7 @@ output:
     center: true
     self_contained: false
     includes       :
-      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
-                      "../../../GA_Script/GA_Script.html"]
+      in_header    : "../../../GA_Script/GA_Script.html"
   html_document:
     toc            : TRUE
     self_contained : false
