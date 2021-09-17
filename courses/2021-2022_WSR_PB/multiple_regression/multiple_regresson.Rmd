@@ -1,20 +1,18 @@
 ---
 title: "Multiple regression"
 author: "Klinkenberg"
-date: "16 sep 2020"
+date: "20 sep 2021"
 output: 
   revealjs::revealjs_presentation:
-    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    template: http://shklinkenberg.github.io/uva_style/UvAtemplate.html
     theme: white #simple #black
     highlight: pygments
     transition: slide #fade #slide
     background_transition: slide
     center: true
     self_contained: false
-
     includes       :
-      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
-                      "../../../GA_Script/GA_Script.html"]
+      in_header    : "../../../GA_Script/GA_Script.html"
   html_document:
     toc            : TRUE
     self_contained : false
@@ -38,23 +36,7 @@ local({
 })
 ```
 
-## Inhoud
-<small>
-<div id="toc"></div>
 
-<div class="notes">
-</small>
-### Outline
-
-[Weblecture](https://webcolleges.uva.nl/Mediasite/Play/e4e7ff7ca4794e85b8dbcc55f1d7524a1d)
-
-* 0:00 Test analysis
-* 0:40 Regression
-* 1:00 Example in SPSS (enter method with 2 blocks)
-* 1:20 Regression slides (regression plane)
-</div>
-
-<!-- Add the required topics below -->
 
 ```{r child="../../../topics/t-distribution/t-distribution.rmd"}
 ```
