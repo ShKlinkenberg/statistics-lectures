@@ -11,16 +11,26 @@
 
 <meta name="author" content="Klinkenberg" />
 
-<meta name="date" content="2020-09-15" />
+<meta name="date" content="2021-09-21" />
 
 <title>T-distribution and the  One-sample t-test</title>
 
+<script src="t_distribution_and_one_sample_t_test_handout_files/header-attrs-2.10/header-attrs.js"></script>
 <script src="t_distribution_and_one_sample_t_test_handout_files/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="t_distribution_and_one_sample_t_test_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="t_distribution_and_one_sample_t_test_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="t_distribution_and_one_sample_t_test_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="t_distribution_and_one_sample_t_test_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="t_distribution_and_one_sample_t_test_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="t_distribution_and_one_sample_t_test_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="t_distribution_and_one_sample_t_test_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
@@ -37,12 +47,16 @@
   gtag('config', 'UA-107432294-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -55,32 +69,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -90,10 +79,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -110,6 +95,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -122,7 +110,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -254,7 +241,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -265,28 +252,21 @@ div.tocify {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">T-distribution and the <br>One-sample t-test</h1>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">15 sep 2020</h4>
+<h4 class="date">21 sep 2021</h4>
 
 </div>
 
 
-<div id="inhoud" class="section level2">
-<h2>Inhoud</h2>
-<div id="toc">
-
-</div>
-<!-- Add the required topics below -->
-</div>
-<div id="t-distribution" class="section level1 section">
-<h1>T-distribution</h1>
+<div id="t-distribution" class="section level1">
+<h1 class="section">T-distribution</h1>
 <div id="gosset" class="section level2 smaller">
-<h2>Gosset</h2>
+<h2 class="smaller">Gosset</h2>
 <p><small> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg" style="float: left; width: 150px; margin: 0 20px 0 0;"></p>
 <p>In probability and statistics, Student’s t-distribution (or simply the t-distribution) is any member of a family of continuous probability distributions that arises when estimating the mean of a normally distributed population in situations where the sample size is small and population standard deviation is unknown.</p>
 <p>In the English-language literature it takes its name from William Sealy Gosset’s 1908 paper in Biometrika under the pseudonym “Student”. Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples, for example the chemical properties of barley where sample sizes might be as low as 3.</p>
@@ -295,7 +275,7 @@ div.tocify {
 <p></small></p>
 </div>
 <div id="population-distribution" class="section level2 smaller subsection">
-<h2>Population distribution</h2>
+<h2 class="smaller subsection">Population distribution</h2>
 <pre class="r"><code>layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
 
 n  = 56    # Sample size
@@ -321,21 +301,20 @@ for(i in 1:n.samples) {
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="t-statistic" class="section level2 subsection">
-<h2>T-statistic</h2>
+<h2 class="subsection">T-statistic</h2>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size, expressed as the degrees of freedom <span class="math inline">\(df = n - 1\)</span></p>
 </div>
 <div id="a-sample" class="section level2 smaller">
-<h2>A sample</h2>
+<h2 class="smaller">A sample</h2>
 <p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
 <pre class="r"><code>x = rnorm(n, mu, sigma); x</code></pre>
-<pre><code>##  [1]  96.48840  86.30457 105.43482 114.55189 106.53954  88.55588 108.29491  94.27125 104.46672
-## [10]  70.43229 103.88444  99.18170  94.47696  78.78681  98.04135 112.31517 122.46559  71.05220
-## [19]  81.85262 130.18445  97.95251 124.61946 102.79958  90.06182 126.90885  90.03485  89.00779
-## [28]  93.34513  98.36934  84.11706 106.90337  82.18229  84.48047  64.53439  99.12368  99.62937
-## [37] 107.56579 115.75632 117.83657  99.07264 115.46097 100.92994  81.41287  90.90320 115.83579
-## [46]  93.71389 105.24351  93.65247  95.01201  82.29839 104.41553 131.00651 124.78444 108.26930
-## [55] 124.10514  92.14009</code></pre>
+<pre><code>##  [1] 105.85977 108.57630 107.88836  95.20701  79.30615  90.62230  72.89313 117.82397  78.85656  93.75204
+## [11]  84.08850  92.20775  89.22105  87.73469 120.79652 106.80530  95.23757  99.16311  90.20186  82.81185
+## [21]  89.55482 105.26342 120.56388 104.63430  90.94572  92.56717  87.51861  90.38074  98.54458 109.81774
+## [31] 119.74032  80.44465  76.27237  97.20483 104.64232  67.37269  87.11988 111.67637 111.15748  92.86267
+## [41]  90.20142  94.29634  95.69456  88.48059 104.57178  98.25747 110.94740 122.17128 112.62858 139.77602
+## [51] 113.32980 117.72814  97.64037  99.57557 116.69309  97.04593</code></pre>
 <pre class="r"><code>hist(x, main = &quot;Sample distribution&quot;, col = &quot;beige&quot;)
 text(80, 10, round(mean(x),2))</code></pre>
 <hr />
@@ -346,7 +325,7 @@ text(80, 10, round(mean(x),2))</code></pre>
 <p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
 <pre class="r"><code>t = (mean(x) - mu) / (sd(x) / sqrt(n))
 t</code></pre>
-<pre><code>## [1] 0.009285428</code></pre>
+<pre><code>## [1] -0.599459</code></pre>
 </div>
 <div id="more-samples" class="section level2">
 <h2>More samples</h2>
@@ -365,12 +344,12 @@ for(i in 1:n.samples) {
 <h2>Mean and SE for all samples</h2>
 <pre class="r"><code>head(cbind(mean.x.values, se.x.values))</code></pre>
 <pre><code>##      mean.x.values se.x.values
-## [1,]     100.97893    1.805681
-## [2,]      96.86122    1.897046
-## [3,]     102.23517    1.907898
-## [4,]      99.60212    1.943256
-## [5,]      99.74744    1.710730
-## [6,]      96.63373    2.197717</code></pre>
+## [1,]      99.11229    2.048595
+## [2,]      97.66709    1.961407
+## [3,]     101.91199    1.920351
+## [4,]     101.83362    1.747613
+## [5,]     100.77842    2.362220
+## [6,]     101.57443    2.059215</code></pre>
 </div>
 <div id="sampling-distribution" class="section level2">
 <h2>Sampling distribution</h2>
@@ -388,12 +367,12 @@ for(i in 1:n.samples) {
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values   t.values
-##  [995,]      99.14841 100    2.068428 -0.4117095
-##  [996,]      96.61590 100    2.068412 -1.6360874
-##  [997,]     102.55820 100    2.109882  1.2124863
-##  [998,]      99.51389 100    1.979735 -0.2455446
-##  [999,]     101.66226 100    1.917703  0.8667972
-## [1000,]     101.30855 100    1.909058  0.6854451</code></pre>
+##  [995,]     100.56675 100    2.220733  0.2552101
+##  [996,]     101.65501 100    1.826755  0.9059815
+##  [997,]     102.09983 100    2.211951  0.9493124
+##  [998,]     100.54540 100    1.755752  0.3106350
+##  [999,]     101.53253 100    1.976764  0.7752744
+## [1000,]      98.34438 100    2.341252 -0.7071516</code></pre>
 </div>
 <div id="sampled-t-values" class="section level2">
 <h2>Sampled t-values</h2>
@@ -411,7 +390,7 @@ legend(&quot;topright&quot;, lty = 1, col=&quot;red&quot;, legend = &quot;T-dist
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="t-distribution-1" class="section level2 smaller">
-<h2>T-distribution</h2>
+<h2 class="smaller">T-distribution</h2>
 <p><small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean (<span class="math inline">\(\mu\)</span>), given a certain sample size (<span class="math inline">\(df = n - 1\)</span>).</p>
 <p>The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough.</p>
 <p>The t-distribution is defined by:</p>
@@ -423,7 +402,7 @@ legend(&quot;topright&quot;, lty = 1, col=&quot;red&quot;, legend = &quot;T-dist
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="one-or-two-sided" class="section level2 subsection">
-<h2>One or two sided</h2>
+<h2 class="subsection">One or two sided</h2>
 <p>Two sided</p>
 <ul>
 <li><span class="math inline">\(H_A: \bar{x} \neq \mu\)</span></li>
@@ -437,7 +416,7 @@ legend(&quot;topright&quot;, lty = 1, col=&quot;red&quot;, legend = &quot;T-dist
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="effect-size" class="section level2 subsection">
-<h2>Effect-size</h2>
+<h2 class="subsection">Effect-size</h2>
 <p>The effect-size is the standardised difference between the mean and the expected <span class="math inline">\(\mu\)</span>. In the t-test effect-size is expressed as <span class="math inline">\(r\)</span>.</p>
 <p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
 <pre class="r"><code>r = sqrt(t^2/(t^2 + df))
@@ -446,18 +425,18 @@ r</code></pre>
 <pre><code>## [1] 0.2603778</code></pre>
 </div>
 <div id="effect-size-distribution" class="section level2 smaller">
-<h2>Effect-size distribution</h2>
+<h2 class="smaller">Effect-size distribution</h2>
 <p><small> We can also calculate effect-sizes for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
 <pre class="r"><code>r = sqrt(t.values^2/(t.values^2 + df))
 
 tail(cbind(mean.x.values, mu, se.x.values, t.values, r))</code></pre>
 <pre><code>##         mean.x.values  mu se.x.values   t.values          r
-##  [995,]      99.14841 100    2.068428 -0.4117095 0.05542955
-##  [996,]      96.61590 100    2.068412 -1.6360874 0.21542990
-##  [997,]     102.55820 100    2.109882  1.2124863 0.16134944
-##  [998,]      99.51389 100    1.979735 -0.2455446 0.03309110
-##  [999,]     101.66226 100    1.917703  0.8667972 0.11608868
-## [1000,]     101.30855 100    1.909058  0.6854451 0.09203314</code></pre>
+##  [995,]     100.56675 100    2.220733  0.2552101 0.03439217
+##  [996,]     101.65501 100    1.826755  0.9059815 0.12126104
+##  [997,]     102.09983 100    2.211951  0.9493124 0.12696926
+##  [998,]     100.54540 100    1.755752  0.3106350 0.04184932
+##  [999,]     101.53253 100    1.976764  0.7752744 0.10397141
+## [1000,]      98.34438 100    2.341252 -0.7071516 0.09492176</code></pre>
 <pre class="r"><code>hist(r, main = &quot;effect-size distribution&quot;, col = &quot;beige&quot;)</code></pre>
 <hr />
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
@@ -470,17 +449,17 @@ tail(cbind(mean.x.values, mu, se.x.values, t.values, r))</code></pre>
 <p></small></p>
 </div>
 <div id="power" class="section level2 subsection">
-<h2>Power</h2>
+<h2 class="subsection">Power</h2>
 <ul>
 <li>Strive for 80%</li>
 <li>Based on know effect size</li>
 <li>Calculate number of subjects needed</li>
 <li>Use <a href="http://www.gpower.hhu.de">G*Power</a> to calculate</li>
 </ul>
-<p><img src="http://www.gpower.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Psychologie/AAP/gpower/GPowerIcon.png" /></p>
+<p><img src="https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png" /></p>
 </div>
 <div id="alpha-power" class="section level2 smaller">
-<h2>Alpha Power</h2>
+<h2 class="smaller">Alpha Power</h2>
 <pre class="r"><code>T = seq(-3,6,.01)
 N = 45
 E = 2
@@ -545,20 +524,20 @@ legend(&quot;topright&quot;, c(expression(alpha),&#39;POWER&#39;),density=c(10,1
 <p><a href="http://rpsychologist.com/d3/NHST/#viz">R-Psychologist</a></p>
 </div>
 </div>
-<div id="one-sample-t-test" class="section level1 section">
-<h1>One-sample t-test</h1>
+<div id="one-sample-t-test" class="section level1">
+<h1 class="section">One-sample t-test</h1>
 <div id="iq-next-to-you" class="section level2 flexbox vcenter">
-<h2>IQ next to you</h2>
-<p><img src="../../../../topics/t-test_one-sample/QR_iq.png" alt="http://goo.gl/T6Lo2s" /> <br> <a href="http://goo.gl/T6Lo2s" class="uri">http://goo.gl/T6Lo2s</a></p>
+<h2 class="flexbox vcenter">IQ next to you</h2>
+<p><img src="../../../topics/t-test_one-sample/QR_iq.png" alt="http://goo.gl/T6Lo2s" /> <br> <a href="http://goo.gl/T6Lo2s" class="uri">http://goo.gl/T6Lo2s</a></p>
 </div>
 <div id="models" class="section level2 flexbox vcenter">
-<h2>Models</h2>
+<h2 class="flexbox vcenter">Models</h2>
 <div style="font-size:200%; transform: rotate(-11deg);">
 <p><span class="math display">\[\text{outcome} = \text{model} + \text{error}\]</span></p>
 </div>
 </div>
 <div id="compare-sample-mean" class="section level2 smaller">
-<h2>Compare sample mean</h2>
+<h2 class="smaller">Compare sample mean</h2>
 <p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</p>
 <p>Let’s take a different sample and calculate the mean of this sample. </small></p>
 <pre class="r"><code>mu     = 120
@@ -568,11 +547,11 @@ mean_x = mean(x, na.rm = T)
 sd_x   = sd(x, na.rm = T)
 cbind(n, mean_x, sd_x)</code></pre>
 <pre><code>##       n   mean_x     sd_x
-## [1,] 49 122.3265 7.684909</code></pre>
+## [1,] 77 119.9091 12.71673</code></pre>
 <p><small> Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
 </div>
 <div id="hypothesis" class="section level2 subsection">
-<h2>Hypothesis</h2>
+<h2 class="subsection">Hypothesis</h2>
 <div id="null-hypothesis" class="section level3">
 <h3>Null hypothesis</h3>
 <ul>
@@ -601,23 +580,23 @@ cbind(n, mean_x, sd_x)</code></pre>
 </div>
 <div id="t-statistic-1" class="section level2">
 <h2>T-statistic</h2>
-<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{122.33 - 120 }{7.68 / \sqrt{49}}\]</span></p>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{119.91 - 120 }{12.72 / \sqrt{77}}\]</span></p>
 <p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
 <pre class="r"><code>t = (mean_x - mu) / (sd_x / sqrt(n)); t</code></pre>
-<pre><code>## [1] 2.119181</code></pre>
+<pre><code>## [1] -0.06273026</code></pre>
 </div>
 <div id="type-1-error" class="section level2 subsection">
-<h2>Type 1 error</h2>
+<h2 class="subsection">Type 1 error</h2>
 <p>To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.</p>
 <ul>
 <li>Type I error / <span class="math inline">\(\alpha\)</span> = .05</li>
 </ul>
 </div>
 <div id="p-value-one-sided" class="section level2 subsection">
-<h2><em>P</em>-value one sided</h2>
+<h2 class="subsection"><em>P</em>-value one sided</h2>
 <p>Finally we have to calculate our <em>p</em>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
 <pre class="r"><code>df = n - 1; df</code></pre>
-<pre><code>## [1] 48</code></pre>
+<pre><code>## [1] 76</code></pre>
 <pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { install.packages(&quot;visualize&quot;) }
 library(&quot;visualize&quot;)
 
@@ -626,7 +605,7 @@ visualize.t(t, df, section = &quot;upper&quot;)</code></pre>
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 <div id="p-value-two-sided" class="section level2 subsection">
-<h2><em>P</em>-value two sided</h2>
+<h2 class="subsection"><em>P</em>-value two sided</h2>
 <pre class="r"><code>visualize.t(c(-t, t), df, section = &quot;tails&quot;)</code></pre>
 <hr />
 <p><img src="t_distribution_and_one_sample_t_test_handout_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
@@ -637,7 +616,7 @@ visualize.t(t, df, section = &quot;upper&quot;)</code></pre>
 <pre class="r"><code>r = sqrt(t^2/(t^2 + df))
 
 r</code></pre>
-<pre><code>## [1] 0.2925001</code></pre>
+<pre><code>## [1] 0.007195468</code></pre>
 <!-- Footer insert below -->
 </div>
 </div>
@@ -674,7 +653,7 @@ r</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -692,7 +671,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -701,6 +680,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
