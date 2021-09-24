@@ -9,6 +9,10 @@
 rm(list=ls())
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
+
+knitr::opts_chunk$set(echo = TRUE)
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
 ```
 
 ## Moderation
@@ -92,7 +96,7 @@ cor(data)
 
 ## 3D plot
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, webgl=TRUE}
 ## 3d plot package rgl
 ## install.packages('rgl')
 ## install.packages("manipulateWidget")
@@ -108,7 +112,7 @@ plot3d(predictor, moderator, outcome,
        size = 8) -> my.plot
 
 my.plot
-rglwidget(reuse = FALSE)
+# rglwidget(reuse = FALSE)
 ```
 
 Take it for a spin (does not work on tablet)
@@ -224,8 +228,6 @@ aspect3d(1,1,1)
 
 subid <- currentSubscene3d()
 rglwidget(elementId="plot3drgl2", reuse = FALSE)
-
-# rglwidget()
 ```
 
 <script type="text/javascript">
