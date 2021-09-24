@@ -19,10 +19,13 @@ Source [WIKIPEDIA](https://en.wikipedia.org/wiki/Moderation_(statistics))
 
 ## Model {.subsection .flexbox .vcenter}
 
+<small>
+
 $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}Out_i = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}+ \epsilon_i$$
 
-![](../../../../topics/moderation/moderation.png)
+![](../../../topics/moderation/moderation.png)
+</small>
 
 ## Example {.smaller}
 
@@ -92,7 +95,9 @@ cor(data)
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ## 3d plot package rgl
 ## install.packages('rgl')
-library(rgl)
+## install.packages("manipulateWidget")
+library("rgl")
+library("manipulateWidget")
 attach(data)
 
 par3d(mouseMode = "trackball")
@@ -103,7 +108,7 @@ plot3d(predictor, moderator, outcome,
        size = 8) -> my.plot
 
 my.plot
-rglwidget()
+rglwidget(reuse = FALSE)
 ```
 
 Take it for a spin (does not work on tablet)
@@ -117,11 +122,15 @@ fit <- lm(outcome ~ predictor + moderator + predictor*moderator); summary(fit)
 
 ## Regression equation
 
+<small>
+
 $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}$$
 
 $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times Pred_i + `r round(fit$coefficients[3],2)` \times Mod_i + \color{red} `r round(fit$coefficients[4],2)` \times Pred_i \times Mod_i \color{black}$$
+
+</small>
 
 ```{r}
 regeq <- function(model, predictor, moderator) { 
@@ -199,7 +208,7 @@ M <- r3dDefaults$userMatrix
 fn <- par3dinterp(time = (0:2)*0.75, userMatrix = list(M, rotate3d(M, pi/2, 0, 0, 1),
                                                           rotate3d(M, pi/2, 0, 0, 1)) )
 
-rglwidget() %>%
+rglwidget(reuse = FALSE) %>%
 playwidget(par3dinterpControl(fn, 0, 3, steps=15),
        step = 0.01, loop = TRUE, rate = 0.5)
 ```
@@ -214,7 +223,7 @@ surface3d(x.pre,y.mod,z.pre, color = c("green"))
 aspect3d(1,1,1)
 
 subid <- currentSubscene3d()
-rglwidget(elementId="plot3drgl2")
+rglwidget(elementId="plot3drgl2", reuse = FALSE)
 
 # rglwidget()
 ```

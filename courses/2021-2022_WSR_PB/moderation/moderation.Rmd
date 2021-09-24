@@ -1,20 +1,18 @@
 ---
 title: "Moderation"
 author: "Klinkenberg"
-date: "23 sep 2020"
+date: "27 sep 2021"
 output: 
   revealjs::revealjs_presentation:
-    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    template: http://shklinkenberg.github.io/uva_style/UvAtemplate.html
     theme: white #simple #black
     highlight: pygments
     transition: slide #fade #slide
     background_transition: slide
     center: true
     self_contained: false
-
     includes       :
-      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
-                      "../../../GA_Script/GA_Script.html"]
+      in_header    : "../../../GA_Script/GA_Script.html"
   html_document:
     toc            : TRUE
     self_contained : false
@@ -38,30 +36,7 @@ local({
 })
 ```
 
-## Table of content
 
-<!--
-<div class="notes">
-### Lecture outline
-
-[Weblecture](https://webcolleges.uva.nl/Mediasite/Play/b6a75f34622f44aa8438e68afd191ceb1d)
-
-* 0:00 What is moderation
-* 0:20 Moderation in SPSS
-* 0:25 Mean centering
-* 1:00 Johnson-Neyman
-* 1:05 Simulation in R
-* 1:10 3D visual
-* 1:17 Regression in R
-* 1:25 Compare plane to SPSS
-* 1:30 Explained variance
-
-</div>
--->
-
-<div id="toc"></div>
-
-<!-- Add the required topics below -->
 
 ```{r child="../../../topics/moderation/moderation_PB_in_R.Rmd"}
 ```
