@@ -48,7 +48,7 @@ For simple regression
 * Sensitivity
 * Homoscedasticity
 
-For multiple regressin
+Plus multiple regressin
 
 * Multicollinearity
 * Linearity
@@ -108,7 +108,7 @@ draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
 
 ## Multicollinearity
 
-<img class="shadow" style="float:right; width:250px;" src="../../../../topics/regression_multiple_predictors/pinguins.jpg">
+<img class="shadow" style="float:right; width:250px;" src="../../../topics/regression_multiple_predictors/pinguins.jpg">
 
 To adhere to the multicollinearity assumptien, there must not be a too high linear relation between the predictor variables.
 
@@ -231,7 +231,7 @@ planes3d(a = 0,
          c = 0,
          #d = c(1,2,3,4),
          d = -sds,
-         alpha=0.7,
+         alpha=0.5,
          color = c("blue"))
 
 #3 Add regression model surface

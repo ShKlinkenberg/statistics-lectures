@@ -306,7 +306,7 @@ Cohen (1988)
 * Calculate number of subjects needed
 * Use [G*Power](http://www.gpower.hhu.de) to calculate
 
-![](http://www.gpower.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Psychologie/AAP/gpower/GPowerIcon.png)
+![](https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png)
 
 ## Alpha Power {.smaller}
 
