@@ -1,6 +1,5 @@
 ---
-title    : "ANOVA"
-subtitle : "F-distribution & Non-parametric tests"
+title    : "F-distribution & Non-parametric tests"
 author   : "Klinkenberg"
 date     : "4 oct 2021"
 output: 
