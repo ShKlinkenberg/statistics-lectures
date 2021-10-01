@@ -14,26 +14,36 @@
 
 <title>Non-parametric tests</title>
 
-<script src="non_parametric_tests_handout_files/jquery-1.12.4/jquery.min.js"></script>
+<script src="non_parametric_tests_handout_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="non_parametric_tests_handout_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="non_parametric_tests_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="non_parametric_tests_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="non_parametric_tests_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="non_parametric_tests_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="non_parametric_tests_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="non_parametric_tests_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="non_parametric_tests_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="non_parametric_tests_handout_files/navigation-1.1/tabsets.js"></script>
 <link href="non_parametric_tests_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="non_parametric_tests_handout_files/highlightjs-9.12.0/highlight.js"></script>
-<script src="non_parametric_tests_handout_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="non_parametric_tests_handout_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="non_parametric_tests_handout_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="non_parametric_tests_handout_files/datatables-binding-0.15/datatables.js"></script>
+<script src="non_parametric_tests_handout_files/datatables-binding-0.19/datatables.js"></script>
 <link href="non_parametric_tests_handout_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="non_parametric_tests_handout_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="non_parametric_tests_handout_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="non_parametric_tests_handout_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="non_parametric_tests_handout_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="non_parametric_tests_handout_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="non_parametric_tests_handout_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
 <script>
@@ -44,12 +54,16 @@
   gtag('config', 'UA-107432294-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -62,32 +76,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -97,10 +86,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -117,6 +102,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -129,7 +117,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -261,7 +248,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -272,26 +259,19 @@ div.tocify {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Non-parametric tests</h1>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">3 oct 2020</h4>
+<h4 class="date">8 oct 2021</h4>
 
 </div>
 
 
-<div id="inhoud" class="section level2">
-<h2>Inhoud</h2>
-<div id="toc" style="font-size:60%; text-align:left;">
-
-</div>
-<!-- Add the required topics below -->
-</div>
-<div id="nonparametric-tests" class="section level1 section">
-<h1>Nonparametric tests</h1>
+<div id="nonparametric-tests" class="section level1">
+<h1 class="section">Nonparametric tests</h1>
 <div id="mytable" class="section level2">
 <h2>Parametric vs Nonparametric</h2>
 <!-- <style>
@@ -343,7 +323,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </table>
 </div>
 <div id="ranking" class="section level2 subsection">
-<h2>Ranking</h2>
+<h2 class="subsection">Ranking</h2>
 <pre class="r"><code>x = c(1, 4, 6, 7, 8, 9)
 y = c(1, 4, 6, 7, 8, 39)
 
@@ -358,7 +338,7 @@ boxplot(y, horizontal=T, col=&#39;red&#39;)</code></pre>
 ## ry    1    2    3    4    5    6</code></pre>
 </div>
 <div id="ties" class="section level2 subsection">
-<h2>Ties</h2>
+<h2 class="subsection">Ties</h2>
 <pre class="r"><code>x = c(1, 4, 6, 7, 8, 8, 4, 7, 9)
 
 rbind(x, ordered = sort(x), non.tied.rank = 1:length(x), ranked = rank(sort(x)))</code></pre>
@@ -370,7 +350,7 @@ rbind(x, ordered = sort(x), non.tied.rank = 1:length(x), ranked = rank(sort(x)))
 <p><span class="math display">\[\frac{2 + 3}{2} = 2.5,  \frac{5 + 6}{2} = 5.5,  \frac{7 + 8}{2} = 7.5\]</span></p>
 </div>
 <div id="procedure" class="section level2 subsection">
-<h2>Procedure</h2>
+<h2 class="subsection">Procedure</h2>
 <ol style="list-style-type: decimal">
 <li>Assumption: independent random samples.</li>
 <li>Hypothesis: <br><span class="math inline">\(H_0\)</span> : equal population distributions (implies equal mean ranking) <br><span class="math inline">\(H_A\)</span> : unequal mean ranking (two sided) <br><span class="math inline">\(H_A\)</span> : higher mean ranking for one group.</li>
@@ -384,8 +364,8 @@ rbind(x, ordered = sort(x), non.tied.rank = 1:length(x), ranked = rank(sort(x)))
 <div id="wilcoxon-rank-sum-test" class="section level1">
 <h1>Wilcoxon rank-sum test</h1>
 <p>Independent 2 samples</p>
-<div id="wilcoxon-rank-sum-test-1" class="section level2 section">
-<h2>Wilcoxon rank-sum test</h2>
+<div id="wilcoxon-rank-sum-test-1" class="section level2">
+<h2 class="section">Wilcoxon rank-sum test</h2>
 <p><img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0;"></p>
 <p>Developed by <a href="http://en.wikipedia.org/wiki/Frank_Wilcoxon">Frank Wilcoxon</a> the rank-sum test is a <a href="http://en.wikipedia.org/wiki/Nonparametric_statistics">nonparametric</a> alternative to the independent samples t-test.</p>
 <p>By first ranking <span class="math inline">\(x\)</span> and then sum these ranks per group one would expect, under the null hypothesis, equal values for both groups.</p>
@@ -413,11 +393,11 @@ data$R &lt;- rank(data$depres)</code></pre>
 </div>
 <div id="example" class="section level2">
 <h2>Example</h2>
-<div id="htmlwidget-0153b338b23a28f34718" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0153b338b23a28f34718">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol"],[27,29,27,27,30,26,29,31,28,28,28,26,29,29,27,28,32,27,26,29],[6,15,6,6,18,2,15,19,10.5,10.5,10.5,2,15,15,6,10.5,20,6,2,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-62c37ea341fdcec4b396" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-62c37ea341fdcec4b396">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol"],[27,29,27,27,30,26,29,31,28,28,28,26,29,29,27,28,32,27,26,29],[6,15,6,6,18,2,15,19,10.5,10.5,10.5,2,15,15,6,10.5,20,6,2,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-the-sum-of-ranks-per-group" class="section level2 subsection">
-<h2>Calculate the sum of ranks per group</h2>
+<h2 class="subsection">Calculate the sum of ranks per group</h2>
 <pre class="r"><code>R &lt;- aggregate(R ~ factor, data, sum)
 R</code></pre>
 <pre><code>##    factor   R
@@ -459,7 +439,7 @@ W.se</code></pre>
 <pre><code>## [1] 13.22876</code></pre>
 </div>
 <div id="calculate-z" class="section level2 subsection">
-<h2>Calculate Z</h2>
+<h2 class="subsection">Calculate Z</h2>
 <p><span class="math display">\[z = \frac{W - \bar{W}}{{SE}_W}\]</span></p>
 <p>Which looks a lot like</p>
 <p><span class="math display">\[\frac{X - \bar{X}}{{SE}_X} \text{or} \frac{b - \mu_{b}}{{SE}_b} \]</span></p>
@@ -490,15 +470,15 @@ r = z / sqrt(N)
 r</code></pre>
 <pre><code>## [1] -0.05070926</code></pre>
 </div>
-<div id="mannwhitney-test" class="section level2 section">
-<h2>Mann–Whitney test</h2>
+<div id="mannwhitney-test" class="section level2">
+<h2 class="section">Mann–Whitney test</h2>
 <p><span class="math display">\[U = n_1 n_2 + \frac{n_1 (n_1 + 1)}{2} - R_1\]</span></p>
 <pre class="r"><code>U = (n.1*n.2)+(n.1*(n.1+1))/2-R$R[1]
 U</code></pre>
 <pre><code>## [1] 53</code></pre>
 </div>
 <div id="baru-and-se_u-for-non-tied-ranks" class="section level2 subsection">
-<h2><span class="math inline">\(\bar{U}\)</span> and <span class="math inline">\({SE}_U\)</span> for non tied ranks</h2>
+<h2 class="subsection"><span class="math inline">\(\bar{U}\)</span> and <span class="math inline">\({SE}_U\)</span> for non tied ranks</h2>
 <p><span class="math display">\[\bar{U} = \frac{n_1 n_2}{2}\]</span></p>
 <pre class="r"><code>(n.1*n.2)/2</code></pre>
 <pre><code>## [1] 50</code></pre>
@@ -510,8 +490,8 @@ U</code></pre>
 <div id="wilcoxon-signed-rank-test" class="section level1">
 <h1>Wilcoxon signed-rank test</h1>
 <p>Paired 2 samples</p>
-<div id="wilcoxon-signed-rank-test-1" class="section level2 section">
-<h2>Wilcoxon signed-rank test</h2>
+<div id="wilcoxon-signed-rank-test-1" class="section level2">
+<h2 class="section">Wilcoxon signed-rank test</h2>
 <p><img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 10%;"></p>
 <p>The Wilcoxon signed-rank test is a nonparametric alternative to the paired samples t-test. It assigns + or - signs to the difference between two repeated measures. By ranking the differences and summing these ranks for the positive group, the null hypothesis is tested that both positive and negative differences are equal.</p>
 </div>
@@ -535,11 +515,11 @@ data &lt;- data.frame(Ecstasy, Alcohol)</code></pre>
 </div>
 <div id="example-1" class="section level2">
 <h2>Example</h2>
-<div id="htmlwidget-a275141ffaf4bd4f06d8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a275141ffaf4bd4f06d8">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e48ef573d7f6a9b27389" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e48ef573d7f6a9b27389">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-t" class="section level2 smaller subsection">
-<h2>Calculate T</h2>
+<h2 class="smaller subsection">Calculate T</h2>
 <!-- Dit gaat niet goed Ranking moet zonder de ties en absoluut. 
 
 data$difference = abs(data$Ecstasy - data$Alcohol)
@@ -573,9 +553,9 @@ data$rank_pos = with(data, ifelse(sign ==  1, rank, 0   ))
 data$rank_neg = with(data, ifelse(sign == -1, rank, 0   ))</code></pre>
 </div>
 <div id="the-data" class="section level2 smaller">
-<h2>The data</h2>
-<div id="htmlwidget-e9d2f9e2580c2f32ed72" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e9d2f9e2580c2f32ed72">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28],[1,-3,1,0,1,0,2,2,-1,0],[1,3,1,0,1,0,2,2,1,0],[2.5,7,2.5,null,2.5,null,5.5,5.5,2.5,null],[1,-1,1,0,1,0,1,1,-1,0],[2.5,0,2.5,0,2.5,0,5.5,5.5,0,0],[0,7,0,0,0,0,0,0,2.5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n      <th>difference<\/th>\n      <th>abs.difference<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n      <th>rank_pos<\/th>\n      <th>rank_neg<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<h2 class="smaller">The data</h2>
+<div id="htmlwidget-236de9c391edd5aea815" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-236de9c391edd5aea815">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28],[1,-3,1,0,1,0,2,2,-1,0],[1,3,1,0,1,0,2,2,1,0],[2.5,7,2.5,null,2.5,null,5.5,5.5,2.5,null],[1,-1,1,0,1,0,1,1,-1,0],[2.5,0,2.5,0,2.5,0,5.5,5.5,0,0],[0,7,0,0,0,0,0,0,2.5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n      <th>difference<\/th>\n      <th>abs.difference<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n      <th>rank_pos<\/th>\n      <th>rank_neg<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-t_" class="section level2">
 <h2>Calculate <span class="math inline">\(T_+\)</span></h2>
@@ -589,7 +569,7 @@ n</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="calculate-bart-and-se_t" class="section level2 subsection">
-<h2>Calculate <span class="math inline">\(\bar{T}\)</span> and <span class="math inline">\({SE}_{T}\)</span></h2>
+<h2 class="subsection">Calculate <span class="math inline">\(\bar{T}\)</span> and <span class="math inline">\({SE}_{T}\)</span></h2>
 <p><span class="math display">\[\bar{T} = \frac{n(n+1)}{4}\]</span></p>
 <pre class="r"><code>T_mean = (n*(n+1))/4
 T_mean</code></pre>
@@ -620,8 +600,8 @@ r</code></pre>
 <pre><code>## [1] 0.170084</code></pre>
 </div>
 </div>
-<div id="kruskalwallis-test" class="section level1 section">
-<h1>Kruskal–Wallis test</h1>
+<div id="kruskalwallis-test" class="section level1">
+<h1 class="section">Kruskal–Wallis test</h1>
 <p>Independent &gt;2 samples</p>
 <div id="kruskalwallis-test-1" class="section level2">
 <h2>Kruskal–Wallis test</h2>
@@ -648,17 +628,17 @@ depres  = round(depres)
 data &lt;- data.frame(factor, depres)</code></pre>
 </div>
 <div id="assign-ranks" class="section level2 subsection">
-<h2>Assign ranks</h2>
+<h2 class="subsection">Assign ranks</h2>
 <pre class="r"><code># Assign ranks
 data$ranks = rank(data$depres)</code></pre>
 </div>
 <div id="the-data-1" class="section level2">
 <h2>The data</h2>
-<div id="htmlwidget-49a18f4ab25782c65d15" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-49a18f4ab25782c65d15">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","control","control","control","control","control","control","control","control","control","control"],[22,22,24,25,21,24,21,23,21,23,27,23,24,24,21,26,23,24,23,24,23,22,21,22,22,25,22,22,22,23],[9.5,9.5,23.5,27.5,3,23.5,3,17,3,17,30,17,23.5,23.5,3,29,17,23.5,17,23.5,17,9.5,3,9.5,9.5,27.5,9.5,9.5,9.5,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>ranks<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8a088ea3c4a1e0e4b706" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8a088ea3c4a1e0e4b706">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","control","control","control","control","control","control","control","control","control","control"],[22,22,24,25,21,24,21,23,21,23,27,23,24,24,21,26,23,24,23,24,23,22,21,22,22,25,22,22,22,23],[9.5,9.5,23.5,27.5,3,23.5,3,17,3,17,30,17,23.5,23.5,3,29,17,23.5,17,23.5,17,9.5,3,9.5,9.5,27.5,9.5,9.5,9.5,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>ranks<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-h" class="section level2 subsection">
-<h2>Calculate H</h2>
+<h2 class="subsection">Calculate H</h2>
 <p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)\]</span></p>
 <ul>
 <li><span class="math inline">\(N\)</span> total sample size</li>
@@ -692,7 +672,7 @@ H</code></pre>
 df = k - 1</code></pre>
 </div>
 <div id="test-for-significance-1" class="section level2 subsection">
-<h2>Test for significance</h2>
+<h2 class="subsection">Test for significance</h2>
 <pre class="r"><code>visualize.chisq(H, df, section=&quot;upper&quot;)</code></pre>
 <hr />
 <p><img src="non_parametric_tests_handout_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -701,8 +681,8 @@ df = k - 1</code></pre>
 <div id="friedmans-anova" class="section level1">
 <h1>Friedman’s ANOVA</h1>
 <p>Paired &gt;2 samples</p>
-<div id="friedmans-anova-1" class="section level2 section">
-<h2>Friedman’s ANOVA</h2>
+<div id="friedmans-anova-1" class="section level2">
+<h2 class="section">Friedman’s ANOVA</h2>
 <p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/William-Friedman.jpg/220px-William-Friedman.jpg" style="float: left; margin: 0 20px 0 0; height: 150px;"></p>
 <p>Created by <a href="http://en.wikipedia.org/wiki/William_F._Friedman">William Frederick Friedman</a> the Friedman’s ANOVA is a nonparametric alternative to the repeated one-way ANOVA.</p>
 <p>Just like the Kruskal-Wallis test, Friedman’s ANOVA, subtracts the expected mean ranking from the calculated observed mean ranking, which is also <span class="math inline">\(\chi^2\)</span> distributed.</p>
@@ -735,8 +715,8 @@ data &lt;- data.frame(ecstasy, alcohol, control)</code></pre>
 </div>
 <div id="the-data-2" class="section level2">
 <h2>The data</h2>
-<div id="htmlwidget-3d9f96570b1b87960cf3" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3d9f96570b1b87960cf3">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[23,24,27,27,25,21,22,21,23,24],[22,24,24,21,25,22,22,25,24,24],[24,27,25,21,21,23,24,21,23,21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a91a9437ffe2a35cab9f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a91a9437ffe2a35cab9f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[23,24,27,27,25,21,22,21,23,24],[22,24,24,21,25,22,22,25,24,24],[24,27,25,21,21,23,24,21,23,21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="assign-ranks-1" class="section level2">
 <h2>Assign ranks</h2>
@@ -746,11 +726,11 @@ ranks = t(apply(data, 1, rank))</code></pre>
 </div>
 <div id="the-data-with-ranks" class="section level2">
 <h2>The data with ranks</h2>
-<div id="htmlwidget-f411693a41e8320b8937" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f411693a41e8320b8937">{"x":{"filter":"none","data":[[2,1.5,3,3,2.5,1,1.5,1.5,1.5,2.5],[1,1.5,1,1.5,2.5,2,1.5,3,3,2.5],[3,3,2,1.5,1,3,3,1.5,1.5,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6ca59b670fec987da3c9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6ca59b670fec987da3c9">{"x":{"filter":"none","vertical":false,"data":[[2,1.5,3,3,2.5,1,1.5,1.5,1.5,2.5],[1,1.5,1,1.5,2.5,2,1.5,3,3,2.5],[3,3,2,1.5,1,3,3,1.5,1.5,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-f_r" class="section level2 subsection">
-<h2>Calculate <span class="math inline">\(F_r\)</span></h2>
+<h2 class="subsection">Calculate <span class="math inline">\(F_r\)</span></h2>
 <p><span class="math display">\[F_r = \left[ \frac{12}{Nk(k+1)} \sum_{i=1}^k R_i^2 \right] - 3N(k+1)\]</span></p>
 <ul>
 <li><span class="math inline">\(N\)</span> total number of subjects</li>
@@ -805,6 +785,9 @@ F.r</code></pre>
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </div>
 </div>
 
@@ -819,7 +802,7 @@ F.r</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -837,7 +820,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -846,6 +829,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
