@@ -258,18 +258,11 @@ div.tocify {
 <h1 class="title toc-ignore">ANOVA</h1>
 <h3 class="subtitle">F-distribution &amp; One-way independent</h3>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">2 oct 2020</h4>
+<h4 class="date">7 oct 2021</h4>
 
 </div>
 
 
-<div id="inhoud" class="section level2">
-<h2>Inhoud</h2>
-<div id="toc">
-
-</div>
-<!-- Add the required topics below -->
-</div>
 <div id="f-distribution" class="section level1">
 <h1 class="section">F-distribution</h1>
 <div id="ronald-fisher" class="section level2 smaller subsection">
@@ -327,7 +320,7 @@ data &lt;- data.frame(group = rep(c(&quot;s1&quot;, &quot;s2&quot;), each=n), sc
     
 F = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
 F</code></pre>
-<pre><code>## [1] 0.04793093</code></pre>
+<pre><code>## [1] 0.3441866</code></pre>
 </div>
 <div id="more-samples" class="section level2 smaller subsection">
 <h2 class="smaller subsection">More samples</h2>
@@ -402,7 +395,7 @@ legend(&quot;topright&quot;, legend = paste(&quot;df model =&quot;,dfs[,1], &quo
 </div>
 <div id="f-distribution-3" class="section level2 flexbox vcenter">
 <h2 class="flexbox vcenter">F-distribution</h2>
-<p><img src="../../../../topics/f_distribution/f_distributions.gif" style="height:400px;" ></p>
+<p><img src="../../../topics/f_distribution/f_distributions.gif" style="height:400px;" ></p>
 </div>
 </div>
 <div id="one-way-independent-anova" class="section level1">
@@ -582,11 +575,8 @@ ms.e = ss.e / df.e; ms.e</code></pre>
 </div>
 <div id="reject-h_0" class="section level2">
 <h2>Reject <span class="math inline">\(H_0\)</span>?</h2>
-<pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { install.packages(&quot;visualize&quot;) }</code></pre>
-<pre><code>## 
-## The downloaded binary packages are in
-##  /var/folders/s4/dwyrwcbd2k17_c8k7219pv800000gn/T//RtmpFWrunj/downloaded_packages</code></pre>
-<pre class="r"><code>library(&quot;visualize&quot;)
+<pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { install.packages(&quot;visualize&quot;) }
+library(&quot;visualize&quot;)
 
 visualize.f(F, df.m,df.e,section=&quot;upper&quot;)</code></pre>
 <hr />
@@ -607,9 +597,9 @@ visualize.f(F, df.m,df.e,section=&quot;upper&quot;)</code></pre>
 <li>Only use chunks once</li>
 <li>Values add up to 0</li>
 </ul>
-<p><img src="../../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" > <img src="../../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" ></p>
+<p><img src="../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" > <img src="../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" ></p>
 <hr />
-<p><img src="../../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" ></p>
+<p><img src="../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" ></p>
 <ul>
 <li>AB-CDEF → A-B → CD-EF → C-D → E-F</li>
 <li>A-BCDEF → A-B → A-C</li>
@@ -749,6 +739,9 @@ visualize.f(F, df.m,df.e,section=&quot;upper&quot;)</code></pre>
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </div>
 </div>
 

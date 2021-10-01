@@ -80,8 +80,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="f_distribution_ANOVA_one_way_independent_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
 
 
-  <!-- some tweaks to reveal css -->
+  <!-- some tweaks to reveal css and uva template specific styles -->
   <style type="text/css">
+	  
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+	  
     .reveal h1 { font-size: 2.0em; }
     .reveal h2 { font-size: 1.5em;  }
     .reveal h3 { font-size: 1.25em;	}
@@ -90,6 +93,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     .reveal .slides>section,
     .reveal .slides>section>section {
       padding: 0px 0px;
+    }
+    
+    html.title div.slide-background.present {
+      background-position: center 200px;
+    }
+    
+    #refs {
+      font-size: 50%;
+      text-align: left;
+    }
+    
+    .TitleBox {
+      background-color: white;
+      width: 500px;
+      text-align: left;
+      position: relative;
+      top: 400px;
+    }
+
+    html.title .title, html.title .subtitle, html.title .author, html.title .date  {
+      font-size: .5em;
+      padding: 5px 10px 5px 10px;
+      margin: 0px;
+    }
+
+    html.title .author, html.title .date  {
+      background-color: lightgrey;
+      }
+
+    html.title .title {
+      height: 100px;
+      vertical-align: text-top;
+      font-size: .8em;
+    }
+    
+    body:after {
+      content: url(https://shklinkenberg.github.io/uva_style/images/uvalogo_regular_p_en.png);
+      position: fixed;
+      top: 1.5em;
+      left: 1.5em;
     }
 
 
@@ -125,7 +168,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <link rel="stylesheet" href="https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"/>
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -178,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 	   Consider using a serif font for readability. */
 	body, p, td, li, div {
 		font-size: 20pt!important;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
+		font-family: 'Source Sans Pro', sans-serif; !important;
 		color: #000;
 	}
 
@@ -189,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 		color: #000!important;
 		height: auto;
 		line-height: normal;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
+		font-family: 'Source Sans Pro', sans-serif; !important;
 		text-shadow: 0 0 0 #000 !important;
 		text-align: left;
 		letter-spacing: normal;
@@ -509,51 +551,6 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      TableOfContents();
-    }
-    );                        
-
-    function TableOfContents(container, output) {
-
-    var output = output || '#toc';
-
-    // Get all elements with class: section or subsection
-    idfromclass = document.querySelectorAll('.section, .subsection');
-
-        // Create the list element:
-        var list = document.createElement('ul');
-
-        // Iterate through all found elements
-        for(var i = 0; i < idfromclass.length; i++) {
-          
-            // Create the list item:
-            var item = document.createElement('li');
-
-            // Set its contents:
-            var id = idfromclass[i].id
-            
-            // Replace - in id with whitespace
-            var titleText = id.replace(/-/gi, " ");
-            
-            // Add text to list element
-            item.appendChild(document.createTextNode(titleText));
-            
-            // Add subsection class
-            item.className = idfromclass[i].className
-            
-            // Add it to the list:
-            list.appendChild(item);
-        }
-
-    // Return generated HTML to toc div in slide
-    document.querySelector(output).innerHTML = list.innerHTML;
-
-    // Generate instruction message if no classes are defined
-    if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
-
-    };</script>
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
     <script>
@@ -569,20 +566,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
   <div class="reveal">
     <div class="slides">
 
-<section>
-    <h1 class="title">ANOVA</h1>
+<section data-state="title" data-background-image="https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg"><div class="TitleBox">
   <h1 class="subtitle">F-distribution &amp; One-way independent</h1>
+
+    <h1 class="title">ANOVA</h1>
+
     <h2 class="author">Klinkenberg</h2>
-    <h3 class="date">2 oct 2020</h3>
-</section>
+    <h3 class="date">7 oct 2021</h3>
+</div></section>
 
-<section id="inhoud" class="slide level2">
-<h2>Inhoud</h2>
-<div id="toc">
-
-</div>
-<!-- Add the required topics below -->
-</section>
 <section>
 <section id="f-distribution" class="title-slide slide level1 section">
 <h1 class="section">F-distribution</h1>
@@ -724,7 +716,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="f-distribution-3" class="slide level2 flexbox vcenter">
 <h2 class="flexbox vcenter">F-distribution</h2>
-<p><img src="../../../../topics/f_distribution/f_distributions.gif" style="height:400px;" ></p>
+<p><img src="../../../topics/f_distribution/f_distributions.gif" style="height:400px;" ></p>
 </section></section>
 <section>
 <section id="one-way-independent-anova" class="title-slide slide level1 section">
@@ -943,11 +935,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Only use chunks once</li>
 <li>Values add up to 0</li>
 </ul>
-<p><img src="../../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" > <img src="../../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" ></p>
+<p><img src="../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" > <img src="../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" ></p>
 </section>
 <section class="slide level2">
 
-<p><img src="../../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" ></p>
+<p><img src="../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" ></p>
 <ul>
 <li>AB-CDEF → A-B → CD-EF → C-D → E-F</li>
 <li>A-BCDEF → A-B → A-C</li>
@@ -1093,6 +1085,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img data-src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </section></section>
     </div>
   </div>
@@ -1140,6 +1135,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
       });
     }
   })();
+</script>
+
+<script>
+Reveal.configure({
+  keyboard: {
+     39: 'next', // Right Arrow
+     37: 'prev'  // Left Arrow
+  }
+});
 </script>
 
 
