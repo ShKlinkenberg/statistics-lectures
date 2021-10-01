@@ -12,19 +12,19 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -44,7 +44,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -514,23 +514,23 @@ document.getElementsByTagName('head')[0].appendChild(style);
       TableOfContents();
     }
     );                        
-    
+
     function TableOfContents(container, output) {
-    
+
     var output = output || '#toc';
-    
+
     // Get all elements with class: section or subsection
     idfromclass = document.querySelectorAll('.section, .subsection');
-    
+
         // Create the list element:
         var list = document.createElement('ul');
-    
+
         // Iterate through all found elements
         for(var i = 0; i < idfromclass.length; i++) {
           
             // Create the list item:
             var item = document.createElement('li');
-    
+
             // Set its contents:
             var id = idfromclass[i].id
             
@@ -546,13 +546,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
             // Add it to the list:
             list.appendChild(item);
         }
-    
+
     // Return generated HTML to toc div in slide
     document.querySelector(output).innerHTML = list.innerHTML;
-    
+
     // Generate instruction message if no classes are defined
     if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
-    
+
     };</script>
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
@@ -560,9 +560,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments)};
       gtag('js', new Date());
-    
+
       gtag('config', 'UA-107432294-1');
     </script>
+    <script src="f_distribution_ANOVA_one_way_independent_reveal_files/header-attrs-2.11/header-attrs.js"></script>
 </head>
 <body>
   <div class="reveal">
@@ -582,8 +583,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </div>
 <!-- Add the required topics below -->
 </section>
-<section><section id="f-distribution" class="title-slide slide level1 section"><h1>F-distribution</h1></section><section id="ronald-fisher" class="slide level2 smaller subsection">
-<h2>Ronald Fisher</h2>
+<section>
+<section id="f-distribution" class="title-slide slide level1 section">
+<h1 class="section">F-distribution</h1>
+
+</section>
+<section id="ronald-fisher" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">Ronald Fisher</h2>
 <p><small></p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" style="float: left; width: 150px; margin: 0 20px 0 0;"></p>
 <p>The F-distribution, also known as Snedecor’s F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.</p>
@@ -591,125 +597,141 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.</p>
 <p><a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Wikipedia</a></p>
 <p></small></p>
-</section><section id="analysing-variance" class="slide level2">
+</section>
+<section id="analysing-variance" class="slide level2">
 <h2>Analysing variance</h2>
 <p><a href="https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000">Decomposing variance example of height for males and females.</a></p>
-</section><section id="population-distribution" class="slide level2 smaller subsection">
-<h2>Population distribution</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="op">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>n  =<span class="st"> </span><span class="dv">56</span>    <span class="co"># Sample size</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>df =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>mu    =<span class="st"> </span><span class="dv">120</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>sigma =<span class="st"> </span><span class="dv">15</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>IQ =<span class="st"> </span><span class="kw">seq</span>(mu<span class="dv">-45</span>, mu<span class="op">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">plot</span>(IQ, <span class="kw">dnorm</span>(IQ, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma), <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>n.samples =<span class="st"> </span><span class="dv">12</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n.samples) {</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  </span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="kw">hist</span>(<span class="kw">rnorm</span>(n, mu, sigma), <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">cex.axis=</span>.<span class="dv">5</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb1-20"><a href="#cb1-20"></a>  </span>
-<span id="cb1-21"><a href="#cb1-21"></a>}</span></code></pre></div>
-</section><section class="slide level2">
+</section>
+<section id="population-distribution" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">Population distribution</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n  <span class="ot">=</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mu    <span class="ot">=</span> <span class="dv">120</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="dv">15</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>IQ <span class="ot">=</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">&quot;&quot;</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
-</section><section id="f-statistic" class="slide level2">
+</section>
+<section id="f-statistic" class="slide level2">
 <h2>F-statistic</h2>
 <p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
 <p>So the <span class="math inline">\(F\)</span>-statistic represents a signal to noise ratio by deviding the model variance component by the error variance component.</p>
-</section><section id="a-samples" class="slide level2 smaller">
-<h2>A samples</h2>
+</section>
+<section id="a-samples" class="slide level2 smaller">
+<h2 class="smaller">A samples</h2>
 <p>Let’s take two sample from our normal populatiion and calculate the F-value.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x<span class="fl">.1</span> =<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>x<span class="fl">.2</span> =<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;s1&quot;</span>, <span class="st">&quot;s2&quot;</span>), <span class="dt">each=</span>n), <span class="dt">score =</span> <span class="kw">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    </span>
-<span id="cb2-6"><a href="#cb2-6"></a>F =<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(<span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>group, data)))[[<span class="dv">1</span>]]<span class="op">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb2-7"><a href="#cb2-7"></a>F</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;s1&quot;</span>, <span class="st">&quot;s2&quot;</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>F</span></code></pre></div>
 <pre><code>## [1] 0.3441866</code></pre>
-</section><section id="more-samples" class="slide level2 smaller subsection">
-<h2>More samples</h2>
+</section>
+<section id="more-samples" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">More samples</h2>
 <p>let’s take more samples and calculate the F-value every time.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n.samples =<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>f.values =<span class="st"> </span><span class="kw">vector</span>()</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n.samples) {</span>
-<span id="cb4-6"><a href="#cb4-6"></a>  </span>
-<span id="cb4-7"><a href="#cb4-7"></a>  x<span class="fl">.1</span> =<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma); x<span class="fl">.1</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>  x<span class="fl">.2</span> =<span class="st"> </span><span class="kw">rnorm</span>(n, mu, sigma); x<span class="fl">.2</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;s1&quot;</span>, <span class="st">&quot;s2&quot;</span>), <span class="dt">each=</span>n), <span class="dt">score =</span> <span class="kw">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
-<span id="cb4-11"><a href="#cb4-11"></a>    </span>
-<span id="cb4-12"><a href="#cb4-12"></a>  f.values[i] =<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(<span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>group, data)))[[<span class="dv">1</span>]]<span class="op">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a>}</span>
-<span id="cb4-15"><a href="#cb4-15"></a></span>
-<span id="cb4-16"><a href="#cb4-16"></a>k =<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a>N =<span class="st"> </span><span class="dv">2</span><span class="op">*</span>n</span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a>df.model =<span class="st"> </span>k <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>df.error =<span class="st"> </span>N <span class="op">-</span><span class="st"> </span>k</span>
-<span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="kw">hist</span>(f.values, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">main=</span><span class="st">&quot;F-values&quot;</span>, <span class="dt">breaks=</span><span class="dv">100</span>)</span>
-<span id="cb4-23"><a href="#cb4-23"></a>F =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="fl">.01</span>)</span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="kw">lines</span>(F, <span class="kw">df</span>(F,df.model, df.error), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n.samples <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>f.values <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  x<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x<span class="fl">.1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  x<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x<span class="fl">.2</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;s1&quot;</span>, <span class="st">&quot;s2&quot;</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  f.values[i] <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>n</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">=</span> N <span class="sc">-</span> k</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(f.values, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">&quot;F-values&quot;</span>, <span class="at">breaks=</span><span class="dv">100</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(F, <span class="fu">df</span>(F,df.model, df.error), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
-</section><section id="f-distribution-1" class="slide level2 smaller">
-<h2>F-distribution</h2>
+</section>
+<section id="f-distribution-1" class="slide level2 smaller">
+<h2 class="smaller">F-distribution</h2>
 <p>So if the population is normaly distributed (assumption of normality) the f-distribution represents the signal to noise ration given a certain number of samples (<span class="math inline">\({df}_{model} = k - 1\)</span>) and sample size (<span class="math inline">\({df}_{error} = N - k\)</span>).</p>
 <p>The F-distibution therefore is different for different sample sizes and number of groups.</p>
-</section><section id="f-distribution-2" class="slide level2 smaller">
-<h2>F-distribution</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>multiple.n  =<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>multiple.k  =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>multiple.df.model =<span class="st"> </span>multiple.k <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>multiple.df.error =<span class="st"> </span>multiple.n <span class="op">-</span><span class="st"> </span>multiple.k</span>
-<span id="cb5-5"><a href="#cb5-5"></a>col         =<span class="st"> </span><span class="kw">rainbow</span>(<span class="kw">length</span>(multiple.df.model) <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(multiple.df.error))</span>
-<span id="cb5-6"><a href="#cb5-6"></a>F =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">.01</span>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">plot</span>(F,  <span class="kw">df</span>(F, multiple.df.model[<span class="dv">1</span>], multiple.df.error[<span class="dv">1</span>]), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, </span>
-<span id="cb5-9"><a href="#cb5-9"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">85</span>), </span>
-<span id="cb5-10"><a href="#cb5-10"></a>     <span class="dt">xlab =</span> <span class="st">&quot;F&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>, </span>
-<span id="cb5-11"><a href="#cb5-11"></a>     <span class="dt">col  =</span> col[<span class="dv">1</span>], <span class="dt">main=</span><span class="st">&quot;F-distributions&quot;</span> )</span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a>dfs =<span class="st"> </span><span class="kw">expand.grid</span>(multiple.df.model, multiple.df.error)</span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw">dim</span>(dfs)[<span class="dv">1</span>]) { </span>
-<span id="cb5-16"><a href="#cb5-16"></a>  </span>
-<span id="cb5-17"><a href="#cb5-17"></a>  <span class="kw">lines</span>(F, <span class="kw">df</span>(F, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), <span class="dt">col=</span>col[i])</span>
-<span id="cb5-18"><a href="#cb5-18"></a>  </span>
-<span id="cb5-19"><a href="#cb5-19"></a>  critical.f &lt;-<span class="st"> </span><span class="kw">qf</span>(.<span class="dv">95</span>, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>])</span>
-<span id="cb5-20"><a href="#cb5-20"></a>  </span>
-<span id="cb5-21"><a href="#cb5-21"></a>  f.alpha &lt;-<span class="st"> </span><span class="kw">seq</span>(critical.f, <span class="dv">1000</span>, <span class="fl">.01</span>)</span>
-<span id="cb5-22"><a href="#cb5-22"></a>  </span>
-<span id="cb5-23"><a href="#cb5-23"></a>  <span class="kw">polygon</span>(<span class="kw">c</span>(f.alpha, <span class="kw">rev</span>(f.alpha)), <span class="kw">c</span>(<span class="kw">df</span>(f.alpha, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), f.alpha<span class="op">*</span><span class="dv">0</span> ), <span class="dt">col=</span> <span class="kw">rgb</span>(<span class="dv">1</span>,.<span class="dv">66</span>,<span class="dv">0</span>, <span class="fl">.5</span>), <span class="dt">border =</span> col[i])</span>
-<span id="cb5-24"><a href="#cb5-24"></a>  </span>
-<span id="cb5-25"><a href="#cb5-25"></a>  <span class="kw">lines</span>(<span class="kw">c</span>(critical.f<span class="fl">+.1</span>, <span class="dv">5</span>), <span class="kw">c</span>(.<span class="dv">02</span>, <span class="fl">.2</span>), <span class="dt">col=</span>col[i])</span>
-<span id="cb5-26"><a href="#cb5-26"></a>        </span>
-<span id="cb5-27"><a href="#cb5-27"></a>}</span>
-<span id="cb5-28"><a href="#cb5-28"></a></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="kw">text</span>(<span class="dv">5</span>,.<span class="dv">2</span>, <span class="kw">expression</span>(<span class="kw">paste</span>(alpha, <span class="st">&quot;= 5%&quot;</span>)), <span class="dt">pos =</span><span class="dv">3</span>)</span>
-<span id="cb5-30"><a href="#cb5-30"></a></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend =</span> <span class="kw">paste</span>(<span class="st">&quot;df model =&quot;</span>,dfs[,<span class="dv">1</span>], <span class="st">&quot;df error =&quot;</span>, dfs[,<span class="dv">2</span>]), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col =</span> col, <span class="dt">cex=</span>.<span class="dv">75</span>)</span></code></pre></div>
-</section><section class="slide level2">
+</section>
+<section id="f-distribution-2" class="slide level2 smaller">
+<h2 class="smaller">F-distribution</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>multiple.n  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>multiple.k  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>multiple.df.model <span class="ot">=</span> multiple.k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>multiple.df.error <span class="ot">=</span> multiple.n <span class="sc">-</span> multiple.k</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>col         <span class="ot">=</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(multiple.df.model) <span class="sc">*</span> <span class="fu">length</span>(multiple.df.error))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, .<span class="dv">01</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(F,  <span class="fu">df</span>(F, multiple.df.model[<span class="dv">1</span>], multiple.df.error[<span class="dv">1</span>]), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">85</span>), </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;F&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;density&quot;</span>, </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> col[<span class="dv">1</span>], <span class="at">main=</span><span class="st">&quot;F-distributions&quot;</span> )</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">=</span> <span class="fu">expand.grid</span>(multiple.df.model, multiple.df.error)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">dim</span>(dfs)[<span class="dv">1</span>]) { </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(F, <span class="fu">df</span>(F, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), <span class="at">col=</span>col[i])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  critical.f <span class="ot">&lt;-</span> <span class="fu">qf</span>(.<span class="dv">95</span>, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>])</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  f.alpha <span class="ot">&lt;-</span> <span class="fu">seq</span>(critical.f, <span class="dv">1000</span>, .<span class="dv">01</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">polygon</span>(<span class="fu">c</span>(f.alpha, <span class="fu">rev</span>(f.alpha)), <span class="fu">c</span>(<span class="fu">df</span>(f.alpha, dfs[i,<span class="dv">1</span>], dfs[i,<span class="dv">2</span>]), f.alpha<span class="sc">*</span><span class="dv">0</span> ), <span class="at">col=</span> <span class="fu">rgb</span>(<span class="dv">1</span>,.<span class="dv">66</span>,<span class="dv">0</span>, .<span class="dv">5</span>), <span class="at">border =</span> col[i])</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">c</span>(critical.f<span class="fl">+.1</span>, <span class="dv">5</span>), <span class="fu">c</span>(.<span class="dv">02</span>, .<span class="dv">2</span>), <span class="at">col=</span>col[i])</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>,.<span class="dv">2</span>, <span class="fu">expression</span>(<span class="fu">paste</span>(alpha, <span class="st">&quot;= 5%&quot;</span>)), <span class="at">pos =</span><span class="dv">3</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">&quot;df model =&quot;</span>,dfs[,<span class="dv">1</span>], <span class="st">&quot;df error =&quot;</span>, dfs[,<span class="dv">2</span>]), <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col =</span> col, <span class="at">cex=</span>.<span class="dv">75</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" /></p>
-</section><section id="f-distribution-3" class="slide level2 flexbox vcenter">
-<h2>F-distribution</h2>
+</section>
+<section id="f-distribution-3" class="slide level2 flexbox vcenter">
+<h2 class="flexbox vcenter">F-distribution</h2>
 <p><img src="../../../../topics/f_distribution/f_distributions.gif" style="height:400px;" ></p>
 </section></section>
-<section><section id="one-way-independent-anova" class="title-slide slide level1 section"><h1>One-way independent ANOVA</h1><p>Compare 2 or more independent groups.</p></section><section id="assumptions" class="slide level2">
+<section>
+<section id="one-way-independent-anova" class="title-slide slide level1 section">
+<h1 class="section">One-way independent ANOVA</h1>
+<p>Compare 2 or more independent groups.</p>
+</section>
+<section id="assumptions" class="slide level2">
 <h2>Assumptions</h2>
 <p>Assuming th <span class="math inline">\(H_0\)</span> hypothesis to be true, the following should hold:</p>
 <ul>
@@ -724,7 +746,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Levene’s test</li>
 </ul></li>
 </ul>
-</section><section id="jet-lag" class="slide level2">
+</section>
+<section id="jet-lag" class="slide level2">
 <h2>Jet lag</h2>
 <p>Wright and Czeisler (2002) performed an experiment where they measured the circadian rhythm by the daily cycle of melatonin production in 22 subjects randomly assigned to one of three light treatments.</p>
 <ul>
@@ -732,15 +755,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Knees (3 hour light to back of knees)</li>
 <li>Eyes (3 hour light in eyes)</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())</span>
-<span id="cb6-2"><a href="#cb6-2"></a>x.c =<span class="st"> </span><span class="kw">c</span>( <span class="fl">.53</span>, <span class="fl">.36</span>,  <span class="fl">.2</span>,  <span class="fl">-.37</span>, <span class="fl">-.6</span>,  <span class="fl">-.64</span>, <span class="fl">-.68</span>,<span class="op">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>x.k =<span class="st"> </span><span class="kw">c</span>( <span class="fl">.73</span>, <span class="fl">.31</span>,  <span class="fl">.03</span>, <span class="fl">-.29</span>, <span class="fl">-.56</span>, <span class="fl">-.96</span>,<span class="op">-</span><span class="fl">1.61</span>      ) <span class="co"># Knees</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>x.e =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">78</span>,<span class="op">-</span>.<span class="dv">86</span>,<span class="op">-</span><span class="fl">1.35</span>,<span class="op">-</span><span class="fl">1.48</span>,<span class="op">-</span><span class="fl">1.52</span>,<span class="op">-</span><span class="fl">2.04</span>,<span class="op">-</span><span class="fl">2.83</span>      ) <span class="co"># Eyes</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>x   =<span class="st"> </span><span class="kw">c</span>( x.c, x.k, x.e )                               <span class="co"># Conditions combined</span></span></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x.c <span class="ot">=</span> <span class="fu">c</span>( .<span class="dv">53</span>, .<span class="dv">36</span>,  .<span class="dv">2</span>,  <span class="sc">-</span>.<span class="dv">37</span>, <span class="sc">-</span>.<span class="dv">6</span>,  <span class="sc">-</span>.<span class="dv">64</span>, <span class="sc">-</span>.<span class="dv">68</span>,<span class="sc">-</span><span class="fl">1.27</span>) <span class="co"># Control </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x.k <span class="ot">=</span> <span class="fu">c</span>( .<span class="dv">73</span>, .<span class="dv">31</span>,  .<span class="dv">03</span>, <span class="sc">-</span>.<span class="dv">29</span>, <span class="sc">-</span>.<span class="dv">56</span>, <span class="sc">-</span>.<span class="dv">96</span>,<span class="sc">-</span><span class="fl">1.61</span>      ) <span class="co"># Knees</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x.e <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">78</span>,<span class="sc">-</span>.<span class="dv">86</span>,<span class="sc">-</span><span class="fl">1.35</span>,<span class="sc">-</span><span class="fl">1.48</span>,<span class="sc">-</span><span class="fl">1.52</span>,<span class="sc">-</span><span class="fl">2.04</span>,<span class="sc">-</span><span class="fl">2.83</span>      ) <span class="co"># Eyes</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>x   <span class="ot">=</span> <span class="fu">c</span>( x.c, x.k, x.e )                               <span class="co"># Conditions combined</span></span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
-</section><section id="variance-components" class="slide level2">
+</section>
+<section id="variance-components" class="slide level2">
 <h2>Variance components</h2>
 <table>
 <colgroup>
@@ -784,109 +809,126 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tbody>
 </table>
 <p>Where <span class="math inline">\(N\)</span> is the total sample size, <span class="math inline">\(n_k\)</span> is the sample size per category and <span class="math inline">\(k\)</span> is the number of categories. Finally <span class="math inline">\(s_k^2\)</span> is the variance per category.</p>
-</section><section id="total-variance" class="slide level2 subsection">
-<h2>Total variance</h2>
+</section>
+<section id="total-variance" class="slide level2 subsection">
+<h2 class="subsection">Total variance</h2>
 <p><span class="math display">\[{MS}_{total} = s_x^2\]</span></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ms.t =<span class="st"> </span><span class="kw">var</span>(x); ms.t</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ms.t <span class="ot">=</span> <span class="fu">var</span>(x); ms.t</span></code></pre></div>
 <pre><code>## [1] 0.7923732</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">sum</span>( (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span> ) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.7923732</code></pre>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p><span class="math display">\[{SS}_{total} = s_x^2 (N-1)\]</span></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>N =<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a>ss.t =<span class="st"> </span><span class="kw">var</span>(x) <span class="op">*</span><span class="st"> </span>(N<span class="dv">-1</span>); ss.t</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="fu">length</span>(x)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ss.t <span class="ot">=</span> <span class="fu">var</span>(x) <span class="sc">*</span> (N<span class="dv">-1</span>); ss.t</span></code></pre></div>
 <pre><code>## [1] 16.63984</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">sum</span>( (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>( (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> )</span></code></pre></div>
 <pre><code>## [1] 16.63984</code></pre>
-</section><section id="visual-ss_total" class="slide level2 smaller">
-<h2>Visual <span class="math inline">\({SS}_{total}\)</span></h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Assign labels</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>lab =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Knee&quot;</span>, <span class="st">&quot;Eyes&quot;</span>) </span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Plot all data points</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span>N,x, </span>
-<span id="cb15-6"><a href="#cb15-6"></a>     <span class="dt">ylab=</span><span class="st">&quot;Shift in circadian rhythm (h)&quot;</span>,</span>
-<span id="cb15-7"><a href="#cb15-7"></a>     <span class="dt">xlab=</span><span class="st">&quot;Light treatment&quot;</span>,</span>
-<span id="cb15-8"><a href="#cb15-8"></a>     <span class="dt">main=</span><span class="st">&quot;Total variance&quot;</span>)</span>
-<span id="cb15-9"><a href="#cb15-9"></a></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="co"># Add mean line</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">22</span>),<span class="kw">rep</span>(<span class="kw">mean</span>(x),<span class="dv">2</span>),<span class="dt">lwd=</span><span class="dv">3</span>)</span>
-<span id="cb15-12"><a href="#cb15-12"></a></span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="co"># Add delta lines / variance components</span></span>
-<span id="cb15-14"><a href="#cb15-14"></a><span class="kw">segments</span>(<span class="dv">1</span><span class="op">:</span>N, <span class="kw">mean</span>(x), <span class="dv">1</span><span class="op">:</span>N, x)</span>
-<span id="cb15-15"><a href="#cb15-15"></a></span>
-<span id="cb15-16"><a href="#cb15-16"></a><span class="co"># Add labels</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a><span class="kw">text</span>(<span class="kw">c</span>(<span class="dv">4</span>,<span class="fl">11.5</span>,<span class="fl">18.5</span>),<span class="kw">rep</span>(.<span class="dv">6</span>,<span class="dv">3</span>),<span class="dt">labels=</span>lab)</span></code></pre></div>
-</section><section class="slide level2">
+</section>
+<section id="visual-ss_total" class="slide level2 smaller">
+<h2 class="smaller">Visual <span class="math inline">\({SS}_{total}\)</span></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign labels</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>lab <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Knee&quot;</span>, <span class="st">&quot;Eyes&quot;</span>) </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot all data points</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>N,x, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Shift in circadian rhythm (h)&quot;</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Light treatment&quot;</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Total variance&quot;</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add mean line</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">22</span>),<span class="fu">rep</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>),<span class="at">lwd=</span><span class="dv">3</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add delta lines / variance components</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="fu">mean</span>(x), <span class="dv">1</span><span class="sc">:</span>N, x)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="fl">11.5</span>,<span class="fl">18.5</span>),<span class="fu">rep</span>(.<span class="dv">6</span>,<span class="dv">3</span>),<span class="at">labels=</span>lab)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" /></p>
-</section><section id="model-variance" class="slide level2 smaller subsection">
-<h2>Model variance</h2>
+</section>
+<section id="model-variance" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">Model variance</h2>
 <p><span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}} \\ {df}_{model} = k - 1\]</span></p>
 <p>Where <span class="math inline">\(k\)</span> is the number of independent groups and</p>
 <p><span class="math display">\[{SS}_{model} = \sum_{k} n_k (\bar{X}_k - \bar{X})^2\]</span></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>k      =<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>n.c =<span class="st"> </span><span class="kw">length</span>(x.c)</span>
-<span id="cb16-3"><a href="#cb16-3"></a>n.k =<span class="st"> </span><span class="kw">length</span>(x.k)</span>
-<span id="cb16-4"><a href="#cb16-4"></a>n.e =<span class="st"> </span><span class="kw">length</span>(x.e)</span></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>k      <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>n.c <span class="ot">=</span> <span class="fu">length</span>(x.c)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>n.k <span class="ot">=</span> <span class="fu">length</span>(x.k)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>n.e <span class="ot">=</span> <span class="fu">length</span>(x.e)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>ss.m.c =<span class="st"> </span>n.c <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(x.c) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>ss.m.k =<span class="st"> </span>n.k <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(x.k) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>ss.m.e =<span class="st"> </span>n.e <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(x.e) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a>ss.m =<span class="st"> </span><span class="kw">sum</span>(ss.m.c, ss.m.k, ss.m.e); ss.m</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ss.m.c <span class="ot">=</span> n.c <span class="sc">*</span> (<span class="fu">mean</span>(x.c) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ss.m.k <span class="ot">=</span> n.k <span class="sc">*</span> (<span class="fu">mean</span>(x.k) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ss.m.e <span class="ot">=</span> n.e <span class="sc">*</span> (<span class="fu">mean</span>(x.e) <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>ss.m <span class="ot">=</span> <span class="fu">sum</span>(ss.m.c, ss.m.k, ss.m.e); ss.m</span></code></pre></div>
 <pre><code>## [1] 7.224492</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df.m =<span class="st"> </span>(k <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb19-2"><a href="#cb19-2"></a>ms.m =<span class="st"> </span>ss.m <span class="op">/</span><span class="st"> </span>df.m; ms.m</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df.m <span class="ot">=</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ms.m <span class="ot">=</span> ss.m <span class="sc">/</span> df.m; ms.m</span></code></pre></div>
 <pre><code>## [1] 3.612246</code></pre>
-</section><section id="visual-ss_model" class="slide level2">
+</section>
+<section id="visual-ss_model" class="slide level2">
 <h2>Visual <span class="math inline">\({SS}_{model}\)</span></h2>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-15-1.png" width="768" /></p>
-</section><section id="error-variance" class="slide level2 subsection">
-<h2>Error variance</h2>
+</section>
+<section id="error-variance" class="slide level2 subsection">
+<h2 class="subsection">Error variance</h2>
 <p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
 <p>where</p>
 <p><span class="math display">\[{SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)\]</span></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>ss.e.c =<span class="st"> </span><span class="kw">var</span>(x.c) <span class="op">*</span><span class="st"> </span>(n.c <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>ss.e.k =<span class="st"> </span><span class="kw">var</span>(x.k) <span class="op">*</span><span class="st"> </span>(n.k <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb21-3"><a href="#cb21-3"></a>ss.e.e =<span class="st"> </span><span class="kw">var</span>(x.e) <span class="op">*</span><span class="st"> </span>(n.e <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb21-4"><a href="#cb21-4"></a>ss.e   =<span class="st"> </span><span class="kw">sum</span>(ss.e.c, ss.e.k, ss.e.e); ss.e</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ss.e.c <span class="ot">=</span> <span class="fu">var</span>(x.c) <span class="sc">*</span> (n.c <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ss.e.k <span class="ot">=</span> <span class="fu">var</span>(x.k) <span class="sc">*</span> (n.k <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ss.e.e <span class="ot">=</span> <span class="fu">var</span>(x.e) <span class="sc">*</span> (n.e <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>ss.e   <span class="ot">=</span> <span class="fu">sum</span>(ss.e.c, ss.e.k, ss.e.e); ss.e</span></code></pre></div>
 <pre><code>## [1] 9.415345</code></pre>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>df.e =<span class="st"> </span>(N <span class="op">-</span><span class="st"> </span>k)</span>
-<span id="cb23-2"><a href="#cb23-2"></a>ms.e =<span class="st"> </span>ss.e <span class="op">/</span><span class="st"> </span>df.e; ms.e</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df.e <span class="ot">=</span> (N <span class="sc">-</span> k)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ms.e <span class="ot">=</span> ss.e <span class="sc">/</span> df.e; ms.e</span></code></pre></div>
 <pre><code>## [1] 0.4955445</code></pre>
-</section><section id="visual-ss_error" class="slide level2">
+</section>
+<section id="visual-ss_error" class="slide level2">
 <h2>Visual <span class="math inline">\({SS}_{error}\)</span></h2>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
-</section><section id="variance-components-1" class="slide level2 subsection">
-<h2>Variance components</h2>
+</section>
+<section id="variance-components-1" class="slide level2 subsection">
+<h2 class="subsection">Variance components</h2>
 <p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6398364 = 7.2244917 + 9.4153446\]</span></p>
 <p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 0.7923732\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 3.6122459\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 0.4955445\]</span></p>
-</section><section id="f-ratio" class="slide level2 subsection">
-<h2>F-ratio</h2>
+</section>
+<section id="f-ratio" class="slide level2 subsection">
+<h2 class="subsection">F-ratio</h2>
 <p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>F =<span class="st"> </span>ms.m <span class="op">/</span><span class="st"> </span>ms.e; F</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> ms.m <span class="sc">/</span> ms.e; F</span></code></pre></div>
 <pre><code>## [1] 7.289449</code></pre>
-</section><section id="reject-h_0" class="slide level2">
+</section>
+<section id="reject-h_0" class="slide level2">
 <h2>Reject <span class="math inline">\(H_0\)</span>?</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="st">&quot;visualize&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()) { <span class="kw">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
-<span id="cb27-3"><a href="#cb27-3"></a></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="kw">visualize.f</span>(F, df.m,df.e,<span class="dt">section=</span><span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">&quot;visualize&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(F, df.m,df.e,<span class="at">section=</span><span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-20-1.png" width="768" /></p>
-</section><section id="contrasts" class="slide level2">
+</section>
+<section id="contrasts" class="slide level2">
 <h2>Contrasts</h2>
 <p>Planned comparisons</p>
 <ul>
@@ -894,14 +936,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Higher precision</li>
 <li>Higher power</li>
 </ul>
-</section><section id="contrasts-1" class="slide level2">
+</section>
+<section id="contrasts-1" class="slide level2">
 <h2>Contrasts</h2>
 <ul>
 <li>Only use chunks once</li>
 <li>Values add up to 0</li>
 </ul>
 <p><img src="../../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" > <img src="../../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" ></p>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p><img src="../../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" ></p>
 <ul>
@@ -910,7 +954,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>A-BCDEG → BC-DEF → B-C → B-DEF</li>
 <li>ABC-DEF → BC-DEF → B-C</li>
 </ul>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p>Assign values that combine to one. Same values define chunk.</p>
 <ul>
@@ -967,10 +1012,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tr>
 </tbody>
 </table>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p><img src="f_distribution_ANOVA_one_way_independent_reveal_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
-</section><section id="post-hoc" class="slide level2">
+</section>
+<section id="post-hoc" class="slide level2">
 <h2>Post-hoc</h2>
 <p>Unplanned comparisons</p>
 <ul>
@@ -1007,21 +1054,29 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tr>
 </tbody>
 </table>
-</section><section id="effect-size-eta2" class="slide level2">
+</section>
+<section id="effect-size-eta2" class="slide level2">
 <h2>Effect size <span class="math inline">\(\eta^2\)</span></h2>
 <p>The amount of explained variance <span class="math inline">\(R^2\)</span> as a general effect size measure.</p>
 <p><span class="math display">\[R^2 = \frac{{SS}_{model}}{{SS}_{total}} = \eta^2\]</span> Taking the square root gives us Cohen’s <span class="math inline">\(r\)</span>.</p>
-</section><section id="effect-size-omega2" class="slide level2">
+</section>
+<section id="effect-size-omega2" class="slide level2">
 <h2>Effect size <span class="math inline">\(\omega^2\)</span></h2>
 <p>Less biased towards just the sample is omega squared <span class="math inline">\(\omega^2\)</span>.</p>
 <p><span class="math display">\[\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}\]</span> But what does it say?</p>
-</section><section id="effect-size-r" class="slide level2">
+</section>
+<section id="effect-size-r" class="slide level2">
 <h2>Effect size <span class="math inline">\(r\)</span></h2>
 <p>A more interpretable effect size measure is <span class="math inline">\(r_{Contrast}\)</span>. Which gives the effect size for a specific contrast.</p>
 <p><span class="math display">\[r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\]</span></p>
 <!-- Footer insert below -->
 </section></section>
-<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<section>
+<section id="end" class="title-slide slide level1">
+<h1>End</h1>
+
+</section>
+<section id="contact" class="slide level2">
 <h2>Contact</h2>
 <script src="https://use.fontawesome.com/23c1d38eea.js"></script>
 <ul class="fa-ul" style="color:black; list-style:none;">
