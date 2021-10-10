@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="Klinkenberg" />
-  <meta name="dcterms.date" content="2020-10-16" />
+  <meta name="dcterms.date" content="2021-10-22" />
   <title>Bayes</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,26 +13,28 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -41,9 +43,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -79,8 +81,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="bayes_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
 
 
-  <!-- some tweaks to reveal css -->
+  <!-- some tweaks to reveal css and uva template specific styles -->
   <style type="text/css">
+	  
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+	  
     .reveal h1 { font-size: 2.0em; }
     .reveal h2 { font-size: 1.5em;  }
     .reveal h3 { font-size: 1.25em;	}
@@ -89,6 +94,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     .reveal .slides>section,
     .reveal .slides>section>section {
       padding: 0px 0px;
+    }
+    
+    html.title div.slide-background.present {
+      background-position: center 200px;
+    }
+    
+    #refs {
+      font-size: 50%;
+      text-align: left;
+    }
+    
+    .TitleBox {
+      background-color: white;
+      width: 500px;
+      text-align: left;
+      position: relative;
+      top: 400px;
+    }
+
+    html.title .title, html.title .subtitle, html.title .author, html.title .date  {
+      font-size: .5em;
+      padding: 5px 10px 5px 10px;
+      margin: 0px;
+    }
+
+    html.title .author, html.title .date  {
+      background-color: lightgrey;
+      }
+
+    html.title .title {
+      height: 100px;
+      vertical-align: text-top;
+      font-size: .8em;
+    }
+    
+    body:after {
+      content: url(https://shklinkenberg.github.io/uva_style/images/uvalogo_regular_p_en.png);
+      position: fixed;
+      top: 1.5em;
+      left: 1.5em;
     }
 
 
@@ -124,7 +169,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <link rel="stylesheet" href="https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"/>
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -177,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 	   Consider using a serif font for readability. */
 	body, p, td, li, div {
 		font-size: 20pt!important;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
+		font-family: 'Source Sans Pro', sans-serif; !important;
 		color: #000;
 	}
 
@@ -188,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 		color: #000!important;
 		height: auto;
 		line-height: normal;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
+		font-family: 'Source Sans Pro', sans-serif; !important;
 		text-shadow: 0 0 0 #000 !important;
 		text-align: left;
 		letter-spacing: normal;
@@ -508,71 +552,29 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      TableOfContents();
-    }
-    );                        
-    
-    function TableOfContents(container, output) {
-    
-    var output = output || '#toc';
-    
-    // Get all elements with class: section or subsection
-    idfromclass = document.querySelectorAll('.section, .subsection');
-    
-        // Create the list element:
-        var list = document.createElement('ul');
-    
-        // Iterate through all found elements
-        for(var i = 0; i < idfromclass.length; i++) {
-          
-            // Create the list item:
-            var item = document.createElement('li');
-    
-            // Set its contents:
-            var id = idfromclass[i].id
-            
-            // Replace - in id with whitespace
-            var titleText = id.replace(/-/gi, " ");
-            
-            // Add text to list element
-            item.appendChild(document.createTextNode(titleText));
-            
-            // Add subsection class
-            item.className = idfromclass[i].className
-            
-            // Add it to the list:
-            list.appendChild(item);
-        }
-    
-    // Return generated HTML to toc div in slide
-    document.querySelector(output).innerHTML = list.innerHTML;
-    
-    // Generate instruction message if no classes are defined
-    if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
-    
-    };</script>
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments)};
       gtag('js', new Date());
-    
+
       gtag('config', 'UA-107432294-1');
     </script>
+    <script src="bayes_reveal_files/header-attrs-2.11/header-attrs.js"></script>
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
 
-<section>
-    <h1 class="title">Bayes</h1>
+<section data-state="title" data-background-image="https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg"><div class="TitleBox">
   <h1 class="subtitle"><small>Parameter estimation &amp; hypothesis testing</small></h1>
+
+    <h1 class="title">Bayes</h1>
+
     <h2 class="author">Klinkenberg</h2>
-    <h3 class="date">16 oct 2020</h3>
-</section>
+    <h3 class="date">22 oct 2021</h3>
+</div></section>
 
 <section id="inhoud" class="slide level2">
 <h2>Inhoud</h2>
@@ -581,10 +583,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </div>
 <!-- Add the required topics below -->
 </section>
-<section><section id="bayes-theorem" class="title-slide slide level1 section"><h1>Bayes Theorem</h1></section><section id="bayes-rule" class="slide level2">
+<section>
+<section id="bayes-theorem" class="title-slide slide level1 section">
+<h1 class="section">Bayes Theorem</h1>
+
+</section>
+<section id="bayes-rule" class="slide level2">
 <h2>Bayes rule</h2>
 <p><span class="math display">\[\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}\]</span></p>
-</section><section id="nhst-table" class="slide level2">
+</section>
+<section id="nhst-table" class="slide level2">
 <h2>NHST Table</h2>
 <table style="border: none;  transform: scale(1);">
 <col width="150px">
@@ -623,8 +631,9 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </td>
 </tr>
 </table>
-</section><section id="bayes-descision-table" class="slide level2">
-<h2>Bayes descision table</h2>
+</section>
+<section id="bayes-decision-table" class="slide level2">
+<h2>Bayes decision table</h2>
 <p><span class="math inline">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
 <table style="border: none;  transform: scale(1);">
 <col width="150px">
@@ -663,7 +672,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </td>
 </tr>
 </table>
-</section><section id="visual" class="slide level2">
+</section>
+<section id="visual" class="slide level2">
 <h2>Visual</h2>
 <table style="border: none;  transform: scale(1);">
 <col width="150px">
@@ -702,13 +712,16 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </td>
 </tr>
 </table>
-</section><section id="date-hypothesis" class="slide level2">
+</section>
+<section id="date-hypothesis" class="slide level2">
 <h2>Date | Hypothesis</h2>
 <p><span class="math display">\[\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}\]</span></p>
-</section><section id="with-legos" class="slide level2">
+</section>
+<section id="with-legos" class="slide level2">
 <h2>With legos</h2>
-<p><img data-src="../../../../topics/bayes/lego_bayes.jpg" /></p>
-</section><section id="posterior-likelihood-prior" class="slide level2">
+<p><img data-src="../../../topics/bayes/lego_bayes.jpg" /></p>
+</section>
+<section id="posterior-likelihood-prior" class="slide level2">
 <h2>Posterior Likelihood Prior</h2>
 <p><span class="math display">\[P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mid H)}{P(D)}\]</span></p>
 <ul>
@@ -717,7 +730,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>the quotient <span class="math inline">\(\frac{P(D \mid H)}{P(D)}\)</span> represents the support <span class="math inline">\(D\)</span> provides for <span class="math inline">\(H\)</span>.</li>
 </ul>
 <p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
-</section><section id="bayes-is-about" class="slide level2">
+</section>
+<section id="bayes-is-about" class="slide level2">
 <h2>Bayes is about</h2>
 <blockquote>
 <p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
@@ -728,7 +742,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Updating belief in light of new evidence</li>
 <li>Yesterdays posteriors are todays priors</li>
 </ul>
-</section><section id="generative-model" class="slide level2">
+</section>
+<section id="generative-model" class="slide level2">
 <h2>Generative model</h2>
 <p>Frequentists</p>
 <blockquote>
@@ -738,7 +753,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <blockquote>
 <p>Data → State of the world</p>
 </blockquote>
-</section><section id="resources" class="slide level2">
+</section>
+<section id="resources" class="slide level2">
 <h2>Resources</h2>
 <ul>
 <li><a href="https://youtu.be/U_85TaXbeIo">The quick proof of Bayes’ theorem - 3Bleu1Brown</a></li>
@@ -746,139 +762,163 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia</a></li>
 </ul>
 </section></section>
-<section><section id="bayesian-parameter-estimation" class="title-slide slide level1 section"><h1>Bayesian parameter estimation</h1></section><section id="updating-belief" class="slide level2">
+<section>
+<section id="bayesian-parameter-estimation" class="title-slide slide level1 section">
+<h1 class="section">Bayesian parameter estimation</h1>
+
+</section>
+<section id="updating-belief" class="slide level2">
 <h2>Updating belief</h2>
 <blockquote>
 <p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
 </blockquote>
-</section><section id="so-what-is-your-belief" class="slide level2">
+</section>
+<section id="so-what-is-your-belief" class="slide level2">
 <h2>So what is your belief</h2>
 <p>In lecture one I tossed ten times. with a coin that was supposedly healed after hamering it flat.</p>
 <p>I arbitrarily assumed my <span class="math inline">\(H_A: \theta=.25\)</span>.</p>
 <p>Considering all possible values of <span class="math inline">\(\theta\)</span>, what is your belief?</p>
 <p><span class="math inline">\([0,1] \Rightarrow \{\theta\in\Bbb R:0\le \theta\le 1\}\)</span></p>
-</section><section id="draw-your-belief" class="slide level2">
+</section>
+<section id="draw-your-belief" class="slide level2">
 <h2>Draw your belief</h2>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
 <p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
-</section><section id="prior-distribution" class="slide level2">
+</section>
+<section id="prior-distribution" class="slide level2">
 <h2>Prior distribution</h2>
 <p>You have assigned a prior probability distribution to the parameter <span class="math inline">\(\theta\)</span>.</p>
 <blockquote>
 <p>This is your prior</p>
 </blockquote>
 <p>Now we normally do not draw our priors, but we could.</p>
-</section><section id="priors" class="slide level2">
+</section>
+<section id="priors" class="slide level2">
 <h2>Priors</h2>
 <p>We can choose a flat prior, or a beta distributed prior with different parameter values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">theta =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">.001</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">plot</span>(theta, <span class="kw">dunif</span>(theta),           <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, <span class="dv">3</span>, <span class="dv">5</span>),     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</a></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, .<span class="dv">001</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dunif</span>(theta),           <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbeta</span>(theta, <span class="dv">3</span>, <span class="dv">5</span>),     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
-</section><section id="choose-prior" class="slide level2">
+</section>
+<section id="choose-prior" class="slide level2">
 <h2>Choose prior</h2>
 <p>Binomial distribution</p>
 <p><span class="math display">\[\theta^k (1-\theta)^{n-k} \\
 \theta^{25} (1-\theta)^{100-25}\]</span></p>
-</section><section id="now-what-is-the-data-saying" class="slide level2">
+</section>
+<section id="now-what-is-the-data-saying" class="slide level2">
 <h2>Now what is the data saying</h2>
 <h3 id="my-ten-tosses">My ten tosses</h3>
 <p><span class="math display">\[\begin{aligned}
   k &amp;= 2 \\
   n &amp;= 10
   \end{aligned}\]</span></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">k =<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">n =<span class="st"> </span><span class="dv">10</span></a></code></pre></div>
-</section><section id="likelihood" class="slide level2">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span></span></code></pre></div>
+</section>
+<section id="likelihood" class="slide level2">
 <h2>Likelihood</h2>
 <p>What is the most likely parameter value <span class="math inline">\(\theta\)</span> assuming the data to be true:</p>
 <p><span class="math display">\[\theta = \frac{2}{10} = 0.2\]</span></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">theta.given.data =<span class="st"> </span>k<span class="op">/</span>n</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">theta.given.data</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theta.given.data <span class="ot">=</span> k<span class="sc">/</span>n</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>theta.given.data</span></code></pre></div>
 <pre><code>## [1] 0.2</code></pre>
-</section><section id="likelihood-function" class="slide level2">
+</section>
+<section id="likelihood-function" class="slide level2">
 <h2>Likelihood function</h2>
 <p>How likely is 2 out of 10 for all possible <span class="math inline">\(\theta\)</span> values?</p>
 <p><span class="math inline">\(\theta^k (1-\theta)^{n-k}\)</span></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">thetas =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">.01</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">likelihood =<span class="st">  </span><span class="kw">dbinom</span>(k, n, thetas)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">plot</span>(thetas, <span class="kw">dbinom</span>(k, n, thetas),</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">     <span class="dt">main =</span> <span class="st">&quot;Likelihood function&quot;</span>,</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">     <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, </a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">     <span class="dt">ylab =</span> <span class="st">&quot;Likelihood&quot;</span>, </a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">     <span class="dt">las =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">v=</span>theta.given.data, <span class="dt">lty=</span><span class="st">&#39;dashed&#39;</span>)</a></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>thetas <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, .<span class="dv">01</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">=</span>  <span class="fu">dbinom</span>(k, n, thetas)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(thetas, <span class="fu">dbinom</span>(k, n, thetas),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Likelihood function&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&#39;l&#39;</span>, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Likelihood&quot;</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>theta.given.data, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
-</section><section class="slide level2">
+</section>
+<section class="slide level2">
 
-<p><img data-src="../../../../topics/bayes/likelihood_function.gif" /></p>
-</section><section id="posterior" class="slide level2">
+<p><img data-src="../../../topics/bayes/likelihood_function.gif" /></p>
+</section>
+<section id="posterior" class="slide level2">
 <h2>Posterior</h2>
 <p>Now we can update our belief about the possible values of theta based on the data (the likelihood function) we found. For this we use Bayes rule.</p>
 <p><span class="math display">\[\begin{aligned}
   {Posterior} &amp;\propto {Likelihood} \times {Prior} \\
   \theta^{27}(1-\theta)^{83} &amp;= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}
   \end{aligned}\]</span></p>
-</section><section id="visual-1" class="slide level2">
+</section>
+<section id="visual-1" class="slide level2">
 <h2>Visual</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">27</span>, <span class="dv">83</span>,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">2</span>, <span class="dv">10</span>,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</a></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(<span class="dv">27</span>, <span class="dv">83</span>,  theta), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="dv">10</span>,   theta), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Prior&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="bayes_reveal_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" /></p>
-</section><section id="theta-all-mighty" class="slide level2">
+</section>
+<section id="theta-all-mighty" class="slide level2">
 <h2>Theta all mighty</h2>
 <p>The true value of <span class="math inline">\(theta\)</span> for our binomial distribution.</p>
 <p><span class="math display">\[\Huge \theta = .68\]</span></p>
 <p>The data driver!</p>
-</section><section id="see-the-prior-update" class="slide level2">
+</section>
+<section id="see-the-prior-update" class="slide level2">
 <h2>See the prior update</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">## Run multiple samples with our real theta of .68 as our driving force.</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">real.theta =<span class="st"> </span><span class="fl">.68</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">old.k =<span class="st"> </span><span class="dv">27</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">old.n =<span class="st"> </span><span class="dv">83</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">  </a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">  <span class="co"># Choose a random sample size between 10 and 100</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">  sample.size.n =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">30</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">  number.of.heads.k =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">  <span class="co"># sample.size.n</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16">  <span class="co"># number.of.heads.k</span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">  </a>
-<a class="sourceLine" id="cb7-18" data-line-number="18">  new.k =<span class="st"> </span>old.k <span class="op">+</span><span class="st"> </span>number.of.heads.k</a>
-<a class="sourceLine" id="cb7-19" data-line-number="19">  new.n =<span class="st"> </span>old.n <span class="op">+</span><span class="st"> </span>sample.size.n</a>
-<a class="sourceLine" id="cb7-20" data-line-number="20">  </a>
-<a class="sourceLine" id="cb7-21" data-line-number="21">  <span class="kw">layout</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb7-22" data-line-number="22">  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(new.k, new.n,  theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Posterior&quot;</span>)</a>
-<a class="sourceLine" id="cb7-23" data-line-number="23">  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</a>
-<a class="sourceLine" id="cb7-24" data-line-number="24">  <span class="kw">plot</span>(theta, <span class="kw">dbinom</span>(old.k, old.n, theta), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Prior&quot;</span>)</a>
-<a class="sourceLine" id="cb7-25" data-line-number="25">  </a>
-<a class="sourceLine" id="cb7-26" data-line-number="26">  old.k =<span class="st"> </span>new.k</a>
-<a class="sourceLine" id="cb7-27" data-line-number="27">  old.n =<span class="st"> </span>new.n</a>
-<a class="sourceLine" id="cb7-28" data-line-number="28">  </a>
-<a class="sourceLine" id="cb7-29" data-line-number="29">}</a></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">25</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>real.theta <span class="ot">=</span> .<span class="dv">68</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>old.k <span class="ot">=</span> <span class="dv">27</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>old.n <span class="ot">=</span> <span class="dv">83</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Choose a random sample size between 10 and 100</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  sample.size.n <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  number.of.heads.k <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sample.size.n</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># number.of.heads.k</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  new.k <span class="ot">=</span> old.k <span class="sc">+</span> number.of.heads.k</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  new.n <span class="ot">=</span> old.n <span class="sc">+</span> sample.size.n</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(new.k, new.n,  theta), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Posterior&quot;</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Likelihood&quot;</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(old.k, old.n, theta), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;likelihood&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Prior&quot;</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  old.k <span class="ot">=</span> new.k</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  old.n <span class="ot">=</span> new.n</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section class="slide level2">
 
-<p><img data-src="../../../../topics/bayes/bayes_in_action.gif" /></p>
-</section><section id="take-home-message" class="slide level2">
+<p><img data-src="../../../topics/bayes/bayes_in_action.gif" /></p>
+</section>
+<section id="take-home-message" class="slide level2">
 <h2>Take home message</h2>
 <ul>
 <li>Bayesians quantify uncertainty through distributions.</li>
@@ -886,26 +926,35 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Incoming information continually updates our knowledge; today’s posterior is tomorrow’s prior.</li>
 </ul>
 </section></section>
-<section><section id="bayesian-hypothesis-testing" class="title-slide slide level1 section"><h1>Bayesian hypothesis testing</h1></section><section id="bayesion-hypothesis" class="slide level2">
+<section>
+<section id="bayesian-hypothesis-testing" class="title-slide slide level1 section">
+<h1 class="section">Bayesian hypothesis testing</h1>
+
+</section>
+<section id="bayesion-hypothesis" class="slide level2">
 <h2>Bayesion Hypothesis</h2>
 <ul>
 <li><span class="math inline">\(H_0\)</span>, the null hypothesis. This is an invariance or “general law”. For instance <span class="math inline">\(\theta = 1\)</span> (all swans are white) or <span class="math inline">\(\theta = .5\)</span> (people cannot look into the future – performance is at chance).</li>
 <li><span class="math inline">\(H_A\)</span> is the hypothesis that relaxes the restriction imposed by <span class="math inline">\(H_0\)</span>.</li>
 </ul>
-</section><section id="prior-belief" class="slide level2">
+</section>
+<section id="prior-belief" class="slide level2">
 <h2>Prior Belief</h2>
 <p><span class="math display">\[\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
-</section><section id="bayes-factor" class="slide level2 subsection">
-<h2>Bayes Factor</h2>
+</section>
+<section id="bayes-factor" class="slide level2 subsection">
+<h2 class="subsection">Bayes Factor</h2>
 <p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the likelihood of the date under the alternative and the null.</p>
 <p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely onder the alternative than under the null.</p>
-</section><section id="simple-bf-explanation" class="slide level2">
+</section>
+<section id="simple-bf-explanation" class="slide level2">
 <h2>Simple BF explanation</h2>
 <p>The special case of the Bayes Factor for null hypotheses testing can be visualised as the difference between the likelihood of the data at <span class="math inline">\(H_A\)</span> / <span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_0\)</span> at the parameter value that represents the null.</p>
 <h3 id="interactive-bf">interactive BF</h3>
 <p><a href="https://tellmi.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd#section-do-the-test">A First Lesson in Bayesian Inference - Shiny App by EJ</a></p>
-</section><section id="heuristics-for-bf" class="slide level2 subsection">
-<h2>Heuristics for BF</h2>
+</section>
+<section id="heuristics-for-bf" class="slide level2 subsection">
+<h2 class="subsection">Heuristics for BF</h2>
 <p>Heuristics for the Interpretation of the Bayes Factor by <a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a></p>
 <table>
 <thead>
@@ -937,29 +986,39 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </tr>
 </tbody>
 </table>
-</section><section id="advantages-of-the-bayes-factor" class="slide level2">
+</section>
+<section id="advantages-of-the-bayes-factor" class="slide level2">
 <h2>Advantages of the Bayes Factor</h2>
 <ul>
 <li>Provides a continuous degree of evidence without requiring an all-or-none decision.</li>
 <li>Allows evidence to be monitored during data collection.</li>
 <li>Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).</li>
 </ul>
-</section><section id="bf-pizza" class="slide level2">
+</section>
+<section id="bf-pizza" class="slide level2">
 <h2>BF pizza</h2>
-<p><img data-src="../../../../topics/bayes/BF1.png" /></p>
-</section><section class="slide level2">
+<p><img data-src="../../../topics/bayes/BF1.png" /></p>
+</section>
+<section class="slide level2">
 
-<p><img data-src="../../../../topics/bayes/BF3.png" /></p>
-</section><section class="slide level2">
+<p><img data-src="../../../topics/bayes/BF3.png" /></p>
+</section>
+<section class="slide level2">
 
-<p><img data-src="../../../../topics/bayes/BF13.png" /></p>
-</section><section id="jasp" class="slide level2">
+<p><img data-src="../../../topics/bayes/BF13.png" /></p>
+</section>
+<section id="jasp" class="slide level2">
 <h2>JASP</h2>
 <p><img data-src="https://jasp-stats.org/wp-content/themes/jasp/images/logo.svg" /></p>
 <p><a href="https://jasp-stats.org">A fresh way to do statistics</a></p>
 <!-- Footer insert below -->
 </section></section>
-<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<section>
+<section id="end" class="title-slide slide level1">
+<h1>End</h1>
+
+</section>
+<section id="contact" class="slide level2">
 <h2>Contact</h2>
 <script src="https://use.fontawesome.com/23c1d38eea.js"></script>
 <ul class="fa-ul" style="color:black; list-style:none;">
@@ -976,6 +1035,9 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img data-src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </section></section>
     </div>
   </div>
@@ -1023,6 +1085,15 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
       });
     }
   })();
+</script>
+
+<script>
+Reveal.configure({
+  keyboard: {
+     39: 'next', // Right Arrow
+     37: 'prev'  // Left Arrow
+  }
+});
 </script>
 
 
