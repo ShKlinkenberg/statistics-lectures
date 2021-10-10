@@ -11,30 +11,40 @@
 
 <meta name="author" content="Klinkenberg" />
 
-<meta name="date" content="2020-10-13" />
+<meta name="date" content="2021-10-19" />
 
 <title>ANOVA</title>
 
-<script src="ANOVA_repeated_and_mixed_handout_files/jquery-1.12.4/jquery.min.js"></script>
+<script src="ANOVA_repeated_and_mixed_handout_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="ANOVA_repeated_and_mixed_handout_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="ANOVA_repeated_and_mixed_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="ANOVA_repeated_and_mixed_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="ANOVA_repeated_and_mixed_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="ANOVA_repeated_and_mixed_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="ANOVA_repeated_and_mixed_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="ANOVA_repeated_and_mixed_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="ANOVA_repeated_and_mixed_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="ANOVA_repeated_and_mixed_handout_files/navigation-1.1/tabsets.js"></script>
 <link href="ANOVA_repeated_and_mixed_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="ANOVA_repeated_and_mixed_handout_files/highlightjs-9.12.0/highlight.js"></script>
-<script src="ANOVA_repeated_and_mixed_handout_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="ANOVA_repeated_and_mixed_handout_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="ANOVA_repeated_and_mixed_handout_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="ANOVA_repeated_and_mixed_handout_files/datatables-binding-0.15/datatables.js"></script>
+<script src="ANOVA_repeated_and_mixed_handout_files/datatables-binding-0.19/datatables.js"></script>
 <link href="ANOVA_repeated_and_mixed_handout_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="ANOVA_repeated_and_mixed_handout_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="ANOVA_repeated_and_mixed_handout_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="ANOVA_repeated_and_mixed_handout_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="ANOVA_repeated_and_mixed_handout_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="ANOVA_repeated_and_mixed_handout_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="ANOVA_repeated_and_mixed_handout_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
 <script>
@@ -45,12 +55,16 @@
   gtag('config', 'UA-107432294-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -63,32 +77,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -98,10 +87,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -118,6 +103,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -130,7 +118,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -262,7 +249,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -273,14 +260,14 @@ div.tocify {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">ANOVA</h1>
 <h3 class="subtitle">Repeated &amp; Mixed</h3>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">13 oct 2020</h4>
+<h4 class="date">19 oct 2021</h4>
 
 </div>
 
@@ -294,8 +281,8 @@ div.tocify {
 </div>
 <div id="anova-one-way-repeated" class="section level1">
 <h1>ANOVA<br>One-way repeated</h1>
-<div id="one-way-repeated-measures-anova" class="section level2 section">
-<h2>One-way repeated measures ANOVA</h2>
+<div id="one-way-repeated-measures-anova" class="section level2">
+<h2 class="section">One-way repeated measures ANOVA</h2>
 <p>The one-way repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
 <ul>
 <li>1 dependent/outcome variable</li>
@@ -307,7 +294,7 @@ div.tocify {
 </ul>
 </div>
 <div id="assumptions" class="section level2 subsection">
-<h2>Assumptions</h2>
+<h2 class="subsection">Assumptions</h2>
 <ul>
 <li>Uni- or Multivariate</li>
 <li>Continuous dependent variable</li>
@@ -322,9 +309,9 @@ div.tocify {
 </ul>
 </div>
 <div id="uni--or-multi--descision-tree" class="section level2 smaller">
-<h2>Uni- or Multi- descision tree</h2>
+<h2 class="smaller">Uni- or Multi- descision tree</h2>
 <p><small></p>
-<p><img class="shadow" style="float:right; width:250px;" src="../../../../topics/ANOVA_repeated_one-way/uni_multi_descicion.png"></p>
+<p><img class="shadow" style="float:right; width:250px;" src="../../../topics/ANOVA_repeated_one-way/uni_multi_descicion.png"></p>
 <ol style="list-style-type: decimal">
 <li>Field: 15.5.2, Output 15.2</li>
 <li>Field: Output 15.4</li>
@@ -337,7 +324,7 @@ div.tocify {
 <p></small></p>
 </div>
 <div id="formulas" class="section level2 smaller subsection">
-<h2>Formulas</h2>
+<h2 class="smaller subsection">Formulas</h2>
 <table>
 <colgroup>
 <col width="17%" />
@@ -405,12 +392,12 @@ div.tocify {
 </ul>
 </div>
 <div id="the-data" class="section level2 smaller">
-<h2>The data</h2>
-<div id="htmlwidget-ed18c618ce22c69ef784" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ed18c618ce22c69ef784">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<h2 class="smaller">The data</h2>
+<div id="htmlwidget-27a87ee55979aa7d5bc7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-27a87ee55979aa7d5bc7">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="ms_total" class="section level2 subsection">
-<h2><span class="math inline">\({MS}_{total}\)</span></h2>
+<h2 class="subsection"><span class="math inline">\({MS}_{total}\)</span></h2>
 <pre class="r"><code># Assign to individual variables
 none_alc = data$none_alc
 some_alc = data$some_alc
@@ -432,7 +419,7 @@ SS_total = MS_total * DF_total; SS_total</code></pre>
 <pre><code>## [1] 55.5217</code></pre>
 </div>
 <div id="ss_total-visual" class="section level2 smaller">
-<h2><span class="math inline">\({SS}_{total}\)</span> visual</h2>
+<h2 class="smaller"><span class="math inline">\({SS}_{total}\)</span> visual</h2>
 <pre class="r"><code># Set offset
 offset = .2
 
@@ -470,7 +457,7 @@ segments(1:21-.5, 3, 1:21-.5, 7.5, col=&#39;grey&#39;)</code></pre>
 <pre class="r"><code>p &lt;- recordPlot()</code></pre>
 </div>
 <div id="ms_within" class="section level2 subsection">
-<h2><span class="math inline">\({MS}_{within}\)</span></h2>
+<h2 class="subsection"><span class="math inline">\({MS}_{within}\)</span></h2>
 <p><span class="math display">\[{MS}_{within} = \frac{{SS}_{{within}}}{{DF}_{{within}}} \\
 {DF}_{within} = (n_i-1)n\]</span></p>
 <pre class="r"><code>n.i = 3  # Number of mesurements per individual (none, some, much)
@@ -481,7 +468,7 @@ DF_within</code></pre>
 <pre><code>## [1] 40</code></pre>
 </div>
 <div id="ss_within" class="section level2 smaller">
-<h2><span class="math inline">\({SS}_{within}\)</span></h2>
+<h2 class="smaller"><span class="math inline">\({SS}_{within}\)</span></h2>
 <p><span class="math display">\[{SS}_{{within}} = \sum{s_i^2(n_i-1)}\]</span></p>
 <pre class="r"><code>var_pp = apply(cbind(none_alc, some_alc, much_alc),1,var)
 ss_pp  = var_pp * (n.i - 1)
@@ -497,8 +484,8 @@ sum(c((none_alc - mean_pp)^2,
 </div>
 <div id="ss_within-data" class="section level2">
 <h2><span class="math inline">\({SS}_{within}\)</span> data</h2>
-<div id="htmlwidget-476b0692990c40f7f3c6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-476b0692990c40f7f3c6">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155],[5.192,5.199,5.96,5.388,5.763,5.558,5.766,5.953,5.292,4.825,5.591,5.538,5.812,5.305,5.348,5.993,5.176,5.196,5.764,6.172],[5.192,1.51,1.805,1.248,1.792,1.316,3.071,0.563,1.326,6.198,1.045,1.881,0.38,2.507,2.328,1.996,2.828,6.767,2.834,1.859]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6d85f92aa695103e7f43" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6d85f92aa695103e7f43">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.426,4.227,5.278,4.632,5.288,5.025,4.496,5.359,4.492,3.587,5.548,4.759,5.359,4.421,4.229,5.53,4.289,3.43,5.017,5.228],[4.106,5.469,5.557,5.323,5.148,5.158,5.829,6.121,5.264,4.047,4.89,5.23,6.229,4.93,5.432,5.31,4.711,5.057,5.139,6.132],[7.043,5.901,7.045,6.208,6.853,6.492,6.972,6.38,6.12,6.84,6.334,6.624,5.849,6.564,6.382,7.14,6.527,7.101,7.137,7.155],[5.192,5.199,5.96,5.388,5.763,5.558,5.766,5.953,5.292,4.825,5.591,5.538,5.812,5.305,5.348,5.993,5.176,5.196,5.764,6.172],[5.192,1.51,1.805,1.248,1.792,1.316,3.071,0.563,1.326,6.198,1.045,1.881,0.38,2.507,2.328,1.996,2.828,6.767,2.834,1.859]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>none_alc<\/th>\n      <th>some_alc<\/th>\n      <th>much_alc<\/th>\n      <th>mean_pp<\/th>\n      <th>ss_pp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="ss_within-visual" class="section level2">
 <h2><span class="math inline">\({SS}_{within}\)</span> visual</h2>
@@ -517,7 +504,7 @@ for(i in 1:n) { text(i-(offset/2), mean_pp[i], expression(bar(X)[i]), pos=2, cex
 <pre class="r"><code>p &lt;- recordPlot()</code></pre>
 </div>
 <div id="ms_between" class="section level2 subsection">
-<h2><span class="math inline">\({MS}_{between}\)</span></h2>
+<h2 class="subsection"><span class="math inline">\({MS}_{between}\)</span></h2>
 <p><span class="math display">\[{MS}_{between} = \frac{{SS}_{{between}}}{{DF}_{{between}}}\]</span></p>
 <p><span class="math display">\[{DF}_{between}-{DF}_{{within}} \\
 {SS}_{between} = {SS}_{total} - {SS}_{within}\]</span></p>
@@ -529,7 +516,7 @@ DF_between</code></pre>
 <pre><code>## [1] 19</code></pre>
 </div>
 <div id="ms_model" class="section level2 subsection">
-<h2><span class="math inline">\({MS}_{model}\)</span></h2>
+<h2 class="subsection"><span class="math inline">\({MS}_{model}\)</span></h2>
 <p><span class="math display">\[{MS}_{model} = \frac{{SS}_{{model}}}{{DF}_{{model}}} \\
 {DF}_{model} = k-1\]</span></p>
 <pre class="r"><code>k = 3
@@ -578,7 +565,7 @@ segments(1:n+offset, mean(total), 1:n+offset, mean(much_alc),   col=&#39;blue&#3
 <pre class="r"><code>p &lt;- recordPlot()</code></pre>
 </div>
 <div id="ms_error" class="section level2 subsection">
-<h2><span class="math inline">\({MS}_{error}\)</span></h2>
+<h2 class="subsection"><span class="math inline">\({MS}_{error}\)</span></h2>
 <p><span class="math display">\[\frac{{SS}_{error}}{{DF}_{error}} \\
 {DF}_{error} = (n-1)(k-1)\]</span></p>
 <pre class="r"><code>DF_error = DF_within - DF_model
@@ -593,7 +580,7 @@ SS_error</code></pre>
 <pre><code>## [1] 9.817655</code></pre>
 </div>
 <div id="f-ratio" class="section level2 subsection">
-<h2>F ratio</h2>
+<h2 class="subsection">F ratio</h2>
 <p><span class="math display">\[F = \frac{{MS}_{{model}}}{{MS}_{{error}}}\]</span></p>
 <pre class="r"><code># Calculate mean squares
 MS_model = SS_model / DF_model
@@ -635,7 +622,7 @@ polygon(c(p.range,rev(p.range)),
 <p><img src="ANOVA_repeated_and_mixed_handout_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 <div id="contrast" class="section level2 subsection">
-<h2>Contrast</h2>
+<h2 class="subsection">Contrast</h2>
 <p>Planned comparisons</p>
 <ul>
 <li>Exploring differences of theoretical interest</li>
@@ -644,7 +631,7 @@ polygon(c(p.range,rev(p.range)),
 </ul>
 </div>
 <div id="post-hoc" class="section level2 subsection">
-<h2>Post-Hoc</h2>
+<h2 class="subsection">Post-Hoc</h2>
 <p>Unplanned comparisons</p>
 <ul>
 <li>Exploring all possible differences</li>
@@ -652,7 +639,7 @@ polygon(c(p.range,rev(p.range)),
 </ul>
 </div>
 <div id="effect-size" class="section level2 subsection">
-<h2>Effect size</h2>
+<h2 class="subsection">Effect size</h2>
 <p>General effect size measures</p>
 <ul>
 <li>Amount of explained variance <span class="math inline">\(R^2\)</span> also called eta squared <span class="math inline">\(\eta^2\)</span>.</li>
@@ -670,8 +657,8 @@ polygon(c(p.range,rev(p.range)),
 </div>
 <div id="anova-factorial-repeated" class="section level1">
 <h1>ANOVA factorial repeated</h1>
-<div id="factorial-repeated-measures-anova" class="section level2 section">
-<h2>Factorial repeated measures ANOVA</h2>
+<div id="factorial-repeated-measures-anova" class="section level2">
+<h2 class="section">Factorial repeated measures ANOVA</h2>
 <p>The factorial repeated measures ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
 <ul>
 <li>1 dependent/outcome variable</li>
@@ -687,7 +674,7 @@ polygon(c(p.range,rev(p.range)),
 <p>Same as one-way repeated measures ANOVA</p>
 </div>
 <div id="example-1" class="section level2 smaller">
-<h2>Example</h2>
+<h2 class="smaller">Example</h2>
 <p><small></p>
 <p>In this example we will again look at the amount of accidents in a car driving simulator while subjects where given varying doses of speed and alcohol. But this time we lat participants partake in all conditions. Every week subjects returned for a different experimental condition.</p>
 <ul>
@@ -714,7 +701,7 @@ polygon(c(p.range,rev(p.range)),
 <p></small></p>
 </div>
 <div id="section" class="section level2 smaller">
-<h2></h2>
+<h2 class="smaller"></h2>
 <table>
 <thead>
 <tr class="header">
@@ -843,13 +830,13 @@ polygon(c(p.range,rev(p.range)),
 </table>
 </div>
 <div id="data" class="section level2 smaller">
-<h2>Data</h2>
-<div id="htmlwidget-20882998c3f3142c588e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-20882998c3f3142c588e">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.43,4.23,5.28,4.63,5.29,5.02,4.5,5.36,4.49,3.59,5.55,4.76,5.36,4.42,4.23,5.53,4.29,3.43,5.02,5.23],[4.11,5.47,5.56,5.32,5.15,5.16,5.83,6.12,5.26,4.05,4.89,5.23,6.23,4.93,5.43,5.31,4.71,5.06,5.14,6.13],[7.04,5.9,7.04,6.21,6.85,6.49,6.97,6.38,6.12,6.84,6.33,6.62,5.85,6.56,6.38,7.14,6.53,7.1,7.14,7.15],[2.97,3.28,3.45,3.3,2.72,2.62,4.77,3.34,3.28,3.19,3.53,2.32,3.24,3.43,3.76,3.22,2.51,3.1,2.51,4.04],[5.21,4.39,6.45,5.62,5.81,5.94,5.08,6.41,5.37,4.59,5.34,6.38,5.52,5.35,5.04,6.13,4.68,5.05,5.89,6.74],[7.39,7.94,7.98,7.24,8.76,8.12,7.45,8.11,7.23,6.69,7.9,7.92,8.68,7.13,7.25,8.63,8.33,7.44,8.89,7.73]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>geen_alc<\/th>\n      <th>beetje_alc<\/th>\n      <th>veel_alc<\/th>\n      <th>geen_spe<\/th>\n      <th>beetje_spe<\/th>\n      <th>veel_spe<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<h2 class="smaller">Data</h2>
+<div id="htmlwidget-12b84c2369c5427c83b5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-12b84c2369c5427c83b5">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[4.43,4.23,5.28,4.63,5.29,5.02,4.5,5.36,4.49,3.59,5.55,4.76,5.36,4.42,4.23,5.53,4.29,3.43,5.02,5.23],[4.11,5.47,5.56,5.32,5.15,5.16,5.83,6.12,5.26,4.05,4.89,5.23,6.23,4.93,5.43,5.31,4.71,5.06,5.14,6.13],[7.04,5.9,7.04,6.21,6.85,6.49,6.97,6.38,6.12,6.84,6.33,6.62,5.85,6.56,6.38,7.14,6.53,7.1,7.14,7.15],[2.97,3.28,3.45,3.3,2.72,2.62,4.77,3.34,3.28,3.19,3.53,2.32,3.24,3.43,3.76,3.22,2.51,3.1,2.51,4.04],[5.21,4.39,6.45,5.62,5.81,5.94,5.08,6.41,5.37,4.59,5.34,6.38,5.52,5.35,5.04,6.13,4.68,5.05,5.89,6.74],[7.39,7.94,7.98,7.24,8.76,8.12,7.45,8.11,7.23,6.69,7.9,7.92,8.68,7.13,7.25,8.63,8.33,7.44,8.89,7.73]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>geen_alc<\/th>\n      <th>beetje_alc<\/th>\n      <th>veel_alc<\/th>\n      <th>geen_spe<\/th>\n      <th>beetje_spe<\/th>\n      <th>veel_spe<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<div id="mixed-design-anova" class="section level1 section">
-<h1>Mixed design ANOVA</h1>
+<div id="mixed-design-anova" class="section level1">
+<h1 class="section">Mixed design ANOVA</h1>
 <div id="mixed-design" class="section level2">
 <h2>Mixed design</h2>
 <p>The mixed ANOVA analyses the variance of the model while reducing the error by the within person variance.</p>
@@ -870,7 +857,7 @@ polygon(c(p.range,rev(p.range)),
 <p>Same as repeated measures ANOVA and same as factorial ANOVA.</p>
 </div>
 <div id="example-2" class="section level2 smaller">
-<h2>Example</h2>
+<h2 class="smaller">Example</h2>
 <p><small></p>
 <ul>
 <li>Dependent variable
@@ -901,7 +888,7 @@ polygon(c(p.range,rev(p.range)),
 <p></small></p>
 </div>
 <div id="section-1" class="section level2 smaller">
-<h2></h2>
+<h2 class="smaller"></h2>
 <p><small></p>
 <table>
 <thead>
@@ -1159,9 +1146,9 @@ polygon(c(p.range,rev(p.range)),
 <p></small></p>
 </div>
 <div id="data-1" class="section level2 smaller">
-<h2>Data</h2>
-<div id="htmlwidget-6b7334a386e43db47dae" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6b7334a386e43db47dae">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.24,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.13,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.35,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.33,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.21,8.74,6.8,5.98,6.66,7.94,9.22,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.99,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.53,6.33,5.64,7.66],[9.51,10.71,9.49,9.39,9.83,10.78,8.59,9.26,9.29,9.14,9.96,9.52,9.12,9.48,9.54,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>sekse<\/th>\n      <th>v1_1<\/th>\n      <th>v1_2<\/th>\n      <th>v1_3<\/th>\n      <th>v2_1<\/th>\n      <th>v2_2<\/th>\n      <th>v2_3<\/th>\n      <th>v3_1<\/th>\n      <th>v3_2<\/th>\n      <th>v3_3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<h2 class="smaller">Data</h2>
+<div id="htmlwidget-20187b6762e1c8deebaf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-20187b6762e1c8deebaf">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2],[1.59,2.18,3.24,2.18,1.36,2.18,2.91,4.26,2.96,1.67,2.88,1.24,1.94,3.29,2.77,2.79,2.03,1.33,1.34,1.1],[4.96,4.66,5.58,5.7,6.15,5.83,4.03,5.48,4.92,4.13,6.68,6.74,6.45,4.52,5.53,5.41,3.5,3.73,5.76,6.4],[6.72,5.84,7.01,6.02,8.35,7.07,6.55,6.34,5.6,4.96,7.08,6.3,7.68,5.46,4.38,8.4,7.33,5.23,7.95,8.18],[2.64,4.43,2.12,3,1.78,3.06,5.35,2.89,3.87,2.52,3.74,1.72,3.02,2.53,2.64,1.84,-0.06,2.23,1.54,5.05],[3.74,4.73,7.12,6.66,5.57,5.91,4.93,6.74,5.12,3.64,4.27,6.03,6.44,5.82,5.84,6.16,6.01,5.09,6.28,6.16],[5.93,7.25,7.43,6.32,8.1,6.51,7.21,8.74,6.8,5.98,6.66,7.94,9.22,6.44,7.82,7.93,8.19,7.84,7.6,7.19],[4.68,3.21,4.99,4.72,5.03,2.61,6.06,2.87,3.01,5.37,3.97,3.99,4.76,4.48,5.87,5.04,5.57,5.73,4.65,5.97],[6.93,3.78,6.66,4.52,5.71,6.09,6.27,7.01,6.06,6.01,5.07,6.36,3.67,5.73,3.74,6.82,4.53,6.33,5.64,7.66],[9.51,10.71,9.49,9.39,9.83,10.78,8.59,9.26,9.29,9.14,9.96,9.52,9.12,9.48,9.54,9.56,9.48,9.24,11.12,7.83]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>pp<\/th>\n      <th>sekse<\/th>\n      <th>v1_1<\/th>\n      <th>v1_2<\/th>\n      <th>v1_3<\/th>\n      <th>v2_1<\/th>\n      <th>v2_2<\/th>\n      <th>v2_3<\/th>\n      <th>v3_1<\/th>\n      <th>v3_2<\/th>\n      <th>v3_3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6,7,8,9,10]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <!-- Footer insert below -->
 </div>
 </div>
@@ -1184,6 +1171,9 @@ polygon(c(p.range,rev(p.range)),
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </div>
 </div>
 
@@ -1198,7 +1188,7 @@ polygon(c(p.range,rev(p.range)),
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1216,7 +1206,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1225,6 +1215,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

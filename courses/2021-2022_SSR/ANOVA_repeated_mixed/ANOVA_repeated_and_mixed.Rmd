@@ -2,20 +2,18 @@
 title: "ANOVA"
 subtitle: "Repeated & Mixed"
 author: "Klinkenberg"
-date: "13 oct 2020"
+date: "19 oct 2021"
 output: 
   revealjs::revealjs_presentation:
-    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    template: http://shklinkenberg.github.io/uva_style/UvAtemplate.html
     theme: white #simple #black
     highlight: pygments
     transition: slide #fade #slide
     background_transition: slide
     center: true
     self_contained: false
-
     includes       :
-      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
-                      "../../../GA_Script/GA_Script.html"]
+      in_header    : "../../../GA_Script/GA_Script.html"
   html_document:
     toc            : TRUE
     self_contained : false
