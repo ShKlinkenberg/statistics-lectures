@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="Klinkenberg" />
+  <meta name="dcterms.date" content="2021-10-12" />
   <title>ANCOVA</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,19 +13,19 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -44,7 +45,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -80,8 +81,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="ANCOVA_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
 
 
-  <!-- some tweaks to reveal css -->
+  <!-- some tweaks to reveal css and uva template specific styles -->
   <style type="text/css">
+	  
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+	  
     .reveal h1 { font-size: 2.0em; }
     .reveal h2 { font-size: 1.5em;  }
     .reveal h3 { font-size: 1.25em;	}
@@ -90,6 +94,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     .reveal .slides>section,
     .reveal .slides>section>section {
       padding: 0px 0px;
+    }
+    
+    html.title div.slide-background.present {
+      background-position: center 200px;
+    }
+    
+    #refs {
+      font-size: 50%;
+      text-align: left;
+    }
+    
+    .TitleBox {
+      background-color: white;
+      width: 500px;
+      text-align: left;
+      position: relative;
+      top: 400px;
+    }
+
+    html.title .title, html.title .subtitle, html.title .author, html.title .date  {
+      font-size: .5em;
+      padding: 5px 10px 5px 10px;
+      margin: 0px;
+    }
+
+    html.title .author, html.title .date  {
+      background-color: lightgrey;
+      }
+
+    html.title .title {
+      height: 100px;
+      vertical-align: text-top;
+      font-size: .8em;
+    }
+    
+    body:after {
+      content: url(https://shklinkenberg.github.io/uva_style/images/uvalogo_regular_p_en.png);
+      position: fixed;
+      top: 1.5em;
+      left: 1.5em;
     }
 
 
@@ -125,7 +169,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <link rel="stylesheet" href="https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"/>
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -178,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 	   Consider using a serif font for readability. */
 	body, p, td, li, div {
 		font-size: 20pt!important;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
+		font-family: 'Source Sans Pro', sans-serif; !important;
 		color: #000;
 	}
 
@@ -189,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 		color: #000!important;
 		height: auto;
 		line-height: normal;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
+		font-family: 'Source Sans Pro', sans-serif; !important;
 		text-shadow: 0 0 0 #000 !important;
 		text-align: left;
 		letter-spacing: normal;
@@ -509,69 +552,25 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      TableOfContents();
-    }
-    );                        
-    
-    function TableOfContents(container, output) {
-    
-    var output = output || '#toc';
-    
-    // Get all elements with class: section or subsection
-    idfromclass = document.querySelectorAll('.section, .subsection');
-    
-        // Create the list element:
-        var list = document.createElement('ul');
-    
-        // Iterate through all found elements
-        for(var i = 0; i < idfromclass.length; i++) {
-          
-            // Create the list item:
-            var item = document.createElement('li');
-    
-            // Set its contents:
-            var id = idfromclass[i].id
-            
-            // Replace - in id with whitespace
-            var titleText = id.replace(/-/gi, " ");
-            
-            // Add text to list element
-            item.appendChild(document.createTextNode(titleText));
-            
-            // Add subsection class
-            item.className = idfromclass[i].className
-            
-            // Add it to the list:
-            list.appendChild(item);
-        }
-    
-    // Return generated HTML to toc div in slide
-    document.querySelector(output).innerHTML = list.innerHTML;
-    
-    // Generate instruction message if no classes are defined
-    if (idfromclass.length == 0) { document.querySelector(output).innerHTML = "Add {.section} or {.subsection} to slide name to generate TOC"; }  
-    
-    };</script>
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments)};
       gtag('js', new Date());
-    
+
       gtag('config', 'UA-107432294-1');
     </script>
-    <script src="ANCOVA_reveal_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-    <script src="ANCOVA_reveal_files/jquery-1.12.4/jquery.min.js"></script>
+    <script src="ANCOVA_reveal_files/header-attrs-2.11/header-attrs.js"></script>
+    <script src="ANCOVA_reveal_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
     <link href="ANCOVA_reveal_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="ANCOVA_reveal_files/datatables-binding-0.15/datatables.js"></script>
+    <script src="ANCOVA_reveal_files/datatables-binding-0.19/datatables.js"></script>
+    <script src="ANCOVA_reveal_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
     <link href="ANCOVA_reveal_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="ANCOVA_reveal_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
     <script src="ANCOVA_reveal_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-    <link href="ANCOVA_reveal_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-    <script src="ANCOVA_reveal_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+    <link href="ANCOVA_reveal_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="ANCOVA_reveal_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
     <link href="ANCOVA_reveal_files/dt-ext-buttons-1.10.20/css/buttons.dataTables.min.css" rel="stylesheet" />
     <script src="ANCOVA_reveal_files/dt-ext-buttons-1.10.20/js/dataTables.buttons.min.js"></script>
     <script src="ANCOVA_reveal_files/dt-ext-buttons-1.10.20/js/buttons.flash.min.js"></script>
@@ -583,24 +582,25 @@ document.getElementsByTagName('head')[0].appendChild(style);
   <div class="reveal">
     <div class="slides">
 
-<section>
+<section data-state="title" data-background-image="https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg"><div class="TitleBox">
+
     <h1 class="title">ANCOVA</h1>
+
     <h2 class="author">Klinkenberg</h2>
-    <h3 class="date">8 oct 2020</h3>
-</section>
+    <h3 class="date">12 oct 2021</h3>
+</div></section>
 
-<section id="inhoud" class="slide level2">
-<h2>Inhoud</h2>
-<div id="toc" style="font-size:60%; text-align:left;">
+<section>
+<section id="ancova" class="title-slide slide level1">
+<h1>ANCOVA</h1>
 
-</div>
-<!-- Add the required topics below -->
 </section>
-<section><section id="ancova" class="title-slide slide level1"><h1>ANCOVA</h1></section><section id="ancova-1" class="slide level2 section">
-<h2>ANCOVA</h2>
+<section id="ancova-1" class="slide level2 section">
+<h2 class="section">ANCOVA</h2>
 <p>Analysis of covariance (ANCOVA) is a general linear model which blends ANOVA and regression. ANCOVA evaluates whether population means of a dependent variable (DV) are equal across levels of a categorical independent variable (IV) often called a treatment, while statistically controlling for the effects of other continuous variables that are not of primary interest, known as covariates (CV).</p>
 <p><a href="https://en.wikipedia.org/wiki/Analysis_of_covariance">WIKIPEDIA</a></p>
-</section><section id="ancova-2" class="slide level2">
+</section>
+<section id="ancova-2" class="slide level2">
 <h2>ANCOVA</h2>
 <p>Determine main effect while correcting for covariate</p>
 <ul>
@@ -609,7 +609,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>1 or more covariates</li>
 </ul>
 <p>A covariate is a variable can be a confounding variable biasing your results. By adding a covariate we reduce error/residual in the model.</p>
-</section><section id="assumptions" class="slide level2">
+</section>
+<section id="assumptions" class="slide level2">
 <h2>Assumptions</h2>
 <ul>
 <li>Same as ANOVA</li>
@@ -624,7 +625,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>Testing: interaction indep. var * covar</li>
 </ul></li>
 </ul>
-</section><section id="data-example" class="slide level2">
+</section>
+<section id="data-example" class="slide level2">
 <h2>Data example</h2>
 <p>We want to test the difference in national extraversion but want to controll for openness to experience.</p>
 <ul>
@@ -637,55 +639,61 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul></li>
 <li>Covariate: Openness to experience</li>
 </ul>
-</section><section id="simulate-data" class="slide level2 smaller">
-<h2>Simulate data</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Simulate data</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>n =<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>k =<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>group       =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(n,<span class="dv">1</span>,k),<span class="dv">0</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>mu.covar    =<span class="st"> </span><span class="dv">8</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>sigma.covar =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>covar       =<span class="st"> </span><span class="kw">round</span>(<span class="kw">rnorm</span>(n,mu.covar,sigma.covar),<span class="dv">2</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Create dummy variables</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>dummy<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">ifelse</span>(group <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>dummy<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">ifelse</span>(group <span class="op">==</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># Set parameters</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>b<span class="fl">.0</span> =<span class="st"> </span><span class="dv">15</span> <span class="co"># initial value for group 1</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>b<span class="fl">.1</span> =<span class="st"> </span><span class="dv">3</span>  <span class="co"># difference between group 1 and 2</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>b<span class="fl">.2</span> =<span class="st"> </span><span class="dv">4</span>  <span class="co"># difference between group 1 and 3</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>b<span class="fl">.3</span> =<span class="st"> </span><span class="dv">3</span>  <span class="co"># Weight for covariate</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co"># Create error</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>error =<span class="st"> </span><span class="kw">rnorm</span>(n,<span class="dv">0</span>,<span class="dv">1</span>)</span></code></pre></div>
-</section><section id="define-the-model" class="slide level2 subsection">
-<h2>Define the model</h2>
+</section>
+<section id="simulate-data" class="slide level2 smaller">
+<h2 class="smaller">Simulate data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>group       <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">runif</span>(n,<span class="dv">1</span>,k),<span class="dv">0</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mu.covar    <span class="ot">=</span> <span class="dv">8</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sigma.covar <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>covar       <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(n,mu.covar,sigma.covar),<span class="dv">2</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dummy variables</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(group <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(group <span class="sc">==</span> <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.0</span> <span class="ot">=</span> <span class="dv">15</span> <span class="co"># initial value for group 1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.1</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># difference between group 1 and 2</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span> <span class="ot">=</span> <span class="dv">4</span>  <span class="co"># difference between group 1 and 3</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.3</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># Weight for covariate</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create error</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>error <span class="ot">=</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,<span class="dv">1</span>)</span></code></pre></div>
+</section>
+<section id="define-the-model" class="slide level2 subsection">
+<h2 class="subsection">Define the model</h2>
 <p><span class="math display">\[{outcome} = {model} + {error}\]</span> <span class="math display">\[{model} = {indvar} + {covariate} = {nationality} + {openness}\]</span></p>
 <p>Formal model</p>
 <p><span class="math display">\[b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\]</span></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Define model</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>outcome =<span class="st"> </span>b<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>b<span class="fl">.1</span> <span class="op">*</span><span class="st"> </span>dummy<span class="fl">.1</span> <span class="op">+</span><span class="st"> </span>b<span class="fl">.2</span> <span class="op">*</span><span class="st"> </span>dummy<span class="fl">.2</span> <span class="op">+</span><span class="st"> </span>b<span class="fl">.3</span> <span class="op">*</span><span class="st"> </span>covar <span class="op">+</span><span class="st"> </span>error</span></code></pre></div>
-</section><section id="dummies" class="slide level2 smaller">
-<h2>Dummies</h2>
-<div id="htmlwidget-d93d9cf4c1ddc75413b5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d93d9cf4c1ddc75413b5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],[3,2,1,3,1,3,2,1,2,2,2,1,1,2,2,3,1,2,3,1],[15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[0,1,0,0,0,0,1,0,1,1,1,0,0,1,1,0,0,1,0,0],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[9,9.3,8.42,8.15,9.38,8.47,7.26,6.7,8.33,8.04,7.7,8.07,7.61,6.72,8.68,7.65,6.14,9.04,7.78,8.85],[0.89,-1.45,-0.45,1.9,0.71,-0.02,-0.67,1.75,-0.46,0.74,0.63,0.26,-2.17,-0.15,0.27,-1.83,0.36,-0.79,-0.1,-0.28],[46.89,44.45,39.81,45.35,43.85,44.39,39.11,36.85,42.53,42.86,41.73,39.47,35.66,38.01,44.31,40.12,33.78,44.33,42.24,41.27]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>group<\/th>\n      <th>b.0<\/th>\n      <th>b.1<\/th>\n      <th>dummy.1<\/th>\n      <th>b.2<\/th>\n      <th>dummy.2<\/th>\n      <th>b.3<\/th>\n      <th>covar<\/th>\n      <th>error<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</section><section id="the-data" class="slide level2 smaller">
-<h2>The data</h2>
-<div id="htmlwidget-210a81a7dc914783ae94" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-210a81a7dc914783ae94">{"x":{"filter":"none","extensions":["Buttons"],"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</section><section id="group-means" class="slide level2 subsection">
-<h2>Group means</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">aggregate</span>(outcome <span class="op">~</span><span class="st"> </span>group, data, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">=</span> b<span class="fl">.0</span> <span class="sc">+</span> b<span class="fl">.1</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.2</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> covar <span class="sc">+</span> error</span></code></pre></div>
+</section>
+<section id="dummies" class="slide level2 smaller">
+<h2 class="smaller">Dummies</h2>
+<div id="htmlwidget-8a66fefce4e8844a8f90" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8a66fefce4e8844a8f90">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],[3,2,1,3,1,3,2,1,2,2,2,1,1,2,2,3,1,2,3,1],[15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[0,1,0,0,0,0,1,0,1,1,1,0,0,1,1,0,0,1,0,0],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[9,9.3,8.42,8.15,9.38,8.47,7.26,6.7,8.33,8.04,7.7,8.07,7.61,6.72,8.68,7.65,6.14,9.04,7.78,8.85],[0.89,-1.45,-0.45,1.9,0.71,-0.02,-0.67,1.75,-0.46,0.74,0.63,0.26,-2.17,-0.15,0.27,-1.83,0.36,-0.79,-0.1,-0.28],[46.89,44.45,39.81,45.35,43.85,44.39,39.11,36.85,42.53,42.86,41.73,39.47,35.66,38.01,44.31,40.12,33.78,44.33,42.24,41.27]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>group<\/th>\n      <th>b.0<\/th>\n      <th>b.1<\/th>\n      <th>dummy.1<\/th>\n      <th>b.2<\/th>\n      <th>dummy.2<\/th>\n      <th>b.3<\/th>\n      <th>covar<\/th>\n      <th>error<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section>
+<section id="the-data" class="slide level2 smaller">
+<h2 class="smaller">The data</h2>
+<div id="htmlwidget-8ff71d0054364e149a7c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8ff71d0054364e149a7c">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section>
+<section id="group-means" class="slide level2 subsection">
+<h2 class="subsection">Group means</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(outcome <span class="sc">~</span> group, data, mean)</span></code></pre></div>
 <pre><code>##   group  outcome
 ## 1     1 38.67000
 ## 2     2 42.16625
 ## 3     3 43.79800</code></pre>
-</section><section id="model-fit-no-covar" class="slide level2 smaller subsection">
-<h2>Model fit no covar</h2>
+</section>
+<section id="model-fit-no-covar" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">Model fit no covar</h2>
 <p><small></p>
 <p>What are the beta coëfficients based on the data without the covariate?</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>fit.group &lt;-<span class="st"> </span><span class="kw">lm</span>(outcome <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(group), data); fit.group</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit.group <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> <span class="fu">factor</span>(group), data); fit.group</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = outcome ~ factor(group), data = data)
@@ -693,15 +701,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## Coefficients:
 ##    (Intercept)  factor(group)2  factor(group)3  
 ##         38.670           3.496           5.128</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>fit.group<span class="op">$</span>coefficients[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] <span class="op">+</span><span class="st"> </span>fit.group<span class="op">$</span>coefficients[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit.group<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">+</span> fit.group<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## factor(group)2 factor(group)3 
 ##       42.16625       43.79800</code></pre>
 <p><span class="math display">\[{Dutch} = 38.67 \&gt; {German} = 42.16625 \&gt; {Belgian} = 43.798\]</span> </small></p>
-</section><section id="model-fit-only-covar" class="slide level2 subsection">
-<h2>Model fit only covar</h2>
+</section>
+<section id="model-fit-only-covar" class="slide level2 subsection">
+<h2 class="subsection">Model fit only covar</h2>
 <p>What is the weight of only the covariate?</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>fit.covar &lt;-<span class="st"> </span><span class="kw">lm</span>(outcome <span class="op">~</span><span class="st"> </span>covar, data)</span>
-<span id="cb9-2"><a href="#cb9-2"></a>fit.covar</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit.covar <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> covar, data)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit.covar</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = outcome ~ covar, data = data)
@@ -709,9 +718,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## Coefficients:
 ## (Intercept)        covar  
 ##      15.667        3.185</code></pre>
-</section><section id="model-fit-with-covar" class="slide level2 smaller subsection">
-<h2>Model fit with covar</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(outcome <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(group) <span class="op">+</span><span class="st"> </span>covar, data); fit</span></code></pre></div>
+</section>
+<section id="model-fit-with-covar" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">Model fit with covar</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> <span class="fu">factor</span>(group) <span class="sc">+</span> covar, data); fit</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = outcome ~ factor(group) + covar, data = data)
@@ -719,164 +729,191 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## Coefficients:
 ##    (Intercept)  factor(group)2  factor(group)3           covar  
 ##         15.965           2.769           4.181           2.881</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>fit<span class="op">$</span>coefficients[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] <span class="op">+</span><span class="st"> </span>fit<span class="op">$</span>coefficients[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">+</span> fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## factor(group)2 factor(group)3 
 ##       18.73401       20.14609</code></pre>
 <p><span class="math display">\[{Dutch} = 15.96 \&gt; {German} = 18.73 \&gt; {Belgian} = 20.14\]</span></p>
-</section><section id="total-variance" class="slide level2 subsection">
-<h2>Total variance</h2>
+</section>
+<section id="total-variance" class="slide level2 subsection">
+<h2 class="subsection">Total variance</h2>
 <p>What is the total variance</p>
 <p><span class="math display">\[{MS}_{total} = s^2_{outcome} = \frac{{SS}_{outcome}}{{df}_{outcome}}\]</span></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>ms.t =<span class="st"> </span><span class="kw">var</span>(data<span class="op">$</span>outcome); ms.t</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ms.t <span class="ot">=</span> <span class="fu">var</span>(data<span class="sc">$</span>outcome); ms.t</span></code></pre></div>
 <pre><code>## [1] 11.97756</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>ss.t =<span class="st"> </span><span class="kw">var</span>(data<span class="op">$</span>outcome) <span class="op">*</span><span class="st"> </span>(<span class="kw">length</span>(data<span class="op">$</span>outcome) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>); ss.t</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ss.t <span class="ot">=</span> <span class="fu">var</span>(data<span class="sc">$</span>outcome) <span class="sc">*</span> (<span class="fu">length</span>(data<span class="sc">$</span>outcome) <span class="sc">-</span> <span class="dv">1</span>); ss.t</span></code></pre></div>
 <pre><code>## [1] 227.5737</code></pre>
-</section><section id="the-data-1" class="slide level2">
+</section>
+<section id="the-data-1" class="slide level2">
 <h2>The data</h2>
-<div id="htmlwidget-ffc10bf56fc43fa01094" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ffc10bf56fc43fa01094">{"x":{"filter":"none","data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</section><section id="total-variance-visual" class="slide level2 subsection">
-<h2>Total variance visual</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x=</span>n, <span class="dt">y=</span>outcome)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="kw">mean</span>(outcome)) <span class="op">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="st">        </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> n, <span class="dt">y =</span> grand.mean, <span class="dt">xend =</span> n, <span class="dt">yend =</span> outcome)) <span class="op">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="st">        </span><span class="kw">ggtitle</span>(<span class="st">&quot;Total variance&quot;</span>)</span>
-<span id="cb19-5"><a href="#cb19-5"></a>plot</span></code></pre></div>
-</section><section class="slide level2">
+<div id="htmlwidget-3cce899de456c357cc8d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3cce899de456c357cc8d">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section>
+<section id="total-variance-visual" class="slide level2 subsection">
+<h2 class="subsection">Total variance visual</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>outcome)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fu">mean</span>(outcome)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> grand.mean, <span class="at">xend =</span> n, <span class="at">yend =</span> outcome)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggtitle</span>(<span class="st">&quot;Total variance&quot;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="ANCOVA_reveal_files/figure-revealjs/unnamed-chunk-15-1.png" width="768" /></p>
-</section><section id="model-variance-group" class="slide level2 smaller">
-<h2>Model variance group</h2>
+</section>
+<section id="model-variance-group" class="slide level2 smaller">
+<h2 class="smaller">Model variance group</h2>
 <p>The model variance consists of two parts. One for the independent variable and one for the covariate. Lets first look at the independent variable.</p>
-<div id="htmlwidget-824b0aae8482169a2cf7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-824b0aae8482169a2cf7">{"x":{"filter":"none","data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</section><section id="model-variance-group-visual" class="slide level2 subsection">
-<h2>Model variance group visual</h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> n, <span class="dt">y =</span> grand.mean, <span class="dt">xend =</span> n, <span class="dt">yend =</span> data<span class="op">$</span>model.group, <span class="dt">colour =</span> <span class="kw">factor</span>(group))) <span class="op">+</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="st">       </span><span class="kw">ggtitle</span>(<span class="st">&quot;Only group variance&quot;</span>)</span></code></pre></div>
-</section><section class="slide level2">
+<div id="htmlwidget-9e30f85c2d4bbd0e1ada" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9e30f85c2d4bbd0e1ada">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section>
+<section id="model-variance-group-visual" class="slide level2 subsection">
+<h2 class="subsection">Model variance group visual</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> grand.mean, <span class="at">xend =</span> n, <span class="at">yend =</span> data<span class="sc">$</span>model.group, <span class="at">colour =</span> <span class="fu">factor</span>(group))) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ggtitle</span>(<span class="st">&quot;Only group variance&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="ANCOVA_reveal_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
-</section><section id="model-variance-covariate-visual" class="slide level2 subsection">
-<h2>Model variance covariate visual</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>data<span class="op">$</span>model.covar &lt;-<span class="st"> </span><span class="kw">round</span>(fit.covar<span class="op">$</span>fitted.values,<span class="dv">2</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> n, <span class="dt">y =</span> grand.mean, <span class="dt">xend =</span> n, <span class="dt">yend =</span> data<span class="op">$</span>model.covar, <span class="dt">colour =</span> <span class="kw">factor</span>(group))) <span class="op">+</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="st">       </span><span class="kw">ggtitle</span>(<span class="st">&quot;Only covariate variance&quot;</span>)</span></code></pre></div>
-</section><section class="slide level2">
+</section>
+<section id="model-variance-covariate-visual" class="slide level2 subsection">
+<h2 class="subsection">Model variance covariate visual</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>model.covar <span class="ot">&lt;-</span> <span class="fu">round</span>(fit.covar<span class="sc">$</span>fitted.values,<span class="dv">2</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> grand.mean, <span class="at">xend =</span> n, <span class="at">yend =</span> data<span class="sc">$</span>model.covar, <span class="at">colour =</span> <span class="fu">factor</span>(group))) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ggtitle</span>(<span class="st">&quot;Only covariate variance&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="ANCOVA_reveal_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
-</section><section id="model-variance-group-and-covariate" class="slide level2 smaller">
-<h2>Model variance group and covariate</h2>
-<div id="htmlwidget-bb0e2523c2ee65a6b795" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bb0e2523c2ee65a6b795">{"x":{"filter":"none","data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8],[42.48,45.54,37,41.37,39.9,35.22,43.85,45.29,38.79,42.2,41.27,40.19,37.07,43.31,44.46,44.33,41.62,42.64,40.03,40.44],[40.22,42.99,35.27,39.21,37.89,33.65,41.46,45.53,39.65,42.73,41.9,40.92,38.09,43.74,44.78,46.07,43.63,44.55,42.18,42.56]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n      <th>model.covar<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</section><section id="model-variance-group-and-covariate-visual" class="slide level2 subsection">
-<h2>Model variance group and covariate visual</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> n, <span class="dt">y =</span> grand.mean, <span class="dt">xend =</span> n, <span class="dt">yend =</span> data<span class="op">$</span>model, <span class="dt">colour =</span> <span class="kw">factor</span>(group))) -&gt;<span class="st"> </span>plot</span>
-<span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Both group and covariate variance&quot;</span>)</span></code></pre></div>
-</section><section class="slide level2">
+</section>
+<section id="model-variance-group-and-covariate" class="slide level2 smaller">
+<h2 class="smaller">Model variance group and covariate</h2>
+<div id="htmlwidget-5b11d8acce1ed29dec55" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5b11d8acce1ed29dec55">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8],[42.48,45.54,37,41.37,39.9,35.22,43.85,45.29,38.79,42.2,41.27,40.19,37.07,43.31,44.46,44.33,41.62,42.64,40.03,40.44],[40.22,42.99,35.27,39.21,37.89,33.65,41.46,45.53,39.65,42.73,41.9,40.92,38.09,43.74,44.78,46.07,43.63,44.55,42.18,42.56]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n      <th>model.covar<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</section>
+<section id="model-variance-group-and-covariate-visual" class="slide level2 subsection">
+<h2 class="subsection">Model variance group and covariate visual</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> grand.mean, <span class="at">xend =</span> n, <span class="at">yend =</span> data<span class="sc">$</span>model, <span class="at">colour =</span> <span class="fu">factor</span>(group))) <span class="ot">-&gt;</span> plot</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Both group and covariate variance&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="ANCOVA_reveal_files/figure-revealjs/unnamed-chunk-20-1.png" width="768" /></p>
-</section><section id="error-variance-with-covariate" class="slide level2 subsection">
-<h2>Error variance with covariate</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x      =</span> n<span class="fl">-.1</span>, </span>
-<span id="cb23-2"><a href="#cb23-2"></a>                        <span class="dt">y      =</span> outcome, </span>
-<span id="cb23-3"><a href="#cb23-3"></a>                        <span class="dt">xend   =</span> n<span class="fl">-.1</span>, </span>
-<span id="cb23-4"><a href="#cb23-4"></a>                        <span class="dt">yend   =</span> data<span class="op">$</span>model, </span>
-<span id="cb23-5"><a href="#cb23-5"></a>                        <span class="dt">colour =</span> <span class="st">&quot;purple&quot;</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="st">       </span><span class="kw">ggtitle</span>(<span class="st">&quot;Error variance&quot;</span>)</span></code></pre></div>
-</section><section class="slide level2">
+</section>
+<section id="error-variance-with-covariate" class="slide level2 subsection">
+<h2 class="subsection">Error variance with covariate</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x      =</span> n<span class="fl">-.1</span>, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y      =</span> outcome, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">xend   =</span> n<span class="fl">-.1</span>, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">yend   =</span> data<span class="sc">$</span>model, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">colour =</span> <span class="st">&quot;purple&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ggtitle</span>(<span class="st">&quot;Error variance&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="ANCOVA_reveal_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
-</section><section id="sums-of-squares" class="slide level2 subsection">
-<h2>Sums of squares</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>SS.model =<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">sum</span>((model <span class="op">-</span><span class="st"> </span>grand.mean)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb24-2"><a href="#cb24-2"></a>SS.error =<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">sum</span>((outcome <span class="op">-</span><span class="st"> </span>model)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb24-3"><a href="#cb24-3"></a></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="co"># Sums of squares for individual effects</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>SS.model.group =<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">sum</span>((model.group <span class="op">-</span><span class="st"> </span>grand.mean)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb24-6"><a href="#cb24-6"></a>SS.model.covar =<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">sum</span>((model.covar <span class="op">-</span><span class="st"> </span>grand.mean)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb24-7"><a href="#cb24-7"></a></span>
-<span id="cb24-8"><a href="#cb24-8"></a>SS.covar =<span class="st"> </span>SS.model <span class="op">-</span><span class="st"> </span>SS.model.group; SS.covar <span class="co">## SS.covar corrected for group</span></span></code></pre></div>
+</section>
+<section id="sums-of-squares" class="slide level2 subsection">
+<h2 class="subsection">Sums of squares</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>SS.model <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>SS.error <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((outcome <span class="sc">-</span> model)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sums of squares for individual effects</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>SS.model.group <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model.group <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>SS.model.covar <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model.covar <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>SS.covar <span class="ot">=</span> SS.model <span class="sc">-</span> SS.model.group; SS.covar <span class="do">## SS.covar corrected for group</span></span></code></pre></div>
 <pre><code>## [1] 121.8463</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>SS.group =<span class="st"> </span>SS.model <span class="op">-</span><span class="st"> </span>SS.model.covar; SS.group <span class="co">## SS.group corrected for covar</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>SS.group <span class="ot">=</span> SS.model <span class="sc">-</span> SS.model.covar; SS.group <span class="do">## SS.group corrected for covar</span></span></code></pre></div>
 <pre><code>## [1] 54.65778</code></pre>
-</section><section id="f-ratio" class="slide level2 subsection">
-<h2>F-ratio</h2>
+</section>
+<section id="f-ratio" class="slide level2 subsection">
+<h2 class="subsection">F-ratio</h2>
 <p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>n =<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>k =<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>df.model =<span class="st"> </span>k <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a>df.error =<span class="st"> </span>n <span class="op">-</span><span class="st"> </span>k <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a></span>
-<span id="cb28-6"><a href="#cb28-6"></a>MS.model =<span class="st"> </span>SS.group <span class="op">/</span><span class="st"> </span>df.model</span>
-<span id="cb28-7"><a href="#cb28-7"></a>MS.error =<span class="st"> </span>SS.error <span class="op">/</span><span class="st"> </span>df.error</span>
-<span id="cb28-8"><a href="#cb28-8"></a>  </span>
-<span id="cb28-9"><a href="#cb28-9"></a>F =<span class="st"> </span>MS.model <span class="op">/</span><span class="st"> </span>MS.error</span>
-<span id="cb28-10"><a href="#cb28-10"></a>F</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">=</span> n <span class="sc">-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>MS.model <span class="ot">=</span> SS.group <span class="sc">/</span> df.model</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>MS.error <span class="ot">=</span> SS.error <span class="sc">/</span> df.error</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> MS.model <span class="sc">/</span> MS.error</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>F</span></code></pre></div>
 <pre><code>## [1] 21.74406</code></pre>
-</section><section id="p-value" class="slide level2">
+</section>
+<section id="p-value" class="slide level2">
 <h2><span class="math inline">\(P\)</span>-value</h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="kw">visualize.f</span>(F, df.model, df.error, <span class="dt">section =</span> <span class="st">&quot;upper&quot;</span>) </span></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(F, df.model, df.error, <span class="at">section =</span> <span class="st">&quot;upper&quot;</span>) </span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="ANCOVA_reveal_files/figure-revealjs/unnamed-chunk-24-1.png" width="768" /></p>
-</section><section id="alpha-power" class="slide level2">
+</section>
+<section id="alpha-power" class="slide level2">
 <h2>Alpha &amp; Power</h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>F.values =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="fl">.01</span>)</span>
-<span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a><span class="kw">plot</span>(F.values, <span class="kw">df</span>(F.values, df.model, df.error), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;H0 and HA F-distribution&quot;</span>)</span>
-<span id="cb31-4"><a href="#cb31-4"></a></span>
-<span id="cb31-5"><a href="#cb31-5"></a>critical.value =<span class="st"> </span><span class="kw">qf</span>(.<span class="dv">95</span>, df.model, df.error)</span>
-<span id="cb31-6"><a href="#cb31-6"></a></span>
-<span id="cb31-7"><a href="#cb31-7"></a>critical.range =<span class="st"> </span><span class="kw">seq</span>(critical.value, <span class="dv">30</span>, <span class="fl">.01</span>)</span>
-<span id="cb31-8"><a href="#cb31-8"></a></span>
-<span id="cb31-9"><a href="#cb31-9"></a><span class="kw">polygon</span>(<span class="kw">c</span>(critical.range,<span class="kw">rev</span>(critical.range)), </span>
-<span id="cb31-10"><a href="#cb31-10"></a>        <span class="kw">c</span>(critical.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(critical.range, df.model, df.error, <span class="dt">ncp =</span> <span class="dv">15</span>))), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</span>
-<span id="cb31-11"><a href="#cb31-11"></a></span>
-<span id="cb31-12"><a href="#cb31-12"></a><span class="kw">lines</span>(F.values, <span class="kw">df</span>(F.values, df.model, df.error, <span class="dt">ncp =</span> <span class="dv">15</span>))</span>
-<span id="cb31-13"><a href="#cb31-13"></a></span>
-<span id="cb31-14"><a href="#cb31-14"></a><span class="kw">polygon</span>(<span class="kw">c</span>(critical.range,<span class="kw">rev</span>(critical.range)), </span>
-<span id="cb31-15"><a href="#cb31-15"></a>        <span class="kw">c</span>(critical.range<span class="op">*</span><span class="dv">0</span>, <span class="kw">rev</span>(<span class="kw">df</span>(critical.range, df.model, df.error))), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-</section><section class="slide level2">
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>F.values <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, .<span class="dv">01</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(F.values, <span class="fu">df</span>(F.values, df.model, df.error), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="at">main =</span> <span class="st">&quot;H0 and HA F-distribution&quot;</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>critical.value <span class="ot">=</span> <span class="fu">qf</span>(.<span class="dv">95</span>, df.model, df.error)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>critical.range <span class="ot">=</span> <span class="fu">seq</span>(critical.value, <span class="dv">30</span>, .<span class="dv">01</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(critical.range,<span class="fu">rev</span>(critical.range)), </span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(critical.range<span class="sc">*</span><span class="dv">0</span>, <span class="fu">rev</span>(<span class="fu">df</span>(critical.range, df.model, df.error, <span class="at">ncp =</span> <span class="dv">15</span>))), <span class="at">col =</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(F.values, <span class="fu">df</span>(F.values, df.model, df.error, <span class="at">ncp =</span> <span class="dv">15</span>))</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(critical.range,<span class="fu">rev</span>(critical.range)), </span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(critical.range<span class="sc">*</span><span class="dv">0</span>, <span class="fu">rev</span>(<span class="fu">df</span>(critical.range, df.model, df.error))), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
 
 <p><img src="ANCOVA_reveal_files/figure-revealjs/unnamed-chunk-25-1.png" width="768" /></p>
-</section><section id="adjusted-means" class="slide level2 smaller subsection">
-<h2>Adjusted means</h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Add dummy variables</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>data<span class="op">$</span>dummy<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">ifelse</span>(data<span class="op">$</span>group <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb32-3"><a href="#cb32-3"></a>data<span class="op">$</span>dummy<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">ifelse</span>(data<span class="op">$</span>group <span class="op">==</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb32-4"><a href="#cb32-4"></a></span>
-<span id="cb32-5"><a href="#cb32-5"></a><span class="co"># b coefficients</span></span>
-<span id="cb32-6"><a href="#cb32-6"></a>b.cov =<span class="st"> </span>fit<span class="op">$</span>coefficients[<span class="st">&quot;covar&quot;</span>];          b.int =<span class="st"> </span>fit<span class="op">$</span>coefficients[<span class="st">&quot;(Intercept)&quot;</span>]</span>
-<span id="cb32-7"><a href="#cb32-7"></a>b<span class="fl">.2</span>   =<span class="st"> </span>fit<span class="op">$</span>coefficients[<span class="st">&quot;factor(group)2&quot;</span>]; b<span class="fl">.3</span>   =<span class="st"> </span>fit<span class="op">$</span>coefficients[<span class="st">&quot;factor(group)3&quot;</span>]</span>
-<span id="cb32-8"><a href="#cb32-8"></a></span>
-<span id="cb32-9"><a href="#cb32-9"></a><span class="co"># Adjustment factor for the means of the independent variable</span></span>
-<span id="cb32-10"><a href="#cb32-10"></a>data<span class="op">$</span>mean.adj &lt;-<span class="st"> </span><span class="kw">with</span>(data, b.int <span class="op">+</span><span class="st"> </span>b.cov <span class="op">*</span><span class="st"> </span><span class="kw">mean</span>(covar) <span class="op">+</span><span class="st"> </span>b<span class="fl">.2</span> <span class="op">*</span><span class="st"> </span>dummy<span class="fl">.1</span> <span class="op">+</span><span class="st"> </span>b<span class="fl">.3</span> <span class="op">*</span><span class="st"> </span>dummy<span class="fl">.2</span>)</span>
-<span id="cb32-11"><a href="#cb32-11"></a></span>
-<span id="cb32-12"><a href="#cb32-12"></a><span class="kw">aggregate</span>(mean.adj <span class="op">~</span><span class="st"> </span>group, data, mean)</span></code></pre></div>
+</section>
+<section id="adjusted-means" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">Adjusted means</h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add dummy variables</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># b coefficients</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>b.cov <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">&quot;covar&quot;</span>];          b.int <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">&quot;(Intercept)&quot;</span>]</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span>   <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">&quot;factor(group)2&quot;</span>]; b<span class="fl">.3</span>   <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">&quot;factor(group)3&quot;</span>]</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjustment factor for the means of the independent variable</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mean.adj <span class="ot">&lt;-</span> <span class="fu">with</span>(data, b.int <span class="sc">+</span> b.cov <span class="sc">*</span> <span class="fu">mean</span>(covar) <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> dummy<span class="fl">.2</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(mean.adj <span class="sc">~</span> group, data, mean)</span></code></pre></div>
 <pre><code>##   group mean.adj
 ## 1     1 39.18576
 ## 2     2 41.95576
 ## 3     3 43.36576</code></pre>
-</section><section id="real-betas" class="slide level2">
+</section>
+<section id="real-betas" class="slide level2">
 <h2>Real <span class="math inline">\(\beta\)</span>’s</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>b<span class="fl">.0</span> =<span class="st"> </span><span class="dv">15</span> <span class="co"># initial value for group 1</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>b<span class="fl">.1</span> =<span class="st"> </span><span class="dv">3</span>  <span class="co"># difference between group 1 and 2</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a>b<span class="fl">.2</span> =<span class="st"> </span><span class="dv">4</span>  <span class="co"># difference between group 1 and 3</span></span>
-<span id="cb34-4"><a href="#cb34-4"></a>b<span class="fl">.3</span> =<span class="st"> </span><span class="dv">3</span>  <span class="co"># Weight for covariate</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a></span>
-<span id="cb34-6"><a href="#cb34-6"></a><span class="kw">cbind</span>(<span class="dt">m.covar =</span> mu.covar<span class="op">*</span><span class="dv">3</span>, </span>
-<span id="cb34-7"><a href="#cb34-7"></a>      <span class="dt">BETA    =</span> <span class="kw">c</span>(b<span class="fl">.0</span>, b<span class="fl">.0</span><span class="op">+</span>b<span class="fl">.1</span>, b<span class="fl">.0</span><span class="op">+</span>b<span class="fl">.2</span>), </span>
-<span id="cb34-8"><a href="#cb34-8"></a>      <span class="dt">sum     =</span> mu.covar<span class="op">*</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(b<span class="fl">.0</span>, b<span class="fl">.0</span><span class="op">+</span>b<span class="fl">.1</span>, b<span class="fl">.0</span><span class="op">+</span>b<span class="fl">.2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.0</span> <span class="ot">=</span> <span class="dv">15</span> <span class="co"># initial value for group 1</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.1</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># difference between group 1 and 2</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span> <span class="ot">=</span> <span class="dv">4</span>  <span class="co"># difference between group 1 and 3</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.3</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># Weight for covariate</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">m.covar =</span> mu.covar<span class="sc">*</span><span class="dv">3</span>, </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">BETA    =</span> <span class="fu">c</span>(b<span class="fl">.0</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.1</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.2</span>), </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sum     =</span> mu.covar<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="fu">c</span>(b<span class="fl">.0</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.1</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.2</span>))</span></code></pre></div>
 <pre><code>##      m.covar BETA sum
 ## [1,]      24   15  39
 ## [2,]      24   18  42
 ## [3,]      24   19  43</code></pre>
 <!-- Footer insert below -->
 </section></section>
-<section><section id="end" class="title-slide slide level1"><h1>End</h1></section><section id="contact" class="slide level2">
+<section>
+<section id="end" class="title-slide slide level1">
+<h1>End</h1>
+
+</section>
+<section id="contact" class="slide level2">
 <h2>Contact</h2>
 <script src="https://use.fontawesome.com/23c1d38eea.js"></script>
 <ul class="fa-ul" style="color:black; list-style:none;">
@@ -893,6 +930,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img data-src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </section></section>
     </div>
   </div>
@@ -940,6 +980,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
       });
     }
   })();
+</script>
+
+<script>
+Reveal.configure({
+  keyboard: {
+     39: 'next', // Right Arrow
+     37: 'prev'  // Left Arrow
+  }
+});
 </script>
 
 
