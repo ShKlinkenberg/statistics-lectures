@@ -99,7 +99,7 @@ abline(v=theta.given.data, lty='dashed')
 
 -----
 
-![](../../../../topics/bayes/likelihood_function.gif)
+![](../../../topics/bayes/likelihood_function.gif)
 
 ## Posterior
 
@@ -164,7 +164,7 @@ for(i in 1:20) {
 
 -------
 
-![](../../../../topics/bayes/bayes_in_action.gif)
+![](../../../topics/bayes/bayes_in_action.gif)
 
 ## Take home message
 

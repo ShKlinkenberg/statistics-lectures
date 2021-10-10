@@ -44,15 +44,15 @@ BF       | Evidence
 
 ## BF pizza
 
-![](../../../../topics/bayes/BF1.png)
+![](../../../topics/bayes/BF1.png)
 
 -------
 
-![](../../../../topics/bayes/BF3.png)
+![](../../../topics/bayes/BF3.png)
 
 -------
 
-![](../../../../topics/bayes/BF13.png)
+![](../../../topics/bayes/BF13.png)
 
 ## JASP
 

@@ -29,7 +29,7 @@ $H_0$ = False
 </tr>
 </table>
 
-## Bayes descision table
+## Bayes decision table
 
 $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}$
 
@@ -131,7 +131,7 @@ $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
 
 ## With legos
 
-![](../../../../topics/bayes/lego_bayes.jpg)
+![](../../../topics/bayes/lego_bayes.jpg)
 
 ## Posterior Likelihood Prior
 

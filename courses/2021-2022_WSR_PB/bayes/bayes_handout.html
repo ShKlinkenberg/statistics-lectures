@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Klinkenberg" />
 
-<meta name="date" content="2020-10-14" />
+<meta name="date" content="2021-10-18" />
 
 <title>Bayes</title>
 
-<script src="bayes_handout_files/jquery-1.11.3/jquery.min.js"></script>
+<script src="bayes_handout_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="bayes_handout_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="bayes_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="bayes_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="bayes_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="bayes_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="bayes_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="bayes_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="bayes_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
@@ -38,12 +47,16 @@
   gtag('config', 'UA-107432294-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -56,32 +69,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -91,10 +79,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -111,6 +95,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -123,7 +110,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -159,6 +145,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -254,7 +241,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -265,14 +252,14 @@ div.tocify {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Bayes</h1>
 <h3 class="subtitle"><small>Parameter estimation &amp; hypothesis testing</small></h3>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">14 oct 2020</h4>
+<h4 class="date">18 oct 2021</h4>
 
 </div>
 
@@ -284,8 +271,8 @@ div.tocify {
 </div>
 <!-- Add the required topics below -->
 </div>
-<div id="bayes-theorem" class="section level1 section">
-<h1>Bayes Theorem</h1>
+<div id="bayes-theorem" class="section level1">
+<h1 class="section">Bayes Theorem</h1>
 <div id="bayes-rule" class="section level2">
 <h2>Bayes rule</h2>
 <p><span class="math display">\[\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}\]</span></p>
@@ -330,8 +317,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </tr>
 </table>
 </div>
-<div id="bayes-descision-table" class="section level2">
-<h2>Bayes descision table</h2>
+<div id="bayes-decision-table" class="section level2">
+<h2>Bayes decision table</h2>
 <p><span class="math inline">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
 <table style="border: none;  transform: scale(1);">
 <col width="150px">
@@ -417,7 +404,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </div>
 <div id="with-legos" class="section level2">
 <h2>With legos</h2>
-<p><img src="../../../../topics/bayes/lego_bayes.jpg" /></p>
+<p><img src="../../../topics/bayes/lego_bayes.jpg" /></p>
 </div>
 <div id="posterior-likelihood-prior" class="section level2">
 <h2>Posterior Likelihood Prior</h2>
@@ -461,8 +448,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </ul>
 </div>
 </div>
-<div id="bayesian-parameter-estimation" class="section level1 section">
-<h1>Bayesian parameter estimation</h1>
+<div id="bayesian-parameter-estimation" class="section level1">
+<h1 class="section">Bayesian parameter estimation</h1>
 <div id="updating-belief" class="section level2">
 <h2>Updating belief</h2>
 <blockquote>
@@ -545,7 +532,7 @@ abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
 <hr />
 <p><img src="bayes_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <hr />
-<p><img src="../../../../topics/bayes/likelihood_function.gif" /></p>
+<p><img src="../../../topics/bayes/likelihood_function.gif" /></p>
 </div>
 <div id="posterior" class="section level2">
 <h2>Posterior</h2>
@@ -602,7 +589,7 @@ for(i in 1:20) {
   
 }</code></pre>
 <hr />
-<p><img src="../../../../topics/bayes/bayes_in_action.gif" /></p>
+<p><img src="../../../topics/bayes/bayes_in_action.gif" /></p>
 </div>
 <div id="take-home-message" class="section level2">
 <h2>Take home message</h2>
@@ -613,8 +600,8 @@ for(i in 1:20) {
 </ul>
 </div>
 </div>
-<div id="bayesian-hypothesis-testing" class="section level1 section">
-<h1>Bayesian hypothesis testing</h1>
+<div id="bayesian-hypothesis-testing" class="section level1">
+<h1 class="section">Bayesian hypothesis testing</h1>
 <div id="bayesion-hypothesis" class="section level2">
 <h2>Bayesion Hypothesis</h2>
 <ul>
@@ -627,7 +614,7 @@ for(i in 1:20) {
 <p><span class="math display">\[\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span></p>
 </div>
 <div id="bayes-factor" class="section level2 subsection">
-<h2>Bayes Factor</h2>
+<h2 class="subsection">Bayes Factor</h2>
 <p><span class="math display">\[\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}\]</span> A ratio of the likelihood of the date under the alternative and the null.</p>
 <p>A Bayes factor of <span class="math inline">\({BF}_{10} = 3\)</span>, means that the data are 3 times more likely onder the alternative than under the null.</p>
 </div>
@@ -640,7 +627,7 @@ for(i in 1:20) {
 </div>
 </div>
 <div id="heuristics-for-bf" class="section level2 subsection">
-<h2>Heuristics for BF</h2>
+<h2 class="subsection">Heuristics for BF</h2>
 <p>Heuristics for the Interpretation of the Bayes Factor by <a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a></p>
 <table>
 <thead>
@@ -683,11 +670,11 @@ for(i in 1:20) {
 </div>
 <div id="bf-pizza" class="section level2">
 <h2>BF pizza</h2>
-<p><img src="../../../../topics/bayes/BF1.png" /></p>
+<p><img src="../../../topics/bayes/BF1.png" /></p>
 <hr />
-<p><img src="../../../../topics/bayes/BF3.png" /></p>
+<p><img src="../../../topics/bayes/BF3.png" /></p>
 <hr />
-<p><img src="../../../../topics/bayes/BF13.png" /></p>
+<p><img src="../../../topics/bayes/BF13.png" /></p>
 </div>
 <div id="jasp" class="section level2">
 <h2>JASP</h2>
@@ -715,6 +702,9 @@ for(i in 1:20) {
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </div>
 </div>
 
@@ -729,7 +719,7 @@ for(i in 1:20) {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -747,7 +737,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -756,6 +746,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -768,7 +761,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
