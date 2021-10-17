@@ -125,7 +125,7 @@ $P(B \mid \neg A)$
 </tr>
 </table>
 
-## Date | Hypothesis
+## Hypothesis | Data
 
 $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
 

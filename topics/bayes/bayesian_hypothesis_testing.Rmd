@@ -12,7 +12,7 @@ $$\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterio
 ## Bayes Factor {.subsection}
 
 $$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
-A ratio of the likelihood of the date under the alternative and the null.
+A ratio of the likelihood of the data under the alternative and the null.
 
 A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely onder the alternative than under the null.
 
