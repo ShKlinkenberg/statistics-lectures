@@ -37,11 +37,6 @@ local({
 })
 ```
 
-## Inhoud
-
-<div style="font-size:60%; text-align:left;" id="toc"></div>
-
-<!-- Add the required topics below -->
 
 ```{r child="../../../topics/bayes/bayes_theorem.Rmd"}
 ```
