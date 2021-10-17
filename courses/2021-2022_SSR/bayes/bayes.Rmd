@@ -1,6 +1,6 @@
 ---
 title: "Bayes"
-subtitle: "<small>Parameter estimation & hypothesis testing</small>"
+subtitle: "Parameter estimation & hypothesis testing"
 author: "Klinkenberg"
 date: "22 oct 2021"
 output: 
@@ -37,9 +37,9 @@ local({
 })
 ```
 
+## Bayes rule
 
-```{r child="../../../topics/bayes/bayes_theorem.Rmd"}
-```
+$$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
 
 ```{r child="../../../topics/bayes/bayesian_parameter_estimation.Rmd"}
 ```

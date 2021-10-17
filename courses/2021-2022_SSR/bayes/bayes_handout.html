@@ -257,189 +257,16 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Bayes</h1>
-<h3 class="subtitle"><small>Parameter estimation &amp; hypothesis testing</small></h3>
+<h3 class="subtitle">Parameter estimation &amp; hypothesis testing</h3>
 <h4 class="author">Klinkenberg</h4>
 <h4 class="date">22 oct 2021</h4>
 
 </div>
 
 
-<div id="bayes-theorem" class="section level1">
-<h1 class="section">Bayes Theorem</h1>
 <div id="bayes-rule" class="section level2">
 <h2>Bayes rule</h2>
-<p><span class="math display">\[\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}\]</span></p>
-</div>
-<div id="nhst-table" class="section level2">
-<h2>NHST Table</h2>
-<table style="border: none;  transform: scale(1);">
-<col width="150px">
-<col width="225px">
-<col width="225px">
-<tr>
-<td>
-</td style="width: 300px;">
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td style="width: 300px;">
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-</table>
-</div>
-<div id="bayes-decision-table" class="section level2">
-<h2>Bayes decision table</h2>
-<p><span class="math inline">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
-<table style="border: none;  transform: scale(1);">
-<col width="150px">
-<col width="225px">
-<col width="225px">
-<tr>
-<td>
-</td style="width: 300px;">
-<td>
-<span class="math inline">\(P(A)\)</span>
-</td style="width: 300px;">
-<td>
-<span class="math inline">\(P(\neg A)\)</span>
-</td>
-</tr>
-<tr height="150px">
-<td>
-<span class="math inline">\(\begin{equation} \begin{aligned} P(\neg B) = &amp; P(\neg B \mid A) P(A) + \\  &amp; P(\neg B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-<span class="math inline">\(P(\neg B \mid A)\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-<span class="math inline">\(P(\neg B \mid \neg A)\)</span>
-</td>
-</tr>
-<tr height="150px">
-<td>
-<span class="math inline">\(\begin{equation} \begin{aligned} P(B) = &amp; P(B \mid A) P(A) + \\  &amp; P(B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-<span class="math inline">\(P(B \mid A)\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-<span class="math inline">\(P(B \mid \neg A)\)</span>
-</td>
-</tr>
-</table>
-</div>
-<div id="visual" class="section level2">
-<h2>Visual</h2>
-<table style="border: none;  transform: scale(1);">
-<col width="150px">
-<col width="100px">
-<col width="225px">
-<tr>
-<td>
-</td style="width: 300px;">
-<td>
-<span class="math inline">\(P(A)\)</span>
-</td style="width: 300px;">
-<td>
-<span class="math inline">\(P(\neg A)\)</span>
-</td>
-</tr>
-<tr height="80px">
-<td>
-<span class="math inline">\(\begin{equation} \begin{aligned} P(\neg B) = &amp; P(\neg B \mid A) P(A) + \\  &amp; P(\neg B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-<span class="math inline">\(P(\neg B \mid A)\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-<span class="math inline">\(P(\neg B \mid \neg A)\)</span>
-</td>
-</tr>
-<tr height="150px">
-<td>
-<span class="math inline">\(\begin{equation} \begin{aligned} P(B) = &amp; P(B \mid A) P(A) + \\  &amp; P(B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-<span class="math inline">\(P(B \mid A)\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-<span class="math inline">\(P(B \mid \neg A)\)</span>
-</td>
-</tr>
-</table>
-</div>
-<div id="hypothesis-data" class="section level2">
-<h2>Hypothesis | Data</h2>
 <p><span class="math display">\[\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}\]</span></p>
-</div>
-<div id="with-legos" class="section level2">
-<h2>With legos</h2>
-<p><img src="../../../topics/bayes/lego_bayes.jpg" /></p>
-</div>
-<div id="posterior-likelihood-prior" class="section level2">
-<h2>Posterior Likelihood Prior</h2>
-<p><span class="math display">\[P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mid H)}{P(D)}\]</span></p>
-<ul>
-<li><span class="math inline">\(P(H)\)</span>, the <span class="math inline">\(prior\)</span>, is the initial degree of belief in <span class="math inline">\(H\)</span>.</li>
-<li><span class="math inline">\(P(H \mid D)\)</span>, the <span class="math inline">\(posterior\)</span>, is the degree of belief after incorporating news that <span class="math inline">\(D\)</span> is true.</li>
-<li>the quotient <span class="math inline">\(\frac{P(D \mid H)}{P(D)}\)</span> represents the support <span class="math inline">\(D\)</span> provides for <span class="math inline">\(H\)</span>.</li>
-</ul>
-<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
-</div>
-<div id="bayes-is-about" class="section level2">
-<h2>Bayes is about</h2>
-<blockquote>
-<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
-</blockquote>
-<ul>
-<li>Quantified belief</li>
-<li>Common sense expressed in numbers</li>
-<li>Updating belief in light of new evidence</li>
-<li>Yesterdays posteriors are todays priors</li>
-</ul>
-</div>
-<div id="generative-model" class="section level2">
-<h2>Generative model</h2>
-<p>Frequentists</p>
-<blockquote>
-<p>State of the world → Data</p>
-</blockquote>
-<p>Bayesions</p>
-<blockquote>
-<p>Data → State of the world</p>
-</blockquote>
-</div>
-<div id="resources" class="section level2">
-<h2>Resources</h2>
-<ul>
-<li><a href="https://youtu.be/U_85TaXbeIo">The quick proof of Bayes’ theorem - 3Bleu1Brown</a></li>
-<li><a href="https://youtu.be/HZGCoVF3YvM">Bayes theorem - 3Blue1Brown</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia</a></li>
-</ul>
-</div>
 </div>
 <div id="bayesian-parameter-estimation" class="section level1">
 <h1 class="section">Bayesian parameter estimation</h1>
@@ -459,7 +286,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <div id="draw-your-belief" class="section level2">
 <h2>Draw your belief</h2>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="prior-distribution" class="section level2">
 <h2>Prior distribution</h2>
@@ -479,7 +306,7 @@ plot(theta, dbeta(theta, 3, 5),     type=&quot;l&quot;, ylab = &quot;likelihood&
 plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;)
 plot(theta, dbeta(theta, 2, 2),     type=&quot;l&quot;, ylab = &quot;likelihood&quot;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="choose-prior" class="section level2">
 <h2>Choose prior</h2>
@@ -523,7 +350,7 @@ plot(thetas, dbinom(k, n, thetas),
      las = 1)
 abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <hr />
 <p><img src="../../../topics/bayes/likelihood_function.gif" /></p>
 </div>
@@ -535,14 +362,14 @@ abline(v=theta.given.data, lty=&#39;dashed&#39;)</code></pre>
   \theta^{27}(1-\theta)^{83} &amp;= \theta^{2} (1-\theta)^{10-2} \times \theta^{25} (1-\theta)^{100-25}
   \end{aligned}\]</span></p>
 </div>
-<div id="visual-1" class="section level2">
+<div id="visual" class="section level2">
 <h2>Visual</h2>
 <pre class="r"><code>layout(matrix(1:3,1,3))
 plot(theta, dbinom(27, 83,  theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Posterior&quot;)
 plot(theta, dbinom(2, 10,   theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Likelihood&quot;)
 plot(theta, dbinom(25, 100, theta), type=&quot;l&quot;, ylab = &quot;likelihood&quot;, main = &quot;Prior&quot;)</code></pre>
 <hr />
-<p><img src="bayes_handout_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="bayes_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="theta-all-mighty" class="section level2">
 <h2>Theta all mighty</h2>
