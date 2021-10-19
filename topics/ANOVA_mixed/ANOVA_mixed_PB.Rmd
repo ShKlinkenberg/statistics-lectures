@@ -13,7 +13,7 @@ The mixed ANOVA analyses the variance of the model while reducing the error by t
 * 1 dependent/outcome variable
 * 2 or more independent/predictor variable with different subjects
     * 2 or more levels
-* 2 or more independent/predictor variable with same subjects
+* 1 or more independent/predictor variable with same subjects
     * 2 or more levels
 
 ## Assumptions
