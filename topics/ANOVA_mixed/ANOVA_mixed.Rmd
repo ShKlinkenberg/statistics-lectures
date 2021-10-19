@@ -75,7 +75,16 @@ data <- read.csv(file = "ANOVA_mixed.csv", header = T)
 
 data[,-1] <- round(data[,-1],2)
 
-datatable(data, rownames = FALSE, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, 
+          rownames = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY = 415, 
+                         paging = F, 
+                         info = F,
+                         dom = 'Bfrtip',
+                         buttons   = c('csv'))
+        )
 ```
 
 
