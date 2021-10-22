@@ -37,9 +37,22 @@ local({
 })
 ```
 
-## Bayes rule
+# 
 
 $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
+
+##
+
+$$\underbrace{P(H \mid D)}_{\text{Posterior}} = \underbrace{P(H)}_{\text{Prior}} \times \underbrace{\frac{P(D \mid H)}{P(D)}}_{\text{Likelihood}}$$
+
+## Bayes is about
+
+> Posterior $\propto$ Prior $\times$ Likelihood
+
+* Quantified belief
+* Common sense expressed in numbers
+* Updating belief in light of new evidence
+* Yesterdays posteriors are todays priors
 
 ```{r child="../../../topics/bayes/bayesian_parameter_estimation.Rmd"}
 ```
