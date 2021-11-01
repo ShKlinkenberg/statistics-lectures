@@ -11,30 +11,39 @@
 
 <meta name="author" content="Klinkenberg" />
 
-<meta name="date" content="2020-10-29" />
 
 <title>Correlation and Simple regression</title>
 
-<script src="correlation_simple_regression_handout_files/jquery-1.12.4/jquery.min.js"></script>
+<script src="correlation_simple_regression_handout_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="correlation_simple_regression_handout_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="correlation_simple_regression_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="correlation_simple_regression_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="correlation_simple_regression_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="correlation_simple_regression_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="correlation_simple_regression_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="correlation_simple_regression_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="correlation_simple_regression_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="correlation_simple_regression_handout_files/navigation-1.1/tabsets.js"></script>
 <link href="correlation_simple_regression_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="correlation_simple_regression_handout_files/highlightjs-9.12.0/highlight.js"></script>
-<script src="correlation_simple_regression_handout_files/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="correlation_simple_regression_handout_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="correlation_simple_regression_handout_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="correlation_simple_regression_handout_files/datatables-binding-0.15/datatables.js"></script>
+<script src="correlation_simple_regression_handout_files/datatables-binding-0.19/datatables.js"></script>
 <link href="correlation_simple_regression_handout_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="correlation_simple_regression_handout_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="correlation_simple_regression_handout_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="correlation_simple_regression_handout_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="correlation_simple_regression_handout_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="correlation_simple_regression_handout_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="correlation_simple_regression_handout_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <!-- Global Site Tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
 <script>
@@ -45,12 +54,16 @@
   gtag('config', 'UA-107432294-1');
 </script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -63,32 +76,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -98,10 +86,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -118,6 +102,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -130,7 +117,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -262,7 +248,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -273,26 +259,19 @@ div.tocify {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Correlation and Simple regression</h1>
 <h4 class="author">Klinkenberg</h4>
-<h4 class="date">29 oct 2020</h4>
+<h4 class="date">4 nov 2021</h4>
 
 </div>
 
 
-<div id="topics" class="section level2">
-<h2>Topics</h2>
-<div id="toc" style="font-size:60%; text-align:left;">
-
-</div>
-<!-- Add the required topics below -->
-</div>
-<div id="correlation" class="section level1 section">
-<h1>Correlation</h1>
+<div id="correlation" class="section level1">
+<h1 class="section">Correlation</h1>
 <div id="pearson-correlation" class="section level2">
 <h2>Pearson Correlation</h2>
 <p><img style="float:left; width:150px; margin:0 20px 20px 0px;" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg"></p>
@@ -338,7 +317,7 @@ text(m.x-.7, m.y+.7, &quot;- x +&quot;, cex = 2)</code></pre>
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /> <span class="math display">\[(x_i - \bar{x})(y_i - \bar{y})\]</span></p>
 </div>
 <div id="guess-the-correlation" class="section level2 flexbox vcenter">
-<h2>Guess the correlation</h2>
+<h2 class="flexbox vcenter">Guess the correlation</h2>
 <p><img src="../../../topics/correlation/qrcode.png" /></p>
 <p><a href="http://guessthecorrelation.com" class="uri">http://guessthecorrelation.com</a></p>
 </div>
@@ -357,7 +336,7 @@ error = rnorm(n, 0, 0.7)
 motivation = 3.2 + .2 * IQ + error</code></pre>
 </div>
 <div id="explaining-vairance" class="section level2 subsection">
-<h2>Explaining vairance</h2>
+<h2 class="subsection">Explaining vairance</h2>
 <pre class="r"><code>grade      = data$grade
 IQ         = data$IQ
 mean.grade = mean(grade)
@@ -370,7 +349,7 @@ points(data$IQ, col=&#39;blue&#39;)</code></pre>
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="standarize" class="section level2 smaller">
-<h2>Standarize</h2>
+<h2 class="smaller">Standarize</h2>
 <p><span class="math display">\[z = \frac{x_i - \bar{x}}{{sd}_x}\]</span></p>
 <pre class="r"><code>data[, c(&#39;z.grade&#39;, &#39;z.IQ&#39;)] = scale(data[, c(&#39;grade&#39;, &#39;IQ&#39;)])
 
@@ -398,7 +377,7 @@ segments(1:N, mean.z.IQ, 1:N, z.IQ, col=&#39;blue&#39;)</code></pre>
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="covariance" class="section level2 subsection">
-<h2>Covariance</h2>
+<h2 class="subsection">Covariance</h2>
 <p><span class="math display">\[{COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}\]</span></p>
 <pre class="r"><code>mean.grade = mean(grade, na.rm=T)
 mean.IQ    = mean(IQ, na.rm=T)
@@ -411,7 +390,7 @@ prod = (grade - mean.grade) * (IQ - mean.IQ)
 covariance = sum(prod) / (N - 1)</code></pre>
 </div>
 <div id="correlation-1" class="section level2 smaller">
-<h2>Correlation</h2>
+<h2 class="smaller">Correlation</h2>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span></p>
 <pre class="r"><code>correlation = covariance / ( sd(grade) * sd(IQ) ); correlation</code></pre>
 <pre><code>## [1] 0.6207285</code></pre>
@@ -436,7 +415,7 @@ cbind(x,y,x*y)</code></pre>
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="significance-of-a-correlation" class="section level2 subsection">
-<h2>Significance of a correlation</h2>
+<h2 class="subsection">Significance of a correlation</h2>
 <p><span class="math display">\[t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
 {df} = N - 2\]</span></p>
 <p><span class="math display">\[
@@ -463,10 +442,10 @@ visualize.t(c(-t.r, t.r),df,section=&#39;tails&#39;)</code></pre>
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 </div>
-<div id="partial-correlation" class="section level1 section">
-<h1>Partial correlation</h1>
+<div id="partial-correlation" class="section level1">
+<h1 class="section">Partial correlation</h1>
 <div id="venn-diagram" class="section level2 smaller">
-<h2>Venn diagram</h2>
+<h2 class="smaller">Venn diagram</h2>
 <pre class="r"><code>grid.newpage()
 draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
                  n12  = 50, 
@@ -477,10 +456,10 @@ draw.triple.venn(area1 = 100, area2 = 100, area3 = 100,
     fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;), cat.prompts = F)</code></pre>
 <hr />
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<pre><code>## (polygon[GRID.polygon.209], polygon[GRID.polygon.210], polygon[GRID.polygon.211], polygon[GRID.polygon.212], polygon[GRID.polygon.213], polygon[GRID.polygon.214], text[GRID.text.215], text[GRID.text.216], text[GRID.text.217], text[GRID.text.218], text[GRID.text.219], text[GRID.text.220], text[GRID.text.221], text[GRID.text.222], text[GRID.text.223], text[GRID.text.224])</code></pre>
+<pre><code>## (polygon[GRID.polygon.726], polygon[GRID.polygon.727], polygon[GRID.polygon.728], polygon[GRID.polygon.729], polygon[GRID.polygon.730], polygon[GRID.polygon.731], text[GRID.text.732], text[GRID.text.733], text[GRID.text.734], text[GRID.text.735], text[GRID.text.736], text[GRID.text.737], text[GRID.text.738], text[GRID.text.739], text[GRID.text.740], text[GRID.text.741])</code></pre>
 </div>
 <div id="partial-correlation-1" class="section level2 smaller">
-<h2>Partial correlation</h2>
+<h2 class="smaller">Partial correlation</h2>
 <p><span class="math display">\[\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}\]</span></p>
 <pre class="r"><code>motivation = data$motivation
 
@@ -501,7 +480,7 @@ partial.correlation</code></pre>
 <pre><code>## [1] 0.6682178</code></pre>
 </div>
 <div id="significance-of-parial-correlation" class="section level2 subsection">
-<h2>Significance of parial correlation</h2>
+<h2 class="subsection">Significance of parial correlation</h2>
 <p>One-sample t-test</p>
 <pre class="r"><code>df = N - 3
 
@@ -513,10 +492,10 @@ t.pr</code></pre>
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
 </div>
-<div id="regression-one-predictor" class="section level1 section">
-<h1>Regression (one predictor)</h1>
+<div id="regression-one-predictor" class="section level1">
+<h1 class="section">Regression (one predictor)</h1>
 <div id="regression" class="section level2 smaller">
-<h2>Regression</h2>
+<h2 class="smaller">Regression</h2>
 <p><span class="math display">\[\LARGE{\text{outcome} = \text{model} + \text{error}}\]</span></p>
 <p>In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.</p>
 <p><span class="math display">\[\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}\]</span></p>
@@ -600,18 +579,18 @@ data = round(data, 2)
 write.table(data, &quot;IQ.csv&quot;, row.names=FALSE, col.names=TRUE, dec=&#39;.&#39;)</code></pre>
 </div>
 <div id="the-data" class="section level2 smaller">
-<h2>The data</h2>
-<div id="htmlwidget-b9593774204ff407ace7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b9593774204ff407ace7">{"x":{"filter":"none","data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<h2 class="smaller">The data</h2>
+<div id="htmlwidget-6a4c885b63e4e9bc871f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6a4c885b63e4e9bc871f">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="calculate-regression-parameters" class="section level2 subsection">
-<h2>Calculate regression parameters</h2>
+<h2 class="subsection">Calculate regression parameters</h2>
 <p><span class="math display">\[{grade}_i = b_0 + b_1 {IQ}_i + \epsilon_i\]</span></p>
 <pre class="r"><code>IQ    = data$IQ
 grade = data$grade</code></pre>
 </div>
 <div id="calculate-b_1" class="section level2 subsection">
-<h2>Calculate <span class="math inline">\(b_1\)</span></h2>
+<h2 class="subsection">Calculate <span class="math inline">\(b_1\)</span></h2>
 <p><span class="math display">\[b_1 = r_{xy} \frac{s_y}{s_x}\]</span></p>
 <pre class="r"><code># Calculate b1
 
@@ -624,7 +603,7 @@ b1</code></pre>
 <pre><code>## [1] 0.04489104</code></pre>
 </div>
 <div id="calculate-b_0" class="section level2 subsection">
-<h2>Calculate <span class="math inline">\(b_0\)</span></h2>
+<h2 class="subsection">Calculate <span class="math inline">\(b_0\)</span></h2>
 <p><span class="math display">\[b_0 = \bar{y} - b_1 \bar{x}\]</span></p>
 <pre class="r"><code>mean.grade = mean(grade)
 mean.IQ    = mean(IQ)
@@ -670,7 +649,7 @@ text(3  , (b0 + b1 * 2.5),
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-31-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="calculate-t-values-for-bs" class="section level2 smaller subsection">
-<h2>Calculate t-values for b’s</h2>
+<h2 class="smaller subsection">Calculate t-values for b’s</h2>
 <p><span class="math display">\[t_{n-p-1} = \frac{b - \mu_b}{{SE}_b}\]</span></p>
 <p>Where <span class="math inline">\(n\)</span> is the number of rows, <span class="math inline">\(p\)</span> is the number of predictors, <span class="math inline">\(b\)</span> is the beta coefficient and <span class="math inline">\({SE}_b\)</span> its standard error.</p>
 <pre class="r"><code># Get Standard error&#39;s for b
@@ -685,7 +664,7 @@ cbind(se.b0, se.b1)</code></pre>
 ## (Intercept) 0.8542378 0.006998539</code></pre>
 </div>
 <div id="section" class="section level2 smaller">
-<h2></h2>
+<h2 class="smaller"></h2>
 <pre class="r"><code># Calculate t&#39;s
 mu.b0 = 0
 mu.b1 = 0
@@ -732,10 +711,10 @@ visualize.t(c(-t.b1,t.b1),df.b1,section=&#39;tails&#39;)</code></pre>
 data$model &lt;- round(data$model, 2)</code></pre>
 </div>
 <div id="expected-values" class="section level2 smaller subsection">
-<h2>Expected values</h2>
+<h2 class="smaller subsection">Expected values</h2>
 <p>Let’s have a look</p>
-<div id="htmlwidget-fc6900d0a8a2c0c95c1b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fc6900d0a8a2c0c95c1b">{"x":{"filter":"none","data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cd38170b95b09fa4390c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd38170b95b09fa4390c">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="y-vs-haty" class="section level2">
 <h2><span class="math inline">\(y\)</span> vs <span class="math inline">\(\hat{y}\)</span></h2>
@@ -748,12 +727,12 @@ lines(c(0,10), c(0,10), col=&#39;red&#39;)</code></pre>
 <p><img src="correlation_simple_regression_handout_files/figure-html/unnamed-chunk-38-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="error" class="section level2 smaller">
-<h2>Error</h2>
+<h2 class="smaller">Error</h2>
 <p>The error / residual is the difference between the model expectation and reality</p>
 <pre class="r"><code>data$error = grade - model
 data$error &lt;- round(data$error, 2)</code></pre>
-<div id="htmlwidget-e6bb94b5b0e6dff30ee7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e6bb94b5b0e6dff30ee7">{"x":{"filter":"none","data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21],[-1.45,1.79,0.93,-1.4,0.94,0.56,-0.32,0.06,-2.35,0.48,0.8,0.43,2.01,0.03,0.48,1.21,-1.88,-2.06,0.05,-0.81,1.26,0.56,-0.09,1.26,0.21,1.26,0.52,0.39,0.41,0.84,-1.96,1.17,-0.23,-0.99,0.53,-1.1,-0.57,1.69,-0.04,0.59,-2.34,0.78,1.95,0.57,-0.03,2.37,-1.53,-1.19,0.18,0.37,-0.78,-0.25,-1.48,1.95,-1.18,-0.8,-1.71,-0.37,0.64,-0.71,-0.17,-0.77,0.07,0.09,0.44,-0.09,-0.62,-0.19,1.59,-0.95,-0.09,0.98,-0.18,-0.29,-1.02,1.27,1.59,-1.51,1.14,-0.37,-1,-2.47,1.64,-2.53,1.04,-0.29,-0.94,-0.08,-1.26,0.88,-0.55,0.39,1.63,-1.19,-0.93,1.84,0.15,0.91,-0.24,0.23,0.75,0.11,0.98,-0.34,0.72,-0.1,-1.64,-0.28,1.4,-0.2,-1.23,1.21,0.16,0.78,-1.83,-0.26,0.67,-0.69,1.35,-0.09,-0.52,-0.29,-0.46]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bee8e2252bbcd90d52fa" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bee8e2252bbcd90d52fa">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21],[-1.45,1.79,0.93,-1.4,0.94,0.56,-0.32,0.06,-2.35,0.48,0.8,0.43,2.01,0.03,0.48,1.21,-1.88,-2.06,0.05,-0.81,1.26,0.56,-0.09,1.26,0.21,1.26,0.52,0.39,0.41,0.84,-1.96,1.17,-0.23,-0.99,0.53,-1.1,-0.57,1.69,-0.04,0.59,-2.34,0.78,1.95,0.57,-0.03,2.37,-1.53,-1.19,0.18,0.37,-0.78,-0.25,-1.48,1.95,-1.18,-0.8,-1.71,-0.37,0.64,-0.71,-0.17,-0.77,0.07,0.09,0.44,-0.09,-0.62,-0.19,1.59,-0.95,-0.09,0.98,-0.18,-0.29,-1.02,1.27,1.59,-1.51,1.14,-0.37,-1,-2.47,1.64,-2.53,1.04,-0.29,-0.94,-0.08,-1.26,0.88,-0.55,0.39,1.63,-1.19,-0.93,1.84,0.15,0.91,-0.24,0.23,0.75,0.11,0.98,-0.34,0.72,-0.1,-1.64,-0.28,1.4,-0.2,-1.23,1.21,0.16,0.78,-1.83,-0.26,0.67,-0.69,1.35,-0.09,-0.52,-0.29,-0.46]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="model-fit" class="section level2">
 <h2>Model fit</h2>
@@ -763,7 +742,7 @@ r</code></pre>
 <pre><code>## [1] 0.5035925</code></pre>
 </div>
 <div id="explained-variance" class="section level2 subsection">
-<h2>Explained variance</h2>
+<h2 class="subsection">Explained variance</h2>
 <pre class="r"><code>r^2</code></pre>
 <pre><code>## [1] 0.2536054</code></pre>
 </div>
@@ -810,7 +789,7 @@ F</code></pre>
 <pre><code>## [1] 41.1269</code></pre>
 </div>
 <div id="section-1" class="section level2 smaller">
-<h2></h2>
+<h2 class="smaller"></h2>
 <pre class="r"><code>SS_total = var(grade) * (n-1)
 rbind(SS_total,
       SS_model,
@@ -850,6 +829,9 @@ rbind(SS_total,
 <i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
 </li>
 </ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
 </div>
 </div>
 
@@ -864,7 +846,7 @@ rbind(SS_total,
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -882,7 +864,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -891,6 +873,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

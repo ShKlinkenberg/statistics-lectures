@@ -39,7 +39,7 @@ local({
 
 ```{r child="../../../topics/t-test_paired/t-test_paired.rmd"}
 ```
-
+li
 ```{r child="../../../topics/t-test_independent/t-test_independent.rmd"}
 ```
 
