@@ -611,11 +611,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>m.x <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>m.y <span class="ot">=</span> <span class="fu">mean</span>(y)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">8</span>,<span class="dv">8</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">0</span>,<span class="dv">0</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">8</span>,<span class="dv">8</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,.<span class="dv">64</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">0</span>,<span class="dv">0</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,.<span class="dv">64</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">0</span>,<span class="dv">0</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">8</span>,<span class="dv">8</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">0</span>,<span class="dv">0</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>,.<span class="dv">55</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(m.x,<span class="dv">8</span>,<span class="dv">8</span>,m.x),<span class="fu">c</span>(m.y,m.y,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>,.<span class="dv">55</span>,<span class="dv">0</span>,.<span class="dv">5</span>))</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x,y)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
@@ -711,8 +711,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>covariance <span class="ot">=</span> <span class="fu">sum</span>(prod) <span class="sc">/</span> (N <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 </section>
-<section id="correlation-1" class="slide level2 smaller">
-<h2 class="smaller">Correlation</h2>
+<section id="correlation-1" class="slide level2">
+<h2>Correlation</h2>
+<p><small></p>
 <p><span class="math display">\[r_{xy} = \frac{{COV}_{xy}}{S_xS_y}\]</span></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">=</span> covariance <span class="sc">/</span> ( <span class="fu">sd</span>(grade) <span class="sc">*</span> <span class="fu">sd</span>(IQ) ); correlation</span></code></pre></div>
 <pre><code>## [1] 0.6207285</code></pre>
@@ -720,6 +721,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## [1] 0.6207285</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(  grade,   IQ)</span></code></pre></div>
 <pre><code>## [1] 0.6207285</code></pre>
+<p></small></p>
 </section>
 <section class="slide level2">
 
@@ -742,6 +744,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="significance-of-a-correlation" class="slide level2 subsection">
 <h2 class="subsection">Significance of a correlation</h2>
+<p><small></p>
 <p><span class="math display">\[t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
 {df} = N - 2\]</span></p>
 <p><span class="math display">\[
@@ -756,6 +759,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(t.r, df)</span></code></pre></div>
 <pre><code>##           t.r df
 ## [1,] 5.485195 48</code></pre>
+<p></small></p>
 </section>
 <section id="visualize" class="slide level2">
 <h2>Visualize</h2>
@@ -774,8 +778,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h1 class="section">Partial correlation</h1>
 
 </section>
-<section id="venn-diagram" class="slide level2 smaller">
-<h2 class="smaller">Venn diagram</h2>
+<section id="venn-diagram" class="slide level2">
+<h2>Venn diagram</h2>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">draw.triple.venn</span>(<span class="at">area1 =</span> <span class="dv">100</span>, <span class="at">area2 =</span> <span class="dv">100</span>, <span class="at">area3 =</span> <span class="dv">100</span>, </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n12  =</span> <span class="dv">50</span>, </span>
@@ -788,7 +792,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section class="slide level2">
 
 <p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
-<pre><code>## (polygon[GRID.polygon.742], polygon[GRID.polygon.743], polygon[GRID.polygon.744], polygon[GRID.polygon.745], polygon[GRID.polygon.746], polygon[GRID.polygon.747], text[GRID.text.748], text[GRID.text.749], text[GRID.text.750], text[GRID.text.751], text[GRID.text.752], text[GRID.text.753], text[GRID.text.754], text[GRID.text.755], text[GRID.text.756], text[GRID.text.757])</code></pre>
+<pre><code>## (polygon[GRID.polygon.1110], polygon[GRID.polygon.1111], polygon[GRID.polygon.1112], polygon[GRID.polygon.1113], polygon[GRID.polygon.1114], polygon[GRID.polygon.1115], text[GRID.text.1116], text[GRID.text.1117], text[GRID.text.1118], text[GRID.text.1119], text[GRID.text.1120], text[GRID.text.1121], text[GRID.text.1122], text[GRID.text.1123], text[GRID.text.1124], text[GRID.text.1125])</code></pre>
 </section>
 <section id="partial-correlation-1" class="slide level2 smaller">
 <h2 class="smaller">Partial correlation</h2>
@@ -834,11 +838,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="regression" class="slide level2 smaller">
 <h2 class="smaller">Regression</h2>
+<p><small></p>
 <p><span class="math display">\[\LARGE{\text{outcome} = \text{model} + \text{error}}\]</span></p>
 <p>In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.</p>
 <p><span class="math display">\[\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}\]</span></p>
 <p>In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Linear_regression">wikipedia</a></p>
+<p></small></p>
 </section>
 <section id="outcome-vs-model" class="slide level2">
 <h2>Outcome vs Model</h2>
@@ -924,8 +930,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="the-data" class="slide level2 smaller">
 <h2 class="smaller">The data</h2>
-<div id="htmlwidget-8f16e354fdd3bb51191b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8f16e354fdd3bb51191b">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-367d403a48c7c8c8e751" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-367d403a48c7c8c8e751">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </section>
 <section id="calculate-regression-parameters" class="slide level2 subsection">
 <h2 class="subsection">Calculate regression parameters</h2>
@@ -977,20 +983,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section class="slide level2">
 
 <p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-30-1.png" width="768" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(IQ,grade, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.4</span>,.<span class="dv">6</span>))</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(grade<span class="sc">~</span>IQ))</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),<span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span>b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),<span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),<span class="fu">c</span>(b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="dv">2</span>,b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="dv">3</span>),<span class="at">col=</span><span class="st">&#39;green&#39;</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">rep</span>(b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="dv">2</span>, <span class="dv">2</span>),<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">2.5</span>, (b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="dv">2</span>),<span class="dv">1</span>, <span class="at">pos=</span><span class="dv">1</span>, <span class="at">cex=</span><span class="dv">1</span>)</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">3</span>  , (b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="fl">2.5</span>),</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>     <span class="fu">round</span>((b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="dv">3</span>)<span class="sc">-</span>(b0 <span class="sc">+</span> b1 <span class="sc">*</span> <span class="dv">2</span>), <span class="dv">2</span>), </span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos=</span><span class="dv">4</span>, </span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="dv">1</span>)</span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -998,34 +990,36 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="calculate-t-values-for-bs" class="slide level2 smaller subsection">
 <h2 class="smaller subsection">Calculate t-values for b’s</h2>
+<p><small></p>
 <p><span class="math display">\[t_{n-p-1} = \frac{b - \mu_b}{{SE}_b}\]</span></p>
 <p>Where <span class="math inline">\(n\)</span> is the number of rows, <span class="math inline">\(p\)</span> is the number of predictors, <span class="math inline">\(b\)</span> is the beta coefficient and <span class="math inline">\({SE}_b\)</span> its standard error.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Standard error&#39;s for b</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(grade<span class="sc">~</span>IQ)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">summary</span>(fit)[<span class="dv">4</span>]<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>se.b0 <span class="ot">=</span> se[<span class="dv">1</span>]</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>se.b1 <span class="ot">=</span> se[<span class="dv">2</span>]</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(se.b0, se.b1)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Standard error&#39;s for b</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(grade<span class="sc">~</span>IQ)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">summary</span>(fit)[<span class="dv">4</span>]<span class="sc">$</span>coefficients[,<span class="dv">2</span>]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>se.b0 <span class="ot">=</span> se[<span class="dv">1</span>]</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>se.b1 <span class="ot">=</span> se[<span class="dv">2</span>]</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(se.b0, se.b1)</span></code></pre></div>
 <pre><code>##                 se.b0       se.b1
 ## (Intercept) 0.8542378 0.006998539</code></pre>
+<p></small></p>
 </section>
 <section id="section" class="slide level2 smaller">
 <h2 class="smaller"></h2>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t&#39;s</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>mu.b0 <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>mu.b1 <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>t.b0  <span class="ot">=</span> (b0 <span class="sc">-</span> mu.b0) <span class="sc">/</span> se.b0; t.b0</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t&#39;s</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mu.b0 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>mu.b1 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>t.b0  <span class="ot">=</span> (b0 <span class="sc">-</span> mu.b0) <span class="sc">/</span> se.b0; t.b0</span></code></pre></div>
 <pre><code>## (Intercept) 
 ##   0.4878187</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>t.b1  <span class="ot">=</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>t.b1  <span class="ot">=</span> (b1 <span class="sc">-</span> mu.b1) <span class="sc">/</span> se.b1; t.b1</span></code></pre></div>
 <pre><code>##       IQ 
 ## 6.414345</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">=</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>p     <span class="ot">=</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>df.b0 <span class="ot">=</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>df.b1 <span class="ot">=</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">=</span> <span class="fu">nrow</span>(data) <span class="co"># number of rows</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>p     <span class="ot">=</span> <span class="dv">1</span>          <span class="co"># number of predictors</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>df.b0 <span class="ot">=</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>df.b1 <span class="ot">=</span> n <span class="sc">-</span> p <span class="sc">-</span> <span class="dv">1</span></span></code></pre></div>
 </section>
 <section id="p-values-of-b_0" class="slide level2">
 <h2>P-values of <span class="math inline">\(b_0\)</span></h2>
@@ -1034,13 +1028,13 @@ t_{n-p-1} &amp;= \frac{b - \mu_b}{{SE}_b} \\
 df &amp;= n - p - 1 \\
 \end{aligned}\]</span></p>
 <p>Where <span class="math inline">\(b\)</span> is het beta coeficient <span class="math inline">\({SE}\)</span> is the standard error of the beta coefficient, <span class="math inline">\(n\)</span> is the number of subjects and <span class="math inline">\(p\)</span> the nubmer of predictors.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;visualize&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;visualize&quot;</span>)} </span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value for b0</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.b0,t.b0),df.b0,<span class="at">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;visualize&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;visualize&quot;</span>)} </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value for b0</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.b0,t.b0),df.b0,<span class="at">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -1048,8 +1042,8 @@ df &amp;= n - p - 1 \\
 </section>
 <section id="p-values-of-b_1" class="slide level2">
 <h2>P-values of <span class="math inline">\(b_1\)</span></h2>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value for b1</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.b1,t.b1),df.b1,<span class="at">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value for b1</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t.b1,t.b1),df.b1,<span class="at">section=</span><span class="st">&#39;tails&#39;</span>)</span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -1059,22 +1053,22 @@ df &amp;= n - p - 1 \\
 <h2>Define regression equation</h2>
 <p><span class="math display">\[\widehat{grade} = {model} = b_0 + b_1 {IQ}\]</span></p>
 <p>So now we can add the expected grade based on this model</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>model <span class="ot">=</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> IQ</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>model <span class="ot">&lt;-</span> <span class="fu">round</span>(data<span class="sc">$</span>model, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>model <span class="ot">=</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> IQ</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>model <span class="ot">&lt;-</span> <span class="fu">round</span>(data<span class="sc">$</span>model, <span class="dv">2</span>)</span></code></pre></div>
 </section>
 <section id="expected-values" class="slide level2 smaller subsection">
 <h2 class="smaller subsection">Expected values</h2>
 <p>Let’s have a look</p>
-<div id="htmlwidget-ceeb9c37099c14911ca8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ceeb9c37099c14911ca8">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7113e8b2290d98343d1a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7113e8b2290d98343d1a">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":375,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </section>
 <section id="y-vs-haty" class="slide level2">
 <h2><span class="math inline">\(y\)</span> vs <span class="math inline">\(\hat{y}\)</span></h2>
 <p>And lets have a look at this relation between expectation and reality</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> data<span class="sc">$</span>model</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model,grade, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> data<span class="sc">$</span>model</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model,grade, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -1083,75 +1077,77 @@ df &amp;= n - p - 1 \\
 <section id="error" class="slide level2 smaller">
 <h2 class="smaller">Error</h2>
 <p>The error / residual is the difference between the model expectation and reality</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>error <span class="ot">=</span> grade <span class="sc">-</span> model</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>error <span class="ot">&lt;-</span> <span class="fu">round</span>(data<span class="sc">$</span>error, <span class="dv">2</span>)</span></code></pre></div>
-<div id="htmlwidget-f9e3c03689f169a235ac" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f9e3c03689f169a235ac">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21],[-1.45,1.79,0.93,-1.4,0.94,0.56,-0.32,0.06,-2.35,0.48,0.8,0.43,2.01,0.03,0.48,1.21,-1.88,-2.06,0.05,-0.81,1.26,0.56,-0.09,1.26,0.21,1.26,0.52,0.39,0.41,0.84,-1.96,1.17,-0.23,-0.99,0.53,-1.1,-0.57,1.69,-0.04,0.59,-2.34,0.78,1.95,0.57,-0.03,2.37,-1.53,-1.19,0.18,0.37,-0.78,-0.25,-1.48,1.95,-1.18,-0.8,-1.71,-0.37,0.64,-0.71,-0.17,-0.77,0.07,0.09,0.44,-0.09,-0.62,-0.19,1.59,-0.95,-0.09,0.98,-0.18,-0.29,-1.02,1.27,1.59,-1.51,1.14,-0.37,-1,-2.47,1.64,-2.53,1.04,-0.29,-0.94,-0.08,-1.26,0.88,-0.55,0.39,1.63,-1.19,-0.93,1.84,0.15,0.91,-0.24,0.23,0.75,0.11,0.98,-0.34,0.72,-0.1,-1.64,-0.28,1.4,-0.2,-1.23,1.21,0.16,0.78,-1.83,-0.26,0.67,-0.69,1.35,-0.09,-0.52,-0.29,-0.46]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>error <span class="ot">=</span> grade <span class="sc">-</span> model</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>error <span class="ot">&lt;-</span> <span class="fu">round</span>(data<span class="sc">$</span>error, <span class="dv">2</span>)</span></code></pre></div>
+<div id="htmlwidget-73f74563f9f1373d6501" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-73f74563f9f1373d6501">{"x":{"filter":"none","vertical":false,"data":[[5.75,7.61,7.26,3.43,6.95,6.16,5.37,5.96,3.04,6.03,7.73,6.29,7.54,5.83,6.55,7.36,4.02,4.42,6.27,5.44,7.24,5.68,5.83,7.34,5.78,7.14,6.82,6.08,5.76,5.38,4.01,7.53,4.98,6.12,6.83,5.01,5.05,6.99,6.41,6.44,3.94,7.04,8.66,7.22,4.32,8.39,4.48,4.82,4.43,6.94,4.73,5.3,4.79,7.18,4.76,5.87,4.31,4.74,6.55,5.1,6.17,4.43,5.25,4.54,6.76,4.27,5.23,5.25,7.65,4.74,5.95,6.49,5.71,4.66,4.1,6.61,9.46,3.96,7.07,6.15,4.36,3.58,7.88,3.08,5.39,5.89,5.4,5.63,3.65,6.82,5.3,6.5,7.86,5.18,5.34,8.82,5.3,5.95,6.15,6.36,7,5.78,7.04,5.8,6.18,6.61,5.14,5.69,6.83,6.03,4.33,6.66,7.22,5.64,3.54,4.84,6.43,5.33,7.29,6.02,5.09,5.65,6.75],[151.13,120.42,131.77,98.32,124.57,115.57,117.38,122.13,110.83,114.28,145.2,121.28,113.9,119.86,125.9,127.67,122.19,135.11,129.24,129.9,123.98,104.76,122.55,126.22,114.8,121.72,130.97,117.56,109.85,91.86,123.67,132.48,106.76,149.08,131.11,126.89,115.87,108.71,134.31,121.13,130.68,130.19,140.1,138.86,87.56,124.83,124.54,124.5,85.46,137.08,113.47,114.4,130.42,107.21,123,139.19,124.8,104.53,122.39,120.11,132.04,106.55,106.13,89.76,131.46,87.9,121.03,111.88,125.79,117.49,125.26,113.43,121.98,100.91,104.72,109.67,165.94,112.55,122.77,135.98,110.21,125.38,129.83,115.63,87.7,128.43,131.91,117.87,100.16,122.97,120.99,126.9,129.39,132.59,130.49,146.18,105.41,103.02,133.17,127.16,130.02,117.1,125.72,127.53,112.3,140.24,141.85,123.67,111.57,129.48,114.48,112.23,148.04,98.99,110.31,104.41,119.08,124.83,122.95,126.81,115.58,122.99,151.37],[7.2,5.82,6.33,4.83,6.01,5.6,5.69,5.9,5.39,5.55,6.93,5.86,5.53,5.8,6.07,6.15,5.9,6.48,6.22,6.25,5.98,5.12,5.92,6.08,5.57,5.88,6.3,5.69,5.35,4.54,5.97,6.36,5.21,7.11,6.3,6.11,5.62,5.3,6.45,5.85,6.28,6.26,6.71,6.65,4.35,6.02,6.01,6.01,4.25,6.57,5.51,5.55,6.27,5.23,5.94,6.67,6.02,5.11,5.91,5.81,6.34,5.2,5.18,4.45,6.32,4.36,5.85,5.44,6.06,5.69,6.04,5.51,5.89,4.95,5.12,5.34,7.87,5.47,5.93,6.52,5.36,6.05,6.24,5.61,4.35,6.18,6.34,5.71,4.91,5.94,5.85,6.11,6.23,6.37,6.27,6.98,5.15,5.04,6.39,6.13,6.25,5.67,6.06,6.14,5.46,6.71,6.78,5.97,5.43,6.23,5.56,5.45,7.06,4.86,5.37,5.1,5.76,6.02,5.94,6.11,5.61,5.94,7.21],[-1.45,1.79,0.93,-1.4,0.94,0.56,-0.32,0.06,-2.35,0.48,0.8,0.43,2.01,0.03,0.48,1.21,-1.88,-2.06,0.05,-0.81,1.26,0.56,-0.09,1.26,0.21,1.26,0.52,0.39,0.41,0.84,-1.96,1.17,-0.23,-0.99,0.53,-1.1,-0.57,1.69,-0.04,0.59,-2.34,0.78,1.95,0.57,-0.03,2.37,-1.53,-1.19,0.18,0.37,-0.78,-0.25,-1.48,1.95,-1.18,-0.8,-1.71,-0.37,0.64,-0.71,-0.17,-0.77,0.07,0.09,0.44,-0.09,-0.62,-0.19,1.59,-0.95,-0.09,0.98,-0.18,-0.29,-1.02,1.27,1.59,-1.51,1.14,-0.37,-1,-2.47,1.64,-2.53,1.04,-0.29,-0.94,-0.08,-1.26,0.88,-0.55,0.39,1.63,-1.19,-0.93,1.84,0.15,0.91,-0.24,0.23,0.75,0.11,0.98,-0.34,0.72,-0.1,-1.64,-0.28,1.4,-0.2,-1.23,1.21,0.16,0.78,-1.83,-0.26,0.67,-0.69,1.35,-0.09,-0.52,-0.29,-0.46]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>grade<\/th>\n      <th>IQ<\/th>\n      <th>model<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </section>
 <section id="model-fit" class="slide level2">
 <h2>Model fit</h2>
 <p>The fit of the model is the amount of error, which can be viewed in the correlation (<span class="math inline">\(r\)</span>).</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">cor</span>(model,grade)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>r</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">cor</span>(model,grade)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>r</span></code></pre></div>
 <pre><code>## [1] 0.5035925</code></pre>
 </section>
 <section id="explained-variance" class="slide level2 subsection">
 <h2 class="subsection">Explained variance</h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>r<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>r<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.2536054</code></pre>
 </section>
 <section id="explained-variance-visually" class="slide level2">
 <h2>Explained variance visually</h2>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is all the grade data</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grade,<span class="at">xlab=</span><span class="st">&#39;participants&#39;</span>)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co"># With the mean</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>n,<span class="fu">rep</span>(<span class="fu">mean</span>(grade),n),<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The blue lines are the total variance, the deviation from the mean.</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>n, grade, <span class="dv">1</span><span class="sc">:</span>n, <span class="fu">mean</span>(grade), <span class="at">col=</span><span class="st">&#39;blue&#39;</span>)</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The model predicts the grade scores</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span>n,model, <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="co"># The part of the variation that overlaps is the &#39;explained&#39; variance. </span></span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>n, model, <span class="dv">1</span><span class="sc">:</span>n, <span class="fu">mean</span>(grade), <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><small></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is all the grade data</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grade,<span class="at">xlab=</span><span class="st">&#39;participants&#39;</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># With the mean</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>n,<span class="fu">rep</span>(<span class="fu">mean</span>(grade),n),<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The blue lines are the total variance, the deviation from the mean.</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>n, grade, <span class="dv">1</span><span class="sc">:</span>n, <span class="fu">mean</span>(grade), <span class="at">col=</span><span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The model predicts the grade scores</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span>n,model, <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co"># The part of the variation that overlaps is the &#39;explained&#39; variance. </span></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">1</span><span class="sc">:</span>n, model, <span class="dv">1</span><span class="sc">:</span>n, <span class="fu">mean</span>(grade), <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
 </section>
 <section class="slide level2">
 
 <p><img src="correlation_simple_regression_reveal_files/figure-revealjs/unnamed-chunk-43-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>The part that does not overlap is therefore ‘unexplained’ variance. And because <span class="math inline">\(r^2\)</span> is the explained variance, <span class="math inline">\(1 - r^2\)</span> is the unexplained variance.</p>
+<p></small></p>
 </section>
 <section id="test-model-fit" class="slide level2">
 <h2>Test model fit</h2>
 <p>Compare model to mean Y (grade) as model</p>
 <p><span class="math display">\[F = \frac{(n-p-1) r^2}{p (1-r^2)}\]</span></p>
 <p>Where <span class="math inline">\({df}_{model} = n - p - 1 = N - K - 1\)</span>.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> ( (n<span class="sc">-</span>p<span class="dv">-1</span>)<span class="sc">*</span>r<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> ( p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>) )</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>F</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> ( (n<span class="sc">-</span>p<span class="dv">-1</span>)<span class="sc">*</span>r<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> ( p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>) )</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>F</span></code></pre></div>
 <pre><code>## [1] 41.11265</code></pre>
 </section>
 <section id="signal-to-noise" class="slide level2">
 <h2>Signal to noise</h2>
 <p>Given the description of explained variance, F can again be seen as a proportion of explained to unexplained variance. Also known as a signal to noise ratio.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">=</span> p <span class="co"># n = rows, p = predictors</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">=</span> n<span class="sc">-</span>p<span class="dv">-1</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">=</span> <span class="fu">sum</span>((model <span class="sc">-</span> <span class="fu">mean</span>(grade))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>SS_error <span class="ot">=</span> <span class="fu">sum</span>((grade <span class="sc">-</span> model)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">=</span> SS_model <span class="sc">/</span> df.model</span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">=</span> SS_error <span class="sc">/</span> df.error</span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> MS_model <span class="sc">/</span> MS_error </span>
-<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>F</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">=</span> p <span class="co"># n = rows, p = predictors</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">=</span> n<span class="sc">-</span>p<span class="dv">-1</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>SS_model <span class="ot">=</span> <span class="fu">sum</span>((model <span class="sc">-</span> <span class="fu">mean</span>(grade))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>SS_error <span class="ot">=</span> <span class="fu">sum</span>((grade <span class="sc">-</span> model)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>MS_model <span class="ot">=</span> SS_model <span class="sc">/</span> df.model</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>MS_error <span class="ot">=</span> SS_error <span class="sc">/</span> df.error</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> MS_model <span class="sc">/</span> MS_error </span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>F</span></code></pre></div>
 <pre><code>## [1] 41.1269</code></pre>
 </section>
 <section id="section-1" class="slide level2 smaller">
 <h2 class="smaller"></h2>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>SS_total <span class="ot">=</span> <span class="fu">var</span>(grade) <span class="sc">*</span> (n<span class="dv">-1</span>)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(SS_total,</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>      SS_model,</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Proportion explained variance</span></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>      SS_model <span class="sc">/</span> SS_total,</span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>      r<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>SS_total <span class="ot">=</span> <span class="fu">var</span>(grade) <span class="sc">*</span> (n<span class="dv">-1</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(SS_total,</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>      SS_model,</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Proportion explained variance</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>      SS_model <span class="sc">/</span> SS_total,</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>      r<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##                 [,1]
 ## SS_total 191.0732000
 ## SS_model  48.4740000
@@ -1160,7 +1156,7 @@ df &amp;= n - p - 1 \\
 </section>
 <section id="visualize-1" class="slide level2">
 <h2>Visualize</h2>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(F, df.model, df.error, <span class="at">section=</span><span class="st">&#39;upper&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(F, df.model, df.error, <span class="at">section=</span><span class="st">&#39;upper&#39;</span>)</span></code></pre></div>
 </section>
 <section class="slide level2">
 

@@ -7,6 +7,8 @@ library("DT")
 
 ## Regression {.smaller}
 
+<small>
+
 $$\LARGE{\text{outcome} = \text{model} + \text{error}}$$
 
 In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted X. The case of one explanatory variable is called simple linear regression.
@@ -16,6 +18,8 @@ $$\LARGE{Y_i = \beta_0 + \beta_1 X_i + \epsilon_i}$$
 In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data.
 
 Source: [wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
+
+</small>
 
 ## Outcome vs Model
 
@@ -189,7 +193,8 @@ text(3  , (b0 + b1 * 2.5),
      cex=1)
 ```
 
-```{r, fig.align='center', fig.width=8, fig.height=6}
+
+```{r, echo=FALSE, fig.align='center', fig.width=8, fig.height=6}
 # Extra
 
 plot(IQ,grade, xlim=c(1, 4), ylim=c(0.4,.6))
@@ -208,6 +213,8 @@ text(3  , (b0 + b1 * 2.5),
 
 ## Calculate t-values for b's {.smaller .subsection}
 
+<small>
+
 $$t_{n-p-1} = \frac{b - \mu_b}{{SE}_b}$$
 
 Where $n$ is the number of rows, $p$ is the number of predictors, $b$ is the beta coefficient and ${SE}_b$ its standard error.
@@ -222,6 +229,8 @@ se.b1 = se[2]
 
 cbind(se.b0, se.b1)
 ```
+
+</small>
 
 ## {.smaller}
 
@@ -324,7 +333,9 @@ r^2
 
 ## Explained variance visually
 
-```{r, fig.align='center'}
+<small>
+
+```{r, echo=TRUE, fig.align='center'}
 # This is all the grade data
 plot(grade,xlab='participants')
 # With the mean
@@ -341,6 +352,8 @@ segments(1:n, model, 1:n, mean(grade), col='red')
 ```
 
 The part that does not overlap is therefore 'unexplained' variance. And because $r^2$ is the explained variance, $1 - r^2$ is the unexplained variance.
+
+</small>
 
 ## Test model fit
 

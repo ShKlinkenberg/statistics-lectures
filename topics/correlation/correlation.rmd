@@ -55,11 +55,11 @@ plot(x, y, las = 1)
 m.x = mean(x)
 m.y = mean(y)
 
-polygon(c(m.x,8,8,m.x),c(m.y,m.y,8,8), col = rgb(0,1,0,.5))
-polygon(c(m.x,0,0,m.x),c(m.y,m.y,0,0), col = rgb(0,1,0,.5))
+polygon(c(m.x,8,8,m.x),c(m.y,m.y,8,8), col = rgb(0,.64,0,.5))
+polygon(c(m.x,0,0,m.x),c(m.y,m.y,0,0), col = rgb(0,.64,0,.5))
 
-polygon(c(m.x,0,0,m.x),c(m.y,m.y,8,8), col = rgb(1,0,0,.5))
-polygon(c(m.x,8,8,m.x),c(m.y,m.y,0,0), col = rgb(1,0,0,.5))
+polygon(c(m.x,0,0,m.x),c(m.y,m.y,8,8), col = rgb(1,.55,0,.5))
+polygon(c(m.x,8,8,m.x),c(m.y,m.y,0,0), col = rgb(1,.55,0,.5))
 
 points(x,y)
 
@@ -163,7 +163,9 @@ prod = (grade - mean.grade) * (IQ - mean.IQ)
 covariance = sum(prod) / (N - 1)
 ```
 
-## Correlation {.smaller}
+## Correlation
+
+<small>
 
 $$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
 
@@ -173,6 +175,8 @@ correlation = covariance / ( sd(grade) * sd(IQ) ); correlation
 cor(z.grade, z.IQ)
 cor(  grade,   IQ)
 ```
+
+</small>
 
 --------
 
@@ -197,6 +201,8 @@ text(mean.grade-.7, mean.IQ+.7, "- x +", cex = 2, col = "red")
 
 ## Significance of a correlation {.subsection}
 
+<small>
+
 $$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
 {df} = N - 2$$
 
@@ -214,6 +220,8 @@ t.r = ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
 cbind(t.r, df)
 ```
 
+</small>
+
 ## Visualize
 
 One-sample t-test
@@ -227,7 +235,8 @@ visualize.t(c(-t.r, t.r),df,section='tails')
 
 # Partial correlation {.section}
 
-## Venn diagram{.smaller}
+## Venn diagram
+
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
@@ -247,6 +256,7 @@ draw.triple.venn(area1 = 100, area2 = 100, area3 = 100,
 
 
 ## Partial correlation {.smaller}
+
 
 $$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}$$
 
