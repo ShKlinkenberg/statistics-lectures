@@ -143,7 +143,7 @@ De beta coëfficients are:
 
 ## Visual
 
-```{r, echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, class.source='rglChunk', webgl=TRUE}
 ## 3d plot package rgl
 ## install.packages('rgl')
 if(!"rgl" %in% installed.packages()) { install.packages("rgl") };
@@ -203,7 +203,7 @@ aspect3d(1,1,1)
 # view3d(theta = 5)
 # view3d(theta = -10, phi = -90)
 # play3d(spin3d(axis = c(0, 0, 1), rpm = 30), duration = 5)
-rglwidget()
+# rglwidget()
 ```
 
 ## What are the expected values based on this model
