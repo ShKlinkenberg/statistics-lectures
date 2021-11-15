@@ -197,7 +197,7 @@ surface3d(x.pre,y.mod,z.pre, color = c("green"))
 aspect3d(1,1,1)
 
 subid <- currentSubscene3d()
-rglwidget(elementId="plot3drgl2")
+rglwidget(elementId="plot3drgl2", reuse = FALSE)
 
 # rglwidget()
 ```
