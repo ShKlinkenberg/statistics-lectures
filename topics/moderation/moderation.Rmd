@@ -124,7 +124,7 @@ sds       <- c(mean(moderator)+(sd(moderator)*c(-1,0,1)))
 
 --------
 
-```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
 my.plot
 
 par3d(mouseMode = "zAxis")
@@ -189,7 +189,7 @@ save(data, x.pre, y.mod, z.pre, quantiles, sds, file="moderation.rdata")
 
 ## Expected surface
 
-```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, rgl.useNULL=TRUE}
 my.plot
 
 surface3d(x.pre,y.mod,z.pre, color = c("green"))
