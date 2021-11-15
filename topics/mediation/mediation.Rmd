@@ -17,7 +17,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 
 Does the speed of recovery after sickness improve with the use of alternative medicine or is this effect mediated by a healthy lifestyle?
 
-![<a style="font-size:50%;" href="https://www.pexels.com/photo/green-purple-flower-163186/" target="_blank">Photo by Pixabay from Pexels</a>](../../../../topics/mediation/green-purple-flower-163186.jpg)
+![<a style="font-size:50%;" href="https://www.pexels.com/photo/green-purple-flower-163186/" target="_blank">Photo by Pixabay from Pexels</a>](../../../topics/mediation/green-purple-flower-163186.jpg)
 
 ## Mediaton paths  {.flexbox .vcenter}
 
@@ -27,7 +27,7 @@ Does the speed of recovery after sickness improve with the use of alternative me
 
 <!-- ![Mediation Path](../../../topics/mediation/mediation.jpeg) -->
 
-![Mediation Path](../../../../topics/mediation/mediation_regressions_relation.png)
+![Mediation Path](../../../topics/mediation/mediation_regressions_relation.png)
 
 ```{r, echo=FALSE, eval=FALSE}
 # library("DiagrammeR")
