@@ -9,6 +9,9 @@
 rm(list=ls())
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
+
+if(!"manipulateWidget" %in% installed.packages()) { install.packages("manipulateWidget") }
+library("manipulateWidget")
 ```
 
 ## Moderation
@@ -22,7 +25,7 @@ Source [WIKIPEDIA](https://en.wikipedia.org/wiki/Moderation_(statistics))
 $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}Out_i = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}+ \epsilon_i$$
 
-![](../../../../topics/moderation/moderation.png)
+![](../../../topics/moderation/moderation.png)
 
 ## Example {.smaller}
 
@@ -154,11 +157,15 @@ fit <- lm(outcome ~ predictor + moderator + predictor*moderator); summary(fit)
 
 ## Regression equation
 
+<small>
+
 $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}$$
 
 $$\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 \color{black}\widehat{Out_i} = `r round(fit$coefficients[1],2)` + `r round(fit$coefficients[2],2)` \times Pred_i + `r round(fit$coefficients[3],2)` \times Mod_i + \color{red} `r round(fit$coefficients[4],2)` \times Pred_i \times Mod_i \color{black}$$
+
+</small>
 
 ```{r}
 regeq <- function(model, predictor, moderator) { 

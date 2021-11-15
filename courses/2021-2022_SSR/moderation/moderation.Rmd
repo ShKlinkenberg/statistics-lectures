@@ -1,10 +1,10 @@
 ---
 title: "Moderation"
 author: "Klinkenberg"
-date: "13 nov 2020"
+date: "17 nov 2021"
 output: 
   revealjs::revealjs_presentation:
-    css: "https://shklinkenberg.github.io/presentations/2020-02-11_FMG_strategiedag/logo.css"
+    template: http://shklinkenberg.github.io/uva_style/UvAtemplate.html
     theme: white #simple #black
     highlight: pygments
     transition: slide #fade #slide
@@ -12,8 +12,7 @@ output:
     center: true
     self_contained: false
     includes       :
-      in_header    : ["../../../TOC/TOC_generator.js.wrapper",
-                      "../../../GA_Script/GA_Script.html"]
+      in_header    : "../../../GA_Script/GA_Script.html"
   html_document:
     toc            : TRUE
     self_contained : false
@@ -37,11 +36,7 @@ local({
 })
 ```
 
-## Table of content
 
-<div style="font-size:60%; text-align:left;" id="toc"></div>
-
-<!-- Add the required topics below -->
 
 ```{r child="../../../topics/moderation/moderation.rmd"}
 ```
