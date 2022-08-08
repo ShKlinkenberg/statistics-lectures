@@ -46,6 +46,6 @@
     "href": "courses/WSR_PB/2022-2023/index.html",
     "title": "Wetenschapsfilosofie & Statistisch Redeneren",
     "section": "",
-    "text": "On this site you can find my statistics lectures for WSR"
+    "text": "files <- list.files(full.names = F, pattern = \"\\\\.qmd\", recursive = T)\nfiles <- files[-1]\n\nlectures = data.frame()\nn = length(files)\n\nfor (i in 1:n) {\n\n  lectures[i ,'url'] <- data.frame(url = paste0(\"courses/WSR_PB/2022-2023/\", files[i]))\n  \n  yaml <- rmarkdown::yaml_front_matter(files[i])\n  \n  lectures[i , 'title'] = yaml$title\n  lectures[i , 'date'] = yaml$date\n  lectures[i , 'file_name'] = files[i]\n\n}\n\ndata.frame(Date    = lectures$date, \n           Lecture = lectures$title,\n           Handout = sprintf(\"[link](/%s)\", lectures$url),\n           Slides  = sprintf('[link](../%s){.external target=\"_blank\"}',\n                             gsub(\"qmd\", \"html\", lectures$url))\n           )\n\n\n\n\n\nDate\nLecture\nHandout\nSlides\n\n\n\n\n13 sep 2022\nNull Hypothesis Testing\nlink\nlink"
   }
 ]
