@@ -4,9 +4,9 @@ author: "Klinkenberg"
 date: today
 ---
 
-On this site you can find my statistics lectures for WSR.
+On this page you can find my statistics lectures for WSR.
 
-```{r, echo=FALSE, eval=TRUE}
+```{r, echo=FALSE}
 files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
 files <- files[-1]
 
