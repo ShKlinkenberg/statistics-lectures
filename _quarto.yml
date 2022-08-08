@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: site
+  render:
+    - index.qmd
+    # - slides_list.qmd
+    - ""
+
+website:
+  title: "Statistics Lectures"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+    right:
+      - icon: fa-github-alt # fa-github 
+        href: https://github.com/ShKlinkenberg/statistics-lectures
+
+  # sidebar:
+  #   - id: lectures
+  #     title: "Lectures"
+  #     style: "docked"
+  #     background: light
+  #     collapse-level: 2
+  #     contents: 
+  #       - "lectures/regression_multiple_predictors.qmd"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    df-print: kable
+    smooth-scroll: true
+    link-external-newwindow: true
+
+
+
