@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Date    =</span> lectures<span class="sc">$</span>date, </span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">Lecture =</span> lectures<span class="sc">$</span>title,</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">Handout =</span> <span class="fu">sprintf</span>(<span class="st">"[link](/%s)"</span>, lectures<span class="sc">$</span>url),</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">Slides  =</span> <span class="fu">sprintf</span>(<span class="st">'[link](../%s){.external target="_blank"}'</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">Slides  =</span> <span class="fu">sprintf</span>(<span class="st">'&lt;a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external"&gt;link&lt;/a&gt;'</span>,</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">gsub</span>(<span class="st">"qmd"</span>, <span class="st">"html"</span>, lectures<span class="sc">$</span>url))</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>           )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -268,7 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;">13 sep 2022</td>
 <td style="text-align: left;">Null Hypothesis Testing</td>
 <td style="text-align: left;"><a href="../../../courses/WSR_PB/2022-2023/nhst/nhst.html">link</a></td>
-<td style="text-align: left;"><a href="../courses/WSR_PB/2022-2023/nhst/nhst.html" class="external" target="_blank">link</a></td>
+<td style="text-align: left;"><a href="https://shklinkenberg.github.io/statistics-lectures/courses/WSR_PB/2022-2023/nhst/nhst.html" target="_blank" class="external">link</a></td>
 </tr>
 </tbody>
 </table>
