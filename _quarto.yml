@@ -3,27 +3,36 @@ project:
   output-dir: site
   render:
     - index.qmd
-    # - slides_list.qmd
-    - ""
+    - courses/SSR/2022-2023/nhst/nhst.qmd
+    - courses/WSR_PB/2022-2023/nhst/nhst.qmd
 
 website:
   title: "Statistics Lectures"
+  site-url: https://shklinkenberg.github.io
+  repo-url: https://github.com/ShKlinkenberg/statistics-lectures
+  repo-actions: [edit, issue]
+  page-navigation: true
   navbar:
     left:
-      - href: index.qmd
-        text: Home
+      - text: Courses
+        menu: 
+          - text: SSR
+            href: courses/SSR/2022-2023/nhst/nhst.qmd
+          - text: WSR
+            href: courses/WSR_PB/2022-2023/nhst/nhst.qmd 
     right:
-      - icon: fa-github-alt # fa-github 
+      - icon: github
         href: https://github.com/ShKlinkenberg/statistics-lectures
+        aria-label: Quarto GitHub
 
-  # sidebar:
-  #   - id: lectures
-  #     title: "Lectures"
-  #     style: "docked"
-  #     background: light
-  #     collapse-level: 2
-  #     contents: 
-  #       - "lectures/regression_multiple_predictors.qmd"
+  sidebar:
+    - id: SSR
+      title: "Scientific & Statistical Reasoning"
+      style: "docked"
+      background: light
+      collapse-level: 2
+      contents:
+        - courses/SSR/2022-2023/nhst/nhst.qmd
 
 format:
   html:

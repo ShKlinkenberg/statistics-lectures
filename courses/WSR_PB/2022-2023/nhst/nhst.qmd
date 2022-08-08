@@ -1,0 +1,29 @@
+---
+title: "Null Hypothesis Testing"
+author: "Klinkenberg"
+date: "13 sep 2022"
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+
+
+
+```{r child="../../../../topics/nhst/NHST_2.rmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.md"}
+```
