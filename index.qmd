@@ -1,9 +1,9 @@
 ---
-title: "Scintific & Statistical Reasoning"
+title: "Statistics Lectures"
 author: "Klinkenberg"
 ---
 
-Below you can find the statistics lectures for the SSR course.
+On this site you can find my statistics lectures for the various courses i give.
 
 ```{r, echo=FALSE, eval=FALSE}
 files <- list.files("lectures", full.names = F, pattern = "\\.qmd", recursive = F)

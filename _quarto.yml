@@ -41,6 +41,3 @@ format:
     df-print: kable
     smooth-scroll: true
     link-external-newwindow: true
-
-
-
