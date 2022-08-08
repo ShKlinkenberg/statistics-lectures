@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klinkenberg" />
+
+
+<title>ANOVA</title>
+
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="f_distribution_ANOVA_one_way_independent_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="f_distribution_ANOVA_one_way_independent_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/navigation-1.1/tabsets.js"></script>
+<link href="f_distribution_ANOVA_one_way_independent_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="f_distribution_ANOVA_one_way_independent_handout_files/highlightjs-9.12.0/highlight.js"></script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107432294-1');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">ANOVA</h1>
+<h3 class="subtitle">F-distribution &amp; One-way independent</h3>
+<h4 class="author">Klinkenberg</h4>
+<h4 class="date">7 oct 2021</h4>
+
+</div>
+
+
+<div id="f-distribution" class="section level1">
+<h1 class="section">F-distribution</h1>
+<div id="ronald-fisher" class="section level2 smaller subsection">
+<h2 class="smaller subsection">Ronald Fisher</h2>
+<p><small></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" style="float: left; width: 150px; margin: 0 20px 0 0;"></p>
+<p>The F-distribution, also known as Snedecor’s F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.</p>
+<p><a href="https://en.wikipedia.org/wiki/F-distribution">Wikipedia</a></p>
+<p>Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.</p>
+<p><a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Wikipedia</a></p>
+<p></small></p>
+</div>
+<div id="analysing-variance" class="section level2">
+<h2>Analysing variance</h2>
+<p><a href="https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000">Decomposing variance example of height for males and females.</a></p>
+</div>
+<div id="population-distribution" class="section level2 smaller subsection">
+<h2 class="smaller subsection">Population distribution</h2>
+<pre class="r"><code>layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
+
+n  = 56    # Sample size
+df = n - 1 # Degrees of freedom
+
+mu    = 120
+sigma = 15
+
+IQ = seq(mu-45, mu+45, 1)
+
+par(mar=c(4,2,0,0))  
+plot(IQ, dnorm(IQ, mean = mu, sd = sigma), type=&#39;l&#39;, col=&quot;red&quot;)
+
+n.samples = 12
+
+for(i in 1:n.samples) {
+  
+  par(mar=c(2,2,0,0))  
+  hist(rnorm(n, mu, sigma), main=&quot;&quot;, cex.axis=.5, col=&quot;red&quot;)
+  
+}</code></pre>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="f-statistic" class="section level2">
+<h2>F-statistic</h2>
+<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
+<p>So the <span class="math inline">\(F\)</span>-statistic represents a signal to noise ratio by deviding the model variance component by the error variance component.</p>
+</div>
+<div id="a-samples" class="section level2 smaller">
+<h2 class="smaller">A samples</h2>
+<p>Let’s take two sample from our normal populatiion and calculate the F-value.</p>
+<pre class="r"><code>x.1 = rnorm(n, mu, sigma)
+x.2 = rnorm(n, mu, sigma)
+
+data &lt;- data.frame(group = rep(c(&quot;s1&quot;, &quot;s2&quot;), each=n), score = c(x.1,x.2))
+    
+F = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
+F</code></pre>
+<pre><code>## [1] 0.3441866</code></pre>
+</div>
+<div id="more-samples" class="section level2 smaller subsection">
+<h2 class="smaller subsection">More samples</h2>
+<p>let’s take more samples and calculate the F-value every time.</p>
+<pre class="r"><code>n.samples = 1000
+
+f.values = vector()
+
+for(i in 1:n.samples) {
+  
+  x.1 = rnorm(n, mu, sigma); x.1
+  x.2 = rnorm(n, mu, sigma); x.2
+
+  data &lt;- data.frame(group = rep(c(&quot;s1&quot;, &quot;s2&quot;), each=n), score = c(x.1,x.2))
+    
+  f.values[i] = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
+
+}
+
+k = 2
+N = 2*n
+
+df.model = k - 1
+df.error = N - k
+
+hist(f.values, freq = FALSE, main=&quot;F-values&quot;, breaks=100)
+F = seq(0, 6, .01)
+lines(F, df(F,df.model, df.error), col = &quot;red&quot;)</code></pre>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="f-distribution-1" class="section level2 smaller">
+<h2 class="smaller">F-distribution</h2>
+<p>So if the population is normaly distributed (assumption of normality) the f-distribution represents the signal to noise ration given a certain number of samples (<span class="math inline">\({df}_{model} = k - 1\)</span>) and sample size (<span class="math inline">\({df}_{error} = N - k\)</span>).</p>
+<p>The F-distibution therefore is different for different sample sizes and number of groups.</p>
+</div>
+<div id="f-distribution-2" class="section level2 smaller">
+<h2 class="smaller">F-distribution</h2>
+<pre class="r"><code>multiple.n  = c(5, 15, 30)
+multiple.k  = c(2, 4, 6)
+multiple.df.model = multiple.k - 1
+multiple.df.error = multiple.n - multiple.k
+col         = rainbow(length(multiple.df.model) * length(multiple.df.error))
+F = seq(0, 10, .01)
+
+plot(F,  df(F, multiple.df.model[1], multiple.df.error[1]), type = &quot;l&quot;, 
+     xlim = c(0,10), ylim = c(0,.85), 
+     xlab = &quot;F&quot;, ylab=&quot;density&quot;, 
+     col  = col[1], main=&quot;F-distributions&quot; )
+
+dfs = expand.grid(multiple.df.model, multiple.df.error)
+
+for(i in 2:dim(dfs)[1]) { 
+  
+  lines(F, df(F, dfs[i,1], dfs[i,2]), col=col[i])
+  
+  critical.f &lt;- qf(.95, dfs[i,1], dfs[i,2])
+  
+  f.alpha &lt;- seq(critical.f, 1000, .01)
+  
+  polygon(c(f.alpha, rev(f.alpha)), c(df(f.alpha, dfs[i,1], dfs[i,2]), f.alpha*0 ), col= rgb(1,.66,0, .5), border = col[i])
+  
+  lines(c(critical.f+.1, 5), c(.02, .2), col=col[i])
+        
+}
+
+text(5,.2, expression(paste(alpha, &quot;= 5%&quot;)), pos =3)
+
+legend(&quot;topright&quot;, legend = paste(&quot;df model =&quot;,dfs[,1], &quot;df error =&quot;, dfs[,2]), lty=1, col = col, cex=.75)</code></pre>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="f-distribution-3" class="section level2 flexbox vcenter">
+<h2 class="flexbox vcenter">F-distribution</h2>
+<p><img src="../../../topics/f_distribution/f_distributions.gif" style="height:400px;" ></p>
+</div>
+</div>
+<div id="one-way-independent-anova" class="section level1">
+<h1 class="section">One-way independent ANOVA</h1>
+<p>Compare 2 or more independent groups.</p>
+<div id="assumptions" class="section level2">
+<h2>Assumptions</h2>
+<p>Assuming th <span class="math inline">\(H_0\)</span> hypothesis to be true, the following should hold:</p>
+<ul>
+<li>Continuous variable</li>
+<li>Random sample</li>
+<li>Normaly distributed
+<ul>
+<li>Shapiro-Wilk test</li>
+</ul></li>
+<li>Equal variance within groups
+<ul>
+<li>Levene’s test</li>
+</ul></li>
+</ul>
+</div>
+<div id="jet-lag" class="section level2">
+<h2>Jet lag</h2>
+<p>Wright and Czeisler (2002) performed an experiment where they measured the circadian rhythm by the daily cycle of melatonin production in 22 subjects randomly assigned to one of three light treatments.</p>
+<ul>
+<li>Control condition (no light)</li>
+<li>Knees (3 hour light to back of knees)</li>
+<li>Eyes (3 hour light in eyes)</li>
+</ul>
+<pre class="r"><code>rm(list=ls())
+x.c = c( .53, .36,  .2,  -.37, -.6,  -.64, -.68,-1.27) # Control 
+x.k = c( .73, .31,  .03, -.29, -.56, -.96,-1.61      ) # Knees
+x.e = c(-.78,-.86,-1.35,-1.48,-1.52,-2.04,-2.83      ) # Eyes
+x   = c( x.c, x.k, x.e )                               # Conditions combined</code></pre>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="variance-components" class="section level2">
+<h2>Variance components</h2>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="30%" />
+<col width="7%" />
+<col width="26%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of Squares</th>
+<th>DF</th>
+<th>Mean Squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td><span class="math inline">\({SS}_{model} = \sum n_k(\bar{X}_k - \bar{X})^2\)</span></td>
+<td><span class="math inline">\(k-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{model}}{{df}_{model}}\)</span></td>
+<td><span class="math inline">\(\frac{{MS}_{model}}{{MS}_{error}}\)</span></td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><span class="math inline">\({SS}_{error} = \sum s_k^2 (n_k - 1)\)</span></td>
+<td><span class="math inline">\(N-k\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{error}}{{df}_{error}}\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\({SS}_{total} = {SS}_{model} + {SS}_{error}\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
+<td><span class="math inline">\(\frac{{SS}_{total}}{{df}_{total}}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(N\)</span> is the total sample size, <span class="math inline">\(n_k\)</span> is the sample size per category and <span class="math inline">\(k\)</span> is the number of categories. Finally <span class="math inline">\(s_k^2\)</span> is the variance per category.</p>
+</div>
+<div id="total-variance" class="section level2 subsection">
+<h2 class="subsection">Total variance</h2>
+<p><span class="math display">\[{MS}_{total} = s_x^2\]</span></p>
+<pre class="r"><code>ms.t = var(x); ms.t</code></pre>
+<pre><code>## [1] 0.7923732</code></pre>
+<pre class="r"><code>sum( (x - mean(x))^2 ) / (length(x) - 1)</code></pre>
+<pre><code>## [1] 0.7923732</code></pre>
+<hr />
+<p><span class="math display">\[{SS}_{total} = s_x^2 (N-1)\]</span></p>
+<pre class="r"><code>N = length(x)
+
+ss.t = var(x) * (N-1); ss.t</code></pre>
+<pre><code>## [1] 16.63984</code></pre>
+<pre class="r"><code>sum( (x - mean(x))^2 )</code></pre>
+<pre><code>## [1] 16.63984</code></pre>
+</div>
+<div id="visual-ss_total" class="section level2 smaller">
+<h2 class="smaller">Visual <span class="math inline">\({SS}_{total}\)</span></h2>
+<pre class="r"><code># Assign labels
+lab = c(&quot;Control&quot;, &quot;Knee&quot;, &quot;Eyes&quot;) 
+
+# Plot all data points
+plot(1:N,x, 
+     ylab=&quot;Shift in circadian rhythm (h)&quot;,
+     xlab=&quot;Light treatment&quot;,
+     main=&quot;Total variance&quot;)
+
+# Add mean line
+lines(c(1,22),rep(mean(x),2),lwd=3)
+
+# Add delta lines / variance components
+segments(1:N, mean(x), 1:N, x)
+
+# Add labels
+text(c(4,11.5,18.5),rep(.6,3),labels=lab)</code></pre>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="model-variance" class="section level2 smaller subsection">
+<h2 class="smaller subsection">Model variance</h2>
+<p><span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}} \\ {df}_{model} = k - 1\]</span></p>
+<p>Where <span class="math inline">\(k\)</span> is the number of independent groups and</p>
+<p><span class="math display">\[{SS}_{model} = \sum_{k} n_k (\bar{X}_k - \bar{X})^2\]</span></p>
+<pre class="r"><code>k      = 3
+n.c = length(x.c)
+n.k = length(x.k)
+n.e = length(x.e)</code></pre>
+<hr />
+<pre class="r"><code>ss.m.c = n.c * (mean(x.c) - mean(x))^2
+ss.m.k = n.k * (mean(x.k) - mean(x))^2
+ss.m.e = n.e * (mean(x.e) - mean(x))^2
+
+ss.m = sum(ss.m.c, ss.m.k, ss.m.e); ss.m</code></pre>
+<pre><code>## [1] 7.224492</code></pre>
+<pre class="r"><code>df.m = (k - 1)
+ms.m = ss.m / df.m; ms.m</code></pre>
+<pre><code>## [1] 3.612246</code></pre>
+</div>
+<div id="visual-ss_model" class="section level2">
+<h2>Visual <span class="math inline">\({SS}_{model}\)</span></h2>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="error-variance" class="section level2 subsection">
+<h2 class="subsection">Error variance</h2>
+<p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
+<p>where</p>
+<p><span class="math display">\[{SS}_{error} = \sum_{k} s_k^2 (n_k - 1) = \sum_{k} \frac{\sum (x_{ik} - \bar{x}_k)^2}{(n_k - 1)} (n_k - 1)\]</span></p>
+<pre class="r"><code>ss.e.c = var(x.c) * (n.c - 1)
+ss.e.k = var(x.k) * (n.k - 1)
+ss.e.e = var(x.e) * (n.e - 1)
+ss.e   = sum(ss.e.c, ss.e.k, ss.e.e); ss.e</code></pre>
+<pre><code>## [1] 9.415345</code></pre>
+<hr />
+<p><span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} \\ {df}_{error} = N - k\]</span></p>
+<pre class="r"><code>df.e = (N - k)
+ms.e = ss.e / df.e; ms.e</code></pre>
+<pre><code>## [1] 0.4955445</code></pre>
+</div>
+<div id="visual-ss_error" class="section level2">
+<h2>Visual <span class="math inline">\({SS}_{error}\)</span></h2>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="variance-components-1" class="section level2 subsection">
+<h2 class="subsection">Variance components</h2>
+<p><span class="math display">\[{SS}_{total} = {SS}_{model} + {SS}_{error}\]</span> <span class="math display">\[16.6398364 = 7.2244917 + 9.4153446\]</span></p>
+<p><span class="math display">\[{MS}_{total} = \frac{{SS}_{total}}{{df}_{total}}= 0.7923732\]</span> <span class="math display">\[{MS}_{model} = \frac{{SS}_{model}}{{df}_{model}}= 3.6122459\]</span> <span class="math display">\[{MS}_{error} = \frac{{SS}_{error}}{{df}_{error}} = 0.4955445\]</span></p>
+</div>
+<div id="f-ratio" class="section level2 subsection">
+<h2 class="subsection">F-ratio</h2>
+<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\]</span></p>
+<pre class="r"><code>F = ms.m / ms.e; F</code></pre>
+<pre><code>## [1] 7.289449</code></pre>
+</div>
+<div id="reject-h_0" class="section level2">
+<h2>Reject <span class="math inline">\(H_0\)</span>?</h2>
+<pre class="r"><code>if(!&quot;visualize&quot; %in% installed.packages()) { install.packages(&quot;visualize&quot;) }
+library(&quot;visualize&quot;)
+
+visualize.f(F, df.m,df.e,section=&quot;upper&quot;)</code></pre>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="contrasts" class="section level2">
+<h2>Contrasts</h2>
+<p>Planned comparisons</p>
+<ul>
+<li>Exploring differences of theoretical interest</li>
+<li>Higher precision</li>
+<li>Higher power</li>
+</ul>
+</div>
+<div id="contrasts-1" class="section level2">
+<h2>Contrasts</h2>
+<ul>
+<li>Only use chunks once</li>
+<li>Values add up to 0</li>
+</ul>
+<p><img src="../../../topics/ANOVA_one_way_independent/pie2.png" style="height:200px;" > <img src="../../../topics/ANOVA_one_way_independent/pie1.png" style="height:200px;" ></p>
+<hr />
+<p><img src="../../../topics/ANOVA_one_way_independent/pie3.png" style="height:200px;" ></p>
+<ul>
+<li>AB-CDEF → A-B → CD-EF → C-D → E-F</li>
+<li>A-BCDEF → A-B → A-C</li>
+<li>A-BCDEG → BC-DEF → B-C → B-DEF</li>
+<li>ABC-DEF → BC-DEF → B-C</li>
+</ul>
+<hr />
+<p>Assign values that combine to one. Same values define chunk.</p>
+<ul>
+<li>AB-CDEF → A-B → CD-EF → C-D → E-F</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Contrast 1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Contrast 2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Contrast 3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Contrast 4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><img src="f_distribution_ANOVA_one_way_independent_handout_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="post-hoc" class="section level2">
+<h2>Post-hoc</h2>
+<p>Unplanned comparisons</p>
+<ul>
+<li>Exploring all possible differences</li>
+<li>Adjust T value for inflated type 1 error</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>C</th>
+<th>K</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C</td>
+<td></td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>K</td>
+<td>4</td>
+<td></td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td>7</td>
+<td>8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="effect-size-eta2" class="section level2">
+<h2>Effect size <span class="math inline">\(\eta^2\)</span></h2>
+<p>The amount of explained variance <span class="math inline">\(R^2\)</span> as a general effect size measure.</p>
+<p><span class="math display">\[R^2 = \frac{{SS}_{model}}{{SS}_{total}} = \eta^2\]</span> Taking the square root gives us Cohen’s <span class="math inline">\(r\)</span>.</p>
+</div>
+<div id="effect-size-omega2" class="section level2">
+<h2>Effect size <span class="math inline">\(\omega^2\)</span></h2>
+<p>Less biased towards just the sample is omega squared <span class="math inline">\(\omega^2\)</span>.</p>
+<p><span class="math display">\[\omega^2 = \frac{{SS}_{model} - ({df}_{model}){MS}_{error}}{{SS}_{total}+{MS}_{error}}\]</span> But what does it say?</p>
+</div>
+<div id="effect-size-r" class="section level2">
+<h2>Effect size <span class="math inline">\(r\)</span></h2>
+<p>A more interpretable effect size measure is <span class="math inline">\(r_{Contrast}\)</span>. Which gives the effect size for a specific contrast.</p>
+<p><span class="math display">\[r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}\]</span></p>
+<!-- Footer insert below -->
+</div>
+</div>
+<div id="end" class="section level1">
+<h1>End</h1>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

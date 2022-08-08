@@ -1,0 +1,59 @@
+---
+title: "ANOVA"
+subtitle: "Repeated & Mixed"
+author: "Klinkenberg"
+date: "19 oct 2021"
+output: 
+  revealjs::revealjs_presentation:
+    template: http://shklinkenberg.github.io/uva_style/UvAtemplate.html
+    theme: white #simple #black
+    highlight: pygments
+    transition: slide #fade #slide
+    background_transition: slide
+    center: true
+    self_contained: false
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+  html_document:
+    toc            : TRUE
+    self_contained : false
+    toc_float:
+      collapsed    : FALSE
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+## Inhoud
+
+<div style="font-size:60%; text-align:left;" id="toc"></div>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../topics/ANOVA_repeated_one-way/ANOVA_repeated_one-way.rmd"}
+```
+
+```{r child="../../../topics/ANOVA_repeated_factorial/ANOVA_repeated_factorial.Rmd"}
+```
+
+```{r child="../../../topics/ANOVA_mixed/ANOVA_mixed.Rmd"}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../footer.md"}
+```

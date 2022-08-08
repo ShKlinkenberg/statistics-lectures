@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klinkenberg" />
+
+<meta name="date" content="2021-10-21" />
+
+<title>Chi squared test</title>
+
+<script src="chi_squared_test_handout_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="chi_squared_test_handout_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="chi_squared_test_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="chi_squared_test_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="chi_squared_test_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="chi_squared_test_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="chi_squared_test_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="chi_squared_test_handout_files/navigation-1.1/tabsets.js"></script>
+<link href="chi_squared_test_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="chi_squared_test_handout_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="chi_squared_test_handout_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/datatables-binding-0.19/datatables.js"></script>
+<link href="chi_squared_test_handout_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="chi_squared_test_handout_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="chi_squared_test_handout_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="chi_squared_test_handout_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107432294-1');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Chi squared test</h1>
+<h4 class="author">Klinkenberg</h4>
+<h4 class="date">21 oct 2021</h4>
+
+</div>
+
+
+<div id="chi2-test" class="section level1">
+<h1 class="section"><span class="math inline">\(\chi^2\)</span> test</h1>
+<p>Relation between categorical variables</p>
+<div id="chi2-test-1" class="section level2 smaller">
+<h2 class="smaller"><span class="math inline">\(\chi^2\)</span> test</h2>
+<p><small></p>
+<p>A ’‘’chi-squared test’’‘, also written as <span class="math inline">\(\chi^2\)</span> test, is any statistical hypothesis test wherein the sampling distribution of the test statistic is a chi-squared distribution when the null hypothesis is true. Without other qualification, ’chi-squared test’ often is used as short for Pearson’s chi-squared test.</p>
+<p>Chi-squared tests are often constructed from a Lack-of-fit sum of squares#Sums of squares|sum of squared errors, or through the Variance Distribution of the sample variance|sample variance. Test statistics that follow a chi-squared distribution arise from an assumption of independent normally distributed data, which is valid in many cases due to the central limit theorem. A chi-squared test can be used to attempt rejection of the null hypothesis that the data are independent.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Chi-squared_test">wikipedia</a></p>
+<p></small></p>
+</div>
+<div id="chi2-test-statistic" class="section level2 subsection">
+<h2 class="subsection"><span class="math inline">\(\chi^2\)</span> test statistic</h2>
+<p><span class="math display">\[\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}\]</span></p>
+<div id="contingency-table" class="section level3">
+<h3>Contingency table</h3>
+<table style="width:700px;">
+<tr>
+<td>
+<p><span class="math display">\[\text{observed}_{ij} = 
+ \begin{pmatrix}
+  o_{11} &amp; o_{12} &amp; \cdots &amp; o_{1j} \\
+  o_{21} &amp; o_{22} &amp; \cdots &amp; o_{2j} \\
+  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+  o_{i1} &amp; o_{i2} &amp; \cdots &amp; o_{ij} 
+ \end{pmatrix}\]</span></p>
+</td>
+<td>
+<p><span class="math display">\[\text{model}_{ij} = 
+ \begin{pmatrix}
+  m_{11}  &amp; m_{12} &amp; \cdots &amp; m_{1j} \\
+  m_{21}  &amp; m_{22} &amp; \cdots &amp; m_{2j} \\
+  \vdots  &amp; \vdots &amp; \ddots &amp; \vdots \\
+  m_{i1}  &amp; m_{i2} &amp; \cdots &amp; m_{ij} 
+ \end{pmatrix}\]</span></p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="chi2-distribution" class="section level2 smaller subsection">
+<h2 class="smaller subsection"><span class="math inline">\(\chi^2\)</span> distribution</h2>
+<p><small></p>
+<p>The <span class="math inline">\(\chi^2\)</span> distribution describes the test statistic under the assumption of <span class="math inline">\(H_0\)</span>, given the degrees of freedom.</p>
+<p><span class="math inline">\(df = (r - 1) (c - 1)\)</span> where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> the amount of columns.</p>
+<pre class="r"><code>chi = seq(0,8,.01)
+df  = c(1,2,3,6,8,10)
+col = rainbow(n = length(df))
+
+plot( chi, dchisq(chi, df[1]), lwd = 2, col = col[1], type=&quot;l&quot;,
+      main = &quot;Chi squared distributions&quot;,
+      ylab = &quot;Density&quot;,
+      ylim = c(0,1),
+      xlab = &quot;Chi squared&quot;)
+
+lines(chi, dchisq(chi, df[2]), lwd = 2, col = col[2], type=&quot;l&quot;)
+lines(chi, dchisq(chi, df[3]), lwd = 2, col = col[3], type=&quot;l&quot;)
+lines(chi, dchisq(chi, df[4]), lwd = 2, col = col[4], type=&quot;l&quot;)
+lines(chi, dchisq(chi, df[5]), lwd = 2, col = col[5], type=&quot;l&quot;)
+lines(chi, dchisq(chi, df[6]), lwd = 2, col = col[6], type=&quot;l&quot;)
+
+legend(&quot;topright&quot;, legend = paste(&quot;k =&quot;,df), col = col, lty = 1, bty = &quot;n&quot;)</code></pre>
+<hr />
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p></small></p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<iframe src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829" style="height: 450px;">
+</iframe>
+<p><a href="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829">Simon</a></p>
+</div>
+<div id="experiment" class="section level2 flexbox vcenter">
+<h2 class="flexbox vcenter">Experiment</h2>
+<p><a href="https://www.the-qrcode-generator.com/"><img src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=http%3A%2F%2Fgoo.gl%2Ffaj76B" alt="QR Code" /></a></p>
+<p><a href="http://goo.gl/faj76B" class="uri">http://goo.gl/faj76B</a></p>
+</div>
+<div id="data" class="section level2 smaller">
+<h2 class="smaller">Data</h2>
+<p><small></p>
+<div id="htmlwidget-6269cf6c5c11aa780d53" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6269cf6c5c11aa780d53">{"x":{"filter":"none","vertical":false,"data":[["215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","539","540","541","542","543","544","545","546","547","548","549","550","551","552","553","554","555","556","557","558","559","560","561","562","563","564","565","566","567","568","569","570","571","572","573","574","575","576","577","578","579","580","581","582","583","584","585","586"],["05/10/2017 16:56:01","12/10/2017 09:50:53","12/10/2017 09:50:55","12/10/2017 09:50:57","12/10/2017 09:51:06","12/10/2017 09:51:10","12/10/2017 09:51:11","12/10/2017 09:51:12","12/10/2017 09:51:13","12/10/2017 09:51:15","12/10/2017 09:51:18","12/10/2017 09:51:19","12/10/2017 09:51:19","12/10/2017 09:51:20","12/10/2017 09:51:22","12/10/2017 09:51:22","12/10/2017 09:51:23","12/10/2017 09:51:24","12/10/2017 09:51:25","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:27","12/10/2017 09:51:28","12/10/2017 09:51:28","12/10/2017 09:51:30","12/10/2017 09:51:30","12/10/2017 09:51:33","12/10/2017 09:51:34","12/10/2017 09:51:34","12/10/2017 09:51:35","12/10/2017 09:51:40","12/10/2017 09:51:42","12/10/2017 09:51:42","12/10/2017 09:51:43","12/10/2017 09:51:44","12/10/2017 09:51:44","12/10/2017 09:51:46","12/10/2017 09:51:47","12/10/2017 09:51:47","12/10/2017 09:51:49","12/10/2017 09:51:49","12/10/2017 09:51:50","12/10/2017 09:51:52","12/10/2017 09:51:54","12/10/2017 09:51:55","12/10/2017 09:51:57","12/10/2017 09:52:00","12/10/2017 09:52:00","12/10/2017 09:52:04","12/10/2017 09:52:06","12/10/2017 09:52:07","12/10/2017 09:52:08","12/10/2017 09:52:10","12/10/2017 09:52:24","12/10/2017 09:52:35","21/10/2021 09:37:56","21/10/2021 09:37:57","21/10/2021 09:37:59","21/10/2021 09:38:12","21/10/2021 09:38:22","21/10/2021 09:38:49","21/10/2021 09:38:57","21/10/2021 09:39:00","21/10/2021 09:39:21","21/10/2021 09:39:22","21/10/2021 09:40:02","21/10/2021 09:40:10","21/10/2021 09:41:16","21/10/2021 09:41:23","21/10/2021 09:41:25","21/10/2021 09:41:27","21/10/2021 09:41:32","21/10/2021 09:41:33","21/10/2021 09:41:33","21/10/2021 09:41:34","21/10/2021 09:41:36","21/10/2021 09:41:39","21/10/2021 09:41:50","21/10/2021 09:41:56","21/10/2021 09:42:00","21/10/2021 09:42:00","21/10/2021 09:42:06","21/10/2021 09:42:09","21/10/2021 09:42:10","21/10/2021 09:42:11","21/10/2021 09:42:13","21/10/2021 09:42:15","21/10/2021 09:42:16","21/10/2021 09:42:18","21/10/2021 09:42:19","21/10/2021 09:42:23","21/10/2021 09:42:24","21/10/2021 09:42:29","21/10/2021 09:42:29","21/10/2021 09:42:34","21/10/2021 09:42:40","21/10/2021 09:42:41","21/10/2021 09:42:41","21/10/2021 09:42:46","21/10/2021 09:43:01","21/10/2021 09:43:05","21/10/2021 09:43:16","21/10/2021 09:43:20"],["Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Nee","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee"],[3,0,1,2,0,0,50,0,7,5,0,0,17,0,10,38,0,0,5,5,30,0,20,0,1,2,0,0,8,150,3,2,0,1,5,4,3,0,90,1,0,2,15,25,0,2,1,2,90,200,1,8,0,0,60,5,0,2,1,0,20,10,0,1,0,5,4,0,0,0,2,4,1,5,1,1,0,28,20,3,30,2,14,10,0,0,2,30,10,3,14,4,3,60,8,0,3,10,5,0,50,0,10,0],[3,1,4,4,1,1,4,4,3,5,3,3,3,2,3,2,4,3,5,4,3,3,3,4,4,4,2,4,5,4,4,3,5,3,4,4,3,4,4,3,4,3,3,5,4,4,4,4,4,5,3,3,4,3,3,3,1,4,4,4,4,3,3,3,2,2,2,3,3,4,2,4,4,2,1,5,4,3,3,3,4,3,2,4,1,3,3,3,3,4,1,4,2,4,3,4,4,4,5,3,3,2,2,3],["Man","Man","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw"],[40,23,27,21,19,20,20,21,20,21,20,19,19,19,26,19,23,21,22,20,19,19,21,20,20,19,21,22,21,20,20,10,23,18,19,25,20,20,25,20,26,20,19,20,20,20,19,20,23,26,19,19,19,31,21,19,19,20,19,19,20,20,19,20,18,20,21,20,21,22,20,22,57,22,22,23,20,22,20,21,21,22,19,22,22,20,24,30,20,22,19,22,20,22,22,20,24,24,20,20,22,20,21,20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Timestamp<\/th>\n      <th>fluiten<\/th>\n      <th>frequentie<\/th>\n      <th>assertief<\/th>\n      <th>sekse<\/th>\n      <th>leeftijd<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p></small></p>
+</div>
+<div id="calculating-chi2" class="section level2 subsection">
+<h2 class="subsection">Calculating <span class="math inline">\(\chi^2\)</span></h2>
+<pre class="r"><code>observed &lt;- table(results[,c(&quot;fluiten&quot;,&quot;sekse&quot;)])
+observed</code></pre>
+<pre><code>##        sekse
+## fluiten Man Vrouw
+##     Ja   27    55
+##     Nee   2    20</code></pre>
+<p><span class="math display">\[\text{observed}_{ij} = 
+ \begin{pmatrix}
+  27 &amp; 55 \\
+  2 &amp; 20 \\
+ \end{pmatrix}\]</span></p>
+</div>
+<div id="calculating-the-model" class="section level2 subsection">
+<h2 class="subsection">Calculating the model</h2>
+<p><span class="math display">\[\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\]</span></p>
+<pre class="r"><code>n   = sum(observed)
+ct1 = colSums(observed)[1]
+ct2 = colSums(observed)[2]
+rt1 = rowSums(observed)[1]
+rt2 = rowSums(observed)[2]
+
+addmargins(observed)</code></pre>
+<pre><code>##        sekse
+## fluiten Man Vrouw Sum
+##     Ja   27    55  82
+##     Nee   2    20  22
+##     Sum  29    75 104</code></pre>
+</div>
+<div id="calculating-the-model-1" class="section level2 smaller">
+<h2 class="smaller">Calculating the model</h2>
+<p><small></p>
+<p><span class="math display">\[\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\]</span></p>
+<pre class="r"><code>model = matrix( c((ct1*rt1)/n,
+                  (ct2*rt1)/n,
+                  (ct1*rt2)/n,
+                  (ct2*rt2)/n),2,2,byrow=T
+          )
+model</code></pre>
+<pre><code>##           [,1]     [,2]
+## [1,] 22.865385 59.13462
+## [2,]  6.134615 15.86538</code></pre>
+<p><span class="math display">\[\text{model}_{ij} = 
+ \begin{pmatrix}
+  22.8653846 &amp; 59.1346154 \\
+  6.1346154 &amp; 15.8653846 \\
+ \end{pmatrix}\]</span></p>
+<p></small></p>
+</div>
+<div id="observed---model" class="section level2 subsection">
+<h2 class="subsection">observed - model</h2>
+<pre class="r"><code>observed - model</code></pre>
+<pre><code>##        sekse
+## fluiten       Man     Vrouw
+##     Ja   4.134615 -4.134615
+##     Nee -4.134615  4.134615</code></pre>
+</div>
+<div id="calculating-chi2-1" class="section level2">
+<h2>Calculating <span class="math inline">\(\chi^2\)</span></h2>
+<p><span class="math display">\[\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}\]</span></p>
+<pre class="r"><code># Calculate chi squared
+chi.squared &lt;- sum((observed - model)^2/model)
+chi.squared</code></pre>
+<pre><code>## [1] 4.900884</code></pre>
+</div>
+<div id="testing-for-significance" class="section level2 subsection">
+<h2 class="subsection">Testing for significance</h2>
+<p><span class="math inline">\(df = (r - 1) (c - 1)\)</span></p>
+<pre class="r"><code>df = (2 - 1) * ( 2 - 1)
+
+library(&#39;visualize&#39;)
+visualize.chisq(chi.squared,df,section=&#39;upper&#39;)</code></pre>
+<hr />
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="fishers-exact-test" class="section level2 subsection">
+<h2 class="subsection">Fisher’s exact test</h2>
+<p>Calculates axact <span class="math inline">\(\chi^2\)</span> for small samples.</p>
+<ul>
+<li>Cell size &lt; 5</li>
+</ul>
+</div>
+<div id="yatess-correction" class="section level2 subsection">
+<h2 class="subsection">Yates’s correction</h2>
+<p>For 2 x 2 contingency tables.</p>
+<p><span class="math display">\[\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}\]</span></p>
+<pre class="r"><code># Calculate Yates&#39;s corrected chi squared
+chi.squared.yates &lt;- sum((abs(observed - model) - .5)^2/model)
+chi.squared.yates</code></pre>
+<pre><code>## [1] 3.787225</code></pre>
+<pre class="r"><code>visualize.chisq(chi.squared.yates,df,section=&#39;upper&#39;)</code></pre>
+<hr />
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="likelihood-ratio" class="section level2 subsection">
+<h2 class="subsection">Likelihood ratio</h2>
+<p>Alternatieve to Pearson’s <span class="math inline">\(\chi^2\)</span>.</p>
+<p><span class="math display">\[L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)\]</span></p>
+<pre class="r"><code># ln is log
+lx2 = 2 * sum(observed * log(observed / model) ); lx2</code></pre>
+<pre><code>## [1] 5.782828</code></pre>
+<pre class="r"><code>visualize.chisq(lx2,df,section=&#39;upper&#39;)</code></pre>
+<hr />
+<p><img src="chi_squared_test_handout_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="standardized-residuals" class="section level2 subsection">
+<h2 class="subsection">Standardized residuals</h2>
+<p><span class="math display">\[\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }\]</span></p>
+<pre class="r"><code>(observed - model) / sqrt(model)</code></pre>
+<pre><code>##        sekse
+## fluiten       Man     Vrouw
+##     Ja   0.864661 -0.537668
+##     Nee -1.669327  1.038030</code></pre>
+</div>
+<div id="effect-size" class="section level2 subsection">
+<h2 class="subsection">Effect size</h2>
+<p>Odds ratio based on the observed values</p>
+<pre class="r"><code>odds &lt;- round( observed, 2); odds</code></pre>
+<pre><code>##        sekse
+## fluiten Man Vrouw
+##     Ja   27    55
+##     Nee   2    20</code></pre>
+<p><span class="math display">\[\begin{pmatrix}
+  a &amp; b \\
+  c &amp; d \\
+ \end{pmatrix}\]</span></p>
+<p><span class="math display">\[OR = \frac{a \times d}{b \times c} = \frac{27 \times 20}{55 \times 2} = 4.9090909\]</span></p>
+</div>
+<div id="odds" class="section level2">
+<h2>Odds</h2>
+<pre><code>##        sekse
+## fluiten Man Vrouw
+##     Ja   27    55
+##     Nee   2    20</code></pre>
+<p>The man and women ratio of people that can whisle and the ratio of those who can’t whistle</p>
+<ul>
+<li>Can wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 27 }{ 55 }\)</span> = 0.4909091</li>
+<li>Can’t wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 2 }{ 20 }\)</span> = 0.1</li>
+</ul>
+</div>
+<div id="odds-ratio" class="section level2">
+<h2>Odds ratio</h2>
+<p>Is the ratio of these odds.</p>
+<p><span class="math display">\[OR = \frac{\text{wistle}}{\text{can&#39;t wistle}} = \frac{0.4909091}{0.1} = 4.9090909\]</span></p>
+<!-- Footer insert below -->
+</div>
+</div>
+<div id="end" class="section level1">
+<h1>End</h1>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></p>
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0" /></a></p>
+<p></small></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Klinkenberg" />
+  <meta name="dcterms.date" content="2021-09-21" />
+  <title>T-distribution and the  One-sample t-test</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="t_distribution_and_one_sample_t_test_reveal_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="t_distribution_and_one_sample_t_test_reveal_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css and uva template specific styles -->
+  <style type="text/css">
+	  
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+	  
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+    
+    html.title div.slide-background.present {
+      background-position: center 200px;
+    }
+    
+    #refs {
+      font-size: 50%;
+      text-align: left;
+    }
+    
+    .TitleBox {
+      background-color: white;
+      width: 500px;
+      text-align: left;
+      position: relative;
+      top: 400px;
+    }
+
+    html.title .title, html.title .subtitle, html.title .author, html.title .date  {
+      font-size: .5em;
+      padding: 5px 10px 5px 10px;
+      margin: 0px;
+    }
+
+    html.title .author, html.title .date  {
+      background-color: lightgrey;
+      }
+
+    html.title .title {
+      height: 100px;
+      vertical-align: text-top;
+      font-size: .8em;
+    }
+    
+    body:after {
+      content: url(https://shklinkenberg.github.io/uva_style/images/uvalogo_regular_p_en.png);
+      position: fixed;
+      top: 1.5em;
+      left: 1.5em;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: 'Source Sans Pro', sans-serif; !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: 'Source Sans Pro', sans-serif; !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+
+      gtag('config', 'UA-107432294-1');
+    </script>
+    <script src="t_distribution_and_one_sample_t_test_reveal_files/header-attrs-2.10/header-attrs.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section data-state="title" data-background-image="https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg"><div class="TitleBox">
+
+    <h1 class="title">T-distribution and the <br>One-sample t-test</h1>
+
+    <h2 class="author">Klinkenberg</h2>
+    <h3 class="date">21 sep 2021</h3>
+</div></section>
+
+<section>
+<section id="t-distribution" class="title-slide slide level1 section">
+<h1 class="section">T-distribution</h1>
+
+</section>
+<section id="gosset" class="slide level2 smaller">
+<h2 class="smaller">Gosset</h2>
+<p><small> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg" style="float: left; width: 150px; margin: 0 20px 0 0;"></p>
+<p>In probability and statistics, Student’s t-distribution (or simply the t-distribution) is any member of a family of continuous probability distributions that arises when estimating the mean of a normally distributed population in situations where the sample size is small and population standard deviation is unknown.</p>
+<p>In the English-language literature it takes its name from William Sealy Gosset’s 1908 paper in Biometrika under the pseudonym “Student”. Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples, for example the chemical properties of barley where sample sizes might be as low as 3.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">Wikipedia</a></p>
+<p><img style="float: right; mix-blend-mode: multiply; width:300px;" src="https://i.vimeocdn.com/video/432998159_1280x768.jpg"></p>
+<p></small></p>
+</section>
+<section id="population-distribution" class="slide level2 smaller subsection">
+<h2 class="smaller subsection">Population distribution</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n  <span class="ot">=</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mu    <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="dv">15</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>IQ <span class="ot">=</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(IQ, <span class="fu">dnorm</span>(IQ, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Population Distribution&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>))  </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">&quot;Sample Distribution&quot;</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">&quot;beige&quot;</span>, <span class="at">cex.main =</span> .<span class="dv">75</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
+</section>
+<section id="t-statistic" class="slide level2 subsection">
+<h2 class="subsection">T-statistic</h2>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
+<p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size, expressed as the degrees of freedom <span class="math inline">\(df = n - 1\)</span></p>
+</section>
+<section id="a-sample" class="slide level2 smaller">
+<h2 class="smaller">A sample</h2>
+<p>Let’s take one sample from our normal populatiion and calculate the t-value.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code></pre></div>
+<pre><code>##  [1] 113.55661 110.32869 104.78017 125.79750  80.46797  90.16822 107.79171  95.05531 104.31656 124.73346
+## [11] 118.74236  84.96141 105.31922  93.20169  90.22726 110.46780 109.81236 116.99513 113.53075 107.88133
+## [21] 111.07202  71.58929  98.24701 138.05566 107.85918 110.43200 104.55206  87.53459 104.40290  91.13490
+## [31] 103.37275  86.89813  88.01206  77.05868  78.81832  60.93756 103.14890  86.49172 110.67063  91.74880
+## [41]  83.59801 126.98396  70.56437 107.68650  87.97323  91.65461  71.18692 107.94378  74.86989 110.00004
+## [51] 104.90144  99.00946 120.91735 113.33111  95.10936 107.44742</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">&quot;Sample distribution&quot;</span>, <span class="at">col =</span> <span class="st">&quot;beige&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">80</span>, <span class="dv">10</span>, <span class="fu">round</span>(<span class="fu">mean</span>(x),<span class="dv">2</span>))</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
+</section>
+<section id="t-value" class="slide level2">
+<h2>t-value</h2>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t</span></code></pre></div>
+<pre><code>## [1] -0.05536624</code></pre>
+</section>
+<section id="more-samples" class="slide level2">
+<h2>More samples</h2>
+<p>let’s take more samples.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n.samples     <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mean.x.values <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>se.x.values   <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  mean.x.values[i] <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  se.x.values[i]   <span class="ot">=</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="mean-and-se-for-all-samples" class="slide level2">
+<h2>Mean and SE for all samples</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code></pre></div>
+<pre><code>##      mean.x.values se.x.values
+## [1,]     101.10366    2.043019
+## [2,]     101.00109    2.230810
+## [3,]     104.73155    1.780262
+## [4,]      99.43963    2.082944
+## [5,]     101.90236    1.814426
+## [6,]      96.54969    2.067791</code></pre>
+</section>
+<section id="sampling-distribution" class="slide level2">
+<h2>Sampling distribution</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mean.x.values, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">&quot;beige&quot;</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Sampling distribution&quot;</span>, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;all sample means&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
+</section>
+<section id="calculate-t-values" class="slide level2">
+<h2>Calculate t-values</h2>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}\]</span></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>t.values <span class="ot">=</span> (mean.x.values <span class="sc">-</span> mu) <span class="sc">/</span> se.x.values</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code></pre></div>
+<pre><code>##         mean.x.values  mu se.x.values   t.values
+##  [995,]      99.43248 100    2.136774 -0.2655962
+##  [996,]      98.74613 100    1.651886 -0.7590536
+##  [997,]     101.38054 100    1.945887  0.7094646
+##  [998,]     102.54474 100    2.094830  1.2147734
+##  [999,]      96.64946 100    1.857363 -1.8039250
+## [1000,]     100.22690 100    2.033131  0.1116035</code></pre>
+</section>
+<section id="sampled-t-values" class="slide level2">
+<h2>Sampled t-values</h2>
+<p>What is the distribution of all these t-values?</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(t.values, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> F, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Sampled T-values&quot;</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;T-values&quot;</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">&quot;beige&quot;</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">4</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>T <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">01</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(T, <span class="fu">dt</span>(T,df), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">legend =</span> <span class="st">&quot;T-distribution&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" /></p>
+</section>
+<section id="t-distribution-1" class="slide level2 smaller">
+<h2 class="smaller">T-distribution</h2>
+<p><small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean (<span class="math inline">\(\mu\)</span>), given a certain sample size (<span class="math inline">\(df = n - 1\)</span>).</p>
+<p>The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough.</p>
+<p>The t-distribution is defined by:</p>
+<p><span class="math display">\[\textstyle\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\!\]</span></p>
+<p>where <span class="math inline">\(\nu\)</span> is the number of degrees of freedom and <span class="math inline">\(\Gamma\)</span> is the gamma function.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">wikipedia</a></p>
+<p></small></p>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" /></p>
+</section>
+<section id="one-or-two-sided" class="slide level2 subsection">
+<h2 class="subsection">One or two sided</h2>
+<p>Two sided</p>
+<ul>
+<li><span class="math inline">\(H_A: \bar{x} \neq \mu\)</span></li>
+</ul>
+<p>One sided</p>
+<ul>
+<li><span class="math inline">\(H_A: \bar{x} &gt; \mu\)</span></li>
+<li><span class="math inline">\(H_A: \bar{x} &lt; \mu\)</span></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" /></p>
+</section>
+<section id="effect-size" class="slide level2 subsection">
+<h2 class="subsection">Effect-size</h2>
+<p>The effect-size is the standardised difference between the mean and the expected <span class="math inline">\(\mu\)</span>. In the t-test effect-size is expressed as <span class="math inline">\(r\)</span>.</p>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">sqrt</span>(t<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>r</span></code></pre></div>
+<pre><code>## [1] 0.2603778</code></pre>
+</section>
+<section id="effect-size-distribution" class="slide level2 smaller">
+<h2 class="smaller">Effect-size distribution</h2>
+<p><small> We can also calculate effect-sizes for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">sqrt</span>(t.values<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t.values<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code></pre></div>
+<pre><code>##         mean.x.values  mu se.x.values   t.values          r
+##  [995,]      99.43248 100    2.136774 -0.2655962 0.03579004
+##  [996,]      98.74613 100    1.651886 -0.7590536 0.10181885
+##  [997,]     101.38054 100    1.945887  0.7094646 0.09522943
+##  [998,]     102.54474 100    2.094830  1.2147734 0.16164585
+##  [999,]      96.64946 100    1.857363 -1.8039250 0.23634971
+## [1000,]     100.22690 100    2.033131  0.1116035 0.01504691</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(r, <span class="at">main =</span> <span class="st">&quot;effect-size distribution&quot;</span>, <span class="at">col =</span> <span class="st">&quot;beige&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-15-1.png" width="768" /></p>
+<p>Cohen (1988)</p>
+<ul>
+<li>Small: 0 &lt;= .1</li>
+<li>Medium: .1 &lt;= .3</li>
+<li>Large: .3 &lt;= .5</li>
+</ul>
+<p></small></p>
+</section>
+<section id="power" class="slide level2 subsection">
+<h2 class="subsection">Power</h2>
+<ul>
+<li>Strive for 80%</li>
+<li>Based on know effect size</li>
+<li>Calculate number of subjects needed</li>
+<li>Use <a href="http://www.gpower.hhu.de">G*Power</a> to calculate</li>
+</ul>
+<p><img data-src="https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png" /></p>
+</section>
+<section id="alpha-power" class="slide level2 smaller">
+<h2 class="smaller">Alpha Power</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>T <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">6</span>,.<span class="dv">01</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">45</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set plot</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Density&quot;</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;T&quot;</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">5</span>),</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">6</span>),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;T-Distributions under H0 and HA&quot;</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>critical_t <span class="ot">=</span> <span class="fu">qt</span>(.<span class="dv">05</span>,N<span class="dv">-1</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Alpha</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>range_x <span class="ot">=</span> <span class="fu">seq</span>(critical_t,<span class="dv">6</span>,.<span class="dv">01</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(range_x,<span class="fu">rev</span>(range_x)),</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(range_x<span class="sc">*</span><span class="dv">0</span>,<span class="fu">rev</span>(<span class="fu">dt</span>(range_x,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>))),</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">col     =</span> <span class="st">&quot;grey&quot;</span>,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">density =</span> <span class="dv">10</span>,</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">angle   =</span> <span class="dv">90</span>,</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">lwd     =</span> <span class="dv">2</span>)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Power</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>range_x <span class="ot">=</span> <span class="fu">seq</span>(critical_t,<span class="dv">6</span>,.<span class="dv">01</span>)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(range_x,<span class="fu">rev</span>(range_x)),</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(range_x<span class="sc">*</span><span class="dv">0</span>,<span class="fu">rev</span>(<span class="fu">dt</span>(range_x,N<span class="dv">-1</span>,<span class="at">ncp=</span>E))),</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">col     =</span> <span class="st">&quot;grey&quot;</span>,</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">density =</span> <span class="dv">10</span>,</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">angle   =</span> <span class="dv">45</span>,</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">lwd     =</span> <span class="dv">2</span>)</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(T,<span class="fu">dt</span>(T,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>),<span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># H0 line</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(T,<span class="fu">dt</span>(T,N<span class="dv">-1</span>,<span class="at">ncp=</span>E),<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># HA line</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Critical value</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">rep</span>(critical_t,<span class="dv">2</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dt</span>(critical_t,N<span class="dv">-1</span>,<span class="at">ncp=</span>E)),<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(critical_t,<span class="fu">dt</span>(critical_t,N<span class="dv">-1</span>,<span class="at">ncp=</span>E),<span class="st">&quot;critical T-value&quot;</span>,<span class="at">pos=</span><span class="dv">2</span>, <span class="at">srt =</span> <span class="dv">90</span>)</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="co"># H0 and HA</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>),<span class="fu">expression</span>(H[<span class="dv">0</span>]),<span class="at">pos=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(E,<span class="fu">dt</span>(E,N<span class="dv">-1</span>,<span class="at">ncp=</span>E),<span class="fu">expression</span>(H[A]),<span class="at">pos=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Mu H0 line</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>)), <span class="at">col=</span><span class="st">&quot;red&quot;</span>,  <span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>)<span class="sc">/</span><span class="dv">2</span>,<span class="fu">expression</span>(mu),<span class="at">pos=</span><span class="dv">4</span>,<span class="at">cex=</span><span class="fl">1.2</span>)</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Mu HA line</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(E,E),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dt</span>(E,N<span class="dv">-1</span>,<span class="at">ncp=</span>E)),<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(E,<span class="fu">dt</span>(<span class="dv">0</span>,N<span class="dv">-1</span>,<span class="at">ncp=</span><span class="dv">0</span>)<span class="sc">/</span><span class="dv">2</span>,<span class="fu">expression</span>(<span class="fu">paste</span>(mu)),<span class="at">pos=</span><span class="dv">4</span>,<span class="at">cex=</span><span class="fl">1.2</span>)</span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="co"># t-value</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>( <span class="fu">c</span>(critical_t<span class="fl">+.01</span>,<span class="dv">6</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">col=</span><span class="st">&quot;green&quot;</span>,<span class="at">lwd=</span><span class="dv">4</span>)</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="fu">expression</span>(alpha),<span class="st">&#39;POWER&#39;</span>),<span class="at">density=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>),<span class="at">angle=</span><span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">45</span>))</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-16-1.png" width="768" /></p>
+</section>
+<section class="slide level2">
+
+<iframe src="http://rpsychologist.com/d3/NHST/#viz">
+</iframe>
+<p><a href="http://rpsychologist.com/d3/NHST/#viz">R-Psychologist</a></p>
+</section></section>
+<section>
+<section id="one-sample-t-test" class="title-slide slide level1 section">
+<h1 class="section">One-sample t-test</h1>
+
+</section>
+<section id="iq-next-to-you" class="slide level2 flexbox vcenter">
+<h2 class="flexbox vcenter">IQ next to you</h2>
+<p><img data-src="../../../topics/t-test_one-sample/QR_iq.png" alt="http://goo.gl/T6Lo2s" /> <br> <a href="http://goo.gl/T6Lo2s" class="uri">http://goo.gl/T6Lo2s</a></p>
+</section>
+<section id="models" class="slide level2 flexbox vcenter">
+<h2 class="flexbox vcenter">Models</h2>
+<div style="font-size:200%; transform: rotate(-11deg);">
+<p><span class="math display">\[\text{outcome} = \text{model} + \text{error}\]</span></p>
+</div>
+</section>
+<section id="compare-sample-mean" class="slide level2 smaller">
+<h2 class="smaller">Compare sample mean</h2>
+<p><small> We use the one-sample t-test to compare the sample mean <span class="math inline">\(\bar{x}\)</span> to the population mean <span class="math inline">\(\mu\)</span>.</p>
+<p>Let’s take a different sample and calculate the mean of this sample. </small></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">=</span> <span class="dv">120</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">=</span> <span class="fu">length</span>(IQ.next.to.you)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>x      <span class="ot">=</span> IQ.next.to.you</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>mean_x <span class="ot">=</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> T)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sd_x   <span class="ot">=</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> T)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(n, mean_x, sd_x)</span></code></pre></div>
+<pre><code>##       n   mean_x     sd_x
+## [1,] 77 119.9091 12.71673</code></pre>
+<p><small> Does this mean, differ significantly from the population mean <span class="math inline">\(\mu = 120\)</span>? </small></p>
+</section>
+<section id="hypothesis" class="slide level2 subsection">
+<h2 class="subsection">Hypothesis</h2>
+<h3 id="null-hypothesis">Null hypothesis</h3>
+<ul>
+<li><span class="math inline">\(H_0: \bar{x} = \mu\)</span></li>
+</ul>
+<h3 id="alternative-hypothesis">Alternative hypothesis</h3>
+<ul>
+<li><span class="math inline">\(H_A: \bar{x} \neq \mu\)</span></li>
+<li><span class="math inline">\(H_A: \bar{x} &gt; \mu\)</span></li>
+<li><span class="math inline">\(H_A: \bar{x} &lt; \mu\)</span></li>
+</ul>
+</section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<ul>
+<li>Normal samples distribution</li>
+<li>Measurement level
+<ul>
+<li>Interval</li>
+<li>Ratio</li>
+</ul></li>
+</ul>
+</section>
+<section id="t-statistic-1" class="slide level2">
+<h2>T-statistic</h2>
+<p><span class="math display">\[T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{119.91 - 120 }{12.72 / \sqrt{77}}\]</span></p>
+<p>So the t-statistic represents the deviation of the sample mean <span class="math inline">\(\bar{x}\)</span> from the population mean <span class="math inline">\(\mu\)</span>, considering the sample size.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> (mean_x <span class="sc">-</span> mu) <span class="sc">/</span> (sd_x <span class="sc">/</span> <span class="fu">sqrt</span>(n)); t</span></code></pre></div>
+<pre><code>## [1] -0.06273026</code></pre>
+</section>
+<section id="type-1-error" class="slide level2 subsection">
+<h2 class="subsection">Type 1 error</h2>
+<p>To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.</p>
+<ul>
+<li>Type I error / <span class="math inline">\(\alpha\)</span> = .05</li>
+</ul>
+</section>
+<section id="p-value-one-sided" class="slide level2 subsection">
+<h2 class="subsection"><em>P</em>-value one sided</h2>
+<p>Finally we have to calculate our <em>p</em>-value for which we need the degrees of freedom <span class="math inline">\(df = n - 1\)</span> to determine the shape of the t-distribution.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> n <span class="sc">-</span> <span class="dv">1</span>; df</span></code></pre></div>
+<pre><code>## [1] 76</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">&quot;visualize&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">&quot;visualize&quot;</span>) }</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;visualize&quot;</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(t, df, <span class="at">section =</span> <span class="st">&quot;upper&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
+</section>
+<section id="p-value-two-sided" class="slide level2 subsection">
+<h2 class="subsection"><em>P</em>-value two sided</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t, t), df, <span class="at">section =</span> <span class="st">&quot;tails&quot;</span>)</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="t_distribution_and_one_sample_t_test_reveal_files/figure-revealjs/unnamed-chunk-22-1.png" width="768" /></p>
+</section>
+<section id="effect-size-1" class="slide level2">
+<h2>Effect-size</h2>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">sqrt</span>(t<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>r</span></code></pre></div>
+<pre><code>## [1] 0.007195468</code></pre>
+<!-- Footer insert below -->
+</section></section>
+<section>
+<section id="end" class="title-slide slide level1">
+<h1>End</h1>
+
+</section>
+<section id="contact" class="slide level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="t_distribution_and_one_sample_t_test_reveal_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="t_distribution_and_one_sample_t_test_reveal_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+<script>
+Reveal.configure({
+  keyboard: {
+     39: 'next', // Right Arrow
+     37: 'prev'  // Left Arrow
+  }
+});
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,52 @@
+---
+title: "Bayes"
+subtitle: "Parameter estimation & hypothesis testing"
+author: "Klinkenberg"
+date: "18 oct 2021"
+output: 
+  revealjs::revealjs_presentation:
+    template: http://shklinkenberg.github.io/uva_style/UvAtemplate.html
+    theme: white #simple #black
+    highlight: pygments
+    transition: slide #fade #slide
+    background_transition: slide
+    center: true
+    self_contained: false
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+  html_document:
+    toc            : TRUE
+    self_contained : false
+    toc_float:
+      collapsed    : FALSE
+      smooth_scroll: TRUE
+    includes       :
+      in_header    : "../../../GA_Script/GA_Script.html"
+---
+
+```{r setup, include=FALSE, eval=T}
+# Display plots on next slide in IOslides
+# smaller in the above YAML must be off to make this work.
+
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+```{r child="../../../topics/bayes/bayes_theorem.Rmd"}
+```
+
+```{r child="../../../topics/bayes/bayesian_parameter_estimation.Rmd"}
+```
+
+```{r child="../../../topics/bayes/bayesian_hypothesis_testing.Rmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../footer.md"}
+```

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Klinkenberg" />
+
+<meta name="date" content="2021-09-09" />
+
+<title>Statistical Reasoning</title>
+
+<script src="reasoning_empirical_cycle_nhst_handout_files/header-attrs-2.10/header-attrs.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="reasoning_empirical_cycle_nhst_handout_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="reasoning_empirical_cycle_nhst_handout_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="reasoning_empirical_cycle_nhst_handout_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="reasoning_empirical_cycle_nhst_handout_files/navigation-1.1/tabsets.js"></script>
+<link href="reasoning_empirical_cycle_nhst_handout_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="reasoning_empirical_cycle_nhst_handout_files/highlightjs-9.12.0/highlight.js"></script>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107432294-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107432294-1');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Statistical Reasoning</h1>
+<h3 class="subtitle">Null Hypothesis Testisn</h3>
+<h4 class="author">Klinkenberg</h4>
+<h4 class="date">09 sep 2021</h4>
+
+</div>
+
+
+<div id="learning" class="section level2">
+<h2>Learning</h2>
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<!-- Add the required topics below -->
+</div>
+<div id="reasoning-in-statistics" class="section level1">
+<h1 class="section">Reasoning in statistics</h1>
+<p>Source: <a href="https://apps3.cehd.umn.edu/artist/glossary.html">ARTIST</a></p>
+<div id="statistical-literacy" class="section level2 subsection">
+<h2 class="subsection">Statistical Literacy</h2>
+<ul>
+<li>Knowledge (Basic understanding of concepts)
+<ul>
+<li>Identify</li>
+<li>Describe</li>
+</ul></li>
+<li>Skils (Ability to work with statistical tools)
+<ul>
+<li>Translate</li>
+<li>Interpret</li>
+<li>Read</li>
+<li>Compute</li>
+</ul></li>
+</ul>
+</div>
+<div id="statistical-reasoning" class="section level2 subsection">
+<h2 class="subsection">Statistical Reasoning</h2>
+<ul>
+<li>Understanding
+<ul>
+<li>Explain why</li>
+<li>Explain how</li>
+</ul></li>
+</ul>
+</div>
+<div id="statistical-thinking" class="section level2 subsection">
+<h2 class="subsection">Statistical thinking</h2>
+<ul>
+<li>Apply
+<ul>
+<li>What methods to use in a specific situation</li>
+</ul></li>
+<li>Critique
+<ul>
+<li>Comment and reflect on work of others</li>
+</ul></li>
+<li>Evaluate
+<ul>
+<li>Assigning value to work</li>
+</ul></li>
+<li>Generalize
+<ul>
+<li>What does variation mean in the large scheme of life</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="empirical-cycle" class="section level1">
+<h1 class="section">Empirical Cycle</h1>
+<div id="by-adriaan-de-groot" class="section level2">
+<h2>By Adriaan de Groot</h2>
+<iframe style="height:450px; width:100%;" id="iframe_container" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen src="https://prezi.com/embed/bpjkj8bz_kja/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI5a2svK0VieFZlK1cxOTFvS1ZwWVVBNFZRPT0&amp;landing_sign=T515ue0i-w4c7Sok6m5LPjV9-MucmIMETU_ItCafgr8">
+</iframe>
+</div>
+<div id="the-components" class="section level2 smaller">
+<h2 class="smaller">The components</h2>
+<p><small></p>
+<ul>
+<li>Observation
+<ul>
+<li>Idea for hypothesis</li>
+</ul></li>
+<li>Induction
+<ul>
+<li>General rule</li>
+<li>Hypothesis</li>
+</ul></li>
+<li>Deduction
+<ul>
+<li>Expectation / Prediction</li>
+<li>Operationalization</li>
+</ul></li>
+<li>Testing
+<ul>
+<li>Test hypothesis</li>
+<li>Compare data to prediction</li>
+</ul></li>
+<li>Evaluation
+<ul>
+<li>Interpret results in terms of hypothesis</li>
+</ul></li>
+</ul>
+<p></small></p>
+</div>
+<div id="explained-by-annemarie-zandscholten" class="section level2">
+<h2>Explained by Annemarie Zandscholten</h2>
+<iframe style="height:450px; width:100%;" src="https://www.youtube.com/embed/D8N1I-FmMvU?rel=0&amp;controls=1" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+</div>
+<div id="experiment" class="section level1">
+<h1 class="section">Experiment</h1>
+<p><a href="https://webcolleges.uva.nl/Mediasite/Play/ed1e63e0cd204dcf9d2a144603ce342b1d?playFrom=3708000">Video registration</a></p>
+<div id="heads" class="section level2">
+<h2>Heads</h2>
+<div style="text-align:center;">
+<img style="width:40%;" src="https://shklinkenberg.github.io/statistics-lectures/topics/coin_expreiment/QR_heads.png">
+<p>
+bit.ly/2j54A2U
+</p>
+</div>
+</div>
+<div id="emperical-cycle" class="section level2">
+<h2 class="section">Emperical Cycle</h2>
+<ul>
+<li><strong>Observation</strong> Patiënt is showing post traumatic symptoms</li>
+<li><strong>Induction</strong> Can we diagnose PTSS</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_0\)</span>: P: fair coin → C: patiënt is balanced</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: Unfair coin → C: patiënt is unbalanced</li>
+<li><strong>Deduction</strong> <span class="math inline">\(H_A\)</span>: P: data <span class="math inline">\(\neq\)</span> EV → C: is unbalanced</li>
+<li><strong>Testing</strong> Choose <span class="math inline">\(\alpha\)</span> and Power</li>
+<li><strong>Evaluation</strong> Make a decision</li>
+</ul>
+</div>
+<div id="null-distribution" class="section level2 subsection">
+<h2 class="subsection">Null distribution</h2>
+<p>Let’s analyse the null distribution of the results.</p>
+<iframe style="height:400px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pubhtml?gid=1329884255&amp;single=true&amp;widget=true&amp;headers=false">
+</iframe>
+<p><a href="https://docs.google.com/spreadsheets/d/150iSLUXqZbsetzDMjYlY5CAcjIzTanTm2tOFfn_ConA/edit?usp=sharing">Google sheet</a></p>
+<!--
+
+
+-->
+</div>
+<div id="distributions" class="section level2">
+<h2>Distributions</h2>
+<p>What is the difference between</p>
+<ul>
+<li>Population distribution</li>
+<li>Sample distribution</li>
+<li>Samples distribution</li>
+</ul>
+<pre class="r"><code># install.packages(&quot;curl&quot;)
+library(&quot;curl&quot;)
+
+url = &quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pub?output=csv&quot;
+
+data &lt;- read.csv(curl(url))</code></pre>
+</div>
+<div id="binomial-distribution" class="section level2">
+<h2>Binomial distribution</h2>
+<p><span class="math display">\[ {n\choose k}p^k(1-p)^{n-k} \\
+ {n\choose k} = \frac{n!}{k!(n-k)!} \]</span></p>
+<p>With values:</p>
+<pre class="r"><code>n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head</code></pre>
+</div>
+<div id="probabilities" class="section level2">
+<h2>Probabilities</h2>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="testing" class="section level2">
+<h2>Testing</h2>
+<p>I landed 2 times head. Can we conclude PTSS?</p>
+<ul>
+<li>As you can see from the distribution of healthy coins, we cannot conclude that by definition.</li>
+<li>What we can do is indicate how rare 2 is in a healthy population.</li>
+</ul>
+</div>
+<div id="testing-1" class="section level2 smaller">
+<h2 class="smaller">Testing</h2>
+<p><small></p>
+<blockquote>
+<ul>
+<li>Based on the null distribution we can see that the expected value (EV is 5.)</li>
+<li>We can now define the <span class="math inline">\(H_0\)</span> hypothesis: <span class="math inline">\(H_0 = 5\)</span></li>
+<li>What is the alternative hypothesis?</li>
+<li>The alternative hypothesis describes a situation where PTSS is pressent.</li>
+<li>We could say that the alternative hypothesis is not 5.
+<ul>
+<li><span class="math inline">\(H_A \ne 5\)</span></li>
+</ul></li>
+<li>We could also formulate our <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span> more abstract:
+<ul>
+<li><span class="math inline">\(H_0:\)</span> the patient is balenced</li>
+<li><span class="math inline">\(H_A:\)</span> the patient is unbalenced</li>
+</ul></li>
+<li>What criterium should we use to conclude that one would be unbalenced?</li>
+<li>In the social sciences this <span class="math inline">\(\alpha\)</span> criteria is often 5%.</li>
+<li>I tossed 2 times head. That is more frequent than 5%.</li>
+<li>Therefore, we conclude that our patient is probably healthy but we can never be sure.</li>
+<li>My coin could still be part of the unbalenced population.</li>
+</ul>
+</blockquote>
+<p></small></p>
+</div>
+<div id="null-distribution-1" class="section level2">
+<h2>Null distribution</h2>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="alternative-distribution" class="section level2 smaller build subsection">
+<h2 class="smaller build subsection">Alternative Distribution</h2>
+<p>But we have no clue of what this distribution could look like.</p>
+<p>For now let’s assume the probability of landing heads for my coin is .25</p>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="h_0-and-h_a-distribution" class="section level2">
+<h2><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span> distribution</h2>
+<hr />
+<p><img src="reasoning_empirical_cycle_nhst_handout_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<!--
+
+## Power and more {.section}
+
+
+
+-->
+<!-- Footer insert below -->
+</div>
+</div>
+<div id="end" class="section level1">
+<h1>End</h1>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
