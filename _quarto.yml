@@ -3,7 +3,9 @@ project:
   output-dir: _site
   render:
     - index.qmd
+    - courses/SSR/2022-2023/index.qmd
     - courses/SSR/2022-2023/nhst/nhst.qmd
+    - courses/WSR_PB/2022-2023/index.qmd
     - courses/WSR_PB/2022-2023/nhst/nhst.qmd
 
 website:
@@ -31,6 +33,7 @@ website:
       background: light
       collapse-level: 2
       contents:
+        - courses/SSR/2022-2023/index.qmd
         - courses/SSR/2022-2023/nhst/nhst.qmd
     - id: WSR
       title: "Wetenschapsfilosofie & Statistisch Redeneren"
@@ -38,6 +41,7 @@ website:
       background: light
       collapse-level: 2
       contents:
+        - courses/WSR_PB/2022-2023/index.qmd
         - courses/WSR_PB/2022-2023/nhst/nhst.qmd
 
 format:
