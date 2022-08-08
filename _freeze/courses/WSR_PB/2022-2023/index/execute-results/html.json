@@ -1,0 +1,14 @@
+{
+  "hash": "ef788b08edcda5f98fe23c05a5c97241",
+  "result": {
+    "markdown": "---\ntitle: \"Wetenschapsfilosofie & Statistisch Redeneren\"\nauthor: \"Klinkenberg\"\ndate: today\n---\n\n\nOn this page you can find my statistics lectures for WSR.\n\n\n::: {.cell}\n::: {.cell-output-display}\n<div class=\"kable-table\">\n\n|Date        |Lecture                 |Handout                                         |Slides                                                                                                                                          |\n|:-----------|:-----------------------|:-----------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|\n|13 sep 2022 |Null Hypothesis Testing |[link](/courses/WSR_PB/2022-2023/nhst/nhst.qmd) |<a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/WSR_PB/2022-2023/nhst/nhst.html\" target=\"_blank\" class=\"external\">link</a> |\n\n</div>\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
