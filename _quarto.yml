@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: site
+  output-dir: _site
   render:
     - index.qmd
     - courses/SSR/2022-2023/nhst/nhst.qmd
