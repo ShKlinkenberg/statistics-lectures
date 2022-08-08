@@ -16,10 +16,9 @@ website:
     left:
       - text: Courses
         menu: 
-          - text: SSR
-            href: courses/SSR/2022-2023/nhst/nhst.qmd
-          - text: WSR
-            href: courses/WSR_PB/2022-2023/nhst/nhst.qmd 
+          - sidebar:SSR
+          - sidebar:WSR
+
     right:
       - icon: github
         href: https://github.com/ShKlinkenberg/statistics-lectures
@@ -33,6 +32,13 @@ website:
       collapse-level: 2
       contents:
         - courses/SSR/2022-2023/nhst/nhst.qmd
+    - id: WSR
+      title: "Wetenschapsfilosofie & Statistisch Redeneren"
+      style: "docked"
+      background: light
+      collapse-level: 2
+      contents:
+        - courses/WSR_PB/2022-2023/nhst/nhst.qmd
 
 format:
   html:
