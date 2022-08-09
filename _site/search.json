@@ -11,7 +11,7 @@
     "href": "courses/SSR/2022-2023/nhst/nhst.html",
     "title": "Null Hypothesis Significance Testing",
     "section": "",
-    "text": "Neyman-Pearson Paradigm\n\n\n\n\n\n\n\n\n\n\n\n\\(H_0\\)\n\nSkeptical point of view\nNo effect\nNo preference\nNo Correlation\nNo difference\n\n\n\n\\(H_A\\)\n\nRefute Skepticism\nEffect\nPreference\nCorrelation\nDifference\n\n\n\n\n\n\n\n\n\nObjective Probability\nRelative frequency in the long run\n\n\n\n\n\n95% confidence interval\n\n\\[SE = \\frac{\\text{Standard deviation}}{\\text{Square root of sample size}} = \\frac{s}{\\sqrt{n}}\\]\n\nLowerbound = \\(\\bar{x} - 1.96 \\times SE\\)\nUpperbound = \\(\\bar{x} + 1.96 \\times SE\\)\n\n\n\n\n\n\n\n\nn₁ = \n\n\nn₂ = \n\n\n\nYour browser does not support the canvas element.\n\n\n\n\n\n\n\n\n\n\n\n\n\nn = 10   # Sample size\nk = 0:n  # Discrete probability space\np = .5   # Probability of head\n\nmunt = 0:1\n\npermutations = factorial(n) / ( factorial(k) * factorial(n-k) )\n# permutations\n\np_k  = p^k * (1-p)^(n-k)  # Probability of single event\np_kp = p_k * permutations # Probability of event times \n                          # the occurrence of that event\n\ntitle = \"Binomial Null distribution\"\n\n# col=c(rep(\"red\",2),rep(\"beige\",7),rep(\"red\",2))\n\nbarplot( p_kp, \n         main=title, \n         names.arg=0:n, \n         xlab=\"number of head\", \n         ylab=\"P(%)\", \n         col='beige',\n         ylim=c(0,.3) )\n\n# abline(v = c(2.5,10.9), lty=2, col='red')\n\ntext(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nIncorrectly reject \\(H_0\\)\nType I error\nFalse Positive\nCriteria often 5%\nDistribution depends on sample size\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nCorrectly reject \\(H_0\\)\nTrue positive\nPower equal to: 1 - Beta\n\nBeta is Type II error\n\nCriteria often 80%\nDepends on sample size\n\n\n\n\n\n\n\n\n\n\n\nAlso known as: observed, retrospective, achieved, prospective and a priori power\nSpecificly meaning:\n\n\nThe power of a test assuming a population effect size equal to the observed effect size in the current sample.\n\nSource: O’Keefe (2007)\n\n\n\nIn statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.\nFor each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.\nSource: WIKIPEDIA\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nCorrectly accept \\(H_0\\)\nTrue negative\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nIncorrectly accept \\(H_0\\)\nType II error\nFalse Negative\nCriteria often 20%\nDistribution depends on sample size\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConditional probability of the found test statistic or more extreme assuming the null hypothesis is true.\n\nReject \\(H_0\\) when:\n\n\\(p\\)-value <= \\(alpha\\)\n\n\n\n\n\n\n\n\n\n\nSome common test statistics\n\nNumber of heads\nSum of dice\nDifference\n\\(t\\)-statistic\n\\(F\\)-statistic\n\\(\\chi^2\\)-statistic\netc…\n\n\n\n\n\nN     = 10  # Sample size\nH0    = .5  # Probability of head under H0 50/50\nHA    = .2  # Aternative expected value\nalpha = .05 # Selected type I error\n\n# Color areas red for selected alpha\narea <- dbinom(0:N, N, H0) < alpha/2\n\n# barplot(dbinom(0:N,N, HA)) -> x.values\n\n# x.values\n# lb <- x.values[c(qbinom(alpha/2, N+1, H0), qbinom(alpha/2, N+1, H0)+1 )]\n# ub <- x.values[c(qbinom(1-(alpha/2), N+1, H0), qbinom(1-(alpha/2), N+1, H0)+1 )]\n# \n# mlb <- mean(lb)\n# mub <- mean(ub)\n\ncol = rep(\"beige\", N+1)\ncol[area] = \"red\"\n\ncol2 = rep(\"red\", N+1)\ncol2[area] = \"beige\"\n\n# Delete # to not color the plots\n# col = col2  = \"beige\"\n\nlayout(matrix(1:9,3,3, byrow=T))\n\nplot.new()\ntext(0.5,0.5,\"Binomial Distribution\",cex=1.5)\n# text(0.5,0.1,paste(\"N:\",N),cex=1.5)\n\nplot.new()\ntext(0.5,0.5,\"H0 True\",cex=2)\n\nplot.new()\ntext(0.5,0.5,\"H0 False\",cex=2)\n\nplot.new()\ntext(0.5,0.5,\"Reject H0\",cex=2)\n\nbarplot(dbinom(0:N,N, H0), \n        col  = col, \n        # yaxt = 'n', \n        main = 'Alpha / Type I error', \n        names.arg = 0:N, \n        cex.names = 0.7)\n\n\n# abline(v = mlb, col=\"red\", lwd=3, lty=2)\n# abline(v = mub, col=\"red\", lwd=3, lty=2)\n\nbarplot(dbinom(0:N,N, HA), \n        col  = col, \n        yaxt = 'n', \n        main = 'Power', \n        names.arg = 0:N, \n        cex.names = 0.7)\n\nplot.new()\ntext(0.5,0.5,\"Accept H0\",cex=2)\n\nbarplot(dbinom(0:N,N, H0), \n        col  = col2, \n        # yaxt = 'n', \n        main = '1 - alpha', \n        names.arg = 0:N, \n        cex.names = 0.7)\n\nbarplot(dbinom(0:N,N, HA), \n        col  = col2, \n        yaxt = 'n', \n        main = 'Beta / Type II error', \n        names.arg = 0:N, \n        cex.names = 0.7)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource: Kristoffer Magnusson"
+    "text": "Neyman-Pearson Paradigm\n\n\n\n\n\n\n\n\n\n\n\n\\(H_0\\)\n\nSkeptical point of view\nNo effect\nNo preference\nNo Correlation\nNo difference\n\n\n\n\\(H_A\\)\n\nRefute Skepticism\nEffect\nPreference\nCorrelation\nDifference\n\n\n\n\n\n\n\n\n\nObjective Probability\nRelative frequency in the long run\n\n\n\n\n\n95% confidence interval\n\n\\[SE = \\frac{\\text{Standard deviation}}{\\text{Square root of sample size}} = \\frac{s}{\\sqrt{n}}\\]\n\nLowerbound = \\(\\bar{x} - 1.96 \\times SE\\)\nUpperbound = \\(\\bar{x} + 1.96 \\times SE\\)\n\n\n\n\n\n\n\n\nn₁ = \n\n\nn₂ = \n\n\n\nYour browser does not support the canvas element."
   },
   {
     "objectID": "courses/SSR/2022-2023/nhst/nhst.html#contact",
@@ -39,7 +39,7 @@
     "href": "courses/SSR/2022-2023/index.html",
     "title": "Scientific & Statistical Reasoning",
     "section": "",
-    "text": "On this site you can find my statistics lectures for SSR."
+    "text": "Date\nLecture\nHandout\nSlides\n\n\n\n\n16 sep 2022\nNull Hypothesis Significance Testing\nlink\nlink"
   },
   {
     "objectID": "courses/WSR_PB/2022-2023/index.html",
@@ -47,5 +47,110 @@
     "title": "Wetenschapsfilosofie & Statistisch Redeneren",
     "section": "",
     "text": "Date\nLecture\nHandout\nSlides\n\n\n\n\n13 sep 2022\nNull Hypothesis Testing\nlink\nlink"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#binomial-h_0-distribution",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#binomial-h_0-distribution",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Binomial \\(H_0\\) distribution",
+    "text": "Binomial \\(H_0\\) distribution\n\nn = 10   # Sample size\nk = 0:n  # Discrete probability space\np = .5   # Probability of head\n\nmunt = 0:1\n\npermutations = factorial(n) / ( factorial(k) * factorial(n-k) )\n# permutations\n\np_k  = p^k * (1-p)^(n-k)  # Probability of single event\np_kp = p_k * permutations # Probability of event times \n                          # the occurrence of that event\n\ntitle = \"Binomial Null distribution\"\n\n# col=c(rep(\"red\",2),rep(\"beige\",7),rep(\"red\",2))\n\nbarplot( p_kp, \n         main=title, \n         names.arg=0:n, \n         xlab=\"number of head\", \n         ylab=\"P(%)\", \n         col='beige',\n         ylim=c(0,.3) )\n\n# abline(v = c(2.5,10.9), lty=2, col='red')\n\ntext(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#binomial-h_a-distribution",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#binomial-h_a-distribution",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Binomial \\(H_A\\) distribution",
+    "text": "Binomial \\(H_A\\) distribution"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#decision-table",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#decision-table",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Decision table",
+    "text": "Decision table\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#alpha-alpha",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#alpha-alpha",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Alpha \\(\\alpha\\)",
+    "text": "Alpha \\(\\alpha\\)\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nIncorrectly reject \\(H_0\\)\nType I error\nFalse Positive\nCriteria often 5%\nDistribution depends on sample size"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#power",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#power",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Power",
+    "text": "Power\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nCorrectly reject \\(H_0\\)\nTrue positive\nPower equal to: 1 - Beta\n\nBeta is Type II error\n\nCriteria often 80%\nDepends on sample size"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#post-hoc-power",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#post-hoc-power",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Post-Hoc Power",
+    "text": "Post-Hoc Power\n\nAlso known as: observed, retrospective, achieved, prospective and a priori power\nSpecificly meaning:\n\n\nThe power of a test assuming a population effect size equal to the observed effect size in the current sample.\n\nSource: O’Keefe (2007)"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#effect-size",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#effect-size",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Effect size",
+    "text": "Effect size\nIn statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.\nFor each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.\nSource: WIKIPEDIA"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#effect-size-1",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#effect-size-1",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Effect size",
+    "text": "Effect size"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#alpha",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#alpha",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "1 - alpha",
+    "text": "1 - alpha\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nCorrectly accept \\(H_0\\)\nTrue negative"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#beta",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#beta",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Beta",
+    "text": "Beta\n\n\n\n\n\n\n\n\n\n\\(H_0\\) = True\n\n\n\\(H_0\\) = False\n\n\n\n\nDecide toreject \\(H_0\\)\n\n\nType I error Alpha \\(\\alpha\\)\n\n\nCorrect True positive = Power\n\n\n\n\nDecide notto reject \\(H_0\\)\n\n\nCorrect  True negative\n\n\nType II error Beta \\(\\beta\\)\n\n\n\n\n\nIncorrectly accept \\(H_0\\)\nType II error\nFalse Negative\nCriteria often 20%\nDistribution depends on sample size"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#p-value",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#p-value",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "P-value",
+    "text": "P-value\n\nConditional probability of the found test statistic or more extreme assuming the null hypothesis is true.\n\nReject \\(H_0\\) when:\n\n\\(p\\)-value <= \\(alpha\\)"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#test-statistics",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#test-statistics",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Test statistics",
+    "text": "Test statistics\nSome common test statistics\n\nNumber of heads\nSum of dice\nDifference\n\\(t\\)-statistic\n\\(F\\)-statistic\n\\(\\chi^2\\)-statistic\netc…"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#decision-table-1",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#decision-table-1",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Decision Table",
+    "text": "Decision Table\n\nN     = 10  # Sample size\nH0    = .5  # Probability of head under H0 50/50\nHA    = .2  # Aternative expected value\nalpha = .05 # Selected type I error\n\n# Color areas red for selected alpha\narea <- dbinom(0:N, N, H0) < alpha/2\n\n# barplot(dbinom(0:N,N, HA)) -> x.values\n\n# x.values\n# lb <- x.values[c(qbinom(alpha/2, N+1, H0), qbinom(alpha/2, N+1, H0)+1 )]\n# ub <- x.values[c(qbinom(1-(alpha/2), N+1, H0), qbinom(1-(alpha/2), N+1, H0)+1 )]\n# \n# mlb <- mean(lb)\n# mub <- mean(ub)\n\ncol = rep(\"beige\", N+1)\ncol[area] = \"red\"\n\ncol2 = rep(\"red\", N+1)\ncol2[area] = \"beige\"\n\n# Delete # to not color the plots\n# col = col2  = \"beige\"\n\nlayout(matrix(1:9,3,3, byrow=T))\n\nplot.new()\ntext(0.5,0.5,\"Binomial Distribution\",cex=1.5)\n# text(0.5,0.1,paste(\"N:\",N),cex=1.5)\n\nplot.new()\ntext(0.5,0.5,\"H0 True\",cex=2)\n\nplot.new()\ntext(0.5,0.5,\"H0 False\",cex=2)\n\nplot.new()\ntext(0.5,0.5,\"Reject H0\",cex=2)\n\nbarplot(dbinom(0:N,N, H0), \n        col  = col, \n        # yaxt = 'n', \n        main = 'Alpha / Type I error', \n        names.arg = 0:N, \n        cex.names = 0.7)\n\n\n# abline(v = mlb, col=\"red\", lwd=3, lty=2)\n# abline(v = mub, col=\"red\", lwd=3, lty=2)\n\nbarplot(dbinom(0:N,N, HA), \n        col  = col, \n        yaxt = 'n', \n        main = 'Power', \n        names.arg = 0:N, \n        cex.names = 0.7)\n\nplot.new()\ntext(0.5,0.5,\"Accept H0\",cex=2)\n\nbarplot(dbinom(0:N,N, H0), \n        col  = col2, \n        # yaxt = 'n', \n        main = '1 - alpha', \n        names.arg = 0:N, \n        cex.names = 0.7)\n\nbarplot(dbinom(0:N,N, HA), \n        col  = col2, \n        yaxt = 'n', \n        main = 'Beta / Type II error', \n        names.arg = 0:N, \n        cex.names = 0.7)"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#reasoning-scheme",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#reasoning-scheme",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "Reasoning Scheme",
+    "text": "Reasoning Scheme"
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/nhst/nhst.html#r-psychologist",
+    "href": "courses/SSR/2022-2023/nhst/nhst.html#r-psychologist",
+    "title": "Null Hypothesis Significance Testing",
+    "section": "R<-PSYCHOLOGIST",
+    "text": "R<-PSYCHOLOGIST\n\n\nSource: Kristoffer Magnusson"
   }
 ]

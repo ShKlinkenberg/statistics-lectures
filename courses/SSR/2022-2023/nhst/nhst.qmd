@@ -12,7 +12,7 @@ library(knitr)
 local({
   hook_plot = knit_hooks$get('plot')
   knit_hooks$set(plot = function(x, options) {
-    paste0('\n\n----\n\n', hook_plot(x, options))
+    paste0('\n\n#\n\n', hook_plot(x, options))
   })
 })
 ```

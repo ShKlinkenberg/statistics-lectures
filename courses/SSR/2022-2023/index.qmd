@@ -6,17 +6,18 @@ date: today
 
 On this site you can find my statistics lectures for SSR.
 
-```{r, echo=FALSE, eval=FALSE}
-files <- list.files("lectures", full.names = F, pattern = "\\.qmd", recursive = F)
+```{r, echo=FALSE}
+files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
+files <- files[-1]
 
 lectures = data.frame()
 n = length(files)
 
 for (i in 1:n) {
 
-  lectures[i ,'url'] <- data.frame(url = paste0("lectures/", files[i]))
+  lectures[i ,'url'] <- data.frame(url = paste0("courses/SSR/2022-2023/", files[i]))
   
-  yaml <- rmarkdown::yaml_front_matter(lectures[i ,'url'])
+  yaml <- rmarkdown::yaml_front_matter(files[i])
   
   lectures[i , 'title'] = yaml$title
   lectures[i , 'date'] = yaml$date
@@ -26,9 +27,8 @@ for (i in 1:n) {
 
 data.frame(Date    = lectures$date, 
            Lecture = lectures$title,
-           Handout = sprintf("[link](%s)", lectures$url),
-           Slides  = sprintf('[link](../lectures/%s){.external target="_blank"}',
-                             gsub("qmd", "html", files[i]))
-           )
+           Handout = sprintf("[link](/%s)", lectures$url),
+           Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "slides", gsub("qmd", "html", lectures$url)) ) 
+          )
 ```
 
