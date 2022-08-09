@@ -52,4 +52,4 @@ format:
     smooth-scroll: true
     link-external-newwindow: true
 
-freeze: true
+freeze: false

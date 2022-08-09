@@ -1,5 +1,5 @@
-# project:
-#   output-dir: ../docs/courses/2022-2023_SSR/
+project:
+  output-dir: ../slides/
 author: "Sharon Klinkenberg"
 institute: "University of Amsterdam"
 format:
