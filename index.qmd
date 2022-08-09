@@ -2,7 +2,9 @@
 title: "Statistics Lectures"
 author: "Klinkenberg"
 date: today
+format: 
+  html: 
+    page-layout: full
 ---
 
 On this site you can find my statistics lectures for the various courses i give.
-
