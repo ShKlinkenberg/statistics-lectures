@@ -195,6 +195,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </script>
 </div>
 
+##
+
 ```{r, echo=FALSE, out.height=600}
 set.seed(1548)
 
@@ -278,6 +280,8 @@ percentage = (1/iterations)*sum(mu_in_ci)
 ## Binomial $H_0$ distribution
 
 ```{r, echo=TRUE}
+#| output-location: slide
+
 n = 10   # Sample size
 k = 0:n  # Discrete probability space
 p = .5   # Probability of head
@@ -308,7 +312,7 @@ barplot( p_kp,
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Binomial $H_A$ distribution
+## Binomial $H_A$ distributions
 
 ```{r, echo=FALSE}
 
@@ -345,7 +349,9 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 }
 ```
 
-## Decision table {.flexbox .vcenter .subsection}
+## Decision table
+
+{{< include ../../../../topics/NHST/descision_table.html >}}
 
 <table style="border: none;  transform: scale(1);">
   <col width="150px">
@@ -363,8 +369,22 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 <td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
 </tr>
 </table>
+            
+## Alpha $\alpha$
 
-## Alpha $\alpha$ {.subsection}
+:::: {.columns}
+
+::: {.column width="40%"}
+
+* Incorrectly reject $H_0$
+* Type I error
+* False Positive
+* Criteria often 5%
+* Distribution depends on sample size
+
+:::
+
+::: {.column width="60%"}
 
 <table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
   <col width="150px">
@@ -383,14 +403,14 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 </tr>
 </table>
 
-* Incorrectly reject $H_0$
-* Type I error
-* False Positive
-* Criteria often 5%
-* Distribution depends on sample size
+:::
 
+::::
+
+## Alpha $\alpha$ in distribution
 
 ```{r, echo=FALSE}
+
 n = 10   # Sample size
 k = 0:10 # Discrete probability space
 p = .5   # Probability of head
@@ -446,7 +466,10 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 * Criteria often 80%
 * Depends on sample size
 
+## Power in distribution
+
 ```{r, echo=FALSE}
+
 n = 10   # Sample size
 k = 0:10 # Discrete probability space
 p = .25   # Probability of head
@@ -494,7 +517,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## Effect size {.flexbox .vcenter}
 
-![](../../../topics/NHST/effec_size.png)
+![](../../../../topics/NHST/effec_size.png)
 
 ## 1 - alpha {.subsection}
 
@@ -515,11 +538,13 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 </tr>
 </table>
 
-
 * Correctly accept $H_0$
 * True negative
 
+## 1 - alpha in distribution
+
 ```{r, echo=FALSE}
+
 n = 10   # Sample size
 k = 0:10 # Discrete probability space
 p = .5   # Probability of head
@@ -573,8 +598,10 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 * Criteria often 20%
 * Distribution depends on sample size
 
+## Beta in distribution
 
 ```{r, echo=FALSE}
+
 n = 10   # Sample size
 k = 0:10 # Discrete probability space
 p = .25   # Probability of head
@@ -603,6 +630,7 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
+## 
 
 ```{r, echo=FALSE}
 
@@ -636,7 +664,10 @@ Reject $H_0$ when:
 
 * $p$-value <= $alpha$
 
+## P-value in $H_{0}$ distribution
+
 ```{r, echo=FALSE}
+
 n = 10   # Sample size
 k = 0:10 # Discrete probability space
 p = .5   # Probability of head
@@ -680,6 +711,8 @@ Some common test statistics
 ## Decision Table {.flexbox .vcenter .smaller}
 
 ```{r, echo=TRUE}
+#| output-location: slide
+
 N     = 10  # Sample size
 H0    = .5  # Probability of head under H0 50/50
 HA    = .2  # Aternative expected value
@@ -759,12 +792,12 @@ barplot(dbinom(0:N,N, HA),
 
 ## Reasoning Scheme {.subsection .flexbox .vcenter}
 
-![](../../../topics/NHST/NHST_descision_scheme.png)
+![](../../../../topics/NHST/NHST_descision_scheme.png)
 
-## R<-PSYCHOLOGIST {.smaller}
+## R<-PSYCHOLOGIST
 
-<iframe style="height:450px;" src="http://rpsychologist.com/d3/NHST/"></iframe>
+Interactive distributions app.
 
-Source: [Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/)
+[Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="true"}
 
 

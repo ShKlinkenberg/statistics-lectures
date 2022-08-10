@@ -590,6 +590,9 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 }
 </script>
 </div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" height="600"></p>
@@ -627,15 +630,20 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <span id="cb1-26"><a href="#cb1-26"></a><span class="co"># abline(v = c(2.5,10.9), lty=2, col='red')</span></span>
 <span id="cb1-27"><a href="#cb1-27"></a></span>
 <span id="cb1-28"><a href="#cb1-28"></a><span class="fu">text</span>(.<span class="dv">6</span><span class="sc">:</span><span class="fl">10.6</span><span class="sc">*</span><span class="fl">1.2</span>,p_kp,<span class="fu">round</span>(p_kp,<span class="dv">3</span>),<span class="at">pos=</span><span class="dv">3</span>,<span class="at">cex=</span>.<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
 </div>
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="binomial-h_a-distribution" class="slide level2">
-<h2>Binomial <span class="math inline">\(H_A\)</span> distribution</h2>
+
+</section>
+<section id="binomial-h_0-distribution-output" class="slide level2 output-location-slide"><h2>Binomial <span class="math inline">\(H_0\)</span> distribution</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</div>
+</div></section><section id="binomial-h_a-distributions" class="slide level2">
+<h2>Binomial <span class="math inline">\(H_A\)</span> distributions</h2>
 
 <img data-src="nhst_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="decision-table" class="slide level2 flexbox vcenter subsection">
+<section id="decision-table" class="slide level2">
 <h2>Decision table</h2>
+<p></p>
 
 <table style="border: none;  transform: scale(1);">
 <colgroup><col width="150px">
@@ -676,9 +684,21 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 
 </tbody></table>
 </section>
-<section id="alpha-alpha" class="slide level2 subsection">
+<section id="alpha-alpha" class="slide level2">
 <h2>Alpha <span class="math inline">\(\alpha\)</span></h2>
+<p>:::: {.columns}</p>
+<div class="column" style="width:40%;">
+<ul>
+<li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
+<li>Type I error</li>
+<li>False Positive</li>
+<li>Criteria often 5%</li>
+<li>Distribution depends on sample size</li>
+</ul>
+</div>
+<p>::: {.column width=“60%”}</p>
 
+<div class="dtable">
 <table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
 <colgroup><col width="150px">
 <col width="225px">
@@ -717,13 +737,12 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </tr>
 
 </tbody></table>
-<ul>
-<li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
-<li>Type I error</li>
-<li>False Positive</li>
-<li>Criteria often 5%</li>
-<li>Distribution depends on sample size</li>
-</ul>
+</div>
+<p>:::</p>
+<p>::::</p>
+</section>
+<section id="alpha-alpha-in-distribution" class="slide level2">
+<h2>Alpha <span class="math inline">\(\alpha\)</span> in distribution</h2>
 
 <img data-src="nhst_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="power" class="slide level2 subsection">
@@ -777,6 +796,9 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 80%</li>
 <li>Depends on sample size</li>
 </ul>
+</section>
+<section id="power-in-distribution" class="slide level2">
+<h2>Power in distribution</h2>
 
 <img data-src="nhst_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
 <section id="post-hoc-power" class="slide level2 subsection">
@@ -799,7 +821,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <section id="effect-size-1" class="slide level2 flexbox vcenter">
 <h2>Effect size</h2>
 
-<img data-src="../../../topics/NHST/effec_size.png" class="r-stretch"></section>
+<img data-src="../../../../topics/NHST/effec_size.png" class="r-stretch"></section>
 <section id="alpha" class="slide level2 subsection">
 <h2>1 - alpha</h2>
 
@@ -845,6 +867,9 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Correctly accept <span class="math inline">\(H_0\)</span></li>
 <li>True negative</li>
 </ul>
+</section>
+<section id="alpha-in-distribution" class="slide level2">
+<h2>1 - alpha in distribution</h2>
 
 <img data-src="nhst_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="beta" class="slide level2 subsection">
@@ -895,17 +920,15 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 20%</li>
 <li>Distribution depends on sample size</li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</div>
-</div>
 </section>
+<section id="beta-in-distribution" class="slide level2">
+<h2>Beta in distribution</h2>
+
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="p-value" class="slide level2 subsection">
 <h2>P-value</h2>
 <blockquote>
@@ -915,6 +938,9 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <ul>
 <li><span class="math inline">\(p\)</span>-value &lt;= <span class="math inline">\(alpha\)</span></li>
 </ul>
+</section>
+<section id="p-value-in-h_0-distribution" class="slide level2">
+<h2>P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
 
 <img data-src="nhst_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="test-statistics" class="slide level2">
@@ -1008,18 +1034,21 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <span id="cb2-73"><a href="#cb2-73"></a>        <span class="at">main =</span> <span class="st">'Beta / Type II error'</span>, </span>
 <span id="cb2-74"><a href="#cb2-74"></a>        <span class="at">names.arg =</span> <span class="dv">0</span><span class="sc">:</span>N, </span>
 <span id="cb2-75"><a href="#cb2-75"></a>        <span class="at">cex.names =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
 </div>
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="reasoning-scheme" class="slide level2 subsection flexbox vcenter">
+
+</section>
+<section id="decision-table-1-output" class="slide level2 flexbox vcenter smaller output-location-slide"><h2>Decision Table</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</div>
+</div></section><section id="reasoning-scheme" class="slide level2 subsection flexbox vcenter">
 <h2>Reasoning Scheme</h2>
 
-<img data-src="../../../topics/NHST/NHST_descision_scheme.png" class="r-stretch"></section>
-<section id="r-psychologist" class="slide level2 smaller">
+<img data-src="../../../../topics/NHST/NHST_descision_scheme.png" class="r-stretch"></section>
+<section id="r-psychologist" class="slide level2">
 <h2>R&lt;-PSYCHOLOGIST</h2>
-<iframe style="height:450px;" src="http://rpsychologist.com/d3/NHST/">
-</iframe>
-<p>Source: <a href="http://rpsychologist.com/d3/NHST/">Kristoffer Magnusson</a></p>
+<p>Interactive distributions app.</p>
+<p><a href="http://rpsychologist.com/d3/NHST/" data-preview-link="true">Kristoffer Magnusson</a></p>
 <!-- Footer insert below -->
 </section></section>
 <section>
