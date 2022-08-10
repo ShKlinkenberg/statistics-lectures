@@ -4,7 +4,7 @@ author: "Klinkenberg"
 date: "16 sep 2022"
 ---
 
-```{r child="../../../../topics/nhst/NHST_2.rmd"}
+```{r child="../../../../topics/nhst/NHST_2.qmd"}
 ```
 
 <!-- Footer insert below -->
