@@ -2,19 +2,12 @@
 
 ## Neyman-Pearson Paradigm
 
+![](https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg){.absolute top=150 left=0 height="300"}
+
+![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top=150 left=200 height="300"}
+
 [Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman)-[Pearson](https://en.wikipedia.org/wiki/Egon_Pearson) Paradigm
 
-<style>
-.np { height: 400px;
-      float: left;
-    }
-</style>
-
-<img class="np" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg">
-
-<img class="np" src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg">
-
-<br>
 
 ## $H_0$ and $H_A$ {.subsection}
 
@@ -662,7 +655,7 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 Reject $H_0$ when:
 
-* $p$-value <= $alpha$
+* $p$-value $\leq$ $alpha$
 
 ## P-value in $H_{0}$ distribution
 
