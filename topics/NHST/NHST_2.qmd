@@ -6,10 +6,10 @@
 
 ![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top=150 left=200 height="300"}
 
-[Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman)-[Pearson](https://en.wikipedia.org/wiki/Egon_Pearson) Paradigm
+[Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman) - [Pearson](https://en.wikipedia.org/wiki/Egon_Pearson)
 
 
-## $H_0$ and $H_A$ {.subsection}
+## Two hypothesis
 
 <table style="width:100%; border: none;">
   
