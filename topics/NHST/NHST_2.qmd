@@ -8,7 +8,6 @@
 
 [Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman) - [Pearson](https://en.wikipedia.org/wiki/Egon_Pearson)
 
-
 ## Two hypothesis
 
 <table style="width:100%; border: none;">
