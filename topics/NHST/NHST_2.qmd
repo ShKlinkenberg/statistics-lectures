@@ -34,12 +34,12 @@ $H_A$
 
 </td></tr></table>
 
-## Frequentist probability {.subsection}
+## Frequentist probability
 
 * Objective Probability
 * Relative frequency in the long run
 
-## Standard Error {.subsection}
+## Standard Error
 
 > 95% confidence interval 
 
@@ -343,25 +343,9 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 
 ## Decision table
 
-{{< include ../../../../topics/NHST/descision_table.html >}}
+```{r child="descision_table.svg"}
+```
 
-<table style="border: none;  transform: scale(1);">
-  <col width="150px">
-  <col width="225px">
-  <col width="225px">
-<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
-<tr height="150px">
-<td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
-</tr>
-<tr height="150px">
-<td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
-</tr>
-</table>
-            
 ## Alpha $\alpha$
 
 :::: {.columns}
@@ -376,24 +360,14 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 
 :::
 
-::: {.column width="60%"}
+::: {#alpha .column width="60%"}
 
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-  <col width="150px">
-  <col width="225px">
-  <col width="225px">
-<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
-<tr height="150px">
-<td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid blue; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
-</tr>
-<tr height="150px">
-<td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
-</tr>
-</table>
+<style>
+#alpha .alpha { stroke: blue; }
+</style>
+
+```{r child="descision_table.svg"}
+```
 
 :::
 
@@ -431,25 +405,11 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Power {.subsection}
+## Power
 
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-  <col width="150px">
-  <col width="225px">
-  <col width="225px">
-<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
-<tr height="150px">
-<td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
-</tr>
-<tr height="150px">
-<td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
-</tr>
-</table>
+:::: {.columns}
 
+::: {.column width="40%"}
 
 * Correctly reject $H_0$
 * True positive
@@ -457,6 +417,21 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
     * Beta is Type II error
 * Criteria often 80%
 * Depends on sample size
+
+:::
+
+::: {#power .column width="60%"}
+
+<style>
+#power .power { stroke: blue; }
+</style>
+
+```{r child="descision_table.svg"}
+```
+
+:::
+
+::::
 
 ## Power in distribution
 
@@ -490,7 +465,7 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Post-Hoc Power {.subsection}
+## Post-Hoc Power
 
 * Also known as: observed, retrospective, achieved, prospective and a priori power
 * Specificly meaning:
@@ -499,7 +474,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 Source: [O'Keefe (2007)](http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf)
 
-## Effect size {.subsection}
+## Effect size
 
 In statistics, an effect size is a quantitative measure of the strength of a phenomenon.  Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.
 
@@ -511,27 +486,29 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ![](../../../../topics/NHST/effec_size.png)
 
-## 1 - alpha {.subsection}
+## One minus alpha
 
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-  <col width="150px">
-  <col width="225px">
-  <col width="225px">
-<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
-<tr height="150px">
-<td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
-</tr>
-<tr height="150px">
-<td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
-</tr>
-</table>
+:::: {.columns}
+
+::: {.column width="40%"}
 
 * Correctly accept $H_0$
 * True negative
+
+:::
+
+::: {#oneminalpha .column width="60%"}
+
+<style>
+#oneminalpha .oneminalpha { stroke: blue; }
+</style>
+
+```{r child="descision_table.svg"}
+```
+
+:::
+
+::::
 
 ## 1 - alpha in distribution
 
@@ -565,30 +542,33 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Beta {.subsection}
+## Beta
 
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-  <col width="150px">
-  <col width="225px">
-  <col width="225px">
-<tr><td></td style="width: 300px;"><td>$H_0$ = True</td style="width: 300px;"><td>$H_0$ = False</td></tr>
-<tr height="150px">
-<td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
-</tr>
-<tr height="150px">
-<td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid blue; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
-</tr>
-</table>
+:::: {.columns}
+
+::: {.column width="40%"}
 
 * Incorrectly accept $H_0$
 * Type II error
 * False Negative
 * Criteria often 20%
 * Distribution depends on sample size
+
+:::
+
+::: {#beta .column width="60%"}
+
+<style>
+#beta .beta { stroke: blue; }
+</style>
+
+```{r child="descision_table.svg"}
+```
+
+:::
+
+::::
+
 
 ## Beta in distribution
 
@@ -648,7 +628,7 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 ```
 
-## P-value {.subsection}
+## P-value
 
 > Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.
 

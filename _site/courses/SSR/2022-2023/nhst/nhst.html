@@ -230,7 +230,7 @@ ga('send', {
   <li><a href="#post-hoc-power" id="toc-post-hoc-power" class="nav-link" data-scroll-target="#post-hoc-power">Post-Hoc Power</a></li>
   <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect size</a></li>
   <li><a href="#effect-size-1" id="toc-effect-size-1" class="nav-link" data-scroll-target="#effect-size-1">Effect size</a></li>
-  <li><a href="#alpha" id="toc-alpha" class="nav-link" data-scroll-target="#alpha">1 - alpha</a></li>
+  <li><a href="#one-minus-alpha" id="toc-one-minus-alpha" class="nav-link" data-scroll-target="#one-minus-alpha">One minus alpha</a></li>
   <li><a href="#alpha-in-distribution" id="toc-alpha-in-distribution" class="nav-link" data-scroll-target="#alpha-in-distribution">1 - alpha in distribution</a></li>
   <li><a href="#beta" id="toc-beta" class="nav-link" data-scroll-target="#beta">Beta</a></li>
   <li><a href="#beta-in-distribution" id="toc-beta-in-distribution" class="nav-link" data-scroll-target="#beta-in-distribution">Beta in distribution</a></li>
@@ -317,15 +317,15 @@ ga('send', {
 
 </tbody></table>
 </section>
-<section id="frequentist-probability" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="frequentist-probability">Frequentist probability</h2>
+<section id="frequentist-probability" class="level2">
+<h2 class="anchored" data-anchor-id="frequentist-probability">Frequentist probability</h2>
 <ul>
 <li>Objective Probability</li>
 <li>Relative frequency in the long run</li>
 </ul>
 </section>
-<section id="standard-error" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="standard-error">Standard Error</h2>
+<section id="standard-error" class="level2">
+<h2 class="anchored" data-anchor-id="standard-error">Standard Error</h2>
 <blockquote class="blockquote">
 <p>95% confidence interval</p>
 </blockquote>
@@ -525,50 +525,13 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="decision-table" class="level2">
 <h2 class="anchored" data-anchor-id="decision-table">Decision table</h2>
-<p></p>
-
-<table style="border: none;  transform: scale(1);">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
 </section>
 <section id="alpha-alpha" class="level2">
 <h2 class="anchored" data-anchor-id="alpha-alpha">Alpha <span class="math inline">\(\alpha\)</span></h2>
-<p>:::: {.columns}</p>
+<div class="columns">
 <div class="column" style="width:40%;">
 <ul>
 <li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
@@ -577,99 +540,28 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 5%</li>
 <li>Distribution depends on sample size</li>
 </ul>
+</div><div id="alpha" class="column" style="width:60%;">
+<style>
+#alpha .alpha { stroke: blue; }
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
 </div>
-<p>::: {.column width=“60%”}</p>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
-<p>:::</p>
-<p>::::</p>
+</div>
 </section>
 <section id="alpha-alpha-in-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="alpha-alpha-in-distribution">Alpha <span class="math inline">\(\alpha\)</span> in distribution</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="nhst_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="nhst_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="power" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="power">Power</h2>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<section id="power" class="level2">
+<h2 class="anchored" data-anchor-id="power">Power</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li>Correctly reject <span class="math inline">\(H_0\)</span></li>
 <li>True positive</li>
@@ -680,17 +572,26 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 80%</li>
 <li>Depends on sample size</li>
 </ul>
+</div><div id="power" class="column" style="width:60%;">
+<style>
+#power .power { stroke: blue; }
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
 </section>
 <section id="power-in-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="power-in-distribution">Power in distribution</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="nhst_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="nhst_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="post-hoc-power" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="post-hoc-power">Post-Hoc Power</h2>
+<section id="post-hoc-power" class="level2">
+<h2 class="anchored" data-anchor-id="post-hoc-power">Post-Hoc Power</h2>
 <ul>
 <li>Also known as: observed, retrospective, achieved, prospective and a priori power</li>
 <li>Specificly meaning:</li>
@@ -700,8 +601,8 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </blockquote>
 <p>Source: <a href="http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf">O’Keefe (2007)</a></p>
 </section>
-<section id="effect-size" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="effect-size">Effect size</h2>
+<section id="effect-size" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size">Effect size</h2>
 <p>In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.</p>
 <p>For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.</p>
 <p>Source: <a href="https://en.wikipedia.org/wiki/Effect_size">WIKIPEDIA</a></p>
@@ -710,101 +611,36 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <h2 class="flexbox vcenter anchored" data-anchor-id="effect-size-1">Effect size</h2>
 <p><img src="../../../../topics/NHST/effec_size.png" class="img-fluid"></p>
 </section>
-<section id="alpha" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="alpha">1 - alpha</h2>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<section id="one-minus-alpha" class="level2">
+<h2 class="anchored" data-anchor-id="one-minus-alpha">One minus alpha</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li>Correctly accept <span class="math inline">\(H_0\)</span></li>
 <li>True negative</li>
 </ul>
+</div><div id="oneminalpha" class="column" style="width:60%;">
+<style>
+#oneminalpha .oneminalpha { stroke: blue; }
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
 </section>
 <section id="alpha-in-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="alpha-in-distribution">1 - alpha in distribution</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="nhst_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="nhst_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="beta" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="beta">Beta</h2>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<section id="beta" class="level2">
+<h2 class="anchored" data-anchor-id="beta">Beta</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li>Incorrectly accept <span class="math inline">\(H_0\)</span></li>
 <li>Type II error</li>
@@ -812,12 +648,21 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 20%</li>
 <li>Distribution depends on sample size</li>
 </ul>
+</div><div id="beta" class="column" style="width:60%;">
+<style>
+#beta .beta { stroke: blue; }
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
 </section>
 <section id="beta-in-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="beta-in-distribution">Beta in distribution</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="nhst_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="nhst_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -825,12 +670,12 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <h2 class="anchored" data-anchor-id="section-1"></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="nhst_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="nhst_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="p-value" class="level2 subsection">
-<h2 class="subsection anchored" data-anchor-id="p-value">P-value</h2>
+<section id="p-value" class="level2">
+<h2 class="anchored" data-anchor-id="p-value">P-value</h2>
 <blockquote class="blockquote">
 <p>Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.</p>
 </blockquote>
@@ -843,7 +688,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <h2 class="anchored" data-anchor-id="p-value-in-h_0-distribution">P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="nhst_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="nhst_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -939,7 +784,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="dv">0</span><span class="sc">:</span>N, </span>
 <span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="nhst_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="nhst_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
