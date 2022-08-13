@@ -4,6 +4,12 @@ author: "Klinkenberg"
 date: "16 sep 2022"
 ---
 
+```{r setup, eval=FALSE}
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+
+child="topics/nhst/NHST_2.qmd", eval=TRUE}
+```
+
 ```{r child="../../../../topics/nhst/NHST_2.qmd", eval=TRUE}
 ```
 
