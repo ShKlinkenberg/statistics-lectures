@@ -391,12 +391,6 @@
   <p class="date">16 sep 2022</p>
 </section>
 
-<section class="slide level2">
-
-<div class="cell">
-
-</div>
-</section>
 <section>
 <section id="null-hypothesis-significance-testing" class="title-slide slide level1 section center">
 <h1>Null Hypothesis<br>Significance Testing</h1>
@@ -595,7 +589,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" height="600"></p>
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" height="600"></p>
 </div>
 </div>
 </section>
@@ -635,17 +629,25 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="binomial-h_0-distribution-output" class="slide level2 output-location-slide"><h2>Binomial <span class="math inline">\(H_0\)</span> distribution</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
 </div>
 </div></section><section id="binomial-h_a-distributions" class="slide level2">
 <h2>Binomial <span class="math inline">\(H_A\)</span> distributions</h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="decision-table" class="slide level2">
 <h2>Decision table</h2>
+<div>
+
+<style>
+#dectable > svg { transform: scale(1.4);}
+</style>
+</div>
+<div id="dectable" class="r-stack r-stretch">
 <svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
 <text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
 </svg>
+</div>
 </section>
 <section id="alpha-alpha" class="slide level2">
 <h2>Alpha <span class="math inline">\(\alpha\)</span></h2>
@@ -660,7 +662,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </ul>
 </div><div id="alpha" class="column" style="width:60%;">
 <style>
-#alpha .alpha { stroke: blue; }
+#alpha .alpha { stroke: black;}
+#alpha > svg { transform: scale(.8);}
 </style>
 <svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
 <text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
@@ -668,10 +671,10 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </div>
 </div>
 </section>
-<section id="alpha-alpha-in-distribution" class="slide level2">
-<h2>Alpha <span class="math inline">\(\alpha\)</span> in distribution</h2>
+<section id="section-1" class="slide level2">
+<h2></h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
 <section id="power" class="slide level2">
 <h2>Power</h2>
 <div class="columns">
@@ -688,7 +691,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </ul>
 </div><div id="power" class="column" style="width:60%;">
 <style>
-#power .power { stroke: blue; }
+#power .power { stroke: black; }
+#power > svg { transform: scale(.8);}
 </style>
 <svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
 <text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
@@ -696,10 +700,10 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </div>
 </div>
 </section>
-<section id="power-in-distribution" class="slide level2">
-<h2>Power in distribution</h2>
+<section id="section-2" class="slide level2">
+<h2></h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="post-hoc-power" class="slide level2">
 <h2>Post-Hoc Power</h2>
 <ul>
@@ -731,7 +735,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </ul>
 </div><div id="oneminalpha" class="column" style="width:60%;">
 <style>
-#oneminalpha .oneminalpha { stroke: blue; }
+#oneminalpha .oneminalpha { stroke: black; }
+#oneminalpha > svg { transform: scale(.8);}
 </style>
 <svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
 <text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
@@ -739,10 +744,10 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </div>
 </div>
 </section>
-<section id="alpha-in-distribution" class="slide level2">
-<h2>1 - alpha in distribution</h2>
+<section id="section-3" class="slide level2">
+<h2></h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="beta" class="slide level2">
 <h2>Beta</h2>
 <div class="columns">
@@ -756,7 +761,8 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </ul>
 </div><div id="beta" class="column" style="width:60%;">
 <style>
-#beta .beta { stroke: blue; }
+#beta .beta { stroke: black; }
+#beta > svg { transform: scale(.8);}
 </style>
 <svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
 <text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
@@ -764,14 +770,14 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </div>
 </div>
 </section>
-<section id="beta-in-distribution" class="slide level2">
-<h2>Beta in distribution</h2>
-
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
-<section id="section-1" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 
 <img data-src="nhst_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
 <section id="p-value" class="slide level2">
 <h2>P-value</h2>
 <blockquote>
@@ -785,7 +791,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <section id="p-value-in-h_0-distribution" class="slide level2">
 <h2>P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="test-statistics" class="slide level2">
 <h2>Test statistics</h2>
 <p>Some common test statistics</p>
@@ -882,7 +888,7 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 </section>
 <section id="decision-table-1-output" class="slide level2 flexbox vcenter smaller output-location-slide"><h2>Decision Table</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </div>
 </div></section><section id="reasoning-scheme" class="slide level2 subsection flexbox vcenter">
 <h2>Reasoning Scheme</h2>

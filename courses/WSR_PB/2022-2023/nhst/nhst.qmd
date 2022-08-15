@@ -20,7 +20,7 @@ local({
 
 
 
-```{r child="../../../../topics/nhst/NHST_2.rmd"}
+```{r child="../../../../topics/nhst/NHST_2.qmd"}
 ```
 
 <!-- Footer insert below -->

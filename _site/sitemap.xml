@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://shklinkenberg.github.io/index.html</loc>
+    <lastmod>2022-08-15T16:00:49.314Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shklinkenberg.github.io/courses/SSR/2022-2023/index.html</loc>
+    <lastmod>2022-08-15T16:00:50.157Z</lastmod>
+  </url>
+  <url>
     <loc>https://shklinkenberg.github.io/courses/SSR/2022-2023/nhst/nhst.html</loc>
-    <lastmod>2022-08-13T19:47:36.339Z</lastmod>
+    <lastmod>2022-08-15T16:00:52.794Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shklinkenberg.github.io/courses/WSR_PB/2022-2023/index.html</loc>
+    <lastmod>2022-08-15T16:00:53.643Z</lastmod>
   </url>
   <url>
     <loc>https://shklinkenberg.github.io/courses/WSR_PB/2022-2023/nhst/nhst.html</loc>
-    <lastmod>2022-08-13T19:47:37.139Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shklinkenberg.github.io/index.html</loc>
-    <lastmod>2022-08-13T19:47:37.944Z</lastmod>
+    <lastmod>2022-08-15T16:00:55.621Z</lastmod>
   </url>
 </urlset>

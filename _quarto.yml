@@ -52,5 +52,6 @@ format:
     df-print: kable
     smooth-scroll: true
     link-external-newwindow: true
+    linkcolor: '#BC0031'
 
 freeze: false
