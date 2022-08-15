@@ -33,6 +33,7 @@ website:
     - id: SSR
       title: "Scientific & Statistical Reasoning"
       style: "docked"
+      foreground: '#BC0031'
       background: light
       collapse-level: 2
       contents:
