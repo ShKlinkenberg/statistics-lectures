@@ -10,12 +10,14 @@ project:
 
 website:
   title: "Statistics Lectures"
+  css: style.scss
   site-url: https://shklinkenberg.github.io
   repo-url: https://github.com/ShKlinkenberg/statistics-lectures
   repo-actions: [edit, issue]
   google-analytics: "UA-107432294-1"
   page-navigation: true
   navbar:
+    background: '#BC0031'
     left:
       - text: Courses
         menu: 
