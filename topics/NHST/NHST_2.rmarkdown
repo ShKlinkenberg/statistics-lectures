@@ -43,17 +43,22 @@ $H_A$
 
 > 95% confidence interval 
 
+
 $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}$$
+
 
 * Lowerbound = $\bar{x} - 1.96 \times SE$
 * Upperbound = $\bar{x} + 1.96 \times SE$
 
 ## Standard Error {.flexbox .vcenter}
 
+
 ```{r, child="ci.html"}
 ```
 
+
 ##
+
 
 ```{r, echo=FALSE, out.height=600}
 set.seed(1548)
@@ -135,7 +140,9 @@ percentage = (1/iterations)*sum(mu_in_ci)
 
 
 
+
 ## Binomial $H_0$ distribution
+
 
 ```{r, echo=TRUE}
 #| output-location: slide
@@ -170,7 +177,9 @@ barplot( p_kp,
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
+
 ## Binomial $H_A$ distributions
+
 
 ```{r, echo=FALSE}
 
@@ -207,6 +216,7 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 }
 ```
 
+
 ## Decision table
 
 ::: {.content-visible when-format="revealjs"}
@@ -220,8 +230,10 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 
 
 ::: {.r-stack #dectable .r-stretch}
+
 ```{r child="decision_table.svg"}
 ```
+
 :::
 
 ## Alpha $\alpha$
@@ -245,14 +257,17 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 #alpha > svg { transform: scale(.8);}
 </style>
 
+
 ```{r child="decision_table.svg"}
 ```
+
 
 :::
 
 ::::
 
 ##
+
 
 ```{r, echo=FALSE}
 
@@ -284,6 +299,7 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
+
 ## Power
 
 :::: {.columns}
@@ -306,14 +322,17 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 #power > svg { transform: scale(.8);}
 </style>
 
+
 ```{r child="decision_table.svg"}
 ```
+
 
 :::
 
 ::::
 
 ##
+
 
 ```{r, echo=FALSE}
 
@@ -344,6 +363,7 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
+
 
 ## Post-Hoc Power
 
@@ -384,14 +404,17 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 #oneminalpha > svg { transform: scale(.8);}
 </style>
 
+
 ```{r child="decision_table.svg"}
 ```
+
 
 :::
 
 ::::
 
 ##
+
 
 ```{r, echo=FALSE}
 
@@ -423,6 +446,7 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
+
 ## Beta
 
 :::: {.columns}
@@ -444,8 +468,10 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 #beta > svg { transform: scale(.8);}
 </style>
 
+
 ```{r child="decision_table.svg"}
 ```
+
 
 :::
 
@@ -453,6 +479,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 
 ##
+
 
 ```{r, echo=FALSE}
 
@@ -484,7 +511,9 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
+
 ## 
+
 
 ```{r, echo=FALSE}
 
@@ -510,6 +539,7 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 ```
 
+
 ## P-value
 
 > Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.
@@ -519,6 +549,7 @@ Reject $H_0$ when:
 * $p$-value $\leq$ $alpha$
 
 ## P-value in $H_{0}$ distribution
+
 
 ```{r, echo=FALSE}
 
@@ -550,6 +581,7 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
+
 ## Test statistics
 
 Some common test statistics
@@ -563,6 +595,7 @@ Some common test statistics
 * etc...
 
 ## Decision Table {.flexbox .vcenter .smaller}
+
 
 ```{r, echo=TRUE}
 #| output-location: slide
@@ -644,12 +677,14 @@ barplot(dbinom(0:N,N, HA),
         cex.names = 0.7)
 ```
 
+
 ## Reasoning Scheme {.subsection .flexbox .vcenter}
 
 ![](../../../../topics/NHST/NHST_descision_scheme.png)
 
-## R<-PSYCHOLOGIST {.smaller}
+## R<-PSYCHOLOGIST {background-iframe="http://rpsychologist.com/d3/NHST/"}
 
-<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 
-[Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"}
+
+
+
