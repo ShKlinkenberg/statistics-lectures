@@ -8,3 +8,65 @@ format:
 ---
 
 On this site you can find my statistics lectures for the various courses i give.
+
+On this site you can find my statistics lectures for SSR.
+
+```{r, echo=FALSE}
+files <- list.files("courses/SSR", full.names = F, pattern = "\\.qmd", recursive = T)
+files <- files[-1]
+
+lectures = data.frame()
+n = length(files)
+
+for (i in 1:n) {
+
+  lectures[i ,'url'] <- data.frame(url = paste0("courses/SSR/", files[i]))
+  
+  yaml <- rmarkdown::yaml_front_matter(lectures[i ,'url'])
+  
+  lectures[i , 'title'] = yaml$title
+  lectures[i , 'date'] = yaml$date
+  lectures[i , 'file_name'] = files[i]
+
+}
+
+data.frame(Date    = lectures$date, 
+           Lecture = lectures$title,
+           Handout = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "handouts", gsub("qmd", "html", lectures$url)) ),
+           Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "slides", gsub("qmd", "html", lectures$url)) ) 
+          ) -> lecture.list
+
+knitr::kable(lecture.list[order(lecture.list$Date, decreasing = TRUE), ],
+             row.names = FALSE)
+```
+
+On this site you can find my statistics lectures for WSR
+
+```{r, echo=FALSE}
+files <- list.files("courses/WSR_PB", full.names = F, pattern = "\\.qmd", recursive = T)
+files <- files[-1]
+
+lectures = data.frame()
+n = length(files)
+
+for (i in 1:n) {
+
+  lectures[i ,'url'] <- data.frame(url = paste0("courses/WSR_PB/", files[i]))
+  
+  yaml <- rmarkdown::yaml_front_matter(lectures[i ,'url'])
+  
+  lectures[i , 'title'] = yaml$title
+  lectures[i , 'date'] = yaml$date
+  lectures[i , 'file_name'] = files[i]
+
+}
+
+data.frame(Date    = lectures$date, 
+           Lecture = lectures$title,
+           Handout = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "handouts", gsub("qmd", "html", lectures$url)) ),
+           Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "slides", gsub("qmd", "html", lectures$url)) ) 
+          ) -> lecture.list
+
+knitr::kable(lecture.list[order(lecture.list$Date, decreasing = TRUE), ],
+             row.names = FALSE)
+```

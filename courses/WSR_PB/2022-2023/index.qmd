@@ -31,6 +31,7 @@ data.frame(Date    = lectures$date,
            Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "slides", gsub("qmd", "html", lectures$url)) ) 
           ) -> lecture.list
 
-lecture.list
+knitr::kable(lecture.list[order(lecture.list$Date, decreasing = TRUE), ],
+             row.names = FALSE)
 ```
 
