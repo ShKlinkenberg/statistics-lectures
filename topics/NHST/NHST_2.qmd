@@ -2,58 +2,38 @@
 
 ## Neyman-Pearson Paradigm
 
-![](https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg){.absolute top=150 left=0 height="300"}
+![](https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg){.absolute top="150" left="0" height="300"}
 
-![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top=150 left=200 height="300"}
+![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top="150" left="200" height="300"}
 
 [Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman) - [Pearson](https://en.wikipedia.org/wiki/Egon_Pearson)
 
 ## Two hypothesis
 
-<table style="width:100%; border: none;">
-  
-<tr><td>
-
-$H_0$
-
-* Skeptical point of view
-* No effect
-* No preference
-* No Correlation
-* No difference
-
-</td><td>
-
-$H_A$
-
-* Refute Skepticism
-* Effect
-* Preference
-* Correlation
-* Difference
-
-</td></tr></table>
+|                                                                                                     |                                                                                   |
+|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| \$H_0\$ \* Skeptical point of view \* No effect \* No preference \* No Correlation \* No difference | \$H_A\$ \* Refute Skepticism \* Effect \* Preference \* Correlation \* Difference |
 
 ## Frequentist probability
 
-* Objective Probability
-* Relative frequency in the long run
+-   Objective Probability
+-   Relative frequency in the long run
 
 ## Standard Error
 
-> 95% confidence interval 
+> 95% confidence interval
 
 $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \frac{s}{\sqrt{n}}$$
 
-* Lowerbound = $\bar{x} - 1.96 \times SE$
-* Upperbound = $\bar{x} + 1.96 \times SE$
+-   Lowerbound = $\bar{x} - 1.96 \times SE$
+-   Upperbound = $\bar{x} + 1.96 \times SE$
 
 ## Standard Error {.flexbox .vcenter}
 
 ```{r, child="ci.html"}
 ```
 
-##
+## 
 
 ```{r, echo=FALSE, out.height=600}
 set.seed(1548)
@@ -133,8 +113,6 @@ for(i in 1:iterations) {
 percentage = (1/iterations)*sum(mu_in_ci)
 ```
 
-
-
 ## Binomial $H_0$ distribution
 
 ```{r, echo=TRUE}
@@ -210,49 +188,42 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 ## Decision table
 
 ::: {.content-visible when-format="revealjs"}
-
+```{=html}
 <style>
 #dectable > svg { transform: scale(1.4);}
 </style>
-
+```
 :::
 
-
-
-::: {.r-stack #dectable .r-stretch}
+::: {#dectable .r-stack .r-stretch}
 ```{r child="decision_table.svg"}
 ```
 :::
 
 ## Alpha $\alpha$
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
-
-* Incorrectly reject $H_0$
-* Type I error
-* False Positive
-* Criteria often 5%
-* Distribution depends on sample size
-
+-   Incorrectly reject $H_0$
+-   Type I error
+-   False Positive
+-   Criteria often 5%
+-   Distribution depends on sample size
 :::
 
 ::: {#alpha .column width="60%"}
-
+```{=html}
 <style>
 #alpha .alpha { stroke: black;}
 #alpha > svg { transform: scale(.8);}
 </style>
-
+```
 ```{r child="decision_table.svg"}
 ```
-
+:::
 :::
 
-::::
-
-##
+## 
 
 ```{r, echo=FALSE}
 
@@ -286,34 +257,29 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Power
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
-
-* Correctly reject $H_0$
-* True positive
-* Power equal to: 1 - Beta
-    * Beta is Type II error
-* Criteria often 80%
-* Depends on sample size
-
+-   Correctly reject $H_0$
+-   True positive
+-   Power equal to: 1 - Beta
+    -   Beta is Type II error
+-   Criteria often 80%
+-   Depends on sample size
 :::
 
 ::: {#power .column width="60%"}
-
+```{=html}
 <style>
 #power .power { stroke: black; }
 #power > svg { transform: scale(.8);}
 </style>
-
+```
 ```{r child="decision_table.svg"}
 ```
-
+:::
 :::
 
-::::
-
-##
+## 
 
 ```{r, echo=FALSE}
 
@@ -347,8 +313,8 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Post-Hoc Power
 
-* Also known as: observed, retrospective, achieved, prospective and a priori power
-* Specificly meaning:
+-   Also known as: observed, retrospective, achieved, prospective and a priori power
+-   Specificly meaning:
 
 > The power of a test assuming a population effect size equal to the observed effect size in the current sample.
 
@@ -356,7 +322,7 @@ Source: [O'Keefe (2007)](http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf)
 
 ## Effect size
 
-In statistics, an effect size is a quantitative measure of the strength of a phenomenon.  Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.
 
 For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.
 
@@ -368,30 +334,25 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 
 ## One minus alpha
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
-
-* Correctly accept $H_0$
-* True negative
-
+-   Correctly accept $H_0$
+-   True negative
 :::
 
 ::: {#oneminalpha .column width="60%"}
-
+```{=html}
 <style>
 #oneminalpha .oneminalpha { stroke: black; }
 #oneminalpha > svg { transform: scale(.8);}
 </style>
-
+```
 ```{r child="decision_table.svg"}
 ```
-
+:::
 :::
 
-::::
-
-##
+## 
 
 ```{r, echo=FALSE}
 
@@ -425,34 +386,28 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Beta
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
-
-* Incorrectly accept $H_0$
-* Type II error
-* False Negative
-* Criteria often 20%
-* Distribution depends on sample size
-
+-   Incorrectly accept $H_0$
+-   Type II error
+-   False Negative
+-   Criteria often 20%
+-   Distribution depends on sample size
 :::
 
 ::: {#beta .column width="60%"}
-
+```{=html}
 <style>
 #beta .beta { stroke: black; }
 #beta > svg { transform: scale(.8);}
 </style>
-
+```
 ```{r child="decision_table.svg"}
 ```
-
+:::
 :::
 
-::::
-
-
-##
+## 
 
 ```{r, echo=FALSE}
 
@@ -516,7 +471,7 @@ legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 Reject $H_0$ when:
 
-* $p$-value $\leq$ $alpha$
+-   $p$-value $\leq$ $alpha$
 
 ## P-value in $H_{0}$ distribution
 
@@ -554,13 +509,13 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 Some common test statistics
 
-* Number of heads
-* Sum of dice
-* Difference
-* $t$-statistic
-* $F$-statistic
-* $\chi^2$-statistic
-* etc...
+-   Number of heads
+-   Sum of dice
+-   Difference
+-   $t$-statistic
+-   $F$-statistic
+-   $\chi^2$-statistic
+-   etc...
 
 ## Decision Table {.flexbox .vcenter .smaller}
 
@@ -648,8 +603,10 @@ barplot(dbinom(0:N,N, HA),
 
 ![](../../../../topics/NHST/NHST_descision_scheme.png)
 
-## R<-PSYCHOLOGIST {.smaller}
+## R\<-PSYCHOLOGIST {.smaller}
 
-<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
+
+</iframe>
 
 [Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"}

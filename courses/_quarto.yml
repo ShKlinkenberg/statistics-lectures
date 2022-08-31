@@ -12,7 +12,8 @@ format:
     theme: white
     slide-number: true
     css: uva_reveal.css
-    footer: "@ShKlinkenberg"
+    footer: "Klinkenberg"
+    google-analytics: "UA-107432294-1"
     title-slide-attributes:
       data-background-image: https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg
       data-background-size: contain

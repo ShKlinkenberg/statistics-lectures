@@ -1,0 +1,304 @@
+# Experiment {.section}
+
+[Video registration](https://webcolleges.uva.nl/Mediasite/Play/ed1e63e0cd204dcf9d2a144603ce342b1d?playFrom=3708000)
+
+## Heads
+
+<div style="text-align:center;">
+
+<img style="width:40%;" src="https://shklinkenberg.github.io/statistics-lectures/topics/coin_expreiment/QR_heads.png">
+<p>bit.ly/2j54A2U</p>
+
+</div>
+
+## Emperical Cycle {.section}
+
+* **Observation** Patiënt is showing post traumatic symptoms
+* **Induction** Can we diagnose PTSD
+* **Deduction** $H_0$: P: fair coin &rarr; C: patiënt is balanced
+* **Deduction** $H_A$: P: Unfair coin &rarr; C: patiënt is unbalanced
+* **Deduction** $H_A$: P: data $\neq$ EV &rarr; C: is unbalanced
+* **Testing** Choose $\alpha$ and Power
+* **Evaluation** Make a decision
+
+## Null distribution {.subsection}
+
+Let's analyse the null distribution of the results.
+
+<iframe style="height:400px; width:100%;" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pubhtml?gid=1329884255&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+[Google sheet](https://docs.google.com/spreadsheets/d/150iSLUXqZbsetzDMjYlY5CAcjIzTanTm2tOFfn_ConA/edit?usp=sharing)
+
+<!--
+
+
+-->
+
+## Distributions
+
+What is the difference between
+
+* Population distribution
+* Sample distribution
+* Samples distribution
+
+```{r, eval=FALSE}
+# install.packages("curl")
+library("curl")
+
+url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDN_T8O8wuk3R-QuQR2PpUfK9IeM979FzMSNZi1krq_T8ICAxE5N10di8vwHfJRHXrr-zwXtKsTWz/pub?output=csv"
+
+data <- read.csv(curl(url))
+```
+
+```{r, echo=FALSE, eval=FALSE}
+
+names(data)[2] <- "heads"
+data$heads <- as.numeric(data$heads)
+data[which(data$heads>=0 & data$heads <= 10), ] -> data.cleaned
+
+freq.table <- table(data.cleaned$heads)
+barplot(freq.table)
+
+barplot(table(factor(data.cleaned$heads, levels=0:10)))
+```
+
+
+
+## Binomial distribution
+
+$$ {n\choose k}p^k(1-p)^{n-k} \\
+ {n\choose k} = \frac{n!}{k!(n-k)!} $$
+
+With values:
+
+```{r, echo=TRUE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+```
+
+## Probabilities
+
+```{r, echo=FALSE}
+munt = 0:1
+
+# alle_mogelijkheden = expand.grid(munt,munt,munt,munt,munt,munt,munt,munt,munt,munt)
+# 
+# sommen = rowSums(alle_mogelijkheden)
+
+# table(sommen)
+
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+# permutations
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("red",2),rep("white",7),rep("red",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col='darkgreen',
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Testing
+
+I landed 2 times head. Can we conclude PTSD? 
+
+* As you can see from the distribution of healthy coins, we cannot conclude that by definition.
+* What we can do is indicate how rare 2 is in a healthy population.
+
+## Testing {.smaller}
+
+<small>
+
+> * Based on the null distribution we can see that the expected value (EV is 5.)
+> * We can now define the $H_0$ hypothesis: $H_0 = 5$
+> * What is the alternative hypothesis?
+> * The alternative hypothesis describes a situation where PTSD is pressent.
+> * We could say that the alternative hypothesis is not 5.
+>   * $H_A \ne 5$
+> * We could also formulate our $H_0$ and $H_A$ more abstract:
+>   * $H_0:$ the patient is balenced
+>   * $H_A:$ the patient is unbalenced
+> * What criterium should we use to conclude that one would be unbalenced?
+> * In the social sciences this $\alpha$ criteria is often 5%.
+> * I tossed 2 times head. That is more frequent than 5%.
+> * Therefore, we conclude that our patient is probably healthy but we can never be sure.
+> * My coin could still be part of the unbalenced population.
+
+</small>
+
+## Null distribution
+
+```{r, echo=FALSE}
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col='darkgreen',
+         ylim=c(0,.3) )
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+```
+
+## Alternative Distribution {.smaller .build .subsection}
+
+But we have no clue of what this distribution could look like. 
+
+For now let's assume the probability of landing heads for my coin is .25
+
+```{r, echo=FALSE}
+
+# n = 10   # Sample size
+# k = 0:10 # Discrete probability space
+p = .25   # Probability of head
+
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+
+p_k2  = p^k  * (1-p)^(n-k)  # Probability of single event
+p_kp2 = p_k2 * permutations # Probability of event times 
+                            # the occurrence of that event
+
+title = "Binomial alternative distribution"
+
+col=c(rep("red",2),rep("white",7),rep("red",2))
+
+barplot( p_kp2, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         beside=TRUE,
+         col="darkorange",
+         ylim=c(0,.3) 
+         )
+
+text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+```
+
+## $H_0$ and $H_A$ distribution
+
+```{r, echo=FALSE}
+
+title = "Both distributions"
+
+colh0 = 'darkgreen'
+colha = 'darkorange'
+
+barplot( rbind(p_kp,p_kp2), 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col = rbind(colh0,colha),
+         beside=TRUE
+         #legend.text = c("H0", "HA")
+         )
+
+legend("topright", legend=c("H0","HA"), fill=c("darkgreen","darkorange"))
+
+abline(v = c(6.5,27.5), col="red", lwd=3, lty="dotted")
+
+```
+
+<!--
+
+## Power and more {.section}
+
+```{r, echo=FALSE, eval=FALSE}
+N     = 10  # Sample size
+H0    = .5  # Kop 50/50
+HA    = .25 # Aternatieve verdeling
+alpha = .02 # Gekozen type I fout
+
+# Juiste gebieden in rood weergeven op basis van de gekozen alpha
+lb = qbinom(alpha/2, N, H0, lower.tail = T)
+ub = qbinom(alpha/2, N, H0, lower.tail = F)
+
+col = rep("white", N+1)
+col[0:lb+1] = "red"
+col[ub:N+1] = "red"
+
+
+col2 = rep("red", N+1)
+col2[0:lb+1] = "white"
+col2[ub:N+1] = "white"
+
+
+# Haal onderstaande # voor col weg om geen kleurtjes aan te geven.
+# col = col2  = "white"
+
+layout(matrix(1:9,3,3, byrow=T))
+
+plot.new()
+text(0.5,0.5,"Binomial Distribution",cex=1.5)
+# text(0.5,0.1,paste("N:",N),cex=1.5)
+
+plot.new()
+text(0.5,0.5,"H0 True",cex=2)
+
+plot.new()
+text(0.5,0.5,"H0 False",cex=2)
+
+plot.new()
+text(0.5,0.5,"Reject H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col, 
+#        yaxt = 'n', 
+        main = 'Alpha / Type I error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col, 
+        yaxt = 'n', 
+        main = 'Power', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
+plot.new()
+text(0.5,0.5,"Accept H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col2, 
+#        yaxt = 'n', 
+        main = '1 - alpha', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col2, 
+        yaxt = 'n', 
+        main = 'Beta / Type II error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
+```
+
+-->

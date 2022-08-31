@@ -1,0 +1,27 @@
+---
+title: "Statistical Reasoning"
+subtitle: "Null Hypothesis Testing"
+author: "Klinkenberg"
+date: "5 sep 2022"
+---
+
+## Learning
+
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../../topics/statistical_reasoning/statistical_reasoning.qmd"}
+```
+
+```{r child="../../../../topics/empirical_cycle/empirical_cycle.qmd"}
+```
+
+```{r child="../../../../topics/coin_expreiment/coin_experiment.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.md"}
+```
+

@@ -6,6 +6,7 @@ project:
     - courses/SSR/2022-2023/index.qmd
     - courses/SSR/2022-2023/nhst/nhst.qmd
     - courses/WSR_PB/2022-2023/index.qmd
+    - courses/WSR_PB/2022-2023/reasoning_hst/reasoning_empirical_cycle_nhst.qmd
     - courses/WSR_PB/2022-2023/nhst/nhst.qmd
 
 format:
@@ -55,6 +56,7 @@ website:
       collapse-level: 2
       contents:
         - courses/WSR_PB/2022-2023/index.qmd
+        - courses/WSR_PB/2022-2023/reasoning_hst/reasoning_empirical_cycle_nhst.qmd
         - courses/WSR_PB/2022-2023/nhst/nhst.qmd
 
 freeze: false
