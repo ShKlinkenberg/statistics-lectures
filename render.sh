@@ -1,3 +1,3 @@
 quarto render
 quarto preview
-quarto render lectures
+quarto render courses

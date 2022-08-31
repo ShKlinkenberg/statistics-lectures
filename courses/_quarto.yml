@@ -18,3 +18,11 @@ format:
       data-background-image: https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg
       data-background-size: contain
       data-background-position: bottom
+      
+project:
+  output-dir: ../handouts/
+format: 
+  html: 
+    toc: true
+    toc-depth: 2
+    toc-location: left

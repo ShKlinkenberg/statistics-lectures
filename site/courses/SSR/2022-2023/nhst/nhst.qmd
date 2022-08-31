@@ -1,0 +1,13 @@
+---
+title: "Null Hypothesis Significance Testing"
+author: "Klinkenberg"
+date: "16 sep 2022"
+---
+
+```{r child="../../../../topics/nhst/NHST_2.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.md"}
+```
