@@ -3,8 +3,8 @@ project:
   output-dir: site
   render:
     - index.qmd
-    # - courses/SSR/2022-2023/index.qmd
-    # - courses/WSR_PB/2022-2023/index.qmd
+    - SSR.qmd
+    - WSR_PB.qmd
 
 format:
   html:
@@ -25,32 +25,32 @@ website:
   page-navigation: true
   navbar:
     background: '#BC0031'
-#     left:
-#       - text: Courses
-#         menu: 
-#           - sidebar:SSR
-#           - sidebar:WSR
-# 
+    left:
+      - text: Courses
+        menu:
+          - sidebar:SSR
+          - sidebar:WSR
+
     right:
       - icon: github
         href: https://github.com/ShKlinkenberg/statistics-lectures
         aria-label: Quarto GitHub
-# 
-#   sidebar:
-#     - id: SSR
-#       title: "Scientific & Statistical Reasoning"
-#       style: "docked"
-#       # foreground: '#BC0031'
-#       background: light
-#       collapse-level: 2
-#       contents:
-#         - courses/SSR/2022-2023/index.qmd
-#     - id: WSR
-#       title: "Wetenschapsfilosofie & Statistisch Redeneren"
-#       style: "docked"
-#       background: light
-#       collapse-level: 2
-#       contents:
-#         - courses/WSR_PB/2022-2023/index.qmd
+
+  sidebar:
+    - id: SSR
+      title: "Scientific & Statistical Reasoning"
+      style: "docked"
+      # foreground: '#BC0031'
+      background: light
+      collapse-level: 2
+      contents:
+        - SSR.qmd
+    - id: WSR
+      title: "Wetenschapsfilosofie & Statistisch Redeneren"
+      style: "docked"
+      background: light
+      collapse-level: 2
+      contents:
+        - WSR_PB.qmd
 # 
 # freeze: false
