@@ -26,3 +26,4 @@ format:
     toc: true
     toc-depth: 2
     toc-location: left
+    smooth-scroll: true
