@@ -27,8 +27,10 @@ for (i in 1:n) {
 
 data.frame(Date    = lectures$date, 
            Lecture = lectures$title,
-           Handout = sprintf("[link](/%s)", lectures$url),
+           Handout = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "handouts", gsub("qmd", "html", lectures$url)) ) ,
            Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "slides", gsub("qmd", "html", lectures$url)) ) 
-          )
+          ) -> lecture.list
+
+lecture.list
 ```
 
