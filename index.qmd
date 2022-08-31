@@ -11,7 +11,7 @@ On this site you can find my statistics lectures for the various courses i give.
 
 On this site you can find my statistics lectures for SSR.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 files <- list.files("courses/SSR", full.names = F, pattern = "\\.qmd", recursive = T)
 files <- files[-1]
 
@@ -36,13 +36,20 @@ data.frame(Date    = lectures$date,
            Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "slides", gsub("qmd", "html", lectures$url)) ) 
           ) -> lecture.list
 
-knitr::kable(lecture.list[order(lecture.list$Date, decreasing = TRUE), ],
-             row.names = FALSE)
+# Sort on date
+library("lubridate")
+library("dplyr")
+
+lecture.list$Date <- lubridate::dmy(lecture.list$Date)
+
+
+# Print table with kable as set in YAML
+dplyr::arrange(lecture.list, desc(Date))
 ```
 
 On this site you can find my statistics lectures for WSR
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 files <- list.files("courses/WSR_PB", full.names = F, pattern = "\\.qmd", recursive = T)
 files <- files[-1]
 
@@ -67,6 +74,9 @@ data.frame(Date    = lectures$date,
            Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("courses", "slides", gsub("qmd", "html", lectures$url)) ) 
           ) -> lecture.list
 
-knitr::kable(lecture.list[order(lecture.list$Date, decreasing = TRUE), ],
-             row.names = FALSE)
+lecture.list$Date <- lubridate::dmy(lecture.list$Date)
+
+
+# Print table with kable as set in YAML
+dplyr::arrange(lecture.list, desc(Date))
 ```
