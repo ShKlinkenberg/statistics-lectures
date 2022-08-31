@@ -9,7 +9,7 @@ format:
 
 On this site you can find my statistics lectures for the various courses i give.
 
-On this site you can find my statistics lectures for SSR.
+## On this site you can find my statistics lectures for SSR.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 files <- list.files("courses/SSR", full.names = F, pattern = "\\.qmd", recursive = T)
@@ -42,12 +42,14 @@ library("dplyr")
 
 lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 
+library('kableExtra')
 
 # Print table with kable as set in YAML
-dplyr::arrange(lecture.list, desc(Date))
+knitr::kable(dplyr::arrange(lecture.list, desc(Date)), escape = F ) %>%
+  kable_styling(full_width = F)
 ```
 
-On this site you can find my statistics lectures for WSR
+## On this site you can find my statistics lectures for WSR
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 files <- list.files("courses/WSR_PB", full.names = F, pattern = "\\.qmd", recursive = T)
@@ -78,5 +80,6 @@ lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 
 
 # Print table with kable as set in YAML
-dplyr::arrange(lecture.list, desc(Date))
+knitr::kable(dplyr::arrange(lecture.list, desc(Date)), escape = F ) %>%
+  kable_styling(full_width = F)
 ```
