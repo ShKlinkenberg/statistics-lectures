@@ -23,6 +23,7 @@ website:
   repo-actions: [edit, issue]
   google-analytics: "UA-107432294-1"
   page-navigation: true
+  search: false
   navbar:
     background: '#BC0031'
     left:
