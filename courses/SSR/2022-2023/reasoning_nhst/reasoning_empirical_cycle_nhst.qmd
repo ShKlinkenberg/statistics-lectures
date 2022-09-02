@@ -20,7 +20,6 @@ date: "08 sep 2022"
 ```{r child="../../../../topics/coin_expreiment/coin_experiment.qmd"}
 ```
 
-
 <!-- Footer insert below -->
 
 ```{r child="../../../../footer.md"}
