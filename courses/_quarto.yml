@@ -12,25 +12,17 @@ format:
     theme: white
     slide-number: true
     css: uva_reveal.css
-    footer: "Klinkenberg"
+    # footer: "Klinkenberg"
     google-analytics: "UA-107432294-1"
     title-slide-attributes:
       data-background-image: https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg
       data-background-size: contain
       data-background-position: bottom
       
-project:
-  output-dir: ../handouts/
-format: 
-  html: 
-    toc: true
-    toc-depth: 2
-    toc-location: left
-#     
 # project:
-#   output-dir: ../pdf/
+#   output-dir: ../handouts/
 # format: 
-#   pdf:
+#   html: 
 #     toc: true
-#     number-sections: true
-#     colorlinks: true
+#     toc-depth: 2
+#     toc-location: left

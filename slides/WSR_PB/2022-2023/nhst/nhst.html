@@ -398,53 +398,33 @@
 </section>
 <section id="neyman-pearson-paradigm" class="slide level2">
 <h2>Neyman-Pearson Paradigm</h2>
-<p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a>-<a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a> Paradigm</p>
-<style>
-.np { height: 400px;
-      float: left;
-    }
-</style>
-<p><img class="np" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg"></p>
-<p><img class="np" src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg"></p>
-<p><br></p>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg" class="absolute" style="top: 150px; left: 0px; height: 300px; "></p>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg" class="absolute" style="top: 150px; left: 200px; height: 300px; "></p>
+<p><a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Neyman</a> - <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Pearson</a></p>
 </section>
-<section id="h_0-and-h_a" class="slide level2 subsection">
-<h2><span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></h2>
-
-<table style="width:100%; border: none;">
-<tbody><tr>
-<td>
-<p><span class="math inline">\(H_0\)</span></p>
-<ul>
-<li>Skeptical point of view</li>
-<li>No effect</li>
-<li>No preference</li>
-<li>No Correlation</li>
-<li>No difference</li>
-</ul>
-</td>
-<td>
-<p><span class="math inline">\(H_A\)</span></p>
-<ul>
-<li>Refute Skepticism</li>
-<li>Effect</li>
-<li>Preference</li>
-<li>Correlation</li>
-<li>Difference</li>
-</ul>
-</td>
+<section id="two-hypothesis" class="slide level2">
+<h2>Two hypothesis</h2>
+<table>
+<colgroup>
+<col style="width: 54%">
+<col style="width: 45%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>$H_0$ * Skeptical point of view * No effect * No preference * No Correlation * No difference</td>
+<td>$H_A$ * Refute Skepticism * Effect * Preference * Correlation * Difference</td>
 </tr>
-
-</tbody></table>
+</tbody>
+</table>
 </section>
-<section id="frequentist-probability" class="slide level2 subsection">
+<section id="frequentist-probability" class="slide level2">
 <h2>Frequentist probability</h2>
 <ul>
 <li>Objective Probability</li>
 <li>Relative frequency in the long run</li>
 </ul>
 </section>
-<section id="standard-error" class="slide level2 subsection">
+<section id="standard-error" class="slide level2">
 <h2>Standard Error</h2>
 <blockquote>
 <p>95% confidence interval</p>
@@ -590,10 +570,12 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 }
 </script>
 </div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <div class="cell">
-<hr>
 <div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" height="600"></p>
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" height="600"></p>
 </div>
 </div>
 </section>
@@ -628,97 +610,35 @@ ctx.fillText("1.96se₂-x̄₂", bar_x_pos+bar_width+bar_gutter+(bar_width/4*3),
 <span id="cb1-26"><a href="#cb1-26"></a><span class="co"># abline(v = c(2.5,10.9), lty=2, col='red')</span></span>
 <span id="cb1-27"><a href="#cb1-27"></a></span>
 <span id="cb1-28"><a href="#cb1-28"></a><span class="fu">text</span>(.<span class="dv">6</span><span class="sc">:</span><span class="fl">10.6</span><span class="sc">*</span><span class="fl">1.2</span>,p_kp,<span class="fu">round</span>(p_kp,<span class="dv">3</span>),<span class="at">pos=</span><span class="dv">3</span>,<span class="at">cex=</span>.<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-
 </div>
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="binomial-h_a-distribution" class="slide level2">
-<h2>Binomial <span class="math inline">\(H_A\)</span> distribution</h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="decision-table" class="slide level2 flexbox vcenter subsection">
-<h2>Decision table</h2>
-
-<table style="border: none;  transform: scale(1);">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
 </section>
-<section id="alpha-alpha" class="slide level2 subsection">
+<section id="binomial-h_0-distribution-output" class="slide level2 output-location-slide"><h2>Binomial <span class="math inline">\(H_0\)</span> distribution</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</div>
+</div></section><section id="binomial-h_a-distributions" class="slide level2">
+<h2>Binomial <span class="math inline">\(H_A\)</span> distributions</h2>
+
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="decision-table" class="slide level2">
+<h2>Decision table</h2>
+<div>
+
+<style>
+#dectable > svg { transform: scale(1.4);}
+</style>
+</div>
+<div id="dectable" class="r-stack r-stretch">
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</section>
+<section id="alpha-alpha" class="slide level2">
 <h2>Alpha <span class="math inline">\(\alpha\)</span></h2>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li>Incorrectly reject <span class="math inline">\(H_0\)</span></li>
 <li>Type I error</li>
@@ -726,49 +646,25 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 5%</li>
 <li>Distribution depends on sample size</li>
 </ul>
+</div><div id="alpha" class="column" style="width:60%;">
+<style>
+#alpha .alpha { stroke: black;}
+#alpha > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section id="power" class="slide level2 subsection">
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="power" class="slide level2">
 <h2>Power</h2>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li>Correctly reject <span class="math inline">\(H_0\)</span></li>
 <li>True positive</li>
@@ -779,9 +675,22 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 80%</li>
 <li>Depends on sample size</li>
 </ul>
+</div><div id="power" class="column" style="width:60%;">
+<style>
+#power .power { stroke: black; }
+#power > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
-<section id="post-hoc-power" class="slide level2 subsection">
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="post-hoc-power" class="slide level2">
 <h2>Post-Hoc Power</h2>
 <ul>
 <li>Also known as: observed, retrospective, achieved, prospective and a priori power</li>
@@ -792,7 +701,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </blockquote>
 <p>Source: <a href="http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf">O’Keefe (2007)</a></p>
 </section>
-<section id="effect-size" class="slide level2 subsection">
+<section id="effect-size" class="slide level2">
 <h2>Effect size</h2>
 <p>In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.</p>
 <p>For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses.</p>
@@ -801,95 +710,34 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <section id="effect-size-1" class="slide level2 flexbox vcenter">
 <h2>Effect size</h2>
 
-<img data-src="../../../topics/NHST/effec_size.png" class="r-stretch"></section>
-<section id="alpha" class="slide level2 subsection">
-<h2>1 - alpha</h2>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<img data-src="../../../../topics/NHST/effec_size.png" class="r-stretch"></section>
+<section id="one-minus-alpha" class="slide level2">
+<h2>One minus alpha</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li>Correctly accept <span class="math inline">\(H_0\)</span></li>
 <li>True negative</li>
 </ul>
+</div><div id="oneminalpha" class="column" style="width:60%;">
+<style>
+#oneminalpha .oneminalpha { stroke: black; }
+#oneminalpha > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
+</div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="beta" class="slide level2 subsection">
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="beta" class="slide level2">
 <h2>Beta</h2>
-
-<table style="border: none;  transform: scale(.5); float:right; margin: -70px;">
-<colgroup><col width="150px">
-<col width="225px">
-<col width="225px">
-</colgroup><tbody><tr>
-<td>
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = True
-</td>
-<td>
-<span class="math inline">\(H_0\)</span> = False
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide to<br>reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
-Type I error <br>Alpha <span class="math inline">\(\alpha\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br>True positive = Power
-</td>
-</tr>
-<tr height="150px">
-<td>
-Decide not<br>to reject <span class="math inline">\(H_0\)</span>
-</td>
-<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-Correct <br> True negative
-</td>
-<td style="border: 5px solid blue; padding: 10px; color: white; background-color: red;">
-Type II error <br>Beta <span class="math inline">\(\beta\)</span>
-</td>
-</tr>
-
-</tbody></table>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li>Incorrectly accept <span class="math inline">\(H_0\)</span></li>
 <li>Type II error</li>
@@ -897,30 +745,39 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <li>Criteria often 20%</li>
 <li>Distribution depends on sample size</li>
 </ul>
-<div class="cell">
-<hr>
-<div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</div>
-</div>
-<div class="cell">
-<hr>
-<div class="cell-output-display">
-<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</div><div id="beta" class="column" style="width:60%;">
+<style>
+#beta .beta { stroke: black; }
+#beta > svg { transform: scale(.8);}
+</style>
+<svg width="600" height="370" xmlns="http://www.w3.org/2000/svg" style="font-size: 30px; color:white;">
+<text x="220" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = TRUE</text> <text x="420" y="60">H<tspan dy="3" font-size=".7em">0</tspan> = FALSE</text> <text x="30" y="120">Decide to</text> <text x="30" y="170">reject H<tspan dy="3" font-size=".7em">0</tspan></text> <text x="30" y="270">Decide to</text> <text x="30" y="320">not reject H<tspan dy="3" font-size=".7em">0</tspan></text> <g id="boxes" style="stroke:white; stroke-width:5px;"> <rect width="200" height="150" x="200" y="70" fill="red"></rect> <rect width="200" height="150" x="200" y="220" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="70" fill="lightgreen"></rect> <rect width="200" height="150" x="400" y="220" fill="red"></rect> </g> <g id="border" style="stroke:none; stroke-width:5px;"> <rect class="alpha" width="190" height="140" x="205" y="75" fill="none"></rect> <rect class="oneminalpha" width="190" height="140" x="205" y="225" fill="none"></rect> <rect class="power" width="190" height="140" x="405" y="75" fill="none"></rect> <rect class="beta" width="190" height="140" x="405" y="225" fill="none"></rect> </g> <g style="fill:white;"> <text x="220" y="120">Alpha</text> <text x="220" y="170">α</text> <text x="420" y="270">Beta</text> <text x="420" y="320">β</text> </g> <g style="fill:black;"> <text x="220" y="270">1 - α</text> <text x="420" y="120">Power</text> <text x="420" y="170">1 - β</text> </g>
+</svg>
 </div>
 </div>
 </section>
-<section id="p-value" class="slide level2 subsection">
+<section id="section-4" class="slide level2">
+<h2></h2>
+
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section id="p-value" class="slide level2">
 <h2>P-value</h2>
 <blockquote>
 <p>Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.</p>
 </blockquote>
 <p>Reject <span class="math inline">\(H_0\)</span> when:</p>
 <ul>
-<li><span class="math inline">\(p\)</span>-value &lt;= <span class="math inline">\(alpha\)</span></li>
+<li><span class="math inline">\(p\)</span>-value <span class="math inline">\(\leq\)</span> <span class="math inline">\(alpha\)</span></li>
 </ul>
+</section>
+<section id="p-value-in-h_0-distribution" class="slide level2">
+<h2>P-value in <span class="math inline">\(H_{0}\)</span> distribution</h2>
 
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="nhst_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="test-statistics" class="slide level2">
 <h2>Test statistics</h2>
 <p>Some common test statistics</p>
@@ -1012,19 +869,22 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <span id="cb2-73"><a href="#cb2-73"></a>        <span class="at">main =</span> <span class="st">'Beta / Type II error'</span>, </span>
 <span id="cb2-74"><a href="#cb2-74"></a>        <span class="at">names.arg =</span> <span class="dv">0</span><span class="sc">:</span>N, </span>
 <span id="cb2-75"><a href="#cb2-75"></a>        <span class="at">cex.names =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-
 </div>
-<img data-src="nhst_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="reasoning-scheme" class="slide level2 subsection flexbox vcenter">
+
+</section>
+<section id="decision-table-1-output" class="slide level2 flexbox vcenter smaller output-location-slide"><h2>Decision Table</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<p><img data-src="nhst_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+</div>
+</div></section><section id="reasoning-scheme" class="slide level2 subsection flexbox vcenter">
 <h2>Reasoning Scheme</h2>
 
-<img data-src="../../../topics/NHST/NHST_descision_scheme.png" class="r-stretch"></section>
+<img data-src="../../../../topics/NHST/NHST_descision_scheme.png" class="r-stretch"></section>
 <section id="r-psychologist" class="slide level2 smaller">
 <h2>R&lt;-PSYCHOLOGIST</h2>
-<iframe style="height:450px;" src="http://rpsychologist.com/d3/NHST/">
+<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" allowfullscreen="" style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
 </iframe>
-<p>Source: <a href="http://rpsychologist.com/d3/NHST/">Kristoffer Magnusson</a></p>
+<p><a href="http://rpsychologist.com/d3/NHST/" data-preview-link="false">Interactive distributions app by Kristoffer Magnusson</a></p>
 <!-- Footer insert below -->
 </section></section>
 <section>
@@ -1059,7 +919,7 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 </small><p><small style="text-align:left;"></small></p>
 <p><img src="https://shklinkenberg.github.io/uva_style/images/logo_uva.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p><span class="citation" data-cites="ShKlinkenberg">@ShKlinkenberg</span></p>
+<p>Wetenschapsfilosofie &amp; Statistisch Redeneren</p>
 </div>
 </section></section>
     </div>

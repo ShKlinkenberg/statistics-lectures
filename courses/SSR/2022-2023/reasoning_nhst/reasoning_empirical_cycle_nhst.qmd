@@ -3,6 +3,7 @@ title: "Statistical Reasoning"
 subtitle: "Null Hypothesis Testisn"
 author: "Klinkenberg"
 date: "08 sep 2022"
+footer: "Scientific & Statistical Reasoning"
 ---
 
 ## Learning

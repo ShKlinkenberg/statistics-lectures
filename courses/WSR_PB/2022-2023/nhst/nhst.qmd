@@ -2,6 +2,7 @@
 title: "Null Hypothesis Testing"
 author: "Klinkenberg"
 date: "13 sep 2022"
+footer: "Wetenschapsfilosofie & Statistisch Redeneren"
 ---
 
 ```{r child="../../../../topics/nhst/NHST_2.qmd"}
