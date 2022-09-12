@@ -1,7 +1,7 @@
 ---
 title: "Null Hypothesis Significance Testing"
 author: "Klinkenberg"
-date: "16 sep 2022"
+date: "15 sep 2022"
 footer: "Scientific & Statistical Reasoning"
 ---
 
