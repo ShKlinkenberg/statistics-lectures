@@ -21,8 +21,8 @@ format:
       
 # project:
 #   output-dir: ../handouts/
-# format: 
-#   html: 
+# format:
+#   html:
 #     toc: true
 #     toc-depth: 2
 #     toc-location: left
