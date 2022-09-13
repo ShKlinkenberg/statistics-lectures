@@ -10,29 +10,27 @@
 
 ## Two hypothesis
 
-:::: {.columns}
+::: columns
+::: column
+$H_0$
 
-::: {.column}
-$H_0$ 
-
-* Skeptical point of view
-* No effect 
-* No preference 
-* No Correlation 
-* No difference
+-   Skeptical point of view
+-   No effect
+-   No preference
+-   No Correlation
+-   No difference
 :::
 
-::: {.column}
+::: column
 $H_A$
 
-* Refute Skepticism
-* Effect
-* Preference
-* Correlation
-* Difference
+-   Refute Skepticism
+-   Effect
+-   Preference
+-   Correlation
+-   Difference
 :::
-
-::::
+:::
 
 ## Frequentist probability
 
