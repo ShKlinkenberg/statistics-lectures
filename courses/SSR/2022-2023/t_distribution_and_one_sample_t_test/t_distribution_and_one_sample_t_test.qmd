@@ -1,0 +1,17 @@
+---
+title: "T-distribution and the <br>One-sample t-test"
+author: "Klinkenberg"
+date: "20 sep 2022"
+footer: "Scientific & Statistical Reasoning"
+---
+
+```{r child="../../../../topics/t-distribution/t-distribution.qmd"}
+```
+
+```{r child="../../../../topics/t-test_one-sample/One-sample_t-test.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.md"}
+```

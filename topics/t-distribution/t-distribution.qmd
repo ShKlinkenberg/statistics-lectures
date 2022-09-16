@@ -1,0 +1,402 @@
+# T-distribution {.section}
+
+## Gosset {.smaller}
+
+```{=html}
+<!--
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg" style="float: left; width: 150px; margin: 0 20px 0 0;">
+-->
+```
+::: {.columns}
+::: {.column width="20%"}
+![William Sealy Gosset (aka Student) in 1908 (age 32)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg)
+:::
+
+::: {.column width="80%"}
+In probability and statistics, Student's t-distribution (or simply the t-distribution) is any member of a family of continuous probability distributions that arises when estimating the mean of a normally distributed population in situations where the sample size is small and population standard deviation is unknown.
+
+In the English-language literature it takes its name from William Sealy Gosset's 1908 paper in Biometrika under the pseudonym "Student". Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples, for example the chemical properties of barley where sample sizes might be as low as 3.
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
+:::
+:::
+
+## Population distribution {.smaller .subsection}
+
+```{r, echo=TRUE}
+#| output-location: slide
+#| code-line-numbers: "3-4|6-7|9|14"
+
+layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
+
+n  = 56    # Sample size
+df = n - 1 # Degrees of freedom
+
+mu    = 100
+sigma = 15
+
+IQ = seq(mu-45, mu+45, 1)
+
+par(mar=c(4,2,2,0))  
+plot(IQ, dnorm(IQ, mean = mu, sd = sigma), type='l', col="red", main = "Population Distribution")
+
+n.samples = 12
+
+for(i in 1:n.samples) {
+  
+  par(mar=c(2,2,2,0))  
+  hist(rnorm(n, mu, sigma), main="Sample Distribution", cex.axis=.5, col="beige", cex.main = .75)
+  
+}
+```
+
+## A sample {.smaller}
+
+Let's take one sample from our normal populatiion and calculate the t-value.
+
+```{r, echo=TRUE}
+x = rnorm(n, mu, sigma); x
+```
+
+```{r, echo=TRUE}
+#| output-location: slide
+hist(x, main = "Sample distribution", col = "beige", breaks = 15)
+text(80, 10, round(mean(x),2))
+```
+
+## More samples
+
+let's take more samples.
+
+```{r, echo=TRUE}
+n.samples     = 1000
+mean.x.values = vector()
+se.x.values   = vector()
+
+for(i in 1:n.samples) {
+  x = rnorm(n, mu, sigma)
+  mean.x.values[i] = mean(x)
+  se.x.values[i]   = (sd(x) / sqrt(n))
+}
+```
+
+## Mean and SE for all samples
+
+```{r, echo=TRUE}
+head(cbind(mean.x.values, se.x.values))
+```
+
+## Sampling distribution
+
+Of the mean
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+hist(mean.x.values, 
+     col  = "beige", 
+     main = "Sampling distribution", 
+     xlab = "all sample means")
+```
+
+## T-statistic {.subsection}
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+
+So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size, expressed as the degrees of freedom $df = n - 1$
+
+## t-value
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+
+```{r, echo=TRUE}
+t = (mean(x) - mu) / (sd(x) / sqrt(n))
+t
+```
+
+## Calculate t-values
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
+
+```{r, echo=TRUE}
+t.values = (mean.x.values - mu) / se.x.values
+
+tail(cbind(mean.x.values, mu, se.x.values, t.values))
+```
+
+## Sampled t-values
+
+What is the distribution of all these t-values?
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+hist(t.values, 
+     freq = F, 
+     main = "Sampled T-values", 
+     xlab = "T-values",
+     col  = "beige",
+     ylim = c(0, .4))
+T = seq(-4, 4, .01)
+lines(T, dt(T,df), col = "red")
+legend("topright", lty = 1, col="red", legend = "T-distribution")
+```
+
+## T-distribution {.smaller}
+
+<small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean ($\mu$), given a certain sample size ($df = n - 1$).
+
+The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough.
+
+The t-distribution is defined by:
+
+$$\textstyle\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\!$$
+
+where $\nu$ is the number of degrees of freedom and $\Gamma$ is the gamma function.
+
+Source: [wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
+
+</small>
+
+## 
+
+```{r, echo=FALSE}
+multiple.n  = c(5, 15, 30, 75, 100)
+multiple.df = multiple.n - 1
+col         = rainbow(length(multiple.df))
+
+plot(T,  dt(T, multiple.df[1]), type = "l", 
+     xlim = c(-4,4), ylim = c(0,.45), 
+     xlab = "T", ylab="density", 
+     col = col[1], main="T-distributions" )
+
+for(i in 2:length(multiple.df)) { 
+  
+  lines(T, dt(T, multiple.df[i]), type="l", col=col[i])
+  } 
+legend("topright", legend = paste("n =",multiple.n), lty=1, col = col)
+```
+
+## One or two sided {.subsection}
+
+Two sided
+
+-   $H_A: \bar{x} \neq \mu$
+
+One sided
+
+-   $H_A: \bar{x} > \mu$
+-   $H_A: \bar{x} < \mu$
+
+## 
+
+```{r, echo=FALSE}
+layout(matrix(1:2, 1, 2))
+
+
+plot(function(x) dt(x, df = 10), -4, 4,
+     main="T distribution (df=10) with two sided alpha",
+     cex.main = .7,
+     xlab="T-value",
+     ylab="",
+     bty="n",
+     lwd=1.5)
+     
+t = 2
+
+p = pt(1,10)
+
+alpha_r = 1-p
+
+
+# add p-value
+#pol_left = seq(-4,-t,length=20)
+#polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=45, density=15, lwd=2)
+#pol_right = seq(4,t,length=20)
+#polygon(c(pol_right,rev(pol_right)),c(rep(0,20), dt( rev(pol_right), df = 10)), col="red", angle=45, density=15, lwd=2)
+
+# add alpha
+
+tp95  = qt(.95,10)
+tp975 = qt(.975,10)
+tp25  = qt(.025,10)
+
+pol_left = seq(-4,tp25,length=20)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=-45, density=15, lwd=2)
+
+pol_left = seq(tp975,4,length=20)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=-45, density=15, lwd=2)
+
+# label alpha
+text(-3,dt(tp25 , df = 10),expression(paste("½",alpha       ," = 2.5%",sep="")),pos=3, col='red')
+text( 3,dt(tp975, df = 10),expression(paste("½",alpha       ," = 2.5%",sep="")),pos=3, col='red')
+
+xbracket = seq(-4,tp25,length=39)
+ybracket = dt(tp25 , df = 10)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+lines(xbracket,ybracket,col="gray")
+
+xbracket = seq(tp975, 4,length=39)
+ybracket = dt(tp975 , df = 10)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+lines(xbracket,ybracket,col="gray")
+
+#text(-4.2,.38,expression(paste("2 sided: P = ",P[left] + P[right]," = 7.34%")),pos=4)
+
+plot(function(x) dt(x, df = 10), -4, 4,
+     main="T distribution (df=10) with one sided alpha",
+     cex.main = .7,
+     xlab="T-value",
+     ylab="",
+     bty="n", 
+     lwd=1.5)
+
+pol_left = seq(tp95,4,length=20)
+polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=-45, density=15, lwd=2)
+
+# label alpha
+text( 3,dt(tp95 , df = 10),expression(paste(    alpha[right]," = 5%"  ,sep="")),pos=3, col='red')
+
+# add p-value
+#pol_left = seq(-4,-t,length=20)
+#polygon(c(pol_left,rev(pol_left)),  c(rep(0,20), dt( rev(pol_left),  df = 10)), col="red", angle=45, density=15, lwd=2)
+#pol_right = seq(4,t,length=20)
+#polygon(c(pol_right,rev(pol_right)),c(rep(0,20), dt( rev(pol_right), df = 10)), col="red", angle=45, density=15, lwd=2)
+
+#text((-4+tp25)/2,dt(tp25  , df = 10),"{",srt=-90,col="grey")
+#text( (4+tp975)/2,dt(tp975, df = 10),"{",srt=-90,col="grey")
+#text( (4+tp95)/2,dt(tp95  , df = 10),"{",srt=-90,col="grey")
+
+# label p-values
+#text(-t,.01,expression(P[left] ),pos=2,col="red")
+#text( t,.01,expression(P[right]),pos=4,col="red")
+
+#text(-t-.1,dt(-t, df = 10)+.003,"T")
+#text( t+.1,dt( t, df = 10)+.003,"T")
+
+
+# text(-4.2,.38 ,"1 sided: P/2 = 3.67%",pos=4)
+
+## 1%   T = 1.81246
+## .95% T = 2.228
+
+#polygon(c(0,1,1,0),c(0,0,.3,.3))
+
+pol_left = seq(-4,-t,length=20)
+
+xbracket = seq(tp95,4,length=39)
+ybracket = dt(tp95 , df = 10)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+lines(xbracket,ybracket,col="gray")
+```
+
+## Effect-size {.subsection}
+
+The effect-size is the standardised difference between the mean and the expected $\mu$. In the t-test effect-size is expressed as $r$.
+
+$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+
+```{r, echo=TRUE}
+r = sqrt(t^2/(t^2 + df))
+
+r
+```
+
+## Effect-sizes
+
+We can also calculate effect-sizes for all our calculated t-values. Under the assumption of $H_0$ the effect-size distribution looks like this.
+
+```{r}
+r = sqrt(t.values^2/(t.values^2 + df))
+
+tail(cbind(mean.x.values, mu, se.x.values, t.values, r))
+```
+
+## Effect-size distribution
+
+```{r, fig.height=3, echo=FALSE}
+hist(r, 
+     main = "effect-size distribution", 
+     col  = "beige")
+```
+
+Cohen (1988)
+
+-   Small: $0 \leq .1$
+-   Medium: $.1 \leq .3$
+-   Large: $.3 \leq .5$
+
+</small>
+
+## Power {.subsection}
+
+-   Strive for 80%
+-   Based on know effect size
+-   Calculate number of subjects needed
+-   Use [G\*Power](http://www.gpower.hhu.de) to calculate
+
+![](https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png)
+
+## Alpha Power {.smaller}
+
+```{r, echo=TRUE, fig.align='center'}
+#| output-location: slide
+
+T = seq(-3,6,.01)
+N = 45
+E = 2
+
+# Set plot
+plot(0,0,
+     type = "n",
+     ylab = "Density",
+     xlab = "T",
+     ylim = c(0,.5),
+     xlim = c(-3,6),
+     main = "T-Distributions under H0 and HA")
+
+critical_t = qt(.05,N-1,lower.tail=FALSE)
+
+# Alpha
+range_x = seq(critical_t,6,.01)
+polygon(c(range_x,rev(range_x)),
+        c(range_x*0,rev(dt(range_x,N-1,ncp=0))),
+        col     = "grey",
+        density = 10,
+        angle   = 90,
+        lwd     = 2)
+
+# Power
+range_x = seq(critical_t,6,.01)
+polygon(c(range_x,rev(range_x)),
+        c(range_x*0,rev(dt(range_x,N-1,ncp=E))),
+        col     = "grey",
+        density = 10,
+        angle   = 45,
+        lwd     = 2)
+
+lines(T,dt(T,N-1,ncp=0),col="red", lwd=2) # H0 line
+lines(T,dt(T,N-1,ncp=E),col="blue",lwd=2) # HA line
+
+# Critical value
+lines(rep(critical_t,2),c(0,dt(critical_t,N-1,ncp=E)),lwd=2,col="black")
+text(critical_t,dt(critical_t,N-1,ncp=E),"critical T-value",pos=2, srt = 90)
+
+# H0 and HA
+text(0,dt(0,N-1,ncp=0),expression(H[0]),pos=3,col="red", cex=2)
+text(E,dt(E,N-1,ncp=E),expression(H[A]),pos=3,col="blue",cex=2)
+
+# Mu H0 line
+lines(c(0,0),c(0,dt(0,N-1)), col="red",  lwd=2,lty=2)
+text(0,dt(0,N-1,ncp=0)/2,expression(mu),pos=4,cex=1.2)
+# Mu HA line
+lines(c(E,E),c(0,dt(E,N-1,ncp=E)),col="blue",lwd=2,lty=2)
+text(E,dt(0,N-1,ncp=0)/2,expression(paste(mu)),pos=4,cex=1.2)
+
+# t-value
+lines( c(critical_t+.01,6),c(0,0),col="green",lwd=4)
+
+# Legend
+legend("topright", c(expression(alpha),'POWER'),density=c(10,10),angle=c(90,45))
+```
+
+## 
+
+[R-Psychologist](http://rpsychologist.com/d3/NHST/#viz)
