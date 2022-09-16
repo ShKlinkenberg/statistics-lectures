@@ -1,0 +1,17 @@
+---
+title: "Paired and Independent<br> t-test"
+author: "Klinkenberg"
+date: "22 sep 2022"
+footer: "Scientific & Statistical Reasoning"
+---
+
+```{r child="../../../../topics/t-test_paired/t-test_paired.qmd"}
+```
+
+```{r child="../../../../topics/t-test_independent/t-test_independent.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.md"}
+```

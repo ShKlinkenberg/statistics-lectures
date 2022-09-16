@@ -1,0 +1,161 @@
+# Independent-samples t-test
+
+Compare 2 independent samples
+
+## Independent-samples t-test
+
+In the independent-samples t-test the mean of both independent samples is calculated and the difference of these $(\bar{X}_1 - \bar{X}_2)$ means is tested against the null hypothesis where $\mu = 0$.
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+Where $n_1$ and $n_2$ are the number of cases in each group and $SE_p$ is the pooled standard error.
+
+## Hypothesis
+
+\begin{aligned}
+H_0 &: t = 0 = \mu_t \\
+H_A &: t \neq 0 \\
+H_A &: t > 0 \\
+H_A &: t < 0 \\
+\end{aligned}
+
+## Data structure
+
+index | k | outcome
+------|----|--
+1     | 1 | d
+2     | 1 | d
+3     | 2 | d
+4     | 2 | d
+
+Where $k$ is the level of the categorical predictor variabla and $d$ is the value of the outcome/dependent variable.
+
+## Additional assumption
+
+Specificly for independent sample $t$-test.
+
+* Equality of variance
+    * $H_0$ : Variance $=$ equal ($p$ > .05)
+    * $H_A$ : Variance $\neq$ equal ($p$ < .05)
+
+## Example
+
+We are going to use the IQ estimates we collected last week again. You had to gues the IQ of the one sitting next to you and your own IQ. But we are going to add gender to the data set. We did not register this so we are going to simulate some genders.
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data <- gsheet2tbl('docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing')
+
+data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
+
+names(data) <- c('IQ.next.to.you', 'IQ.you')
+```
+
+
+```{r, echo=TRUE}
+gender = sample(c("male", "female"), dim(data)[1], replace = TRUE)
+```
+
+## The data
+
+```{r, echo=FALSE}
+data$gender = gender
+
+# Write data for use in SPSS
+write.table(data, "IQ.csv", row.names=FALSE, col.names=TRUE, dec=',')
+
+datatable(data[,c('gender', 'IQ.you')], options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate means {.subsection}
+
+```{r, echo=TRUE}
+IQ.you.male   = subset(data, gender == "male",   select = IQ.you)$IQ.you
+IQ.you.female = subset(data, gender == "female", select = IQ.you)$IQ.you
+
+IQ.you.male.mean   = mean(IQ.you.male,   na.rm = T)
+IQ.you.female.mean = mean(IQ.you.female, na.rm = T)
+
+rbind(IQ.you.male.mean, IQ.you.female.mean)
+```
+
+## Calculate variance {.smaller .subsection}
+
+```{r, echo=TRUE}
+IQ.you.male.var   = var(IQ.you.male,   na.rm = T)
+IQ.you.female.var = var(IQ.you.female, na.rm = T)
+rbind(IQ.you.male.var, IQ.you.female.var)
+
+IQ.you.male.n   = length(IQ.you.male)   - 1
+IQ.you.female.n = length(IQ.you.female) - 1
+rbind(IQ.you.male.n, IQ.you.female.n)
+```
+
+## Calculate t-value {.smaller}
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+
+Where ${SE}_p$ is the pooled standard error.
+
+$${SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}$$
+
+And $S^2_p$ is the pooled variance.
+
+$$S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
+
+Where $s^2$ is the variance and $n$ the sample size.
+
+## Calculate pooled variance {.subsection}
+
+$$S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}$$
+
+```{r, echo=TRUE}
+df = IQ.you.male.n + IQ.you.female.n - 2
+
+s2.p = ( (IQ.you.male.n-1)*IQ.you.male.var + (IQ.you.female.n-1)*IQ.you.female.var ) / df
+
+df
+s2.p
+```
+
+## Calculate pooled SE {.subsection}
+
+$$ {SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}} $$
+
+```{r, echo=TRUE}
+se.p = sqrt( ((s2.p/IQ.you.male.n) + (s2.p/IQ.you.female.n)) )
+se.p
+```
+
+## Calculate t-value {.subsection}
+
+$$t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}$$
+
+```{r, echo=TRUE}
+t = ( IQ.you.male.mean - IQ.you.female.mean ) / se.p
+
+t
+```
+
+## Test for significance
+
+Two tailed
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.t(c(-t,t), df, section="tails")
+```
+
+## Effect-size
+
+$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+
+```{r, echo=TRUE}
+r = sqrt(t^2/(t^2 + df))
+
+r
+```

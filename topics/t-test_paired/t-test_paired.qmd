@@ -1,0 +1,149 @@
+# Paired-samples t-test {.section}
+
+Paired 2 samples
+
+## Paired-samples t-test
+
+In the Paired samples t-test the deviation ($D$) for each pair is calculated and the mean of these deviations ($\bar{D}$) is tested against the null hypothesis where $\mu = 0$.
+
+$$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
+Where $n$ (the number of cases) minus $1$, are the degrees of freedom $df = n - 1$ and $SE_D$ is the standard error of $D$, defined as $s_D/\sqrt{n}$.
+
+## Hypothesis
+
+$$\LARGE{
+  \begin{aligned}
+  H_0 &: \bar{D} = \mu_D \\
+  H_A &: \bar{D} \neq \mu_D \\
+  H_A &: \bar{D} > \mu_D \\
+  H_A &: \bar{D} < \mu_D \\
+  \end{aligned}}$$
+
+## Data structure
+
+index | k1 | k2
+------|----|--
+1     | d  | d
+2     | d  | d
+3     | d  | d
+4     | d  | d
+
+Where $k$ is the level of the categorical predictor variabla and $d$ is the value of the outcome/dependent variable.
+
+## Data example
+
+We are going to use the IQ estimates we collected last week. You had to gues the IQ of the one sitting next to you and your own IQ.
+
+Let's take a look at the data.
+
+## IQ estimates
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data <- gsheet2tbl('docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing')
+
+data = data[grep("2017", as.character(data$Timestamp)),c("IQ next to you", "Own IQ")]
+
+IQ.next.to.you = data$"IQ next to you"
+IQ.you         = data$"Own IQ"
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+```
+
+
+
+```{r, echo=FALSE}
+datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Calculate $D$ {.smaller .subsection}
+
+```{r, echo=TRUE}
+D = IQ.next.to.you - IQ.you
+```
+
+
+```{r, echo=FALSE}
+data$D = D
+
+datatable(data, options = list(searching = FALSE, scrollY = 315, paging = F, info = F))
+```
+
+## Calculate $\bar{D}$
+
+```{r, echo=TRUE}
+D      = na.omit(D) # get rid of all missing values
+D.mean = mean(D)
+D.mean
+```
+
+And we also need n.
+
+```{r, echo=TRUE}
+n = length(D)
+n
+```
+
+## Calculate t-value {.subsection}
+
+$$t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }$$
+
+```{r, echo=TRUE}
+mu = 0                # Define mu
+
+D.sd = sd(D)          # Calculate standard deviation
+D.se = D.sd / sqrt(n) # Calculate standard error
+
+df   = n - 1          # Calculate degrees of freedom
+
+# Calculate t
+t = ( D.mean - mu ) / D.se
+t
+```
+
+## Test for significance {.subsection}
+
+Two tailed
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.t(c(-t,t), df, section="tails")
+```
+
+## Effect-size {.subsection}
+
+$$r = \sqrt{\frac{t^2}{t^2 + \text{df}}}$$
+
+```{r, echo=TRUE}
+r = sqrt(t^2/(t^2 + df))
+r
+```
+
+## Confidence interval
+
+To display correct conficance intervals in SPSS we need to correct the original scores for whithin subject variation.
+
+<code><pre>
+** SPSS SYNTAX
+
+COMPUTE personal_mean = MEAN(IQ.next.to.you, IQ.you).
+EXECUTE.
+
+AGGREGATE
+  /OUTFILE=* MODE=ADDVARIABLES
+  /BREAK=
+  /total_mean = MEAN(personal_mean).
+
+COMPUTE adjustment = total_mean - personal_mean.
+EXECUTE.
+
+COMPUTE IQ.next.to.you.adj = IQ.next.to.you + adjustment.
+COMPUTE IQ.you             = IQ.you         + adjustment.
+EXECUTE.
+</pre></code>
