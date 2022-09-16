@@ -1,0 +1,18 @@
+---
+title: "Multiple regression"
+author: "Klinkenberg"
+date: "20 sep 2021"
+footer: "Wetenschapsfilosofie & Statistisch Redeneren"
+---
+
+```{r child="../../../../topics/t-distribution/t-distribution.qmd"}
+```
+
+```{r child="../../../../topics/regression_multiple_predictors/regression_multiple_predictors_PB_in_R.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.md"}
+```
+
