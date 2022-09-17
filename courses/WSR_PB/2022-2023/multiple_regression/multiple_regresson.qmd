@@ -1,7 +1,7 @@
 ---
 title: "T-distribution &<br> Multiple regression"
 author: "Klinkenberg"
-date: "20 sep 2021"
+date: "20 sep 2022"
 footer: "Wetenschapsfilosofie & Statistisch Redeneren"
 format: 
   html: default

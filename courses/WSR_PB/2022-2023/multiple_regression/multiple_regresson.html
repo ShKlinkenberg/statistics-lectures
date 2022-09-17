@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Klinkenberg">
-<meta name="dcterms.date" content="2021-09-20">
+<meta name="dcterms.date" content="2022-09-20">
 
 <title>T-distribution &amp;  Multiple regression</title>
 <style>
@@ -526,7 +526,7 @@ void main(void) {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 20, 2021</p>
+      <p class="date">September 20, 2022</p>
     </div>
   </div>
     
@@ -589,14 +589,14 @@ void main(void) {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  92.54887 116.88633  94.15187  95.83270 100.16572  99.88695 118.74612
- [8] 102.03768 114.03892 121.76049  94.70395  99.92364  94.88201 109.22124
-[15]  87.33666  93.20123  89.14499  97.50020  87.95898 109.33406 103.46704
-[22]  85.17840  90.91056 146.52188  89.41869 103.41143 107.15650 102.87560
-[29] 104.00327 110.32311 133.58187  81.23102 101.69349 106.33627  99.99688
-[36] 116.24470  83.76360 117.33482  99.75402 107.82520  98.95245 102.94735
-[43] 112.82127  96.15350  98.32315 109.14824  79.08859 114.45060 142.85334
-[50] 110.09663 105.43633 111.95114 114.61845  82.45313  68.10313  70.79122</code></pre>
+<pre><code> [1] 129.37929  93.37447  98.46015  76.70254 108.12876 112.66911 110.90536
+ [8]  89.60532  96.20909 113.11469 102.07251 115.58984 116.46707 108.47784
+[15]  89.51081  84.42983 119.95210 109.72107  81.51062  89.84505  96.85496
+[22]  98.55964 113.65554 109.50999  95.71528  79.59035  90.24377 101.24550
+[29] 114.80142  88.62666  90.99577  83.41280  87.50694  95.90238  92.57426
+[36] 104.35734  99.84138 115.81907  98.04514 121.29264  84.93484 105.23203
+[43]  87.02485 100.06899  92.57538 120.40754 101.06133  95.30677 114.28804
+[50]  94.81749 137.78255  69.11160 102.84745 102.56956  94.53364 106.08156</code></pre>
 </div>
 </div>
 <div class="cell" data-output-location="slide">
@@ -628,12 +628,12 @@ void main(void) {
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     mean.x.values se.x.values
-[1,]     100.35888    2.155154
-[2,]     100.92068    1.837751
-[3,]     103.57149    1.800154
-[4,]     100.14246    2.225551
-[5,]     102.44211    1.729649
-[6,]      99.64848    1.827775</code></pre>
+[1,]     101.45935    1.737695
+[2,]     100.99435    1.991450
+[3,]      94.75063    1.939298
+[4,]     102.76646    2.157508
+[5,]      99.72281    2.229159
+[6,]     100.61274    1.852429</code></pre>
 </div>
 </div>
 </section>
@@ -662,7 +662,7 @@ void main(void) {
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.1757794</code></pre>
+<pre><code>[1] 1.010664</code></pre>
 </div>
 </div>
 </section>
@@ -675,12 +675,12 @@ void main(void) {
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values    t.values
- [995,]     101.87354 100    2.044864  0.91621859
- [996,]      97.24504 100    2.310409 -1.19241339
- [997,]      97.68848 100    2.053702 -1.12553921
- [998,]     100.08226 100    2.193571  0.03749895
- [999,]     100.29493 100    2.035044  0.14492662
-[1000,]      99.64490 100    2.020136 -0.17577942</code></pre>
+ [995,]      99.79144 100    2.187475 -0.09534234
+ [996,]      99.29912 100    2.153217 -0.32550305
+ [997,]      98.93224 100    2.134161 -0.50031896
+ [998,]     101.16607 100    1.800170  0.64775295
+ [999,]     100.00944 100    2.063587  0.00457568
+[1000,]     102.34882 100    2.324038  1.01066443</code></pre>
 </div>
 </div>
 </section>
@@ -761,13 +761,13 @@ void main(void) {
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        mean.x.values  mu se.x.values    t.values           r
- [995,]     101.87354 100    2.044864  0.91621859 0.122610738
- [996,]      97.24504 100    2.310409 -1.19241339 0.158746144
- [997,]      97.68848 100    2.053702 -1.12553921 0.150049438
- [998,]     100.08226 100    2.193571  0.03749895 0.005056293
- [999,]     100.29493 100    2.035044  0.14492662 0.019538171
-[1000,]      99.64490 100    2.020136 -0.17577942 0.023695437</code></pre>
+<pre><code>        mean.x.values  mu se.x.values    t.values            r
+ [995,]      99.79144 100    2.187475 -0.09534234 0.0128548965
+ [996,]      99.29912 100    2.153217 -0.32550305 0.0438486072
+ [997,]      98.93224 100    2.134161 -0.50031896 0.0673099967
+ [998,]     101.16607 100    1.800170  0.64775295 0.0870117225
+ [999,]     100.00944 100    2.063587  0.00457568 0.0006169845
+[1000,]     102.34882 100    2.324038  1.01066443 0.1350298655</code></pre>
 </div>
 </div>
 </section>
