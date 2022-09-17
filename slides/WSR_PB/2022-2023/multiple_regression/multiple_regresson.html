@@ -741,9 +741,6 @@
 </section>
 <section id="gosset" class="slide level2 smaller">
 <h2>Gosset</h2>
-<!--
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg" style="float: left; width: 150px; margin: 0 20px 0 0;">
--->
 <div class="columns">
 <div class="column" style="width:20%;">
 <div class="quarto-figure quarto-figure-center">
@@ -796,14 +793,14 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 119.00450  79.96792  97.43713 129.60687 103.68249 106.35523  84.93015
- [8]  88.11222 112.03683  87.03016  90.84906 111.54660  85.45944 108.44904
-[15] 128.24997  72.85621 104.71749  76.81519 117.83476  87.18247 118.43140
-[22] 123.83706 118.88888  85.79092 111.77783  77.31383  89.83295  82.28417
-[29]  94.56606  90.11934  97.32986 122.62102  94.44630 101.90345  85.58360
-[36]  81.18229  99.84258  72.11375  97.97951 115.23298  96.86632 103.52036
-[43] 115.95031  99.64510 100.52382  98.01818 104.18369  87.05843 122.69603
-[50]  74.45810  99.86028  84.52774 105.05337 110.27848  97.32375 125.71015</code></pre>
+<pre><code> [1]  95.57627 112.29587 100.82542  87.40720 102.69453  84.89332 111.08989
+ [8] 105.94381 104.82489 118.63981  98.43336  99.51320 134.33561 131.22120
+[15] 100.88138 100.16761 114.57803 117.61612  96.13283 118.84892  94.52979
+[22]  93.58257 116.19637  89.83422 116.14204  95.02790  66.29981  76.80969
+[29]  82.59508  77.34475 107.17241  96.65595 123.10755 129.72158 110.87640
+[36] 110.10584 130.62487  93.03554 114.72155  90.07917  99.94270 106.38158
+[43] 119.07501 131.24939 111.35325 106.10504  80.30907  91.63128  67.28218
+[50]  97.40889  91.45184  75.49520  74.40532  70.08628  93.06981 122.68133</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -837,12 +834,12 @@
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     mean.x.values se.x.values
-[1,]      96.07742    2.253705
-[2,]     103.31618    2.037743
-[3,]     100.43863    1.996082
-[4,]     101.08402    1.916678
-[5,]      96.54203    1.837848
-[6,]     101.01585    1.910597</code></pre>
+[1,]      100.3099    2.133236
+[2,]      101.1574    1.809184
+[3,]      101.1474    1.986484
+[4,]      102.3224    1.819317
+[5,]      103.1790    2.104462
+[6,]      100.0533    2.233349</code></pre>
 </div>
 </div>
 </section>
@@ -873,7 +870,7 @@
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>t <span class="ot">=</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
 <span id="cb9-2"><a href="#cb9-2"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4040656</code></pre>
+<pre><code>[1] 0.1948689</code></pre>
 </div>
 </div>
 </section>
@@ -886,12 +883,12 @@
 <span id="cb11-3"><a href="#cb11-3"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values   t.values
- [995,]     101.39229 100    2.384778  0.5838227
- [996,]     101.97634 100    1.895572  1.0426085
- [997,]      99.27494 100    1.885292 -0.3845879
- [998,]     100.42878 100    1.942749  0.2207097
- [999,]     100.47084 100    1.889099  0.2492419
-[1000,]     100.74320 100    1.839315  0.4040656</code></pre>
+ [995,]     101.43870 100    1.618746  0.8887753
+ [996,]     101.91377 100    2.044512  0.9360522
+ [997,]     101.88967 100    1.831476  1.0317741
+ [998,]     102.57852 100    2.213968  1.1646587
+ [999,]      99.63338 100    1.819241 -0.2015237
+[1000,]     100.38376 100    1.969345  0.1948689</code></pre>
 </div>
 </div>
 </section>
@@ -964,12 +961,12 @@
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values   t.values          r
- [995,]     101.39229 100    2.384778  0.5838227 0.07847983
- [996,]     101.97634 100    1.895572  1.0426085 0.13921628
- [997,]      99.27494 100    1.885292 -0.3845879 0.05178824
- [998,]     100.42878 100    1.942749  0.2207097 0.02974732
- [999,]     100.47084 100    1.889099  0.2492419 0.03358881
-[1000,]     100.74320 100    1.839315  0.4040656 0.05440350</code></pre>
+ [995,]     101.43870 100    1.618746  0.8887753 0.11899100
+ [996,]     101.91377 100    2.044512  0.9360522 0.12522374
+ [997,]     101.88967 100    1.831476  1.0317741 0.13779720
+ [998,]     102.57852 100    2.213968  1.1646587 0.15514113
+ [999,]      99.63338 100    1.819241 -0.2015237 0.02716342
+[1000,]     100.38376 100    1.969345  0.1948689 0.02626705</code></pre>
 </div>
 </div>
 </section>

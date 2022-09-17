@@ -5,7 +5,7 @@ project:
     - index.qmd
     - SSR.qmd
     - WSR_PB.qmd
-
+    
 format:
   html:
     theme: cosmo
