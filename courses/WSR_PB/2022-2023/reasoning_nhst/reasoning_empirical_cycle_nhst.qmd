@@ -4,6 +4,10 @@ subtitle: "Null Hypothesis Testing"
 author: "Klinkenberg"
 date: "5 sep 2022"
 footer: "Wetenschapsfilosofie & Statistisch Redeneren"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
 ---
 
 ## Learning

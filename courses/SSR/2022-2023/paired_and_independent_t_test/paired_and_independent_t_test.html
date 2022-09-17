@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Klinkenberg">
+<meta name="dcterms.date" content="2022-09-22">
+
+<title>Paired and Independent  t-test</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="paired_and_independent_t_test_files/libs/clipboard/clipboard.min.js"></script>
+<script src="paired_and_independent_t_test_files/libs/quarto-html/quarto.js"></script>
+<script src="paired_and_independent_t_test_files/libs/quarto-html/popper.min.js"></script>
+<script src="paired_and_independent_t_test_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="paired_and_independent_t_test_files/libs/quarto-html/anchor.min.js"></script>
+<link href="paired_and_independent_t_test_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="paired_and_independent_t_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="paired_and_independent_t_test_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="paired_and_independent_t_test_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="paired_and_independent_t_test_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="paired_and_independent_t_test_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="paired_and_independent_t_test_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="paired_and_independent_t_test_files/libs/datatables-binding-0.25/datatables.js"></script>
+<script src="paired_and_independent_t_test_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="paired_and_independent_t_test_files/libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="paired_and_independent_t_test_files/libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="paired_and_independent_t_test_files/libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="paired_and_independent_t_test_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="paired_and_independent_t_test_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#paired-samples-t-test" id="toc-paired-samples-t-test" class="nav-link active" data-scroll-target="#paired-samples-t-test">Paired-samples t-test</a>
+  <ul class="collapse">
+  <li><a href="#paired-samples-t-test-1" id="toc-paired-samples-t-test-1" class="nav-link" data-scroll-target="#paired-samples-t-test-1">Paired-samples t-test</a></li>
+  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis">Hypothesis</a></li>
+  <li><a href="#data-structure" id="toc-data-structure" class="nav-link" data-scroll-target="#data-structure">Data structure</a></li>
+  <li><a href="#data-example" id="toc-data-example" class="nav-link" data-scroll-target="#data-example">Data example</a></li>
+  <li><a href="#iq-estimates" id="toc-iq-estimates" class="nav-link" data-scroll-target="#iq-estimates">IQ estimates</a></li>
+  <li><a href="#calculate-d" id="toc-calculate-d" class="nav-link" data-scroll-target="#calculate-d">Calculate <span class="math inline">\(D\)</span></a></li>
+  <li><a href="#calculate-bard" id="toc-calculate-bard" class="nav-link" data-scroll-target="#calculate-bard">Calculate <span class="math inline">\(\bar{D}\)</span></a></li>
+  <li><a href="#calculate-t-value" id="toc-calculate-t-value" class="nav-link" data-scroll-target="#calculate-t-value">Calculate t-value</a></li>
+  <li><a href="#test-for-significance" id="toc-test-for-significance" class="nav-link" data-scroll-target="#test-for-significance">Test for significance</a></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect-size</a></li>
+  <li><a href="#confidence-interval" id="toc-confidence-interval" class="nav-link" data-scroll-target="#confidence-interval">Confidence interval</a></li>
+  </ul></li>
+  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test">Independent-samples t-test</a>
+  <ul class="collapse">
+  <li><a href="#independent-samples-t-test-1" id="toc-independent-samples-t-test-1" class="nav-link" data-scroll-target="#independent-samples-t-test-1">Independent-samples t-test</a></li>
+  <li><a href="#hypothesis-1" id="toc-hypothesis-1" class="nav-link" data-scroll-target="#hypothesis-1">Hypothesis</a></li>
+  <li><a href="#data-structure-1" id="toc-data-structure-1" class="nav-link" data-scroll-target="#data-structure-1">Data structure</a></li>
+  <li><a href="#additional-assumption" id="toc-additional-assumption" class="nav-link" data-scroll-target="#additional-assumption">Additional assumption</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#calculate-means" id="toc-calculate-means" class="nav-link" data-scroll-target="#calculate-means">Calculate means</a></li>
+  <li><a href="#calculate-variance" id="toc-calculate-variance" class="nav-link" data-scroll-target="#calculate-variance">Calculate variance</a></li>
+  <li><a href="#calculate-t-value-1" id="toc-calculate-t-value-1" class="nav-link" data-scroll-target="#calculate-t-value-1">Calculate t-value</a></li>
+  <li><a href="#calculate-pooled-variance" id="toc-calculate-pooled-variance" class="nav-link" data-scroll-target="#calculate-pooled-variance">Calculate pooled variance</a></li>
+  <li><a href="#calculate-pooled-se" id="toc-calculate-pooled-se" class="nav-link" data-scroll-target="#calculate-pooled-se">Calculate pooled SE</a></li>
+  <li><a href="#calculate-t-value-2" id="toc-calculate-t-value-2" class="nav-link" data-scroll-target="#calculate-t-value-2">Calculate t-value</a></li>
+  <li><a href="#test-for-significance-1" id="toc-test-for-significance-1" class="nav-link" data-scroll-target="#test-for-significance-1">Test for significance</a></li>
+  <li><a href="#effect-size-1" id="toc-effect-size-1" class="nav-link" data-scroll-target="#effect-size-1">Effect-size</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Paired and Independent<br> t-test</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Klinkenberg </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 22, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="paired-samples-t-test" class="level1 section">
+<h1 class="section">Paired-samples t-test</h1>
+<p>Paired 2 samples</p>
+<section id="paired-samples-t-test-1" class="level2">
+<h2 class="anchored" data-anchor-id="paired-samples-t-test-1">Paired-samples t-test</h2>
+<p>In the Paired samples t-test the deviation (<span class="math inline">\(D\)</span>) for each pair is calculated and the mean of these deviations (<span class="math inline">\(\bar{D}\)</span>) is tested against the null hypothesis where <span class="math inline">\(\mu = 0\)</span>.</p>
+<p><span class="math display">\[t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }\]</span></p>
+<p>Where <span class="math inline">\(n\)</span> (the number of cases) minus <span class="math inline">\(1\)</span>, are the degrees of freedom <span class="math inline">\(df = n - 1\)</span> and <span class="math inline">\(SE_D\)</span> is the standard error of <span class="math inline">\(D\)</span>, defined as <span class="math inline">\(s_D/\sqrt{n}\)</span>.</p>
+</section>
+<section id="hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis">Hypothesis</h2>
+<p><span class="math display">\[\LARGE{
+  \begin{aligned}
+  H_0 &amp;: \bar{D} = \mu_D \\
+  H_A &amp;: \bar{D} \neq \mu_D \\
+  H_A &amp;: \bar{D} &gt; \mu_D \\
+  H_A &amp;: \bar{D} &lt; \mu_D \\
+  \end{aligned}}\]</span></p>
+</section>
+<section id="data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="data-structure">Data structure</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>index</th>
+<th>k1</th>
+<th>k2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>d</td>
+<td>d</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>d</td>
+<td>d</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>d</td>
+<td>d</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>d</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(k\)</span> is the level of the categorical predictor variabla and <span class="math inline">\(d\)</span> is the value of the outcome/dependent variable.</p>
+</section>
+<section id="data-example" class="level2">
+<h2 class="anchored" data-anchor-id="data-example">Data example</h2>
+<p>We are going to use the IQ estimates we collected last week. You had to gues the IQ of the one sitting next to you and your own IQ.</p>
+<p>Let’s take a look at the data.</p>
+</section>
+<section id="iq-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="iq-estimates">IQ estimates</h2>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-168037e7610e9fa27ace" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-168037e7610e9fa27ace">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ next to you<\/th>\n      <th>Own IQ<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="calculate-d" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="calculate-d">Calculate <span class="math inline">\(D\)</span></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> IQ.next.to.you <span class="sc">-</span> IQ.you</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-0f0aaeea4d532f632d0e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0f0aaeea4d532f632d0e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],[130,120,124,124,120,130,119,118,124,125,125,120,125,130,116,125,120,120,116,120,122,125,140,120,120,115,131,115,123,125,121,120,125,150,135,125,110,120,127,120,128,110,120,119,121,119,112,125,100],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120],[5,0,-1,-10,5,0,9,0,8,0,0,5,4,-4,1,0,-16,-5,-5,0,7,0,5,10,5,0,13,0,5,-4,-7,0,5,22,5,10,-5,0,9,0,0,2,0,9,12,1,12,4,-20]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>IQ next to you<\/th>\n      <th>Own IQ<\/th>\n      <th>D<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="calculate-bard" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-bard">Calculate <span class="math inline">\(\bar{D}\)</span></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>D      <span class="ot">=</span> <span class="fu">na.omit</span>(D) <span class="co"># get rid of all missing values</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>D.mean <span class="ot">=</span> <span class="fu">mean</span>(D)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>D.mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959184</code></pre>
+</div>
+</div>
+<p>And we also need n.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">length</span>(D)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 49</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-t-value" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-t-value">Calculate t-value</h2>
+<p><span class="math display">\[t_{n-1} = \frac{\bar{D} - \mu}{ {SE}_D }\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">=</span> <span class="dv">0</span>                <span class="co"># Define mu</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>D.sd <span class="ot">=</span> <span class="fu">sd</span>(D)          <span class="co"># Calculate standard deviation</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>D.se <span class="ot">=</span> D.sd <span class="sc">/</span> <span class="fu">sqrt</span>(n) <span class="co"># Calculate standard error</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df   <span class="ot">=</span> n <span class="sc">-</span> <span class="dv">1</span>          <span class="co"># Calculate degrees of freedom</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> ( D.mean <span class="sc">-</span> mu ) <span class="sc">/</span> D.se</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.915726</code></pre>
+</div>
+</div>
+</section>
+<section id="test-for-significance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="test-for-significance">Test for significance</h2>
+<p>Two tailed</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t,t), df, <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="paired_and_independent_t_test_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="effect-size" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="effect-size">Effect-size</h2>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">sqrt</span>(t<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2665104</code></pre>
+</div>
+</div>
+</section>
+<section id="confidence-interval" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval">Confidence interval</h2>
+<p>To display correct conficance intervals in SPSS we need to correct the original scores for whithin subject variation.</p>
+<code>
+<pre>** SPSS SYNTAX
+
+COMPUTE personal_mean = MEAN(IQ.next.to.you, IQ.you).
+EXECUTE.
+
+AGGREGATE
+  /OUTFILE=* MODE=ADDVARIABLES
+  /BREAK=
+  /total_mean = MEAN(personal_mean).
+
+COMPUTE adjustment = total_mean - personal_mean.
+EXECUTE.
+
+COMPUTE IQ.next.to.you.adj = IQ.next.to.you + adjustment.
+COMPUTE IQ.you             = IQ.you         + adjustment.
+EXECUTE.
+</pre>
+</code><p><code></code></p>
+</section>
+</section>
+<section id="independent-samples-t-test" class="level1">
+<h1>Independent-samples t-test</h1>
+<p>Compare 2 independent samples</p>
+<section id="independent-samples-t-test-1" class="level2">
+<h2 class="anchored" data-anchor-id="independent-samples-t-test-1">Independent-samples t-test</h2>
+<p>In the independent-samples t-test the mean of both independent samples is calculated and the difference of these <span class="math inline">\((\bar{X}_1 - \bar{X}_2)\)</span> means is tested against the null hypothesis where <span class="math inline">\(\mu = 0\)</span>.</p>
+<p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
+<p>Where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the number of cases in each group and <span class="math inline">\(SE_p\)</span> is the pooled standard error.</p>
+</section>
+<section id="hypothesis-1" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-1">Hypothesis</h2>
+<span class="math display">\[\begin{aligned}
+H_0 &amp;: t = 0 = \mu_t \\
+H_A &amp;: t \neq 0 \\
+H_A &amp;: t &gt; 0 \\
+H_A &amp;: t &lt; 0 \\
+\end{aligned}\]</span>
+</section>
+<section id="data-structure-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-structure-1">Data structure</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>index</th>
+<th>k</th>
+<th>outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>d</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>d</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+<td>d</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+<p>Where <span class="math inline">\(k\)</span> is the level of the categorical predictor variabla and <span class="math inline">\(d\)</span> is the value of the outcome/dependent variable.</p>
+</section>
+<section id="additional-assumption" class="level2">
+<h2 class="anchored" data-anchor-id="additional-assumption">Additional assumption</h2>
+<p>Specificly for independent sample <span class="math inline">\(t\)</span>-test.</p>
+<ul>
+<li>Equality of variance
+<ul>
+<li><span class="math inline">\(H_0\)</span> : Variance <span class="math inline">\(=\)</span> equal (<span class="math inline">\(p\)</span> &gt; .05)</li>
+<li><span class="math inline">\(H_A\)</span> : Variance <span class="math inline">\(\neq\)</span> equal (<span class="math inline">\(p\)</span> &lt; .05)</li>
+</ul></li>
+</ul>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>We are going to use the IQ estimates we collected last week again. You had to gues the IQ of the one sitting next to you and your own IQ. But we are going to add gender to the data set. We did not register this so we are going to simulate some genders.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>), <span class="fu">dim</span>(data)[<span class="dv">1</span>], <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-4619c3bf9b9171ecbcf4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4619c3bf9b9171ecbcf4">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"],["female","male","female","female","male","female","male","male","female","female","female","male","female","male","female","male","male","female","female","male","female","male","male","female","male","female","female","female","male","male","female","female","male","male","male","male","female","male","male","male","male","male","male","female","female","female","male","male","female"],[125,120,125,134,115,130,110,118,116,125,125,115,121,134,115,125,136,125,121,120,115,125,135,110,115,115,118,115,118,129,128,120,120,128,130,115,115,120,118,120,128,108,120,110,109,118,100,121,120]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>gender<\/th>\n      <th>IQ.you<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="calculate-means" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-means">Calculate means</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>IQ.you.male   <span class="ot">=</span> <span class="fu">subset</span>(data, gender <span class="sc">==</span> <span class="st">"male"</span>,   <span class="at">select =</span> IQ.you)<span class="sc">$</span>IQ.you</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>IQ.you.female <span class="ot">=</span> <span class="fu">subset</span>(data, gender <span class="sc">==</span> <span class="st">"female"</span>, <span class="at">select =</span> IQ.you)<span class="sc">$</span>IQ.you</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>IQ.you.male.mean   <span class="ot">=</span> <span class="fu">mean</span>(IQ.you.male,   <span class="at">na.rm =</span> T)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>IQ.you.female.mean <span class="ot">=</span> <span class="fu">mean</span>(IQ.you.female, <span class="at">na.rm =</span> T)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(IQ.you.male.mean, IQ.you.female.mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       [,1]
+IQ.you.male.mean   120.8846
+IQ.you.female.mean 119.7826</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-variance" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="calculate-variance">Calculate variance</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>IQ.you.male.var   <span class="ot">=</span> <span class="fu">var</span>(IQ.you.male,   <span class="at">na.rm =</span> T)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>IQ.you.female.var <span class="ot">=</span> <span class="fu">var</span>(IQ.you.female, <span class="at">na.rm =</span> T)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(IQ.you.male.var, IQ.you.female.var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      [,1]
+IQ.you.male.var   70.90615
+IQ.you.female.var 43.45059</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>IQ.you.male.n   <span class="ot">=</span> <span class="fu">length</span>(IQ.you.male)   <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>IQ.you.female.n <span class="ot">=</span> <span class="fu">length</span>(IQ.you.female) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(IQ.you.male.n, IQ.you.female.n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                [,1]
+IQ.you.male.n     25
+IQ.you.female.n   22</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-t-value-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="calculate-t-value-1">Calculate t-value</h2>
+<p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
+<p>Where <span class="math inline">\({SE}_p\)</span> is the pooled standard error.</p>
+<p><span class="math display">\[{SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}}\]</span></p>
+<p>And <span class="math inline">\(S^2_p\)</span> is the pooled variance.</p>
+<p><span class="math display">\[S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}\]</span></p>
+<p>Where <span class="math inline">\(s^2\)</span> is the variance and <span class="math inline">\(n\)</span> the sample size.</p>
+</section>
+<section id="calculate-pooled-variance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-pooled-variance">Calculate pooled variance</h2>
+<p><span class="math display">\[S^2_p = \frac{(n_1-1)s^2_1+(n_2-1)s^2_2}{n_1+n_2-2}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> IQ.you.male.n <span class="sc">+</span> IQ.you.female.n <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>s2.p <span class="ot">=</span> ( (IQ.you.male.n<span class="dv">-1</span>)<span class="sc">*</span>IQ.you.male.var <span class="sc">+</span> (IQ.you.female.n<span class="dv">-1</span>)<span class="sc">*</span>IQ.you.female.var ) <span class="sc">/</span> df</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>s2.p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58.09356</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-pooled-se" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-pooled-se">Calculate pooled SE</h2>
+<p><span class="math display">\[ {SE}_p = \sqrt{\frac{S^2_p}{n_1}+\frac{S^2_p}{n_2}} \]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>se.p <span class="ot">=</span> <span class="fu">sqrt</span>( ((s2.p<span class="sc">/</span>IQ.you.male.n) <span class="sc">+</span> (s2.p<span class="sc">/</span>IQ.you.female.n)) )</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>se.p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.228084</code></pre>
+</div>
+</div>
+</section>
+<section id="calculate-t-value-2" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculate-t-value-2">Calculate t-value</h2>
+<p><span class="math display">\[t_{n_1 + n_2 -2} = \frac{(\bar{X}_1 - \bar{X}_2) - \mu}{{SE}_p}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> ( IQ.you.male.mean <span class="sc">-</span> IQ.you.female.mean ) <span class="sc">/</span> se.p</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4945983</code></pre>
+</div>
+</div>
+</section>
+<section id="test-for-significance-1" class="level2">
+<h2 class="anchored" data-anchor-id="test-for-significance-1">Test for significance</h2>
+<p>Two tailed</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">"visualize"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) { <span class="fu">install.packages</span>(<span class="st">"visualize"</span>) }</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.t</span>(<span class="fu">c</span>(<span class="sc">-</span>t,t), df, <span class="at">section=</span><span class="st">"tails"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="paired_and_independent_t_test_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="effect-size-1" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-1">Effect-size</h2>
+<p><span class="math display">\[r = \sqrt{\frac{t^2}{t^2 + \text{df}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">sqrt</span>(t<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> df))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07353078</code></pre>
+</div>
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">CC BY-NC-SA 4.0</figcaption><p></p>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

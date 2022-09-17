@@ -4,6 +4,10 @@ subtitle: "Null Hypothesis Testisn"
 author: "Klinkenberg"
 date: "08 sep 2022"
 footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
 ---
 
 ## Learning

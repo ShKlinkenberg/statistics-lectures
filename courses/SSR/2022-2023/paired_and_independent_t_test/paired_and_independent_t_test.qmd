@@ -3,6 +3,10 @@ title: "Paired and Independent<br> t-test"
 author: "Klinkenberg"
 date: "22 sep 2022"
 footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
 ---
 
 ```{r child="../../../../topics/t-test_paired/t-test_paired.qmd"}
