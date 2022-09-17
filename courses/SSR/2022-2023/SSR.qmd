@@ -11,8 +11,6 @@ course.path = "courses/SSR/2022-2023/"
 
 files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
 
-paste0(course.path, files)
-
 files <- files[grep("SSR.qmd", files, invert = TRUE)]
 
 lectures = data.frame()
