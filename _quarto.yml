@@ -3,8 +3,8 @@ project:
   output-dir: site
   render:
     - index.qmd
-    - courses/SSR/202-2023/SSR.qmd
-    - courses/WSR_PB/202-2023/WSR_PB.qmd
+    - courses/SSR/2022-2023/SSR.qmd
+    - courses/WSR_PB/2022-2023/WSR_PB.qmd
     
 format:
   html:
@@ -45,13 +45,13 @@ website:
       background: light
       collapse-level: 2
       contents:
-        - courses/SSR/202-2023/SSR.qmd
+        - courses/SSR/2022-2023/SSR.qmd
     - id: WSR
       title: "Wetenschapsfilosofie & Statistisch Redeneren"
       style: "docked"
       background: light
       collapse-level: 2
       contents:
-        - courses/WSR_PB/202-2023/WSR_PB.qmd
+        - courses/WSR_PB/2022-2023/WSR_PB.qmd
 # 
 # freeze: false
