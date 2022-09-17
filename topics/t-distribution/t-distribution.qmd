@@ -142,7 +142,7 @@ lines(T, dt(T,df), col = "red")
 legend("topright", lty = 1, col="red", legend = "T-distribution")
 ```
 
-## T-distribution {.smaller}
+## T-distribution
 
 <small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean ($\mu$), given a certain sample size ($df = n - 1$).
 
