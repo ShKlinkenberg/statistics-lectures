@@ -3,6 +3,10 @@ title: "T-distribution &<br> Multiple regression"
 author: "Klinkenberg"
 date: "20 sep 2021"
 footer: "Wetenschapsfilosofie & Statistisch Redeneren"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
 ---
 
 ```{r child="../../../../topics/t-distribution/t-distribution.qmd"}

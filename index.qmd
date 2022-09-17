@@ -9,8 +9,5 @@ format:
 
 On this site you can find my statistics lectures for the various courses i give.
 
-```{r, echo=FALSE, eval=FALSE}
-# quarto_render(input = "courses/WSR_PB/2022-2023/multiple_regression/multiple_regresson.qmd",
-#               output_format = "html")
-```
+
 

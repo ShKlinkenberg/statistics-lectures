@@ -1,8 +1,12 @@
-project:
-  output-dir: ../slides/
+# project:
+#   output-dir: ../slides/
 author: "Sharon Klinkenberg"
 institute: "University of Amsterdam"
 format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: left
   revealjs:
     smaller: false
     linkcolor: '#BC0031'
@@ -23,7 +27,4 @@ format:
 # project:
 #   output-dir: ../handouts/
 # format:
-#   html:
-#     toc: true
-#     toc-depth: 2
-#     toc-location: left
+
