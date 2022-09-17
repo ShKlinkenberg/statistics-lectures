@@ -796,14 +796,14 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 110.93294 110.25996 104.79944  88.27775 112.56131 100.30105  75.97438
- [8] 111.17471  95.99355  99.79441 107.89609 108.52273  81.96937  98.07020
-[15]  93.58943  94.28669  89.26379 104.38066 107.00821 104.08569  93.95568
-[22]  86.36646  63.63876 114.99243  88.83857 102.96312  84.04638 132.87704
-[29]  95.41673  99.84450  94.46612  82.02669 128.57749 100.93192 100.46667
-[36]  82.61795  86.54864 117.69481 102.49153 106.90965 120.07125 108.79773
-[43] 102.01876 103.00544  99.03073  96.99446  87.83025  90.47150 106.36313
-[50]  97.32067 103.58218  71.61269 102.09268  96.86589 103.17461 105.62292</code></pre>
+<pre><code> [1] 119.00450  79.96792  97.43713 129.60687 103.68249 106.35523  84.93015
+ [8]  88.11222 112.03683  87.03016  90.84906 111.54660  85.45944 108.44904
+[15] 128.24997  72.85621 104.71749  76.81519 117.83476  87.18247 118.43140
+[22] 123.83706 118.88888  85.79092 111.77783  77.31383  89.83295  82.28417
+[29]  94.56606  90.11934  97.32986 122.62102  94.44630 101.90345  85.58360
+[36]  81.18229  99.84258  72.11375  97.97951 115.23298  96.86632 103.52036
+[43] 115.95031  99.64510 100.52382  98.01818 104.18369  87.05843 122.69603
+[50]  74.45810  99.86028  84.52774 105.05337 110.27848  97.32375 125.71015</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -837,12 +837,12 @@
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     mean.x.values se.x.values
-[1,]     103.32112    1.861466
-[2,]     104.45116    1.733388
-[3,]     100.29360    2.177433
-[4,]     101.18869    1.945632
-[5,]      97.68523    2.006061
-[6,]      98.77702    2.591187</code></pre>
+[1,]      96.07742    2.253705
+[2,]     103.31618    2.037743
+[3,]     100.43863    1.996082
+[4,]     101.08402    1.916678
+[5,]      96.54203    1.837848
+[6,]     101.01585    1.910597</code></pre>
 </div>
 </div>
 </section>
@@ -873,7 +873,7 @@
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>t <span class="ot">=</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
 <span id="cb9-2"><a href="#cb9-2"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.05305005</code></pre>
+<pre><code>[1] 0.4040656</code></pre>
 </div>
 </div>
 </section>
@@ -885,13 +885,13 @@
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        mean.x.values  mu se.x.values    t.values
- [995,]      99.54320 100    1.925085 -0.23729001
- [996,]      96.38651 100    2.149771 -1.68087103
- [997,]     100.54732 100    1.487724  0.36788828
- [998,]      97.84052 100    2.077872 -1.03927340
- [999,]     102.62917 100    1.902721  1.38179316
-[1000,]     100.09807 100    1.848683  0.05305005</code></pre>
+<pre><code>        mean.x.values  mu se.x.values   t.values
+ [995,]     101.39229 100    2.384778  0.5838227
+ [996,]     101.97634 100    1.895572  1.0426085
+ [997,]      99.27494 100    1.885292 -0.3845879
+ [998,]     100.42878 100    1.942749  0.2207097
+ [999,]     100.47084 100    1.889099  0.2492419
+[1000,]     100.74320 100    1.839315  0.4040656</code></pre>
 </div>
 </div>
 </section>
@@ -915,7 +915,7 @@
 <div class="cell-output-display">
 <p><img data-src="multiple_regresson_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
 </div>
-</div></section><section id="t-distribution-1" class="slide level2 smaller">
+</div></section><section id="t-distribution-1" class="slide level2">
 <h2>T-distribution</h2>
 <p><small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean (<span class="math inline">\(\mu\)</span>), given a certain sample size (<span class="math inline">\(df = n - 1\)</span>).</small></p><small>
 <p>The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough.</p>
@@ -963,13 +963,13 @@
 <p>We can also calculate effect-sizes for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>        mean.x.values  mu se.x.values    t.values           r
- [995,]      99.54320 100    1.925085 -0.23729001 0.031979813
- [996,]      96.38651 100    2.149771 -1.68087103 0.221042275
- [997,]     100.54732 100    1.487724  0.36788828 0.049545124
- [998,]      97.84052 100    2.077872 -1.03927340 0.138779546
- [999,]     102.62917 100    1.902721  1.38179316 0.183168680
-[1000,]     100.09807 100    1.848683  0.05305005 0.007153084</code></pre>
+<pre><code>        mean.x.values  mu se.x.values   t.values          r
+ [995,]     101.39229 100    2.384778  0.5838227 0.07847983
+ [996,]     101.97634 100    1.895572  1.0426085 0.13921628
+ [997,]      99.27494 100    1.885292 -0.3845879 0.05178824
+ [998,]     100.42878 100    1.942749  0.2207097 0.02974732
+ [999,]     100.47084 100    1.889099  0.2492419 0.03358881
+[1000,]     100.74320 100    1.839315  0.4040656 0.05440350</code></pre>
 </div>
 </div>
 </section>
