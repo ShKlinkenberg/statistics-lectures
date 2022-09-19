@@ -450,14 +450,14 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  74.75301 133.63472  89.08070 101.93819  78.89195 124.48082  99.32143
- [8] 100.84499 109.57823  90.16939 143.06355  84.55694 112.91643 113.64078
-[15]  69.99808  96.91466  84.22154 117.18420  78.67502  78.23669 112.25490
-[22] 122.64115 108.72553  99.37753  77.91612  54.01692  93.00842  81.97344
-[29]  89.32900  88.20341  85.62222  89.17493  88.85239  89.02577 123.69058
-[36]  90.74076 105.90865  74.18368  91.27768 117.34459  96.54665 103.28022
-[43]  88.48697 111.82813 103.28112 103.32578 136.47127  93.63828 100.59457
-[50]  93.39386 109.29895 118.93160 101.01886  87.18020 125.32176  84.00078</code></pre>
+<pre><code> [1]  90.29226  86.50468  82.67459  87.52014 109.47630  98.08283  87.67426
+ [8] 104.11862  90.84647 102.19677 109.45225 108.74995 137.29301 104.96585
+[15]  85.70202 100.49200  86.03716  87.62016 104.32542  98.36916 112.92071
+[22]  96.43524  81.46636 111.04604 114.71462 135.98574  97.31552 100.96565
+[29] 113.32101 101.34637  87.97518 102.77408 122.15193 103.17731  86.67964
+[36] 105.05558 122.54113 117.60647 111.24434 101.70309 130.46728  98.23638
+[43] 111.14123 104.96811  97.33341 100.28260  85.72114 107.43696 101.52655
+[50] 101.63470 108.97211 117.24962  82.24049  87.62497 134.93508  63.65653</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -491,12 +491,12 @@
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     mean.x.values se.x.values
-[1,]      95.93865    2.026165
-[2,]      99.94104    2.368118
-[3,]     100.95072    1.912079
-[4,]     104.70662    1.886519
-[5,]      99.81168    1.575575
-[6,]     101.40504    1.965715</code></pre>
+[1,]     100.24455    1.808818
+[2,]      96.90638    1.588307
+[3,]      99.68740    1.919229
+[4,]      99.44906    2.463697
+[5,]      97.76291    1.562652
+[6,]     103.85461    2.099900</code></pre>
 </div>
 </div>
 </section>
@@ -527,7 +527,7 @@
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>t <span class="ot">=</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
 <span id="cb9-2"><a href="#cb9-2"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.4450627</code></pre>
+<pre><code>[1] -0.2809564</code></pre>
 </div>
 </div>
 </section>
@@ -540,12 +540,12 @@
 <span id="cb11-3"><a href="#cb11-3"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values   t.values
- [995,]      97.49819 100    2.072248 -1.2072922
- [996,]      96.74977 100    1.843844 -1.7627472
- [997,]     102.74720 100    2.081312  1.3199346
- [998,]     101.89083 100    1.943033  0.9731354
- [999,]      97.24199 100    1.776622 -1.5523913
-[1000,]      99.20852 100    1.778352 -0.4450627</code></pre>
+ [995,]     102.68990 100    2.151975  1.2499683
+ [996,]      98.13215 100    2.102059 -0.8885817
+ [997,]      98.31403 100    1.927675 -0.8746117
+ [998,]      95.94184 100    2.087404 -1.9441195
+ [999,]     104.30809 100    1.918401  2.2456652
+[1000,]      99.41000 100    2.099974 -0.2809564</code></pre>
 </div>
 </div>
 </section>
@@ -617,13 +617,13 @@
 <p>We can also calculate effect-sizes for all our calculated t-values. Under the assumption of <span class="math inline">\(H_0\)</span> the effect-size distribution looks like this.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>        mean.x.values  mu se.x.values   t.values          r
- [995,]      97.49819 100    2.072248 -1.2072922 0.16067613
- [996,]      96.74977 100    1.843844 -1.7627472 0.23124629
- [997,]     102.74720 100    2.081312  1.3199346 0.17522627
- [998,]     101.89083 100    1.943033  0.9731354 0.13010228
- [999,]      97.24199 100    1.776622 -1.5523913 0.20488385
-[1000,]      99.20852 100    1.778352 -0.4450627 0.05990447</code></pre>
+<pre><code>        mean.x.values  mu se.x.values   t.values         r
+ [995,]     102.68990 100    2.151975  1.2499683 0.1662015
+ [996,]      98.13215 100    2.102059 -0.8885817 0.1189654
+ [997,]      98.31403 100    1.927675 -0.8746117 0.1171210
+ [998,]      95.94184 100    2.087404 -1.9441195 0.2535769
+ [999,]     104.30809 100    1.918401  2.2456652 0.2898103
+[1000,]      99.41000 100    2.099974 -0.2809564 0.0378570</code></pre>
 </div>
 </div>
 </section>
@@ -777,6 +777,7 @@
 <h2>Assumptions</h2>
 <ul>
 <li>Normal samples distribution</li>
+<li>Random sample</li>
 <li>Measurement level
 <ul>
 <li>Interval</li>

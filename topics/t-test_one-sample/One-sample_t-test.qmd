@@ -63,6 +63,7 @@ Does this mean, differ significantly from the population mean $\mu = `r mu`$?
 ## Assumptions
 
 * Normal samples distribution
+* Random sample
 * Measurement level
     * Interval
     * Ratio

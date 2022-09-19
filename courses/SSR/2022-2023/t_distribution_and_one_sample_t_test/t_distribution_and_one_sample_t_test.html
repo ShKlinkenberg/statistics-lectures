@@ -235,14 +235,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  87.46430  98.59482 115.20966 103.61720  98.63612  91.54045  73.32446
- [8] 101.19816  95.88840 105.76536 112.61936  94.80475 100.51661 105.08739
-[15]  97.21629  93.84628  96.87881 113.67686  98.47815  82.88049  87.60055
-[22]  78.25017  85.77800 116.15603  92.88263  96.42855 103.38751 140.51425
-[29] 136.36642 104.76600 130.84757 110.80905 101.01644 101.20233  99.86218
-[36]  97.51727 104.11566  95.08653  93.42798  86.93350 107.42024 101.17208
-[43] 119.33065 101.12113  89.05900 100.01449 100.45759  92.33823  98.19079
-[50] 113.03368 118.99738 106.83381 116.60377  86.09529 107.23132 106.02775</code></pre>
+<pre><code> [1] 109.43112  96.87128 125.02820 100.50236 103.15677  86.33173  79.40158
+ [8] 109.37891  98.09908  99.08930  93.71331  92.56543  97.07199 122.73654
+[15] 120.66219 114.96873  59.54988 109.57176  96.82111 116.20960 123.09352
+[22]  99.23364  87.89970 108.11215 111.38267 128.05283 101.35790  99.22410
+[29] 111.57814 105.22128  99.32861  95.55047  65.06105  91.23018  88.75616
+[36] 112.04127 108.23778  89.89440  74.23339 109.12790  81.36150 108.44184
+[43] 116.13111 114.97818 138.63833  93.69768  91.26753 101.30472  94.33761
+[50]  84.74939 103.41192 107.03687 109.93603  84.34081  77.82622  85.21784</code></pre>
 </div>
 </div>
 <div class="cell" data-output-location="slide">
@@ -274,12 +274,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(mean.x.values, se.x.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     mean.x.values se.x.values
-[1,]      96.12246    2.099822
-[2,]     102.66095    1.826832
-[3,]      96.33643    1.961413
-[4,]     100.48116    2.307582
-[5,]      99.26709    2.141239
-[6,]      97.13782    2.191977</code></pre>
+[1,]     100.13359    2.178297
+[2,]     100.01375    1.951004
+[3,]      96.20884    2.114315
+[4,]     101.50074    1.848675
+[5,]      98.53697    2.541891
+[6,]      99.86697    2.057775</code></pre>
 </div>
 </div>
 </section>
@@ -308,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8211483</code></pre>
+<pre><code>[1] -0.2164327</code></pre>
 </div>
 </div>
 </section>
@@ -321,12 +321,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values    t.values
- [995,]      99.96007 100    2.212376 -0.01804941
- [996,]     103.06889 100    1.416221  2.16695746
- [997,]     101.55463 100    2.172662  0.71554330
- [998,]     102.23960 100    1.671423  1.33993701
- [999,]      99.86482 100    1.909452 -0.07079462
-[1000,]     101.80744 100    2.201117  0.82114828</code></pre>
+ [995,]     101.35934 100    2.135869  0.63643459
+ [996,]     101.98231 100    1.782861  1.11187169
+ [997,]     101.91252 100    2.148384  0.89021105
+ [998,]      96.29151 100    2.309735 -1.60559106
+ [999,]      99.88058 100    2.041275 -0.05850079
+[1000,]      99.56213 100    2.023119 -0.21643269</code></pre>
 </div>
 </div>
 </section>
@@ -408,12 +408,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">cbind</span>(mean.x.values, mu, se.x.values, t.values, r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean.x.values  mu se.x.values    t.values           r
- [995,]      99.96007 100    2.212376 -0.01804941 0.002433775
- [996,]     103.06889 100    1.416221  2.16695746 0.280465111
- [997,]     101.55463 100    2.172662  0.71554330 0.096037860
- [998,]     102.23960 100    1.671423  1.33993701 0.177798333
- [999,]      99.86482 100    1.909452 -0.07079462 0.009545510
-[1000,]     101.80744 100    2.201117  0.82114828 0.110051069</code></pre>
+ [995,]     101.35934 100    2.135869  0.63643459 0.085502558
+ [996,]     101.98231 100    1.782861  1.11187169 0.148267669
+ [997,]     101.91252 100    2.148384  0.89021105 0.119180489
+ [998,]      96.29151 100    2.309735 -1.60559106 0.211595753
+ [999,]      99.88058 100    2.041275 -0.05850079 0.007887999
+[1000,]      99.56213 100    2.023119 -0.21643269 0.029171358</code></pre>
 </div>
 </div>
 </section>
@@ -571,6 +571,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
 <ul>
 <li>Normal samples distribution</li>
+<li>Random sample</li>
 <li>Measurement level
 <ul>
 <li>Interval</li>
