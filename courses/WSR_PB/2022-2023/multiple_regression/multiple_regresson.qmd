@@ -17,5 +17,5 @@ format:
 
 <!-- Footer insert below -->
 
-```{r child="../../../../footer.md"}
+```{r child="../../../../footer.qmd"}
 ```
