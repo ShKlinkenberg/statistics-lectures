@@ -47,24 +47,24 @@ A selection from Field (8.3.2.1. Assumptions of the linear model):
 
 For simple regression
 
-* Sensitivity
-* Homoscedasticity
+-   Sensitivity
+-   Homoscedasticity
 
 Plus multiple regressin
 
-* Multicollinearity
-* Linearity
+-   Multicollinearity
+-   Linearity
 
 ## Sensitivity
 
 Outliers
 
-* Extreme residuals
-    * Cook's distance (< 1)
-    * Mahalonobis (< 11 at N = 30)
-    * Laverage (The average leverage value is defined as (k + 1)/n)
-    
-##
+-   Extreme residuals
+    -   Cook's distance (\< 1)
+    -   Mahalonobis (\< 11 at N = 30)
+    -   Laverage (The average leverage value is defined as (k + 1)/n)
+
+## 
 
 ```{r, fig.align='center', fig.width=5, fig.height=5, echo=FALSE}
 x[1] =  2
@@ -91,11 +91,17 @@ text(x[1], y[1], paste("r =", r," r2 = ", r.2), pos = 2, col = "blue")
 
 ## Homoscedasticity
 
-* Variance of residual should be equal across all expected values
-     * Look at scatterplot of standardized: expected values $\times$ residuals. Roughly round shape is needed.
+::: {.columns}
+::: {.column}
+-   Variance of residual should be equal across all expected values
+    -   Look at scatterplot of standardized: expected values $\times$ residuals. Roughly round shape is needed.
+:::
 
+::: {.column}
 ```{r, fig.align='center', fig.width=5, fig.height=5, echo=TRUE}
-#| output-location: column
+#| code-fold: true
+#| code-line-numbers: "5-6"
+set.seed(27364)
 
 fit <- lm(x[2:n] ~ y[2:n])
 
@@ -110,20 +116,27 @@ if(!"plotrix" %in% installed.packages()) { install.packages("plotrix") };
 library("plotrix")
 draw.circle(0,0,1.7,col=rgb(1,0,0,.5))
 ```
-
+:::
+:::
 
 ## Multicollinearity
 
-<img class="shadow" style="float:right; width:250px;" src="../../../../topics/regression_multiple_predictors/pinguins.jpg">
+::: {.columns}
+::: {.column width="60%"}
 
 To adhere to the multicollinearity assumptien, there must not be a too high linear relation between the predictor variables.
 
 This can be assessed through:
 
-* Correlations
-* Matrix scatterplot
-<!-- * VIF: max < 10, mean < 1 -->
-* Tolerance > 0.2
+-   Correlations
+-   Matrix scatterplot <!-- * VIF: max < 10, mean < 1 -->
+-   Tolerance \> 0.2
+:::
+
+::: {.column  width="40%"}
+![](../../../../topics/regression_multiple_predictors/pinguins.jpg){width="350px"}
+:::
+:::
 
 ## Linearity
 
@@ -131,12 +144,12 @@ For the linearity assumption to hold, the predictors must have a linear relation
 
 This can be checked through:
 
-* Correlations
-* Matrix scatterplot with predictors and outcome variable
+-   Correlations
+-   Matrix scatterplot with predictors and outcome variable
 
-## Example
+## Example {.center}
 
-Perdict study outcome based on IQ and motivation.
+> Perdict study outcome based on IQ and motivation.
 
 ## Read data {.smaller}
 
@@ -165,7 +178,6 @@ summary(fit)
 head(data, 10)
 ```
 
-
 ```{r, warning=FALSE, message=FALSE, echo=TRUE, eval=TRUE}
 
 # data <- read.csv('IQ.csv', header=T)
@@ -178,7 +190,7 @@ study.outcome = data$Studieprestatie
 motivation    = data$Motivatie
 ```
 
-## Regression model in R 
+## Regression model in R
 
 Perdict study outcome based on IQ and motivation.
 
@@ -196,18 +208,17 @@ b.1 = round(fit$coefficients[2], 2) ## Beta coefficient for IQ
 b.2 = round(fit$coefficients[3], 2) ## Beta coefficient for motivation
 ```
 
-De beta coëfficients are: 
+De beta coëfficients are:
 
-* $b_0$ (intercept) = `r b.0`
-* $b_1$ = `r b.1`
-* $b_2$ = `r b.2`.
+-   $b_0$ (intercept) = `r b.0`
+-   $b_1$ = `r b.1`
+-   $b_2$ = `r b.2`.
 
 ## Model summaries
 
 ```{r, echo=TRUE}
 summary(fit)
 ```
-
 
 ## Visual
 
@@ -239,7 +250,7 @@ planes3d(a = 0,
          c = 0,
          #d = c(1,2,3,4),
          d = -sds,
-         alpha=0.5,
+         alpha=0.1,
          color = c("blue"))
 
 #3 Add regression model surface
@@ -277,6 +288,7 @@ rglwidget(elementId="plot3drgl2")
 
 ```
 
+```{=html}
 <script type="text/javascript">
 var rotate = function(angle) {
   var rgl = document.getElementById("plot3drgl2").rglinstance;
@@ -284,9 +296,18 @@ var rotate = function(angle) {
   rgl.drawScene();
 };
 </script>
+```
+<button type="button" onclick="rotate(-10)">
 
-<button type="button" onclick="rotate(-10)">Lef</button>
-<button type="button" onclick="rotate(10)">Right</button>
+Lef
+
+</button>
+
+<button type="button" onclick="rotate(10)">
+
+Right
+
+</button>
 
 ## What are the expected values based on this model
 
@@ -302,8 +323,7 @@ $$\text{model} = \widehat{\text{studie prestatie}}$$
 
 ## Apply regression model
 
-$$\widehat{\text{studie prestatie}} = b_0 + b_1 \text{IQ} + b_2 \text{motivation}$$
-$$\widehat{\text{model}} = b_0 + b_1 \text{IQ} + b_2 \text{motivation}$$
+$$\widehat{\text{studie prestatie}} = b_0 + b_1 \text{IQ} + b_2 \text{motivation}$$ $$\widehat{\text{model}} = b_0 + b_1 \text{IQ} + b_2 \text{motivation}$$
 
 ```{r, echo=TRUE}
 cbind(model, b.0, b.1, IQ, b.2, motivation)[1:5,]
@@ -327,7 +347,7 @@ Is that true?
 study.outcome == model + error
 ```
 
-> - Yes!
+> -   Yes!
 
 ## Visual {.smaller}
 
@@ -367,7 +387,6 @@ r = cor(study.outcome, model)
 r^2
 ```
 
-
 ## Compare models
 
 ```{r, echo=TRUE}
@@ -379,4 +398,3 @@ fit2 <- lm(study.outcome ~ motivation + IQ, data)
 
 anova(fit1, fit2)
 ```
-
