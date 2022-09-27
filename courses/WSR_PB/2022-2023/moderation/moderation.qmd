@@ -1,0 +1,20 @@
+---
+title: "Moderation"
+author: "Klinkenberg"
+date: "28 sep 2022"
+footer: "Wetenschapsfilosofie & Statistisch Redeneren"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/moderation/moderation_PB_in_R.qmd"}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
