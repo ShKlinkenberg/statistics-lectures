@@ -1,0 +1,158 @@
+# F-distribution {.section}
+
+## Ronald Fisher {.smaller .subsection}
+
+::: {.columns}
+
+::: {.column width="70%"}
+
+The F-distribution, also known as Snedecor's F distribution or the Fisher--Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.
+
+[Wikipedia](https://en.wikipedia.org/wiki/F-distribution)
+
+Sir Ronald Aylmer Fisher FRS (17 February 1890 -- 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.
+
+[Wikipedia](https://en.wikipedia.org/wiki/Ronald_Fisher)
+
+:::
+
+::: {.column width="30%"}
+
+![Ronald Fisher](https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG){width="291"}
+
+:::
+
+:::
+
+## Analysing variance
+
+[Decomposing variance example of height for males and females.](https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000)
+
+## Population distribution {.smaller .subsection}
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
+
+n  = 56    # Sample size
+df = n - 1 # Degrees of freedom
+
+mu    = 120
+sigma = 15
+
+IQ = seq(mu-45, mu+45, 1)
+
+par(mar=c(4,2,0,0))  
+plot(IQ, dnorm(IQ, mean = mu, sd = sigma), type='l', col="red")
+
+n.samples = 12
+
+for(i in 1:n.samples) {
+  
+  par(mar=c(2,2,0,0))  
+  hist(rnorm(n, mu, sigma), main="", cex.axis=.5, col="red")
+  
+}
+```
+
+## F-statistic
+
+$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
+
+So the $F$-statistic represents a signal to noise ratio by deviding the model variance component by the error variance component.
+
+## A samples
+
+Let's take two sample from our normal populatiion and calculate the F-value.
+
+```{r, echo=TRUE}
+x.1 = rnorm(n, mu, sigma)
+x.2 = rnorm(n, mu, sigma)
+
+data <- data.frame(group = rep(c("s1", "s2"), each=n), score = c(x.1,x.2))
+	
+F = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
+F
+```
+
+## More samples {.smaller .subsection}
+
+let's take more samples and calculate the F-value every time.
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+n.samples = 1000
+
+f.values = vector()
+
+for(i in 1:n.samples) {
+  
+  x.1 = rnorm(n, mu, sigma); x.1
+  x.2 = rnorm(n, mu, sigma); x.2
+
+  data <- data.frame(group = rep(c("s1", "s2"), each=n), score = c(x.1,x.2))
+	
+  f.values[i] = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
+
+}
+
+k = 2
+N = 2*n
+
+df.model = k - 1
+df.error = N - k
+
+hist(f.values, freq = FALSE, main="F-values", breaks=100)
+F = seq(0, 6, .01)
+lines(F, df(F,df.model, df.error), col = "red")
+```
+
+## F-distribution {.smaller}
+
+So if the population is normaly distributed (assumption of normality) the f-distribution represents the signal to noise ration given a certain number of samples (${df}_{model} = k - 1$) and sample size (${df}_{error} = N - k$).
+
+The F-distibution therefore is different for different sample sizes and number of groups.
+
+## F-distribution {.smaller}
+
+```{r}
+#| output-location: slide
+
+multiple.n  = c(5, 15, 30)
+multiple.k  = c(2, 4, 6)
+multiple.df.model = multiple.k - 1
+multiple.df.error = multiple.n - multiple.k
+col         = rainbow(length(multiple.df.model) * length(multiple.df.error))
+F = seq(0, 10, .01)
+
+plot(F,  df(F, multiple.df.model[1], multiple.df.error[1]), type = "l", 
+     xlim = c(0,10), ylim = c(0,.85), 
+     xlab = "F", ylab="density", 
+     col  = col[1], main="F-distributions" )
+
+dfs = expand.grid(multiple.df.model, multiple.df.error)
+
+for(i in 2:dim(dfs)[1]) { 
+  
+  lines(F, df(F, dfs[i,1], dfs[i,2]), col=col[i])
+  
+  critical.f <- qf(.95, dfs[i,1], dfs[i,2])
+  
+  f.alpha <- seq(critical.f, 1000, .01)
+  
+  polygon(c(f.alpha, rev(f.alpha)), c(df(f.alpha, dfs[i,1], dfs[i,2]), f.alpha*0 ), col= rgb(1,.66,0, .5), border = col[i])
+  
+  lines(c(critical.f+.1, 5), c(.02, .2), col=col[i])
+        
+}
+
+text(5,.2, expression(paste(alpha, "= 5%")), pos =3)
+
+legend("topright", legend = paste("df model =",dfs[,1], "df error =", dfs[,2]), lty=1, col = col, cex=.75)
+```
+
+## F-distribution {.flexbox .vcenter}
+
+![Animated F-distrigutions](../../../../topics/f_distribution/f_distributions.gif)

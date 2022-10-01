@@ -1,0 +1,79 @@
+# Nonparametric tests {.section}
+
+```{r}
+#| echo: false
+library("knitr")
+```
+
+
+## Parametric vs Nonparametric {#mytable}
+
+<!-- <style>
+#mytable th {
+background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #FFA500), color-stop(80%, #FFA500)) no-repeat !important;
+background-image: -webkit-linear-gradient(top, rgb(255,165,0) 40%, rgb(255,165,0) 80%) !important;
+background: -webkit-linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
+background-image: -webkit-linear-gradient(top, rgb(255,165,0) 40%, rgb(255,165,0) 80%) !important;
+background: -moz-linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
+background: -o-linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
+background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
+}
+</style> -->
+
+Attribute    | Parametric            | Nonparametric
+-------------|-----------------------|--------------------------
+distribution | normaly distributed   | any distribution
+sampling     | random sample         | random sample
+sensitivity to outliers | yes        | no
+works with   | large data sets       | small and large data sets
+speed        | fast                  | slow
+
+## Ranking {.subsection}
+
+```{r, fig.height=3, fig.align='center'}
+x = c(1, 4, 6, 7, 8, 9)
+y = c(1, 4, 6, 7, 8, 39)
+
+layout(matrix(1:2, 1, 2))
+boxplot(x, horizontal=T, col='red')
+boxplot(y, horizontal=T, col='red')
+```
+
+```{r, fig.height=3}
+kable(rbind(rx = rank(x), ry = rank(y)))
+```
+
+## Ties {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+x = c(1, 4, 6, 7, 8, 8, 4, 7, 9)
+
+data.frame(x, ordered = sort(x), non.tied.rank = 1:length(x), ranked = rank(sort(x))) -> ranks
+
+kable(ranks)
+```
+
+:::
+
+::: {.column}
+
+$$\frac{2 + 3}{2} = 2.5 \\  \frac{5 + 6}{2} = 5.5 \\  \frac{7 + 8}{2} = 7.5$$
+:::
+
+:::
+
+## Procedure {.smaller}
+
+1. Assumption: independent random samples.
+2. Hypothesis: 
+<br>$H_0$ : equal population distributions (implies equal mean ranking) 
+<br>$H_A$ : unequal mean ranking (two sided) 
+<br>$H_A$ : higher mean ranking for one group.
+3. Test statistic is difference between mean or sum of ranking.
+4. Standardise test statistic
+5. Calculate *P*-value one or two sided.
+5. Conclude to reject $H_0$ if $p < \alpha$.

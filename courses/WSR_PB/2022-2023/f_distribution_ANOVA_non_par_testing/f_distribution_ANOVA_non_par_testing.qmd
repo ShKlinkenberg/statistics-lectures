@@ -1,0 +1,25 @@
+---
+title    : "F-distribution & Non-parametric tests"
+author   : "Klinkenberg"
+date     : "3 oct 2022"
+footer: "Wetenschapsfilosofie & Statistisch Redeneren"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/f_distribution/f_distribution.qmd"}
+```
+
+```{r child="../../../../topics/non_parametric_concept/non_parametric_concept.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/kruskal_wallis_test/kruskal_wallis_test.qmd", eval=TRUE}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
