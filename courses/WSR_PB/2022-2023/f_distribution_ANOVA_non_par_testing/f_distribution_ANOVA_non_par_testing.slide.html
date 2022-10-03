@@ -475,7 +475,7 @@
 <span id="cb2-6"><a href="#cb2-6"></a>F <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
 <span id="cb2-7"><a href="#cb2-7"></a>F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.442019</code></pre>
+<pre><code>[1] 0.4490979</code></pre>
 </div>
 </div>
 </section>
@@ -615,84 +615,31 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 </div>
 </div>
 </section>
-<section id="ties" class="slide level2 smaller">
+<section id="ties" class="slide level2">
 <h2>Ties</h2>
-<div class="columns">
-<div class="column">
 <div class="cell">
-<div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">x</th>
-<th style="text-align: right;">ordered</th>
-<th style="text-align: right;">non.tied.rank</th>
-<th style="text-align: right;">ranked</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">2.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">5.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">7.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">9.0</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Scores</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">42</span>, <span class="dv">62</span>, <span class="dv">73</span>, <span class="dv">84</span>, <span class="dv">84</span>, <span class="dv">42</span>, <span class="dv">73</span>, <span class="dv">90</span>); x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11 42 62 73 84 84 42 73 90</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># sort</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">sort</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11 42 42 62 73 73 84 84 90</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># assign ranks</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5 6 7 8 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># solve for ties</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">rank</span>(<span class="fu">sort</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.0 2.5 2.5 4.0 5.5 5.5 7.5 7.5 9.0</code></pre>
 </div>
 </div>
-</div><div class="column">
-<p><span class="math display">\[\frac{2 + 3}{2} = 2.5 \\  \frac{5 + 6}{2} = 5.5 \\  \frac{7 + 8}{2} = 7.5\]</span></p>
-</div>
-</div>
+<p><span class="math display">\[\frac{2 + 3}{2} = 2.5,  \frac{5 + 6}{2} = 5.5,  \frac{7 + 8}{2} = 7.5\]</span></p>
 </section>
 <section id="procedure" class="slide level2 smaller">
 <h2>Procedure</h2>
@@ -722,28 +669,28 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="simulate-data" class="slide level2">
 <h2>Simulate data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>n      <span class="ot">=</span> <span class="dv">30</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>factor <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"ecstasy"</span>,<span class="st">"alcohol"</span>,<span class="st">"control"</span>), <span class="at">each=</span>n<span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a>dummy<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">ifelse</span>(factor <span class="sc">==</span> <span class="st">"alcohol"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb5-5"><a href="#cb5-5"></a>dummy<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">ifelse</span>(factor <span class="sc">==</span> <span class="st">"ecstasy"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb5-6"><a href="#cb5-6"></a>b<span class="fl">.0</span>     <span class="ot">=</span> <span class="dv">23</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>b<span class="fl">.1</span>     <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>b<span class="fl">.2</span>     <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>error   <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">1.7</span>)</span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co"># Model</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>depres  <span class="ot">=</span> b<span class="fl">.0</span> <span class="sc">+</span> b<span class="fl">.1</span><span class="sc">*</span>dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.2</span><span class="sc">*</span>dummy<span class="fl">.2</span> <span class="sc">+</span> error</span>
-<span id="cb5-13"><a href="#cb5-13"></a>depres  <span class="ot">=</span> <span class="fu">round</span>(depres)</span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(factor, depres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>n      <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>factor <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"ecstasy"</span>,<span class="st">"alcohol"</span>,<span class="st">"control"</span>), <span class="at">each=</span>n<span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a>dummy<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">ifelse</span>(factor <span class="sc">==</span> <span class="st">"alcohol"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>dummy<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">ifelse</span>(factor <span class="sc">==</span> <span class="st">"ecstasy"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a>b<span class="fl">.0</span>     <span class="ot">=</span> <span class="dv">23</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>b<span class="fl">.1</span>     <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>b<span class="fl">.2</span>     <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>error   <span class="ot">=</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">1.7</span>)</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co"># Model</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>depres  <span class="ot">=</span> b<span class="fl">.0</span> <span class="sc">+</span> b<span class="fl">.1</span><span class="sc">*</span>dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.2</span><span class="sc">*</span>dummy<span class="fl">.2</span> <span class="sc">+</span> error</span>
+<span id="cb13-13"><a href="#cb13-13"></a>depres  <span class="ot">=</span> <span class="fu">round</span>(depres)</span>
+<span id="cb13-14"><a href="#cb13-14"></a></span>
+<span id="cb13-15"><a href="#cb13-15"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(factor, depres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="assign-ranks" class="slide level2 subsection">
 <h2>Assign ranks</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Assign ranks</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>data<span class="sc">$</span>ranks <span class="ot">=</span> <span class="fu">rank</span>(data<span class="sc">$</span>depres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Assign ranks</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>data<span class="sc">$</span>ranks <span class="ot">=</span> <span class="fu">rank</span>(data<span class="sc">$</span>depres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-data" class="slide level2 smaller">
@@ -769,18 +716,18 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <section id="calculate-h-1" class="slide level2">
 <h2>Calculate H</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Now we need the sum of the ranks per group.</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>R.i <span class="ot">=</span> <span class="fu">aggregate</span>(ranks <span class="sc">~</span> factor, <span class="at">data =</span> data, sum)<span class="sc">$</span>ranks</span>
-<span id="cb7-3"><a href="#cb7-3"></a>R.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Now we need the sum of the ranks per group.</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>R.i <span class="ot">=</span> <span class="fu">aggregate</span>(ranks <span class="sc">~</span> factor, <span class="at">data =</span> data, sum)<span class="sc">$</span>ranks</span>
+<span id="cb15-3"><a href="#cb15-3"></a>R.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 207.0 121.5 136.5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># De total sample size N is:</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>N <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># And the sample size per group is n_i:</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>n.i <span class="ot">=</span> <span class="fu">aggregate</span>(depres <span class="sc">~</span> factor, <span class="at">data=</span>data, length)<span class="sc">$</span>depres</span>
-<span id="cb9-6"><a href="#cb9-6"></a>n.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># De total sample size N is:</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>N <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># And the sample size per group is n_i:</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>n.i <span class="ot">=</span> <span class="fu">aggregate</span>(depres <span class="sc">~</span> factor, <span class="at">data=</span>data, length)<span class="sc">$</span>depres</span>
+<span id="cb17-6"><a href="#cb17-6"></a>n.i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 10 10</code></pre>
 </div>
@@ -790,22 +737,22 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <h2>Calculate H</h2>
 <p><span class="math display">\[H = \frac{12}{N(N+1)} \sum_{i=1}^k \frac{R_i^2}{n_i} - 3(N+1)\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>H <span class="ot">=</span> ( <span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)) ) <span class="sc">*</span> <span class="fu">sum</span>(R.i<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n.i) <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a>H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>H <span class="ot">=</span> ( <span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)) ) <span class="sc">*</span> <span class="fu">sum</span>(R.i<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n.i) <span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.37871</code></pre>
 </div>
 </div>
 <p>And the degrees of freedom</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>k  <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>df <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>k  <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>df <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="test-for-significance" class="slide level2 subsection">
 <h2>Test for significance</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">visualize.chisq</span>(H, df, <span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">visualize.chisq</span>(H, df, <span class="at">section=</span><span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <!-- Footer insert below -->
