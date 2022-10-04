@@ -111,7 +111,7 @@ ga('send', {
         
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -141,7 +141,57 @@ ga('send', {
 
 </header>
 
-<p>On this site you can find my statistics lectures for the various courses i give.</p>
+<div class="column-screen">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+<script>
+let particles = [];
+const num = 1000;
+
+const noiseScale = 0.01/2;
+
+function setup() {
+  var canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent('canvasForHTML');
+  for(let i = 0; i < num; i ++) {
+    particles.push(createVector(random(width), random(height)));
+  }
+  
+  
+  stroke(255,0,0);
+  // For a cool effect try uncommenting this line
+  // And comment out the background() line in draw
+  // stroke(color(188, 0, 49));
+  clear();
+}
+
+function draw() {
+  background(255, 10);
+  for(let i = 0; i < num; i ++) {
+    let p = particles[i];
+    point(p.x, p.y);
+    let n = noise(p.x * noiseScale, p.y * noiseScale, frameCount * noiseScale * noiseScale);
+    let a = TAU * n;
+    p.x += cos(a);
+    p.y += sin(a);
+    if(!onScreen(p) && frameCount < 1000) {
+      p.x = random(width);
+      p.y = random(height);
+    }
+  }
+}
+
+function mouseReleased() {
+  noiseSeed(millis());
+}
+
+function onScreen(v) {
+  return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
+}
+</script>
+<div id="canvasForHTML">
+
+</div>
+</div>
 
 
 

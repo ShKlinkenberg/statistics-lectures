@@ -1,0 +1,14 @@
+{
+  "hash": "f7d733a282bc3ffa4a1d40c5a696ae84",
+  "result": {
+    "markdown": "---\ntitle: \"Statistics Lectures\"\nauthor: \"Klinkenberg\"\ndate: today\nformat: \n  html: \n    page-layout: full\n---\n\n\nOn this site you can find my statistics lectures for the various courses i give.\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
