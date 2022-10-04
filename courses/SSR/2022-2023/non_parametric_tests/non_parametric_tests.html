@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Klinkenberg">
-<meta name="dcterms.date" content="2021-10-08">
+<meta name="dcterms.date" content="2022-10-07">
 
 <title>Non-parametric tests</title>
 <style>
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 8, 2021</p>
+      <p class="date">October 7, 2022</p>
     </div>
   </div>
     
@@ -443,8 +443,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-7e86c136588333c0c421" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7e86c136588333c0c421">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol"],[30,29,29,24,29,30,28,27,31,28,28,28,28,31,28,29,26,27,28,29],[17.5,14,14,1,14,17.5,8,3.5,19.5,8,8,8,8,19.5,8,14,2,3.5,8,14]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b2749d3fab8bc06b6479" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b2749d3fab8bc06b6479">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Ecstasy","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol","Alcohol"],[28,28,27,26,24,26,25,28,28,32,25,27,29,28,27,33,29,30,26,29],[12,12,8,5,1,5,2.5,12,12,19,2.5,8,16,12,8,20,16,18,5,16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -454,9 +454,9 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(R <span class="sc">~</span> factor, data, sum)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   factor   R
-1 Alcohol  93
-2 Ecstasy 117</code></pre>
+<pre><code>   factor     R
+1 Alcohol 121.5
+2 Ecstasy  88.5</code></pre>
 </div>
 </div>
 </section>
@@ -467,7 +467,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">min</span>(R<span class="sc">$</span>R)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>W</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 93</code></pre>
+<pre><code>[1] 88.5</code></pre>
 </div>
 </div>
 </section>
@@ -519,7 +519,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> (W <span class="sc">-</span> W.mean) <span class="sc">/</span> W.se</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.9071147</code></pre>
+<pre><code>[1] -1.247283</code></pre>
 </div>
 </div>
 </section>
@@ -560,7 +560,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> z <span class="sc">/</span> <span class="fu">sqrt</span>(N)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.202837</code></pre>
+<pre><code>[1] -0.2789009</code></pre>
 </div>
 </div>
 </section>
@@ -571,7 +571,7 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>U <span class="ot">=</span> (n<span class="fl">.1</span><span class="sc">*</span>n<span class="fl">.2</span>)<span class="sc">+</span>(n<span class="fl">.1</span><span class="sc">*</span>(n<span class="fl">.1</span><span class="sc">+</span><span class="dv">1</span>))<span class="sc">/</span><span class="dv">2</span><span class="sc">-</span>R<span class="sc">$</span>R[<span class="dv">1</span>]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>U</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 62</code></pre>
+<pre><code>[1] 33.5</code></pre>
 </div>
 </div>
 </section>
@@ -629,8 +629,8 @@ background: linear-gradient(top, #FFA500 40%, #FFA500 80%) no-repeat !important;
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-acf61fb0670160d06132" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-acf61fb0670160d06132">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7abdece5ef801a313ed9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7abdece5ef801a313ed9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -675,8 +675,8 @@ data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-5b6a0356af275f8da2e4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5b6a0356af275f8da2e4">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28],[1,-3,1,0,1,0,2,2,-1,0],[1,3,1,0,1,0,2,2,1,0],[2.5,7,2.5,null,2.5,null,5.5,5.5,2.5,null],[1,-1,1,0,1,0,1,1,-1,0],[2.5,0,2.5,0,2.5,0,5.5,5.5,0,0],[0,7,0,0,0,0,0,0,2.5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n      <th>difference<\/th>\n      <th>abs.difference<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n      <th>rank_pos<\/th>\n      <th>rank_neg<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c9cb70508ed4f36ba87d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c9cb70508ed4f36ba87d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[29,25,28,27,29,28,28,29,29,28],[28,28,27,27,28,28,26,27,30,28],[1,-3,1,0,1,0,2,2,-1,0],[1,3,1,0,1,0,2,2,1,0],[2.5,7,2.5,null,2.5,null,5.5,5.5,2.5,null],[1,-1,1,0,1,0,1,1,-1,0],[2.5,0,2.5,0,2.5,0,5.5,5.5,0,0],[0,7,0,0,0,0,0,0,2.5,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Ecstasy<\/th>\n      <th>Alcohol<\/th>\n      <th>difference<\/th>\n      <th>abs.difference<\/th>\n      <th>rank<\/th>\n      <th>sign<\/th>\n      <th>rank_pos<\/th>\n      <th>rank_neg<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -794,8 +794,8 @@ data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-a4a42a213eb85479406b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a4a42a213eb85479406b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","control","control","control","control","control","control","control","control","control","control"],[22,22,24,25,21,24,21,23,21,23,27,23,24,24,21,26,23,24,23,24,23,22,21,22,22,25,22,22,22,23],[9.5,9.5,23.5,27.5,3,23.5,3,17,3,17,30,17,23.5,23.5,3,29,17,23.5,17,23.5,17,9.5,3,9.5,9.5,27.5,9.5,9.5,9.5,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>ranks<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d6a0b9f9173d7339e22b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d6a0b9f9173d7339e22b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"],["ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","ecstasy","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","alcohol","control","control","control","control","control","control","control","control","control","control"],[22,22,24,25,21,24,21,23,21,23,27,23,24,24,21,26,23,24,23,24,23,22,21,22,22,25,22,22,22,23],[9.5,9.5,23.5,27.5,3,23.5,3,17,3,17,30,17,23.5,23.5,3,29,17,23.5,17,23.5,17,9.5,3,9.5,9.5,27.5,9.5,9.5,9.5,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>factor<\/th>\n      <th>depres<\/th>\n      <th>ranks<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -906,8 +906,8 @@ data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-6e33ea825ae0421f07b1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6e33ea825ae0421f07b1">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[23,24,27,27,25,21,22,21,23,24],[22,24,24,21,25,22,22,25,24,24],[24,27,25,21,21,23,24,21,23,21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-59191f8d0626c872d137" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-59191f8d0626c872d137">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[23,24,27,27,25,21,22,21,23,24],[22,24,24,21,25,22,22,25,24,24],[24,27,25,21,21,23,24,21,23,21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -924,8 +924,8 @@ data[which(data$difference != 0),'rank'] <- rank(data[which(data$difference != 0
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-5bb250830b6e1c57d2d9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5bb250830b6e1c57d2d9">{"x":{"filter":"none","vertical":false,"data":[[2,1.5,3,3,2.5,1,1.5,1.5,1.5,2.5],[1,1.5,1,1.5,2.5,2,1.5,3,3,2.5],[3,3,2,1.5,1,3,3,1.5,1.5,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-15b6efa2f5fe48ba8b13" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-15b6efa2f5fe48ba8b13">{"x":{"filter":"none","vertical":false,"data":[[2,1.5,3,3,2.5,1,1.5,1.5,1.5,2.5],[1,1.5,1,1.5,2.5,2,1.5,3,3,2.5],[3,3,2,1.5,1,3,3,1.5,1.5,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ecstasy<\/th>\n      <th>alcohol<\/th>\n      <th>control<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"iDisplayLength":7,"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>

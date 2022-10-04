@@ -1,7 +1,7 @@
 ---
 title: "Non-parametric tests"
 author: "Klinkenberg"
-date: "8 oct 2021"
+date: "7 oct 2022"
 footer: "Scientific & Statistical Reasoning"
 format: 
   html: default
