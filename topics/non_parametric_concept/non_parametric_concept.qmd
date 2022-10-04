@@ -43,21 +43,26 @@ boxplot(y, horizontal=T, col='red')
 kable(rbind(rx = rank(x), ry = rank(y)))
 ```
 
-## Ties
+## Ties {.smaller}
 
 ```{r, echo=TRUE}
 # Scores
-x = c(11, 42, 62, 73, 84, 84, 42, 73, 90); x
+x = c(11, 42, 62, 73, 84, 84, 42, 73, 90)
 
 # sort
-sort(x)
+order = sort(x)
 
 # assign ranks
-1:length(x)
+ranks = 1:length(x)
 
 # solve for ties
-rank(sort(x))
+ties = rank(sort(x))
 ```
+
+```{r, echo=FALSE}
+kable(rbind(x, order, ranks, ties))
+```
+
 
 $$\frac{2 + 3}{2} = 2.5,  \frac{5 + 6}{2} = 5.5,  \frac{7 + 8}{2} = 7.5$$
 
