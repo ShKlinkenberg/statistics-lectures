@@ -1,0 +1,31 @@
+---
+title: "Non-parametric tests"
+author: "Klinkenberg"
+date: "8 oct 2021"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/non_parametric_concept/non_parametric_concept.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/wilcoxon_rank_sum_test/wilcoxon_rank_sum_test.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/wilcoxon_signed_rank_test/wilcoxon_signed_rank_test.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/kruskal_wallis_test/kruskal_wallis_test.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/friedman_anova/friedman_anova.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
