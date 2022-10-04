@@ -1,0 +1,23 @@
+---
+title    : "ANOVA"
+subtitle : "F-distribution & One-way independent"
+author   : "Klinkenberg"
+date     : "6 oct 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+
+```{r child="../../../../topics/f_distribution/f_distribution.qmd"}
+```
+
+```{r child="../../../../topics/ANOVA_one_way_independent/ANOVA_one_way_independent.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
