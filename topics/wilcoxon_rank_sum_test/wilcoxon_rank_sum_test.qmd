@@ -7,9 +7,9 @@ library("DT")
 
 Independent 2 samples
 
-## Wilcoxon rank-sum test {.section}
+## Wilcoxon rank-sum test
 
-<img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0;">
+<img src="http://upload.wikimedia.org/wikipedia/en/9/9a/FrankWilcoxon.png" style="float: left; margin: 0 20px 0 0; width: 300px;">
   
 Developed by [Frank Wilcoxon](http://en.wikipedia.org/wiki/Frank_Wilcoxon) the rank-sum test is a [nonparametric](http://en.wikipedia.org/wiki/Nonparametric_statistics) alternative to the independent samples t-test.
 
