@@ -1,0 +1,25 @@
+---
+title: "ANOVA"
+subtitle: "Independent factorial, repeated and mixed"
+author: "Klinkenberg"
+date: "10 oct 2022"
+footer: "Wetenschapsfilosofie & Statistisch Redeneren"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA.qmd"}
+```
+
+```{r child="../../../../topics/ANOVA_repeated_one-way/anova_repeated_one-way.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/ANOVA_mixed/ANOVA_mixed_PB.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
