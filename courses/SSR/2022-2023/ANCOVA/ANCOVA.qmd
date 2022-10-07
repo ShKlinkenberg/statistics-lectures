@@ -1,0 +1,18 @@
+---
+title: "ANCOVA"
+author: "Klinkenberg"
+date: "12 oct 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/ANCOVA/ANCOVA.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```

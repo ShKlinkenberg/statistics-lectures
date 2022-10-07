@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Klinkenberg">
+<meta name="dcterms.date" content="2022-10-12">
+
+<title>ANCOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="ANCOVA_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ANCOVA_files/libs/quarto-html/quarto.js"></script>
+<script src="ANCOVA_files/libs/quarto-html/popper.min.js"></script>
+<script src="ANCOVA_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ANCOVA_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ANCOVA_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ANCOVA_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ANCOVA_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ANCOVA_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ANCOVA_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="ANCOVA_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="ANCOVA_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="ANCOVA_files/libs/datatables-binding-0.25/datatables.js"></script>
+<script src="ANCOVA_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="ANCOVA_files/libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="ANCOVA_files/libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="ANCOVA_files/libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="ANCOVA_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="ANCOVA_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="ANCOVA_files/libs/dt-ext-buttons-1.11.3/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="ANCOVA_files/libs/dt-ext-buttons-1.11.3/js/dataTables.buttons.min.js"></script>
+<script src="ANCOVA_files/libs/dt-ext-buttons-1.11.3/js/buttons.html5.min.js"></script>
+<script src="ANCOVA_files/libs/dt-ext-buttons-1.11.3/js/buttons.colVis.min.js"></script>
+<script src="ANCOVA_files/libs/dt-ext-buttons-1.11.3/js/buttons.print.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ancova" id="toc-ancova" class="nav-link active" data-scroll-target="#ancova">ANCOVA</a>
+  <ul class="collapse">
+  <li><a href="#ancova-1" id="toc-ancova-1" class="nav-link" data-scroll-target="#ancova-1">ANCOVA</a></li>
+  <li><a href="#ancova-2" id="toc-ancova-2" class="nav-link" data-scroll-target="#ancova-2">ANCOVA</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#data-example" id="toc-data-example" class="nav-link" data-scroll-target="#data-example">Data example</a></li>
+  <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">Simulate data</a></li>
+  <li><a href="#define-the-model" id="toc-define-the-model" class="nav-link" data-scroll-target="#define-the-model">Define the model</a></li>
+  <li><a href="#dummies" id="toc-dummies" class="nav-link" data-scroll-target="#dummies">Dummies</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#group-means" id="toc-group-means" class="nav-link" data-scroll-target="#group-means">Group means</a></li>
+  <li><a href="#model-fit-no-covar" id="toc-model-fit-no-covar" class="nav-link" data-scroll-target="#model-fit-no-covar">Model fit no covar</a></li>
+  <li><a href="#model-fit-only-covar" id="toc-model-fit-only-covar" class="nav-link" data-scroll-target="#model-fit-only-covar">Model fit only covar</a></li>
+  <li><a href="#model-fit-with-covar" id="toc-model-fit-with-covar" class="nav-link" data-scroll-target="#model-fit-with-covar">Model fit with covar</a></li>
+  <li><a href="#total-variance" id="toc-total-variance" class="nav-link" data-scroll-target="#total-variance">Total variance</a></li>
+  <li><a href="#the-data-1" id="toc-the-data-1" class="nav-link" data-scroll-target="#the-data-1">The data</a></li>
+  <li><a href="#total-variance-visual" id="toc-total-variance-visual" class="nav-link" data-scroll-target="#total-variance-visual">Total variance visual</a></li>
+  <li><a href="#model-variance-group" id="toc-model-variance-group" class="nav-link" data-scroll-target="#model-variance-group">Model variance group</a></li>
+  <li><a href="#model-variance-group-visual" id="toc-model-variance-group-visual" class="nav-link" data-scroll-target="#model-variance-group-visual">Model variance group visual</a></li>
+  <li><a href="#model-variance-covariate-visual" id="toc-model-variance-covariate-visual" class="nav-link" data-scroll-target="#model-variance-covariate-visual">Model variance covariate visual</a></li>
+  <li><a href="#model-variance-group-and-covariate" id="toc-model-variance-group-and-covariate" class="nav-link" data-scroll-target="#model-variance-group-and-covariate">Model variance group and covariate</a></li>
+  <li><a href="#model-variance-group-and-covariate-visual" id="toc-model-variance-group-and-covariate-visual" class="nav-link" data-scroll-target="#model-variance-group-and-covariate-visual">Model variance group and covariate visual</a></li>
+  <li><a href="#error-variance-with-covariate" id="toc-error-variance-with-covariate" class="nav-link" data-scroll-target="#error-variance-with-covariate">Error variance with covariate</a></li>
+  <li><a href="#sums-of-squares" id="toc-sums-of-squares" class="nav-link" data-scroll-target="#sums-of-squares">Sums of squares</a></li>
+  <li><a href="#f-ratio" id="toc-f-ratio" class="nav-link" data-scroll-target="#f-ratio">F-ratio</a></li>
+  <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value"><span class="math inline">\(P\)</span>-value</a></li>
+  <li><a href="#alpha-power" id="toc-alpha-power" class="nav-link" data-scroll-target="#alpha-power">Alpha &amp; Power</a></li>
+  <li><a href="#adjusted-means" id="toc-adjusted-means" class="nav-link" data-scroll-target="#adjusted-means">Adjusted means</a></li>
+  <li><a href="#real-betas" id="toc-real-betas" class="nav-link" data-scroll-target="#real-betas">Real <span class="math inline">\(\beta\)</span>’s</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ANCOVA</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Klinkenberg </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 12, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="ancova" class="level1">
+<h1>ANCOVA</h1>
+<div class="cell">
+
+</div>
+<section id="ancova-1" class="level2 section">
+<h2 class="section anchored" data-anchor-id="ancova-1">ANCOVA</h2>
+<p>Analysis of covariance (ANCOVA) is a general linear model which blends ANOVA and regression. ANCOVA evaluates whether population means of a dependent variable (DV) are equal across levels of a categorical independent variable (IV) often called a treatment, while statistically controlling for the effects of other continuous variables that are not of primary interest, known as covariates (CV).</p>
+<p><a href="https://en.wikipedia.org/wiki/Analysis_of_covariance">WIKIPEDIA</a></p>
+</section>
+<section id="ancova-2" class="level2">
+<h2 class="anchored" data-anchor-id="ancova-2">ANCOVA</h2>
+<p>Determine main effect while correcting for covariate</p>
+<ul>
+<li>1 dependent variable</li>
+<li>1 or more independent variables</li>
+<li>1 or more covariates</li>
+</ul>
+<p>A covariate is a variable can be a confounding variable biasing your results. By adding a covariate we reduce error/residual in the model.</p>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<ul>
+<li>Same as ANOVA</li>
+<li>Independence of the covariate and treatment effect §12.3.1.
+<ul>
+<li>No difference on ANOVA with covar and independent variable</li>
+<li>Matching experimental groups on the covariate</li>
+</ul></li>
+<li>Homogeneity of regression slopes §12.3.2.
+<ul>
+<li>Visual: scatterplot dep var * covar per condition</li>
+<li>Testing: interaction indep. var * covar</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-example" class="level2">
+<h2 class="anchored" data-anchor-id="data-example">Data example</h2>
+<p>We want to test the difference in national extraversion but want to controll for openness to experience.</p>
+<ul>
+<li>Dependent variable: Extraversion</li>
+<li>Independent variabele: Nationality
+<ul>
+<li>Dutch</li>
+<li>German</li>
+<li>Belgian</li>
+</ul></li>
+<li>Covariate: Openness to experience</li>
+</ul>
+</section>
+<section id="simulate-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-data">Simulate data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>group       <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">runif</span>(n,<span class="dv">1</span>,k),<span class="dv">0</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mu.covar    <span class="ot">=</span> <span class="dv">8</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sigma.covar <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>covar       <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(n,mu.covar,sigma.covar),<span class="dv">2</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dummy variables</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(group <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(group <span class="sc">==</span> <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.0</span> <span class="ot">=</span> <span class="dv">15</span> <span class="co"># initial value for group 1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.1</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># difference between group 1 and 2</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span> <span class="ot">=</span> <span class="dv">4</span>  <span class="co"># difference between group 1 and 3</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.3</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># Weight for covariate</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create error</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>error <span class="ot">=</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="define-the-model" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="define-the-model">Define the model</h2>
+<p><span class="math inline">\({outcome} = {model} + {error}\)</span> <span class="math inline">\({model} = {indvar} + {covariate} = {nationality} + {openness}\)</span></p>
+<p>Formal model</p>
+<p><span class="math inline">\(b_0 + b_1 {dummy}_1 + b_2 {dummy}_2 + b_3 covar\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">=</span> b<span class="fl">.0</span> <span class="sc">+</span> b<span class="fl">.1</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.2</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> covar <span class="sc">+</span> error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dummies" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="dummies">Dummies</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-27a87ee55979aa7d5bc7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-27a87ee55979aa7d5bc7">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],[3,2,1,3,1,3,2,1,2,2,2,1,1,2,2,3,1,2,3,1],[15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[0,1,0,0,0,0,1,0,1,1,1,0,0,1,1,0,0,1,0,0],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[9,9.3,8.42,8.15,9.38,8.47,7.26,6.7,8.33,8.04,7.7,8.07,7.61,6.72,8.68,7.65,6.14,9.04,7.78,8.85],[0.89,-1.45,-0.45,1.9,0.71,-0.02,-0.67,1.75,-0.46,0.74,0.63,0.26,-2.17,-0.15,0.27,-1.83,0.36,-0.79,-0.1,-0.28],[46.89,44.45,39.81,45.35,43.85,44.39,39.11,36.85,42.53,42.86,41.73,39.47,35.66,38.01,44.31,40.12,33.78,44.33,42.24,41.27]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>group<\/th>\n      <th>b.0<\/th>\n      <th>b.1<\/th>\n      <th>dummy.1<\/th>\n      <th>b.2<\/th>\n      <th>dummy.2<\/th>\n      <th>b.3<\/th>\n      <th>covar<\/th>\n      <th>error<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="the-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-data">The data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-6d85f92aa695103e7f43" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6d85f92aa695103e7f43">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":300,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="group-means" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="group-means">Group means</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(outcome <span class="sc">~</span> group, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group  outcome
+1     1 38.67000
+2     2 42.16625
+3     3 43.79800</code></pre>
+</div>
+</div>
+</section>
+<section id="model-fit-no-covar" class="level2">
+<h2 class="anchored" data-anchor-id="model-fit-no-covar">Model fit no covar</h2>
+<p>What are the beta coëfficients based on the data without the covariate?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit.group <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> <span class="fu">factor</span>(group), data); fit.group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = outcome ~ factor(group), data = data)
+
+Coefficients:
+   (Intercept)  factor(group)2  factor(group)3  
+        38.670           3.496           5.128  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit.group<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">+</span> fit.group<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>factor(group)2 factor(group)3 
+      42.16625       43.79800 </code></pre>
+</div>
+</div>
+<p><span class="math inline">\({Dutch} = 38.67 \&gt; {German} = 42.16625 \&gt; {Belgian} = 43.798\)</span></p>
+</section>
+<section id="model-fit-only-covar" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="model-fit-only-covar">Model fit only covar</h2>
+<p>What is the weight of only the covariate?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit.covar <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> covar, data)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit.covar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = outcome ~ covar, data = data)
+
+Coefficients:
+(Intercept)        covar  
+     15.667        3.185  </code></pre>
+</div>
+</div>
+</section>
+<section id="model-fit-with-covar" class="level2">
+<h2 class="anchored" data-anchor-id="model-fit-with-covar">Model fit with covar</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> <span class="fu">factor</span>(group) <span class="sc">+</span> covar, data); fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = outcome ~ factor(group) + covar, data = data)
+
+Coefficients:
+   (Intercept)  factor(group)2  factor(group)3           covar  
+        15.965           2.769           4.181           2.881  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">+</span> fit<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>factor(group)2 factor(group)3 
+      18.73401       20.14609 </code></pre>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<p><span class="math inline">\({Dutch} = 15.96 \&gt; {German} = 18.73 \&gt; {Belgian} = 20.14\)</span></p>
+</section>
+<section id="total-variance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="total-variance">Total variance</h2>
+<p>What is the total variance</p>
+<p><span class="math inline">\({MS}_{total} = s^2_{outcome} = \frac{{SS}_{outcome}}{{df}_{outcome}}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ms.t <span class="ot">=</span> <span class="fu">var</span>(data<span class="sc">$</span>outcome); ms.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11.97756</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ss.t <span class="ot">=</span> <span class="fu">var</span>(data<span class="sc">$</span>outcome) <span class="sc">*</span> (<span class="fu">length</span>(data<span class="sc">$</span>outcome) <span class="sc">-</span> <span class="dv">1</span>); ss.t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 227.5737</code></pre>
+</div>
+</div>
+</section>
+<section id="the-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="the-data-1">The data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-12b84c2369c5427c83b5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-12b84c2369c5427c83b5">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="total-variance-visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="total-variance-visual">Total variance visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ANCOVA_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="model-variance-group" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-variance-group">Model variance group</h2>
+<p>The model variance consists of two parts. One for the independent variable and one for the covariate. Lets first look at the independent variable.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-20187b6762e1c8deebaf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-20187b6762e1c8deebaf">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":315,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="model-variance-group-visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="model-variance-group-visual">Model variance group visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ANCOVA_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="model-variance-covariate-visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="model-variance-covariate-visual">Model variance covariate visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ANCOVA_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="model-variance-group-and-covariate" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-variance-group-and-covariate">Model variance group and covariate</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-aade037627a6e8e4ba69" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aade037627a6e8e4ba69">{"x":{"filter":"none","vertical":false,"data":[["3","5","8","12","13","17","20","2","7","9","10","11","14","15","18","1","4","6","16","19"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],[1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3],[8.42,9.38,6.7,8.07,7.61,6.14,8.85,9.3,7.26,8.33,8.04,7.7,6.72,8.68,9.04,9,8.15,8.47,7.65,7.78],[39.81,43.85,36.85,39.47,35.66,33.78,41.27,44.45,39.11,42.53,42.86,41.73,38.01,44.31,44.33,46.89,45.35,44.39,40.12,42.24],[41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505,41.3505],[38.67,38.67,38.67,38.67,38.67,38.67,38.67,42.17,42.17,42.17,42.17,42.17,42.17,42.17,42.17,43.8,43.8,43.8,43.8,43.8],[42.48,45.54,37,41.37,39.9,35.22,43.85,45.29,38.79,42.2,41.27,40.19,37.07,43.31,44.46,44.33,41.62,42.64,40.03,40.44],[40.22,42.99,35.27,39.21,37.89,33.65,41.46,45.53,39.65,42.73,41.9,40.92,38.09,43.74,44.78,46.07,43.63,44.55,42.18,42.56]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n<\/th>\n      <th>group<\/th>\n      <th>covar<\/th>\n      <th>outcome<\/th>\n      <th>grand.mean<\/th>\n      <th>model.group<\/th>\n      <th>model.covar<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":415,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="model-variance-group-and-covariate-visual" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="model-variance-group-and-covariate-visual">Model variance group and covariate visual</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ANCOVA_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="error-variance-with-covariate" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="error-variance-with-covariate">Error variance with covariate</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ANCOVA_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="sums-of-squares" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="sums-of-squares">Sums of squares</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>SS.model <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>SS.error <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((outcome <span class="sc">-</span> model)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sums of squares for individual effects</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>SS.model.group <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model.group <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>SS.model.covar <span class="ot">=</span> <span class="fu">with</span>(data, <span class="fu">sum</span>((model.covar <span class="sc">-</span> grand.mean)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>SS.covar <span class="ot">=</span> SS.model <span class="sc">-</span> SS.model.group; SS.covar <span class="do">## SS.covar corrected for group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 121.8463</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>SS.group <span class="ot">=</span> SS.model <span class="sc">-</span> SS.model.covar; SS.group <span class="do">## SS.group corrected for covar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 54.65778</code></pre>
+</div>
+</div>
+</section>
+<section id="f-ratio" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="f-ratio">F-ratio</h2>
+<p><span class="math inline">\(F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df.model <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>df.error <span class="ot">=</span> n <span class="sc">-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>MS.model <span class="ot">=</span> SS.group <span class="sc">/</span> df.model</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>MS.error <span class="ot">=</span> SS.error <span class="sc">/</span> df.error</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>F <span class="ot">=</span> MS.model <span class="sc">/</span> MS.error</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21.74406</code></pre>
+</div>
+</div>
+</section>
+<section id="p-value" class="level2">
+<h2 class="anchored" data-anchor-id="p-value"><span class="math inline">\(P\)</span>-value</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"visualize"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.f</span>(F, df.model, df.error, <span class="at">section =</span> <span class="st">"upper"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ANCOVA_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="alpha-power" class="level2">
+<h2 class="anchored" data-anchor-id="alpha-power">Alpha &amp; Power</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ANCOVA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="adjusted-means" class="level2">
+<h2 class="anchored" data-anchor-id="adjusted-means">Adjusted means</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add dummy variables</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dummy<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># b coefficients</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>b.cov <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"covar"</span>];          b.int <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"(Intercept)"</span>]</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span>   <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"factor(group)2"</span>]; b<span class="fl">.3</span>   <span class="ot">=</span> fit<span class="sc">$</span>coefficients[<span class="st">"factor(group)3"</span>]</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjustment factor for the means of the independent variable</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mean.adj <span class="ot">&lt;-</span> <span class="fu">with</span>(data, b.int <span class="sc">+</span> b.cov <span class="sc">*</span> <span class="fu">mean</span>(covar) <span class="sc">+</span> b<span class="fl">.2</span> <span class="sc">*</span> dummy<span class="fl">.1</span> <span class="sc">+</span> b<span class="fl">.3</span> <span class="sc">*</span> dummy<span class="fl">.2</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(mean.adj <span class="sc">~</span> group, data, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group mean.adj
+1     1 39.18576
+2     2 41.95576
+3     3 43.36576</code></pre>
+</div>
+</div>
+</section>
+<section id="real-betas" class="level2">
+<h2 class="anchored" data-anchor-id="real-betas">Real <span class="math inline">\(\beta\)</span>’s</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.0</span> <span class="ot">=</span> <span class="dv">15</span> <span class="co"># initial value for group 1</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.1</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># difference between group 1 and 2</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.2</span> <span class="ot">=</span> <span class="dv">4</span>  <span class="co"># difference between group 1 and 3</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>b<span class="fl">.3</span> <span class="ot">=</span> <span class="dv">3</span>  <span class="co"># Weight for covariate</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">m.covar =</span> mu.covar<span class="sc">*</span><span class="dv">3</span>, </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">BETA    =</span> <span class="fu">c</span>(b<span class="fl">.0</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.1</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.2</span>), </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sum     =</span> mu.covar<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> <span class="fu">c</span>(b<span class="fl">.0</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.1</span>, b<span class="fl">.0</span><span class="sc">+</span>b<span class="fl">.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     m.covar BETA sum
+[1,]      24   15  39
+[2,]      24   18  42
+[3,]      24   19  43</code></pre>
+</div>
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">CC BY-NC-SA 4.0</figcaption><p></p>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
