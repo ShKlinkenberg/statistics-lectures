@@ -1,0 +1,19 @@
+---
+title: "ANOVA"
+subtitle: "Independent factorial"
+author: "Klinkenberg"
+date: "13 oct 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
