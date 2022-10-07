@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistics Lectures",
-    "section": "",
-    "text": "On this site you can find my statistics lectures for the various courses i give."
-  },
-  {
     "objectID": "courses/SSR/2022-2023/SSR.html",
     "href": "courses/SSR/2022-2023/SSR.html",
     "title": "SSR 2022-2023",
@@ -18,6 +11,6 @@
     "href": "courses/WSR_PB/2022-2023/WSR_PB.html",
     "title": "WSR PB 2022-2023",
     "section": "",
-    "text": "Date \n    Lecture \n    Handout \n    Slides \n  \n \n\n  \n    2022-10-03 \n    F-distribution & Non-parametric tests \n    link \n    link \n  \n  \n    2022-09-28 \n    Moderation \n    link \n    link \n  \n  \n    2022-09-20 \n    T-distribution & Multiple regression \n    link \n    link \n  \n  \n    2022-09-12 \n    Null Hypothesis Testing \n    link \n    link \n  \n  \n    2022-09-05 \n    Statistical Reasoning \n    link \n    link"
+    "text": "Date \n    Lecture \n    Handout \n    Slides \n  \n \n\n  \n    2022-10-10 \n    ANOVA \n    link \n    link \n  \n  \n    2022-10-03 \n    F-distribution & Non-parametric tests \n    link \n    link \n  \n  \n    2022-09-28 \n    Moderation \n    link \n    link \n  \n  \n    2022-09-20 \n    T-distribution & Multiple regression \n    link \n    link \n  \n  \n    2022-09-12 \n    Null Hypothesis Testing \n    link \n    link \n  \n  \n    2022-09-05 \n    Statistical Reasoning \n    link \n    link"
   }
 ]
