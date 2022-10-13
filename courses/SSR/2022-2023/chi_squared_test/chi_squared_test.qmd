@@ -1,0 +1,18 @@
+---
+title: "Chi squared test"
+author: "Klinkenberg"
+date: "22 oct 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/chi_square/chi_square_test.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
