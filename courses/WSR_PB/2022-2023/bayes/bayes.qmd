@@ -1,0 +1,25 @@
+---
+title: "Bayes"
+subtitle: "Parameter estimation & hypothesis testing"
+author: "Klinkenberg"
+date: "17 oct 2022"
+footer: "Wetenschapsfilosofie & Statistisch Redeneren"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/bayes/bayes_theorem.qmd"}
+```
+
+```{r child="../../../../topics/bayes/bayesian_parameter_estimation.qmd"}
+```
+
+```{r child="../../../../topics/bayes/bayesian_hypothesis_testing.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```

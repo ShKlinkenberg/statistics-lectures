@@ -1,0 +1,61 @@
+# Bayesian hypothesis testing {.section}
+
+## Bayesion Hypothesis
+
+* $H_0$, the null hypothesis. This is an invariance or “general law”. For instance $\theta = 1$ (all swans are white) or $\theta = .5$ (people cannot look into the future – performance is at chance).
+* $H_A$ is the hypothesis that relaxes the restriction imposed by $H_0$.
+
+## Prior Belief
+
+$$\large \underbrace{\frac{P(H_A \mid data)}{P(H_0 \mid data)}}_\textrm{Posterior belief} = \underbrace{\frac{P(H_A)}{P(H_0)}}_\textrm{Prior belief} \times \underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
+
+## Bayes Factor {.subsection}
+
+$$\underbrace{\frac{P(data \mid H_A)}{P(data \mid H_0)}}_\textrm{Bayes Factor}$$
+A ratio of the likelihood of the data under the alternative and the null.
+
+A Bayes factor of ${BF}_{10} = 3$, means that the data are 3 times more likely under the alternative than under the null.
+
+## Simple BF explanation
+
+The special case of the Bayes Factor for null hypotheses testing can be visualised as the difference between the likelihood of the data at $H_A$ / $H_1$ and $H_0$ at the parameter value that represents the null.
+
+### interactive BF
+
+[A First Lesson in Bayesian Inference - Shiny App by EJ](https://tellmi.psy.lmu.de/felix/BayesLessons/BayesianLesson1.Rmd#section-do-the-test)
+
+## Heuristics for BF {.subsection}
+
+Heuristics for the Interpretation of the Bayes Factor by [Harold Jeffreys](https://en.wikipedia.org/wiki/Harold_Jeffreys)
+
+BF       | Evidence
+---------|----------
+ 1 – 3   | Anecdotal
+ 3 – 10  | Moderate
+10 – 30  | Strong
+30 – 100 | Very strong
+>100     | Extreme
+
+## Advantages of the Bayes Factor
+
+* Provides a continuous degree of evidence without requiring an all-or-none decision.
+* Allows evidence to be monitored during data collection.
+* Differentiates between “the data support H0” (evidence for absence) and “the data are not informative” (absence of evidence).
+
+## BF pizza
+
+![](../../../../topics/bayes/BF1.png)
+
+-------
+
+![](../../../../topics/bayes/BF3.png)
+
+-------
+
+![](../../../../topics/bayes/BF13.png)
+
+## JASP
+
+![](https://jasp-stats.org/wp-content/themes/jasp/images/logo.svg)
+
+[A fresh way to do statistics](https://jasp-stats.org)
