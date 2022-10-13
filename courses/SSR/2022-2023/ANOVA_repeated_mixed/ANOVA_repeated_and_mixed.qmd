@@ -1,0 +1,26 @@
+---
+title: "ANOVA"
+subtitle: "Repeated & Mixed"
+author: "Klinkenberg"
+date: "18 oct 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/ANOVA_repeated_one-way/ANOVA_repeated_one-way.qmd"}
+```
+
+```{r child="../../../../topics/ANOVA_repeated_factorial/ANOVA_repeated_factorial.qmd"}
+```
+
+```{r child="../../../../topics/ANOVA_mixed/ANOVA_mixed.qmd"}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
