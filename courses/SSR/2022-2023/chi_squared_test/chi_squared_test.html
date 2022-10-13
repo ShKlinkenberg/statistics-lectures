@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Klinkenberg">
+<meta name="dcterms.date" content="2022-10-22">
+
+<title>Chi squared test</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="chi_squared_test_files/libs/clipboard/clipboard.min.js"></script>
+<script src="chi_squared_test_files/libs/quarto-html/quarto.js"></script>
+<script src="chi_squared_test_files/libs/quarto-html/popper.min.js"></script>
+<script src="chi_squared_test_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="chi_squared_test_files/libs/quarto-html/anchor.min.js"></script>
+<link href="chi_squared_test_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="chi_squared_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="chi_squared_test_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="chi_squared_test_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="chi_squared_test_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="chi_squared_test_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="chi_squared_test_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="chi_squared_test_files/libs/datatables-binding-0.25/datatables.js"></script>
+<script src="chi_squared_test_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="chi_squared_test_files/libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="chi_squared_test_files/libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="chi_squared_test_files/libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="chi_squared_test_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="chi_squared_test_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#chi2-test" id="toc-chi2-test" class="nav-link active" data-scroll-target="#chi2-test"><span class="math inline">\(\chi^2\)</span> test</a>
+  <ul class="collapse">
+  <li><a href="#chi2-test-1" id="toc-chi2-test-1" class="nav-link" data-scroll-target="#chi2-test-1"><span class="math inline">\(\chi^2\)</span> test</a></li>
+  <li><a href="#chi2-test-statistic" id="toc-chi2-test-statistic" class="nav-link" data-scroll-target="#chi2-test-statistic"><span class="math inline">\(\chi^2\)</span> test statistic</a></li>
+  <li><a href="#chi2-distribution" id="toc-chi2-distribution" class="nav-link" data-scroll-target="#chi2-distribution"><span class="math inline">\(\chi^2\)</span> distribution</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#experiment" id="toc-experiment" class="nav-link" data-scroll-target="#experiment">Experiment</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#calculating-chi2" id="toc-calculating-chi2" class="nav-link" data-scroll-target="#calculating-chi2">Calculating <span class="math inline">\(\chi^2\)</span></a></li>
+  <li><a href="#calculating-the-model" id="toc-calculating-the-model" class="nav-link" data-scroll-target="#calculating-the-model">Calculating the model</a></li>
+  <li><a href="#calculating-the-model-1" id="toc-calculating-the-model-1" class="nav-link" data-scroll-target="#calculating-the-model-1">Calculating the model</a></li>
+  <li><a href="#observed---model" id="toc-observed---model" class="nav-link" data-scroll-target="#observed---model">observed - model</a></li>
+  <li><a href="#calculating-chi2-1" id="toc-calculating-chi2-1" class="nav-link" data-scroll-target="#calculating-chi2-1">Calculating <span class="math inline">\(\chi^2\)</span></a></li>
+  <li><a href="#testing-for-significance" id="toc-testing-for-significance" class="nav-link" data-scroll-target="#testing-for-significance">Testing for significance</a></li>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test">Fisher’s exact test</a></li>
+  <li><a href="#yatess-correction" id="toc-yatess-correction" class="nav-link" data-scroll-target="#yatess-correction">Yates’s correction</a></li>
+  <li><a href="#likelihood-ratio" id="toc-likelihood-ratio" class="nav-link" data-scroll-target="#likelihood-ratio">Likelihood ratio</a></li>
+  <li><a href="#standardized-residuals" id="toc-standardized-residuals" class="nav-link" data-scroll-target="#standardized-residuals">Standardized residuals</a></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect size</a></li>
+  <li><a href="#odds" id="toc-odds" class="nav-link" data-scroll-target="#odds">Odds</a></li>
+  <li><a href="#odds-ratio" id="toc-odds-ratio" class="nav-link" data-scroll-target="#odds-ratio">Odds ratio</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chi squared test</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Klinkenberg </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 22, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="chi2-test" class="level1 section">
+<h1 class="section"><span class="math inline">\(\chi^2\)</span> test</h1>
+<p>Relation between categorical variables</p>
+<section id="chi2-test-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="chi2-test-1"><span class="math inline">\(\chi^2\)</span> test</h2>
+<p>A ’‘’chi-squared test’’‘, also written as <span class="math inline">\(\chi^2\)</span> test, is any statistical hypothesis test wherein the sampling distribution of the test statistic is a chi-squared distribution when the null hypothesis is true. Without other qualification, ’chi-squared test’ often is used as short for Pearson’s chi-squared test.</p>
+<p>Chi-squared tests are often constructed from a Lack-of-fit sum of squares#Sums of squares|sum of squared errors, or through the Variance Distribution of the sample variance|sample variance. Test statistics that follow a chi-squared distribution arise from an assumption of independent normally distributed data, which is valid in many cases due to the central limit theorem. A chi-squared test can be used to attempt rejection of the null hypothesis that the data are independent.</p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Chi-squared_test">wikipedia</a></p>
+</section>
+<section id="chi2-test-statistic" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="chi2-test-statistic"><span class="math inline">\(\chi^2\)</span> test statistic</h2>
+<p><span class="math inline">\(\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}\)</span></p>
+<section id="contingency-table" class="level3 smalller">
+<h3 class="smalller anchored" data-anchor-id="contingency-table">Contingency table</h3>
+<div class="columns">
+<div class="column" style="transform: scale(.7);">
+<p><span class="math inline">\(\text{observed}_{ij} =  \begin{pmatrix}  o_{11} &amp; o_{12} &amp; \cdots &amp; o_{1j} \\  o_{21} &amp; o_{22} &amp; \cdots &amp; o_{2j} \\  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\  o_{i1} &amp; o_{i2} &amp; \cdots &amp; o_{ij}  \end{pmatrix}\)</span></p>
+</div><div class="column" style="transform: scale(.7);">
+<p><span class="math inline">\(\text{model}_{ij} =  \begin{pmatrix}  m_{11} &amp; m_{12} &amp; \cdots &amp; m_{1j} \\  m_{21} &amp; m_{22} &amp; \cdots &amp; m_{2j} \\  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\  m_{i1} &amp; m_{i2} &amp; \cdots &amp; m_{ij}  \end{pmatrix}\)</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="chi2-distribution" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="chi2-distribution"><span class="math inline">\(\chi^2\)</span> distribution</h2>
+<p>The <span class="math inline">\(\chi^2\)</span> distribution describes the test statistic under the assumption of <span class="math inline">\(H_0\)</span>, given the degrees of freedom.</p>
+<p><span class="math inline">\(df = (r - 1) (c - 1)\)</span> where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> the amount of columns.</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>chi <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,.<span class="dv">01</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>col <span class="ot">=</span> <span class="fu">rainbow</span>(<span class="at">n =</span> <span class="fu">length</span>(df))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( chi, <span class="fu">dchisq</span>(chi, df[<span class="dv">1</span>]), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> col[<span class="dv">1</span>], <span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Chi squared distributions"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Chi squared"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(chi, <span class="fu">dchisq</span>(chi, df[<span class="dv">2</span>]), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> col[<span class="dv">2</span>], <span class="at">type=</span><span class="st">"l"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(chi, <span class="fu">dchisq</span>(chi, df[<span class="dv">3</span>]), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> col[<span class="dv">3</span>], <span class="at">type=</span><span class="st">"l"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(chi, <span class="fu">dchisq</span>(chi, df[<span class="dv">4</span>]), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> col[<span class="dv">4</span>], <span class="at">type=</span><span class="st">"l"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(chi, <span class="fu">dchisq</span>(chi, df[<span class="dv">5</span>]), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> col[<span class="dv">5</span>], <span class="at">type=</span><span class="st">"l"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(chi, <span class="fu">dchisq</span>(chi, df[<span class="dv">6</span>]), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> col[<span class="dv">6</span>], <span class="at">type=</span><span class="st">"l"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">"k ="</span>,df), <span class="at">col =</span> col, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chi_squared_test_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<iframe src="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829" style="height: 450px;">
+</iframe>
+<p><a href="http://www.tandfonline.com/doi/pdf/10.1080/09589236.2012.708829">Simon</a></p>
+</section>
+<section id="experiment" class="level2 flexbox vcenter">
+<h2 class="flexbox vcenter anchored" data-anchor-id="experiment">Experiment</h2>
+<p><a href="https://www.the-qrcode-generator.com/"><img src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=http%3A%2F%2Fgoo.gl%2Ffaj76B" alt="QR Code"></a></p>
+<p>http://goo.gl/faj76B</p>
+</section>
+<section id="data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data">Data</h2>
+<p><small></small></p><small>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-0d6004a50d7c49d122b1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0d6004a50d7c49d122b1">{"x":{"filter":"none","vertical":false,"data":[["215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270"],["05/10/2017 16:56:01","12/10/2017 09:50:53","12/10/2017 09:50:55","12/10/2017 09:50:57","12/10/2017 09:51:06","12/10/2017 09:51:10","12/10/2017 09:51:11","12/10/2017 09:51:12","12/10/2017 09:51:13","12/10/2017 09:51:15","12/10/2017 09:51:18","12/10/2017 09:51:19","12/10/2017 09:51:19","12/10/2017 09:51:20","12/10/2017 09:51:22","12/10/2017 09:51:22","12/10/2017 09:51:23","12/10/2017 09:51:24","12/10/2017 09:51:25","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:27","12/10/2017 09:51:28","12/10/2017 09:51:28","12/10/2017 09:51:30","12/10/2017 09:51:30","12/10/2017 09:51:33","12/10/2017 09:51:34","12/10/2017 09:51:34","12/10/2017 09:51:35","12/10/2017 09:51:40","12/10/2017 09:51:42","12/10/2017 09:51:42","12/10/2017 09:51:43","12/10/2017 09:51:44","12/10/2017 09:51:44","12/10/2017 09:51:46","12/10/2017 09:51:47","12/10/2017 09:51:47","12/10/2017 09:51:49","12/10/2017 09:51:49","12/10/2017 09:51:50","12/10/2017 09:51:52","12/10/2017 09:51:54","12/10/2017 09:51:55","12/10/2017 09:51:57","12/10/2017 09:52:00","12/10/2017 09:52:00","12/10/2017 09:52:04","12/10/2017 09:52:06","12/10/2017 09:52:07","12/10/2017 09:52:08","12/10/2017 09:52:10","12/10/2017 09:52:24","12/10/2017 09:52:35"],["Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja"],[3,0,1,2,0,0,50,0,7,5,0,0,17,0,10,38,0,0,5,5,30,0,20,0,1,2,0,0,8,150,3,2,0,1,5,4,3,0,90,1,0,2,15,25,0,2,1,2,90,200,1,8,0,0,60,5],[3,1,4,4,1,1,4,4,3,5,3,3,3,2,3,2,4,3,5,4,3,3,3,4,4,4,2,4,5,4,4,3,5,3,4,4,3,4,4,3,4,3,3,5,4,4,4,4,4,5,3,3,4,3,3,3],["Man","Man","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Man","Vrouw"],[40,23,27,21,19,20,20,21,20,21,20,19,19,19,26,19,23,21,22,20,19,19,21,20,20,19,21,22,21,20,20,10,23,18,19,25,20,20,25,20,26,20,19,20,20,20,19,20,23,26,19,19,19,31,21,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Timestamp<\/th>\n      <th>fluiten<\/th>\n      <th>frequentie<\/th>\n      <th>assertief<\/th>\n      <th>sekse<\/th>\n      <th>leeftijd<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</small><p><small></small></p>
+<div class="cell">
+
+</div>
+</section>
+<section id="calculating-chi2" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculating-chi2">Calculating <span class="math inline">\(\chi^2\)</span></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">table</span>(results[,<span class="fu">c</span>(<span class="st">"fluiten"</span>,<span class="st">"sekse"</span>)])</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>observed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       sekse
+fluiten Man Vrouw
+    Ja   17    26
+    Nee   1    12</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\text{observed}_{ij} =  \begin{pmatrix}  17 &amp; 26 \\  1 &amp; 12 \\  \end{pmatrix}\)</span></p>
+</section>
+<section id="calculating-the-model" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="calculating-the-model">Calculating the model</h2>
+<p><span class="math inline">\(\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n   <span class="ot">=</span> <span class="fu">sum</span>(observed)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ct1 <span class="ot">=</span> <span class="fu">colSums</span>(observed)[<span class="dv">1</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ct2 <span class="ot">=</span> <span class="fu">colSums</span>(observed)[<span class="dv">2</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>rt1 <span class="ot">=</span> <span class="fu">rowSums</span>(observed)[<span class="dv">1</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>rt2 <span class="ot">=</span> <span class="fu">rowSums</span>(observed)[<span class="dv">2</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(observed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       sekse
+fluiten Man Vrouw Sum
+    Ja   17    26  43
+    Nee   1    12  13
+    Sum  18    38  56</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-the-model-1" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-the-model-1">Calculating the model</h2>
+<p><span class="math inline">\(\text{model}_{ij} = E_{ij} = \frac{\text{row total}_i \times \text{column total}_j}{n }\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">matrix</span>( <span class="fu">c</span>((ct1<span class="sc">*</span>rt1)<span class="sc">/</span>n,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                  (ct2<span class="sc">*</span>rt1)<span class="sc">/</span>n,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                  (ct1<span class="sc">*</span>rt2)<span class="sc">/</span>n,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                  (ct2<span class="sc">*</span>rt2)<span class="sc">/</span>n),<span class="dv">2</span>,<span class="dv">2</span>,<span class="at">byrow=</span>T</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          )</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]      [,2]
+[1,] 13.821429 29.178571
+[2,]  4.178571  8.821429</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\text{model}_{ij} =  \begin{pmatrix}  13.8214286 &amp; 29.1785714 \\  4.1785714 &amp; 8.8214286 \\  \end{pmatrix}\)</span></p>
+</section>
+<section id="observed---model" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="observed---model">observed - model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>observed <span class="sc">-</span> model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       sekse
+fluiten       Man     Vrouw
+    Ja   3.178571 -3.178571
+    Nee -3.178571  3.178571</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-chi2-1" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-chi2-1">Calculating <span class="math inline">\(\chi^2\)</span></h2>
+<p><span class="math inline">\(\chi^2 = \sum \frac{(\text{observed}_{ij} - \text{model}_{ij})^2}{\text{model}_{ij}}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate chi squared</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>chi.squared <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> model)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>model)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>chi.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.64045</code></pre>
+</div>
+</div>
+</section>
+<section id="testing-for-significance" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="testing-for-significance">Testing for significance</h2>
+<p><span class="math inline">\(df = (r - 1) (c - 1)\)</span></p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> (<span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> ( <span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'visualize'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.chisq</span>(chi.squared,df,<span class="at">section=</span><span class="st">'upper'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chi_squared_test_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="fishers-exact-test" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="fishers-exact-test">Fisher’s exact test</h2>
+<p>Calculates axact <span class="math inline">\(\chi^2\)</span> for small samples.</p>
+<ul>
+<li>Cell size &lt; 5</li>
+</ul>
+</section>
+<section id="yatess-correction" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="yatess-correction">Yates’s correction</h2>
+<p>For 2 x 2 contingency tables.</p>
+<p><span class="math inline">\(\chi^2 = \sum \frac{ ( | \text{observed}_{ij} - \text{model}_{ij} | - .5)^2}{\text{model}_{ij}}\)</span></p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Yates's corrected chi squared</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>chi.squared.yates <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(observed <span class="sc">-</span> model) <span class="sc">-</span> .<span class="dv">5</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>model)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>chi.squared.yates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.295358</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.chisq</span>(chi.squared.yates,df,<span class="at">section=</span><span class="st">'upper'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chi_squared_test_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="likelihood-ratio" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="likelihood-ratio">Likelihood ratio</h2>
+<p>Alternatieve to Pearson’s <span class="math inline">\(\chi^2\)</span>.</p>
+<p><span class="math inline">\(L \chi^2 = 2 \sum \text{observed}_{ij} ln \left( \frac{\text{observed}_{ij}}{\text{model}_{ij}} \right)\)</span></p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ln is log</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>lx2 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(observed <span class="sc">*</span> <span class="fu">log</span>(observed <span class="sc">/</span> model) ); lx2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.565598</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize.chisq</span>(lx2,df,<span class="at">section=</span><span class="st">'upper'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chi_squared_test_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="standardized-residuals" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="standardized-residuals">Standardized residuals</h2>
+<p><span class="math inline">\(\text{standardized residuals} = \frac{ \text{observed}_{ij} - \text{model}_{ij} }{ \sqrt{ \text{model}_{ij} } }\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(observed <span class="sc">-</span> model) <span class="sc">/</span> <span class="fu">sqrt</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       sekse
+fluiten        Man      Vrouw
+    Ja   0.8549791 -0.5884370
+    Nee -1.5549558  1.0701940</code></pre>
+</div>
+</div>
+</section>
+<section id="effect-size" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="effect-size">Effect size</h2>
+<p>Odds ratio based on the observed values</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">round</span>( observed, <span class="dv">2</span>); odds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       sekse
+fluiten Man Vrouw
+    Ja   17    26
+    Nee   1    12</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\begin{pmatrix}  a &amp; b \\  c &amp; d \\  \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(OR = \frac{a \times d}{b \times c} = \frac{17 \times 12}{26 \times 1} = 7.8461538\)</span></p>
+</section>
+<section id="odds" class="level2">
+<h2 class="anchored" data-anchor-id="odds">Odds</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       sekse
+fluiten Man Vrouw
+    Ja   17    26
+    Nee   1    12</code></pre>
+</div>
+</div>
+<p>The man and women ratio of people that can whisle and the ratio of those who can’t whistle</p>
+<ul>
+<li>Can wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 17 }{ 26 }\)</span> = 0.6538462</li>
+<li>Can’t wistle <span class="math inline">\(\text{Odds}_{mf} = \frac{ 1 }{ 12 }\)</span> = 0.0833333</li>
+</ul>
+</section>
+<section id="odds-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="odds-ratio">Odds ratio</h2>
+<p>Is the ratio of these odds.</p>
+<p><span class="math inline">\(OR = \frac{\text{wistle}}{\text{can't wistle}} = \frac{0.6538462}{0.0833333} = 7.8461538\)</span></p>
+<div class="cell">
+
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">CC BY-NC-SA 4.0</figcaption><p></p>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
