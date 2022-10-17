@@ -133,9 +133,10 @@ $\Huge \theta = .68$
 
 The data driver!
 
-## See the prior update
+## Animation code
 
-```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.1, eval=FALSE}
+```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.1, eval=FALSE, echo=TRUE}
+
 set.seed(25)
 ## Run multiple samples with our real theta of .68 as our driving force.
 real.theta = .68
@@ -166,6 +167,8 @@ for(i in 1:20) {
   
 }
 ```
+
+## Animation
 
 ![](../../../../topics/bayes/bayes_in_action.gif)
 

@@ -692,11 +692,42 @@ Type II error <br>Beta <span class="math inline">\(\beta\)</span>
 <p><span class="math inline">\(\Huge \theta = .68\)</span></p>
 <p>The data driver!</p>
 </section>
-<section id="see-the-prior-update" class="slide level2">
-<h2>See the prior update</h2>
+<section id="animation-code" class="slide level2">
+<h2>Animation code</h2>
 <div class="cell" data-ffmpeg.format="gif" data-animation.hook="gifski">
-
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">set.seed</span>(<span class="dv">25</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="do">## Run multiple samples with our real theta of .68 as our driving force.</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>real.theta <span class="ot">=</span> .<span class="dv">68</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a>old.k <span class="ot">=</span> <span class="dv">27</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>old.n <span class="ot">=</span> <span class="dv">83</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb6-9"><a href="#cb6-9"></a>  </span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="co"># Choose a random sample size between 10 and 100</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  sample.size.n <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="co"># Sample number of heads based on sample size and fixed real parameter value</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  number.of.heads.k <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, sample.size.n, real.theta)</span>
+<span id="cb6-14"><a href="#cb6-14"></a>  </span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="co"># sample.size.n</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>  <span class="co"># number.of.heads.k</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>  </span>
+<span id="cb6-18"><a href="#cb6-18"></a>  new.k <span class="ot">=</span> old.k <span class="sc">+</span> number.of.heads.k</span>
+<span id="cb6-19"><a href="#cb6-19"></a>  new.n <span class="ot">=</span> old.n <span class="sc">+</span> sample.size.n</span>
+<span id="cb6-20"><a href="#cb6-20"></a>  </span>
+<span id="cb6-21"><a href="#cb6-21"></a>  <span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb6-22"><a href="#cb6-22"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(new.k, new.n,  theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Posterior"</span>)</span>
+<span id="cb6-23"><a href="#cb6-23"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(number.of.heads.k, sample.size.n,   theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Likelihood"</span>)</span>
+<span id="cb6-24"><a href="#cb6-24"></a>  <span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(old.k, old.n, theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>, <span class="at">main =</span> <span class="st">"Prior"</span>)</span>
+<span id="cb6-25"><a href="#cb6-25"></a>  </span>
+<span id="cb6-26"><a href="#cb6-26"></a>  old.k <span class="ot">=</span> new.k</span>
+<span id="cb6-27"><a href="#cb6-27"></a>  old.n <span class="ot">=</span> new.n</span>
+<span id="cb6-28"><a href="#cb6-28"></a>  </span>
+<span id="cb6-29"><a href="#cb6-29"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="animation" class="slide level2">
+<h2>Animation</h2>
 
 <img data-src="../../../../topics/bayes/bayes_in_action.gif" class="r-stretch"></section>
 <section id="take-home-message" class="slide level2">
