@@ -17,12 +17,19 @@ $[0,1] \Rightarrow  \{\theta\in\Bbb R:0\le \theta\le 1\}$
 ## Draw your belief
 
 ```{r, echo=FALSE}
+#| fig-asp: 1
+#| fig-align: center
+
 plot(.5,.5, 
      ylab = "likelihood",
      xlab = "Theta",
      ylim = c(0,1),
      xlim = c(0,1),
      type = "n")
+grid(nx = 10, ny = 10,
+     lty = 2,      # Grid line type
+     col = "lightgray", # Grid line color
+     lwd = 2)      # Grid line width
 ```
 
 ## Prior distribution
