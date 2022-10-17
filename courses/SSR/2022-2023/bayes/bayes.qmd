@@ -8,6 +8,7 @@ format:
   html: default
   revealjs: 
     output-ext: slide.html
+    chalkboard: true
 ---
 
 # 
