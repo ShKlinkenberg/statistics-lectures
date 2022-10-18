@@ -7,7 +7,7 @@
 <link href="chi_squared_test_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="chi_squared_test_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="chi_squared_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.37">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Klinkenberg">
   <meta name="dcterms.date" content="2022-10-22">
@@ -20,10 +20,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -90,7 +95,7 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="chi_squared_test_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link rel="stylesheet" href="../../../uva_reveal.css">
+  <link rel="stylesheet" href="https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css">
   <link href="chi_squared_test_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="chi_squared_test_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="chi_squared_test_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -470,8 +475,8 @@
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-de78cc0a1bf77f812b8f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-de78cc0a1bf77f812b8f">{"x":{"filter":"none","vertical":false,"data":[["215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270"],["05/10/2017 16:56:01","12/10/2017 09:50:53","12/10/2017 09:50:55","12/10/2017 09:50:57","12/10/2017 09:51:06","12/10/2017 09:51:10","12/10/2017 09:51:11","12/10/2017 09:51:12","12/10/2017 09:51:13","12/10/2017 09:51:15","12/10/2017 09:51:18","12/10/2017 09:51:19","12/10/2017 09:51:19","12/10/2017 09:51:20","12/10/2017 09:51:22","12/10/2017 09:51:22","12/10/2017 09:51:23","12/10/2017 09:51:24","12/10/2017 09:51:25","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:27","12/10/2017 09:51:28","12/10/2017 09:51:28","12/10/2017 09:51:30","12/10/2017 09:51:30","12/10/2017 09:51:33","12/10/2017 09:51:34","12/10/2017 09:51:34","12/10/2017 09:51:35","12/10/2017 09:51:40","12/10/2017 09:51:42","12/10/2017 09:51:42","12/10/2017 09:51:43","12/10/2017 09:51:44","12/10/2017 09:51:44","12/10/2017 09:51:46","12/10/2017 09:51:47","12/10/2017 09:51:47","12/10/2017 09:51:49","12/10/2017 09:51:49","12/10/2017 09:51:50","12/10/2017 09:51:52","12/10/2017 09:51:54","12/10/2017 09:51:55","12/10/2017 09:51:57","12/10/2017 09:52:00","12/10/2017 09:52:00","12/10/2017 09:52:04","12/10/2017 09:52:06","12/10/2017 09:52:07","12/10/2017 09:52:08","12/10/2017 09:52:10","12/10/2017 09:52:24","12/10/2017 09:52:35"],["Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja"],[3,0,1,2,0,0,50,0,7,5,0,0,17,0,10,38,0,0,5,5,30,0,20,0,1,2,0,0,8,150,3,2,0,1,5,4,3,0,90,1,0,2,15,25,0,2,1,2,90,200,1,8,0,0,60,5],[3,1,4,4,1,1,4,4,3,5,3,3,3,2,3,2,4,3,5,4,3,3,3,4,4,4,2,4,5,4,4,3,5,3,4,4,3,4,4,3,4,3,3,5,4,4,4,4,4,5,3,3,4,3,3,3],["Man","Man","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Man","Vrouw"],[40,23,27,21,19,20,20,21,20,21,20,19,19,19,26,19,23,21,22,20,19,19,21,20,20,19,21,22,21,20,20,10,23,18,19,25,20,20,25,20,26,20,19,20,20,20,19,20,23,26,19,19,19,31,21,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Timestamp<\/th>\n      <th>fluiten<\/th>\n      <th>frequentie<\/th>\n      <th>assertief<\/th>\n      <th>sekse<\/th>\n      <th>leeftijd<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d52a31a040bec1a5d737" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d52a31a040bec1a5d737">{"x":{"filter":"none","vertical":false,"data":[["215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270"],["05/10/2017 16:56:01","12/10/2017 09:50:53","12/10/2017 09:50:55","12/10/2017 09:50:57","12/10/2017 09:51:06","12/10/2017 09:51:10","12/10/2017 09:51:11","12/10/2017 09:51:12","12/10/2017 09:51:13","12/10/2017 09:51:15","12/10/2017 09:51:18","12/10/2017 09:51:19","12/10/2017 09:51:19","12/10/2017 09:51:20","12/10/2017 09:51:22","12/10/2017 09:51:22","12/10/2017 09:51:23","12/10/2017 09:51:24","12/10/2017 09:51:25","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:26","12/10/2017 09:51:27","12/10/2017 09:51:28","12/10/2017 09:51:28","12/10/2017 09:51:30","12/10/2017 09:51:30","12/10/2017 09:51:33","12/10/2017 09:51:34","12/10/2017 09:51:34","12/10/2017 09:51:35","12/10/2017 09:51:40","12/10/2017 09:51:42","12/10/2017 09:51:42","12/10/2017 09:51:43","12/10/2017 09:51:44","12/10/2017 09:51:44","12/10/2017 09:51:46","12/10/2017 09:51:47","12/10/2017 09:51:47","12/10/2017 09:51:49","12/10/2017 09:51:49","12/10/2017 09:51:50","12/10/2017 09:51:52","12/10/2017 09:51:54","12/10/2017 09:51:55","12/10/2017 09:51:57","12/10/2017 09:52:00","12/10/2017 09:52:00","12/10/2017 09:52:04","12/10/2017 09:52:06","12/10/2017 09:52:07","12/10/2017 09:52:08","12/10/2017 09:52:10","12/10/2017 09:52:24","12/10/2017 09:52:35"],["Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Ja","Ja","Nee","Nee","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Nee","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Nee","Ja","Ja","Ja","Ja","Ja","Ja","Ja","Nee","Ja","Ja","Ja"],[3,0,1,2,0,0,50,0,7,5,0,0,17,0,10,38,0,0,5,5,30,0,20,0,1,2,0,0,8,150,3,2,0,1,5,4,3,0,90,1,0,2,15,25,0,2,1,2,90,200,1,8,0,0,60,5],[3,1,4,4,1,1,4,4,3,5,3,3,3,2,3,2,4,3,5,4,3,3,3,4,4,4,2,4,5,4,4,3,5,3,4,4,3,4,4,3,4,3,3,5,4,4,4,4,4,5,3,3,4,3,3,3],["Man","Man","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Vrouw","Man","Man","Vrouw","Man","Vrouw","Vrouw","Man","Vrouw"],[40,23,27,21,19,20,20,21,20,21,20,19,19,19,26,19,23,21,22,20,19,19,21,20,20,19,21,22,21,20,20,10,23,18,19,25,20,20,25,20,26,20,19,20,20,20,19,20,23,26,19,19,19,31,21,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Timestamp<\/th>\n      <th>fluiten<\/th>\n      <th>frequentie<\/th>\n      <th>assertief<\/th>\n      <th>sekse<\/th>\n      <th>leeftijd<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </small><p><small></small></p>
@@ -1023,7 +1028,8 @@ fluiten Man Vrouw
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);

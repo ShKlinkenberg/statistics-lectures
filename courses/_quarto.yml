@@ -15,7 +15,7 @@ format:
     background-transition: fade
     theme: white
     slide-number: true
-    css: uva_reveal.css
+    css: https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css
     touch: true
     # footer: "Klinkenberg"
     google-analytics: "UA-107432294-1"
