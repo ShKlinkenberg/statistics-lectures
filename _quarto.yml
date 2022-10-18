@@ -17,7 +17,6 @@ format:
 
 website:
   title: "Statistics Lectures"
-  css: style.scss
   site-url: https://shklinkenberg.github.io
   repo-url: https://github.com/ShKlinkenberg/statistics-lectures
   repo-actions: [edit, issue]
