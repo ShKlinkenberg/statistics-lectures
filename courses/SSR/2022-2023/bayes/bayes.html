@@ -106,10 +106,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"></a>
+  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link active" data-scroll-target="#bayes-theorem">Bayes Theorem</a>
   <ul class="collapse">
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#bayes-rule" id="toc-bayes-rule" class="nav-link" data-scroll-target="#bayes-rule">Bayes rule</a></li>
+  <li><a href="#conditional-probabilities" id="toc-conditional-probabilities" class="nav-link" data-scroll-target="#conditional-probabilities">Conditional probabilities</a></li>
+  <li><a href="#hypothesis-data" id="toc-hypothesis-data" class="nav-link" data-scroll-target="#hypothesis-data">Hypothesis | Data</a></li>
+  <li><a href="#posterior-likelihood-prior" id="toc-posterior-likelihood-prior" class="nav-link" data-scroll-target="#posterior-likelihood-prior">Posterior Likelihood Prior</a></li>
   <li><a href="#bayes-is-about" id="toc-bayes-is-about" class="nav-link" data-scroll-target="#bayes-is-about">Bayes is about</a></li>
+  <li><a href="#generative-model" id="toc-generative-model" class="nav-link" data-scroll-target="#generative-model">Generative model</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul></li>
   <li><a href="#bayesian-parameter-estimation" id="toc-bayesian-parameter-estimation" class="nav-link" data-scroll-target="#bayesian-parameter-estimation">Bayesian parameter estimation</a>
   <ul class="collapse">
@@ -180,23 +185,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="section" class="level1">
-<h1></h1>
+<section id="bayes-theorem" class="level1 section">
+<h1 class="section">Bayes Theorem</h1>
+<section id="bayes-rule" class="level2">
+<h2 class="anchored" data-anchor-id="bayes-rule">Bayes rule</h2>
+<p><span class="math display">\[\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}\]</span></p>
+</section>
+<section id="conditional-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-probabilities">Conditional probabilities</h2>
+<p><span class="math inline">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
+
+<table style="border: none;  transform: scale(1);">
+<colgroup><col width="150px">
+<col width="225px">
+<col width="225px">
+</colgroup><tbody><tr>
+<td>
+</td>
+<td>
+<span class="math inline">\(P(A)\)</span>
+</td>
+<td>
+<span class="math inline">\(P(\neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(\neg B) = &amp; P(\neg B \mid A) P(A) + \\  &amp; P(\neg B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(\neg B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(\neg B \mid \neg A)\)</span>
+</td>
+</tr>
+<tr height="150px">
+<td>
+<span class="math inline">\(\begin{equation} \begin{aligned} P(B) = &amp; P(B \mid A) P(A) + \\  &amp; P(B \mid \neg A) P(\neg A) \end{aligned} \end{equation}\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
+<span class="math inline">\(P(B \mid A)\)</span>
+</td>
+<td style="border: 5px solid white; padding: 10px; color: white; background-color: red;">
+<span class="math inline">\(P(B \mid \neg A)\)</span>
+</td>
+</tr>
+
+</tbody></table>
+</section>
+<section id="hypothesis-data" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-data">Hypothesis | Data</h2>
 <p><span class="math display">\[\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}\]</span></p>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1"></h2>
+</section>
+<section id="posterior-likelihood-prior" class="level2">
+<h2 class="anchored" data-anchor-id="posterior-likelihood-prior">Posterior Likelihood Prior</h2>
 <p><span class="math display">\[\underbrace{P(H \mid D)}_{\text{Posterior}} = \underbrace{P(H)}_{\text{Prior}} \times \underbrace{\frac{P(D \mid H)}{P(D)}}_{\text{Likelihood}}\]</span></p>
+<ul>
+<li><span class="math inline">\(P(H)\)</span>, the <span class="math inline">\(prior\)</span>, is the initial degree of belief in <span class="math inline">\(H\)</span>.</li>
+<li><span class="math inline">\(P(H \mid D)\)</span>, the <span class="math inline">\(posterior\)</span>, is the degree of belief after incorporating news that <span class="math inline">\(D\)</span> is true.</li>
+<li>the quotient <span class="math inline">\(\frac{P(D \mid H)}{P(D)}\)</span> represents the support <span class="math inline">\(D\)</span> provides for <span class="math inline">\(H\)</span>.</li>
+</ul>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
 </section>
 <section id="bayes-is-about" class="level2">
 <h2 class="anchored" data-anchor-id="bayes-is-about">Bayes is about</h2>
 <blockquote class="blockquote">
-<p>Posterior <span class="math inline">\(\propto\)</span> Prior <span class="math inline">\(\times\)</span> Likelihood</p>
+<p>Posterior <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior</p>
 </blockquote>
 <ul>
 <li>Quantified belief</li>
 <li>Common sense expressed in numbers</li>
 <li>Updating belief in light of new evidence</li>
 <li>Yesterdays posteriors are todays priors</li>
+</ul>
+</section>
+<section id="generative-model" class="level2">
+<h2 class="anchored" data-anchor-id="generative-model">Generative model</h2>
+<p>Frequentists</p>
+<blockquote class="blockquote">
+<p>State of the world → Data</p>
+</blockquote>
+<p>Bayesions</p>
+<blockquote class="blockquote">
+<p>Data → State of the world</p>
+</blockquote>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://youtu.be/U_85TaXbeIo">The quick proof of Bayes’ theorem - 3Bleu1Brown</a></li>
+<li><a href="https://youtu.be/HZGCoVF3YvM">Bayes theorem - 3Blue1Brown</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia</a></li>
 </ul>
 </section>
 </section>
@@ -221,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="bayes_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="bayes_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -246,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbinom</span>(<span class="dv">25</span>, <span class="dv">100</span>, theta), <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dbeta</span>(theta, <span class="dv">2</span>, <span class="dv">2</span>),     <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"likelihood"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="bayes_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="bayes_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -295,7 +375,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>theta.given.data, <span class="at">lty=</span><span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="bayes_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="bayes_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <hr>
@@ -310,7 +390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="visual">Visual</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="bayes_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="bayes_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

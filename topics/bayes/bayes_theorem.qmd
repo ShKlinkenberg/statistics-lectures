@@ -4,32 +4,7 @@
 
 $$\large P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}$$
 
-## NHST Table
-
-<table style="border: none;  transform: scale(1);">
-  <col width="150px">
-  <col width="225px">
-  <col width="225px">
-<tr><td></td style="width: 300px;">
-<td>
-$H_0$ = True
-</td style="width: 300px;">
-<td>
-$H_0$ = False
-</td></tr>
-<tr height="150px">
-<td>Decide to<br>reject $H_0$</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type I error <br>Alpha $\alpha$ </td>
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br>True positive = Power</td>
-</tr>
-<tr height="150px">
-<td>Decide not<br>to reject $H_0$</td>   
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">Correct <br> True negative</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">Type II error <br>Beta $\beta$ </td>
-</tr>
-</table>
-
-## Bayes decision table
+## Conditional probabilities
 
 $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}$
 
@@ -78,64 +53,12 @@ $P(B \mid \neg A)$
 </tr>
 </table>
 
-## Visual
-
-<table style="border: none;  transform: scale(1);">
-  <col width="150px">
-  <col width="100px">
-  <col width="225px">
-<tr><td></td style="width: 300px;">
-<td>
-$P(A)$
-</td style="width: 300px;">
-<td>
-$P(\neg A)$
-</td></tr>
-<tr height="80px">
-<td>
-$\begin{equation}
-\begin{aligned}
-P(\neg B) = & P(\neg B \mid A) P(A) + \\ 
-            & P(\neg B \mid \neg A) P(\neg A)
-\end{aligned}
-\end{equation}$
-</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">
-$P(\neg B \mid A)$
-</td>
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-$P(\neg B \mid \neg A)$
-</td>
-</tr>
-<tr height="150px">
-<td>
-$\begin{equation}
-\begin{aligned}
-P(B) = & P(B \mid A) P(A) + \\ 
-       & P(B \mid \neg A) P(\neg A)
-\end{aligned}
-\end{equation}$
-</td>   
-<td style = "border: 5px solid white; padding: 10px; color: black; background-color: lightgreen;">
-$P(B \mid A)$
-</td>
-<td style = "border: 5px solid white; padding: 10px; color: white; background-color: red;">
-$P(B \mid \neg A)$
-</td>
-</tr>
-</table>
-
 ## Hypothesis | Data
 
 $$\large P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)}$$
+## Posterior Likelihood Prior {.smaller}
 
-## With legos
-
-![](../../../../topics/bayes/lego_bayes.jpg)
-
-## Posterior Likelihood Prior
-
-$$P(H \mid D) = \frac{P(D \mid H) \times P(H)}{P(D)} = P(H) \times \frac{P(D \mid H)}{P(D)}$$
+$$\underbrace{P(H \mid D)}_{\text{Posterior}} = \underbrace{P(H)}_{\text{Prior}} \times \underbrace{\frac{P(D \mid H)}{P(D)}}_{\text{Likelihood}}$$
 
 * $P(H)$, the $prior$, is the initial degree of belief in $H$.
 * $P(H \mid D)$, the $posterior$, is the degree of belief after incorporating news that $D$ is true.
