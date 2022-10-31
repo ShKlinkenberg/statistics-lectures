@@ -1,0 +1,299 @@
+# Correlation {.section}
+
+```{r, eval=FALSE, echo=FALSE}
+# Remove all objects from workspace
+rm(list=ls())
+
+# Install if nesserary and load RCurl package
+if(!'RCurl' %in% installed.packages()) { install.packages('RCurl') }
+library(RCurl)
+
+key = "1foUIwXqvvAWRg7FKdRMAIBLakpLbnhUpYhiTYayaPfc" # IQ cijfer
+
+# key = "1yg31q0Q2sEcGq2Y3JaXEEcwsJ5DvDDGzjDbSfAvzZ2c" # Fluiten
+
+# Set google url
+google.url <- paste("https://docs.google.com/spreadsheets/d/",key,"/export?format=csv&id=",key, sep='')
+
+# Load csv
+myCsv <- getURL(google.url)
+# Read csv and assing to data object
+data <- read.csv(textConnection(myCsv))
+# Change header names
+names(data)[2:4] <- c('IQ', 'cijfers', 'motivation')
+
+# Get rid of outliers
+data[data$cijfers   %in% boxplot.stats(data$cijfers)$out,   'cijfers']   = NA
+data[data$IQ %in% boxplot.stats(data$IQ)$out, 'IQ'] = NA
+```
+
+## Pearson Correlation
+
+<img style="float:left; width:150px; margin:0 20px 20px 0px;" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Karl_Pearson%2C_1912.jpg">
+
+In statistics, the Pearson correlation coefficient, also referred to as the Pearson's r, Pearson product-moment correlation coefficient (PPMCC) or bivariate correlation, is a measure of the linear correlation between two variables X and Y. It has a value between +1 and −1, where 1 is total positive linear correlation, 0 is no linear correlation, and −1 is total negative linear correlation. It is widely used in the sciences. It was developed by Karl Pearson from a related idea introduced by Francis Galton in the 1880s.
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)
+
+## PMCC
+
+$$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
+Where $S$ is sthe standard deviation and $COV$ is the covariance.
+
+$${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+## Plot correlation
+
+```{r, fig.width=5, fig.height=5, fig.align='center'}
+set.seed(565433)
+
+x = rnorm(10, 5)
+y = rnorm(10, 5)
+
+plot(x, y, las = 1)
+
+m.x = mean(x)
+m.y = mean(y)
+
+polygon(c(m.x,8,8,m.x),c(m.y,m.y,8,8), col = rgb(0,.64,0,.5))
+polygon(c(m.x,0,0,m.x),c(m.y,m.y,0,0), col = rgb(0,.64,0,.5))
+
+polygon(c(m.x,0,0,m.x),c(m.y,m.y,8,8), col = rgb(1,.55,0,.5))
+polygon(c(m.x,8,8,m.x),c(m.y,m.y,0,0), col = rgb(1,.55,0,.5))
+
+points(x,y)
+
+abline(h = m.y, lwd = 3)
+abline(v = m.x, lwd = 3)
+
+segments(x, m.y, x, y, col = "orange",    lwd = 2)
+segments(x, y, m.x, y, col = "darkgreen", lwd = 2)
+
+text(m.x+.7, m.y+.7, "+ x +", cex = 2)
+text(m.x-.7, m.y-.7, "- x -", cex = 2)
+text(m.x+.7, m.y-.7, "+ x -", cex = 2)
+text(m.x-.7, m.y+.7, "- x +", cex = 2)
+```
+$$(x_i - \bar{x})(y_i - \bar{y})$$
+
+## Guess the correlation
+
+![[Guess the correlation](http://guessthecorrelation.com
+)](../../../../topics/correlation/qrcodeqtc.png)
+
+<img src="topics/correlation/qrcodeqtc.png">
+
+## Simulate data
+
+```{r, eval=TRUE, echo=TRUE}
+n     = 50
+grade = rnorm(n, 6, 1.6)
+b.0   = 100
+b.1   = .3
+error = rnorm(n, 0, 0.7)
+
+IQ = b.0 + b.1 * grade + error
+#IQ = group(IQ)
+
+error = rnorm(n, 0, 0.7)
+motivation = 3.2 + .2 * IQ + error
+```
+
+```{r, echo=FALSE}
+data <- data.frame(grade, IQ, motivation)
+data <- round(data, 2)
+# Write data for use in SPSS
+write.table(data, "grade.csv", row.names=FALSE, col.names=TRUE, dec='.')
+```
+
+## Explaining vairance {.subsection}
+
+```{r}
+grade      = data$grade
+IQ         = data$IQ
+mean.grade = mean(grade)
+mean.IQ    = mean(IQ)
+N          = length(grade)
+
+plot(data$grade, ylim=summary(c(data$grade, data$IQ))[c('Min.','Max.')], col='orange')
+points(data$IQ, col='blue')
+```
+
+## Standarize {.smaller}
+
+$$z = \frac{x_i - \bar{x}}{{sd}_x}$$
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+data[, c('z.grade', 'z.IQ')] = scale(data[, c('grade', 'IQ')])
+
+z.grade      = data$z.grade
+z.IQ         = data$z.IQ
+
+mean.z.grade = mean(z.grade, na.rm=T)
+mean.z.IQ    = mean(z.IQ,      na.rm=T)
+
+plot(z.grade, 
+     ylim = summary(c(z.grade, z.IQ))[c('Min.','Max.')], 
+     col  = 'orange', 
+     ylab = "", xlab="participants")
+
+points(z.IQ, col='blue')
+
+# Add mean lines
+lines(rep(mean.z.grade, N), col='orange')
+lines(rep(mean.z.IQ,    N), col='blue', lt=2)
+
+# Add vertical variance lines
+segments(1:N, mean.z.grade, 1:N, z.grade, col='orange')
+segments(1:N, mean.z.IQ, 1:N, z.IQ, col='blue')
+```
+
+## Covariance {.subsection}
+
+$${COV}_{xy} = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+```{r, echo=TRUE}
+mean.grade = mean(grade, na.rm=T)
+mean.IQ    = mean(IQ, na.rm=T)
+
+delta.grade = grade - mean.grade
+delta.IQ    = IQ      - mean.IQ
+
+prod = (grade - mean.grade) * (IQ - mean.IQ)
+
+covariance = sum(prod) / (N - 1)
+```
+
+## Correlation
+
+$$r_{xy} = \frac{{COV}_{xy}}{S_xS_y}$$
+
+```{r, echo=TRUE}
+correlation = covariance / ( sd(grade) * sd(IQ) ); correlation
+
+cor(z.grade, z.IQ)
+cor(  grade,   IQ)
+```
+
+--------
+
+```{r, echo=TRUE}
+sum( z.grade * z.IQ ) / (N - 1)
+
+x = c(1,-1,-1, 0,.5,-.5)
+y = c(1,-1, 1, 1, 1, 1)
+cbind(x,y,x*y)
+```
+
+## Plot correlation
+
+```{r, echo=FALSE}
+plot(grade,IQ)
+lines(c(mean.grade, mean.grade), c(-80,120), col="red")
+lines(c(-100,100), c(mean.IQ, mean.IQ), col="red")
+
+text(mean.grade+.7, mean.IQ+.7, "+ x +", cex = 2, col = "red")
+text(mean.grade-.7, mean.IQ-.7, "- x -", cex = 2, col = "red")
+text(mean.grade+.7, mean.IQ-.7, "+ x -", cex = 2, col = "red")
+text(mean.grade-.7, mean.IQ+.7, "- x +", cex = 2, col = "red")
+```
+
+## Significance of a correlation {.subsection}
+
+$$t_r = \frac{r \sqrt{N-2}}{\sqrt{1 - r^2}} \\ 
+{df} = N - 2$$
+
+$$
+  \begin{aligned}
+  H_0 &: t_r = 0 \\
+  H_A &: t_r \neq 0 \\
+  H_A &: t_r > 0 \\
+  H_A &: t_r < 0 \\
+  \end{aligned}
+$$
+
+## r to t
+
+```{r, echo=TRUE}
+df = N-2
+t.r = ( correlation*sqrt(df) ) / sqrt(1-correlation^2)
+cbind(t.r, df)
+```
+
+## Visualize
+
+One-sample t-test
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.t(c(-t.r, t.r),df,section='tails')
+```
+
+# Partial correlation {.section}
+
+## Venn diagram
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, prompt=FALSE}
+if(!"VennDiagram" %in% installed.packages()) { install.packages("VennDiagram") };
+library("VennDiagram")
+```
+
+```{r, echo=FALSE, results='hide'}
+grid.newpage()
+draw.triple.venn(area1 = 100, area2 = 100, area3 = 100, 
+                 n12  = 50, 
+                 n23  = 50, 
+                 n13  = 50, 
+                 n123 = 25, 
+                 category = c("X", "Y", "Z"), lty = "blank", 
+    fill = c("skyblue", "pink1", "mediumorchid"), cat.prompts = F)
+```
+
+
+## Partial correlation {.smaller}
+
+
+$$\LARGE{r_{xy \cdot z} = \frac{r_{xy} - r_{xz} r_{yz}}{\sqrt{(1 - r_{xz}^2)(1 - r_{yz}^2)}}}$$
+
+```{r, echo=TRUE}
+motivation = data$motivation
+
+cor.grade.IQ         = cor(grade,IQ)
+cor.grade.motivation = cor(grade,motivation)
+cor.IQ.motivation    = cor(IQ,motivation)
+
+data.frame(cor.grade.IQ, cor.grade.motivation, cor.IQ.motivation)
+```
+
+------
+
+```{r, echo=TRUE}
+numerator   = cor.grade.IQ - (cor.grade.motivation * cor.IQ.motivation)
+denominator = sqrt( (1-cor.grade.motivation^2)*(1-cor.IQ.motivation^2) )
+
+partial.correlation = numerator / denominator
+
+partial.correlation
+```
+
+## Significance of parial correlation {.subsection}
+
+One-sample t-test
+
+```{r, echo=TRUE}
+#| output-location: slide
+
+df = N - 3
+
+t.pr = ( partial.correlation*sqrt(df) ) / sqrt(1-partial.correlation^2)
+t.pr
+
+visualize.t(c(-t.pr,t.pr),df,section='tails')
+```
