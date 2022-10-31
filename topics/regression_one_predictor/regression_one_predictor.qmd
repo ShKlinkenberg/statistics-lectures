@@ -85,7 +85,6 @@ r.2 = round(r^2, 2)
 text(x[1], y[1], paste("r =", r," r2 = ", r.2), pos = 2, col = "blue")
 ```
 
-    
 ## Homoscedasticity
 
 ::: {.columns}
