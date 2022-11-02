@@ -115,7 +115,10 @@ mean.grade = mean(grade)
 mean.IQ    = mean(IQ)
 N          = length(grade)
 
-plot(data$grade, ylim=summary(c(data$grade, data$IQ))[c('Min.','Max.')], col='orange')
+plot(data$grade, ylim=summary(c(data$grade, data$IQ))[c('Min.','Max.')], 
+     col='orange', 
+     ylab="variables",
+     xlab="People")
 points(data$IQ, col='blue')
 ```
 
