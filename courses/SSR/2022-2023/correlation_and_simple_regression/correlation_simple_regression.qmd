@@ -1,0 +1,23 @@
+---
+title: "Correlation and Simple regression"
+author: "Klinkenberg"
+date: "3 nov 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/correlation/correlation.qmd"}
+```
+
+```{r child="../../../../topics/regression_one_predictor/regression_one_predictor.qmd", eval=TRUE}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
