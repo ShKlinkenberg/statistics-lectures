@@ -175,7 +175,7 @@ planes3d(a = 0,
          c = 0,
          #d = c(1,2,3,4),
          d = -sds,
-         alpha=0.7,
+         alpha=0.1,
          color = c("blue"))
 
 #3 Add regression model surface
