@@ -1,0 +1,21 @@
+---
+title: "Multiple regression"
+author: "Klinkenberg"
+date: "10 nov 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+<!-- Add the required topics below -->
+
+```{r child="../../../../topics/regression_multiple_predictors/regression_multiple_predictors.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
