@@ -1,0 +1,19 @@
+---
+title: "Mediation"
+author: "Klinkenberg"
+date: "15 nov 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/mediation/mediation.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
