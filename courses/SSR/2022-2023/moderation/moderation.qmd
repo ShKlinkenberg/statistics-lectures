@@ -1,0 +1,19 @@
+---
+title: "Moderation"
+author: "Klinkenberg"
+date: "13 nov 2022"
+footer: "Scientific & Statistical Reasoning"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/moderation/moderation.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
