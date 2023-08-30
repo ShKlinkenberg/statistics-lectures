@@ -1,0 +1,32 @@
+---
+title: "Statistical Reasoning"
+subtitle: "Null Hypothesis Testisn"
+author: "Klinkenberg"
+date: "06 sep 2023"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+## Learning
+
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../../topics/statistical_reasoning/statistical_reasoning.qmd"}
+```
+
+```{r child="../../../../topics/empirical_cycle/empirical_cycle.qmd"}
+```
+
+```{r child="../../../../topics/coin_expreiment/coin_experiment.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+

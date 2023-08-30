@@ -1,17 +1,18 @@
 ---
-title: "Scientific and statistical reasoning 2022-2023"
+title: "Statistical Modelling 2023-2024"
+subtitle: "For semester 1: SMCO / SMCR"
 author: "Klinkenberg"
 date: today
 ---
 
-On this site you can find my statistics lectures for SSR.
+On this site you can find my statistics lectures for SMCO and SMCR.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-course.path = "courses/SSR/2022-2023/"
+course.path = "courses/SM/2023-2024-S1/"
 
 files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
 
-files <- files[grep("SSR.qmd", files, invert = TRUE)]
+files <- files[grep("SM.qmd", files, invert = TRUE)]
 
 lectures = data.frame()
 n = length(files)

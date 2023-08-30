@@ -3,6 +3,7 @@ project:
   output-dir: site
   render:
     - index.qmd
+    - courses/SM/2023-2024-S1/SM.qmd
     - courses/SSR/2022-2023/SSR.qmd
     - courses/WSR_PB/2022-2023/WSR_PB.qmd
     
@@ -28,6 +29,7 @@ website:
     left:
       - text: Courses
         menu:
+          - sidebar:SMC
           - sidebar:SSR
           - sidebar:WSR
 
@@ -52,5 +54,12 @@ website:
       collapse-level: 2
       contents:
         - courses/WSR_PB/2022-2023/WSR_PB.qmd
+    - id: SMC
+      title: "Statistical Modelling"
+      style: "docked"
+      background: light
+      collapse-level: 2
+      contents:
+        - courses/SM/2023-2024-S1/SM.qmd
 # 
 # freeze: false
