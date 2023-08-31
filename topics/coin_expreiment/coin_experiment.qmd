@@ -42,9 +42,9 @@ What is the difference between
 
 -   Population distribution
 -   Sample distribution
--   Samples distribution
+-   Sampling distribution
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 # install.packages("curl")
 library("curl")
 
@@ -67,8 +67,9 @@ barplot(table(factor(data.cleaned$heads, levels=0:10)))
 
 ## Binomial distribution
 
-$$ {n\choose k}p^k(1-p)^{n-k} \\
- {n\choose k} = \frac{n!}{k!(n-k)!} $$
+$$ {n\choose k}p^k(1-p)^{n-k}$$
+
+$$ {n\choose k} = \frac{n!}{k!(n-k)!} $$
 
 With values:
 
