@@ -48,8 +48,8 @@ $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \fr
 
 ## Standard Error {.flexbox .vcenter}
 
-```{r, child="ci.html"}
-```
+
+{{< include ci.html >}}
 
 ## 
 
@@ -236,6 +236,7 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 #alpha > svg { transform: scale(.8);}
 </style>
 ```
+
 ```{r child="decision_table.svg"}
 ```
 :::
@@ -292,6 +293,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 #power > svg { transform: scale(.8);}
 </style>
 ```
+
 ```{r child="decision_table.svg"}
 ```
 :::
@@ -314,7 +316,7 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial alternative distribution"
 
-col=c(rep("red",2),rep("beige",7),rep("red",2))
+col=c(rep("green",2),rep("beige",7),rep("green",2))
 
 barplot( p_kp, 
          main=title, 
@@ -365,6 +367,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Effect_size)
 #oneminalpha > svg { transform: scale(.8);}
 </style>
 ```
+
 ```{r child="decision_table.svg"}
 ```
 :::
@@ -387,7 +390,7 @@ p_kp = p_k * permutations # Probability of event times
 
 title = "Binomial Null distribution"
 
-col=c(rep("beige",2),rep("red",7),rep("beige",2))
+col=c(rep("beige",2),rep("green",7),rep("beige",2))
 
 barplot( p_kp, 
          main=title, 
@@ -420,6 +423,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 #beta > svg { transform: scale(.8);}
 </style>
 ```
+
 ```{r child="decision_table.svg"}
 ```
 :::
@@ -560,7 +564,7 @@ area <- dbinom(0:N, N, H0) < alpha/2
 col = rep("beige", N+1)
 col[area] = "red"
 
-col2 = rep("red", N+1)
+col2 = rep("green", N+1)
 col2[area] = "beige"
 
 # Delete # to not color the plots

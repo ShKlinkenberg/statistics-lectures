@@ -1,0 +1,18 @@
+---
+title: "Null Hypothesis Significance Testing"
+author: "Klinkenberg"
+date: "11 sep 2023"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/nhst/NHST_3.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
