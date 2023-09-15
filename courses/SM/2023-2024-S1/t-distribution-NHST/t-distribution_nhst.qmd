@@ -1,0 +1,38 @@
+---
+title: "T-Distribution NHST"
+author: "Klinkenberg"
+date: "18 sep 2023"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+## IQ next to you
+
+::: {.r-stack}
+
+![http://goo.gl/T6Lo2s](../../../../topics/t-test_one-sample/QR_iq.png)
+<br>
+http://goo.gl/T6Lo2s
+
+:::
+
+## Models {.center}
+
+<div style="font-size:200%; transform: rotate(-11deg);">
+$$\text{outcome} = \text{model} + \text{error}$$
+</div>
+
+```{r child="../../../../topics/t-distribution/t-distribution_SM.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/t-test_one-sample/One-sample_t-test_SM.qmd", eval=TRUE}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```

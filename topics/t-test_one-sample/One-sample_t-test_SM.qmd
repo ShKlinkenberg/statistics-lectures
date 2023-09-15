@@ -1,0 +1,114 @@
+# One-sample t-test {.section}
+
+<!--
+
+## IQ next to you
+
+::: {.r-stack}
+
+![http://goo.gl/T6Lo2s](../../../../topics/t-test_one-sample/QR_iq.png)
+<br>
+http://goo.gl/T6Lo2s
+
+:::
+
+## Models {.center}
+
+<div style="font-size:200%; transform: rotate(-11deg);">
+$$\text{outcome} = \text{model} + \text{error}$$
+</div>
+
+-->
+
+## Our data {.smaller}
+
+```{r, message=FALSE, eval=TRUE, echo=FALSE}
+
+if(!'gsheet' %in% installed.packages()) { install.packages('gsheet') }
+library("gsheet")
+data <- gsheet2tbl('docs.google.com/spreadsheets/d/13oLFjy5e923weH8bzBipZSvWYS_dpw7B77g5yW_myLg/edit?usp=sharing')
+
+IQ.next.to.you = data[grep("2022|2023", as.character(data$Timestamp)),"IQ next to you"]
+IQ.next.to.you <- as.numeric(IQ.next.to.you$"IQ next to you")
+
+DT::datatable(data, extensions = "Buttons", 
+            options = list(paging = TRUE,
+                           scrollX=TRUE, 
+                           searching = TRUE,
+                           ordering = TRUE,
+                           dom = 'Bfrtip',
+                           buttons = c('csv'),
+                           pageLength=5, 
+                           lengthMenu=c(3,5,10) ))
+```
+## Descriptives
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+mu     = 120
+n      = length(IQ.next.to.you)
+x      = IQ.next.to.you
+mean_x = mean(x, na.rm = TRUE)
+sd_x   = sd(x, na.rm = TRUE)
+# cbind(n, mean_x, sd_x)
+```
+
+$\bar{x} = `r round(mean_x,2)`$
+
+$s_x = `r round(sd_x,2)`$
+
+$n = `r n`$
+
+> Does this mean, differ significantly from the population mean $\mu = `r mu`$?
+
+## Hypothesis {.subsection}
+
+### Null hypothesis
+
+* $H_0: \bar{x} = \mu$
+
+### Alternative hypothesis
+
+* $H_A: \bar{x} \neq \mu$
+* $H_A: \bar{x} > \mu$
+* $H_A: \bar{x} < \mu$
+
+## T-statistic
+
+$$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}} = \frac{`r round(mean_x,2)` - `r mu` }{`r round(sd_x,2)` / \sqrt{`r n`}}$$
+
+The t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size.
+
+```{r, echo=TRUE}
+t = (mean_x - mu) / (sd_x / sqrt(n))
+```
+
+$$t = `r t`$$
+
+## Type I error {.subsection}
+
+To determine if this t-value significantly differs from the population mean we have to specify a type I error that we are willing to make.
+
+* Type I error / $\alpha$ = .05
+
+## P-value one sided {.subsection}
+
+Finally we have to calculate our _p_-value for which we need the degrees of freedom $df = n - 1$ to determine the shape of the t-distribution.
+
+```{r, echo=FALSE, eval=FALSE}
+df = n - 1; df
+```
+
+```{r, echo=FALSE}
+#| output-location: slide
+
+if(!"visualize" %in% installed.packages()) { install.packages("visualize") }
+library("visualize")
+
+visualize.t(t, df, section = "upper")
+```
+
+## P-value two sided {.subsection}
+
+```{r, echo=FALSE}
+visualize.t(c(-t, t), df, section = "tails")
+```
