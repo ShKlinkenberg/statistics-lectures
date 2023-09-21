@@ -5,7 +5,7 @@ date: "10/10/2018"
 output: html_document
 ---
 
-```{r, echo=FALSE, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=.2, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, fig.show='animate', ffmpeg.format='gif', dev='png', interval=.2, message=FALSE, warning=FALSE}
 multiple.n  = c(5, 15, 30)
 multiple.k  = c(2, 4, 6)
 multiple.df.model = multiple.k - 1

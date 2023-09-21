@@ -1,5 +1,10 @@
 # F-distribution {.section}
 
+```{r, echo=FALSE}
+set.seed(4876)
+```
+
+
 ## Ronald Fisher {.smaller .subsection}
 
 ::: {.columns}
@@ -26,12 +31,30 @@ Sir Ronald Aylmer Fisher FRS (17 February 1890 -- 29 July 1962), known as R.A. F
 
 ## Analysing variance
 
-[Decomposing variance example of height for males and females.](https://webcolleges.uva.nl/Mediasite/Play/42718d5968df45b29c089fcd02bcb86a1d?playFrom=377000)
+> Decomposing variance example of height for males and females.
+
+<style>
+#hazard {
+  height: 30px;
+  color: white;
+  padding: 5px;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    white,
+    white 20px,
+    red 20px,
+    red 40px
+  );
+}
+</style>
+
+<hr id="hazard">
 
 ## Population distribution {.smaller .subsection}
 
 ```{r, echo=TRUE}
 #| output-location: slide
+#| code-line-numbers: "3|6-7|14"
 
 layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
 
@@ -60,21 +83,27 @@ for(i in 1:n.samples) {
 
 $$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
 
-So the $F$-statistic represents a signal to noise ratio by deviding the model variance component by the error variance component.
+The $F$-statistic represents a signal to noise ratio by defiding the model variance component by the error variance component.
 
 ## A samples
 
-Let's take two sample from our normal populatiion and calculate the F-value.
+Let's take two sample from our normal population and calculate the F-value.
 
 ```{r, echo=TRUE}
 x.1 = rnorm(n, mu, sigma)
 x.2 = rnorm(n, mu, sigma)
+```
 
+```{r, echo=FALSE}
 data <- data.frame(group = rep(c("s1", "s2"), each=n), score = c(x.1,x.2))
 	
-F = summary(aov(lm(score ~ group, data)))[[1]]$F[1]
-F
+F = round(summary(aov(lm(score ~ group, data)))[[1]]$F[1], 2)
+
+MS_model = round(summary(aov(lm(score ~ group, data)))[[1]]$Mean[1], 2)
+MS_error = round(summary(aov(lm(score ~ group, data)))[[1]]$Mean[2], 2)
 ```
+
+$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}} = \frac{{`r MS_model`}}{{`r MS_error`}} = `r F`$$
 
 ## More samples {.smaller .subsection}
 
@@ -82,6 +111,7 @@ let's take more samples and calculate the F-value every time.
 
 ```{r, echo=TRUE}
 #| output-location: slide
+#| code-line-numbers: "1|7-8|12"
 
 n.samples = 1000
 
@@ -111,9 +141,11 @@ lines(F, df(F,df.model, df.error), col = "red")
 
 ## F-distribution {.smaller}
 
-So if the population is normaly distributed (assumption of normality) the f-distribution represents the signal to noise ration given a certain number of samples (${df}_{model} = k - 1$) and sample size (${df}_{error} = N - k$).
+So if the population is normally distributed (assumption of normality) the f-distribution represents the signal to noise ratio given a certain number of samples (${df}_{model} = k - 1$) and sample size (${df}_{error} = N - k$).
 
 The F-distibution therefore is different for different sample sizes and number of groups.
+
+$$\frac{\sqrt{\frac{(d_1x)^{d_1}\,\,d_2^{d_2}} {(d_1x+d_2)^{d_1+d_2}}}} {x\operatorname{B}\left(\frac{d_1}{2},\frac{d_2}{2}\right)}$$
 
 ## F-distribution {.smaller}
 

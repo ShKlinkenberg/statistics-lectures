@@ -1,0 +1,24 @@
+---
+title: "F-Distribution and factorial ANOVA"
+author: "Klinkenberg"
+date: "25 sep 2023"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/f_distribution/f_distribution.qmd", eval=TRUE}
+
+```
+
+```{r child="../../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA_SM.qmd", eval=TRUE}
+
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```

@@ -5,7 +5,7 @@ Two or more independent variables with two or more categories. One dependent var
 ```{r, echo=FALSE}
 rm(list=ls())
 
-data <- read.csv("anova_alcohol_speed_sekse.csv")
+data <- read.csv("../../../../topics/ANOVA_independent_factorial/anova_alcohol_speed_sekse.csv")
 
 if(!"ggplot2" %in% installed.packages()) { install.packages("ggplot2") }
 library("ggplot2")
