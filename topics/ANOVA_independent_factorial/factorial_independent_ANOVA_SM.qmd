@@ -70,7 +70,11 @@ person | alcohol | speed | accidents
 ## Data {.smaller}
 
 ```{r, echo=FALSE}
-datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(data, 
+          options = list(searching = FALSE, 
+                         scrollY = 415, 
+                         paging = F, 
+                         info = F))
 ```
 
 ## Effects
@@ -543,17 +547,63 @@ $\tiny `r b_0` + `r b_1` \times \text{some}_{01}
          + `r b_4` \times \text{some}_{01} \times \text{weight}
          + `r b_5` \times \text{much}_{01} \times \text{weight}$
          
-<small style="transform: scale(0.8); margin:0; padding:0;">
+<small style="transform: scale(0.9); margin:0 0 0 -60px; padding:0;">
 
 ```{r}
 some = ifelse(data$alcohol == "some", 1, 0)
 much = ifelse(data$alcohol == "much", 1, 0)
 
-weight = data$weight
+weight  = data$weight
+expect  = round(fit$fitted.values,2)
+outcome = round(data$accidents, 2)
 
-reg.data <- data.frame(b_0, b_1, some, b_2, much, b_3, weight, b_4, some, much, b_5, some, much, weight)
+reg.data <- data.frame(b_0, b_1, some, b_2, much, b_3, weight, b_4, some, weight, b_5, much, weight, expect, outcome)
 
-datatable(reg.data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+datatable(reg.data, 
+          rownames = FALSE,
+          options = list(searching = FALSE, 
+                         scrollY   = 415,
+                         autoWidth = FALSE,
+                         paging    = F, 
+                         info      = F)
+          )
+
+# kableExtra::kable(reg.data)
 ```
 
 </small>
+
+## How good is the model {.smaller}
+
+::: {.columns}
+
+::: {.column}
+
+```{r, echo=FALSE, eval=TRUE, fig.asp=1}
+plot(expect, outcome)
+abline(coef = c(0,1), col = "red")
+
+correlation = cor(expect, outcome)^2
+```
+
+:::
+
+::: {.column}
+
+$$\LARGE \eta^2$$
+
+Squared correlation between model expectation and actual outcome: `r round(correlation,3)`
+
+Proportion of explained versus unexplained variance / model vs error / between vs within.
+
+```{r, echo=FALSE}
+SS_total = var(outcome) * (length(outcome)-1)
+SS_model = sum( ( mean(outcome) - fit$fitted.values )^2 )
+```
+
+
+$\frac{`r round(SS_model,3)`}{`r round(SS_total,3)`} = `r round(SS_model / SS_total,3)`$
+
+:::
+
+::::
