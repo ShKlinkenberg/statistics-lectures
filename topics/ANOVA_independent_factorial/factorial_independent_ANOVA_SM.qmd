@@ -462,13 +462,17 @@ Effect sizes of post-hoc comparisons
 * Cohen's $r$ gives the effect size for a specific comparison
     * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$
 
-# ANOVA as gegression
+# ANOVA as regression
 
 ## Linear line equation
 
 $Y = aX + b$
 
+:::{.column-page}
+
 <iframe src="https://www.geogebra.org/calculator/z2eydyxx?embed" width="1200" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+:::
 
 ## Regression equation
 
@@ -497,20 +501,20 @@ $$b_0 + b_1 \times \text{alcohol} + b_2 \times \text{weight}$$
 Categorical variable need to be recoded into $[0, 1]$ (on / off) dummy variables. Number of categories - 1 dummies.
 
 * alcohol [none, some, much]
+  * none $[0,1]$
   * some $[0,1]$
-  * much $[0,1]$
 
-$b_0 + b_1 \times \text{some alcohol} + b_2 \times \text{much alcohol} + b_2 \times \text{weight}$
+$b_0 + b_1 \times \text{none alcohol} + b_2 \times \text{some alcohol} + b_2 \times \text{weight}$
 
 ## Aalcohol x Weight
 
 $$
 \begin{aligned}
-b_0 & + b_1 \times \text{some alcohol} \\
-    & + b_2 \times \text{much alcohol} \\
+b_0 & + b_1 \times \text{none alcohol} \\
+    & + b_2 \times \text{some alcohol} \\
     & + b_3 \times \text{weight} \\
-    & + b_4 \times \text{some alcohol} \times \text{weight} \\
-    & + b_5 \times \text{much alcohol} \times \text{weight} \\
+    & + b_4 \times \text{none alcohol} \times \text{weight} \\
+    & + b_5 \times \text{some alcohol} \times \text{weight} \\
 \end{aligned}
 $$
 
@@ -531,33 +535,35 @@ b_5 = fit$coefficients[6]
 
 $$
 \begin{aligned}
-`r b_0` & + `r b_1` \times \text{some}_{01} \\
-        & + `r b_2` \times \text{much}_{01} \\
+`r b_0` & + `r b_1` \times \text{none}_{01} \\
+        & + `r b_2` \times \text{some}_{01} \\
         & + `r b_3` \times \text{weight} \\
-        & + `r b_4` \times \text{some}_{01} \times \text{weight} \\
-        & + `r b_5` \times \text{much}_{01} \times \text{weight} \\
+        & + `r b_4` \times \text{none}_{01} \times \text{weight} \\
+        & + `r b_5` \times \text{some}_{01} \times \text{weight} \\
 \end{aligned}
 $$
 
 ## Data with dummies {.smaller}
 
-$\tiny `r b_0` + `r b_1` \times \text{some}_{01}
-         + `r b_2` \times \text{much}_{01}
+$\tiny `r b_0` + `r b_1` \times \text{none}_{01}
+         + `r b_2` \times \text{some}_{01}
          + `r b_3` \times \text{weight}
-         + `r b_4` \times \text{some}_{01} \times \text{weight}
-         + `r b_5` \times \text{much}_{01} \times \text{weight}$
+         + `r b_4` \times \text{none}_{01} \times \text{weight}
+         + `r b_5` \times \text{some}_{01} \times \text{weight}$
          
 <small style="transform: scale(0.9); margin:0 0 0 -60px; padding:0;">
 
-```{r}
+:::{.column-page}
+
+```{r, echo=FALSE, warning=FALSE}
+none = ifelse(data$alcohol == "none", 1, 0)
 some = ifelse(data$alcohol == "some", 1, 0)
-much = ifelse(data$alcohol == "much", 1, 0)
 
 weight  = data$weight
 expect  = round(fit$fitted.values,2)
 outcome = round(data$accidents, 2)
 
-reg.data <- data.frame(b_0, b_1, some, b_2, much, b_3, weight, b_4, some, weight, b_5, much, weight, expect, outcome)
+reg.data <- data.frame(b_0, b_1, none, b_2, some, b_3, weight, b_4, none, weight, b_5, some, weight, expect, outcome)
 
 datatable(reg.data, 
           rownames = FALSE,
@@ -570,6 +576,8 @@ datatable(reg.data,
 
 # kableExtra::kable(reg.data)
 ```
+
+:::
 
 </small>
 
@@ -594,7 +602,11 @@ $$\LARGE \eta^2$$
 
 Squared correlation between model expectation and actual outcome: `r round(correlation,3)`
 
-Proportion of explained versus unexplained variance / model vs error / between vs within.
+Proportion of: 
+
+* explained vs unexplained variance
+* model vs error
+* between vs within.
 
 ```{r, echo=FALSE}
 SS_total = var(outcome) * (length(outcome)-1)

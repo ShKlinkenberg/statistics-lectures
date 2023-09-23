@@ -149,7 +149,7 @@ $$\frac{\sqrt{\frac{(d_1x)^{d_1}\,\,d_2^{d_2}} {(d_1x+d_2)^{d_1+d_2}}}} {x\opera
 
 ## F-distribution {.smaller}
 
-```{r}
+```{r, echo=FALSE}
 #| output-location: slide
 
 multiple.n  = c(5, 15, 30)
