@@ -81,7 +81,7 @@ for(i in 1:n.samples) {
 
 ## F-statistic
 
-$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}}$$
+$$F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{\text{between group var.}}{\text{within group var.}} = \frac{{SIGNAL}}{{NOISE}}$$
 
 The $F$-statistic represents a signal to noise ratio by defiding the model variance component by the error variance component.
 

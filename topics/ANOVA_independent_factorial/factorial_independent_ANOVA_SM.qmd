@@ -7,6 +7,8 @@ rm(list=ls())
 
 data <- read.csv("../../../../topics/ANOVA_independent_factorial/anova_alcohol_speed_sekse.csv")
 
+# data <- read.csv("anova_alcohol_speed_sekse.csv")
+
 if(!"ggplot2" %in% installed.packages()) { install.packages("ggplot2") }
 library("ggplot2")
 
@@ -71,7 +73,36 @@ person | alcohol | speed | accidents
 datatable(data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
 ```
 
-## SS model {.smaller}
+## Effects
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+* Total
+  * $F = \frac{{MS}_{model}}{{MS}_{error}}$
+* Main effects 
+  * $F = \frac{{MS}_{goup A}}{{MS}_{error}}$
+  * $F = \frac{{MS}_{goup B}}{{MS}_{error}}$
+* Interaction/moderation
+  * $F = \frac{{MS}_{A \times B}}{{MS}_{error}}$
+  
+:::
+
+::: {.column width="50%"}
+
+$MS = \text{Mean Squares}$
+
+$MS = \frac{SS}{df}$
+
+$SS = \text{Sums of Squares}$
+
+$df = \text{degrees of freedom}$
+:::
+
+::::
+
+## SS model
 
 ```{r, echo=FALSE}
 accidents <- data$accidents
@@ -159,12 +190,6 @@ legend("topleft",
        pch    = c("o"),
        col    = c("red"),
        legend = c("Full model") )
-```
-
-## Data {.smaller}
-
-```{r, echo=FALSE}
-table.ss
 ```
 
 ## SS error
@@ -334,7 +359,7 @@ ss.speed.alcohol <- ss.model - ss.speed - ss.alcohol
 # ss.speed.alcohol
 ```
 
-$\text{SS}_{\text{speed} \times \text{alcohol}} = `r ss.speed.alcohol`$ 
+$$\text{SS}_{\text{speed} \times \text{alcohol}} = `r ss.speed.alcohol`$$ 
 
 ## Mean Squares
 
@@ -364,9 +389,7 @@ F_{Alcohol \times Speed} &= \frac{{MS}_{Alcohol \times Speed}}{{MS}_{error}} \\
 
 ## Interaction
 
-$$F_{Alcohol \times Speed}$$
-
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 N          = length(accidents)
 k.speed    = 3
 k.alcohol  = 3
@@ -379,14 +402,15 @@ ms.speed.alcohol = ss.speed.alcohol / df.speed.alcohol
 
 df.error = N - k.model
 ms.error = ss.error / df.error
+
+F.speed.alcohol = ms.speed.alcohol / ms.error
 ```
+
+$$F_{Alcohol \times Speed} = \frac{{MS}_{Alcohol \times Speed}}{{MS}_{error}} = \frac{`r round(ms.speed.alcohol,2)`}{`r round(ms.error, 2)`} = `r round(F.speed.alcohol, 2)`$$
 
 ## $P$-value
 
-```{r, echo=TRUE}
-F.speed.alcohol = ms.speed.alcohol / ms.error
-F.speed.alcohol
-
+```{r, echo=FALSE}
 library(visualize)
 visualize.f(F.speed.alcohol, df.speed.alcohol, df.error, section = "upper")
 ```
@@ -416,14 +440,6 @@ polygon(c(p.range,rev(p.range)),
         c(p.range*0, rev(df(p.range, df.speed.alcohol, df.error))), col = rgb(0,0,1,.6), density = 20)
 ```
 
-## Contrast
-
-Planned comparisons
-
-* Exploring differences of theoretical interest
-* Higher precision
-* Higher power
-
 ## Post-Hoc
 
 Unplanned comparisons
@@ -436,9 +452,108 @@ Unplanned comparisons
 General effect size measures
 
 * Amount of explained variance $R^2$ also called eta squared $\eta^2$.
-* Omega squared $\omega^2$
 
-Effect sizes of contrasts or post-hoc comparisons
+Effect sizes of post-hoc comparisons
 
 * Cohen's $r$ gives the effect size for a specific comparison
     * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$
+
+# ANOVA as gegression
+
+## Linear line equation
+
+$Y = aX + b$
+
+<iframe src="https://www.geogebra.org/calculator/z2eydyxx?embed" width="1200" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+## Regression equation
+
+
+
+$$\text{outcome} = \text{model} + \text{error}$$
+
+$$\text{model} = b_0 + b_1 \times \text{predictor}$$
+
+## Data {.smaller}
+
+```{r, echo=FALSE}
+datatable(data[, 1:6], options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+## Aalcohol + Weight
+
+$$\text{outcome} = \text{model} + \text{error}$$
+
+$$\text{model}$$
+
+$$b_0 + b_1 \times \text{alcohol} + b_2 \times \text{weight}$$
+
+## Dummies
+
+Categorical variable need to be recoded into $[0, 1]$ (on / off) dummy variables. Number of categories - 1 dummies.
+
+* alcohol [none, some, much]
+  * some $[0,1]$
+  * much $[0,1]$
+
+$b_0 + b_1 \times \text{some alcohol} + b_2 \times \text{much alcohol} + b_2 \times \text{weight}$
+
+## Aalcohol x Weight
+
+$$
+\begin{aligned}
+b_0 & + b_1 \times \text{some alcohol} \\
+    & + b_2 \times \text{much alcohol} \\
+    & + b_3 \times \text{weight} \\
+    & + b_4 \times \text{some alcohol} \times \text{weight} \\
+    & + b_5 \times \text{much alcohol} \times \text{weight} \\
+\end{aligned}
+$$
+
+## Regression model
+
+```{r, eval=TRUE, echo=FALSE}
+fit <- lm(accidents ~ factor(alcohol) + weight + factor(alcohol) * weight, data)
+
+fit$coefficients = round(fit$coefficients,3)
+
+b_0 = fit$coefficients[1]
+b_1 = fit$coefficients[2]
+b_2 = fit$coefficients[3]
+b_3 = fit$coefficients[4]
+b_4 = fit$coefficients[5]
+b_5 = fit$coefficients[6]
+```
+
+$$
+\begin{aligned}
+`r b_0` & + `r b_1` \times \text{some}_{01} \\
+        & + `r b_2` \times \text{much}_{01} \\
+        & + `r b_3` \times \text{weight} \\
+        & + `r b_4` \times \text{some}_{01} \times \text{weight} \\
+        & + `r b_5` \times \text{much}_{01} \times \text{weight} \\
+\end{aligned}
+$$
+
+## Data with dummies {.smaller}
+
+$\tiny `r b_0` + `r b_1` \times \text{some}_{01}
+         + `r b_2` \times \text{much}_{01}
+         + `r b_3` \times \text{weight}
+         + `r b_4` \times \text{some}_{01} \times \text{weight}
+         + `r b_5` \times \text{much}_{01} \times \text{weight}$
+         
+<small style="transform: scale(0.8); margin:0; padding:0;">
+
+```{r}
+some = ifelse(data$alcohol == "some", 1, 0)
+much = ifelse(data$alcohol == "much", 1, 0)
+
+weight = data$weight
+
+reg.data <- data.frame(b_0, b_1, some, b_2, much, b_3, weight, b_4, some, much, b_5, some, much, weight)
+
+datatable(reg.data, options = list(searching = FALSE, scrollY = 415, paging = F, info = F))
+```
+
+</small>
