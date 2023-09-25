@@ -504,7 +504,7 @@ Categorical variable need to be recoded into $[0, 1]$ (on / off) dummy variables
   * none $[0,1]$
   * some $[0,1]$
 
-$b_0 + b_1 \times \text{none alcohol} + b_2 \times \text{some alcohol} + b_2 \times \text{weight}$
+$b_0 + b_1 \times \text{none alcohol} + b_2 \times \text{some alcohol} + b_3 \times \text{weight}$
 
 ## Aalcohol x Weight
 
@@ -604,9 +604,9 @@ Squared correlation between model expectation and actual outcome: `r round(corre
 
 Proportion of: 
 
-* explained vs unexplained variance
-* model vs error
-* between vs within.
+* explained / total variance
+* model / total variance
+* between group variance / total variance.
 
 ```{r, echo=FALSE}
 SS_total = var(outcome) * (length(outcome)-1)
