@@ -1,0 +1,19 @@
+---
+title: "Moderation"
+author: "Klinkenberg"
+date: "2 oct 2023"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/moderation/moderationSM.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+

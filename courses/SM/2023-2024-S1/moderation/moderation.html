@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Klinkenberg">
+<meta name="dcterms.date" content="2023-10-02">
+
+<title>Moderation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="moderation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="moderation_files/libs/quarto-html/quarto.js"></script>
+<script src="moderation_files/libs/quarto-html/popper.min.js"></script>
+<script src="moderation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="moderation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="moderation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="moderation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="moderation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="moderation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="moderation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="moderation_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="moderation_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="moderation_files/libs/datatables-binding-0.25/datatables.js"></script>
+<script src="moderation_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="moderation_files/libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="moderation_files/libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="moderation_files/libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="moderation_files/libs/dt-ext-buttons-1.11.3/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="moderation_files/libs/dt-ext-buttons-1.11.3/js/dataTables.buttons.min.js"></script>
+<script src="moderation_files/libs/dt-ext-buttons-1.11.3/js/buttons.html5.min.js"></script>
+<script src="moderation_files/libs/dt-ext-buttons-1.11.3/js/buttons.colVis.min.js"></script>
+<script src="moderation_files/libs/dt-ext-buttons-1.11.3/js/buttons.print.min.js"></script>
+<link href="moderation_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="moderation_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="moderation_files/libs/rglWebGL-binding-0.110.2/rglWebGL.js"></script>
+<link href="moderation_files/libs/rglwidgetClass-0.110.2/rgl.css" rel="stylesheet">
+<script src="moderation_files/libs/rglwidgetClass-0.110.2/rglClass.min.js"></script>
+<!--html_preserve--><script type="text/plain" id="rgl-vertex-shader">
+#line 2 1
+// File 1 is the vertex shader
+#ifdef GL_ES
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+#endif
+
+attribute vec3 aPos;
+attribute vec4 aCol;
+uniform mat4 mvMatrix;
+uniform mat4 prMatrix;
+varying vec4 vCol;
+varying vec4 vPosition;
+
+#ifdef NEEDS_VNORMAL
+attribute vec3 aNorm;
+uniform mat4 normMatrix;
+varying vec4 vNormal;
+#endif
+
+#if defined(HAS_TEXTURE) || defined (IS_TEXT)
+attribute vec2 aTexcoord;
+varying vec2 vTexcoord;
+#endif
+
+#ifdef FIXED_SIZE
+uniform vec3 textScale;
+#endif
+
+#ifdef FIXED_QUADS
+attribute vec3 aOfs;
+#endif
+
+#ifdef IS_TWOSIDED
+#ifdef HAS_NORMALS
+varying float normz;
+uniform mat4 invPrMatrix;
+#else
+attribute vec3 aPos1;
+attribute vec3 aPos2;
+varying float normz;
+#endif
+#endif // IS_TWOSIDED
+
+#ifdef FAT_LINES
+attribute vec3 aNext;
+attribute vec2 aPoint;
+varying vec2 vPoint;
+varying float vLength;
+uniform float uAspect;
+uniform float uLwd;
+#endif
+
+
+void main(void) {
+  
+#ifndef IS_BRUSH
+#if defined(NCLIPPLANES) || !defined(FIXED_QUADS) || defined(HAS_FOG)
+  vPosition = mvMatrix * vec4(aPos, 1.);
+#endif
+  
+#ifndef FIXED_QUADS
+  gl_Position = prMatrix * vPosition;
+#endif
+#endif // !IS_BRUSH
+  
+#ifdef IS_POINTS
+  gl_PointSize = POINTSIZE;
+#endif
+  
+  vCol = aCol;
+  
+#ifdef NEEDS_VNORMAL
+  vNormal = normMatrix * vec4(-aNorm, dot(aNorm, aPos));
+#endif
+  
+#ifdef IS_TWOSIDED
+#ifdef HAS_NORMALS
+  /* normz should be calculated *after* projection */
+  normz = (invPrMatrix*vNormal).z;
+#else
+  vec4 pos1 = prMatrix*(mvMatrix*vec4(aPos1, 1.));
+  pos1 = pos1/pos1.w - gl_Position/gl_Position.w;
+  vec4 pos2 = prMatrix*(mvMatrix*vec4(aPos2, 1.));
+  pos2 = pos2/pos2.w - gl_Position/gl_Position.w;
+  normz = pos1.x*pos2.y - pos1.y*pos2.x;
+#endif
+#endif // IS_TWOSIDED
+  
+#ifdef NEEDS_VNORMAL
+  vNormal = vec4(normalize(vNormal.xyz/vNormal.w), 1);
+#endif
+  
+#if defined(HAS_TEXTURE) || defined(IS_TEXT)
+  vTexcoord = aTexcoord;
+#endif
+  
+#if defined(FIXED_SIZE) && !defined(ROTATING)
+  vec4 pos = prMatrix * mvMatrix * vec4(aPos, 1.);
+  pos = pos/pos.w;
+  gl_Position = pos + vec4(aOfs*textScale, 0.);
+#endif
+  
+#if defined(IS_SPRITES) && !defined(FIXED_SIZE)
+  vec4 pos = mvMatrix * vec4(aPos, 1.);
+  pos = pos/pos.w + vec4(aOfs,  0.);
+  gl_Position = prMatrix*pos;
+#endif
+  
+#ifdef FAT_LINES
+  /* This code was inspired by Matt Deslauriers' code in 
+   https://mattdesl.svbtle.com/drawing-lines-is-hard */
+  vec2 aspectVec = vec2(uAspect, 1.0);
+  mat4 projViewModel = prMatrix * mvMatrix;
+  vec4 currentProjected = projViewModel * vec4(aPos, 1.0);
+  currentProjected = currentProjected/currentProjected.w;
+  vec4 nextProjected = projViewModel * vec4(aNext, 1.0);
+  vec2 currentScreen = currentProjected.xy * aspectVec;
+  vec2 nextScreen = (nextProjected.xy / nextProjected.w) * aspectVec;
+  float len = uLwd;
+  vec2 dir = vec2(1.0, 0.0);
+  vPoint = aPoint;
+  vLength = length(nextScreen - currentScreen)/2.0;
+  vLength = vLength/(vLength + len);
+  if (vLength > 0.0) {
+    dir = normalize(nextScreen - currentScreen);
+  }
+  vec2 normal = vec2(-dir.y, dir.x);
+  dir.x /= uAspect;
+  normal.x /= uAspect;
+  vec4 offset = vec4(len*(normal*aPoint.x*aPoint.y - dir), 0.0, 0.0);
+  gl_Position = currentProjected + offset;
+#endif
+  
+#ifdef IS_BRUSH
+  gl_Position = vec4(aPos, 1.);
+#endif
+}
+</script>
+<script type="text/plain" id="rgl-fragment-shader">
+#line 2 2
+// File 2 is the fragment shader
+#ifdef GL_ES
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+#endif
+varying vec4 vCol; // carries alpha
+varying vec4 vPosition;
+#if defined(HAS_TEXTURE) || defined (IS_TEXT)
+varying vec2 vTexcoord;
+uniform sampler2D uSampler;
+#endif
+
+#ifdef HAS_FOG
+uniform int uFogMode;
+uniform vec3 uFogColor;
+uniform vec4 uFogParms;
+#endif
+
+#if defined(IS_LIT) && !defined(FIXED_QUADS)
+varying vec4 vNormal;
+#endif
+
+#if NCLIPPLANES > 0
+uniform vec4 vClipplane[NCLIPPLANES];
+#endif
+
+#if NLIGHTS > 0
+uniform mat4 mvMatrix;
+#endif
+
+#ifdef IS_LIT
+uniform vec3 emission;
+uniform float shininess;
+#if NLIGHTS > 0
+uniform vec3 ambient[NLIGHTS];
+uniform vec3 specular[NLIGHTS]; // light*material
+uniform vec3 diffuse[NLIGHTS];
+uniform vec3 lightDir[NLIGHTS];
+uniform bool viewpoint[NLIGHTS];
+uniform bool finite[NLIGHTS];
+#endif
+#endif // IS_LIT
+
+#ifdef IS_TWOSIDED
+uniform bool front;
+varying float normz;
+#endif
+
+#ifdef FAT_LINES
+varying vec2 vPoint;
+varying float vLength;
+#endif
+
+void main(void) {
+  vec4 fragColor;
+#ifdef FAT_LINES
+  vec2 point = vPoint;
+  bool neg = point.y < 0.0;
+  point.y = neg ? (point.y + vLength)/(1.0 - vLength) :
+                 -(point.y - vLength)/(1.0 - vLength);
+#if defined(IS_TRANSPARENT) && defined(IS_LINESTRIP)
+  if (neg && length(point) <= 1.0) discard;
+#endif
+  point.y = min(point.y, 0.0);
+  if (length(point) > 1.0) discard;
+#endif // FAT_LINES
+  
+#ifdef ROUND_POINTS
+  vec2 coord = gl_PointCoord - vec2(0.5);
+  if (length(coord) > 0.5) discard;
+#endif
+  
+#if NCLIPPLANES > 0
+  for (int i = 0; i < NCLIPPLANES; i++)
+    if (dot(vPosition, vClipplane[i]) < 0.0) discard;
+#endif
+    
+#ifdef FIXED_QUADS
+    vec3 n = vec3(0., 0., 1.);
+#elif defined(IS_LIT)
+    vec3 n = normalize(vNormal.xyz);
+#endif
+    
+#ifdef IS_TWOSIDED
+    if ((normz <= 0.) != front) discard;
+#endif
+    
+#ifdef IS_LIT
+    vec3 eye = normalize(-vPosition.xyz/vPosition.w);
+    vec3 lightdir;
+    vec4 colDiff;
+    vec3 halfVec;
+    vec4 lighteffect = vec4(emission, 0.);
+    vec3 col;
+    float nDotL;
+#ifdef FIXED_QUADS
+    n = -faceforward(n, n, eye);
+#endif
+    
+#if NLIGHTS > 0
+    for (int i=0;i<NLIGHTS;i++) {
+      colDiff = vec4(vCol.rgb * diffuse[i], vCol.a);
+      lightdir = lightDir[i];
+      if (!viewpoint[i])
+        lightdir = (mvMatrix * vec4(lightdir, 1.)).xyz;
+      if (!finite[i]) {
+        halfVec = normalize(lightdir + eye);
+      } else {
+        lightdir = normalize(lightdir - vPosition.xyz/vPosition.w);
+        halfVec = normalize(lightdir + eye);
+      }
+      col = ambient[i];
+      nDotL = dot(n, lightdir);
+      col = col + max(nDotL, 0.) * colDiff.rgb;
+      col = col + pow(max(dot(halfVec, n), 0.), shininess) * specular[i];
+      lighteffect = lighteffect + vec4(col, colDiff.a);
+    }
+#endif
+    
+#else // not IS_LIT
+    vec4 colDiff = vCol;
+    vec4 lighteffect = colDiff;
+#endif
+    
+#ifdef IS_TEXT
+    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
+#endif
+    
+#ifdef HAS_TEXTURE
+#ifdef TEXTURE_rgb
+    vec4 textureColor = lighteffect*vec4(texture2D(uSampler, vTexcoord).rgb, 1.);
+#endif
+    
+#ifdef TEXTURE_rgba
+    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
+#endif
+    
+#ifdef TEXTURE_alpha
+    vec4 textureColor = texture2D(uSampler, vTexcoord);
+    float luminance = dot(vec3(1.,1.,1.), textureColor.rgb)/3.;
+    textureColor =  vec4(lighteffect.rgb, lighteffect.a*luminance);
+#endif
+    
+#ifdef TEXTURE_luminance
+    vec4 textureColor = vec4(lighteffect.rgb*dot(texture2D(uSampler, vTexcoord).rgb, vec3(1.,1.,1.))/3., lighteffect.a);
+#endif
+    
+#ifdef TEXTURE_luminance_alpha
+    vec4 textureColor = texture2D(uSampler, vTexcoord);
+    float luminance = dot(vec3(1.,1.,1.),textureColor.rgb)/3.;
+    textureColor = vec4(lighteffect.rgb*luminance, lighteffect.a*textureColor.a);
+#endif
+    
+    fragColor = textureColor;
+
+#elif defined(IS_TEXT)
+    if (textureColor.a < 0.1)
+      discard;
+    else
+      fragColor = textureColor;
+#else
+    fragColor = lighteffect;
+#endif // HAS_TEXTURE
+    
+#ifdef HAS_FOG
+    // uFogParms elements: x = near, y = far, z = fogscale, w = (1-sin(FOV/2))/(1+sin(FOV/2))
+    // In Exp and Exp2: use density = density/far
+    // fogF will be the proportion of fog
+    // Initialize it to the linear value
+    float fogF;
+    if (uFogMode > 0) {
+      fogF = (uFogParms.y - vPosition.z/vPosition.w)/(uFogParms.y - uFogParms.x);
+      if (uFogMode > 1)
+        fogF = mix(uFogParms.w, 1.0, fogF);
+      fogF = fogF*uFogParms.z;
+      if (uFogMode == 2)
+        fogF = 1.0 - exp(-fogF);
+      // Docs are wrong: use (density*c)^2, not density*c^2
+      // https://gitlab.freedesktop.org/mesa/mesa/-/blob/master/src/mesa/swrast/s_fog.c#L58
+      else if (uFogMode == 3)
+        fogF = 1.0 - exp(-fogF*fogF);
+      fogF = clamp(fogF, 0.0, 1.0);
+      gl_FragColor = vec4(mix(fragColor.rgb, uFogColor, fogF), fragColor.a);
+    } else gl_FragColor = fragColor;
+#else
+    gl_FragColor = fragColor;
+#endif // HAS_FOG
+    
+}
+</script><!--/html_preserve-->
+<script src="moderation_files/libs/CanvasMatrix4-0.110.2/CanvasMatrix.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#moderation" id="toc-moderation" class="nav-link active" data-scroll-target="#moderation">Moderation</a>
+  <ul class="collapse">
+  <li><a href="#moderation-1" id="toc-moderation-1" class="nav-link" data-scroll-target="#moderation-1">Moderation</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#view-data" id="toc-view-data" class="nav-link" data-scroll-target="#view-data">View data</a></li>
+  <li><a href="#mean-centering" id="toc-mean-centering" class="nav-link" data-scroll-target="#mean-centering">mean centering</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations">Correlations</a></li>
+  <li><a href="#scatterplots" id="toc-scatterplots" class="nav-link" data-scroll-target="#scatterplots">Scatterplots</a></li>
+  <li><a href="#d-plot" id="toc-d-plot" class="nav-link" data-scroll-target="#d-plot">3D plot</a></li>
+  <li><a href="#sd-planes" id="toc-sd-planes" class="nav-link" data-scroll-target="#sd-planes">1 SD planes</a></li>
+  <li><a href="#fit-model" id="toc-fit-model" class="nav-link" data-scroll-target="#fit-model">Fit model</a></li>
+  <li><a href="#regression-equation" id="toc-regression-equation" class="nav-link" data-scroll-target="#regression-equation">Regression equation</a></li>
+  <li><a href="#determine-slopes" id="toc-determine-slopes" class="nav-link" data-scroll-target="#determine-slopes">Determine slopes</a></li>
+  <li><a href="#expected-surface" id="toc-expected-surface" class="nav-link" data-scroll-target="#expected-surface">Expected surface</a></li>
+  <li><a href="#total-variance" id="toc-total-variance" class="nav-link" data-scroll-target="#total-variance">Total variance</a></li>
+  <li><a href="#explained-variance" id="toc-explained-variance" class="nav-link" data-scroll-target="#explained-variance">Explained variance</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Moderation</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Klinkenberg 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 2, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="moderation" class="level1 section">
+<h1 class="section">Moderation</h1>
+<!-- Allow color highlighting in mathjax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+<div class="cell">
+
+</div>
+<section id="moderation-1" class="level2">
+<h2 class="anchored" data-anchor-id="moderation-1">Moderation</h2>
+<p>In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction.</p>
+<p>Source <a href="https://en.wikipedia.org/wiki/Moderation_(statistics)">WIKIPEDIA</a></p>
+</section>
+<section id="model" class="level2 subsection flexbox vcenter">
+<h2 class="subsection flexbox vcenter anchored" data-anchor-id="model">Model</h2>
+<p><span class="math inline">\(\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0} \color{black}Out_i = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}+ \epsilon_i\)</span></p>
+<p><img src="../../../../topics/moderation/moderation.png" class="img-fluid"></p>
+</section>
+<section id="example" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="example">Example</h2>
+<p>Video games are among the favourite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain.</p>
+<p>Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behaviour, callous unemotional traits, and the number of hours per week they play video games.</p>
+<p>Source: Field 11.3.1</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="view-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="view-data">View data</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-c804f96c51686a1489e8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c804f96c51686a1489e8">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[18.02,15.6,14.02,16.47,12,13,21.11,18.52,18.64,20.28,15.65,18.02,12.08,17.99,16.37,13.66,11.46,17.3,15.78,11.29,11.27,14.82,9.46,11.98,19.71,13.18,16.75,17.31,9.61,18.53,16.77,11.58,14.24,15.64,14.48,13.78,13.38,12.63,12.13,18.18,11.04,18.4,18.67,17.54,16.73,16.34,15.99,16.1,15.63,14.87,13.77,16.65,12.3,14.98,17.53,16.33,11.28,14.38,19.24,17.73,14.96,19.42,13.02,16.41,16.37,20.2,15.84,18.48,15.09,16.95,15.14,12.17,16.48,15.22,11.61,10.97,20.63,16.21,10.65,14,15.67,17.21,10.59,11.56,15.46,13.6,18.8,12.2,17.41,11.43,10.54,21.48,18.97,17.15,14.16,18.14,13.87,13.51,18.27,21.04],[7.75,5.94,6.48,9.52,5.4,2.42,11.74,12.61,13.08,8.45,5.83,13.82,1.47,14.84,4.65,7.58,3.16,9.89,9.21,1.51,0.29,-0.19,3.48,8.13,13.15,3.57,6.73,14.74,0.22,13.86,7.81,4.46,4.98,11.5,7.54,10.21,3.87,7.09,3.73,10.81,4.69,14.57,7.22,8.51,7.96,11.96,9.91,0.26,10.19,5.43,1.95,12.03,4.5,7.89,10.41,14.24,3.88,3.37,9.67,12.36,2.71,7.99,4.29,8.23,12.92,18.2,10,9.22,7.32,4.08,12.1,4.12,8.08,5.74,8.74,6.27,12.05,7.78,0.89,5.37,12.43,11.54,1.55,7.77,7.51,8.06,6.54,4.94,7.97,4.5,-0.7,15.78,12.53,10.52,9.08,11.02,11.85,5.16,11.55,12.72],[9.8,8.64,8.34,5.4,8.25,11.89,19.31,11.3,9.57,11.78,0.17,9.65,12.79,13.77,5.37,1.56,8.49,7.13,7.56,15.61,14.33,10.74,10.6,-0.7,17.07,9.82,4.61,11.17,14.79,11.99,8.8,7.6,6.31,1.85,10.17,1.68,8.55,5.31,6.88,7.59,10.69,16.17,3.04,12.31,3.73,6.4,4.09,6.42,6.89,6.3,12.29,9.77,17.75,8.07,3.82,9.18,9.87,4.67,8.37,11.24,11.78,5.71,7.19,4.07,10.2,29.33,4.34,1.69,-1.49,8.2,4.15,6.25,3.54,8.33,6.8,0.86,17.52,4.68,10.25,1.02,3.53,11.61,16.82,4.3,7.31,2.18,9.04,9.05,7.94,3.67,23.03,24.82,11.7,9.34,-1.29,12,3.65,0.38,9.21,15.47]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>predictor<\/th>\n      <th>moderator<\/th>\n      <th>outcome<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv"],"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="mean-centering" class="level2">
+<h2 class="anchored" data-anchor-id="mean-centering">mean centering</h2>
+<div class="cell">
+
+</div>
+<p><span class="math inline">\(\text{pred}_\text{c} = \text{pred} - \bar{\text{pred}} = \text{pred} - 15.39\)</span></p>
+<p><span class="math inline">\(\text{mod}_\text{c} = \text{mod} - \bar{\text{mod}}= \text{mod} - 7.808\)</span></p>
+<p>SPSS syntax</p>
+<pre><code>COMPUTE pred = pred - 15.39.
+COMPUTE mod  = mod  - 7.808.
+EXECUTE.
+</code></pre>
+</section>
+<section id="correlations" class="level2">
+<h2 class="anchored" data-anchor-id="correlations">Correlations</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>          predictor moderator outcome
+predictor     1.000     0.722   0.215
+moderator     0.722     1.000   0.109
+outcome       0.215     0.109   1.000</code></pre>
+</div>
+</div>
+</section>
+<section id="scatterplots" class="level2 subsection">
+<h2 class="subsection anchored" data-anchor-id="scatterplots">Scatterplots</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="moderation_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="d-plot" class="level2">
+<h2 class="anchored" data-anchor-id="d-plot">3D plot</h2>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<div id="rgl10807" style="width:100%;height:464px;" class="rglWebGL html-widget"></div>
+<script type="application/json" data-for="rgl10807">{"x":{"material":{"color":"#000000","alpha":1,"lit":true,"ambient":"#000000","specular":"#FFFFFF","emission":"#000000","shininess":50,"smooth":true,"front":"filled","back":"filled","size":3,"lwd":1,"fog":true,"point_antialias":false,"line_antialias":false,"texture":null,"textype":"rgb","texmipmap":false,"texminfilter":"linear","texmagfilter":"linear","texenvmap":false,"depth_mask":true,"depth_test":"less","isTransparent":false,"polygon_offset":[0,0],"margin":"","floating":false,"tag":"","blend":["src_alpha","one_minus_src_alpha"]},"rootSubscene":7,"objects":{"13":{"id":13,"type":"points","material":{"lit":false,"size":8},"vertices":"0","colors":"1","centers":"2","ignoreExtent":false,"flags":34816},"15":{"id":15,"type":"text","material":{"lit":false,"margin":0,"floating":true,"edge":[0,1,1]},"vertices":"3","colors":"4","texts":[["predictor"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"5","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"16":{"id":16,"type":"text","material":{"lit":false,"margin":1,"floating":true,"edge":[1,1,1]},"vertices":"6","colors":"7","texts":[["moderator"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"8","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"17":{"id":17,"type":"text","material":{"lit":false,"margin":2,"floating":true,"edge":[1,1,1]},"vertices":"9","colors":"10","texts":[["outcome"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"11","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"11":{"id":11,"type":"light","vertices":[[0,0,1]],"colors":[[1,1,1,1],[1,1,1,1],[1,1,1,1]],"viewpoint":true,"finite":false},"10":{"id":10,"type":"background","material":{},"colors":"12","centers":"13","sphere":false,"fogtype":"none","fogscale":1,"flags":32768},"12":{"id":12,"type":"background","material":{"lit":false,"back":"lines"},"colors":"14","centers":"15","sphere":false,"fogtype":"none","fogscale":1,"flags":32768},"14":{"id":14,"type":"bboxdeco","material":{"front":"lines","back":"lines"},"vertices":"16","colors":"17","axes":{"mode":["pretty","pretty","pretty"],"step":[2,5,5],"nticks":[5,5,5],"marklen":[15,15,15],"expand":[1.02999997138977,1.02999997138977,1.02999997138977]},"draw_front":true,"flags":32769},"7":{"id":7,"type":"subscene","par3d":{"antialias":4,"FOV":30,"ignoreExtent":false,"listeners":7,"mouseMode":{"none":"none","left":"trackball","right":"zoom","middle":"fov","wheel":"pull"},"observer":[0,0,93.2443389892578],"modelMatrix":[[1.83016324043274,0,0,-0.144939377903938],[0,0.398108631372452,0.670632183551788,-9.71019077301025],[0,-1.09379434585571,0.244090154767036,-95.6147308349609],[0,0,0,1]],"projMatrix":[[3.73205065727234,0,0,0],[0,3.73205065727234,0,0],[0,0,-3.86370325088501,-336.135070800781],[0,0,-1,0]],"skipRedraw":false,"userMatrix":[[1,0,0,0],[0,0.342020143325668,0.939692620785909,0],[0,-0.939692620785909,0.342020143325668,0],[0,0,0,1]],"userProjection":[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],"scale":[1.83016324043274,1.16399168968201,0.713671863079071],"viewport":{"x":0,"y":0,"width":1,"height":1},"zoom":1,"bbox":[-5.93124008178711,6.08962965011597,-8.51074314117432,10.3898677825928,-1.4919501543045,29.3347587585449],"windowRect":[0,45,256,301],"family":"sans","font":1,"cex":1,"useFreeType":true,"fontname":"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library/rgl/fonts/FreeSans.ttf","maxClipPlanes":6,"glVersion":2.1,"activeSubscene":0},"embeddings":{"viewport":"replace","projection":"replace","model":"replace","mouse":"replace"},"objects":[12,14,13,15,16,17,11],"subscenes":[],"flags":36113}},"crosstalk":{"key":[],"group":[],"id":[],"options":[]},"width":672,"height":480,"buffer":{"accessors":[{"bufferView":0,"componentType":5126,"count":100,"type":"VEC3"},{"bufferView":1,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":2,"componentType":5126,"count":100,"type":"VEC3"},{"bufferView":3,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":4,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":5,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":6,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":7,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":8,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":9,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":10,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":11,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":12,"componentType":5126,"count":1,"type":"VEC4"},{"bufferView":13,"componentType":5121,"count":1,"type":"VEC3"},{"bufferView":14,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":15,"componentType":5121,"count":1,"type":"VEC3"},{"bufferView":16,"componentType":5126,"count":16,"type":"VEC3"},{"bufferView":17,"componentType":5121,"count":1,"type":"VEC4"}],"bufferViews":[{"buffer":0,"byteLength":1200,"byteOffset":0},{"buffer":0,"byteLength":4,"byteOffset":1200},{"buffer":0,"byteLength":1200,"byteOffset":1204},{"buffer":0,"byteLength":12,"byteOffset":2404},{"buffer":0,"byteLength":4,"byteOffset":2416},{"buffer":0,"byteLength":12,"byteOffset":2420},{"buffer":0,"byteLength":12,"byteOffset":2432},{"buffer":0,"byteLength":4,"byteOffset":2444},{"buffer":0,"byteLength":12,"byteOffset":2448},{"buffer":0,"byteLength":12,"byteOffset":2460},{"buffer":0,"byteLength":4,"byteOffset":2472},{"buffer":0,"byteLength":12,"byteOffset":2476},{"buffer":0,"byteLength":16,"byteOffset":2488},{"buffer":0,"byteLength":3,"byteOffset":2504},{"buffer":0,"byteLength":4,"byteOffset":2507},{"buffer":0,"byteLength":3,"byteOffset":2511},{"buffer":0,"byteLength":192,"byteOffset":2516},{"buffer":0,"byteLength":4,"byteOffset":2708}],"buffers":[{"byteLength":2712,"bytes":"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\nAADAfwAAyEEAAAAB"}]},"context":{"shiny":false,"rmarkdown":null},"vertexShader":"#line 2 1\n// File 1 is the vertex shader\n#ifdef GL_ES\n#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#endif\n\nattribute vec3 aPos;\nattribute vec4 aCol;\nuniform mat4 mvMatrix;\nuniform mat4 prMatrix;\nvarying vec4 vCol;\nvarying vec4 vPosition;\n\n#ifdef NEEDS_VNORMAL\nattribute vec3 aNorm;\nuniform mat4 normMatrix;\nvarying vec4 vNormal;\n#endif\n\n#if defined(HAS_TEXTURE) || defined (IS_TEXT)\nattribute vec2 aTexcoord;\nvarying vec2 vTexcoord;\n#endif\n\n#ifdef FIXED_SIZE\nuniform vec3 textScale;\n#endif\n\n#ifdef FIXED_QUADS\nattribute vec3 aOfs;\n#endif\n\n#ifdef IS_TWOSIDED\n#ifdef HAS_NORMALS\nvarying float normz;\nuniform mat4 invPrMatrix;\n#else\nattribute vec3 aPos1;\nattribute vec3 aPos2;\nvarying float normz;\n#endif\n#endif // IS_TWOSIDED\n\n#ifdef FAT_LINES\nattribute vec3 aNext;\nattribute vec2 aPoint;\nvarying vec2 vPoint;\nvarying float vLength;\nuniform float uAspect;\nuniform float uLwd;\n#endif\n\n\nvoid main(void) {\n  \n#ifndef IS_BRUSH\n#if defined(NCLIPPLANES) || !defined(FIXED_QUADS) || defined(HAS_FOG)\n  vPosition = mvMatrix * vec4(aPos, 1.);\n#endif\n  \n#ifndef FIXED_QUADS\n  gl_Position = prMatrix * vPosition;\n#endif\n#endif // !IS_BRUSH\n  \n#ifdef IS_POINTS\n  gl_PointSize = POINTSIZE;\n#endif\n  \n  vCol = aCol;\n  \n#ifdef NEEDS_VNORMAL\n  vNormal = normMatrix * vec4(-aNorm, dot(aNorm, aPos));\n#endif\n  \n#ifdef IS_TWOSIDED\n#ifdef HAS_NORMALS\n  /* normz should be calculated *after* projection */\n  normz = (invPrMatrix*vNormal).z;\n#else\n  vec4 pos1 = prMatrix*(mvMatrix*vec4(aPos1, 1.));\n  pos1 = pos1/pos1.w - gl_Position/gl_Position.w;\n  vec4 pos2 = prMatrix*(mvMatrix*vec4(aPos2, 1.));\n  pos2 = pos2/pos2.w - gl_Position/gl_Position.w;\n  normz = pos1.x*pos2.y - pos1.y*pos2.x;\n#endif\n#endif // IS_TWOSIDED\n  \n#ifdef NEEDS_VNORMAL\n  vNormal = vec4(normalize(vNormal.xyz/vNormal.w), 1);\n#endif\n  \n#if defined(HAS_TEXTURE) || defined(IS_TEXT)\n  vTexcoord = aTexcoord;\n#endif\n  \n#if defined(FIXED_SIZE) && !defined(ROTATING)\n  vec4 pos = prMatrix * mvMatrix * vec4(aPos, 1.);\n  pos = pos/pos.w;\n  gl_Position = pos + vec4(aOfs*textScale, 0.);\n#endif\n  \n#if defined(IS_SPRITES) && !defined(FIXED_SIZE)\n  vec4 pos = mvMatrix * vec4(aPos, 1.);\n  pos = pos/pos.w + vec4(aOfs,  0.);\n  gl_Position = prMatrix*pos;\n#endif\n  \n#ifdef FAT_LINES\n  /* This code was inspired by Matt Deslauriers' code in \n   https://mattdesl.svbtle.com/drawing-lines-is-hard */\n  vec2 aspectVec = vec2(uAspect, 1.0);\n  mat4 projViewModel = prMatrix * mvMatrix;\n  vec4 currentProjected = projViewModel * vec4(aPos, 1.0);\n  currentProjected = currentProjected/currentProjected.w;\n  vec4 nextProjected = projViewModel * vec4(aNext, 1.0);\n  vec2 currentScreen = currentProjected.xy * aspectVec;\n  vec2 nextScreen = (nextProjected.xy / nextProjected.w) * aspectVec;\n  float len = uLwd;\n  vec2 dir = vec2(1.0, 0.0);\n  vPoint = aPoint;\n  vLength = length(nextScreen - currentScreen)/2.0;\n  vLength = vLength/(vLength + len);\n  if (vLength > 0.0) {\n    dir = normalize(nextScreen - currentScreen);\n  }\n  vec2 normal = vec2(-dir.y, dir.x);\n  dir.x /= uAspect;\n  normal.x /= uAspect;\n  vec4 offset = vec4(len*(normal*aPoint.x*aPoint.y - dir), 0.0, 0.0);\n  gl_Position = currentProjected + offset;\n#endif\n  \n#ifdef IS_BRUSH\n  gl_Position = vec4(aPos, 1.);\n#endif\n}","fragmentShader":"#line 2 2\n// File 2 is the fragment shader\n#ifdef GL_ES\n#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#endif\nvarying vec4 vCol; // carries alpha\nvarying vec4 vPosition;\n#if defined(HAS_TEXTURE) || defined (IS_TEXT)\nvarying vec2 vTexcoord;\nuniform sampler2D uSampler;\n#endif\n\n#ifdef HAS_FOG\nuniform int uFogMode;\nuniform vec3 uFogColor;\nuniform vec4 uFogParms;\n#endif\n\n#if defined(IS_LIT) && !defined(FIXED_QUADS)\nvarying vec4 vNormal;\n#endif\n\n#if NCLIPPLANES > 0\nuniform vec4 vClipplane[NCLIPPLANES];\n#endif\n\n#if NLIGHTS > 0\nuniform mat4 mvMatrix;\n#endif\n\n#ifdef IS_LIT\nuniform vec3 emission;\nuniform float shininess;\n#if NLIGHTS > 0\nuniform vec3 ambient[NLIGHTS];\nuniform vec3 specular[NLIGHTS]; // light*material\nuniform vec3 diffuse[NLIGHTS];\nuniform vec3 lightDir[NLIGHTS];\nuniform bool viewpoint[NLIGHTS];\nuniform bool finite[NLIGHTS];\n#endif\n#endif // IS_LIT\n\n#ifdef IS_TWOSIDED\nuniform bool front;\nvarying float normz;\n#endif\n\n#ifdef FAT_LINES\nvarying vec2 vPoint;\nvarying float vLength;\n#endif\n\nvoid main(void) {\n  vec4 fragColor;\n#ifdef FAT_LINES\n  vec2 point = vPoint;\n  bool neg = point.y < 0.0;\n  point.y = neg ? (point.y + vLength)/(1.0 - vLength) :\n                 -(point.y - vLength)/(1.0 - vLength);\n#if defined(IS_TRANSPARENT) && defined(IS_LINESTRIP)\n  if (neg && length(point) <= 1.0) discard;\n#endif\n  point.y = min(point.y, 0.0);\n  if (length(point) > 1.0) discard;\n#endif // FAT_LINES\n  \n#ifdef ROUND_POINTS\n  vec2 coord = gl_PointCoord - vec2(0.5);\n  if (length(coord) > 0.5) discard;\n#endif\n  \n#if NCLIPPLANES > 0\n  for (int i = 0; i < NCLIPPLANES; i++)\n    if (dot(vPosition, vClipplane[i]) < 0.0) discard;\n#endif\n    \n#ifdef FIXED_QUADS\n    vec3 n = vec3(0., 0., 1.);\n#elif defined(IS_LIT)\n    vec3 n = normalize(vNormal.xyz);\n#endif\n    \n#ifdef IS_TWOSIDED\n    if ((normz <= 0.) != front) discard;\n#endif\n    \n#ifdef IS_LIT\n    vec3 eye = normalize(-vPosition.xyz/vPosition.w);\n    vec3 lightdir;\n    vec4 colDiff;\n    vec3 halfVec;\n    vec4 lighteffect = vec4(emission, 0.);\n    vec3 col;\n    float nDotL;\n#ifdef FIXED_QUADS\n    n = -faceforward(n, n, eye);\n#endif\n    \n#if NLIGHTS > 0\n    for (int i=0;i<NLIGHTS;i++) {\n      colDiff = vec4(vCol.rgb * diffuse[i], vCol.a);\n      lightdir = lightDir[i];\n      if (!viewpoint[i])\n        lightdir = (mvMatrix * vec4(lightdir, 1.)).xyz;\n      if (!finite[i]) {\n        halfVec = normalize(lightdir + eye);\n      } else {\n        lightdir = normalize(lightdir - vPosition.xyz/vPosition.w);\n        halfVec = normalize(lightdir + eye);\n      }\n      col = ambient[i];\n      nDotL = dot(n, lightdir);\n      col = col + max(nDotL, 0.) * colDiff.rgb;\n      col = col + pow(max(dot(halfVec, n), 0.), shininess) * specular[i];\n      lighteffect = lighteffect + vec4(col, colDiff.a);\n    }\n#endif\n    \n#else // not IS_LIT\n    vec4 colDiff = vCol;\n    vec4 lighteffect = colDiff;\n#endif\n    \n#ifdef IS_TEXT\n    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);\n#endif\n    \n#ifdef HAS_TEXTURE\n#ifdef TEXTURE_rgb\n    vec4 textureColor = lighteffect*vec4(texture2D(uSampler, vTexcoord).rgb, 1.);\n#endif\n    \n#ifdef TEXTURE_rgba\n    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);\n#endif\n    \n#ifdef TEXTURE_alpha\n    vec4 textureColor = texture2D(uSampler, vTexcoord);\n    float luminance = dot(vec3(1.,1.,1.), textureColor.rgb)/3.;\n    textureColor =  vec4(lighteffect.rgb, lighteffect.a*luminance);\n#endif\n    \n#ifdef TEXTURE_luminance\n    vec4 textureColor = vec4(lighteffect.rgb*dot(texture2D(uSampler, vTexcoord).rgb, vec3(1.,1.,1.))/3., lighteffect.a);\n#endif\n    \n#ifdef TEXTURE_luminance_alpha\n    vec4 textureColor = texture2D(uSampler, vTexcoord);\n    float luminance = dot(vec3(1.,1.,1.),textureColor.rgb)/3.;\n    textureColor = vec4(lighteffect.rgb*luminance, lighteffect.a*textureColor.a);\n#endif\n    \n    fragColor = textureColor;\n\n#elif defined(IS_TEXT)\n    if (textureColor.a < 0.1)\n      discard;\n    else\n      fragColor = textureColor;\n#else\n    fragColor = lighteffect;\n#endif // HAS_TEXTURE\n    \n#ifdef HAS_FOG\n    // uFogParms elements: x = near, y = far, z = fogscale, w = (1-sin(FOV/2))/(1+sin(FOV/2))\n    // In Exp and Exp2: use density = density/far\n    // fogF will be the proportion of fog\n    // Initialize it to the linear value\n    float fogF;\n    if (uFogMode > 0) {\n      fogF = (uFogParms.y - vPosition.z/vPosition.w)/(uFogParms.y - uFogParms.x);\n      if (uFogMode > 1)\n        fogF = mix(uFogParms.w, 1.0, fogF);\n      fogF = fogF*uFogParms.z;\n      if (uFogMode == 2)\n        fogF = 1.0 - exp(-fogF);\n      // Docs are wrong: use (density*c)^2, not density*c^2\n      // https://gitlab.freedesktop.org/mesa/mesa/-/blob/master/src/mesa/swrast/s_fog.c#L58\n      else if (uFogMode == 3)\n        fogF = 1.0 - exp(-fogF*fogF);\n      fogF = clamp(fogF, 0.0, 1.0);\n      gl_FragColor = vec4(mix(fragColor.rgb, uFogColor, fogF), fragColor.a);\n    } else gl_FragColor = fragColor;\n#else\n    gl_FragColor = fragColor;\n#endif // HAS_FOG\n    \n}","players":[],"webGLoptions":{"preserveDrawingBuffer":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Take it for a spin (does not work on tablet)</p>
+</section>
+<section id="sd-planes" class="level2">
+<h2 class="anchored" data-anchor-id="sd-planes">1 SD planes</h2>
+<div class="cell">
+
+</div>
+<div class="cell" data-rgl.usenull="true">
+<div class="cell-output-display no-overflow-x">
+<div id="rgl5882" style="width:100%;height:464px;" class="rglWebGL html-widget"></div>
+<script type="application/json" data-for="rgl5882">{"x":{"material":{"color":"#000000","alpha":1,"lit":true,"ambient":"#000000","specular":"#FFFFFF","emission":"#000000","shininess":50,"smooth":true,"front":"filled","back":"filled","size":3,"lwd":1,"fog":true,"point_antialias":false,"line_antialias":false,"texture":null,"textype":"rgb","texmipmap":false,"texminfilter":"linear","texmagfilter":"linear","texenvmap":false,"depth_mask":true,"depth_test":"less","isTransparent":false,"polygon_offset":[0,0],"margin":"","floating":false,"tag":"","blend":["src_alpha","one_minus_src_alpha"]},"rootSubscene":7,"objects":{"13":{"id":13,"type":"points","material":{"lit":false,"size":8},"vertices":"0","colors":"1","centers":"2","ignoreExtent":false,"flags":34816},"15":{"id":15,"type":"text","material":{"lit":false,"margin":0,"floating":true,"edge":[0,1,1]},"vertices":"3","colors":"4","texts":[["predictor"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"5","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"16":{"id":16,"type":"text","material":{"lit":false,"margin":1,"floating":true,"edge":[1,1,1]},"vertices":"6","colors":"7","texts":[["moderator"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"8","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"17":{"id":17,"type":"text","material":{"lit":false,"margin":2,"floating":true,"edge":[1,1,1]},"vertices":"9","colors":"10","texts":[["outcome"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"11","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"24":{"id":24,"type":"planes","material":{"alpha":0.69803923368454,"isTransparent":true},"vertices":"12","colors":"14","offsets":[[4.12284231185913],[-2.84217087951293e-16],[-4.12284231185913]],"centers":"15","normals":"13","ignoreExtent":true,"flags":32803},"11":{"id":11,"type":"light","vertices":[[0,0,1]],"colors":[[1,1,1,1],[1,1,1,1],[1,1,1,1]],"viewpoint":true,"finite":false},"10":{"id":10,"type":"background","material":{},"colors":"16","centers":"17","sphere":false,"fogtype":"none","fogscale":1,"flags":32768},"12":{"id":12,"type":"background","material":{"lit":false,"back":"lines"},"colors":"18","centers":"19","sphere":false,"fogtype":"none","fogscale":1,"flags":32768},"14":{"id":14,"type":"bboxdeco","material":{"front":"lines","back":"lines"},"vertices":"20","colors":"21","axes":{"mode":["pretty","pretty","pretty"],"step":[2,5,5],"nticks":[5,5,5],"marklen":[15,15,15],"expand":[1.02999997138977,1.02999997138977,1.02999997138977]},"draw_front":true,"flags":32769},"7":{"id":7,"type":"subscene","par3d":{"antialias":4,"FOV":30,"ignoreExtent":false,"listeners":7,"mouseMode":{"none":"none","left":"zAxis","right":"zoom","middle":"fov","wheel":"pull"},"observer":[0,0,93.2443389892578],"modelMatrix":[[1.83016324043274,0,0,-0.144939377903938],[0,0.398108631372452,0.670632183551788,-9.71019077301025],[0,-1.09379434585571,0.244090154767036,-95.6147308349609],[0,0,0,1]],"projMatrix":[[3.73205065727234,0,0,0],[0,3.73205065727234,0,0],[0,0,-3.86370325088501,-336.135070800781],[0,0,-1,0]],"skipRedraw":false,"userMatrix":[[1,0,0,0],[0,0.342020143325668,0.939692620785909,0],[0,-0.939692620785909,0.342020143325668,0],[0,0,0,1]],"userProjection":[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],"scale":[1.83016324043274,1.16399168968201,0.713671863079071],"viewport":{"x":0,"y":0,"width":1,"height":1},"zoom":1,"bbox":[-5.93124008178711,6.08962965011597,-8.51074314117432,10.3898677825928,-1.4919501543045,29.3347587585449],"windowRect":[0,45,256,301],"family":"sans","font":1,"cex":1,"useFreeType":true,"fontname":"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library/rgl/fonts/FreeSans.ttf","maxClipPlanes":6,"glVersion":2.1,"activeSubscene":0},"embeddings":{"viewport":"replace","projection":"replace","model":"replace","mouse":"replace"},"objects":[12,14,13,15,16,17,24,11],"subscenes":[],"flags":36147}},"crosstalk":{"key":[],"group":[],"id":[],"options":[]},"width":672,"height":480,"buffer":{"accessors":[{"bufferView":0,"componentType":5126,"count":100,"type":"VEC3"},{"bufferView":1,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":2,"componentType":5126,"count":100,"type":"VEC3"},{"bufferView":3,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":4,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":5,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":6,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":7,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":8,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":9,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":10,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":11,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":12,"componentType":5126,"count":3,"type":"VEC3"},{"bufferView":13,"componentType":5121,"count":3,"type":"VEC3"},{"bufferView":14,"componentType":5126,"count":1,"type":"VEC4"},{"bufferView":15,"componentType":5126,"count":12,"type":"VEC3"},{"bufferView":16,"componentType":5126,"count":1,"type":"VEC4"},{"bufferView":17,"componentType":5121,"count":1,"type":"VEC3"},{"bufferView":18,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":19,"componentType":5121,"count":1,"type":"VEC3"},{"bufferView":20,"componentType":5126,"count":16,"type":"VEC3"},{"bufferView":21,"componentType":5121,"count":1,"type":"VEC4"}],"bufferViews":[{"buffer":0,"byteLength":1200,"byteOffset":0},{"buffer":0,"byteLength":4,"byteOffset":1200},{"buffer":0,"byteLength":1200,"byteOffset":1204},{"buffer":0,"byteLength":12,"byteOffset":2404},{"buffer":0,"byteLength":4,"byteOffset":2416},{"buffer":0,"byteLength":12,"byteOffset":2420},{"buffer":0,"byteLength":12,"byteOffset":2432},{"buffer":0,"byteLength":4,"byteOffset":2444},{"buffer":0,"byteLength":12,"byteOffset":2448},{"buffer":0,"byteLength":12,"byteOffset":2460},{"buffer":0,"byteLength":4,"byteOffset":2472},{"buffer":0,"byteLength":12,"byteOffset":2476},{"buffer":0,"byteLength":36,"byteOffset":2488},{"buffer":0,"byteLength":9,"byteOffset":2524},{"buffer":0,"byteLength":16,"byteOffset":2536},{"buffer":0,"byteLength":144,"byteOffset":2552},{"buffer":0,"byteLength":16,"byteOffset":2696},{"buffer":0,"byteLength":3,"byteOffset":2712},{"buffer":0,"byteLength":4,"byteOffset":2715},{"buffer":0,"byteLength":3,"byteOffset":2719},{"buffer":0,"byteLength":192,"byteOffset":2724},{"buffer":0,"byteLength":4,"byteOffset":2916}],"buffers":[{"byteLength":2920,"bytes":"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\nAAAAAQ=="}]},"context":{"shiny":false,"rmarkdown":null},"vertexShader":"#line 2 1\n// File 1 is the vertex shader\n#ifdef GL_ES\n#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#endif\n\nattribute vec3 aPos;\nattribute vec4 aCol;\nuniform mat4 mvMatrix;\nuniform mat4 prMatrix;\nvarying vec4 vCol;\nvarying vec4 vPosition;\n\n#ifdef NEEDS_VNORMAL\nattribute vec3 aNorm;\nuniform mat4 normMatrix;\nvarying vec4 vNormal;\n#endif\n\n#if defined(HAS_TEXTURE) || defined (IS_TEXT)\nattribute vec2 aTexcoord;\nvarying vec2 vTexcoord;\n#endif\n\n#ifdef FIXED_SIZE\nuniform vec3 textScale;\n#endif\n\n#ifdef FIXED_QUADS\nattribute vec3 aOfs;\n#endif\n\n#ifdef IS_TWOSIDED\n#ifdef HAS_NORMALS\nvarying float normz;\nuniform mat4 invPrMatrix;\n#else\nattribute vec3 aPos1;\nattribute vec3 aPos2;\nvarying float normz;\n#endif\n#endif // IS_TWOSIDED\n\n#ifdef FAT_LINES\nattribute vec3 aNext;\nattribute vec2 aPoint;\nvarying vec2 vPoint;\nvarying float vLength;\nuniform float uAspect;\nuniform float uLwd;\n#endif\n\n\nvoid main(void) {\n  \n#ifndef IS_BRUSH\n#if defined(NCLIPPLANES) || !defined(FIXED_QUADS) || defined(HAS_FOG)\n  vPosition = mvMatrix * vec4(aPos, 1.);\n#endif\n  \n#ifndef FIXED_QUADS\n  gl_Position = prMatrix * vPosition;\n#endif\n#endif // !IS_BRUSH\n  \n#ifdef IS_POINTS\n  gl_PointSize = POINTSIZE;\n#endif\n  \n  vCol = aCol;\n  \n#ifdef NEEDS_VNORMAL\n  vNormal = normMatrix * vec4(-aNorm, dot(aNorm, aPos));\n#endif\n  \n#ifdef IS_TWOSIDED\n#ifdef HAS_NORMALS\n  /* normz should be calculated *after* projection */\n  normz = (invPrMatrix*vNormal).z;\n#else\n  vec4 pos1 = prMatrix*(mvMatrix*vec4(aPos1, 1.));\n  pos1 = pos1/pos1.w - gl_Position/gl_Position.w;\n  vec4 pos2 = prMatrix*(mvMatrix*vec4(aPos2, 1.));\n  pos2 = pos2/pos2.w - gl_Position/gl_Position.w;\n  normz = pos1.x*pos2.y - pos1.y*pos2.x;\n#endif\n#endif // IS_TWOSIDED\n  \n#ifdef NEEDS_VNORMAL\n  vNormal = vec4(normalize(vNormal.xyz/vNormal.w), 1);\n#endif\n  \n#if defined(HAS_TEXTURE) || defined(IS_TEXT)\n  vTexcoord = aTexcoord;\n#endif\n  \n#if defined(FIXED_SIZE) && !defined(ROTATING)\n  vec4 pos = prMatrix * mvMatrix * vec4(aPos, 1.);\n  pos = pos/pos.w;\n  gl_Position = pos + vec4(aOfs*textScale, 0.);\n#endif\n  \n#if defined(IS_SPRITES) && !defined(FIXED_SIZE)\n  vec4 pos = mvMatrix * vec4(aPos, 1.);\n  pos = pos/pos.w + vec4(aOfs,  0.);\n  gl_Position = prMatrix*pos;\n#endif\n  \n#ifdef FAT_LINES\n  /* This code was inspired by Matt Deslauriers' code in \n   https://mattdesl.svbtle.com/drawing-lines-is-hard */\n  vec2 aspectVec = vec2(uAspect, 1.0);\n  mat4 projViewModel = prMatrix * mvMatrix;\n  vec4 currentProjected = projViewModel * vec4(aPos, 1.0);\n  currentProjected = currentProjected/currentProjected.w;\n  vec4 nextProjected = projViewModel * vec4(aNext, 1.0);\n  vec2 currentScreen = currentProjected.xy * aspectVec;\n  vec2 nextScreen = (nextProjected.xy / nextProjected.w) * aspectVec;\n  float len = uLwd;\n  vec2 dir = vec2(1.0, 0.0);\n  vPoint = aPoint;\n  vLength = length(nextScreen - currentScreen)/2.0;\n  vLength = vLength/(vLength + len);\n  if (vLength > 0.0) {\n    dir = normalize(nextScreen - currentScreen);\n  }\n  vec2 normal = vec2(-dir.y, dir.x);\n  dir.x /= uAspect;\n  normal.x /= uAspect;\n  vec4 offset = vec4(len*(normal*aPoint.x*aPoint.y - dir), 0.0, 0.0);\n  gl_Position = currentProjected + offset;\n#endif\n  \n#ifdef IS_BRUSH\n  gl_Position = vec4(aPos, 1.);\n#endif\n}","fragmentShader":"#line 2 2\n// File 2 is the fragment shader\n#ifdef GL_ES\n#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#endif\nvarying vec4 vCol; // carries alpha\nvarying vec4 vPosition;\n#if defined(HAS_TEXTURE) || defined (IS_TEXT)\nvarying vec2 vTexcoord;\nuniform sampler2D uSampler;\n#endif\n\n#ifdef HAS_FOG\nuniform int uFogMode;\nuniform vec3 uFogColor;\nuniform vec4 uFogParms;\n#endif\n\n#if defined(IS_LIT) && !defined(FIXED_QUADS)\nvarying vec4 vNormal;\n#endif\n\n#if NCLIPPLANES > 0\nuniform vec4 vClipplane[NCLIPPLANES];\n#endif\n\n#if NLIGHTS > 0\nuniform mat4 mvMatrix;\n#endif\n\n#ifdef IS_LIT\nuniform vec3 emission;\nuniform float shininess;\n#if NLIGHTS > 0\nuniform vec3 ambient[NLIGHTS];\nuniform vec3 specular[NLIGHTS]; // light*material\nuniform vec3 diffuse[NLIGHTS];\nuniform vec3 lightDir[NLIGHTS];\nuniform bool viewpoint[NLIGHTS];\nuniform bool finite[NLIGHTS];\n#endif\n#endif // IS_LIT\n\n#ifdef IS_TWOSIDED\nuniform bool front;\nvarying float normz;\n#endif\n\n#ifdef FAT_LINES\nvarying vec2 vPoint;\nvarying float vLength;\n#endif\n\nvoid main(void) {\n  vec4 fragColor;\n#ifdef FAT_LINES\n  vec2 point = vPoint;\n  bool neg = point.y < 0.0;\n  point.y = neg ? (point.y + vLength)/(1.0 - vLength) :\n                 -(point.y - vLength)/(1.0 - vLength);\n#if defined(IS_TRANSPARENT) && defined(IS_LINESTRIP)\n  if (neg && length(point) <= 1.0) discard;\n#endif\n  point.y = min(point.y, 0.0);\n  if (length(point) > 1.0) discard;\n#endif // FAT_LINES\n  \n#ifdef ROUND_POINTS\n  vec2 coord = gl_PointCoord - vec2(0.5);\n  if (length(coord) > 0.5) discard;\n#endif\n  \n#if NCLIPPLANES > 0\n  for (int i = 0; i < NCLIPPLANES; i++)\n    if (dot(vPosition, vClipplane[i]) < 0.0) discard;\n#endif\n    \n#ifdef FIXED_QUADS\n    vec3 n = vec3(0., 0., 1.);\n#elif defined(IS_LIT)\n    vec3 n = normalize(vNormal.xyz);\n#endif\n    \n#ifdef IS_TWOSIDED\n    if ((normz <= 0.) != front) discard;\n#endif\n    \n#ifdef IS_LIT\n    vec3 eye = normalize(-vPosition.xyz/vPosition.w);\n    vec3 lightdir;\n    vec4 colDiff;\n    vec3 halfVec;\n    vec4 lighteffect = vec4(emission, 0.);\n    vec3 col;\n    float nDotL;\n#ifdef FIXED_QUADS\n    n = -faceforward(n, n, eye);\n#endif\n    \n#if NLIGHTS > 0\n    for (int i=0;i<NLIGHTS;i++) {\n      colDiff = vec4(vCol.rgb * diffuse[i], vCol.a);\n      lightdir = lightDir[i];\n      if (!viewpoint[i])\n        lightdir = (mvMatrix * vec4(lightdir, 1.)).xyz;\n      if (!finite[i]) {\n        halfVec = normalize(lightdir + eye);\n      } else {\n        lightdir = normalize(lightdir - vPosition.xyz/vPosition.w);\n        halfVec = normalize(lightdir + eye);\n      }\n      col = ambient[i];\n      nDotL = dot(n, lightdir);\n      col = col + max(nDotL, 0.) * colDiff.rgb;\n      col = col + pow(max(dot(halfVec, n), 0.), shininess) * specular[i];\n      lighteffect = lighteffect + vec4(col, colDiff.a);\n    }\n#endif\n    \n#else // not IS_LIT\n    vec4 colDiff = vCol;\n    vec4 lighteffect = colDiff;\n#endif\n    \n#ifdef IS_TEXT\n    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);\n#endif\n    \n#ifdef HAS_TEXTURE\n#ifdef TEXTURE_rgb\n    vec4 textureColor = lighteffect*vec4(texture2D(uSampler, vTexcoord).rgb, 1.);\n#endif\n    \n#ifdef TEXTURE_rgba\n    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);\n#endif\n    \n#ifdef TEXTURE_alpha\n    vec4 textureColor = texture2D(uSampler, vTexcoord);\n    float luminance = dot(vec3(1.,1.,1.), textureColor.rgb)/3.;\n    textureColor =  vec4(lighteffect.rgb, lighteffect.a*luminance);\n#endif\n    \n#ifdef TEXTURE_luminance\n    vec4 textureColor = vec4(lighteffect.rgb*dot(texture2D(uSampler, vTexcoord).rgb, vec3(1.,1.,1.))/3., lighteffect.a);\n#endif\n    \n#ifdef TEXTURE_luminance_alpha\n    vec4 textureColor = texture2D(uSampler, vTexcoord);\n    float luminance = dot(vec3(1.,1.,1.),textureColor.rgb)/3.;\n    textureColor = vec4(lighteffect.rgb*luminance, lighteffect.a*textureColor.a);\n#endif\n    \n    fragColor = textureColor;\n\n#elif defined(IS_TEXT)\n    if (textureColor.a < 0.1)\n      discard;\n    else\n      fragColor = textureColor;\n#else\n    fragColor = lighteffect;\n#endif // HAS_TEXTURE\n    \n#ifdef HAS_FOG\n    // uFogParms elements: x = near, y = far, z = fogscale, w = (1-sin(FOV/2))/(1+sin(FOV/2))\n    // In Exp and Exp2: use density = density/far\n    // fogF will be the proportion of fog\n    // Initialize it to the linear value\n    float fogF;\n    if (uFogMode > 0) {\n      fogF = (uFogParms.y - vPosition.z/vPosition.w)/(uFogParms.y - uFogParms.x);\n      if (uFogMode > 1)\n        fogF = mix(uFogParms.w, 1.0, fogF);\n      fogF = fogF*uFogParms.z;\n      if (uFogMode == 2)\n        fogF = 1.0 - exp(-fogF);\n      // Docs are wrong: use (density*c)^2, not density*c^2\n      // https://gitlab.freedesktop.org/mesa/mesa/-/blob/master/src/mesa/swrast/s_fog.c#L58\n      else if (uFogMode == 3)\n        fogF = 1.0 - exp(-fogF*fogF);\n      fogF = clamp(fogF, 0.0, 1.0);\n      gl_FragColor = vec4(mix(fragColor.rgb, uFogColor, fogF), fragColor.a);\n    } else gl_FragColor = fragColor;\n#else\n    gl_FragColor = fragColor;\n#endif // HAS_FOG\n    \n}","players":[],"webGLoptions":{"preserveDrawingBuffer":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="fit-model" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="fit-model">Fit model</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = outcome ~ predictor + moderator + predictor * moderator)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.1725 -2.0186  0.2975  2.2995 10.0602 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          5.37810    0.38305  14.040  &lt; 2e-16 ***
+predictor            0.70301    0.15469   4.544  1.6e-05 ***
+moderator           -0.21636    0.10891  -1.987   0.0498 *  
+predictor:moderator  0.37000    0.02649  13.967  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.086 on 96 degrees of freedom
+Multiple R-squared:  0.6869,    Adjusted R-squared:  0.6771 
+F-statistic:  70.2 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="regression-equation" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="regression-equation">Regression equation</h2>
+<p><span class="math inline">\(\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0} \color{black}\widehat{Out_i} = b_0 + b_1 Pred_i + b_2 Mod_i + \color{red}b_3 Pred_i \times Mod_i \color{black}\)</span></p>
+<p><span class="math inline">\(\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0} \color{black}\widehat{Out_i} = 5.38 + 0.7 \times Pred_i + -0.22 \times Mod_i + \color{red} 0.37 \times Pred_i \times Mod_i \color{black}\)</span></p>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="determine-slopes" class="level2">
+<h2 class="anchored" data-anchor-id="determine-slopes">Determine slopes</h2>
+<p>To determine the slopes of the regression plane at different levels of the moderater you can add the required moderator value to the regression equation and simplify.</p>
+<p><br></p>
+<p><span class="math inline">\(5.38 + 0.7 \times Pred + -0.22 \times Mod + 0.37 \times Pred \times Mod\)</span></p>
+</section>
+<section id="expected-surface" class="level2">
+<h2 class="anchored" data-anchor-id="expected-surface">Expected surface</h2>
+<div class="cell" data-rgl.usenull="true">
+<div class="cell-output-display no-overflow-x">
+<div id="plot3drgl2" style="width:100%;height:464px;" class="rglWebGL html-widget"></div>
+<script type="application/json" data-for="plot3drgl2">{"x":{"material":{"color":"#000000","alpha":1,"lit":true,"ambient":"#000000","specular":"#FFFFFF","emission":"#000000","shininess":50,"smooth":true,"front":"filled","back":"filled","size":3,"lwd":1,"fog":true,"point_antialias":false,"line_antialias":false,"texture":null,"textype":"rgb","texmipmap":false,"texminfilter":"linear","texmagfilter":"linear","texenvmap":false,"depth_mask":true,"depth_test":"less","isTransparent":false,"polygon_offset":[0,0],"margin":"","floating":false,"tag":"","blend":["src_alpha","one_minus_src_alpha"]},"rootSubscene":7,"objects":{"13":{"id":13,"type":"points","material":{"lit":false,"size":8},"vertices":"0","colors":"1","centers":"2","ignoreExtent":false,"flags":34816},"15":{"id":15,"type":"text","material":{"lit":false,"margin":0,"floating":true,"edge":[0,1,1]},"vertices":"3","colors":"4","texts":[["predictor"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"5","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"16":{"id":16,"type":"text","material":{"lit":false,"margin":1,"floating":true,"edge":[1,1,1]},"vertices":"6","colors":"7","texts":[["moderator"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"8","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"17":{"id":17,"type":"text","material":{"lit":false,"margin":2,"floating":true,"edge":[1,1,1]},"vertices":"9","colors":"10","texts":[["outcome"]],"cex":[[1]],"adj":[[0.5,0.5,0.5]],"centers":"11","family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":33808},"24":{"id":24,"type":"planes","material":{"alpha":0.69803923368454,"isTransparent":true},"vertices":"12","colors":"14","offsets":[[4.12284231185913],[-2.84217087951293e-16],[-4.12284231185913]],"centers":"15","normals":"13","ignoreExtent":true,"flags":32803},"31":{"id":31,"type":"surface","material":{},"vertices":"16","colors":"18","dim":[[30,30]],"centers":"19","normals":"17","ignoreExtent":false,"flipped":true,"flags":32771},"11":{"id":11,"type":"light","vertices":[[0,0,1]],"colors":[[1,1,1,1],[1,1,1,1],[1,1,1,1]],"viewpoint":true,"finite":false},"10":{"id":10,"type":"background","material":{},"colors":"20","centers":"21","sphere":false,"fogtype":"none","fogscale":1,"flags":32768},"12":{"id":12,"type":"background","material":{"lit":false,"back":"lines"},"colors":"22","centers":"23","sphere":false,"fogtype":"none","fogscale":1,"flags":32768},"14":{"id":14,"type":"bboxdeco","material":{"front":"lines","back":"lines"},"vertices":"24","colors":"25","axes":{"mode":["pretty","pretty","pretty"],"step":[2,5,10],"nticks":[5,5,5],"marklen":[15,15,15],"expand":[1.02999997138977,1.02999997138977,1.02999997138977]},"draw_front":true,"flags":32769},"7":{"id":7,"type":"subscene","par3d":{"antialias":4,"FOV":30,"ignoreExtent":false,"listeners":7,"mouseMode":{"none":"none","left":"zAxis","right":"zoom","middle":"fov","wheel":"pull"},"observer":[0,0,141.707046508789],"modelMatrix":[[2.76555132865906,0,0,-0.123937696218491],[0,0.560830950737,0.594630181789398,-2.02075099945068],[0,-1.54087042808533,0.216427698731422,-142.102386474609],[0,0,0,1]],"projMatrix":[[3.73205089569092,0,0,0],[0,3.73205089569092,0,0],[0,0,-3.86370325088501,-510.837493896484],[0,0,-1,0]],"skipRedraw":false,"userMatrix":[[1,0,0,0],[0,0.342020143325668,0.939692620785909,0],[0,-0.939692620785909,0.342020143325668,0],[0,0,0,1]],"userProjection":[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],"scale":[2.76555132865906,1.63976001739502,0.632792234420776],"viewport":{"x":0,"y":0,"width":1,"height":1},"zoom":1,"bbox":[-6,6.08962965011597,-10,10.3898677825928,-23.203742980957,29.632698059082],"windowRect":[0,45,256,301],"family":"sans","font":1,"cex":1,"useFreeType":true,"fontname":"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library/rgl/fonts/FreeSans.ttf","maxClipPlanes":6,"glVersion":2.1,"activeSubscene":0},"embeddings":{"viewport":"replace","projection":"replace","model":"replace","mouse":"replace"},"objects":[12,14,13,15,16,17,24,31,11],"subscenes":[],"flags":36147}},"crosstalk":{"key":[],"group":[],"id":[],"options":[]},"width":672,"height":480,"buffer":{"accessors":[{"bufferView":0,"componentType":5126,"count":100,"type":"VEC3"},{"bufferView":1,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":2,"componentType":5126,"count":100,"type":"VEC3"},{"bufferView":3,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":4,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":5,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":6,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":7,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":8,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":9,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":10,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":11,"componentType":5126,"count":1,"type":"VEC3"},{"bufferView":12,"componentType":5126,"count":3,"type":"VEC3"},{"bufferView":13,"componentType":5121,"count":3,"type":"VEC3"},{"bufferView":14,"componentType":5126,"count":1,"type":"VEC4"},{"bufferView":15,"componentType":5126,"count":12,"type":"VEC3"},{"bufferView":16,"componentType":5126,"count":900,"type":"VEC3"},{"bufferView":17,"componentType":5126,"count":900,"type":"VEC3"},{"bufferView":18,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":19,"componentType":5126,"count":841,"type":"VEC3"},{"bufferView":20,"componentType":5126,"count":1,"type":"VEC4"},{"bufferView":21,"componentType":5121,"count":1,"type":"VEC3"},{"bufferView":22,"componentType":5121,"count":1,"type":"VEC4"},{"bufferView":23,"componentType":5121,"count":1,"type":"VEC3"},{"bufferView":24,"componentType":5126,"count":17,"type":"VEC3"},{"bufferView":25,"componentType":5121,"count":1,"type":"VEC4"}],"bufferViews":[{"buffer":0,"byteLength":1200,"byteOffset":0},{"buffer":0,"byteLength":4,"byteOffset":1200},{"buffer":0,"byteLength":1200,"byteOffset":1204},{"buffer":0,"byteLength":12,"byteOffset":2404},{"buffer":0,"byteLength":4,"byteOffset":2416},{"buffer":0,"byteLength":12,"byteOffset":2420},{"buffer":0,"byteLength":12,"byteOffset":2432},{"buffer":0,"byteLength":4,"byteOffset":2444},{"buffer":0,"byteLength":12,"byteOffset":2448},{"buffer":0,"byteLength":12,"byteOffset":2460},{"buffer":0,"byteLength":4,"byteOffset":2472},{"buffer":0,"byteLength":12,"byteOffset":2476},{"buffer":0,"byteLength":36,"byteOffset":2488},{"buffer":0,"byteLength":9,"byteOffset":2524},{"buffer":0,"byteLength":16,"byteOffset":2536},{"buffer":0,"byteLength":144,"byteOffset":2552},{"buffer":0,"byteLength":10800,"byteOffset":2696},{"buffer":0,"byteLength":10800,"byteOffset":13496},{"buffer":0,"byteLength":4,"byteOffset":24296},{"buffer":0,"byteLength":10092,"byteOffset":24300},{"buffer":0,"byteLength":16,"byteOffset":34392},{"buffer":0,"byteLength":3,"byteOffset":34408},{"buffer":0,"byteLength":4,"byteOffset":34411},{"buffer":0,"byteLength":3,"byteOffset":34415},{"buffer":0,"byteLength":204,"byteOffset":34420},{"buffer":0,"byteLength":4,"byteOffset":34624}],"buffers":[{"byteLength":34628,"bytes":"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\nUCOswI2w3MCAhYZBhOWewI2w3MDKZoBBuqeRwI2w3MApkHRB7mmEwI2w3MC+UmhBR1huwI2w\n3MBTFVxBstxTwI2w3MDo109BGmE5wI2w3MB9mkNBhOUewI2w3MASXTdB7mkEwI2w3MCmHytB\nsNzTv42w3MA74h5BhOWev42w3MDQpBJBsNxTv42w3MBlZwZBsNzTvo2w3MDzU/RAAAAAAI2w\n3MAc2dtAsNzTPo2w3MBGXsNAsNxTP42w3MBv46pAhOWeP42w3MCZaJJAsNzTP42w3MCG23NA\n7mkEQI2w3MDZ5UJAhOUeQI2w3MAs8BFAGmE5QI2w3MD+9ME/sdxTQI2w3MBKE0A/RlhuQI2w\n3MBG2nC87mmEQI2w3MAcmke/uqeRQI2w3MBouMW/hOWeQI2w3MDh0RPAUCOsQI2w3MCOx0TA\nGmG5QI2w3MA6vXXAGmG5wOaexsBQPn9BUCOswOaexsBksXRBhOWewOaexsB2JGpBuqeRwOae\nxsCKl19B7mmEwOaexsCeClVBR1huwOaexsCwfUpBstxTwOaexsDE8D9BGmE5wOaexsDYYzVB\nhOUewOaexsDq1ipB7mkEwOaexsD+SSBBsNzTv+aexsASvRVBhOWev+aexsAkMAtBsNxTv+ae\nxsA4owBBsNzTvuaexsCXLOxAAAAAAOaexsC9EtdAsNzTPuaexsDj+MFAsNxTP+aexsAL36xA\nhOWeP+aexsAxxZdAsNzTP+aexsBYq4JA7mkEQOaexsD9IltAhOUeQOaexsBL7zBAGmE5QOae\nxsCYuwZAsdxTQOaexsDLD7k/RlhuQOaexsDKUEk/7mmEQOaexsADCAI+uqeRQOaexsDKTAi/\nhOWeQOaexsDKjZi/UCOsQOaexsAv9ey/GmG5QOaexsBKriDAGmG5wD6NsMA0NGVBUCOswD6N\nsMDGV1xBhOWewD6NsMBYe1NBuqeRwD6NsMDrnkpB7mmEwD6NsMB8wkFBR1huwD6NsMAN5jhB\nstxTwD6NsMCgCTBBGmE5wD6NsMAyLSdBhOUewD6NsMDEUB5B7mkEwD6NsMBWdBVBsNzTvz6N\nsMDnlwxBhOWevz6NsMB5uwNBsNxTvz6NsMAXvvVAsNzTvj6NsMA6BeRAAAAAAD6NsMBeTNJA\nsNzTPj6NsMCCk8BAsNxTPz6NsMCl2q5AhOWePz6NsMDKIZ1AsNzTPz6NsMDtaItA7mkEQD6N\n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\nsEBq5oVAsNzTPj6NsEBfPapAsNxTPz6NsEBVlM5AhOWePz6NsEBK6/JAsNzTPz6NsEAfoQtB\n7mkEQD6NsECazB1BhOUeQD6NsEAU+C9BGmE5QD6NsECPI0JBsdxTQD6NsEAJT1RBRlhuQD6N\nsECEemZB7mmEQD6NsED/pXhBuqeRQD6NsEC8aIVBhOWeQD6NsEB6fo5BUCOsQD6NsEA3lJdB\nGmG5QD6NsED0qaBBGmG5wOWexkCad1XBUCOswOWexkChm0HBhOWewOWexkCovy3BuqeRwOWe\nxkCu4xnB7mmEwOWexkC2BwbBR1huwOWexkB5V+TAstxTwOWexkCGn7zAGmE5wOWexkCU55TA\nhOUewOWexkBEX1rA7mkEwOWexkBg7wrAsNzTv+WexkDv/W2/hOWev+WexkBEg58+sNxTv+We\nxkCZwMY/sNzTvuWexkAy0DJAAAAAAOWexkALIIFAsNzTPuWexkD916hAsNxTP+WexkDvj9BA\nhOWeP+WexkDiR/hAsNzTP+WexkDq/w9B7mkEQOWexkDj2yNBhOUeQOWexkDctzdBGmE5QOWe\nxkDVk0tBsdxTQOWexkDOb19BRlhuQOWexkDIS3NB7mmEQOWexkDhk4NBuqeRQOWexkDdgY1B\nhOWeQOWexkDab5dBUCOsQOWexkDWXaFBGmG5QOWexkDTS6tBGmG5wI2w3EC2gW/BUCOswI2w\n3EA99VnBhOWewI2w3EDGaETBuqeRwI2w3EBO3C7B7mmEwI2w3EDXTxnBR1huwI2w3EBfwwPB\nstxTwI2w3EDPbdzAGmE5wI2w3EDgVLHAhOUewI2w3EDwO4bA7mkEwI2w3EABRjbAsNzTv42w\n3EBGKMC/hOWev42w3EBGJB6+sNxTv42w3EA0n5g/sNzTvo2w3EB4gSJAAAAAAI2w3EBYs3hA\nsNzTPo2w3ECbcqdAsNxTP42w3ECKi9JAhOWeP42w3EB5pP1AsNzTP42w3EC0XhRB7mkEQI2w\n3EAs6ylBhOUeQI2w3ECkdz9BGmE5QI2w3EAcBFVBsdxTQI2w3ECSkGpBRlhuQI2w3ECGDoBB\n7mmEQI2w3EDB1IpBuqeRQI2w3ED9mpVBhOWeQI2w3EA4YaBBUCOsQI2w3EB0J6tBGmG5QI2w\n3ECw7bVBGmG5wDXC8kDoxYTBUCOswDXC8kDaTnLBhOWewDXC8kDkEVvBuqeRwDXC8kDu1EPB\n7mmEwDXC8kD4lyzBR1huwDXC8kABWxXBstxTwDXC8kAXPPzAGmE5wDXC8kAqws3AhOUewDXC\n8kA+SJ/A7mkEwDXC8kCinGHAsNzTvzXC8kDKqATAhOWevzXC8kDF0x6/sNxTvzXC8kCd+1Q/\nsNzTvjXC8kDAMhJAAAAAADXC8kCZJm9AsNzTPjXC8kA5DaZAsNxTPzXC8kAlh9RAhOWePzXC\n8kCIgAFBsNzTPzXC8kB/vRhB7mkEQDXC8kB1+i9BhOUeQDXC8kBsN0dBGmE5QDXC8kBidF5B\nsdxTQDXC8kBYsXVBRlhuQDXC8kAnd4ZB7mmEQDXC8kCiFZJBuqeRQDXC8kAdtJ1BhOWeQDXC\n8kCYUqlBUCOsQDXC8kAT8bRBGmG5QDXC8kCPj8BBGmG5wO5pBEH2ypHBUCOswO5pBEE8VIXB\nhOWewO5pBEECu3HBuqeRwO5pBEGOzVjB7mmEwO5pBEEZ4D/BR1huwO5pBEGk8ibBstxTwO5p\nBEEvBQ7BGmE5wO5pBEF2L+rAhOUewO5pBEGMVLjA7mkEwO5pBEGieYbAsNzTv+5pBEFxPSnA\nhOWev+5pBEE9D4u/sNxTv+5pBEGkcfE+sNzTvu5pBEEI5AFAAAAAAO5pBEHamWVAsNzTPu5p\nBEHWp6RAsNxTP+5pBEG/gtZAhOWeP+5pBEHULgRBsNzTP+5pBEFJHB1B7mkEQO5pBEG+CTZB\nhOUeQO5pBEEz905BGmE5QO5pBEGn5GdBsdxTQO5pBEEOaYBBRlhuQO5pBEHI34xB7mmEQO5p\nBEGCVplBuqeRQO5pBEE9zaVBhOWeQO5pBEH3Q7JBUCOsQO5pBEGyur5BGmG5QO5pBEFsMctB\nGmG5wMJyD0EE0J7BUCOswMJyD0EKgZHBhOWewMJyD0EQMoTBuqeRwMJyD0Etxm3B7mmEwMJy\nD0E5KFPBR1huwMJyD0FGijjBstxTwMJyD0FT7B3BGmE5wMJyD0FgTgPBhOUewMJyD0HaYNHA\n7mkEwMJyD0HzJJzAsNzTv8JyD0EZ0k3AhOWev8JyD0GWtMa/sNxTv8JyD0E0sOM9sNzTvsJy\nD0GeKuM/AAAAAMJyD0EcDVxAsNzTPsJyD0F0QqNAsNxTP8JyD0FbfthAhOWeP8JyD0Eh3QZB\nsNzTP8JyD0EUeyFB7mkEQMJyD0EHGTxBhOUeQMJyD0H7tlZBGmE5QMJyD0HuVHFBsdxTQMJy\nD0Fw+YVBRlhuQMJyD0FqSJNB7mmEQMJyD0Fkl6BBuqeRQMJyD0Fe5q1BhOWeQMJyD0FXNbtB\nUCOsQMJyD0FQhMhBGmG5QMJyD0FK09VBGmG5wJZ7GkER1avBUCOswJZ7GkHYrZ3BhOWewJZ7\nGkGgho/BuqeRwJZ7GkFmX4HB7mmEwJZ7GkFbcGbBR1huwJZ7GkHqIUrBstxTwJZ7GkF30y3B\nGmE5wJZ7GkEGhRHBhOUewJZ7GkEnberA7mkEwJZ7GkFE0LHAsNzTv5Z7GkHAZnLAhOWev5Z7\nGkH4LAHAsNxTv5Z7GkESM3++sNzTvpZ7GkEsjcI/AAAAAJZ7GkFdgFJAsNzTPpZ7GkES3aFA\nsNxTP5Z7GkH1edpAhOWeP5Z7GkFtiwlBsNzTP5Z7GkHf2SVB7mkEQJZ7GkFQKEJBhOUeQJZ7\nGkHCdl5BGmE5QJZ7GkE0xXpBsdxTQJZ7GkHTiYtBRlhuQJZ7GkEMsZlB7mmEQJZ7GkFE2KdB\nuqeRQJZ7GkF+/7VBhOWeQJZ7GkG2JsRBUCOsQJZ7GkHvTdJBGmG5QJZ7GkEpdeBBmZiYPpmY\nmD6ZmJg+AACAPwAAAAEBAQEAAAAAAAAAwMAAAMB/AADAfwAAgMAAAMB/AADAfwAAAMAAAMB/\nAADAfwAAAAAAAMB/AADAfwAAAEAAAMB/AADAfwAAgEAAAMB/AADAfwAAwEAAAMB/AADAfwAA\nwH8AACDBAADAfwAAwH8AAKDAAADAfwAAwH8AAAAAAADAfwAAwH8AAKBAAADAfwAAwH8AACBB\nAADAfwAAwH8AAMB/AACgwQAAwH8AAMB/AAAgwQAAwH8AAMB/AAAAAAAAwH8AAMB/AAAgQQAA\nwH8AAMB/AACgQQAAAAE="}]},"context":{"shiny":false,"rmarkdown":null},"vertexShader":"#line 2 1\n// File 1 is the vertex shader\n#ifdef GL_ES\n#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#endif\n\nattribute vec3 aPos;\nattribute vec4 aCol;\nuniform mat4 mvMatrix;\nuniform mat4 prMatrix;\nvarying vec4 vCol;\nvarying vec4 vPosition;\n\n#ifdef NEEDS_VNORMAL\nattribute vec3 aNorm;\nuniform mat4 normMatrix;\nvarying vec4 vNormal;\n#endif\n\n#if defined(HAS_TEXTURE) || defined (IS_TEXT)\nattribute vec2 aTexcoord;\nvarying vec2 vTexcoord;\n#endif\n\n#ifdef FIXED_SIZE\nuniform vec3 textScale;\n#endif\n\n#ifdef FIXED_QUADS\nattribute vec3 aOfs;\n#endif\n\n#ifdef IS_TWOSIDED\n#ifdef HAS_NORMALS\nvarying float normz;\nuniform mat4 invPrMatrix;\n#else\nattribute vec3 aPos1;\nattribute vec3 aPos2;\nvarying float normz;\n#endif\n#endif // IS_TWOSIDED\n\n#ifdef FAT_LINES\nattribute vec3 aNext;\nattribute vec2 aPoint;\nvarying vec2 vPoint;\nvarying float vLength;\nuniform float uAspect;\nuniform float uLwd;\n#endif\n\n\nvoid main(void) {\n  \n#ifndef IS_BRUSH\n#if defined(NCLIPPLANES) || !defined(FIXED_QUADS) || defined(HAS_FOG)\n  vPosition = mvMatrix * vec4(aPos, 1.);\n#endif\n  \n#ifndef FIXED_QUADS\n  gl_Position = prMatrix * vPosition;\n#endif\n#endif // !IS_BRUSH\n  \n#ifdef IS_POINTS\n  gl_PointSize = POINTSIZE;\n#endif\n  \n  vCol = aCol;\n  \n#ifdef NEEDS_VNORMAL\n  vNormal = normMatrix * vec4(-aNorm, dot(aNorm, aPos));\n#endif\n  \n#ifdef IS_TWOSIDED\n#ifdef HAS_NORMALS\n  /* normz should be calculated *after* projection */\n  normz = (invPrMatrix*vNormal).z;\n#else\n  vec4 pos1 = prMatrix*(mvMatrix*vec4(aPos1, 1.));\n  pos1 = pos1/pos1.w - gl_Position/gl_Position.w;\n  vec4 pos2 = prMatrix*(mvMatrix*vec4(aPos2, 1.));\n  pos2 = pos2/pos2.w - gl_Position/gl_Position.w;\n  normz = pos1.x*pos2.y - pos1.y*pos2.x;\n#endif\n#endif // IS_TWOSIDED\n  \n#ifdef NEEDS_VNORMAL\n  vNormal = vec4(normalize(vNormal.xyz/vNormal.w), 1);\n#endif\n  \n#if defined(HAS_TEXTURE) || defined(IS_TEXT)\n  vTexcoord = aTexcoord;\n#endif\n  \n#if defined(FIXED_SIZE) && !defined(ROTATING)\n  vec4 pos = prMatrix * mvMatrix * vec4(aPos, 1.);\n  pos = pos/pos.w;\n  gl_Position = pos + vec4(aOfs*textScale, 0.);\n#endif\n  \n#if defined(IS_SPRITES) && !defined(FIXED_SIZE)\n  vec4 pos = mvMatrix * vec4(aPos, 1.);\n  pos = pos/pos.w + vec4(aOfs,  0.);\n  gl_Position = prMatrix*pos;\n#endif\n  \n#ifdef FAT_LINES\n  /* This code was inspired by Matt Deslauriers' code in \n   https://mattdesl.svbtle.com/drawing-lines-is-hard */\n  vec2 aspectVec = vec2(uAspect, 1.0);\n  mat4 projViewModel = prMatrix * mvMatrix;\n  vec4 currentProjected = projViewModel * vec4(aPos, 1.0);\n  currentProjected = currentProjected/currentProjected.w;\n  vec4 nextProjected = projViewModel * vec4(aNext, 1.0);\n  vec2 currentScreen = currentProjected.xy * aspectVec;\n  vec2 nextScreen = (nextProjected.xy / nextProjected.w) * aspectVec;\n  float len = uLwd;\n  vec2 dir = vec2(1.0, 0.0);\n  vPoint = aPoint;\n  vLength = length(nextScreen - currentScreen)/2.0;\n  vLength = vLength/(vLength + len);\n  if (vLength > 0.0) {\n    dir = normalize(nextScreen - currentScreen);\n  }\n  vec2 normal = vec2(-dir.y, dir.x);\n  dir.x /= uAspect;\n  normal.x /= uAspect;\n  vec4 offset = vec4(len*(normal*aPoint.x*aPoint.y - dir), 0.0, 0.0);\n  gl_Position = currentProjected + offset;\n#endif\n  \n#ifdef IS_BRUSH\n  gl_Position = vec4(aPos, 1.);\n#endif\n}","fragmentShader":"#line 2 2\n// File 2 is the fragment shader\n#ifdef GL_ES\n#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#endif\nvarying vec4 vCol; // carries alpha\nvarying vec4 vPosition;\n#if defined(HAS_TEXTURE) || defined (IS_TEXT)\nvarying vec2 vTexcoord;\nuniform sampler2D uSampler;\n#endif\n\n#ifdef HAS_FOG\nuniform int uFogMode;\nuniform vec3 uFogColor;\nuniform vec4 uFogParms;\n#endif\n\n#if defined(IS_LIT) && !defined(FIXED_QUADS)\nvarying vec4 vNormal;\n#endif\n\n#if NCLIPPLANES > 0\nuniform vec4 vClipplane[NCLIPPLANES];\n#endif\n\n#if NLIGHTS > 0\nuniform mat4 mvMatrix;\n#endif\n\n#ifdef IS_LIT\nuniform vec3 emission;\nuniform float shininess;\n#if NLIGHTS > 0\nuniform vec3 ambient[NLIGHTS];\nuniform vec3 specular[NLIGHTS]; // light*material\nuniform vec3 diffuse[NLIGHTS];\nuniform vec3 lightDir[NLIGHTS];\nuniform bool viewpoint[NLIGHTS];\nuniform bool finite[NLIGHTS];\n#endif\n#endif // IS_LIT\n\n#ifdef IS_TWOSIDED\nuniform bool front;\nvarying float normz;\n#endif\n\n#ifdef FAT_LINES\nvarying vec2 vPoint;\nvarying float vLength;\n#endif\n\nvoid main(void) {\n  vec4 fragColor;\n#ifdef FAT_LINES\n  vec2 point = vPoint;\n  bool neg = point.y < 0.0;\n  point.y = neg ? (point.y + vLength)/(1.0 - vLength) :\n                 -(point.y - vLength)/(1.0 - vLength);\n#if defined(IS_TRANSPARENT) && defined(IS_LINESTRIP)\n  if (neg && length(point) <= 1.0) discard;\n#endif\n  point.y = min(point.y, 0.0);\n  if (length(point) > 1.0) discard;\n#endif // FAT_LINES\n  \n#ifdef ROUND_POINTS\n  vec2 coord = gl_PointCoord - vec2(0.5);\n  if (length(coord) > 0.5) discard;\n#endif\n  \n#if NCLIPPLANES > 0\n  for (int i = 0; i < NCLIPPLANES; i++)\n    if (dot(vPosition, vClipplane[i]) < 0.0) discard;\n#endif\n    \n#ifdef FIXED_QUADS\n    vec3 n = vec3(0., 0., 1.);\n#elif defined(IS_LIT)\n    vec3 n = normalize(vNormal.xyz);\n#endif\n    \n#ifdef IS_TWOSIDED\n    if ((normz <= 0.) != front) discard;\n#endif\n    \n#ifdef IS_LIT\n    vec3 eye = normalize(-vPosition.xyz/vPosition.w);\n    vec3 lightdir;\n    vec4 colDiff;\n    vec3 halfVec;\n    vec4 lighteffect = vec4(emission, 0.);\n    vec3 col;\n    float nDotL;\n#ifdef FIXED_QUADS\n    n = -faceforward(n, n, eye);\n#endif\n    \n#if NLIGHTS > 0\n    for (int i=0;i<NLIGHTS;i++) {\n      colDiff = vec4(vCol.rgb * diffuse[i], vCol.a);\n      lightdir = lightDir[i];\n      if (!viewpoint[i])\n        lightdir = (mvMatrix * vec4(lightdir, 1.)).xyz;\n      if (!finite[i]) {\n        halfVec = normalize(lightdir + eye);\n      } else {\n        lightdir = normalize(lightdir - vPosition.xyz/vPosition.w);\n        halfVec = normalize(lightdir + eye);\n      }\n      col = ambient[i];\n      nDotL = dot(n, lightdir);\n      col = col + max(nDotL, 0.) * colDiff.rgb;\n      col = col + pow(max(dot(halfVec, n), 0.), shininess) * specular[i];\n      lighteffect = lighteffect + vec4(col, colDiff.a);\n    }\n#endif\n    \n#else // not IS_LIT\n    vec4 colDiff = vCol;\n    vec4 lighteffect = colDiff;\n#endif\n    \n#ifdef IS_TEXT\n    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);\n#endif\n    \n#ifdef HAS_TEXTURE\n#ifdef TEXTURE_rgb\n    vec4 textureColor = lighteffect*vec4(texture2D(uSampler, vTexcoord).rgb, 1.);\n#endif\n    \n#ifdef TEXTURE_rgba\n    vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);\n#endif\n    \n#ifdef TEXTURE_alpha\n    vec4 textureColor = texture2D(uSampler, vTexcoord);\n    float luminance = dot(vec3(1.,1.,1.), textureColor.rgb)/3.;\n    textureColor =  vec4(lighteffect.rgb, lighteffect.a*luminance);\n#endif\n    \n#ifdef TEXTURE_luminance\n    vec4 textureColor = vec4(lighteffect.rgb*dot(texture2D(uSampler, vTexcoord).rgb, vec3(1.,1.,1.))/3., lighteffect.a);\n#endif\n    \n#ifdef TEXTURE_luminance_alpha\n    vec4 textureColor = texture2D(uSampler, vTexcoord);\n    float luminance = dot(vec3(1.,1.,1.),textureColor.rgb)/3.;\n    textureColor = vec4(lighteffect.rgb*luminance, lighteffect.a*textureColor.a);\n#endif\n    \n    fragColor = textureColor;\n\n#elif defined(IS_TEXT)\n    if (textureColor.a < 0.1)\n      discard;\n    else\n      fragColor = textureColor;\n#else\n    fragColor = lighteffect;\n#endif // HAS_TEXTURE\n    \n#ifdef HAS_FOG\n    // uFogParms elements: x = near, y = far, z = fogscale, w = (1-sin(FOV/2))/(1+sin(FOV/2))\n    // In Exp and Exp2: use density = density/far\n    // fogF will be the proportion of fog\n    // Initialize it to the linear value\n    float fogF;\n    if (uFogMode > 0) {\n      fogF = (uFogParms.y - vPosition.z/vPosition.w)/(uFogParms.y - uFogParms.x);\n      if (uFogMode > 1)\n        fogF = mix(uFogParms.w, 1.0, fogF);\n      fogF = fogF*uFogParms.z;\n      if (uFogMode == 2)\n        fogF = 1.0 - exp(-fogF);\n      // Docs are wrong: use (density*c)^2, not density*c^2\n      // https://gitlab.freedesktop.org/mesa/mesa/-/blob/master/src/mesa/swrast/s_fog.c#L58\n      else if (uFogMode == 3)\n        fogF = 1.0 - exp(-fogF*fogF);\n      fogF = clamp(fogF, 0.0, 1.0);\n      gl_FragColor = vec4(mix(fragColor.rgb, uFogColor, fogF), fragColor.a);\n    } else gl_FragColor = fragColor;\n#else\n    gl_FragColor = fragColor;\n#endif // HAS_FOG\n    \n}","players":[],"webGLoptions":{"preserveDrawingBuffer":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<script type="text/javascript">
+var rotate = function(angle) {
+  var rgl = document.getElementById("plot3drgl2").rglinstance;
+  rgl.getObj(7).par3d.userMatrix.rotate(angle, 1,0,0);
+  rgl.drawScene();
+};
+</script>
+<button type="button" onclick="rotate(-10)">
+Down
+</button>
+<button type="button" onclick="rotate(10)">
+Up
+</button>
+<div class="cell">
+
+</div>
+</section>
+<section id="total-variance" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="total-variance">Total variance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="moderation_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="explained-variance" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="explained-variance">Explained variance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="moderation_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-twitter"></i> <a href="https://twitter.com/shklinkenberg" target="_blank" style="color:black; border-bottom:none;"><span class="citation" data-cites="shklinkenberg">@shklinkenberg</span></a>
+</li>
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">CC BY-NC-SA 4.0</figcaption><p></p>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
