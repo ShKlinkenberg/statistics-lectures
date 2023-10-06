@@ -28,7 +28,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 
 > Mediation does not imply causation!
 
-[Criteria for a causal relation](https://shklinkenberg.github.io/Statistical-Inference/11.1-mediation-as-causal-process.html#causalcriteria)
+[Criteria for causal relations](https://shklinkenberg.github.io/Statistical-Inference/11.1-mediation-as-causal-process.html#causalcriteria)
 
 All requirements need to be met:
 
@@ -178,6 +178,22 @@ b.a        = m.2.med.pre$coefficients[2]
 b.b        = m.3.out.pre.med$coefficients[3]
 b.c        = m.1.out.pre$coefficients[2]
 b.c.accent = m.3.out.pre.med$coefficients[2]
+
+se.a        = summary(m.2.med.pre)$coefficients[2,2]
+se.b        = summary(m.3.out.pre.med)$coefficients[3,2]
+se.c        = summary(m.1.out.pre)$coefficients[2,2]
+se.c.accent = summary(m.3.out.pre.med)$coefficients[2,2]
+
+CI <- function(b, se) {
+  ci  = 1.96 * se
+  
+  lb = round(b - ci, 2)
+  ub = round(b + ci, 2)
+  
+  string = "[LB : UB]"
+  
+  return(sprintf("[%s : %s]", lb, ub))
+}
 ```
 
 $$
@@ -188,6 +204,53 @@ b_c &= `r round(b.c, 3)` \\
 b_{c`} &= `r round(b.c.accent, 3)` \\
 \end{aligned}
 $$
+
+## Path model
+
+```{r, echo=FALSE}
+library(visNetwork)
+nodes <- data.frame(id = 1:5, 
+                    x  = c(0, 400, 800, 0, 800),
+                    y  = c(300, 100, 300, 0, 0),
+                    label = c("Alt Med", 
+                              "Lifestyle", 
+                              "Healing",
+                              "Alt Med",
+                              "Healing"), 
+                    shape       = "box", 
+                    font.size   = 42, 
+                    shadow      = "FALSE", 
+                    physics     = FALSE, 
+                    borderWidth = 1, 
+                    color       = list(background = "white", 
+                                       border     = "black") )
+
+edges <- data.frame(from       = c(1, 1, 2, 4), 
+                    to         = c(3, 2, 3, 5),
+                    width      = c(1, 1, 1, 1),
+                    # font.color = c(brewercolors[[1]], 
+                    #                rep(brewercolors[[5]],2), 
+                    #                brewercolors[[1]], 
+                    #                rep(brewercolors[[5]],5), 
+                    #                brewercolors[[1]]),
+                    # color.highlight = rep(brewercolors[[5]]),
+                    # shadow          = c(rep(TRUE, 4), FALSE, 
+                    #                     rep(TRUE, 2), FALSE, 
+                    #                     rep(TRUE, 2)),
+                    label = c(paste(round(b.c.accent, 2), "\n", CI(b.c.accent, se.c.accent) ),
+                              paste(round(b.a, 2), "\n", CI(b.a, se.a) ),
+                              paste(round(b.b, 2), "\n", CI(b.b, se.b)  ),
+                              paste(round(b.c, 2), "\n", CI(b.c, se.c)  )
+                              )
+                    )
+
+# Display network.
+visNetwork(nodes, edges, width = "100%") %>% 
+  visEdges(arrows = "to", font = list(size = 30)) %>% 
+  visOptions(highlightNearest = list(enabled = TRUE, algorithm = "hierarchical", 
+   degree = list(from = 1, to = 0))) %>%
+  visInteraction(dragNodes = TRUE, multiselect = TRUE)
+```
 
 ## Visual {.subsection}
 
@@ -269,7 +332,7 @@ rglwidget()
 
 Interactive, give it a spin.
 
-## Calculate indirect effect {.subsection}
+## Indirect effect {.subsection}
 
 $a \times b = b_a \times b_b$
 
@@ -278,7 +341,7 @@ b.a*b.b
 b.c - b.c.accent
 ```
 
-## Calculate indirect effect (partially standardized) {.subsection}
+## Indirect effect (partially standardized) {.subsection}
 
 $\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$
 
@@ -286,7 +349,7 @@ $\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$
 b.a*b.b/sd(speed.of.healing)
 ```
 
-## Calculate indirect effect (standardized) {.subsection}
+## Indirect effect (standardized) {.subsection}
 
 $\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \times s_{Predictor}$
 
@@ -294,3 +357,10 @@ $\frac{ab}{s_{Outcome}} \times s_{Predictor} = \frac{b_a b_b}{s_{Outcome}} \time
 b.a*b.b/sd(speed.of.healing)*sd(use.homeopathic.remedies)
 ```
 
+## Types of mediation
+
+* Parallel mediation
+* Serial mediation
+* Combined serial and parallel mediation
+* Mediation with covariates
+* Combined mediation and moderation
