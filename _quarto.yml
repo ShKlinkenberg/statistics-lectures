@@ -4,6 +4,7 @@ project:
   render:
     - index.qmd
     - courses/SM/2023-2024-S1/SM.qmd
+    - courses/SM/2023-2024-S2/SM.qmd
     - courses/SSR/2022-2023/SSR.qmd
     - courses/WSR_PB/2022-2023/WSR_PB.qmd
     
@@ -61,5 +62,6 @@ website:
       collapse-level: 2
       contents:
         - courses/SM/2023-2024-S1/SM.qmd
+        - courses/SM/2023-2024-S2/SM.qmd
 # 
 # freeze: false

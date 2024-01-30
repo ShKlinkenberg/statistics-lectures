@@ -5,7 +5,6 @@ date: today
 format: 
   html: 
     page-layout: full
-    include-in-header: https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js
 ---
 
 ::: {.column-screen}

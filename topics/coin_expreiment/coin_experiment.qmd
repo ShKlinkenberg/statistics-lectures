@@ -158,6 +158,9 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 abline(v = c(2.5,10.9), col="red", lwd=3, lty="dotted")
 ```
 
+````{=html}
+<!--
+
 ## Alternative Distribution {.smaller .build .subsection}
 
 But we have no clue of what this distribution could look like.
@@ -220,8 +223,7 @@ abline(v = c(6.5,27.5), col="red", lwd=3, lty="dotted")
 
 ```
 
-````{=html}
-<!--
+
 
 ## Power and more {.section}
 
