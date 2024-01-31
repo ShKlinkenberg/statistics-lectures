@@ -1,0 +1,79 @@
+# Exact approach
+
+Last weeks coin toss example.
+
+## Coin values
+
+Lets start simple and throw only 2 times with a fair coin. Assigning 1 for heads and 0 for tails.
+
+```{r}
+coin = c(0,1)
+```
+
+The coin can only have the value `r coin`.
+
+## Permutation
+
+If we throw 2 times we have the following possible outcomes.
+
+```{r}
+all.options <- expand.grid(coin, coin)
+names(all.options) = gsub("Var", "Toss", names(all.options))
+all.options
+```
+
+With frequency of heads being
+
+```{r}
+frequency = apply(all.options, 1, sum)
+cbind(all.options, frequency)
+```
+
+## Probabilities
+
+For each coin toss, disregarding the outcom, there is a .5 probability of landing heads.
+
+```{r}
+probabilities <- all.options
+probabilities[] = .5
+probabilities
+```
+
+So for each we can specify the total probability by applying the product rule (e.g. multiplying the probabilities)
+
+```{r}
+probability = apply(probabilities, 1, prod)
+cbind(probabilities, probability)
+```
+
+Which is of course the same for all outcomes.
+
+## Discrete probability distribution
+
+Though some outcomes occurs more often. Throwing 0 times heads, is only occurs once and hense has a probability of .25. But throwing 1 times heads, can occur in two situations. So, for this situation we can add up the probabilities.
+
+```{r}
+cbind(all.options, frequency, probability)
+```
+
+## Frequecy and probability distribution
+
+```{r}
+layout(matrix(1:2, 1, 2))
+barplot(table(frequency), ylab = "Frequency", xlab = "#Heads", col = 'lightblue')
+barplot(table(frequency) * .25, ylab = "Probability", xlab = "#Heads", col = 'lightblue')
+```
+
+## 10 tosses
+
+This also holds for 10 tosses.
+
+```{r}
+barplot(dbinom(0:10, 10, .5),
+        main      = "Binomial distribution p = .5",
+        ylab      = "Probability", 
+        xlab      = "#Heads", 
+        col       = 'darkgreen', 
+        names.arg = 0:10)
+```
+
