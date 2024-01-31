@@ -68,7 +68,7 @@ barplot(table(frequency) * .25, ylab = "Probability", xlab = "#Heads", col = 'li
 
 This also holds for 10 tosses.
 
-```{r}
+```{r, echo=FALSE}
 barplot(dbinom(0:10, 10, .5),
         main      = "Binomial distribution p = .5",
         ylab      = "Probability", 
