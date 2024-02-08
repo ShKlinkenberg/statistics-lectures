@@ -6,25 +6,28 @@ Last weeks coin toss example.
 
 Lets start simple and throw only 2 times with a fair coin. Assigning 1 for heads and 0 for tails.
 
-```{r}
+```{r, echo=FALSE}
 coin = c(0,1)
 ```
 
-The coin can only have the value `r coin`.
+The coin can only have the values `r coin`, heads or tails.
 
 ## Permutation
 
 If we throw 2 times we have the following possible outcomes.
 
-```{r}
+```{r, echo=FALSE}
 all.options <- expand.grid(coin, coin)
 names(all.options) = gsub("Var", "Toss", names(all.options))
 all.options
 ```
 
+
+## Number of heads
+
 With frequency of heads being
 
-```{r}
+```{r, echo=FALSE}
 frequency = apply(all.options, 1, sum)
 cbind(all.options, frequency)
 ```
@@ -33,7 +36,7 @@ cbind(all.options, frequency)
 
 For each coin toss, disregarding the outcom, there is a .5 probability of landing heads.
 
-```{r}
+```{r, echo=FALSE}
 probabilities <- all.options
 probabilities[] = .5
 probabilities
@@ -41,24 +44,24 @@ probabilities
 
 So for each we can specify the total probability by applying the product rule (e.g. multiplying the probabilities)
 
-```{r}
+```{r, echo=FALSE}
 probability = apply(probabilities, 1, prod)
 cbind(probabilities, probability)
 ```
 
-Which is of course the same for all outcomes.
+Which is the same for all outcomes.
 
-## Discrete probability distribution
+## Discrete probabilities
 
-Though some outcomes occurs more often. Throwing 0 times heads, is only occurs once and hense has a probability of .25. But throwing 1 times heads, can occur in two situations. So, for this situation we can add up the probabilities.
+Though some outcomes occurs more often. Throwing 0 times heads,  only occurs once and hence has a probability of .25. But throwing 1 times heads, can occur in two situations. So, for this situation we can add up the probabilities.
 
-```{r}
+```{r, echo=FALSE}
 cbind(all.options, frequency, probability)
 ```
 
 ## Frequecy and probability distribution
 
-```{r}
+```{r, echo=FALSE}
 layout(matrix(1:2, 1, 2))
 barplot(table(frequency), ylab = "Frequency", xlab = "#Heads", col = 'lightblue')
 barplot(table(frequency) * .25, ylab = "Probability", xlab = "#Heads", col = 'lightblue')
@@ -67,6 +70,60 @@ barplot(table(frequency) * .25, ylab = "Probability", xlab = "#Heads", col = 'li
 ## 10 tosses
 
 This also holds for 10 tosses.
+
+::: {.panel-tabset}
+
+### Permutation
+
+```{r, echo=FALSE}
+library("DT")
+all.options <- expand.grid(coin, coin, coin, coin, coin, coin,coin, coin, coin, coin)
+names(all.options) = gsub("Var", "Toss", names(all.options))
+datatable(all.options, rownames = FALSE)
+```
+
+### Frequency
+
+```{r, echo=FALSE}
+frequency = apply(all.options, 1, sum)
+datatable(cbind(all.options, frequency), rownames = FALSE)
+```
+
+### Probabilities
+
+```{r, echo=FALSE}
+probabilities <- all.options
+probabilities[] = .5
+kableExtra::kable(probabilities[1:7,])
+```
+
+### Probability
+
+```{r, echo=FALSE}
+probability = apply(probabilities, 1, prod)
+kableExtra::kable(cbind(probabilities, probability)[1:5, ])
+```
+
+### Frequency and probabilities
+
+```{r, echo=FALSE}
+data.frame(as.factor(frequency), probability) -> freq.prob
+datatable(freq.prob, rownames = FALSE, filter = 'top')
+```
+
+### Cumulative probabilities
+
+```{r, echo=FALSE}
+tosses.1 <- aggregate(probability ~ frequency, freq.prob, sum)
+tosses.2 <- aggregate(probability ~ frequency, freq.prob, length)
+tosses <- merge(tosses.2, tosses.1, by ="frequency")
+names(tosses) <- c("#Heads", "frequencies", "Probabilities")
+kableExtra::kable(tosses, rownames = FALSE)
+```
+
+:::
+
+## Binomial distribution
 
 ```{r, echo=FALSE}
 barplot(dbinom(0:10, 10, .5),
@@ -77,3 +134,35 @@ barplot(dbinom(0:10, 10, .5),
         names.arg = 0:10)
 ```
 
+## Calculate binomial probabilities
+
+
+$$ {n\choose k}p^k(1-p)^{n-k}$$
+
+$$ {n\choose k} = \frac{n!}{k!(n-k)!} $$
+
+::: {.panel-tabset}
+
+### With values
+
+```{r, echo=TRUE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+```
+
+### Calculations
+
+```{r, echo=FALSE}
+kableExtra::kable(cbind(n, k, p, 
+      'n!'         = factorial(n), 
+      'k!'         = factorial(k), 
+      '(n-k)!'     = factorial(n-k), 
+      '(n over k)' = factorial(n)/(factorial(k)*factorial(n-k)),
+      'p^k'        = p^k,
+      '(1-p)^(n-k)'  = (1-p)^(n-k),
+      'Binom Prob' = ( factorial(n)/(factorial(k)*factorial(n-k)) ) * ( p^k * (1-p)^(n-k) )
+    ))
+```
+
+:::

@@ -1,0 +1,56 @@
+# Bootstrapping
+
+Sampling from your sample to approximate the sampling distribution.
+
+## My Coin tosses
+
+```{r, echo=FALSE}
+my.tosses = c(0,1,0,1,0,0,0,0,0,0)
+```
+
+Sample
+
+### `r my.tosses` {.center .coins}
+
+```{css, echo=FALSE}
+.coins {
+  color: darkgreen;
+}
+```
+
+## Sample from the sample
+
+Sampling with replacement
+
+```{r}
+sample(my.tosses, replace = TRUE)
+```
+
+## Sampling from the sample
+
+```{r}
+n.samples = 1000
+n.heads = vector()
+
+for (i in 1:n.samples) {
+  my.sample <- sample(my.tosses, replace = TRUE)
+  
+  n.heads[i] <- sum(my.sample) 
+}
+n.heads
+```
+
+## Frequencies
+
+Frequencies for number of heads per sample.
+
+```{r, echo=FALSE}
+kableExtra::kable(table(n.heads))
+```
+
+## Bootstrapped sampling distribution
+
+```{r, echo=FALSE}
+barplot(table(n.heads), col = "darkgreen")
+```
+
