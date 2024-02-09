@@ -57,7 +57,7 @@ Let's take a larger sample from our normal population.
 x = rnorm(n, mu, sigma); x
 ```
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 #| output-location: slide
 hist(x, main = "Sample distribution", col = "beige", breaks = 15)
 text(80, 10, round(mean(x),2))
@@ -85,8 +85,8 @@ for(i in 1:n.samples) {
 
 ## Mean and SE for all samples
 
-```{r, echo=TRUE}
-head(cbind(mean.x.values, se.x.values))
+```{r, echo=FALSE}
+kableExtra::kable( head(cbind(mean.x.values, se.x.values)) )
 ```
 
 ## Sampling distribution
@@ -108,7 +108,7 @@ $$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
 
 So the t-statistic represents the deviation of the sample mean $\bar{x}$ from the population mean $\mu$, considering the sample size, expressed as the degrees of freedom $df = n - 1$
 
-## t-value
+## T-value
 
 $$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
 
@@ -125,7 +125,7 @@ $$T_{n-1} = \frac{\bar{x}-\mu}{SE_x} = \frac{\bar{x}-\mu}{s_x / \sqrt{n}}$$
 t.values = (mean.x.values - mu) / se.x.values
 ```
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 tail(cbind(mean.x.values, mu, se.x.values, t.values))
 ```
 
@@ -151,7 +151,7 @@ legend("topright", lty = 1, col="red", legend = "T-distribution")
 
 The t-distibution therefore is different for different sample sizes and converges to a standard normal distribution if sample size is large enough.
 
-The t-distribution is defined by:
+The t-distribution is defined by the probability density function (PDF):
 
 $$\textstyle\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\!$$
 
@@ -159,7 +159,7 @@ where $\nu$ is the number of degrees of freedom and $\Gamma$ is the gamma functi
 
 
 ::: {.callout-warning}
-Not exam material
+Formula not exam material
 :::
 
 </small>
@@ -293,6 +293,8 @@ ybracket = dt(tp95 , df = 10)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.0
 lines(xbracket,ybracket,col="gray")
 ```
 
+<!--
+
 ## Effect-size {.subsection}
 
 The effect-size is the standardised difference between the mean and the expected $\mu$. In the t-test effect-size is expressed as $r$.
@@ -392,3 +394,5 @@ legend("topright", c(expression(alpha),'POWER'),density=c(10,10),angle=c(90,45))
 # http://powerandsamplesize.com/Calculators/ in our own app?
 knitr::include_app("https://sharon-klinkenberg.shinyapps.io/sample-size-power2/", height="485px")
 ```
+
+-->

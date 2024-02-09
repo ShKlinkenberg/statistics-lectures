@@ -9,8 +9,6 @@ format:
     output-ext: slide.html
 ---
 
-<!-- Add the required topics below -->
-
 ```{r child="../../../../topics/exact_probability/exact_probability.qmd"}
 ```
 
