@@ -1,7 +1,5 @@
 # Exact approach
 
-Last weeks coin toss example.
-
 ## Coin values
 
 Lets start simple and throw only 2 times with a fair coin. Assigning 1 for heads and 0 for tails.
@@ -67,9 +65,9 @@ barplot(table(frequency), ylab = "Frequency", xlab = "#Heads", col = 'lightblue'
 barplot(table(frequency) * .25, ylab = "Probability", xlab = "#Heads", col = 'lightblue')
 ```
 
-## 10 tosses
+## 10 tosses {.smaller}
 
-This also holds for 10 tosses.
+:::  {style="transform: scale(0.7) translateY(-25%);"}
 
 ::: {.panel-tabset}
 
@@ -123,6 +121,8 @@ kableExtra::kable(tosses, rownames = FALSE)
 
 :::
 
+:::
+
 ## Binomial distribution
 
 ```{r, echo=FALSE}
@@ -134,12 +134,12 @@ barplot(dbinom(0:10, 10, .5),
         names.arg = 0:10)
 ```
 
-## Calculate binomial probabilities
+## Calculate binomial probabilities {.smaller}
 
 
-$$ {n\choose k}p^k(1-p)^{n-k}$$
+$$ {n\choose k}p^k(1-p)^{n-k}, \small {n\choose k} = \frac{n!}{k!(n-k)!} $$
 
-$$ {n\choose k} = \frac{n!}{k!(n-k)!} $$
+::: {style="transform: scale(0.7) translateY(-25%);"}
 
 ::: {.panel-tabset}
 
@@ -164,5 +164,7 @@ kableExtra::kable(cbind(n, k, p,
       'Binom Prob' = ( factorial(n)/(factorial(k)*factorial(n-k)) ) * ( p^k * (1-p)^(n-k) )
     ))
 ```
+
+:::
 
 :::

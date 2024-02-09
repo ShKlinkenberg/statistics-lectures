@@ -90,4 +90,3 @@ See canvas for all the details.
 
 ```{r child="../../../../footer.qmd"}
 ```
-

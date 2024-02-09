@@ -1,0 +1,38 @@
+---
+title: "Probability Models"
+author: "Klinkenberg"
+date: "12 feb 2024"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+<!-- Add the required topics below -->
+
+```{r child="../../../../topics/exact_probability/exact_probability.qmd"}
+```
+
+```{r child="../../../../topics/bootstrap/bootstrap.qmd"}
+```
+
+# Theoretical Approximations
+
+```{r child="../../../../topics/continuous_probability_distributions/continuous_probability_distributions.qmd"}
+```
+
+
+```{r child="../../../../topics/t-distribution/t-distribution_SM.qmd"}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
+# References
+
+::: {#refs}
+:::

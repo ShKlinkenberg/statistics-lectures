@@ -2,6 +2,8 @@
 #   output-dir: ../slides/
 author: "Sharon Klinkenberg"
 institute: "University of Amsterdam"
+bibliography: ../bibliography.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa-6th-edition.csl
 format:
   html:
     toc: true

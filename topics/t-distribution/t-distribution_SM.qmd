@@ -1,26 +1,30 @@
-# T-distribution {.section}
+# T-distribution
 
 ## Gosset {.smaller}
 
 ::: {.columns}
+
 ::: {.column width="20%"}
+
 ![William Sealy Gosset (aka Student) in 1908 (age 32)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/William_Sealy_Gosset.jpg/800px-William_Sealy_Gosset.jpg)
+
 :::
 
 ::: {.column width="70%"}
+
 In probability and statistics, Student's t-distribution (or simply the t-distribution) is any member of a family of continuous probability distributions that arises when estimating the mean of a normally distributed population in situations where the sample size is small and population standard deviation is unknown.
 
-In the English-language literature it takes its name from William Sealy Gosset's 1908 paper in Biometrika under the pseudonym "Student". Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples, for example the chemical properties of barley where sample sizes might be as low as 3.
+In the English-language literature it takes its name from William Sealy Gosset's 1908 paper in Biometrika under the pseudonym "Student". Gosset worked at the Guinness Brewery in Dublin, Ireland, and was interested in the problems of small samples, for example the chemical properties of barley where sample sizes might be as low as 3 [@wiki:Students_t-distribution].
 
-Source: [Wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
 :::
+
 :::
 
 ## Population distribution {.smaller .subsection}
 
 ```{r, echo=TRUE}
 #| output-location: slide
-#| code-line-numbers: "3-4|6-7|14"
+#| code-line-numbers: "3|6-7|14"
 
 layout(matrix(c(2:6,1,1,7:8,1,1,9:13), 4, 4))
 
@@ -45,7 +49,7 @@ for(i in 1:n.samples) {
 }
 ```
 
-## A sample {.smaller}
+## One sample {.smaller}
 
 Let's take a larger sample from our normal population.
 
@@ -64,7 +68,7 @@ text(80, 10, round(mean(x),2))
 let's take more samples.
 
 ```{r, echo=TRUE}
-#| code-line-numbers: "1|6|7-8"
+#| code-line-numbers: "1|6|7|9"
 
 n.samples     = 1000
 mean.x.values = vector()
@@ -151,9 +155,12 @@ The t-distribution is defined by:
 
 $$\textstyle\frac{\Gamma \left(\frac{\nu+1}{2} \right)} {\sqrt{\nu\pi}\,\Gamma \left(\frac{\nu}{2} \right)} \left(1+\frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}\!$$
 
-where $\nu$ is the number of degrees of freedom and $\Gamma$ is the gamma function.
+where $\nu$ is the number of degrees of freedom and $\Gamma$ is the gamma function [@wiki:Students_t-distribution].
 
-Source: [wikipedia](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
+
+::: {.callout-warning}
+Not exam material
+:::
 
 </small>
 
