@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bar Graph with Confidence Intervals</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .bar {
+            fill: steelblue;
+        }
+        .confidence-interval {
+            stroke: black;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="sampleSize">Sample Size: </label>
+        <input type="range" id="sampleSize" name="sampleSize" min="2" max="50" value="30">
+        <span id="sampleSizeValue">30</span>
+    </div>
+
+    <script>
+        // Sample data: mean values for the two bars
+        const data = [
+            {id: 'A', value: 50, sampleSize: 30},
+            {id: 'B', value: 70, sampleSize: 30}
+        ];
+
+        // SVG setup
+        const margin = {top: 20, right: 20, bottom: 30, left: 40},
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+        const svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        // Scales
+        const x = d3.scaleBand()
+            .range([0, width])
+            .padding(0.1)
+            .domain(data.map(d => d.id));
+
+        const y = d3.scaleLinear()
+            .range([height, 0])
+            .domain([0, d3.max(data, d => d.value) + 10]);
+
+        // Add the bars
+        svg.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.id))
+            .attr("width", x.bandwidth())
+            .attr("y", d => y(d.value))
+            .attr("height", d => height - y(d.value));
+
+        // Function to update the confidence intervals
+        function updateConfidenceIntervals(sampleSize) {
+            data.forEach(d => {
+                d.sampleSize = sampleSize;
+                // Simplified confidence interval calculation (for demonstration)
+                const stderr = Math.sqrt(d.value * (1 - d.value / 100)) / Math.sqrt(d.sampleSize);
+                const ci = 1.96 * stderr; // 95% CI
+                d.ciLower = d.value - ci;
+                d.ciUpper = d.value + ci;
+            });
+
+            const ciLines = svg.selectAll(".confidence-interval")
+                .data(data);
+
+            ciLines.enter()
+                .append("line")
+                .attr("class", "confidence-interval")
+                .merge(ciLines)
+                .attr("x1", d => x(d.id) + x.bandwidth() / 2)
+                .attr("x2", d => x(d.id) + x.bandwidth() / 2)
+                .attr("y1", d => y(d.ciLower))
+                .attr("y2", d => y(d.ciUpper));
+
+            ciLines.exit().remove();
+        }
+
+        // Initial update with default sample size
+        updateConfidenceIntervals(30);
+
+        // Slider interaction
+        d3.select("#sampleSize").on("input", function() {
+            const newSampleSize = +this.value;
+            d3.select("#sampleSizeValue").text(newSampleSize);
+            updateConfidenceIntervals(newSampleSize);
+        });
+    </script>
+</body>
+</html>

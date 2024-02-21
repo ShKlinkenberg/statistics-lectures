@@ -1,0 +1,23 @@
+---
+title: "Alternatives to NHST"
+author: "Klinkenberg"
+date: "26 feb 2024"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/confidence_interval/confidence_interval.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
+# References
+
+::: {#refs}
+:::
