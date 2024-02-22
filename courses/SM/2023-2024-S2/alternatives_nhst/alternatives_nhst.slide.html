@@ -362,6 +362,34 @@ Klinkenberg
   <p class="date">2024-02-26</p>
 </section>
 <section>
+<section id="the-problem-with-p-values" class="title-slide slide level1 center" data-background-image="Sad-P.webp" data-background-color="black">
+<h1>The problem with P-values</h1>
+
+</section>
+<section id="there-is-no-problem" class="slide level2">
+<h2>There is no problem</h2>
+<p>The problem with P-values is that they are often <strong>misunderstood</strong> and <strong>misinterpreted</strong>. The P-value is the probability of observing a test statistic as or more extreme as the one obtained, given that the null hypothesis is true. It is not the probability that the null hypothesis is true. The P-value is not a measure of the strength of the evidence against the null hypothesis.</p>
+<blockquote>
+<p>The mis interpretation is the problem, and not adhering to the Nayman-Pearson framework</p>
+</blockquote>
+</section>
+<section id="the-dance-of-the-p-value" class="slide level2">
+<h2>The dance of the P-value</h2>
+<ul>
+<li><a href="https://youtu.be/ez4DgdurRPg?si=z7oIlKZx6iZjHNYH&amp;t=58">Should replication reveal the same <em>p</em>?</a></li>
+<li><a href="https://youtu.be/ez4DgdurRPg?si=pN0QTEjARl_2mUO0&amp;t=235">What Power are you using</a></li>
+<li><a href="https://youtu.be/ez4DgdurRPg?si=QQku6BKu4C-8BvhF&amp;t=396">Increasing the power</a></li>
+<li><a href="https://youtu.be/ez4DgdurRPg?si=QPAcDeFmG-BUe8ZH&amp;t=480">Comparing CI’s to single point</a></li>
+</ul>
+</section>
+<section id="h0-and-ha-distribution" class="slide level2 center">
+<h2>H0 and HA distribution</h2>
+<div class="cell" data-layout-align="center" data-screenshot.opts="{&quot;delay&quot;:5}">
+<iframe src="https://sharon-klinkenberg.shinyapps.io/tiny-effects/?showcase=0" width="1200px" height="340px" data-external="1">
+</iframe>
+</div>
+</section></section>
+<section>
 <section id="confidence-interval" class="title-slide slide level1 center">
 <h1>Confidence Interval</h1>
 <p>The confidence interval is a range of values that is likely to contain the true value of an unknown population parameter. The confidence interval is calculated from a given set of sample data. The confidence interval is used to express the uncertainty associated with a sample estimate of a population parameter.</p>
@@ -378,15 +406,15 @@ Klinkenberg
 <li>Upperbound = <span class="math inline">\(\bar{x} + 1.96 \times SE\)</span></li>
 </ul>
 </section>
-<section id="standard-error-1" class="slide level2">
-<h2>Standard Error</h2>
+<section id="plot-ci" class="slide level2">
+<h2>Plot CI</h2>
 
-<img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="out-of-100-samples" class="slide level2">
 <h2>5 out of 100 samples</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" height="600"></p>
+<p><img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" height="600"></p>
 </div>
 </div>
 </section>
@@ -429,7 +457,7 @@ Klinkenberg
 <caption>Table 2 from <span class="citation" data-cites="hoekstra2014robust">Hoekstra et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span></caption>
 <colgroup>
 <col style="width: 9%">
-<col style="width: 34%">
+<col style="width: 35%">
 <col style="width: 29%">
 <col style="width: 26%">
 </colgroup>
@@ -486,6 +514,9 @@ Klinkenberg
 </tr>
 </tbody>
 </table>
+</section>
+<section id="ci-compare-to-h0" class="slide level2">
+<h2>CI compare to H0</h2>
 <!-- Footer insert below -->
 </section></section>
 <section>

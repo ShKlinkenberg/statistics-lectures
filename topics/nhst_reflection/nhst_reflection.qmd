@@ -1,0 +1,23 @@
+# The problem with P-values {background-image="Sad-P.webp" background-color="black"}
+
+## There is no problem
+
+The problem with P-values is that they are often **misunderstood** and **misinterpreted**. The P-value is the probability of observing a sample statistic as or more extreme as the one obtained, given that the null hypothesis is true. It is **NOT** the probability that the null hypothesis is true. The P-value is **NOT** a measure of the strength of the evidence against the null hypothesis.
+
+> The mis interpretation is the problem,
+> and not adhering to the Nayman-Pearson framework
+
+## The dance of the P-value
+
+* [Should replication reveal the same _p_?](https://youtu.be/ez4DgdurRPg?si=z7oIlKZx6iZjHNYH&t=58)
+* [What Power are you using](https://youtu.be/ez4DgdurRPg?si=pN0QTEjARl_2mUO0&t=235)
+* [Increasing the power](https://youtu.be/ez4DgdurRPg?si=QQku6BKu4C-8BvhF&t=396)
+* [Comparing CI's to single point](https://youtu.be/ez4DgdurRPg?si=QPAcDeFmG-BUe8ZH&t=480)
+
+## H0 and HA distribution {.center}
+
+```{r tiny-effects, fig.pos='H', fig.align='center', fig.cap="Any effect can be statistically significant.", echo=FALSE, screenshot.opts = list(delay = 5), dev="png", out.width="1200px"}
+# Illustrate that even tiny effects can yield statistically significant test results if the sample is sufficiently large.
+# Generate a normal distribution as hypothesized sampling distribution (M = 2.8, SE = SD / sqrt(N) = 0.6 / sqrt(10) = 0.2) with 2.5% of each tail area coloured. Add a vertical line with value for the sample average linked to a slider (range [2.82, 3.00] initial value 2.90). Add a sample size slider (range [10, 5,000], initial value 10), which is linked to the standard error of the normal curve. With slider for (assumed) true population mean and test power.
+knitr::include_app("https://sharon-klinkenberg.shinyapps.io/tiny-effects/", height="340px")
+```

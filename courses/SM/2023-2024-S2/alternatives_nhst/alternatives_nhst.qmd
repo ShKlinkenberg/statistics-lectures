@@ -9,6 +9,9 @@ format:
     output-ext: slide.html
 ---
 
+```{r child="../../../../topics/nhst_reflection/nhst_reflection.qmd", eval=TRUE}
+```
+
 ```{r child="../../../../topics/confidence_interval/confidence_interval.qmd", eval=TRUE}
 ```
 
