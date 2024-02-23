@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Klinkenberg">
-<meta name="dcterms.date" content="2024-02-23">
 
-<title>Statistics Lectures</title>
+<title>nhst_reflection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,194 +23,95 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
-
-<script type="text/javascript">
-
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-107432294-1', 'auto');
-
-ga('send', {
-  hitType: 'pageview',
-  'anonymizeIp': true,
-});
-</script>
-<style>html{ scroll-behavior: smooth; }</style>
+<script src="nhst_reflection_files/libs/clipboard/clipboard.min.js"></script>
+<script src="nhst_reflection_files/libs/quarto-html/quarto.js"></script>
+<script src="nhst_reflection_files/libs/quarto-html/popper.min.js"></script>
+<script src="nhst_reflection_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="nhst_reflection_files/libs/quarto-html/anchor.min.js"></script>
+<link href="nhst_reflection_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="nhst_reflection_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="nhst_reflection_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="nhst_reflection_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="nhst_reflection_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body class="nav-fixed">
+<body class="fullcontent">
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Statistics Lectures</span>
-    </a>
-  </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-courses" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Courses</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-courses">    
-        <li>
-    <a class="dropdown-item" href="./courses/SM/2023-2024-S1/SM.html" rel="" target="">
- <span class="dropdown-text">Statistical Modelling</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./courses/SSR/2022-2023/SSR.html" rel="" target="">
- <span class="dropdown-text">Scientific &amp; Statistical Reasoning</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./courses/WSR_PB/2022-2023/WSR_PB.html" rel="" target="">
- <span class="dropdown-text">Wetenschapsfilosofie &amp; Statistisch Redeneren</span></a>
-  </li>  
-    </ul>
-  </li>
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/ShKlinkenberg/statistics-lectures" rel="" target=""><i class="bi bi-github" role="img" aria-label="Quarto GitHub">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-</ul>
-            <div class="quarto-navbar-tools">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="the-problem-with-p-values" class="level1" data-background-image="Sad-P.webp" data-background-color="black">
+<h1 data-background-image="Sad-P.webp" data-background-color="black">The problem with P-values</h1>
+<section id="there-is-no-problem" class="level2">
+<h2 class="anchored" data-anchor-id="there-is-no-problem">There is no problem</h2>
+<p>The problem with P-values is that they are often <strong>misunderstood</strong> and <strong>misinterpreted</strong>. The P-value is the probability of observing a sample statistic as or more extreme as the one obtained, given that the null hypothesis is true. It is <strong>NOT</strong> the probability that the null hypothesis is true. The P-value is <strong>NOT</strong> a measure of the strength of the evidence against the null hypothesis.</p>
+<blockquote class="blockquote">
+<p>The mis interpretation is the problem, and not adhering to the Nayman-Pearson framework</p>
+</blockquote>
+</section>
+<section id="the-dance-of-the-p-value" class="level2">
+<h2 class="anchored" data-anchor-id="the-dance-of-the-p-value">The dance of the P-value</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<!-- <iframe width="560" height="315" id="player" src="https://www.youtube-nocookie.com/embed/ez4DgdurRPg?si=3luIv64yRJt6Min2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+<div class="responsive-container">
+<div id="player">
+
 </div>
-          </div> <!-- /navcollapse -->
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
-<!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Statistics Lectures</h1>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Klinkenberg </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">February 23, 2024</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-</header>
-
-<div class="column-screen">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+</div><div class="column" style="width:40%;">
+<div class="cell">
 <script>
-let particles = [];
-const num = 1000;
-
-const noiseScale = 0.01/2;
-
-function setup() {
-  var canvas = createCanvas(windowWidth, windowHeight);
-  canvas.parent('canvasForHTML');
-  for(let i = 0; i < num; i ++) {
-    particles.push(createVector(random(width), random(height)));
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'ez4DgdurRPg',
+    });
   }
-  
-  
-  stroke(255,0,0);
-  // For a cool effect try uncommenting this line
-  // And comment out the background() line in draw
-  // stroke(color(188, 0, 49));
-  clear();
-}
-
-function draw() {
-  background(255, 10);
-  for(let i = 0; i < num; i ++) {
-    let p = particles[i];
-    point(p.x, p.y);
-    let n = noise(p.x * noiseScale, p.y * noiseScale, frameCount * noiseScale * noiseScale);
-    let a = TAU * n;
-    p.x += cos(a);
-    p.y += sin(a);
-    if(!onScreen(p) && frameCount < 1000) {
-      p.x = random(width);
-      p.y = random(height);
-    }
+  function setCurrentTime(slideNum) {
+    var object = [ 58, 235, 396, 480 ];
+    player.seekTo(object[slideNum]);
   }
-}
-
-function mouseReleased() {
-  noiseSeed(millis());
-}
-
-function onScreen(v) {
-  return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
-}
 </script>
-<div id="canvasForHTML">
-
+</div>
+<strong>Timestamps:</strong>
+<ul>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(0)">Should replication reveal the same <em>p</em>?</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(1)">What Power are you using</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(2)">Increasing the power</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(3)">Comparing CI’s to single point</a>
+</li>
+</ul>
 </div>
 </div>
+</section>
+<section id="h0-and-ha-distribution" class="level2 center">
+<h2 class="center anchored" data-anchor-id="h0-and-ha-distribution">H0 and HA distribution</h2>
+<div class="cell" data-layout-align="center" data-screenshot.opts="{&quot;delay&quot;:5}">
+<iframe src="https://sharon-klinkenberg.shinyapps.io/tiny-effects/?showcase=0" width="1200px" height="340px" data-external="1">
+</iframe>
+</div>
+</section>
+</section>
 
-
-
-</main> <!-- /main -->
+</main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -444,25 +343,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/shklinkenberg\.github\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ShKlinkenberg/statistics-lectures/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ShKlinkenberg/statistics-lectures/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer><script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

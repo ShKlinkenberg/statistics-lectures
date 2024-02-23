@@ -363,24 +363,60 @@ Klinkenberg
 </section>
 <section>
 <section id="the-problem-with-p-values" class="title-slide slide level1 center" data-background-image="Sad-P.webp" data-background-color="black">
-<h1>The problem with P-values</h1>
+<h1>The problem with <br>P-values</h1>
 
 </section>
 <section id="there-is-no-problem" class="slide level2">
 <h2>There is no problem</h2>
-<p>The problem with P-values is that they are often <strong>misunderstood</strong> and <strong>misinterpreted</strong>. The P-value is the probability of observing a test statistic as or more extreme as the one obtained, given that the null hypothesis is true. It is not the probability that the null hypothesis is true. The P-value is not a measure of the strength of the evidence against the null hypothesis.</p>
+<p>The problem with P-values is that they are often <strong>misunderstood</strong> and <strong>misinterpreted</strong>. The P-value is the probability of observing a sample statistic as or more extreme as the one obtained, given that the null hypothesis is true. It is <strong>NOT</strong> the probability that the null hypothesis is true. The P-value is <strong>NOT</strong> a measure of the strength of the evidence against the null hypothesis.</p>
 <blockquote>
-<p>The mis interpretation is the problem, and not adhering to the Nayman-Pearson framework</p>
+<p>The misinterpretation is the problem, and not adhering to the Nayman-Pearson paradigm</p>
 </blockquote>
 </section>
 <section id="the-dance-of-the-p-value" class="slide level2">
 <h2>The dance of the P-value</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="responsive-container">
+<div id="player">
+
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<script>
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'ez4DgdurRPg',
+    });
+  }
+  function setCurrentTime(slideNum) {
+    var object = [ 58, 235, 396, 480 ];
+    player.seekTo(object[slideNum]);
+  }
+</script>
+</div>
 <ul>
-<li><a href="https://youtu.be/ez4DgdurRPg?si=z7oIlKZx6iZjHNYH&amp;t=58">Should replication reveal the same <em>p</em>?</a></li>
-<li><a href="https://youtu.be/ez4DgdurRPg?si=pN0QTEjARl_2mUO0&amp;t=235">What Power are you using</a></li>
-<li><a href="https://youtu.be/ez4DgdurRPg?si=QQku6BKu4C-8BvhF&amp;t=396">Increasing the power</a></li>
-<li><a href="https://youtu.be/ez4DgdurRPg?si=QPAcDeFmG-BUe8ZH&amp;t=480">Comparing CI’s to single point</a></li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(0)">Should replication reveal the same <em>p</em>?</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(1)">What Power are you using</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(2)">Increasing the power</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(3)">Comparing CI’s to single point</a>
+</li>
 </ul>
+</div>
+</div>
 </section>
 <section id="h0-and-ha-distribution" class="slide level2 center">
 <h2>H0 and HA distribution</h2>
@@ -388,6 +424,15 @@ Klinkenberg
 <iframe src="https://sharon-klinkenberg.shinyapps.io/tiny-effects/?showcase=0" width="1200px" height="340px" data-external="1">
 </iframe>
 </div>
+</section>
+<section id="gpower" class="slide level2">
+<h2>G*Power</h2>
+<p>Determine the required sample size for a desired test power, significance level, and effect size.</p>
+<blockquote>
+<p>G*Power is a tool to compute statistical power analyses for many different <span class="math inline">\(t\)</span> tests, <span class="math inline">\(F\)</span> tests, <span class="math inline">\(\chi^2\)</span> tests, <span class="math inline">\(z\)</span> tests and some exact tests.</p>
+</blockquote>
+<p><a href="http://www.gpower.hhu.de/">gpower.hhu.de</a></p>
+<p><img data-src="https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png" class="absolute" style="bottom: 0px; right: 50px; height: 220px; "></p>
 </section></section>
 <section>
 <section id="confidence-interval" class="title-slide slide level1 center">
@@ -405,16 +450,17 @@ Klinkenberg
 <li>Lowerbound = <span class="math inline">\(\bar{x} - 1.96 \times SE\)</span></li>
 <li>Upperbound = <span class="math inline">\(\bar{x} + 1.96 \times SE\)</span></li>
 </ul>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Standard_deviation_diagram_micro.svg" class="absolute fragment" style="bottom: 0px; right: 50px; height: 220px; "></p>
 </section>
 <section id="plot-ci" class="slide level2">
 <h2>Plot CI</h2>
 
-<img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="out-of-100-samples" class="slide level2">
 <h2>5 out of 100 samples</h2>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" height="600"></p>
+<p><img data-src="alternatives_nhst_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" height="600"></p>
 </div>
 </div>
 </section>
@@ -423,16 +469,16 @@ Klinkenberg
 <p>Confidence intervals and levels are frequently misunderstood, and published studies have shown that even professional scientists often misinterpret them <span class="citation" data-cites="wiki:Confidence_interval">(<a href="#/references" role="doc-biblioref" onclick="">Wikipedia, 2024</a>)</span></p>
 <p><span class="citation" data-cites="hoekstra2014robust">Hoekstra, Morey, Rouder, &amp; Wagenmakers (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span> administerred the following questionair to 120 researchers.</p>
 </section>
-<section id="section" class="slide level2">
+<section id="section" class="slide level2 smaller">
 <h2></h2>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:70%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="https://media.springernature.com/full/springer-static/image/art%3A10.3758%2Fs13423-013-0572-3/MediaObjects/13423_2013_572_Figa_HTML.gif"></p>
 </figure>
 </div>
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:30%;">
 <div class="fragment">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -463,7 +509,7 @@ Klinkenberg
 </colgroup>
 <thead>
 <tr class="header">
-<th>Number</th>
+<th>#True</th>
 <th>First-Year Students (n = 442)</th>
 <th>Master Students (n = 34)</th>
 <th>Researchers (n = 118)</th>
@@ -514,9 +560,20 @@ Klinkenberg
 </tr>
 </tbody>
 </table>
+</section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+<blockquote>
+<p>Use both NHST and confidence intervals</p>
+</blockquote>
 </section>
-<section id="ci-compare-to-h0" class="slide level2">
-<h2>CI compare to H0</h2>
+<section id="example" class="slide level2 smaller">
+<h2>Example</h2>
+<p><img data-src="https://ars.els-cdn.com/content/image/1-s2.0-S0360131511000418-gr5.jpg" class="absolute" style="bottom: 20px; right: 50px; height: 200px; "></p>
+<div style="font-size: 70%">
+<p>We also studied the validity by comparing the mean ability ratings of children in different grades. We expected a positive relation between grade and ability. Figure 5 shows the average ability rating for each grade and domain. As expected, children in older age groups had a higher rating than children in younger age groups. In all four domains, there is an overall significant effect of grade: addition <span class="math inline">\(F(5,1456)=1091.4,p&lt;.01,\omega^2=.78\)</span>, subtraction <span class="math inline">\(F(5,1363)=780.5,p&lt;.01,\omega^2=.74\)</span>, multiplication <span class="math inline">\(F(5,1215)=409.6,p&lt;.01,\omega^2=.62\)</span>, and <span class="math inline">\(F(5,973)=223.31,p&lt;.01,\omega^2=.53\)</span> for division. Levene’s tests show differences in variances for the domains multiplication and division. However, the non-parametric Kruskal-Wallis tests also show significant differences for these domains: <span class="math inline">\(\chi^2(5)=753.28,p&lt;.01\)</span> for multiplication and <span class="math inline">\(\chi^2(5)=505.17,p&lt;.01\)</span> for division. For all domains, post hoc analyses show significant differences between all grades, except for the differences between grades five and six <span class="citation" data-cites="KLINKENBERG20111813">(<a href="#/references" role="doc-biblioref" onclick="">Klinkenberg, Straatemeier, &amp; van der Maas, 2011</a>)</span>.</p>
+</div>
 <!-- Footer insert below -->
 </section></section>
 <section>
@@ -552,6 +609,9 @@ Klinkenberg
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-hoekstra2014robust" class="csl-entry" role="listitem">
 Hoekstra, R., Morey, R. D., Rouder, J. N., &amp; Wagenmakers, E.-J. (2014). Robust misinterpretation of confidence intervals. <em>Psychonomic Bulletin &amp; Review</em>, <em>21</em>, 1157–1164.
+</div>
+<div id="ref-KLINKENBERG20111813" class="csl-entry" role="listitem">
+Klinkenberg, S., Straatemeier, M., &amp; van der Maas, H. L. J. (2011). Computer adaptive practice of maths ability using a new item response model for on the fly ability and difficulty estimation. <em>Computers &amp; Education</em>, <em>57</em>(2), 1813–1824. https://doi.org/<a href="https://doi.org/10.1016/j.compedu.2011.02.003">https://doi.org/10.1016/j.compedu.2011.02.003</a>
 </div>
 <div id="ref-wiki:Confidence_interval" class="csl-entry" role="listitem">
 Wikipedia. (2024). <em><span class="nocase">Confidence interval</span> — <span>W</span>ikipedia<span>,</span> the free encyclopedia</em>. <a href="http://en.wikipedia.org/w/index.php?title=Confidence%20interval&amp;oldid=1207611938" class="uri">http://en.wikipedia.org/w/index.php?title=Confidence%20interval&amp;oldid=1207611938</a>.

@@ -1,18 +1,75 @@
-# The problem with P-values {background-image="Sad-P.webp" background-color="black"}
+# The problem with <br>P-values {background-image="Sad-P.webp" background-color="black"}
 
 ## There is no problem
 
 The problem with P-values is that they are often **misunderstood** and **misinterpreted**. The P-value is the probability of observing a sample statistic as or more extreme as the one obtained, given that the null hypothesis is true. It is **NOT** the probability that the null hypothesis is true. The P-value is **NOT** a measure of the strength of the evidence against the null hypothesis.
 
-> The mis interpretation is the problem,
-> and not adhering to the Nayman-Pearson framework
+> The misinterpretation is the problem,
+> and not adhering to the Nayman-Pearson paradigm
 
 ## The dance of the P-value
 
-* [Should replication reveal the same _p_?](https://youtu.be/ez4DgdurRPg?si=z7oIlKZx6iZjHNYH&t=58)
-* [What Power are you using](https://youtu.be/ez4DgdurRPg?si=pN0QTEjARl_2mUO0&t=235)
-* [Increasing the power](https://youtu.be/ez4DgdurRPg?si=QQku6BKu4C-8BvhF&t=396)
-* [Comparing CI's to single point](https://youtu.be/ez4DgdurRPg?si=QPAcDeFmG-BUe8ZH&t=480)
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{style, echo=FALSE}
+.responsive-container {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 0px;
+	height: 0;
+	overflow: hidden;
+}
+
+.responsive-container iframe,
+.responsive-container object,
+.responsive-container embed,
+.responsive-container video
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+```
+
+
+<div class="responsive-container"><div id="player"></div></div>
+
+:::
+
+::: {.column width="40%"}
+
+```{js, echo=FALSE}
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'ez4DgdurRPg',
+    });
+  }
+  function setCurrentTime(slideNum) {
+    var object = [ 58, 235, 396, 480 ];
+    player.seekTo(object[slideNum]);
+  }
+```
+
+
+<ul>
+<li><a href="javascript:void(0);" onclick="setCurrentTime(0)">Should replication reveal the same _p_?</a></li>
+<li><a href="javascript:void(0);" onclick="setCurrentTime(1)">What Power are you using</a></li>
+<li><a href="javascript:void(0);" onclick="setCurrentTime(2)">Increasing the power</a></li>
+<li><a href="javascript:void(0);" onclick="setCurrentTime(3)">Comparing CI's to single point</a></li>
+</ul>
+
+:::
+
+::::
 
 ## H0 and HA distribution {.center}
 
@@ -21,3 +78,13 @@ The problem with P-values is that they are often **misunderstood** and **misinte
 # Generate a normal distribution as hypothesized sampling distribution (M = 2.8, SE = SD / sqrt(N) = 0.6 / sqrt(10) = 0.2) with 2.5% of each tail area coloured. Add a vertical line with value for the sample average linked to a slider (range [2.82, 3.00] initial value 2.90). Add a sample size slider (range [10, 5,000], initial value 10), which is linked to the standard error of the normal curve. With slider for (assumed) true population mean and test power.
 knitr::include_app("https://sharon-klinkenberg.shinyapps.io/tiny-effects/", height="340px")
 ```
+
+## G*Power
+
+Determine the required sample size for a desired test power, significance level, and effect size.
+
+> G\*Power is a tool to compute statistical power analyses for many different $t$ tests, $F$ tests, $\chi^2$ tests, $z$ tests and some exact tests.
+
+[gpower.hhu.de](http://www.gpower.hhu.de/)
+
+![](https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png){.absolute bottom=0 right=50 height="220"}

@@ -13,6 +13,8 @@ $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \fr
 - Lowerbound = $\bar{x} - 1.96 \times SE$
 - Upperbound = $\bar{x} + 1.96 \times SE$
 
+![](https://upload.wikimedia.org/wikipedia/commons/3/3a/Standard_deviation_diagram_micro.svg){.absolute bottom=0 right=50 height="220" .fragment}
+
 ## Plot CI
 
 
@@ -152,15 +154,15 @@ Confidence intervals and levels are frequently misunderstood, and published stud
 
 @hoekstra2014robust administerred the following questionair to 120 researchers.
 
-##
+## {.smaller}
 
 :::: {.columns}
 
-::: {.column width="60%"}
+::: {.column width="70%"}
 ![](https://media.springernature.com/full/springer-static/image/art%3A10.3758%2Fs13423-013-0572-3/MediaObjects/13423_2013_572_Figa_HTML.gif){fig-align="center"}
 :::
 
-::: {.column width="40%"}
+::: {.column width="30%"}
 
 :::: {.fragment}
 
@@ -176,7 +178,7 @@ All of the statements are false
 
 ## Researcher don't know {.smaller}
 
-| Number | First-Year Students (n = 442) | Master Students (n = 34) | Researchers (n = 118) |
+| #True | First-Year Students (n = 442) | Master Students (n = 34) | Researchers (n = 118) |
 |--------|-------------------------------|--------------------------|-----------------------|
 | 0      | 2%                            | 0%                       | 3%                    |
 | 1      | 6%                            | 24%                      | 9%                    |
@@ -187,6 +189,4 @@ All of the statements are false
 | 6      | 7%                            | 12%                      | 11%                   |
 
 : Table 2 from @hoekstra2014robust
-
-## CI compare to H0
 

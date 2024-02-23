@@ -15,6 +15,20 @@ format:
 ```{r child="../../../../topics/confidence_interval/confidence_interval.qmd", eval=TRUE}
 ```
 
+# Conclusion
+
+> Use both NHST and confidence intervals
+
+## Example {.smaller}
+
+![](https://ars.els-cdn.com/content/image/1-s2.0-S0360131511000418-gr5.jpg){.absolute bottom=20 right=50 height="200"}
+
+::: {style="font-size: 70%"}
+
+We also studied the validity by comparing the mean ability ratings of children in different grades. We expected a positive relation between grade and ability. Figure 5 shows the average ability rating for each grade and domain. As expected, children in older age groups had a higher rating than children in younger age groups. In all four domains, there is an overall significant effect of grade: addition $F(5,1456)=1091.4,p<.01,\omega^2=.78$, subtraction  $F(5,1363)=780.5,p<.01,\omega^2=.74$, multiplication $F(5,1215)=409.6,p<.01,\omega^2=.62$, and $F(5,973)=223.31,p<.01,\omega^2=.53$ for division. Levene's tests show differences in variances for the domains multiplication and division. However, the non-parametric Kruskal-Wallis tests also show significant differences for these domains: $\chi^2(5)=753.28,p<.01$ for multiplication and $\chi^2(5)=505.17,p<.01$ for division. For all domains, post hoc analyses show significant differences between all grades, except for the differences between grades five and six [@KLINKENBERG20111813].
+
+:::
+
 <!-- Footer insert below -->
 
 ```{r child="../../../../footer.qmd"}
