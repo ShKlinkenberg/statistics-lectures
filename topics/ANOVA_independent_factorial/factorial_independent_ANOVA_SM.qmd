@@ -27,7 +27,11 @@ Effects and interactions/moderation:
 * 1 dependent/outcome variable
 * 2 or more independent/predictor variables
     * 2 or more cat./levels
-    
+
+## Flow chart
+
+![Flow chart statistical test selection](https://shklinkenberg.github.io/Statistical-Inference/GentleIntro_files/figure-html/choice-diagram-copy-1.png)
+
 ## Assumptions {.subsection}
 
 * Continuous variable
@@ -466,9 +470,9 @@ Effect sizes of post-hoc comparisons
 
 ## Linear line equation
 
-$Y = aX + b$
+$$\hat{x} = b_0 + b_1 \times x, \hspace{1 cm} Y = aX + b $$
 
-:::{.column-page}
+:::{.column-page .fragment}
 
 <iframe src="https://www.geogebra.org/calculator/z2eydyxx?embed" width="1200" height="400" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 

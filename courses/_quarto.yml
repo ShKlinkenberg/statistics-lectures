@@ -26,6 +26,9 @@ format:
       data-background-image: https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg
       data-background-size: contain
       data-background-position: bottom
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
       
 # project:
 #   output-dir: ../handouts/
