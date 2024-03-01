@@ -1,7 +1,7 @@
 ---
 title: "F-Distribution and factorial ANOVA"
 author: "Klinkenberg"
-date: "25 sep 2023"
+date: "4 feb 2024"
 footer: "SMCR / SMCO"
 format: 
   html: default
