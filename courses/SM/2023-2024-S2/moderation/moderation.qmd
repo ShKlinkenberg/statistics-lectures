@@ -1,0 +1,23 @@
+---
+title: "Moderation with continuous predictors"
+author: "Klinkenberg"
+date: "11 mar 2024"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/moderation/moderationSM.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
+# References
+
+::: {#refs}
+:::

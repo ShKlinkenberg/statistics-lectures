@@ -1,4 +1,4 @@
-# Moderation {.section}
+# Moderation
 
 <!-- Allow color highlighting in mathjax -->
 <script type="text/x-mathjax-config">
@@ -14,11 +14,7 @@ if(!"manipulateWidget" %in% installed.packages()) { install.packages("manipulate
 library("manipulateWidget")
 ```
 
-## Moderation
-
-In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction.
-
-Source [WIKIPEDIA](https://en.wikipedia.org/wiki/Moderation_(statistics))
+In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction [@wiki:Moderation_statistics].
 
 ## Model {.subsection .flexbox .vcenter}
 
@@ -31,9 +27,7 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 
 Video games are among the favourite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain. 
 
-Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behaviour, callous unemotional traits, and the number of hours per week they play video games.
-
-Source: Field 11.3.1
+Imagine a scientist wanted to look at the relationship between playing violent video games such as Grand Theft Auto, MadWorld and Manhunt and aggression. She gathered data from 442 youths. She measured their aggressive behaviour, callous unemotional traits, and the number of hours per week they play video games [@Field2017, §11.3.1]
 
 ```{r, echo=FALSE}
 set.seed(283) ## Mooie seed :-)
@@ -109,7 +103,7 @@ round(cor(data), 3)
 
 ## Scatterplots {.subsection}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.asp=.8}
 plot(data)
 ```
 
@@ -168,9 +162,16 @@ rglwidget()
 
 ## Fit model {.smaller .subsection}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# load package
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+
 #fit2 <- lm(outcome ~ predictor + moderator)
-fit <- lm(outcome ~ predictor + moderator + predictor*moderator); summary(fit)
+fit <- lm(outcome ~ predictor + moderator + predictor*moderator); 
+
+tab_model(summary(fit))
 ```
 
 ## Regression equation {.smaller}
@@ -267,3 +268,41 @@ points(1:n, data$exp, col='green')
 #for(i in 1:n) {lines(c(i,i),c(mean(data$exp), data$exp[i]), col='red')}
 segments(1:n, mean(data$exp), 1:n, data$exp, col='green')
 ```
+
+## Variance decomposition 3D
+
+```{r, echo=FALSE}
+
+
+surface3d(x.pre,y.mod,z.pre * 0 + mean(outcome), color = rgb(1,1,1,.7))
+
+
+markers <- data.frame(startX = predictor, 
+                      startY = moderator, 
+                      startZ = outcome * 0 + mean(outcome), 
+                      endX = predictor, 
+                      endY = moderator, 
+                      endZ = outcome)
+
+segments3d(x=as.vector(t(markers[,c(1,4)])),
+           y=as.vector(t(markers[,c(2,5)])),
+           z=as.vector(t(markers[,c(3,6)])))
+
+aspect3d(1,1,1)
+
+my.plot
+
+subid <- currentSubscene3d()
+rglwidget(elementId="plot3drgl2-2", reuse = FALSE)
+```
+
+<script type="text/javascript">
+var rotate2 = function(angle) {
+  var rgl = document.getElementById("plot3drgl2-2").rglinstance;
+  rgl.getObj(`r subid`).par3d.userMatrix.rotate(angle, 1,0,0);
+  rgl.drawScene();
+};
+</script>
+
+<button type="button" onclick="rotate2(-10)">Down</button>
+<button type="button" onclick="rotate2(10)">Up</button>
