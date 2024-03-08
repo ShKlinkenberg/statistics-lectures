@@ -282,11 +282,24 @@ markers <- data.frame(startX = predictor,
                       startZ = outcome * 0 + mean(outcome), 
                       endX = predictor, 
                       endY = moderator, 
-                      endZ = outcome)
+                      endZ = data$exp)
 
 segments3d(x=as.vector(t(markers[,c(1,4)])),
            y=as.vector(t(markers[,c(2,5)])),
-           z=as.vector(t(markers[,c(3,6)])))
+           z=as.vector(t(markers[,c(3,6)])),
+           color = "green")
+
+markers <- data.frame(startX = predictor+.01, 
+                      startY = moderator, 
+                      startZ = outcome, 
+                      endX = predictor+.01, 
+                      endY = moderator, 
+                      endZ = data$exp)
+
+segments3d(x=as.vector(t(markers[,c(1,4)])),
+           y=as.vector(t(markers[,c(2,5)])),
+           z=as.vector(t(markers[,c(3,6)])),
+           color = "black")
 
 aspect3d(1,1,1)
 
