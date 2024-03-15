@@ -1,0 +1,23 @@
+---
+title: "Mediation"
+author: "Klinkenberg"
+date: "18 mar 2024"
+footer: "SMCR / SMCO"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/mediation/mediationSM.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
+# References
+
+::: {#refs}
+:::

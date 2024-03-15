@@ -1,5 +1,3 @@
-# Mediation {.section}
-
 ```{r, echo=FALSE}
 if(!"DT" %in% installed.packages()) { install.packages("DT") }
 library("DT")
@@ -11,14 +9,55 @@ library("DT")
 
 ::: {.column}
 
-![Mediation](https://upload.wikimedia.org/wikipedia/commons/4/4d/Mediation.jpg)
+
+```{r, echo=FALSE}
+library(visNetwork)
+nodes <- data.frame(id = 1:3, 
+                    x  = c(0, 400, 800),
+                    y  = c(200, 0, 200),
+                    label = c("Predictor", 
+                              "Mediator", 
+                              "Outcome"), 
+                    shape       = "box",
+                    font.size   = 40, 
+                    shadow      = FALSE, 
+                    physics     = FALSE, 
+                    borderWidth = 1, 
+                    color       = list(background = "#E7EEF8", 
+                                       border     = "black") )
+
+edges <- data.frame(from       = c(1, 1, 2), 
+                    to         = c(3, 2, 3),
+                    width      = c(1, 1, 1),
+                    # font.color = c(brewercolors[[1]], 
+                    #                rep(brewercolors[[5]],2), 
+                    #                brewercolors[[1]], 
+                    #                rep(brewercolors[[5]],5), 
+                    #                brewercolors[[1]]),
+                    # color.highlight = rep(brewercolors[[5]]),
+                    # shadow          = c(rep(TRUE, 4), FALSE, 
+                    #                     rep(TRUE, 2), FALSE, 
+                    #                     rep(TRUE, 2)),
+                    label = c("C","A","B")
+                    )
+
+# Display network.
+visNetwork(nodes, edges, width = "100%") %>% 
+  visEdges(arrows = "to", 
+           font   = list(size = 30)) %>% 
+  visOptions(highlightNearest = list(enabled   = TRUE, 
+                                     algorithm = "hierarchical", 
+              degree = list(from = 1, 
+                            to = 0))) %>%
+  visInteraction(dragNodes   = FALSE, 
+                 multiselect = TRUE )
+```
+
 :::
 
 ::: {.column}
 
-In statistics, a mediation model is one that seeks to identify and explain the mechanism or process that underlies an observed relationship between an independent variable and a dependent variable via the inclusion of a third hypothetical variable, known as a mediator variable (also a mediating variable, intermediary variable, or intervening variable).
-
-Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
+In statistics, a mediation model is one that seeks to identify and explain the mechanism or process that underlies an observed relationship between an independent variable and a dependent variable via the inclusion of a third hypothetical variable, known as a mediator variable (also a mediating variable, intermediary variable, or intervening variable) [@wiki:Mediation_statistics].
 
 :::
 
@@ -26,7 +65,7 @@ Source: [WIKIPEDIA](https://en.wikipedia.org/wiki/Mediation_(statistics))
 
 ## Causality
 
-> Mediation does not imply causation!
+> **Mediation does not imply causation!**
 
 [Criteria for causal relations](https://shklinkenberg.github.io/Statistical-Inference/11.1-mediation-as-causal-process.html#causalcriteria)
 
@@ -34,7 +73,7 @@ All requirements need to be met:
 
 1. Correlation
 2. Time order
-3. No [spurious correlation](https://www.tylervigen.com/spurious-correlations)
+3. No [spurious (false) correlation](https://www.tylervigen.com/spurious-correlations)
 4. No common cause confounder 
 
 ## Example
@@ -129,7 +168,7 @@ datatable(data, rownames = FALSE,
 
 ## Apply 3 models {.smaller}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # load package
 library(sjPlot)
 library(sjmisc)
@@ -147,7 +186,7 @@ m.3.out.pre.med <- lm(speed.of.healing  ~ use.homeopathic.remedies + healthy.lif
 
 $$\widehat{\text{Outcome}} = b_0 + b_c \times \text{Predictor}_i$$
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 tab_model(m.1.out.pre)
 ```
 
@@ -155,7 +194,7 @@ tab_model(m.1.out.pre)
 
 $$\widehat{\text{Mediator}} = b_0 + b_a \times \text{Predictor}_i$$
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 tab_model(m.2.med.pre)
 ```
 
@@ -163,7 +202,7 @@ tab_model(m.2.med.pre)
 
 $$\widehat{\text{Outcome}} = b_0 + b_{c`} \times \text{Predictor}_i + b_b \times \text{Mediator}_i$$
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 tab_model(m.3.out.pre.med)
 ```
 
@@ -254,12 +293,12 @@ visNetwork(nodes, edges, width = "100%") %>%
 
 ## Visual {.subsection}
 
-```{r, fig.asp=1, fig.width=5, fig.align='center'}
+```{r, fig.asp=1, fig.width=5, fig.align='center', echo=FALSE}
 plot(data$use.homeopathic.remedies, data$speed.of.healing, col = 'red', xlab="alter", ylab="rocov")
 
 fit.1 <- lm(speed.of.healing ~ use.homeopathic.remedies, data)
 
-abline(fit.1, col = 'green')
+abline(fit.1, col = 'blue')
 ```
 
 ## 3D Visual
@@ -290,13 +329,13 @@ quantiles <- as.vector(quantile(data$use.homeopathic.remedies, seq(.1,.9,.1)))
 sds       <- c(mean(data$healthy.lifestyle)+(sd(data$healthy.lifestyle)*c(-1,0,1)))
 # sds       <- 1:4
 
-planes3d(a = 0,
-         b = 1,
-         c = 0,
-         #d = c(1,2,3,4),
-         d = -sds,
-         alpha=0.1,
-         color = c("blue"))
+# planes3d(a = 0,
+#          b = 1,
+#          c = 0,
+#          #d = c(1,2,3,4),
+#          d = -sds,
+#          alpha=0.1,
+#          color = c("blue"))
 
 #3 Add regression model surface
 
@@ -322,6 +361,27 @@ z.pre <- outer(x.pre, y.med, FUN='regeq')
 
 ## Add 3D regression plane to scatter plot 
 surface3d(x.pre, y.med, z.pre, color = c("green"))
+
+# segments3d(x=cbind( rep(min(x.pre), 3),  
+#                     rep(max(x.pre), 3) ),
+#            y=cbind( sds, 
+#                     sds ),
+#            z=cbind( rep(50, 3),
+#                     rep(60, 3) ),
+#            color = "blue")
+
+
+segments3d(x=rep(c(min(x.pre), max(x.pre)), 3),
+           y=rep(sds, each= 2),
+           z=regeq(rep(c(min(x.pre), max(x.pre)), 3), rep(sds, each= 2)),
+           color = "blue")
+
+segments3d(x=c(min(x.pre), max(x.pre)),
+           y=c(min(y.med), max(y.med)),
+           z=regeq( c(min(x.pre), max(x.pre)), c(min(y.med), max(y.med)) ),
+           color = "blue", lwd=3)
+
+
 
 aspect3d(1,1,1)
 # view3d(theta = 5)
