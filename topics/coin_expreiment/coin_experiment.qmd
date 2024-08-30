@@ -122,27 +122,6 @@ I landed 2 times head. Can we conclude PTSD?
 -   As you can see from the distribution of healthy coins, we cannot conclude that by definition.
 -   What we can do is indicate how rare 2 is in a healthy population.
 
-## Testing {.smaller}
-
-<small>
-
-> -   Based on the null distribution we can see that the expected value (EV is 5.)
-> -   We can now define the $H_0$ hypothesis: $H_0 = 5$
-> -   What is the alternative hypothesis?
-> -   The alternative hypothesis describes a situation where PTSD is pressent.
-> -   We could say that the alternative hypothesis is not 5.
->     -   $H_A \ne 5$
-> -   We could also formulate our $H_0$ and $H_A$ more abstract:
->     -   $H_0:$ the patient is balenced
->     -   $H_A:$ the patient is unbalenced
-> -   What criterium should we use to conclude that one would be unbalenced?
-> -   In the social sciences this $\alpha$ criteria is often 5%.
-> -   I tossed 2 times head. That is more frequent than 5%.
-> -   Therefore, we conclude that our patient is probably healthy but we can never be sure.
-> -   My coin could still be part of the unbalenced population.
-
-</small>
-
 ## Null distribution
 
 ```{r, echo=FALSE}
