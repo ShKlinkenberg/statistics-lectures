@@ -1,0 +1,49 @@
+---
+title: "Statistical Reasoning 2024-2025"
+subtitle: "Semester 1"
+author: "Klinkenberg"
+date: today
+---
+
+On this site you can find my statistics lectures for Statistical Reasoning.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+course.path = "courses/SR/2024-2025-S1/"
+
+files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
+
+files <- files[grep("SR.qmd", files, invert = TRUE)]
+
+lectures = data.frame()
+n = length(files)
+
+for (i in 1:n) {
+
+  lectures[i ,'url'] <- data.frame(url = paste0(course.path, files[i]))
+  
+  yaml <- rmarkdown::yaml_front_matter(files[i])
+  
+  lectures[i , 'title'] = yaml$title
+  lectures[i , 'date'] = yaml$date
+  lectures[i , 'file_name'] = files[i]
+
+}
+
+data.frame(Date    = lectures$date, 
+           Lecture = lectures$title,
+           Handout = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("qmd", "html", lectures$url)),
+           Slides  = sprintf('<a href="https://shklinkenberg.github.io/statistics-lectures/%s" target="_blank" class="external">link</a>', gsub("qmd", "slide.html", lectures$url)) 
+          ) -> lecture.list
+
+# Sort on date
+library("lubridate")
+library("dplyr")
+
+lecture.list$Date <- lubridate::dmy(lecture.list$Date)
+
+library('kableExtra')
+
+# Print table with kable as set in YAML
+knitr::kable(dplyr::arrange(lecture.list, desc(Date)), escape = F ) %>%
+  kable_styling(full_width = T)
+```

@@ -1,0 +1,68 @@
+---
+title: "Statistical Reasoning"
+subtitle: "Introduction to statistical reasoning"
+author: "Klinkenberg"
+date: "02 sep 2024"
+footer: "Statistical Reasoning 2024-2025"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+## Statistical Reasoning {background-image="Here-Be-Dragons-animation.gif" background-size="contain"}
+
+
+## Course parts
+
+* Lectures: On campus / Online / Video recording
+* Preparatory Assignment: Submit and **reflect** in canvas
+* Tutorials: For your support and in class assessment
+* Exam: Knowledge and skills
+
+## in class assessment
+
+![](unnamed-chunk-13-1.png)
+
+## Grading
+
+$$\text{Final grade} = 0.9 \times \text{exam grade} + 0.1 \times \text{credit points}$$
+
+* Exam
+* Credits for
+  * Tutorial participation
+  * Preparatory assignment
+
+## Credits {.smaller}
+
+> You get 10 at the start of the course.
+
+Number of times missed | Deduction for TU |	Deduction for PA
+-----------------------|------------------|-----------------
+1x                     | 0                | 0
+2x                     | 0	              | 0
+3x                     | 2                | 2
+4x                     | 4                | 4
+5x or more             | 5                | 5
+
+See canvas for all the details.
+
+## Learning
+
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- Add the required topics below -->
+
+```{r child="../../../../topics/statistical_reasoning/statistical_reasoning.qmd"}
+```
+
+```{r child="../../../../topics/empirical_cycle/empirical_cycle.qmd"}
+```
+
+```{r child="../../../../topics/coin_expreiment/coin_experiment.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```

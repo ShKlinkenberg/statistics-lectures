@@ -3,10 +3,12 @@ project:
   output-dir: site
   render:
     - index.qmd
+    - courses/SR/2024-2025-S1/SR.qmd
     - courses/SM/2023-2024-S1/SM.qmd
     - courses/SM/2023-2024-S2/SM.qmd
     - courses/SSR/2022-2023/SSR.qmd
     - courses/WSR_PB/2022-2023/WSR_PB.qmd
+
     
 format:
   html:
@@ -30,6 +32,7 @@ website:
     left:
       - text: Courses
         menu:
+          - sidebar:SR
           - sidebar:SMC
           - sidebar:SSR
           - sidebar:WSR
@@ -63,5 +66,13 @@ website:
       contents:
         - courses/SM/2023-2024-S1/SM.qmd
         - courses/SM/2023-2024-S2/SM.qmd
+    - id: SR
+      title: "Statistical Reasoning"
+      style: "docked"
+      # foreground: '#BC0031'
+      background: light
+      collapse-level: 2
+      contents:
+        - courses/SR/2024-2025-S1/SR.qmd
 # 
 # freeze: false
