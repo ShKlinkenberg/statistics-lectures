@@ -168,3 +168,7 @@ kableExtra::kable(cbind(n, k, p,
 :::
 
 :::
+
+::: {.callout-warning}
+Formula not exam material
+:::

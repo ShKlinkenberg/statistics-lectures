@@ -1,0 +1,40 @@
+---
+title: "Probability Models"
+author: "Klinkenberg"
+date: "09 sep 2024"
+footer: "Statistical Reasoning 2024-2025"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+# Why do we need them {background-image="probabilitymodels.png" background-color="black"}
+
+```{r child="../../../../topics/exact_probability/exact_probability.qmd"}
+```
+
+```{r child="../../../../topics/bootstrap/bootstrap.qmd"}
+```
+
+# Theoretical Approximations
+
+```{r child="../../../../topics/continuous_probability_distributions/continuous_probability_distributions.qmd"}
+```
+
+
+```{r child="../../../../topics/t-distribution/t-distribution_SM.qmd"}
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
+# References
+
+::: {#refs}
+:::
+
+* Distribution illustration generated with DALL-E by OpenAI

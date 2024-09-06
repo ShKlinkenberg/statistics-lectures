@@ -145,6 +145,8 @@ lines(T, dt(T,df), col = "red")
 legend("topright", lty = 1, col="red", legend = "T-distribution")
 ```
 
+The t-distribution **approximates** the sampling distribution, hence the name theoretical **approximation**.
+
 ## T-distribution
 
 <small> So if the population is normaly distributed (assumption of normality) the t-distribution represents the deviation of sample means from the population mean ($\mu$), given a certain sample size ($df = n - 1$).
@@ -182,6 +184,8 @@ for(i in 2:length(multiple.df)) {
   } 
 legend("topright", legend = paste("n =",multiple.n), lty=1, col = col)
 ```
+
+<!--
 
 ## One or two sided {.subsection}
 
@@ -293,7 +297,7 @@ ybracket = dt(tp95 , df = 10)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.0
 lines(xbracket,ybracket,col="gray")
 ```
 
-<!--
+
 
 ## Effect-size {.subsection}
 
