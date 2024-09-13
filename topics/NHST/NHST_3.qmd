@@ -106,9 +106,7 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 
 ##
 
-../../../../topics/nhst/
-
-![](../../../topics/NHST/binomial_thetas.gif)
+![](../../../../topics/nhst/binomial_thetas.gif)
 
 ## Decision table
 
@@ -355,9 +353,10 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Effect size
 
-In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences [@wiki:Effect_size].
 
-For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses [@wiki:Effect_size].
+* True effect size
+* Observed effect size
 
 ## 
 
@@ -396,7 +395,6 @@ Some common test statistics
 -   $F$-statistic
 -   $\chi^2$-statistic
 -   etc...
-
 
 ## P-value
 
@@ -440,8 +438,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 
 ## Observed effect size {.flexbox .vcenter}
 
-![](../../../../topics/NHST/effec_size.png)
-
+![](../../../../topics/nhst/effec_size.png)
 ## Post-Hoc Power
 
 -   Also known as: observed, retrospective, achieved
@@ -541,7 +538,7 @@ barplot(dbinom(0:N,N, HA),
 
 ## Reasoning Scheme {.subsection .flexbox .vcenter}
 
-![](../../../../topics/NHST/NHST_descision_scheme.png)
+![](../../../../topics/nhst/NHST_descision_scheme.png)
 
 ## R\<-PSYCHOLOGIST {.smaller}
 
