@@ -2,6 +2,7 @@
 
 ## Neyman-Pearson Paradigm
 
+
 ![](https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg){.absolute top="150" left="0" height="300"}
 
 ![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top="150" left="200" height="300"}
