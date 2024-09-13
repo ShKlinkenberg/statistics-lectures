@@ -104,6 +104,12 @@ text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
 }
 ```
 
+##
+
+../../../../topics/nhst/
+
+![](../../../topics/NHST/binomial_thetas.gif)
+
 ## Decision table
 
 ::: {.content-visible when-format="revealjs"}
@@ -236,25 +242,6 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Post-Hoc Power
-
--   Also known as: observed, retrospective, achieved, prospective and a priori power
--   Specificly meaning:
-
-> The power of a test assuming a population effect size equal to the observed effect size in the current sample.
-
-@doi:10.1080/19312450701641375
-
-## Effect size
-
-In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.
-
-For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses [@wiki:Effect_size].
-
-## Effect size {.flexbox .vcenter}
-
-![](../../../../topics/NHST/effec_size.png)
-
 ## One minus alpha
 
 ::: columns
@@ -366,6 +353,12 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
+## Effect size
+
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences.
+
+For each type of effect size, a larger absolute value always indicates a stronger effect. Effect sizes complement statistical hypothesis testing, and play an important role in power analyses, sample size planning, and in meta-analyses [@wiki:Effect_size].
+
 ## 
 
 ```{r, echo=FALSE}
@@ -391,6 +384,19 @@ abline(v = c(6.5,27.5), lty=2, col='red')
 legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
 
 ```
+
+## Test statistics
+
+Some common test statistics
+
+-   Number of heads
+-   Sum of dice
+-   Difference
+-   $t$-statistic
+-   $F$-statistic
+-   $\chi^2$-statistic
+-   etc...
+
 
 ## P-value
 
@@ -432,17 +438,18 @@ abline(v = c(2.5,10.9), lty=2, col='red')
 text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ```
 
-## Test statistics
+## Observed effect size {.flexbox .vcenter}
 
-Some common test statistics
+![](../../../../topics/NHST/effec_size.png)
 
--   Number of heads
--   Sum of dice
--   Difference
--   $t$-statistic
--   $F$-statistic
--   $\chi^2$-statistic
--   etc...
+## Post-Hoc Power
+
+-   Also known as: observed, retrospective, achieved
+-   Specificly meaning:
+
+> The power of a test assuming a population effect size equal to the observed effect size in the current sample.
+
+@doi:10.1080/19312450701641375
 
 ## Decision Table {.flexbox .vcenter .smaller}
 
