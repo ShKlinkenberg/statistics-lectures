@@ -1,0 +1,549 @@
+# Null Hypothesis<br>Significance Testing {.section}
+
+## Neyman-Pearson Paradigm
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg){.absolute top="150" left="0" height="300"}
+
+![](https://upload.wikimedia.org/wikipedia/en/a/a2/Egon_Pearson.jpg){.absolute top="150" left="200" height="300"}
+
+[Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman) - [Pearson](https://en.wikipedia.org/wiki/Egon_Pearson)
+
+## Two hypothesis
+
+::: columns
+::: column
+$H_0$
+
+-   Skeptical point of view
+-   No effect
+-   No preference
+-   No Correlation
+-   No difference
+:::
+
+::: column
+$H_A$
+
+-   Refute Skepticism
+-   Effect
+-   Preference
+-   Correlation
+-   Difference
+:::
+:::
+
+## Binomial $H_0$ distribution
+
+```{r, echo=FALSE}
+#| output-location: slide
+
+n = 10   # Sample size
+k = 0:n  # Discrete probability space
+p = .5   # Probability of head
+
+munt = 0:1
+
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+# permutations
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+
+title = "Binomial Null distribution"
+
+# col=c(rep("red",2),rep("beige",7),rep("red",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:n, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col='beige',
+         ylim=c(0,.3) )
+
+# abline(v = c(2.5,10.9), lty=2, col='red')
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Binomial $H_A$ distributions
+
+```{r, echo=FALSE}
+
+# n = 10   # Sample size
+# k = 0:10 # Discrete probability space
+prob = c(.2, .4, .6, .8)  # Probability of head
+
+layout(matrix(1:4, 2,2)) 
+
+for(p in prob) {
+permutations = factorial(n) / ( factorial(k) * factorial(n-k) )
+
+p_k2  = p^k  * (1-p)^(n-k)  # Probability of single event
+p_kp2 = p_k2 * permutations # Probability of event times 
+                            # the occurrence of that event
+
+title = "Binomial alternative distribution"
+
+col=c(rep("red",2),rep("beige",7),rep("red",2))
+
+barplot( p_kp2, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         beside=TRUE,
+         col="beige",
+         ylim=c(0,.3) 
+         )
+
+# abline(v = c(2.5,10.9), lty=2, col='red')
+
+text(.6:10.6*1.2,p_kp2,round(p_kp2,3),pos=3,cex=.5)
+}
+```
+
+##
+
+![](../../../../topics/nhst/binomial_thetas.gif)
+
+## Decision table
+
+::: {.content-visible when-format="revealjs"}
+```{=html}
+<style>
+#dectable > svg { transform: scale(1.4);}
+</style>
+```
+:::
+
+::: {#dectable .r-stack .r-stretch}
+
+```{r child="../../../../topics/nhst/decision_table.svg", eval=TRUE}
+```
+
+:::
+
+## Alpha $\alpha$
+
+::: columns
+::: {.column width="40%"}
+-   Incorrectly reject $H_0$
+-   Type I error
+-   False Positive
+-   Criteria often 5%
+-   Distribution depends on sample size
+:::
+
+::: {#alpha .column width="60%"}
+```{=html}
+<style>
+#alpha .alpha { stroke: black;}
+#alpha > svg { transform: scale(.8);}
+</style>
+```
+
+```{r child="../../../../topics/nhst/decision_table.svg", eval=TRUE}
+```
+
+:::
+:::
+
+## 
+
+```{r, echo=FALSE}
+
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("red",2),rep("beige",7),rep("red",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Power
+
+::: columns
+::: {.column width="40%"}
+-   Correctly reject $H_0$
+-   True positive
+-   Power equal to: 1 - Beta
+    -   Beta is Type II error
+-   Criteria often 80%
+-   Depends on sample size
+:::
+
+::: {#power .column width="60%"}
+```{=html}
+<style>
+#power .power { stroke: black; }
+#power > svg { transform: scale(.8);}
+</style>
+```
+
+```{r child="../../../../topics/nhst/decision_table.svg", eval=TRUE}
+```
+
+:::
+:::
+
+## 
+
+```{r, echo=FALSE}
+
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .25   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial alternative distribution"
+
+col=c(rep("#90EE90",2),rep("beige",7),rep("#90EE90",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## One minus alpha
+
+::: columns
+::: {.column width="40%"}
+-   Correctly accept $H_0$
+-   True negative
+:::
+
+::: {#oneminalpha .column width="60%"}
+```{=html}
+<style>
+#oneminalpha .oneminalpha { stroke: black; }
+#oneminalpha > svg { transform: scale(.8);}
+</style>
+```
+
+```{r child="../../../../topics/nhst/decision_table.svg", eval=TRUE}
+```
+
+:::
+:::
+
+## 
+
+```{r, echo=FALSE}
+
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("beige",2),rep("#90EE90",7),rep("beige",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Beta
+
+::: columns
+::: {.column width="40%"}
+-   Incorrectly accept $H_0$
+-   Type II error
+-   False Negative
+-   Criteria often 20%
+-   Distribution depends on sample size
+:::
+
+::: {#beta .column width="60%"}
+```{=html}
+<style>
+#beta .beta { stroke: black; }
+#beta > svg { transform: scale(.8);}
+</style>
+```
+
+```{r child="../../../../topics/nhst/decision_table.svg", eval=TRUE}
+```
+
+:::
+:::
+
+## 
+
+```{r, echo=FALSE}
+
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .25   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial alternative distribution"
+
+col=c(rep("beige",2),rep("red",7),rep("beige",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Effect size
+
+In statistics, an effect size is a quantitative measure of the strength of a phenomenon. Examples of effect sizes are the correlation between two variables, the regression coefficient in a regression, the mean difference and standardised differences [@wiki:Effect_size].
+
+* True effect size
+* Observed effect size
+
+## 
+
+```{r, echo=FALSE}
+
+title = "Both distributions"
+
+colh0 = 'darkgreen'
+colha = 'darkorange'
+
+barplot( rbind(dbinom(0:10, 10, .5),
+               dbinom(0:10, 10, .2)), 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col = rbind(colh0,colha),
+         beside=TRUE
+         #legend.text = c("H0", "HA")
+         )
+
+abline(v = c(6.5,27.5), lty=2, col='red')
+
+legend("topright", legend=c("H0","HA"), fill=c(colh0, colha))
+
+```
+
+## Test statistics
+
+Some common test statistics
+
+-   Number of heads
+-   Sum of dice
+-   Difference
+-   $t$-statistic
+-   $F$-statistic
+-   $\chi^2$-statistic
+-   etc...
+
+## P-value
+
+> Conditional probability of the found test statistic or more extreme assuming the null hypothesis is true.
+
+Reject $H_0$ when:
+
+-   $p$-value $\leq$ $alpha$
+
+## P-value in $H_{0}$ distribution
+
+```{r, echo=FALSE}
+
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+
+p_k  = p^k * (1-p)^(n-k)  # Probability of single event
+p_kp = p_k * permutations # Probability of event times 
+                          # the occurrence of that event
+# sample = 90
+# freq_munt = round(p_kp*sample)
+# cbind(k,permutations,p_k,p_kp,freq_munt)
+
+title = "Binomial Null distribution"
+
+col=c(rep("blue",3),rep("beige",5),rep("blue",2))
+
+barplot( p_kp, 
+         main=title, 
+         names.arg=0:10, 
+         xlab="number of head", 
+         ylab="P(%)", 
+         col=col,
+         ylim=c(0,.3) )
+
+abline(v = c(2.5,10.9), lty=2, col='red')
+
+text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
+```
+
+## Observed effect size {.flexbox .vcenter}
+
+![](../../../../topics/nhst/effec_size.png)
+## Post-Hoc Power
+
+-   Also known as: observed, retrospective, achieved
+-   Specificly meaning:
+
+> The power of a test assuming a population effect size equal to the observed effect size in the current sample.
+
+@doi:10.1080/19312450701641375
+
+## Decision Table {.flexbox .vcenter .smaller}
+
+```{r, echo=FALSE}
+#| output-location: slide
+
+N     = 10  # Sample size
+H0    = .5  # Probability of head under H0 50/50
+HA    = .2  # Aternative expected value
+alpha = .05 # Selected type I error
+
+# Color areas red for selected alpha
+area <- dbinom(0:N, N, H0) < alpha/2
+
+# barplot(dbinom(0:N,N, HA)) -> x.values
+
+# x.values
+# lb <- x.values[c(qbinom(alpha/2, N+1, H0), qbinom(alpha/2, N+1, H0)+1 )]
+# ub <- x.values[c(qbinom(1-(alpha/2), N+1, H0), qbinom(1-(alpha/2), N+1, H0)+1 )]
+# 
+# mlb <- mean(lb)
+# mub <- mean(ub)
+
+col_alpha = rep("beige", N+1)
+col_alpha[area] = "red"
+
+col_power = rep("beige", N+1)
+col_power[area] = "#90EE90"
+
+col_one_nin_alpha = rep("#90EE90", N+1)
+col_one_nin_alpha[area] = "beige"
+
+col_beta = rep("red", N+1)
+col_beta[area] = "beige"
+
+# Delete # to not color the plots
+# col = col2  = "beige"
+
+layout(matrix(1:9,3,3, byrow=T))
+
+plot.new()
+text(0.5,0.5,"Binomial Distribution",cex=1.5)
+# text(0.5,0.1,paste("N:",N),cex=1.5)
+
+plot.new()
+text(0.5,0.5,"H0 True",cex=2)
+
+plot.new()
+text(0.5,0.5,"H0 False",cex=2)
+
+plot.new()
+text(0.5,0.5,"Reject H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col_alpha, 
+        # yaxt = 'n', 
+        main = 'Alpha / Type I error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+
+# abline(v = mlb, col="red", lwd=3, lty=2)
+# abline(v = mub, col="red", lwd=3, lty=2)
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col_power, 
+        yaxt = 'n', 
+        main = 'Power', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+plot.new()
+text(0.5,0.5,"Accept H0",cex=2)
+
+barplot(dbinom(0:N,N, H0), 
+        col  = col_one_nin_alpha, 
+        # yaxt = 'n', 
+        main = '1 - alpha', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+
+barplot(dbinom(0:N,N, HA), 
+        col  = col_beta, 
+        yaxt = 'n', 
+        main = 'Beta / Type II error', 
+        names.arg = 0:N, 
+        cex.names = 0.7)
+```
+
+## Reasoning Scheme {.subsection .flexbox .vcenter}
+
+![](../../../../topics/nhst/NHST_descision_scheme.png)
+
+## R\<-PSYCHOLOGIST {.smaller}
+
+<iframe src="http://rpsychologist.com/d3/NHST/" width="1000" height="500" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
+
+</iframe>
+
+[Interactive distributions app by Kristoffer Magnusson](http://rpsychologist.com/d3/NHST/){preview-link="false"}
