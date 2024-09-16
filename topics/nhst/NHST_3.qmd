@@ -440,6 +440,7 @@ text(.6:10.6*1.2,p_kp,round(p_kp,3),pos=3,cex=.5)
 ## Observed effect size {.flexbox .vcenter}
 
 ![](../../../../topics/nhst/effec_size.png)
+
 ## Post-Hoc Power
 
 -   Also known as: observed, retrospective, achieved
