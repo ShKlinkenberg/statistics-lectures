@@ -1,8 +1,8 @@
 ---
 title: "Alternatives to NHST"
 author: "Klinkenberg"
-date: "26 feb 2024"
-footer: "SMCR / SMCO"
+date: "23 sep 2024"
+footer: "Statistical Reasoning 2024-2025"
 format: 
   html: default
   revealjs: 

@@ -1,8 +1,12 @@
-# Confidence Interval
+# Confidence Interval {background-color="#e98300"}
 
-The confidence interval is a range of values that is likely to contain the true value of an unknown population parameter. The confidence interval is calculated from a given set of sample data. The confidence interval is used to express the uncertainty associated with a sample estimate of a population parameter.
+## Testing hypothesis with CI's
 
-We use the standard error to calculate the lower and upper limit of the confidence interval.
+Using confidence intervals to test hypotheses is a common practice in scientific research.
+
+We can use this knowledge to test hypotheses. If the confidence interval does not contain the null hypothesis value, the null hypothesis can be rejected.
+
+> **Note** that this is not the same as our decision rule for NHST. In NHST, we compare the p-value to the alpha level. In the case of the confidence interval, we compare the confidence interval to the null hypothesis value.
 
 ## Standard Error
 
@@ -14,6 +18,46 @@ $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \fr
 - Upperbound = $\bar{x} + 1.96 \times SE$
 
 ![](https://upload.wikimedia.org/wikipedia/commons/3/3a/Standard_deviation_diagram_micro.svg){.absolute bottom=0 right=50 height="220" .fragment}
+
+## Candy weight example
+
+```{r, fig.height=3, fig.width=6, echo=FALSE}
+cw   = rnorm(46, 7, 2)
+mcw  = mean(cw)
+sdcw = sd(cw)
+ncw  = length(cw)
+se   = sdcw/sqrt(ncw)
+lb   = mcw - 1.96 * se
+ub   = mcw + 1.96 * se
+
+plot(cw, 0*cw+1, 
+     xlim = c(0,15), 
+     ylim = c(.8,1.2), 
+     ylab = "", 
+     xlab = "Candy weight",
+     yaxt = "n",
+     cex  = 2,
+     col  = rgb(0,0,0,.5))
+
+# population value of candy weight is 5.5
+abline(v=5.5, col="red", lwd=2)
+text(5.5, .85, "Hypothesis value 5.5", col="red", pos=4)
+
+# average and and standard error
+text(mcw, 1.1, paste("m =", round(mcw,2), "se =", round(se,2)), pos=4, col="blue")
+
+segments(lb, 1, ub, 1, lwd=4, col="blue")
+# lb
+segments(lb, 1.05, lb, .95, lwd=2, col="blue")
+text(lb, .92, paste("LB =", round(lb,2)), col="blue", pos=2, cex = .8)
+# ub
+segments(ub, 1.05, ub, .95, lwd=2, col="blue")
+text(ub, .92, paste("UB =", round(ub,2)), col="blue", pos=4, cex = .8)
+
+
+
+```
+
 
 ## Plot CI
 
