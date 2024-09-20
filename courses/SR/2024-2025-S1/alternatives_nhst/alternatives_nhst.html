@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Klinkenberg">
+<meta name="dcterms.date" content="2024-09-23">
 
-<title>confidence_interval</title>
+<title>Alternatives to NHST</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,22 +22,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="confidence_interval_files/libs/clipboard/clipboard.min.js"></script>
-<script src="confidence_interval_files/libs/quarto-html/quarto.js"></script>
-<script src="confidence_interval_files/libs/quarto-html/popper.min.js"></script>
-<script src="confidence_interval_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="confidence_interval_files/libs/quarto-html/anchor.min.js"></script>
-<link href="confidence_interval_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="confidence_interval_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="confidence_interval_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="confidence_interval_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="confidence_interval_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="alternatives_nhst_files/libs/clipboard/clipboard.min.js"></script>
+<script src="alternatives_nhst_files/libs/quarto-html/quarto.js"></script>
+<script src="alternatives_nhst_files/libs/quarto-html/popper.min.js"></script>
+<script src="alternatives_nhst_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="alternatives_nhst_files/libs/quarto-html/anchor.min.js"></script>
+<link href="alternatives_nhst_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="alternatives_nhst_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="alternatives_nhst_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="alternatives_nhst_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="alternatives_nhst_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -66,15 +88,157 @@ window.Quarto = {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#the-problem-with-p-values" id="toc-the-problem-with-p-values" class="nav-link active" data-scroll-target="#the-problem-with-p-values">The problem with <br>P-values</a>
+  <ul class="collapse">
+  <li><a href="#there-is-no-problem" id="toc-there-is-no-problem" class="nav-link" data-scroll-target="#there-is-no-problem">There is no problem</a></li>
+  <li><a href="#the-dance-of-the-p-value" id="toc-the-dance-of-the-p-value" class="nav-link" data-scroll-target="#the-dance-of-the-p-value">The dance of the P-value</a></li>
+  <li><a href="#h0-and-ha-distribution" id="toc-h0-and-ha-distribution" class="nav-link" data-scroll-target="#h0-and-ha-distribution">H0 and HA distribution</a></li>
+  <li><a href="#gpower" id="toc-gpower" class="nav-link" data-scroll-target="#gpower">G*Power</a></li>
+  </ul></li>
+  <li><a href="#confidence-interval" id="toc-confidence-interval" class="nav-link" data-scroll-target="#confidence-interval">Confidence Interval</a>
+  <ul class="collapse">
+  <li><a href="#testing-hypothesis-with-cis" id="toc-testing-hypothesis-with-cis" class="nav-link" data-scroll-target="#testing-hypothesis-with-cis">Testing hypothesis with CI’s</a></li>
+  <li><a href="#standard-error" id="toc-standard-error" class="nav-link" data-scroll-target="#standard-error">Standard Error</a></li>
+  <li><a href="#candy-weight-example" id="toc-candy-weight-example" class="nav-link" data-scroll-target="#candy-weight-example">Candy weight example</a></li>
+  <li><a href="#plot-ci" id="toc-plot-ci" class="nav-link" data-scroll-target="#plot-ci">Plot CI</a></li>
+  <li><a href="#out-of-100-samples" id="toc-out-of-100-samples" class="nav-link" data-scroll-target="#out-of-100-samples">5 out of 100 samples</a></li>
+  <li><a href="#common-misinterpretations" id="toc-common-misinterpretations" class="nav-link" data-scroll-target="#common-misinterpretations">Common Misinterpretations</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#researcher-dont-know" id="toc-researcher-dont-know" class="nav-link" data-scroll-target="#researcher-dont-know">Researcher don’t know</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="alternatives_nhst.slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Alternatives to NHST</h1>
+</div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Klinkenberg </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+  </div>
 
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 23, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-problem-with-p-values" class="level1" data-background-image="Sad-P.webp" data-background-color="black">
+<h1 data-background-image="Sad-P.webp" data-background-color="black">The problem with <br>P-values</h1>
+<section id="there-is-no-problem" class="level2">
+<h2 class="anchored" data-anchor-id="there-is-no-problem">There is no problem</h2>
+<p>The problem with P-values is that they are often <strong>misunderstood</strong> and <strong>misinterpreted</strong>. The P-value is the probability of observing a sample statistic as or more extreme as the one obtained, given that the null hypothesis is true. It is <strong>NOT</strong> the probability that the null hypothesis is true. The P-value is <strong>NOT</strong> a measure of the strength of the evidence against the null hypothesis.</p>
+<blockquote class="blockquote">
+<p>The misinterpretation is the problem, and not adhering to the Nayman-Pearson paradigm</p>
+</blockquote>
+</section>
+<section id="the-dance-of-the-p-value" class="level2">
+<h2 class="anchored" data-anchor-id="the-dance-of-the-p-value">The dance of the P-value</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="responsive-container">
+<div id="player">
+
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<script>
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'ez4DgdurRPg',
+    });
+  }
+  function setCurrentTime(slideNum) {
+    var object = [ 58, 235, 396, 480 ];
+    player.seekTo(object[slideNum]);
+  }
+</script>
+</div>
+<ul>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(0)">Should replication reveal the same <em>p</em>?</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(1)">What Power are you using</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(2)">Increasing the power</a>
+</li>
+<li>
+<a href="javascript:void(0);" onclick="setCurrentTime(3)">Comparing CI’s to single point</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="h0-and-ha-distribution" class="level2 center">
+<h2 class="center anchored" data-anchor-id="h0-and-ha-distribution">H0 and HA distribution</h2>
+<div class="cell" data-layout-align="center" data-screenshot.opts="{&quot;delay&quot;:5}">
+<iframe src="https://sharon-klinkenberg.shinyapps.io/tiny-effects/?showcase=0" width="1200px" height="340px" data-external="1">
+</iframe>
+</div>
+</section>
+<section id="gpower" class="level2">
+<h2 class="anchored" data-anchor-id="gpower">G*Power</h2>
+<p>Determine the required sample size for a desired test power, significance level, and effect size.</p>
+<blockquote class="blockquote">
+<p>G*Power is a tool to compute statistical power analyses for many different <span class="math inline">\(t\)</span> tests, <span class="math inline">\(F\)</span> tests, <span class="math inline">\(\chi^2\)</span> tests, <span class="math inline">\(z\)</span> tests and some exact tests.</p>
+</blockquote>
+<p><a href="http://www.gpower.hhu.de/">gpower.hhu.de</a></p>
+<p><img src="https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png" class="absolute" data-bottom="0" data-right="50" height="220"></p>
+</section>
+</section>
 <section id="confidence-interval" class="level1" data-background-color="#e98300">
 <h1 data-background-color="#e98300">Confidence Interval</h1>
 <section id="testing-hypothesis-with-cis" class="level2">
@@ -103,7 +267,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="confidence_interval_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="alternatives_nhst_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -115,7 +279,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="confidence_interval_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="alternatives_nhst_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -127,7 +291,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="confidence_interval_files/figure-html/unnamed-chunk-3-1.png" width="672" height="600" class="figure-img"></p>
+<p><img src="alternatives_nhst_files/figure-html/unnamed-chunk-14-1.png" width="672" height="600" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -135,8 +299,8 @@ window.Quarto = {
 </section>
 <section id="common-misinterpretations" class="level2">
 <h2 class="anchored" data-anchor-id="common-misinterpretations">Common Misinterpretations</h2>
-<p>Confidence intervals and levels are frequently misunderstood, and published studies have shown that even professional scientists often misinterpret them <span class="citation" data-cites="wiki:Confidence_interval">[@wiki:Confidence_interval]</span></p>
-<p><span class="citation" data-cites="hoekstra2014robust">@hoekstra2014robust</span> administerred the following questionair to 120 researchers.</p>
+<p>Confidence intervals and levels are frequently misunderstood, and published studies have shown that even professional scientists often misinterpret them <span class="citation" data-cites="wiki:Confidence_interval">(<a href="#ref-wiki:Confidence_interval" role="doc-biblioref">Wikipedia, 2024</a>)</span></p>
+<p><span class="citation" data-cites="hoekstra2014robust">Hoekstra, Morey, Rouder, &amp; Wagenmakers (<a href="#ref-hoekstra2014robust" role="doc-biblioref">2014</a>)</span> administerred the following questionair to 120 researchers.</p>
 </section>
 <section id="section" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="section"></h2>
@@ -169,7 +333,7 @@ Important
 <section id="researcher-dont-know" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="researcher-dont-know">Researcher don’t know</h2>
 <table class="caption-top table">
-<caption>Table 2 from <span class="citation" data-cites="hoekstra2014robust">@hoekstra2014robust</span></caption>
+<caption>Table 2 from <span class="citation" data-cites="hoekstra2014robust">Hoekstra et al. (<a href="#ref-hoekstra2014robust" role="doc-biblioref">2014</a>)</span></caption>
 <colgroup>
 <col style="width: 9%">
 <col style="width: 35%">
@@ -230,6 +394,60 @@ Important
 </tbody>
 </table>
 </section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<blockquote class="blockquote">
+<p>Use both NHST and confidence intervals</p>
+</blockquote>
+<section id="example" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="example">Example</h2>
+<p><img src="https://ars.els-cdn.com/content/image/1-s2.0-S0360131511000418-gr5.jpg" class="absolute" data-bottom="20" data-right="50" height="200"></p>
+<div style="font-size: 70%">
+<p>We also studied the validity by comparing the mean ability ratings of children in different grades. We expected a positive relation between grade and ability. Figure 5 shows the average ability rating for each grade and domain. As expected, children in older age groups had a higher rating than children in younger age groups. In all four domains, there is an overall significant effect of grade: addition <span class="math inline">\(F(5,1456)=1091.4,p&lt;.01,\omega^2=.78\)</span>, subtraction <span class="math inline">\(F(5,1363)=780.5,p&lt;.01,\omega^2=.74\)</span>, multiplication <span class="math inline">\(F(5,1215)=409.6,p&lt;.01,\omega^2=.62\)</span>, and <span class="math inline">\(F(5,973)=223.31,p&lt;.01,\omega^2=.53\)</span> for division. Levene’s tests show differences in variances for the domains multiplication and division. However, the non-parametric Kruskal-Wallis tests also show significant differences for these domains: <span class="math inline">\(\chi^2(5)=753.28,p&lt;.01\)</span> for multiplication and <span class="math inline">\(\chi^2(5)=505.17,p&lt;.01\)</span> for division. For all domains, post hoc analyses show significant differences between all grades, except for the differences between grades five and six <span class="citation" data-cites="KLINKENBERG20111813">(<a href="#ref-KLINKENBERG20111813" role="doc-biblioref">Klinkenberg, Straatemeier, &amp; van der Maas, 2011</a>)</span>.</p>
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img" alt="CC BY-NC-SA 4.0"></a></p>
+<figcaption>CC BY-NC-SA 4.0</figcaption>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-hoekstra2014robust" class="csl-entry" role="listitem">
+Hoekstra, R., Morey, R. D., Rouder, J. N., &amp; Wagenmakers, E.-J. (2014). Robust misinterpretation of confidence intervals. <em>Psychonomic Bulletin &amp; Review</em>, <em>21</em>, 1157–1164.
+</div>
+<div id="ref-KLINKENBERG20111813" class="csl-entry" role="listitem">
+Klinkenberg, S., Straatemeier, M., &amp; van der Maas, H. L. J. (2011). Computer adaptive practice of maths ability using a new item response model for on the fly ability and difficulty estimation. <em>Computers &amp; Education</em>, <em>57</em>(2), 1813–1824. https://doi.org/<a href="https://doi.org/10.1016/j.compedu.2011.02.003">https://doi.org/10.1016/j.compedu.2011.02.003</a>
+</div>
+<div id="ref-wiki:Confidence_interval" class="csl-entry" role="listitem">
+Wikipedia. (2024). <em><span class="nocase">Confidence interval</span> — <span>W</span>ikipedia<span>,</span> the free encyclopedia</em>. <a href="http://en.wikipedia.org/w/index.php?title=Confidence%20interval&amp;oldid=1207611938" class="uri">http://en.wikipedia.org/w/index.php?title=Confidence%20interval&amp;oldid=1207611938</a>.
+</div>
+</div>
 </section>
 
 </main>

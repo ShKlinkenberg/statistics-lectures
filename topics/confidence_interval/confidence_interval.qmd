@@ -22,7 +22,7 @@ $$SE = \frac{\text{Standard deviation}}{\text{Square root of sample size}} = \fr
 ## Candy weight example
 
 ```{r, fig.height=3, fig.width=6, echo=FALSE}
-cw   = rnorm(46, 7, 2)
+cw   = rnorm(46, 4, 2)
 mcw  = mean(cw)
 sdcw = sd(cw)
 ncw  = length(cw)
@@ -31,7 +31,7 @@ lb   = mcw - 1.96 * se
 ub   = mcw + 1.96 * se
 
 plot(cw, 0*cw+1, 
-     xlim = c(0,15), 
+     xlim = c(0,10), 
      ylim = c(.8,1.2), 
      ylab = "", 
      xlab = "Candy weight",
@@ -39,9 +39,9 @@ plot(cw, 0*cw+1,
      cex  = 2,
      col  = rgb(0,0,0,.5))
 
-# population value of candy weight is 5.5
-abline(v=5.5, col="red", lwd=2)
-text(5.5, .85, "Hypothesis value 5.5", col="red", pos=4)
+# population value of candy weight is 2.8
+abline(v=2.8, col="red", lwd=2)
+text(2.8, .85, "Hypothesis value 2.8", col="red", pos=4)
 
 # average and and standard error
 text(mcw, 1.1, paste("m =", round(mcw,2), "se =", round(se,2)), pos=4, col="blue")
