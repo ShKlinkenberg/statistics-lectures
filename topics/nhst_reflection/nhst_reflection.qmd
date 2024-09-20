@@ -1,3 +1,21 @@
+## H0 and HA distribution {.center}
+
+```{r tiny-effects, fig.pos='H', fig.align='center', fig.cap="Any effect can be statistically significant.", echo=FALSE, screenshot.opts = list(delay = 5), dev="png", out.width="1200px"}
+# Illustrate that even tiny effects can yield statistically significant test results if the sample is sufficiently large.
+# Generate a normal distribution as hypothesized sampling distribution (M = 2.8, SE = SD / sqrt(N) = 0.6 / sqrt(10) = 0.2) with 2.5% of each tail area coloured. Add a vertical line with value for the sample average linked to a slider (range [2.82, 3.00] initial value 2.90). Add a sample size slider (range [10, 5,000], initial value 10), which is linked to the standard error of the normal curve. With slider for (assumed) true population mean and test power.
+knitr::include_app("https://sharon-klinkenberg.shinyapps.io/tiny-effects/", height="340px")
+```
+
+## G*Power
+
+Determine the required sample size for a desired test power, significance level, and effect size.
+
+> G\*Power is a tool to compute statistical power analyses for many different $t$ tests, $F$ tests, $\chi^2$ tests, $z$ tests and some exact tests.
+
+[gpower.hhu.de](http://www.gpower.hhu.de/)
+
+![](https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png){.absolute bottom=0 right=50 height="220"}
+
 # The problem with <br>P-values {background-image="Sad-P.webp" background-color="black"}
 
 ## There is no problem
@@ -71,20 +89,3 @@ The problem with P-values is that they are often **misunderstood** and **misinte
 
 ::::
 
-## H0 and HA distribution {.center}
-
-```{r tiny-effects, fig.pos='H', fig.align='center', fig.cap="Any effect can be statistically significant.", echo=FALSE, screenshot.opts = list(delay = 5), dev="png", out.width="1200px"}
-# Illustrate that even tiny effects can yield statistically significant test results if the sample is sufficiently large.
-# Generate a normal distribution as hypothesized sampling distribution (M = 2.8, SE = SD / sqrt(N) = 0.6 / sqrt(10) = 0.2) with 2.5% of each tail area coloured. Add a vertical line with value for the sample average linked to a slider (range [2.82, 3.00] initial value 2.90). Add a sample size slider (range [10, 5,000], initial value 10), which is linked to the standard error of the normal curve. With slider for (assumed) true population mean and test power.
-knitr::include_app("https://sharon-klinkenberg.shinyapps.io/tiny-effects/", height="340px")
-```
-
-## G*Power
-
-Determine the required sample size for a desired test power, significance level, and effect size.
-
-> G\*Power is a tool to compute statistical power analyses for many different $t$ tests, $F$ tests, $\chi^2$ tests, $z$ tests and some exact tests.
-
-[gpower.hhu.de](http://www.gpower.hhu.de/)
-
-![](https://www.psychologie.hhu.de/fileadmin/_processed_/f/d/csm_GPowerIcon_b6bfb17f0c.png){.absolute bottom=0 right=50 height="220"}
