@@ -466,6 +466,8 @@ Effect sizes of post-hoc comparisons
 * Cohen's $r$ gives the effect size for a specific comparison
     * $r_{Contrast} = \sqrt{\frac{t^2}{t^2+{df}}}$
 
+<!--
+
 # ANOVA as regression
 
 ## Linear line equation
@@ -623,3 +625,5 @@ $\frac{`r round(SS_model,3)`}{`r round(SS_total,3)`} = `r round(SS_model / SS_to
 :::
 
 ::::
+
+-->
