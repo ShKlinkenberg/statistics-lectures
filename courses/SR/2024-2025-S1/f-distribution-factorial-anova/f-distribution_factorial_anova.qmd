@@ -1,0 +1,23 @@
+---
+title: "F-Distribution and factorial ANOVA"
+author: "Klinkenberg"
+date: "30 sep 2024"
+footer: "Statistical Reasoning 2024-2025"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/f_distribution/f_distribution.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/ANOVA_independent_factorial/factorial_independent_ANOVA_SM.qmd", eval=TRUE}
+
+```
+
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
