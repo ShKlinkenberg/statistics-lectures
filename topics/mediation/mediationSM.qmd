@@ -67,7 +67,7 @@ In statistics, a mediation model is one that seeks to identify and explain the m
 
 > **Mediation does not imply causation!**
 
-[Criteria for causal relations](https://shklinkenberg.github.io/Statistical-Inference/11.1-mediation-as-causal-process.html#causalcriteria)
+[Criteria for causal relations](https://shklinkenberg.github.io/Statistical-Inference/9.1-mediation-as-causal-process.html#causalcriteria)
 
 All requirements need to be met:
 

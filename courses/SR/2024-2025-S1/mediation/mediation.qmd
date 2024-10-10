@@ -1,0 +1,23 @@
+---
+title: "Mediation"
+author: "Klinkenberg"
+date: "14 oct 2024"
+footer: "Statistical Reasoning 2024-2025"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/mediation/mediationSM.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
+# References
+
+::: {#refs}
+:::
