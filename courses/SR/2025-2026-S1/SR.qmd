@@ -7,7 +7,7 @@ date: today
 
 On this site you will find my statistics lectures for Statistical Reasoning.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
 course.path = "courses/SR/2025-2026-S1/"
 
 files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
@@ -44,6 +44,6 @@ lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 library('kableExtra')
 
 # Print table with kable as set in YAML
-knitr::kable(dplyr::arrange(lecture.list, desc(Date)), escape = F ) %>%
-  kable_styling(full_width = T)
+knitr::kable(dplyr::arrange(lecture.list, desc(Date)), escape = F ) 
+# %>% kable_styling(full_width = T)
 ```
