@@ -3,6 +3,7 @@ project:
   output-dir: site
   render:
     - index.qmd
+    - courses/SR/2025-2026-S1/SR.qmd
     - courses/SR/2024-2025-S1/SR.qmd
     - courses/SM/2023-2024-S1/SM.qmd
     - courses/SM/2023-2024-S2/SM.qmd
@@ -74,5 +75,6 @@ website:
       collapse-level: 2
       contents:
         - courses/SR/2024-2025-S1/SR.qmd
+        - courses/SR/2025-2026-S1/SR.qmd        
 # 
 # freeze: false
