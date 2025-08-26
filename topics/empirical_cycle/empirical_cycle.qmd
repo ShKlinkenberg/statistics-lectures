@@ -6,8 +6,9 @@
 
 ## The components {.smaller}
 
-<small>
+:::: {.columns}
 
+::: {.column width="50%"}
 * Observation
     * Idea for hypothesis
 * Induction
@@ -16,13 +17,22 @@
 * Deduction
     * Expectation / Prediction
     * Operationalization
+:::
+
+::: {.column width="50%"}
 * Testing
     * Test hypothesis
     * Compare data to prediction
 * Evaluation
     * Interpret results in terms of hypothesis
+:::
 
-</small>
+::::
+
+
+
+
+
 
 ## Explained by Annemarie Zandscholten
 

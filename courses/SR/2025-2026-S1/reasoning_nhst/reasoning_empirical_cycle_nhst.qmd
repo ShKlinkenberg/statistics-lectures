@@ -1,0 +1,71 @@
+---
+title: "Statistical Reasoning"
+subtitle: "Introduction to statistical reasoning"
+author: "Klinkenberg"
+date: "01 sep 2025"
+footer: "Statistical Reasoning 2025-2026"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+## Statistical Reasoning {background-image="Here-Be-Dragons-animation.gif" background-size="contain"}
+
+## Course setup
+
+* Lectures: On campus / Online / Video recording
+* Preparatory Assignment: Submit and **reflect** in canvas
+* Tutorials: For your support and in class progress check (you can mis max 3 tutorials)
+* Exam: Knowledge and skills
+
+## in class progress check
+
+![](unnamed-chunk-13-1.png)
+
+## Grading {.smaller}
+
+> $\text{Final grade} = 0.9 \times \text{exam grade} + 0.1 \times \text{Preparatory Assignment}$
+
+* Exam
+* Preparatory Assignment (VO in Dutch)
+
+## Preparatory Assignment
+
+* 11 PA's/VO's in total
+* You need to have done the PA with effort and reflect on your progress.
+
+$$\text{PA points} = \frac{\text{Number of PA's done}}{11}$$
+
+## Learning
+
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Course changes {.smaller}
+
+Changes based on feedback, course evaluation, redesign and DEI project.
+
+* Textual instructions added to all SPSS content in the book.
+* ANOVA chapter example changed from Jolie & Clooney to Vaccine acceptance to be less gender stereo typed.
+* Moderation with regression chapters, analysis now all done with PROCESS
+
+Organisational changes
+
+* Tutorial attendance now mandatory (mis max 3)
+* Resit now in March
+
+<!-- Add the required topics below -->
+
+```{r child="../../../../topics/statistical_reasoning/statistical_reasoning.qmd"}
+```
+
+```{r child="../../../../topics/empirical_cycle/empirical_cycle.qmd"}
+```
+
+```{r child="../../../../topics/coin_expreiment/coin_experiment.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
