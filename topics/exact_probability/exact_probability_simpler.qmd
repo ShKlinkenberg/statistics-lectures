@@ -1,0 +1,130 @@
+# Exact approach
+
+## Applicable
+
+Exact probabilities can only be calculated for:
+
+* Discreet variables
+* Categorical variables
+
+> An exact approach lists and counts all possible combinations.
+
+## Coin values
+
+Coin values for heads and tails.
+
+```{r, echo=FALSE}
+coin = c(0,1)
+```
+
+::: {.r-fit-text}
+$\{`r rev(coin)`\}$
+:::
+
+## 10 tosses {.smaller}
+
+:::  {style="transform: scale(0.7) translateY(-25%);"}
+
+::: {.panel-tabset}
+
+### Permutation
+
+```{r, echo=FALSE}
+library("DT")
+all.options <- expand.grid(coin, coin, coin, coin, coin, coin,coin, coin, coin, coin)
+names(all.options) = gsub("Var", "Toss", names(all.options))
+datatable(all.options, rownames = FALSE)
+```
+
+### Frequency
+
+```{r, echo=FALSE}
+frequency = apply(all.options, 1, sum)
+datatable(cbind(all.options, frequency), rownames = FALSE)
+```
+
+### Probabilities
+
+```{r, echo=FALSE}
+probabilities <- all.options
+probabilities[] = .5
+kableExtra::kable(probabilities[1:7,])
+```
+
+### Probability
+
+```{r, echo=FALSE}
+probability = apply(probabilities, 1, prod)
+kableExtra::kable(cbind(probabilities, probability)[1:5, ])
+```
+
+### Frequency and probabilities
+
+```{r, echo=FALSE}
+data.frame(as.factor(frequency), probability) -> freq.prob
+datatable(freq.prob, rownames = FALSE, filter = 'top')
+```
+
+### Cumulative probabilities
+
+```{r, echo=FALSE}
+tosses.1 <- aggregate(probability ~ frequency, freq.prob, sum)
+tosses.2 <- aggregate(probability ~ frequency, freq.prob, length)
+tosses <- merge(tosses.2, tosses.1, by ="frequency")
+names(tosses) <- c("#Heads", "frequencies", "Probabilities")
+kableExtra::kable(tosses, rownames = FALSE)
+```
+
+:::
+
+:::
+
+## Calculate binomial probabilities {.smaller}
+
+
+$$ {n\choose k}p^k(1-p)^{n-k}, \small {n\choose k} = \frac{n!}{k!(n-k)!} $$
+
+::: {style="transform: scale(0.7) translateY(-25%);"}
+
+::: {.panel-tabset}
+
+### With values
+
+```{r, echo=TRUE}
+n = 10   # Sample size
+k = 0:10 # Discrete probability space
+p = .5   # Probability of head
+```
+
+### Calculations
+
+```{r, echo=FALSE}
+kableExtra::kable(cbind(n, k, p, 
+      'n!'         = factorial(n), 
+      'k!'         = factorial(k), 
+      '(n-k)!'     = factorial(n-k), 
+      '(n over k)' = factorial(n)/(factorial(k)*factorial(n-k)),
+      'p^k'        = p^k,
+      '(1-p)^(n-k)'  = (1-p)^(n-k),
+      'Binom Prob' = ( factorial(n)/(factorial(k)*factorial(n-k)) ) * ( p^k * (1-p)^(n-k) )
+    ))
+```
+
+:::
+
+:::
+
+::: {.callout-warning}
+Formula not exam material
+:::
+
+## Binomial distribution
+
+```{r, echo=FALSE}
+barplot(dbinom(0:10, 10, .5),
+        main      = "Binomial distribution p = .5",
+        ylab      = "Probability", 
+        xlab      = "#Heads", 
+        col       = 'darkgreen', 
+        names.arg = 0:10)
+```

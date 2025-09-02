@@ -20,6 +20,8 @@ In the English-language literature it takes its name from William Sealy Gosset's
 
 :::
 
+![](https://upload.wikimedia.org/wikipedia/commons/5/5b/Glas_Guinness.jpg){.absolute top=400 right=-150 width="200" height="260" .fragment}
+
 ## Population distribution {.smaller .subsection}
 
 ```{r, echo=TRUE}
@@ -68,7 +70,7 @@ text(80, 10, round(mean(x),2))
 let's take more samples.
 
 ```{r, echo=TRUE}
-#| code-line-numbers: "1|6|7|9"
+#| code-line-numbers: "1|6|7|8|9"
 
 n.samples     = 1000
 mean.x.values = vector()
@@ -86,7 +88,9 @@ for(i in 1:n.samples) {
 ## Mean and SE for all samples
 
 ```{r, echo=FALSE}
-kableExtra::kable( head(cbind(mean.x.values, se.x.values)) )
+# kableExtra::kable( head(cbind(mean.x.values, se.x.values)) )
+head(cbind(mean.x.values, se.x.values))
+tail(cbind(mean.x.values, se.x.values))
 ```
 
 ## Sampling distribution

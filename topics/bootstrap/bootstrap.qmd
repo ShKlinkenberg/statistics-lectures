@@ -5,7 +5,7 @@ Sampling from your sample to approximate the sampling distribution.
 ## My Coin tosses
 
 ```{r, echo=TRUE}
-my.tosses = c(1,0,0,0,0,1,0,0,0,0)
+my.tosses = c(0,0,1,0,0,0,0,0,1,0)
 ```
 
 ## Sample from the sample
@@ -22,13 +22,13 @@ sample(my.tosses, replace = TRUE)
 ## Sampling from the sample {.smaller}
 
 ```{r, echo=TRUE}
-n.samples = 1000
+n.bootstrap.samples = 1000
 n.heads = vector()
 
-for (i in 1:n.samples) {
-  my.sample <- sample(my.tosses, replace = TRUE)
+for (i in 1:n.bootstrap.samples) {
+  bootstrap.sample <- sample(my.tosses, replace = TRUE)
   
-  n.heads[i] <- sum(my.sample) 
+  n.heads[i] <- sum(bootstrap.sample) 
 }
 ```
 
@@ -51,6 +51,7 @@ kableExtra::kable(transposed)
 
 ```{r, echo=FALSE}
 barplot(table(factor(n.heads, levels=0:10))/1000, 
-        col = "darkgreen")
+        col  = "darkgreen",
+        ylim = c(0,.35) )
 ```
 
