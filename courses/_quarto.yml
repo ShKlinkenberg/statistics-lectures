@@ -9,10 +9,10 @@ format:
     toc: true
     toc-depth: 2
     toc-location: left
-    linkcolor: '#BC0031'
+    # linkcolor: '#BC0031'
   revealjs:
     smaller: false
-    linkcolor: '#BC0031'
+    # linkcolor: "#BC0031"
     logo: https://shklinkenberg.github.io/uva_style/images/logo_uva.png
     transition: slide
     background-transition: fade
