@@ -2,3 +2,12 @@
 
 $link-color: #e98300;
 $light-bg-link-color: #fff;
+
+/*-- scss:rules --*/
+
+.reveal .slide blockquote {
+  border-left: 3px solid $link-color;
+  padding-left: 0.5em;
+  color: $link-color;
+  background-color: lighten($link-color, 45%);
+}

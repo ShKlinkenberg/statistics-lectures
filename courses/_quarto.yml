@@ -18,7 +18,8 @@ format:
     background-transition: fade
     theme: white
     slide-number: true
-    css: https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css
+    css: 
+    - https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css
     touch: true
     # footer: "Klinkenberg"
     google-analytics: "UA-107432294-1"
@@ -26,10 +27,10 @@ format:
       data-background-image: https://shklinkenberg.github.io/uva_style/images/uva_bg.jpg
       data-background-size: contain
       data-background-position: bottom
-html-math-method:
-  method: mathjax
-  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-      
+# html-math-method:
+#   method: mathjax
+#   url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+#       
 # project:
 #   output-dir: ../handouts/
 # format:
