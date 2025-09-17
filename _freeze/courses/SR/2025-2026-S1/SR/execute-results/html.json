@@ -1,0 +1,15 @@
+{
+  "hash": "f2c84e4415fc6aa479783e6828d3242f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Statistical Reasoning 2025-2026\"\nsubtitle: \"Semester 1\"\nauthor: \"Klinkenberg\"\ndate: today\n---\n\nOn this site you will find my statistics lectures for Statistical Reasoning.\n\n\n::: {.cell}\n::: {.cell-output-display}\n`````{=html}\n<table>\n <thead>\n  <tr>\n   <th style=\"text-align:left;\"> Date </th>\n   <th style=\"text-align:left;\"> Lecture </th>\n   <th style=\"text-align:left;\"> Handout </th>\n   <th style=\"text-align:left;\"> Slides </th>\n  </tr>\n </thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:left;\"> 2025-09-22 </td>\n   <td style=\"text-align:left;\"> Alternatives to NHST </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/alternatives_nhst/alternatives_nhst.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/alternatives_nhst/alternatives_nhst.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> 2025-09-15 </td>\n   <td style=\"text-align:left;\"> Null Hypothesis Significance Testing </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/nhst/nhst.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/nhst/nhst.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> 2025-09-08 </td>\n   <td style=\"text-align:left;\"> Probability Models </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/probability_models/probability_models.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/probability_models/probability_models.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> 2025-09-01 </td>\n   <td style=\"text-align:left;\"> Statistical Reasoning </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/reasoning_nhst/reasoning_empirical_cycle_nhst.html\" target=\"_blank\" class=\"external\">link</a> </td>\n   <td style=\"text-align:left;\"> <a href=\"https://shklinkenberg.github.io/statistics-lectures/courses/SR/2025-2026-S1/reasoning_nhst/reasoning_empirical_cycle_nhst.slide.html\" target=\"_blank\" class=\"external\">link</a> </td>\n  </tr>\n</tbody>\n</table>\n\n`````\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
