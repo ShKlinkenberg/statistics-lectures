@@ -1,0 +1,233 @@
+# ANOVA as regression
+
+## ANOVA
+
+> **AN**alysis **O**f **VA**riance
+
+ANOVA's decompose the variance components and look at the ratio of explained to unexplained variance.
+
+Assuming $H_0$ is true, we would expect an equal amount of explained and unexplained variance.
+
+## Model
+
+$\LARGE{\text{Outcome} = \text{Model} + \text{Error}}$
+
+## Regression model
+
+In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted as X.
+
+$\LARGE{Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \dotso + \beta_n X_{ni} + \epsilon_i}$
+
+In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters $\beta$'s are estimated from the data ($b$).
+
+## Outcome vs Model
+
+```{r, fig.align='center', fig.asp=.5, echo=FALSE}
+error = c(2, 1, .5, .1)
+n = 100
+
+layout(matrix(1:4,1,4))
+for(e in error) {
+  
+  x = rnorm(n)
+  y = x + rnorm(n, 0 , e)
+  
+  r   = round(cor(x,y), 2)
+  r.2 = round(r^2, 2)
+  
+  plot(x,y, las = 1, ylab = "outcome", xlab = "model", main = paste("r =", r," r2 = ", r.2), ylim=c(-2,2), xlim=c(-2,2))
+  fit <- lm(y ~ x)
+  abline(fit, col = "red")
+  
+}
+```
+
+The better the model, the more it is the same as the outcome variable. Hence, they have a high correlation $r$, and the explained variance $R^2$ is also high.
+
+## Formal model
+
+$$
+\begin{align}
+\text{model} &= \beta_0 + \beta_1 X_{1i} \\
+\\
+Y_i &= \beta_0 + \beta_1 X_{1i} + \epsilon_i \\
+\hat{Y}_i &= \beta_0 + \beta_1 X_{1i} \\
+\\
+\epsilon_i &= Y_i - \hat{Y}_i
+\end{align}
+$$
+
+* $_i$ is the index number for the data. A row in your data.
+* $\beta$ is the true population parameter
+* $X$ is your predictor variable
+* $\epsilon$ is the error. How much is the model off.
+* The $\hat{\phantom{Y}}$ refers to the expected outcome. So, it is the result of the model.
+
+## ANOVA as regression
+
+To run an ANOVA as a regression model we need to create **dummy variables** for each categorical variable that we use. We need $k - 1$ dummy variables, where $k$ is the amount of categories.
+
+So, for the categorical variable biological sex, we need 1 dummy.
+
+## Dummy variable
+
+Creating a dummy variable means making a new variable in SPSS to turn on that category, and turn all other categories off.
+
+In our case, biological sex has two categories, so we need one dummy. Let's call our dummy female. 
+
+$$
+\begin{align}
+\widehat{outcome}_i &= b_0 + b_1 \text{dummy}_i \\
+\widehat{height}_i &= b_0 + b_1 \text{female}_i
+\end{align}
+$$
+
+* $\text{dummy} = \{0, 1\}$, on or off
+* $\text{female} = \{0,1\}$, on or off
+
+## Example
+
+```{r}
+#| echo = FALSE
+set.seed(878473)
+
+B.0 = 177
+B.1 = B.0 - 161.5
+
+n  = 132
+sd = 6.35 
+error = rnorm(n, 0, sd)
+
+females = sample(c(0,1), size = n, replace = TRUE)
+
+height = B.0 - B.1 * females + error
+
+# clean up variables for data frame
+height = round(height, 0)
+sex = ifelse(females, "female", "male")
+
+height.data <- data.frame(sex, height)
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+
+datatable(height.data, 
+          rownames   = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 350, 
+                         paging    = F, 
+                         info      = F,                          
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv','excel')))
+```
+
+## Regression analysis
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# load package
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+
+fit <- lm(height ~ sex, height.data)
+
+tab_model(fit)
+
+b.0 = round(fit$coefficients[1], 2)
+b.1 = round(fit$coefficients[2], 2)
+```
+
+* $b_0 = `r b.0`$, $\bar{x}_\text{females} = `r b.0`$
+* $b_1 = `r b.1`$, $\bar{x}_\text{males} = b_0 + b_1 = `r b.0 + b.1`$
+
+## Regression model
+
+$$
+\begin{align}
+\widehat{\text{height}}_i &= b_0 + b_1 \times \text{dummy}_i \\
+\widehat{\text{height}}_i &= `r b.0` + `r b.1` \times \text{dummy}_i
+\end{align}
+$$
+
+```{r}
+#| echo: false
+
+dummy = ifelse(height.data$sex == "male", 1, 0)
+
+height.data$expected_height = round(fit$fitted.values, 2)
+height.data$b.0 = b.0
+height.data$b.1 = b.1
+height.data$dummy = dummy
+height.data$error = round(fit$residuals, 2)
+
+datatable(height.data, 
+          rownames   = FALSE,
+          options = list(searching = FALSE, 
+                         scrollY   = 350, 
+                         paging    = F, 
+                         info      = F))
+```
+
+## r
+
+The correlation between **height** and **expected height** as indication of how wel our model fits.
+
+```{r}
+plot(height.data$expected_height, height.data$height,
+     main = "Correlation between outcome and expected outcome",
+     xlab = "Expected height",
+     ylab = "Height")
+
+r = round(cor(height.data$expected_height, height.data$height),2)
+
+text(175, 150, paste("r =", r))
+
+```
+
+## R squared
+
+$R^2$ is simply the squared correlation $r = `r r`$, $R^2 = r \times r = `r r^2`$.
+
+This represents the amount of variance explained in relation to the total amount of variance.
+
+## Total variance
+
+```{r}
+#| echo: false
+
+height.data <- height.data[order(height.data$sex),]
+plot(1:n, height.data$height,
+     main = "Total varience",
+     ylab = "Height",
+     xlab = "Participants")
+
+grand.mean = mean(height.data$height)
+
+abline(h = grand.mean)
+
+segments(1:n , grand.mean, 
+         1:n , height.data$height)
+```
+
+Sums of squares $\Sigma^n_{i = 1} (x_i - \bar{x})^2$ devided by the degrees of freedom $n-1$.
+
+$$\text{Variance} = s^{2} = \dfrac{\sum_{i=1}^{n}(x_i - \overline{x})^{2}}{n - 1}$$
+
+## Explained variance
+
+What part of the variance is explained bay the model.
+
+$R^2 = \frac{{SS}_{explained}}{{SS_{total}}}$
+
+## Unexplained variance
+
+This is the error / residual ($\epsilon$). The difference between model expectation and observed measurement.
+
+## F value
+
+This is the ratio between explained and unexplained variance.
