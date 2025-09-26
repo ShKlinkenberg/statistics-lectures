@@ -100,7 +100,7 @@ So, for the categorical variable biological sex, we need 1 dummy.
 
 Creating a dummy variable means making a new variable in SPSS to turn on that category, and turn all other categories off.
 
-In our case, biological sex has two categories, so we need one dummy. Let's call our dummy female. 
+In our case, biological sex has two categories, so we need one dummy. Let's call our dummy male. 
 
 $$
 \begin{align}
