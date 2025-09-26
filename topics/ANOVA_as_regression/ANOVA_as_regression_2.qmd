@@ -1,0 +1,218 @@
+# Moderation
+
+## Interaction
+
+In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction.
+
+## Categorical and continuous predictor {.smaller}
+
+Another good predictor for height is the [mid-parental height](https://adc.bmj.com/content/81/3/257.abstract). That is, the biological sex adjusted average height of both parents.
+
+```{r}
+#| echo: false
+
+load(file="height_data.Rdata")
+
+height.data <- data
+
+MPH <- ifelse(height.data$sex == 1, ((height.data$height * 2) - 13)/2,  ((height.data$height * 2) + 13)/2 )
+MPH <- round(rnorm(length(MPH), MPH, 6), 0 )
+
+height.data$MPH = MPH
+
+
+
+if(!"DT" %in% installed.packages()) { install.packages("DT") }
+library("DT")
+
+datatable(height.data, 
+          rownames   = FALSE, 
+          extensions = 'Buttons',
+          options = list(searching = FALSE, 
+                         scrollY   = 350, 
+                         paging    = F, 
+                         info      = F,                          
+                         dom       = 'Bfrtip',
+                         buttons   = c('csv','excel')))
+```
+
+## Interaction
+
+Formal model
+
+$$
+\begin{align}
+\widehat{outcome}_i &= b_0 + b_1 \times \text{dummy}_i + b_2 \times {MPH}_i + b_3 \times \text{dummy}_i \times {MPH}_i\\
+\widehat{height}_i &= b_0 + b_1 \times \text{male}_i + b_2 \times {MPH}_i + b_3 \times \text{male}_i \times {MPH}_i\\
+\end{align}
+$$
+
+
+## Regression model {.smaller}
+
+$$
+\begin{align}
+\widehat{height}_i &= b_0 + b_1 \times \text{male}_i + b_2 \times {MPH}_i + b_3 \times \text{male}_i \times {MPH}_i\\
+\end{align}
+$$
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# load package
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+
+fit2 <- lm(height ~ sex + MPH + sex * MPH, height.data)
+
+tab_model(fit2)
+```
+
+## ANOVA
+
+```{r}
+anova(fit2)
+```
+
+## Total explained variance
+
+```{r}
+#| echo: false
+
+grand.mean = mean(height.data$height)
+
+height.data$expected_height = round(fit2$fitted.values, 2)
+height.data$error = round(fit2$residuals, 2)
+height.data$expected_height_sex = round(fit$fitted.values, 2)
+
+fit3 <- lm(height ~ MPH, height.data)
+
+height.data$expected_height_mph = round(fit3$fitted.values, 2)
+
+height.data <- height.data[order(height.data$sex),]
+
+
+plot(1:n, height.data$height,
+     main = "Total explained varience explained by model",
+     ylab = "Height",
+     xlab = "Participants")
+
+
+
+abline(h = grand.mean)
+
+segments(1:n , grand.mean, 
+         1:n , height.data$height)
+
+p.total <- recordPlot()
+
+segments(1:n , grand.mean, 
+         1:n , height.data$expected_height,
+         col = "darkgreen",
+         lwd = 2)
+
+p <- recordPlot()
+
+legend("topleft",
+       pch    = c("o"),
+       col    = c("darkgreen"),
+       legend = c("Explained") )
+```
+
+## Total unexplained variance
+
+```{r}
+#| echo: false
+ 
+p
+
+segments(1:n , height.data$height, 
+         1:n , height.data$expected_height,
+         col = "red",
+         lwd = 2)
+
+legend("topleft",
+       pch    = c("o"),
+       col    = c("red"),
+       legend = c("Unexplained") )
+
+p <- recordPlot()
+```
+
+## Explained variance sex
+
+```{r}
+#| echo: false
+
+p.total
+
+segments(1:n , grand.mean, 
+         1:n , height.data$expected_height_sex,
+         col = "darkgreen",
+         lwd = 2)
+
+```
+
+## Explained variance MPH
+
+```{r}
+#| echo: false
+
+p.total
+
+
+
+segments(1:n , grand.mean, 
+         1:n , height.data$expected_height_mph,
+         col = "darkgreen",
+         lwd = 2)
+
+```
+
+## Interaction SS AB Alcohol x Speed {.smaller}
+
+| Variance | Sum of squares | df | Mean squares | F-ratio |
+|----------|----------------|----|--------------|---------|
+| $\hspace{2ex}AB$ | $\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}$ | $df_A \times df_B$ | $\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}$ | $\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}$ |
+
+```{r}
+#| echo: false
+
+anova.results <- anova(fit2)
+
+options(scipen=999)
+
+ss.sex   = round(anova.results$`Sum Sq`[1], 1)
+ss.mph   = round(anova.results$`Sum Sq`[2], 1)
+ss.model = round(ss.sex + ss.mph + anova.results$`Sum Sq`[3], 1)
+```
+
+$$
+\begin{align}
+{SS}_{{sex} \times {MPH}} &= {SS}_{model} - {SS}_{sex} - {SS}_{MPH} \\
+{SS}_{{sex} \times {MPH}} &= `r ss.model` - `r ss.sex` - `r ss.mph` = `r round(ss.model - ss.sex - ss.mph, 3)`
+\end{align}
+$$
+
+## Interaction plot
+
+```{r}
+#| echo: false
+#| warning: false
+
+# Load ggplot2 library
+library(ggplot2)
+
+# Create interaction plot
+ggplot(height.data, aes(x = MPH, y = height, color = sex)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Interaction Plot: Height vs MPH by sex",
+       y = "Height (cm)",
+       x = "Mid-parental height (MPH)") +
+  theme_minimal()
+```
+

@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Klinkenberg">
+<meta name="dcterms.date" content="2025-09-29">
+
+<title>ANOVA as regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="anova_as_regression_files/libs/clipboard/clipboard.min.js"></script>
+<script src="anova_as_regression_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="anova_as_regression_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="anova_as_regression_files/libs/quarto-html/popper.min.js"></script>
+<script src="anova_as_regression_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="anova_as_regression_files/libs/quarto-html/anchor.min.js"></script>
+<link href="anova_as_regression_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="anova_as_regression_files/libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="anova_as_regression_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="anova_as_regression_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="anova_as_regression_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="anova_as_regression_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="anova_as_regression_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="anova_as_regression_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="anova_as_regression_files/libs/datatables-binding-0.33/datatables.js"></script>
+<script src="anova_as_regression_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="anova_as_regression_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="anova_as_regression_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="anova_as_regression_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="anova_as_regression_files/libs/jszip-1.13.6/jszip.min.js"></script>
+<link href="anova_as_regression_files/libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="anova_as_regression_files/libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+<script src="anova_as_regression_files/libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+<script src="anova_as_regression_files/libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+<script src="anova_as_regression_files/libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+<link href="anova_as_regression_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="anova_as_regression_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#anova-as-regression" id="toc-anova-as-regression" class="nav-link active" data-scroll-target="#anova-as-regression">ANOVA as regression</a>
+  <ul class="collapse">
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova">ANOVA</a></li>
+  <li><a href="#analysing-variance-components" id="toc-analysing-variance-components" class="nav-link" data-scroll-target="#analysing-variance-components">Analysing variance components</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
+  <li><a href="#regression-model" id="toc-regression-model" class="nav-link" data-scroll-target="#regression-model">Regression model</a></li>
+  <li><a href="#outcome-vs-model" id="toc-outcome-vs-model" class="nav-link" data-scroll-target="#outcome-vs-model">Outcome vs Model</a></li>
+  <li><a href="#formal-model" id="toc-formal-model" class="nav-link" data-scroll-target="#formal-model">Formal model</a></li>
+  <li><a href="#anova-as-regression-1" id="toc-anova-as-regression-1" class="nav-link" data-scroll-target="#anova-as-regression-1">ANOVA as regression</a></li>
+  <li><a href="#dummy-variable" id="toc-dummy-variable" class="nav-link" data-scroll-target="#dummy-variable">Dummy variable</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#regression-analysis" id="toc-regression-analysis" class="nav-link" data-scroll-target="#regression-analysis">Regression analysis</a></li>
+  <li><a href="#regression-model-1" id="toc-regression-model-1" class="nav-link" data-scroll-target="#regression-model-1">Regression model</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">r</a></li>
+  <li><a href="#r-squared" id="toc-r-squared" class="nav-link" data-scroll-target="#r-squared">R squared</a></li>
+  <li><a href="#total-variance" id="toc-total-variance" class="nav-link" data-scroll-target="#total-variance">Total variance</a></li>
+  <li><a href="#explained-variance" id="toc-explained-variance" class="nav-link" data-scroll-target="#explained-variance">Explained variance</a></li>
+  <li><a href="#unexplained-variance" id="toc-unexplained-variance" class="nav-link" data-scroll-target="#unexplained-variance">Unexplained variance</a></li>
+  <li><a href="#f-value" id="toc-f-value" class="nav-link" data-scroll-target="#f-value">F value</a></li>
+  </ul></li>
+  <li><a href="#f-distribution" id="toc-f-distribution" class="nav-link" data-scroll-target="#f-distribution">F-distribution</a>
+  <ul class="collapse">
+  <li><a href="#ronald-fisher" id="toc-ronald-fisher" class="nav-link" data-scroll-target="#ronald-fisher">Ronald Fisher</a></li>
+  <li><a href="#population-distribution" id="toc-population-distribution" class="nav-link" data-scroll-target="#population-distribution">Population distribution</a></li>
+  <li><a href="#f-statistic" id="toc-f-statistic" class="nav-link" data-scroll-target="#f-statistic">F-statistic</a></li>
+  <li><a href="#sample-from-same-distribution" id="toc-sample-from-same-distribution" class="nav-link" data-scroll-target="#sample-from-same-distribution">Sample from same distribution</a></li>
+  <li><a href="#more-samples" id="toc-more-samples" class="nav-link" data-scroll-target="#more-samples">More samples</a></li>
+  <li><a href="#f-distribution-1" id="toc-f-distribution-1" class="nav-link" data-scroll-target="#f-distribution-1">F-distribution</a></li>
+  <li><a href="#f-distribution-2" id="toc-f-distribution-2" class="nav-link" data-scroll-target="#f-distribution-2">F-distribution</a></li>
+  <li><a href="#f-distribution-3" id="toc-f-distribution-3" class="nav-link" data-scroll-target="#f-distribution-3">F-distribution</a></li>
+  </ul></li>
+  <li><a href="#moderation" id="toc-moderation" class="nav-link" data-scroll-target="#moderation">Moderation</a>
+  <ul class="collapse">
+  <li><a href="#interaction" id="toc-interaction" class="nav-link" data-scroll-target="#interaction">Interaction</a></li>
+  <li><a href="#categorical-and-continuous-predictor" id="toc-categorical-and-continuous-predictor" class="nav-link" data-scroll-target="#categorical-and-continuous-predictor">Categorical and continuous predictor</a></li>
+  <li><a href="#interaction-1" id="toc-interaction-1" class="nav-link" data-scroll-target="#interaction-1">Interaction</a></li>
+  <li><a href="#regression-model-2" id="toc-regression-model-2" class="nav-link" data-scroll-target="#regression-model-2">Regression model</a></li>
+  <li><a href="#anova-1" id="toc-anova-1" class="nav-link" data-scroll-target="#anova-1">ANOVA</a></li>
+  <li><a href="#total-explained-variance" id="toc-total-explained-variance" class="nav-link" data-scroll-target="#total-explained-variance">Total explained variance</a></li>
+  <li><a href="#total-unexplained-variance" id="toc-total-unexplained-variance" class="nav-link" data-scroll-target="#total-unexplained-variance">Total unexplained variance</a></li>
+  <li><a href="#explained-variance-sex" id="toc-explained-variance-sex" class="nav-link" data-scroll-target="#explained-variance-sex">Explained variance sex</a></li>
+  <li><a href="#explained-variance-mph" id="toc-explained-variance-mph" class="nav-link" data-scroll-target="#explained-variance-mph">Explained variance MPH</a></li>
+  <li><a href="#interaction-ss-ab-alcohol-x-speed" id="toc-interaction-ss-ab-alcohol-x-speed" class="nav-link" data-scroll-target="#interaction-ss-ab-alcohol-x-speed">Interaction SS AB Alcohol x Speed</a></li>
+  <li><a href="#interaction-plot" id="toc-interaction-plot" class="nav-link" data-scroll-target="#interaction-plot">Interaction plot</a></li>
+  </ul></li>
+  <li><a href="#end" id="toc-end" class="nav-link" data-scroll-target="#end">End</a>
+  <ul class="collapse">
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="anova_as_regression.slide.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ANOVA as regression</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Klinkenberg </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Amsterdam
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 29, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="anova-as-regression" class="level1">
+<h1>ANOVA as regression</h1>
+<section id="anova" class="level2">
+<h2 class="anchored" data-anchor-id="anova">ANOVA</h2>
+<blockquote class="blockquote">
+<p><strong>AN</strong>alysis <strong>O</strong>f <strong>VA</strong>riance</p>
+</blockquote>
+<p>ANOVA’s decompose the variance components and look at the ratio of explained to unexplained variance.</p>
+<p>Assuming <span class="math inline">\(H_0\)</span> is true, we would expect an equal amount of explained and unexplained variance.</p>
+</section>
+<section id="analysing-variance-components" class="level2">
+<h2 class="anchored" data-anchor-id="analysing-variance-components">Analysing variance components</h2>
+<blockquote class="blockquote">
+<p>Decomposing variance example of height for males and females.</p>
+</blockquote>
+<style>
+#hazard {
+  height: 30px;
+  color: white;
+  padding: 5px;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    white,
+    white 20px,
+    red 20px,
+    red 40px
+  );
+}
+</style>
+<hr id="hazard">
+<div class="r-stack fragment">
+<iframe id="kaltura_player" src="https://api.eu.kaltura.com/p/120/sp/12000/embedIframeJs/uiconf_id/23449960/partner_id/120?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=0_0l9yy9c2&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=0_n1h0iqj2" width="400" height="261" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Explaining Variance">
+</iframe>
+</div>
+</section>
+<section id="model" class="level2">
+<h2 class="anchored" data-anchor-id="model">Model</h2>
+<p><span class="math inline">\(\LARGE{\text{Outcome} = \text{Model} + \text{Error}}\)</span></p>
+</section>
+<section id="regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="regression-model">Regression model</h2>
+<p>In statistics, linear regression is a linear approach for modeling the relationship between a scalar dependent variable y and one or more explanatory variables denoted as X.</p>
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \dotso + \beta_n X_{ni} + \epsilon_i\]</span></p>
+<p>In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters <span class="math inline">\(\beta\)</span>’s are estimated from the data (<span class="math inline">\(b\)</span>).</p>
+</section>
+<section id="outcome-vs-model" class="level2">
+<h2 class="anchored" data-anchor-id="outcome-vs-model">Outcome vs Model</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The better the model, the more it is the same as the outcome variable. Hence, they have a high correlation <span class="math inline">\(r\)</span>, and the explained variance <span class="math inline">\(R^2\)</span> is also high.</p>
+</section>
+<section id="formal-model" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="formal-model">Formal model</h2>
+<p><span class="math display">\[
+\begin{align}
+\text{model} &amp;= \beta_0 + \beta_1 X_{1i} \\
+\\
+Y_i &amp;= \beta_0 + \beta_1 X_{1i} + \epsilon_i \\
+\hat{Y}_i &amp;= \beta_0 + \beta_1 X_{1i} \\
+\\
+\epsilon_i &amp;= Y_i - \hat{Y}_i
+\end{align}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(_i\)</span> is the index number for the data. A row in your data.</li>
+<li><span class="math inline">\(\beta\)</span> is the true population parameter</li>
+<li><span class="math inline">\(X\)</span> is your predictor variable</li>
+<li><span class="math inline">\(\epsilon\)</span> is the error. How much is the model off.</li>
+<li>The <span class="math inline">\(\hat{\phantom{Y}}\)</span> refers to the expected outcome. So, it is the result of the model.</li>
+</ul>
+</section>
+<section id="anova-as-regression-1" class="level2">
+<h2 class="anchored" data-anchor-id="anova-as-regression-1">ANOVA as regression</h2>
+<p>To run an ANOVA as a regression model we need to create <strong>dummy variables</strong> for each categorical variable that we use. We need <span class="math inline">\(k - 1\)</span> dummy variables, where <span class="math inline">\(k\)</span> is the amount of categories.</p>
+<p>So, for the categorical variable biological sex, we need 1 dummy.</p>
+</section>
+<section id="dummy-variable" class="level2">
+<h2 class="anchored" data-anchor-id="dummy-variable">Dummy variable</h2>
+<p>Creating a dummy variable means making a new variable in SPSS to turn on that category, and turn all other categories off.</p>
+<p>In our case, biological sex has two categories, so we need one dummy. Let’s call our dummy female.</p>
+<p><span class="math display">\[
+\begin{align}
+\widehat{outcome}_i &amp;= b_0 + b_1 \text{dummy}_i \\
+\widehat{height}_i &amp;= b_0 + b_1 \text{male}_i
+\end{align}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\text{dummy} = \{0, 1\}\)</span>, on or off</li>
+<li><span class="math inline">\(\text{male} = \{0,1\}\)</span>, on or off</li>
+</ul>
+</section>
+<section id="example" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="example">Example</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a14109efc6c324642f30" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a14109efc6c324642f30">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["male","female","male","female","female","female","male","female","male","male","male","male","male","female","female","female","male","female","male","female","male","female","male","female","female","male","male","male","male","female","female","female","male","male","female","male","female","male","male","male","female","female","female","female","female","female","female","female","female","male","male","male","male","male","female","female","male","male","female","female","male","female","female","male","male","male","female","male","female","male","male","female","male","male","female","male","male","male","male","female","female","female","male","female","female","female","female","female","female","male","male","male","male","female","male","male","male","male","female","male","male","male","male","male","male","male","female","female","male","female","female","female","female","male","female","female","female","male","female","male","female","male","female","female","female","male","male","male","female","male","female","female"],[177,165,172,168,172,153,168,158,179,177,172,169,182,167,171,161,181,155,176,160,189,154,180,163,163,168,177,171,175,162,169,163,177,176,157,177,159,175,166,180,167,168,163,165,160,170,160,157,161,180,164,168,182,171,170,169,171,183,158,150,170,156,145,172,178,185,152,188,156,179,177,151,188,183,156,169,187,175,176,161,159,165,182,165,168,162,153,159,171,175,183,170,175,160,182,176,173,183,159,162,179,171,193,162,176,175,160,157,180,169,159,158,162,194,168,160,155,176,158,183,164,177,164,170,160,182,177,178,178,178,157,161]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sex<\/th>\n      <th>height<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"dom":"Bfrtip","buttons":["csv","excel"],"columnDefs":[{"className":"dt-right","targets":1},{"name":"sex","targets":0},{"name":"height","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="regression-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="regression-analysis">Regression analysis</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">height</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">161.48</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">159.90&nbsp;–&nbsp;163.05</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">sex [male]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">15.42</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">13.21&nbsp;–&nbsp;17.63</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">132</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.595 / 0.591</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(b_0 = 161.48\)</span>, <span class="math inline">\(\bar{x}_\text{females} = 161.48\)</span></li>
+<li><span class="math inline">\(b_1 = 15.42\)</span>, <span class="math inline">\(\bar{x}_\text{males} = b_0 + b_1 = 176.9\)</span></li>
+</ul>
+</section>
+<section id="regression-model-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="regression-model-1">Regression model</h2>
+<p><span class="math display">\[
+\begin{align}
+\widehat{\text{height}}_i &amp;= b_0 + b_1 \times \text{dummy}_i \\
+\widehat{\text{height}}_i &amp;= 161.48 + 15.42 \times \text{dummy}_i
+\end{align}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2cf95df8a1eafe93f520" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2cf95df8a1eafe93f520">{"x":{"filter":"none","vertical":false,"data":[["male","female","male","female","female","female","male","female","male","male","male","male","male","female","female","female","male","female","male","female","male","female","male","female","female","male","male","male","male","female","female","female","male","male","female","male","female","male","male","male","female","female","female","female","female","female","female","female","female","male","male","male","male","male","female","female","male","male","female","female","male","female","female","male","male","male","female","male","female","male","male","female","male","male","female","male","male","male","male","female","female","female","male","female","female","female","female","female","female","male","male","male","male","female","male","male","male","male","female","male","male","male","male","male","male","male","female","female","male","female","female","female","female","male","female","female","female","male","female","male","female","male","female","female","female","male","male","male","female","male","female","female"],[177,165,172,168,172,153,168,158,179,177,172,169,182,167,171,161,181,155,176,160,189,154,180,163,163,168,177,171,175,162,169,163,177,176,157,177,159,175,166,180,167,168,163,165,160,170,160,157,161,180,164,168,182,171,170,169,171,183,158,150,170,156,145,172,178,185,152,188,156,179,177,151,188,183,156,169,187,175,176,161,159,165,182,165,168,162,153,159,171,175,183,170,175,160,182,176,173,183,159,162,179,171,193,162,176,175,160,157,180,169,159,158,162,194,168,160,155,176,158,183,164,177,164,170,160,182,177,178,178,178,157,161],[176.9,161.48,176.9,161.48,161.48,161.48,176.9,161.48,176.9,176.9,176.9,176.9,176.9,161.48,161.48,161.48,176.9,161.48,176.9,161.48,176.9,161.48,176.9,161.48,161.48,176.9,176.9,176.9,176.9,161.48,161.48,161.48,176.9,176.9,161.48,176.9,161.48,176.9,176.9,176.9,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,176.9,176.9,176.9,176.9,176.9,161.48,161.48,176.9,176.9,161.48,161.48,176.9,161.48,161.48,176.9,176.9,176.9,161.48,176.9,161.48,176.9,176.9,161.48,176.9,176.9,161.48,176.9,176.9,176.9,176.9,161.48,161.48,161.48,176.9,161.48,161.48,161.48,161.48,161.48,161.48,176.9,176.9,176.9,176.9,161.48,176.9,176.9,176.9,176.9,161.48,176.9,176.9,176.9,176.9,176.9,176.9,176.9,161.48,161.48,176.9,161.48,161.48,161.48,161.48,176.9,161.48,161.48,161.48,176.9,161.48,176.9,161.48,176.9,161.48,161.48,161.48,176.9,176.9,176.9,161.48,176.9,161.48,161.48],[161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48,161.48],[15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42,15.42],[1,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,1,0,1,0,1,0,0,1,1,1,1,0,0,0,1,1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1,1,0,0,1,0,0,1,1,1,0,1,0,1,1,0,1,1,0,1,1,1,1,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,1,1,1,0,1,0,0],[0.1,3.52,-4.9,6.52,10.52,-8.48,-8.9,-3.48,2.1,0.1,-4.9,-7.9,5.1,5.52,9.52,-0.48,4.1,-6.48,-0.9,-1.48,12.1,-7.48,3.1,1.52,1.52,-8.9,0.1,-5.9,-1.9,0.52,7.52,1.52,0.1,-0.9,-4.48,0.1,-2.48,-1.9,-10.9,3.1,5.52,6.52,1.52,3.52,-1.48,8.52,-1.48,-4.48,-0.48,3.1,-12.9,-8.9,5.1,-5.9,8.52,7.52,-5.9,6.1,-3.48,-11.48,-6.9,-5.48,-16.48,-4.9,1.1,8.1,-9.48,11.1,-5.48,2.1,0.1,-10.48,11.1,6.1,-5.48,-7.9,10.1,-1.9,-0.9,-0.48,-2.48,3.52,5.1,3.52,6.52,0.52,-8.48,-2.48,9.52,-1.9,6.1,-6.9,-1.9,-1.48,5.1,-0.9,-3.9,6.1,-2.48,-14.9,2.1,-5.9,16.1,-14.9,-0.9,-1.9,-1.48,-4.48,3.1,7.52,-2.48,-3.48,0.52,17.1,6.52,-1.48,-6.48,-0.9,-3.48,6.1,2.52,0.1,2.52,8.52,-1.48,5.1,0.1,1.1,16.52,1.1,-4.48,-0.48]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sex<\/th>\n      <th>height<\/th>\n      <th>expected_height<\/th>\n      <th>b.0<\/th>\n      <th>b.1<\/th>\n      <th>dummy<\/th>\n      <th>error<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"name":"sex","targets":0},{"name":"height","targets":1},{"name":"expected_height","targets":2},{"name":"b.0","targets":3},{"name":"b.1","targets":4},{"name":"dummy","targets":5},{"name":"error","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">r</h2>
+<p>The correlation between <strong>height</strong> and <strong>expected height</strong> as indication of how wel our model fits.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="r-squared" class="level2">
+<h2 class="anchored" data-anchor-id="r-squared">R squared</h2>
+<p><span class="math inline">\(R^2\)</span> is simply the squared correlation <span class="math inline">\(r = 0.77\)</span>, <span class="math inline">\(R^2 = r \times r = 0.5929\)</span>.</p>
+<p>This represents the amount of variance explained in relation to the total amount of variance.</p>
+</section>
+<section id="total-variance" class="level2">
+<h2 class="anchored" data-anchor-id="total-variance">Total variance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Sums of squares <span class="math inline">\(\Sigma^n_{i = 1} (x_i - \bar{x})^2\)</span> devided by the degrees of freedom <span class="math inline">\(n-1\)</span>.</p>
+<p><span class="math display">\[\text{Variance} = s^{2} = \dfrac{\sum_{i=1}^{n}(x_i - \overline{x})^{2}}{n - 1}\]</span></p>
+</section>
+<section id="explained-variance" class="level2">
+<h2 class="anchored" data-anchor-id="explained-variance">Explained variance</h2>
+<blockquote class="blockquote">
+<p>Between groups</p>
+</blockquote>
+<p>What part of the variance is explained by the model.</p>
+<p><span class="math inline">\(R^2 = \frac{{SS}_{explained}}{{SS_{total}}}\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="unexplained-variance" class="level2">
+<h2 class="anchored" data-anchor-id="unexplained-variance">Unexplained variance</h2>
+<blockquote class="blockquote">
+<p>Unexplained = within groups variance = error = residuals</p>
+</blockquote>
+<p>This is the error / residual (<span class="math inline">\(\epsilon\)</span>). The difference between model expectation and observed measurement.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="f-value" class="level2">
+<h2 class="anchored" data-anchor-id="f-value">F value</h2>
+<p>This is the ratio between average explained and unexplained variance.</p>
+<p><span class="math inline">\(F = \frac{{MS}_{Explained}}{{MS_{Unexplained}}} = \frac{{MS}_{model}}{{MS_{error}}} =  \frac{{MS}_{model}}{{MS_{Residuals}}}\)</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: height
+           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+sex         1 7843.4  7843.4  190.64 &lt; 2.2e-16 ***
+Residuals 130 5348.5    41.1                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="f-distribution" class="level1 section">
+<h1 class="section">F-distribution</h1>
+<section id="ronald-fisher" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="ronald-fisher">Ronald Fisher</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>The F-distribution, also known as Snedecor’s F distribution or the Fisher–Snedecor distribution (after Ronald Fisher and George W. Snedecor) is, in probability theory and statistics, a continuous probability distribution. The F-distribution arises frequently as the null distribution of a test statistic, most notably in the analysis of variance; see F-test.</p>
+<p><a href="https://en.wikipedia.org/wiki/F-distribution">Wikipedia</a></p>
+<p>Sir Ronald Aylmer Fisher FRS (17 February 1890 – 29 July 1962), known as R.A. Fisher, was an English statistician, evolutionary biologist, mathematician, geneticist, and eugenicist. Fisher is known as one of the three principal founders of population genetics, creating a mathematical and statistical basis for biology and uniting natural selection with Mendelian genetics.</p>
+<p><a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Wikipedia</a></p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG" class="img-fluid figure-img" width="291"></p>
+<figcaption>Ronald Fisher</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="population-distribution" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="population-distribution">Population distribution</h2>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">9</span><span class="sc">:</span><span class="dv">13</span>), <span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>n  <span class="ot">=</span> <span class="dv">56</span>    <span class="co"># Sample size</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>df <span class="ot">=</span> n <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Degrees of freedom</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>mu    <span class="ot">=</span> <span class="dv">170</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>sigma <span class="ot">=</span> <span class="fl">6.35</span> </span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>height <span class="ot">=</span> <span class="fu">seq</span>(mu<span class="dv">-45</span>, mu<span class="sc">+</span><span class="dv">45</span>, <span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="fu">plot</span>(height, <span class="fu">dnorm</span>(height, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a>n.samples <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb2-17"><a href="#cb2-17"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))  </span>
+<span id="cb2-19"><a href="#cb2-19"></a>  <span class="fu">hist</span>(<span class="fu">rnorm</span>(n, mu, sigma), <span class="at">main=</span><span class="st">""</span>, <span class="at">cex.axis=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a>  </span>
+<span id="cb2-21"><a href="#cb2-21"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="f-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="f-statistic">F-statistic</h2>
+<div class="r-stack" style="height:300px;">
+<p><span class="math inline">\(F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{\text{between group var.}}{\text{within group var.}} = \frac{Explained}{Unexplained} = \frac{{SIGNAL}}{{NOISE}}\)</span></p>
+</div>
+<p>The <span class="math inline">\(F\)</span>-statistic represents a signal to noise ratio by defiding the model variance component by the error variance component.</p>
+</section>
+<section id="sample-from-same-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="sample-from-same-distribution">Sample from same distribution</h2>
+<p>Let’s take two sample from our normal population and calculate the F-value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><span class="math display">\[F = \frac{{MS}_{model}}{{MS}_{error}} = \frac{{SIGNAL}}{{NOISE}} = \frac{{93.57}}{{53.18}} = 1.76\]</span></p>
+</section>
+<section id="more-samples" class="level2 smaller subsection">
+<h2 class="smaller subsection anchored" data-anchor-id="more-samples">More samples</h2>
+<p>let’s take more samples and calculate the F-value every time.</p>
+<div class="cell" data-output-location="slide">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n.samples <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>f.values <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n.samples) {</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  </span>
+<span id="cb4-7"><a href="#cb4-7"></a>  x<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x<span class="fl">.1</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  x<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">rnorm</span>(n, mu, sigma); x<span class="fl">.2</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>), <span class="at">each=</span>n), <span class="at">score =</span> <span class="fu">c</span>(x<span class="fl">.1</span>,x<span class="fl">.2</span>))</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    </span>
+<span id="cb4-12"><a href="#cb4-12"></a>  f.values[i] <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">aov</span>(<span class="fu">lm</span>(score <span class="sc">~</span> group, data)))[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a>}</span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a>k <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>N <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>n</span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a>df.model <span class="ot">=</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>df.error <span class="ot">=</span> N <span class="sc">-</span> k</span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="fu">hist</span>(f.values, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">"F-values"</span>, <span class="at">breaks=</span><span class="dv">100</span>)</span>
+<span id="cb4-23"><a href="#cb4-23"></a>F <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="fu">lines</span>(F, <span class="fu">df</span>(F,df.model, df.error), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="f-distribution-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="f-distribution-1">F-distribution</h2>
+<p>So if the population is normally distributed (assumption of normality) the f-distribution represents the signal to noise ratio given a certain number of samples (<span class="math inline">\({df}_{model} = k - 1\)</span>) and sample size (<span class="math inline">\({df}_{error} = N - k\)</span>).</p>
+<p>The F-distibution therefore is different for different sample sizes and number of groups.</p>
+<p><span class="math display">\[\frac{\sqrt{\frac{(d_1x)^{d_1}\,\,d_2^{d_2}} {(d_1x+d_2)^{d_1+d_2}}}} {x\operatorname{B}\left(\frac{d_1}{2},\frac{d_2}{2}\right)}\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Formula not exam material</p>
+</div>
+</div>
+</section>
+<section id="f-distribution-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="f-distribution-2">F-distribution</h2>
+<div class="cell" data-output-location="slide">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="f-distribution-3" class="level2 flexbox vcenter">
+<h2 class="flexbox vcenter anchored" data-anchor-id="f-distribution-3">F-distribution</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../../topics/f_distribution/f_distributions.gif" class="img-fluid figure-img"></p>
+<figcaption>Animated F-distrigutions</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="moderation" class="level1">
+<h1>Moderation</h1>
+<section id="interaction" class="level2">
+<h2 class="anchored" data-anchor-id="interaction">Interaction</h2>
+<p>In statistics and regression analysis, moderation occurs when the relationship between two variables depends on a third variable. The third variable is referred to as the moderator variable or simply the moderator. The effect of a moderating variable is characterized statistically as an interaction.</p>
+</section>
+<section id="categorical-and-continuous-predictor" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="categorical-and-continuous-predictor">Categorical and continuous predictor</h2>
+<p>Another good predictor for height is the <a href="https://adc.bmj.com/content/81/3/257.abstract">mid-parental height</a>. That is, the biological sex adjusted average height of both parents.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-d20fb8568ddc9e545d4b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d20fb8568ddc9e545d4b">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["male","female","male","female","female","female","male","female","male","male","male","male","male","female","female","female","male","female","male","female","male","female","male","female","female","male","male","male","male","female","female","female","male","male","female","male","female","male","male","male","female","female","female","female","female","female","female","female","female","male","male","male","male","male","female","female","male","male","female","female","male","female","female","male","male","male","female","male","female","male","male","female","male","male","female","male","male","male","male","female","female","female","male","female","female","female","female","female","female","male","male","male","male","female","male","male","male","male","female","male","male","male","male","male","male","male","female","female","male","female","female","female","female","male","female","female","female","male","female","male","female","male","female","female","female","male","male","male","female","male","female","female"],[177,165,172,168,172,153,168,158,179,177,172,169,182,167,171,161,181,155,176,160,189,154,180,163,163,168,177,171,175,162,169,163,177,176,157,177,159,175,166,180,167,168,163,165,160,170,160,157,161,180,164,168,182,171,170,169,171,183,158,150,170,156,145,172,178,185,152,188,156,179,177,151,188,183,156,169,187,175,176,161,159,165,182,165,168,162,153,159,171,175,183,170,175,160,182,176,173,183,159,162,179,171,193,162,176,175,160,157,180,169,159,158,162,194,168,160,155,176,158,183,164,177,164,170,160,182,177,178,178,178,157,161],[185,170,177,177,172,167,164,171,190,184,179,161,194,169,172,164,190,150,179,166,195,153,183,173,178,171,186,165,166,175,180,163,184,176,159,177,161,187,165,185,172,176,174,163,159,175,160,164,171,181,163,173,189,173,186,177,176,192,158,161,178,157,153,168,189,180,165,200,172,179,177,152,193,189,166,178,192,177,184,169,169,183,190,167,175,160,154,166,167,175,187,179,176,166,190,188,182,187,163,173,187,184,198,171,182,179,163,157,181,178,162,160,160,197,174,169,163,186,173,190,173,184,174,164,161,189,190,196,191,190,163,175]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sex<\/th>\n      <th>height<\/th>\n      <th>MPH<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":350,"paging":[0,0.01,0.02,0.03,0.04,0.05,0.06,0.07000000000000001,0.08,0.09,0.1,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.2,0.21,0.22,0.23,0.24,0.25,0.26,0.27,0.28,0.29,0.3,0.31,0.32,0.33,0.34,0.35,0.36,0.37,0.38,0.39,0.4,0.41,0.42,0.43,0.44,0.45,0.46,0.47,0.48,0.49,0.5,0.51,0.52,0.53,0.54,0.55,0.5600000000000001,0.5700000000000001,0.58,0.59,0.6,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68,0.6900000000000001,0.7000000000000001,0.71,0.72,0.73,0.74,0.75,0.76,0.77,0.78,0.79,0.8,0.8100000000000001,0.8200000000000001,0.8300000000000001,0.84,0.85,0.86,0.87,0.88,0.89,0.9,0.91,0.92,0.93,0.9400000000000001,0.9500000000000001,0.96,0.97,0.98,0.99,1,1.01,1.02,1.03,1.04,1.05,1.06,1.07,1.08,1.09,1.1,1.11,1.12,1.13,1.14,1.15,1.16,1.17,1.18,1.19,1.2,1.21,1.22,1.23,1.24,1.25,1.26,1.27,1.28,1.29,1.3,1.31,1.32,1.33,1.34,1.35,1.36,1.37,1.38,1.39,1.4,1.41,1.42,1.43,1.44,1.45,1.46,1.47,1.48,1.49,1.5,1.51,1.52,1.53,1.54,1.55,1.56,1.57,1.58,1.59,1.6,1.61,1.62,1.63,1.64,1.65,1.66,1.67,1.68,1.69,1.7,1.71,1.72,1.73,1.74,1.75,1.76,1.77,1.78,1.79,1.8,1.81,1.82,1.83,1.84,1.85,1.86,1.87,1.88,1.89,1.9,1.91,1.92,1.93,1.94,1.95,1.96,1.97,1.98,1.99,2,2.01,2.02,2.03,2.04,2.05,2.06,2.07,2.08,2.09,2.1,2.11,2.12,2.13,2.14,2.15,2.16,2.17,2.18,2.19,2.2,2.21,2.22,2.23,2.24,2.25,2.26,2.27,2.28,2.29,2.3,2.31,2.32,2.33,2.34,2.35,2.36,2.37,2.38,2.39,2.4,2.41,2.42,2.43,2.44,2.45,2.46,2.47,2.48,2.49,2.5,2.51,2.52,2.53,2.54,2.55,2.56,2.57,2.58,2.59,2.6,2.61,2.62,2.63,2.64,2.65,2.66,2.67,2.68,2.69,2.7,2.71,2.72,2.73,2.74,2.75,2.76,2.77,2.78,2.79,2.8,2.81,2.82,2.83,2.84,2.85,2.86,2.87,2.88,2.89,2.9,2.91,2.92,2.93,2.94,2.95,2.96,2.97,2.98,2.99,3,3.01,3.02,3.03,3.04,3.05,3.06,3.07,3.08,3.09,3.1,3.11,3.12,3.13,3.14,3.15,3.16,3.17,3.18,3.19,3.2,3.21,3.22,3.23,3.24,3.25,3.26,3.27,3.28,3.29,3.3,3.31,3.32,3.33,3.34,3.35,3.36,3.37,3.38,3.39,3.4,3.41,3.42,3.43,3.44,3.45,3.46,3.47,3.48,3.49,3.5,3.51,3.52,3.53,3.54,3.55,3.56,3.57,3.58,3.59,3.6,3.61,3.62,3.63,3.64,3.65,3.66,3.67,3.68,3.69,3.7,3.71,3.72,3.73,3.74,3.75,3.76,3.77,3.78,3.79,3.8,3.81,3.82,3.83,3.84,3.85,3.86,3.87,3.88,3.89,3.9,3.91,3.92,3.93,3.94,3.95,3.96,3.97,3.98,3.99,4,4.01,4.02,4.03,4.04,4.05,4.06,4.07,4.08,4.09,4.1,4.11,4.12,4.13,4.14,4.15,4.16,4.17,4.18,4.19,4.2,4.21,4.22,4.23,4.24,4.25,4.26,4.27,4.28,4.29,4.3,4.31,4.32,4.33,4.34,4.350000000000001,4.36,4.37,4.38,4.39,4.4,4.41,4.42,4.43,4.44,4.45,4.46,4.47,4.48,4.49,4.5,4.51,4.52,4.53,4.54,4.55,4.56,4.57,4.58,4.59,4.600000000000001,4.61,4.62,4.63,4.64,4.65,4.66,4.67,4.68,4.69,4.7,4.71,4.72,4.73,4.74,4.75,4.76,4.77,4.78,4.79,4.8,4.81,4.82,4.83,4.84,4.850000000000001,4.86,4.87,4.88,4.89,4.9,4.91,4.92,4.93,4.94,4.95,4.96,4.97,4.98,4.99,5,5.01,5.02,5.03,5.04,5.05,5.06,5.07,5.08,5.09,5.100000000000001,5.11,5.12,5.13,5.14,5.15,5.16,5.17,5.18,5.19,5.2,5.21,5.22,5.23,5.24,5.25,5.26,5.27,5.28,5.29,5.3,5.31,5.32,5.33,5.34,5.350000000000001,5.36,5.37,5.38,5.39,5.4,5.41,5.42,5.43,5.44,5.45,5.46,5.47,5.48,5.49,5.5,5.51,5.52,5.53,5.54,5.55,5.56,5.57,5.58,5.59,5.600000000000001,5.61,5.62,5.63,5.64,5.65,5.66,5.67,5.68,5.69,5.7,5.71,5.72,5.73,5.74,5.75,5.76,5.77,5.78,5.79,5.8,5.81,5.82,5.83,5.84,5.850000000000001,5.86,5.87,5.88,5.89,5.9,5.91,5.92,5.93,5.94,5.95,5.96,5.97,5.98,5.99,6,6.01,6.02,6.03,6.04,6.05,6.06,6.07,6.08,6.09,6.100000000000001,6.11,6.12,6.13,6.140000000000001,6.15,6.16,6.17,6.18,6.19,6.2,6.21,6.22,6.23,6.24,6.25,6.26,6.27,6.28,6.29,6.3,6.31,6.32,6.33,6.34,6.350000000000001,6.36,6.37,6.38,6.390000000000001,6.4,6.41,6.42,6.43,6.44,6.45,6.46,6.47,6.48,6.49,6.5,6.51,6.52,6.53,6.54,6.55,6.56,6.57,6.58,6.59,6.600000000000001,6.61,6.62,6.63,6.640000000000001,6.65,6.66,6.67,6.68,6.69,6.7,6.71,6.72,6.73,6.74,6.75,6.76,6.77,6.78,6.79,6.8,6.81,6.82,6.83,6.84,6.850000000000001,6.86,6.87,6.88,6.890000000000001,6.9,6.91,6.92,6.93,6.94,6.95,6.96,6.97,6.98,6.99,7,7.01,7.02,7.03,7.04,7.05,7.06,7.07,7.08,7.09,7.100000000000001,7.11,7.12,7.13,7.140000000000001,7.15,7.16,7.17,7.18,7.19,7.2,7.21,7.22,7.23,7.24,7.25,7.26,7.27,7.28,7.29,7.3,7.31,7.32,7.33,7.34,7.350000000000001,7.36,7.37,7.38,7.390000000000001,7.4,7.41,7.42,7.43,7.44,7.45,7.46,7.47,7.48,7.49,7.5,7.51,7.52,7.53,7.54,7.55,7.56,7.57,7.58,7.59,7.600000000000001,7.61,7.62,7.63,7.640000000000001,7.65,7.66,7.67,7.68,7.69,7.7,7.71,7.72,7.73,7.74,7.75,7.76,7.77,7.78,7.79,7.8,7.81,7.82,7.83,7.84,7.850000000000001,7.86,7.87,7.88,7.890000000000001,7.9,7.91,7.92,7.930000000000001,7.94,7.95,7.96,7.97,7.98,7.99,8,8.01,8.02,8.029999999999999,8.040000000000001,8.050000000000001,8.06,8.07,8.08,8.09,8.1,8.109999999999999,8.120000000000001,8.130000000000001,8.140000000000001,8.15,8.16,8.17,8.18,8.19,8.199999999999999,8.210000000000001,8.220000000000001,8.23,8.24,8.25,8.26,8.27,8.279999999999999,8.290000000000001,8.300000000000001,8.31,8.32,8.33,8.34,8.35,8.359999999999999,8.370000000000001,8.380000000000001,8.390000000000001,8.4,8.41,8.42,8.43,8.44,8.449999999999999,8.460000000000001,8.470000000000001,8.48,8.49,8.5,8.51,8.52,8.529999999999999,8.540000000000001,8.550000000000001,8.56,8.57,8.58,8.59,8.6,8.609999999999999,8.620000000000001,8.630000000000001,8.640000000000001,8.65,8.66,8.67,8.68,8.69,8.700000000000001,8.710000000000001,8.720000000000001,8.73,8.74,8.75,8.76,8.77,8.779999999999999,8.790000000000001,8.800000000000001,8.81,8.82,8.83,8.84,8.85,8.859999999999999,8.870000000000001,8.880000000000001,8.890000000000001,8.9,8.91,8.92,8.93,8.94,8.950000000000001,8.960000000000001,8.970000000000001,8.98,8.99,9,9.01,9.02,9.029999999999999,9.040000000000001,9.050000000000001,9.06,9.07,9.08,9.09,9.1,9.109999999999999,9.120000000000001,9.130000000000001,9.140000000000001,9.15,9.16,9.17,9.18,9.19,9.200000000000001,9.210000000000001,9.220000000000001,9.23,9.24,9.25,9.26,9.27,9.279999999999999,9.290000000000001,9.300000000000001,9.31,9.32,9.33,9.34,9.35,9.359999999999999,9.370000000000001,9.380000000000001,9.390000000000001,9.4,9.41,9.42,9.43,9.44,9.450000000000001,9.460000000000001,9.470000000000001,9.48,9.49,9.5,9.51,9.52,9.529999999999999,9.540000000000001,9.550000000000001,9.56,9.57,9.58,9.59,9.6,9.609999999999999,9.620000000000001,9.630000000000001,9.640000000000001,9.65,9.66,9.67,9.68,9.69,9.700000000000001,9.710000000000001,9.720000000000001,9.73,9.74,9.75,9.76,9.77,9.779999999999999,9.790000000000001,9.800000000000001,9.81,9.82,9.83,9.84,9.85,9.859999999999999,9.870000000000001,9.880000000000001,9.890000000000001,9.9,9.91,9.92,9.93,9.94,9.950000000000001,9.960000000000001,9.970000000000001,9.98,9.99,10],"info":[0,0.01,0.02,0.03,0.04,0.05,0.06,0.07000000000000001,0.08,0.09,0.1,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.2,0.21,0.22,0.23,0.24,0.25,0.26,0.27,0.28,0.29,0.3,0.31,0.32,0.33,0.34,0.35,0.36,0.37,0.38,0.39,0.4,0.41,0.42,0.43,0.44,0.45,0.46,0.47,0.48,0.49,0.5,0.51,0.52,0.53,0.54,0.55,0.5600000000000001,0.5700000000000001,0.58,0.59,0.6,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68,0.6900000000000001,0.7000000000000001,0.71,0.72,0.73,0.74,0.75,0.76,0.77,0.78,0.79,0.8,0.8100000000000001,0.8200000000000001,0.8300000000000001,0.84,0.85,0.86,0.87,0.88,0.89,0.9,0.91,0.92,0.93,0.9400000000000001,0.9500000000000001,0.96,0.97,0.98,0.99,1,1.01,1.02,1.03,1.04,1.05,1.06,1.07,1.08,1.09,1.1,1.11,1.12,1.13,1.14,1.15,1.16,1.17,1.18,1.19,1.2,1.21,1.22,1.23,1.24,1.25,1.26,1.27,1.28,1.29,1.3,1.31,1.32,1.33,1.34,1.35,1.36,1.37,1.38,1.39,1.4,1.41,1.42,1.43,1.44,1.45,1.46,1.47,1.48,1.49,1.5,1.51,1.52,1.53,1.54,1.55,1.56,1.57,1.58,1.59,1.6,1.61,1.62,1.63,1.64,1.65,1.66,1.67,1.68,1.69,1.7,1.71,1.72,1.73,1.74,1.75,1.76,1.77,1.78,1.79,1.8,1.81,1.82,1.83,1.84,1.85,1.86,1.87,1.88,1.89,1.9,1.91,1.92,1.93,1.94,1.95,1.96,1.97,1.98,1.99,2,2.01,2.02,2.03,2.04,2.05,2.06,2.07,2.08,2.09,2.1,2.11,2.12,2.13,2.14,2.15,2.16,2.17,2.18,2.19,2.2,2.21,2.22,2.23,2.24,2.25,2.26,2.27,2.28,2.29,2.3,2.31,2.32,2.33,2.34,2.35,2.36,2.37,2.38,2.39,2.4,2.41,2.42,2.43,2.44,2.45,2.46,2.47,2.48,2.49,2.5,2.51,2.52,2.53,2.54,2.55,2.56,2.57,2.58,2.59,2.6,2.61,2.62,2.63,2.64,2.65,2.66,2.67,2.68,2.69,2.7,2.71,2.72,2.73,2.74,2.75,2.76,2.77,2.78,2.79,2.8,2.81,2.82,2.83,2.84,2.85,2.86,2.87,2.88,2.89,2.9,2.91,2.92,2.93,2.94,2.95,2.96,2.97,2.98,2.99,3,3.01,3.02,3.03,3.04,3.05,3.06,3.07,3.08,3.09,3.1,3.11,3.12,3.13,3.14,3.15,3.16,3.17,3.18,3.19,3.2,3.21,3.22,3.23,3.24,3.25,3.26,3.27,3.28,3.29,3.3,3.31,3.32,3.33,3.34,3.35,3.36,3.37,3.38,3.39,3.4,3.41,3.42,3.43,3.44,3.45,3.46,3.47,3.48,3.49,3.5,3.51,3.52,3.53,3.54,3.55,3.56,3.57,3.58,3.59,3.6,3.61,3.62,3.63,3.64,3.65,3.66,3.67,3.68,3.69,3.7,3.71,3.72,3.73,3.74,3.75,3.76,3.77,3.78,3.79,3.8,3.81,3.82,3.83,3.84,3.85,3.86,3.87,3.88,3.89,3.9,3.91,3.92,3.93,3.94,3.95,3.96,3.97,3.98,3.99,4,4.01,4.02,4.03,4.04,4.05,4.06,4.07,4.08,4.09,4.1,4.11,4.12,4.13,4.14,4.15,4.16,4.17,4.18,4.19,4.2,4.21,4.22,4.23,4.24,4.25,4.26,4.27,4.28,4.29,4.3,4.31,4.32,4.33,4.34,4.350000000000001,4.36,4.37,4.38,4.39,4.4,4.41,4.42,4.43,4.44,4.45,4.46,4.47,4.48,4.49,4.5,4.51,4.52,4.53,4.54,4.55,4.56,4.57,4.58,4.59,4.600000000000001,4.61,4.62,4.63,4.64,4.65,4.66,4.67,4.68,4.69,4.7,4.71,4.72,4.73,4.74,4.75,4.76,4.77,4.78,4.79,4.8,4.81,4.82,4.83,4.84,4.850000000000001,4.86,4.87,4.88,4.89,4.9,4.91,4.92,4.93,4.94,4.95,4.96,4.97,4.98,4.99,5,5.01,5.02,5.03,5.04,5.05,5.06,5.07,5.08,5.09,5.100000000000001,5.11,5.12,5.13,5.14,5.15,5.16,5.17,5.18,5.19,5.2,5.21,5.22,5.23,5.24,5.25,5.26,5.27,5.28,5.29,5.3,5.31,5.32,5.33,5.34,5.350000000000001,5.36,5.37,5.38,5.39,5.4,5.41,5.42,5.43,5.44,5.45,5.46,5.47,5.48,5.49,5.5,5.51,5.52,5.53,5.54,5.55,5.56,5.57,5.58,5.59,5.600000000000001,5.61,5.62,5.63,5.64,5.65,5.66,5.67,5.68,5.69,5.7,5.71,5.72,5.73,5.74,5.75,5.76,5.77,5.78,5.79,5.8,5.81,5.82,5.83,5.84,5.850000000000001,5.86,5.87,5.88,5.89,5.9,5.91,5.92,5.93,5.94,5.95,5.96,5.97,5.98,5.99,6,6.01,6.02,6.03,6.04,6.05,6.06,6.07,6.08,6.09,6.100000000000001,6.11,6.12,6.13,6.140000000000001,6.15,6.16,6.17,6.18,6.19,6.2,6.21,6.22,6.23,6.24,6.25,6.26,6.27,6.28,6.29,6.3,6.31,6.32,6.33,6.34,6.350000000000001,6.36,6.37,6.38,6.390000000000001,6.4,6.41,6.42,6.43,6.44,6.45,6.46,6.47,6.48,6.49,6.5,6.51,6.52,6.53,6.54,6.55,6.56,6.57,6.58,6.59,6.600000000000001,6.61,6.62,6.63,6.640000000000001,6.65,6.66,6.67,6.68,6.69,6.7,6.71,6.72,6.73,6.74,6.75,6.76,6.77,6.78,6.79,6.8,6.81,6.82,6.83,6.84,6.850000000000001,6.86,6.87,6.88,6.890000000000001,6.9,6.91,6.92,6.93,6.94,6.95,6.96,6.97,6.98,6.99,7,7.01,7.02,7.03,7.04,7.05,7.06,7.07,7.08,7.09,7.100000000000001,7.11,7.12,7.13,7.140000000000001,7.15,7.16,7.17,7.18,7.19,7.2,7.21,7.22,7.23,7.24,7.25,7.26,7.27,7.28,7.29,7.3,7.31,7.32,7.33,7.34,7.350000000000001,7.36,7.37,7.38,7.390000000000001,7.4,7.41,7.42,7.43,7.44,7.45,7.46,7.47,7.48,7.49,7.5,7.51,7.52,7.53,7.54,7.55,7.56,7.57,7.58,7.59,7.600000000000001,7.61,7.62,7.63,7.640000000000001,7.65,7.66,7.67,7.68,7.69,7.7,7.71,7.72,7.73,7.74,7.75,7.76,7.77,7.78,7.79,7.8,7.81,7.82,7.83,7.84,7.850000000000001,7.86,7.87,7.88,7.890000000000001,7.9,7.91,7.92,7.930000000000001,7.94,7.95,7.96,7.97,7.98,7.99,8,8.01,8.02,8.029999999999999,8.040000000000001,8.050000000000001,8.06,8.07,8.08,8.09,8.1,8.109999999999999,8.120000000000001,8.130000000000001,8.140000000000001,8.15,8.16,8.17,8.18,8.19,8.199999999999999,8.210000000000001,8.220000000000001,8.23,8.24,8.25,8.26,8.27,8.279999999999999,8.290000000000001,8.300000000000001,8.31,8.32,8.33,8.34,8.35,8.359999999999999,8.370000000000001,8.380000000000001,8.390000000000001,8.4,8.41,8.42,8.43,8.44,8.449999999999999,8.460000000000001,8.470000000000001,8.48,8.49,8.5,8.51,8.52,8.529999999999999,8.540000000000001,8.550000000000001,8.56,8.57,8.58,8.59,8.6,8.609999999999999,8.620000000000001,8.630000000000001,8.640000000000001,8.65,8.66,8.67,8.68,8.69,8.700000000000001,8.710000000000001,8.720000000000001,8.73,8.74,8.75,8.76,8.77,8.779999999999999,8.790000000000001,8.800000000000001,8.81,8.82,8.83,8.84,8.85,8.859999999999999,8.870000000000001,8.880000000000001,8.890000000000001,8.9,8.91,8.92,8.93,8.94,8.950000000000001,8.960000000000001,8.970000000000001,8.98,8.99,9,9.01,9.02,9.029999999999999,9.040000000000001,9.050000000000001,9.06,9.07,9.08,9.09,9.1,9.109999999999999,9.120000000000001,9.130000000000001,9.140000000000001,9.15,9.16,9.17,9.18,9.19,9.200000000000001,9.210000000000001,9.220000000000001,9.23,9.24,9.25,9.26,9.27,9.279999999999999,9.290000000000001,9.300000000000001,9.31,9.32,9.33,9.34,9.35,9.359999999999999,9.370000000000001,9.380000000000001,9.390000000000001,9.4,9.41,9.42,9.43,9.44,9.450000000000001,9.460000000000001,9.470000000000001,9.48,9.49,9.5,9.51,9.52,9.529999999999999,9.540000000000001,9.550000000000001,9.56,9.57,9.58,9.59,9.6,9.609999999999999,9.620000000000001,9.630000000000001,9.640000000000001,9.65,9.66,9.67,9.68,9.69,9.700000000000001,9.710000000000001,9.720000000000001,9.73,9.74,9.75,9.76,9.77,9.779999999999999,9.790000000000001,9.800000000000001,9.81,9.82,9.83,9.84,9.85,9.859999999999999,9.870000000000001,9.880000000000001,9.890000000000001,9.9,9.91,9.92,9.93,9.94,9.950000000000001,9.960000000000001,9.970000000000001,9.98,9.99,10],"dom":"Bfrtip","buttons":["csv","excel"],"columnDefs":[{"className":"dt-right","targets":[1,2]},{"name":"sex","targets":0},{"name":"height","targets":1},{"name":"MPH","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="interaction-1" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-1">Interaction</h2>
+<p>Formal model</p>
+<p><span class="math display">\[
+\begin{align}
+\widehat{outcome}_i &amp;= b_0 + b_1 \times \text{dummy}_i + b_2 \times {MPH}_i + b_3 \times \text{dummy}_i \times {MPH}_i\\
+\widehat{height}_i &amp;= b_0 + b_1 \times \text{male}_i + b_2 \times {MPH}_i + b_3 \times \text{male}_i \times {MPH}_i\\
+\end{align}
+\]</span></p>
+</section>
+<section id="regression-model-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="regression-model-2">Regression model</h2>
+<p><span class="math display">\[
+\begin{align}
+\widehat{height}_i &amp;= b_0 + b_1 \times \text{male}_i + b_2 \times {MPH}_i + b_3 \times \text{male}_i \times {MPH}_i\\
+\end{align}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">height</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">72.36</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">52.13&nbsp;–&nbsp;92.60</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">sex [male]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-3.93</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-32.35&nbsp;–&nbsp;24.49</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.785</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">MPH</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.53</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.41&nbsp;–&nbsp;0.65</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">sex [male] × MPH</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.06</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.10&nbsp;–&nbsp;0.23</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.445</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">132</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.838 / 0.834</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="anova-1" class="level2">
+<h2 class="anchored" data-anchor-id="anova-1">ANOVA</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: height
+           Df Sum Sq Mean Sq  F value Pr(&gt;F)    
+sex         1 7843.4  7843.4 469.3746 &lt;2e-16 ***
+MPH         1 3199.8  3199.8 191.4850 &lt;2e-16 ***
+sex:MPH     1    9.8     9.8   0.5859 0.4454    
+Residuals 128 2138.9    16.7                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="total-explained-variance" class="level2">
+<h2 class="anchored" data-anchor-id="total-explained-variance">Total explained variance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="total-unexplained-variance" class="level2">
+<h2 class="anchored" data-anchor-id="total-unexplained-variance">Total unexplained variance</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="explained-variance-sex" class="level2">
+<h2 class="anchored" data-anchor-id="explained-variance-sex">Explained variance sex</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="explained-variance-mph" class="level2">
+<h2 class="anchored" data-anchor-id="explained-variance-mph">Explained variance MPH</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interaction-ss-ab-alcohol-x-speed" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="interaction-ss-ab-alcohol-x-speed">Interaction SS AB Alcohol x Speed</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 30%">
+<col style="width: 7%">
+<col style="width: 26%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variance</th>
+<th>Sum of squares</th>
+<th>df</th>
+<th>Mean squares</th>
+<th>F-ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hspace{2ex}AB\)</span></td>
+<td><span class="math inline">\(\text{SS}_{A \times B} = \text{SS}_{\text{model}} - \text{SS}_{\text{A}} - \text{SS}_{\text{B}}\)</span></td>
+<td><span class="math inline">\(df_A \times df_B\)</span></td>
+<td><span class="math inline">\(\frac{\text{SS}_{\text{AB}}}{\text{df}_{\text{AB}}}\)</span></td>
+<td><span class="math inline">\(\frac{\text{MS}_{\text{AB}}}{\text{MS}_{\text{error}}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\begin{align}
+{SS}_{{sex} \times {MPH}} &amp;= {SS}_{model} - {SS}_{sex} - {SS}_{MPH} \\
+{SS}_{{sex} \times {MPH}} &amp;= 11053 - 7843.4 - 3199.8 = 9.8
+\end{align}
+\]</span></p>
+</section>
+<section id="interaction-plot" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-plot">Interaction plot</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="anova_as_regression_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- Footer insert below -->
+</section>
+</section>
+<section id="end" class="level1">
+<h1>End</h1>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<script src="https://use.fontawesome.com/23c1d38eea.js"></script>
+<ul class="fa-ul" style="color:black; list-style:none;">
+<li>
+<i class="fa-li fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/sharonklinkenberg/" target="_blank" style="color:black; border-bottom:none;">Klinkenberg</a>
+</li>
+<li>
+<i class="fa-li fa fa-envelope-o"></i> <a style="unicode-bidi:bidi-override; direction: rtl; color:black" href="javascript:window.location.href = 'mailto:' + ['s.klinkenberg','uva.nl'].join('@')">ln.AvU@grebneknilK.S</a>
+</li>
+<li>
+<i class="fa-li fa fa-github"></i> <a href="https://github.com/ShKlinkenberg" target="_blank" style="color:black; border-bottom:none;">ShKlinkenberg</a>
+</li>
+</ul>
+<p><small style="text-align:left;"></small></p><small style="text-align:left;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" class="img-fluid figure-img"></a></p>
+<figcaption>CC BY-NC-SA 4.0</figcaption>
+</figure>
+</div>
+</small><p><small style="text-align:left;"></small></p>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" role="list">
+
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

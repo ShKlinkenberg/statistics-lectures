@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -122,12 +87,12 @@ window.Quarto = {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 
 
-<section id="anova-as-regression" class="level1">
+<section id="anova-as-regression" class="level1 page-columns page-full">
 <h1>ANOVA as regression</h1>
 <section id="anova" class="level2">
 <h2 class="anchored" data-anchor-id="anova">ANOVA</h2>
@@ -136,6 +101,31 @@ window.Quarto = {
 </blockquote>
 <p>ANOVA’s decompose the variance components and look at the ratio of explained to unexplained variance.</p>
 <p>Assuming <span class="math inline">\(H_0\)</span> is true, we would expect an equal amount of explained and unexplained variance.</p>
+</section>
+<section id="analysing-variance-components" class="level2">
+<h2 class="anchored" data-anchor-id="analysing-variance-components">Analysing variance components</h2>
+<blockquote class="blockquote">
+<p>Decomposing variance example of height for males and females.</p>
+</blockquote>
+<style>
+#hazard {
+  height: 30px;
+  color: white;
+  padding: 5px;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    white,
+    white 20px,
+    red 20px,
+    red 40px
+  );
+}
+</style>
+<hr id="hazard">
+<div class="r-stack fragment">
+<iframe id="kaltura_player" src="https://api.eu.kaltura.com/p/120/sp/12000/embedIframeJs/uiconf_id/23449960/partner_id/120?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=0_0l9yy9c2&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en_US&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=0_n1h0iqj2" width="400" height="261" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Explaining Variance">
+</iframe>
+</div>
 </section>
 <section id="model" class="level2">
 <h2 class="anchored" data-anchor-id="model">Model</h2>
@@ -269,22 +259,14 @@ Y_i &amp;= \beta_0 + \beta_1 X_{1i} + \epsilon_i \\
 </div>
 </div>
 </section>
-<section id="r" class="level2">
+<section id="r" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="r">r</h2>
 <p>The correlation between <strong>height</strong> and <strong>expected height</strong> as indication of how wel our model fits.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(height.data<span class="sc">$</span>expected_height, height.data<span class="sc">$</span>height,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Correlation between outcome and expected outcome"</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Expected height"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Height"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">cor</span>(height.data<span class="sc">$</span>expected_height, height.data<span class="sc">$</span>height),<span class="dv">2</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">175</span>, <span class="dv">150</span>, <span class="fu">paste</span>(<span class="st">"r ="</span>, r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ANOVA_as_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="ANOVA_as_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img column-page-right" width="672"></p>
 </figure>
 </div>
 </div>
@@ -311,15 +293,53 @@ Y_i &amp;= \beta_0 + \beta_1 X_{1i} + \epsilon_i \\
 </section>
 <section id="explained-variance" class="level2">
 <h2 class="anchored" data-anchor-id="explained-variance">Explained variance</h2>
-<p>What part of the variance is explained bay the model.</p>
+<blockquote class="blockquote">
+<p>Between groups</p>
+</blockquote>
+<p>What part of the variance is explained by the model.</p>
 <p><span class="math inline">\(R^2 = \frac{{SS}_{explained}}{{SS_{total}}}\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ANOVA_as_regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="unexplained-variance" class="level2">
 <h2 class="anchored" data-anchor-id="unexplained-variance">Unexplained variance</h2>
+<blockquote class="blockquote">
+<p>Unexplained = within groups variance = error = residuals</p>
+</blockquote>
 <p>This is the error / residual (<span class="math inline">\(\epsilon\)</span>). The difference between model expectation and observed measurement.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ANOVA_as_regression_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="f-value" class="level2">
 <h2 class="anchored" data-anchor-id="f-value">F value</h2>
+<p>This is the ratio between average explained and unexplained variance.</p>
+<p><span class="math inline">\(F = \frac{{MS}_{Explained}}{{MS_{Unexplained}}} = \frac{{MS}_{model}}{{MS_{error}}} =  \frac{{MS}_{model}}{{MS_{Residuals}}}\)</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: height
+           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+sex         1 7843.4  7843.4  190.64 &lt; 2.2e-16 ***
+Residuals 130 5348.5    41.1                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
 </section>
 </section>
 

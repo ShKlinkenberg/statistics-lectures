@@ -1,0 +1,29 @@
+---
+title: "ANOVA as regression"
+author: "Klinkenberg"
+date: "29 sep 2025"
+footer: "Statistical Reasoning 2025-2026"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+```{r child="../../../../topics/ANOVA_as_regression/ANOVA_as_regression_1.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/f_distribution/f_distribution_height.qmd", eval=TRUE}
+```
+
+```{r child="../../../../topics/ANOVA_as_regression/ANOVA_as_regression_2.qmd", eval=TRUE}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
+
+# References
+
+::: {#refs}
+:::
