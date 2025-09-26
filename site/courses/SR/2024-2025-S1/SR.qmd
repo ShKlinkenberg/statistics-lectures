@@ -1,14 +1,14 @@
 ---
-title: "Statistical Reasoning 2025-2026"
+title: "Statistical Reasoning 2024-2025"
 subtitle: "Semester 1"
 author: "Klinkenberg"
 date: today
 ---
 
-On this site you will find my statistics lectures for Statistical Reasoning.
+On this site you can find my statistics lectures for Statistical Reasoning.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE}
-course.path = "courses/SR/2025-2026-S1/"
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+course.path = "courses/SR/2024-2025-S1/"
 
 files <- list.files(full.names = F, pattern = "\\.qmd", recursive = T)
 
@@ -44,6 +44,6 @@ lecture.list$Date <- lubridate::dmy(lecture.list$Date)
 library('kableExtra')
 
 # Print table with kable as set in YAML
-knitr::kable(dplyr::arrange(lecture.list, desc(Date)), escape = F ) 
-# %>% kable_styling(full_width = T)
+knitr::kable(dplyr::arrange(lecture.list, desc(Date)), escape = F ) %>%
+  kable_styling(full_width = T)
 ```
