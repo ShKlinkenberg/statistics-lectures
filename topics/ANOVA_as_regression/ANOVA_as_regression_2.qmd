@@ -36,7 +36,7 @@ datatable(height.data,
                          buttons   = c('csv','excel')))
 ```
 
-## Interaction
+## Interaction {.smaller}
 
 Formal model
 
