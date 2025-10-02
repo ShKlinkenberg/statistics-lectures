@@ -78,4 +78,4 @@ website:
         - courses/SR/2025-2026-S1/SR.qmd        
 # 
 execute:
-  freeze: auto  # re-render only when source changes
+  freeze: false  # re-render only when source changes
