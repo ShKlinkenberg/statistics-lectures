@@ -4,3 +4,5 @@
 /.quarto/
 .DS_Store
 statistics-lectures.Rproj
+
+**/*.quarto_ipynb

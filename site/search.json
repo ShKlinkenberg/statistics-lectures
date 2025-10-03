@@ -1,5 +1,35 @@
 [
   {
+    "objectID": "courses/WSR_PB/2022-2023/WSR_PB.html",
+    "href": "courses/WSR_PB/2022-2023/WSR_PB.html",
+    "title": "WSR PB 2022-2023",
+    "section": "",
+    "text": "On this page you can find my statistics lectures for WSR.\n\n\n\n\n\n\n\n\n\n\n\nDate\nLecture\nHandout\nSlides\n\n\n\n\n2022-10-17\nBayes\nlink\nlink\n\n\n2022-10-10\nANOVA\nlink\nlink\n\n\n2022-10-03\nF-distribution & Non-parametric tests\nlink\nlink\n\n\n2022-09-28\nModeration\nlink\nlink\n\n\n2022-09-20\nT-distribution &\nMultiple regression\nlink\nlink\n\n\n2022-09-12\nNull Hypothesis Testing\nlink\nlink\n\n\n2022-09-05\nStatistical Reasoning\nlink\nlink",
+    "crumbs": [
+      "WSR PB 2022-2023"
+    ]
+  },
+  {
+    "objectID": "courses/SM/2023-2024-S2/SM.html",
+    "href": "courses/SM/2023-2024-S2/SM.html",
+    "title": "Statistical Modelling 2023-2024 S2",
+    "section": "",
+    "text": "On this site you can find my statistics lectures for SMCO and SMCR.\n\n\n\n\n\nDate\nLecture\nHandout\nSlides\n\n\n\n\n2024-03-18\nMediation\nlink\nlink\n\n\n2024-03-11\nModeration with continuous predictors\nlink\nlink\n\n\n2024-03-04\nF-Distribution and factorial ANOVA\nlink\nlink\n\n\n2024-02-19\nNull Hypothesis Significance Testing\nlink\nlink\n\n\n2024-02-12\nProbability Models\nlink\nlink\n\n\n2024-02-05\nStatistical Reasoning\nlink\nlink",
+    "crumbs": [
+      "Statistical Modelling 2023-2024 S2"
+    ]
+  },
+  {
+    "objectID": "courses/SR/2024-2025-S1/SR.html",
+    "href": "courses/SR/2024-2025-S1/SR.html",
+    "title": "Statistical Reasoning 2024-2025",
+    "section": "",
+    "text": "On this site you can find my statistics lectures for Statistical Reasoning.\n\n\n\n\n\nDate\nLecture\nHandout\nSlides\n\n\n\n\n2024-10-14\nMediation\nlink\nlink\n\n\n2024-09-30\nF-Distribution and factorial ANOVA\nlink\nlink\n\n\n2024-09-23\nAlternatives to NHST\nlink\nlink\n\n\n2024-09-16\nNull Hypothesis Significance Testing\nlink\nlink\n\n\n2024-09-09\nProbability Models\nlink\nlink\n\n\n2024-09-02\nStatistical Reasoning\nlink\nlink",
+    "crumbs": [
+      "Statistical Reasoning 2024-2025"
+    ]
+  },
+  {
     "objectID": "courses/SR/2025-2026-S1/SR.html",
     "href": "courses/SR/2025-2026-S1/SR.html",
     "title": "Statistical Reasoning 2025-2026",
@@ -7,6 +37,26 @@
     "text": "On this site you will find my statistics lectures for Statistical Reasoning.\n\n\n\n\n\nDate\nLecture\nHandout\nSlides\n\n\n\n\n2025-10-06\nModeration with continuous predictors\nlink\nlink\n\n\n2025-09-29\nANOVA as regression\nlink\nlink\n\n\n2025-09-22\nAlternatives to NHST\nlink\nlink\n\n\n2025-09-15\nNull Hypothesis Significance Testing\nlink\nlink\n\n\n2025-09-08\nProbability Models\nlink\nlink\n\n\n2025-09-01\nStatistical Reasoning\nlink\nlink",
     "crumbs": [
       "Statistical Reasoning 2025-2026"
+    ]
+  },
+  {
+    "objectID": "courses/SM/2023-2024-S1/SM.html",
+    "href": "courses/SM/2023-2024-S1/SM.html",
+    "title": "Statistical Modelling 2023-2024",
+    "section": "",
+    "text": "On this site you can find my statistics lectures for SMCO and SMCR.\n\n\n\n\n\nDate\nLecture\nHandout\nSlides\n\n\n\n\n2023-10-02\nModeration\nlink\nlink\n\n\n2023-09-25\nF-Distribution and factorial ANOVA\nlink\nlink\n\n\n2023-09-18\nT-Distribution NHST\nlink\nlink\n\n\n2023-09-11\nNull Hypothesis Significance Testing\nlink\nlink\n\n\n2023-09-06\nStatistical Reasoning\nlink\nlink",
+    "crumbs": [
+      "Statistical Modelling 2023-2024"
+    ]
+  },
+  {
+    "objectID": "courses/SSR/2022-2023/SSR.html",
+    "href": "courses/SSR/2022-2023/SSR.html",
+    "title": "Scientific and statistical reasoning 2022-2023",
+    "section": "",
+    "text": "On this site you can find my statistics lectures for SSR.\n\n\n\n\n\n\n\n\n\n\n\nDate\nLecture\nHandout\nSlides\n\n\n\n\n2022-11-15\nMediation\nlink\nlink\n\n\n2022-11-13\nModeration\nlink\nlink\n\n\n2022-11-10\nMultiple regression\nlink\nlink\n\n\n2022-11-03\nCorrelation and Simple regression\nlink\nlink\n\n\n2022-10-22\nChi squared test\nlink\nlink\n\n\n2022-10-21\nBayes\nlink\nlink\n\n\n2022-10-18\nANOVA\nlink\nlink\n\n\n2022-10-13\nANOVA\nlink\nlink\n\n\n2022-10-12\nANCOVA\nlink\nlink\n\n\n2022-10-07\nNon-parametric tests\nlink\nlink\n\n\n2022-10-06\nANOVA\nlink\nlink\n\n\n2022-09-22\nPaired and Independent\nt-test\nlink\nlink\n\n\n2022-09-20\nT-distribution and the\nOne-sample t-test\nlink\nlink\n\n\n2022-09-15\nNull Hypothesis Significance Testing\nlink\nlink",
+    "crumbs": [
+      "Scientific and statistical reasoning 2022-2023"
     ]
   }
 ]

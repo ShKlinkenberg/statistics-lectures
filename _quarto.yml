@@ -4,11 +4,11 @@ project:
   render:
     - index.qmd
     - courses/SR/2025-2026-S1/SR.qmd
-    # - courses/SR/2024-2025-S1/SR.qmd
-    # - courses/SM/2023-2024-S1/SM.qmd
-    # - courses/SM/2023-2024-S2/SM.qmd
-    # - courses/SSR/2022-2023/SSR.qmd
-    # - courses/WSR_PB/2022-2023/WSR_PB.qmd
+    - courses/SR/2024-2025-S1/SR.qmd
+    - courses/SM/2023-2024-S1/SM.qmd
+    - courses/SM/2023-2024-S2/SM.qmd
+    - courses/SSR/2022-2023/SSR.qmd
+    - courses/WSR_PB/2022-2023/WSR_PB.qmd
 
     
 format:
@@ -74,8 +74,9 @@ website:
       background: light
       collapse-level: 2
       contents:
+        - courses/SR/2025-2026-S1/SR.qmd   
         - courses/SR/2024-2025-S1/SR.qmd
-        - courses/SR/2025-2026-S1/SR.qmd        
+             
 # 
 execute:
   freeze: false  # re-render only when source changes

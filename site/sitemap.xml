@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://shklinkenberg.github.io/courses/SR/2025-2026-S1/SR.html</loc>
-    <lastmod>2025-09-26T15:35:09.010Z</lastmod>
+    <loc>https://shklinkenberg.github.io/courses/WSR_PB/2022-2023/WSR_PB.html</loc>
+    <lastmod>2022-10-18T18:12:32.367Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shklinkenberg.github.io/courses/SM/2023-2024-S2/SM.html</loc>
+    <lastmod>2024-01-30T15:38:49.777Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shklinkenberg.github.io/courses/SR/2024-2025-S1/SR.html</loc>
+    <lastmod>2024-08-30T08:14:50.537Z</lastmod>
   </url>
   <url>
     <loc>https://shklinkenberg.github.io/index.html</loc>
     <lastmod>2024-01-30T15:23:48.532Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shklinkenberg.github.io/courses/SR/2025-2026-S1/SR.html</loc>
+    <lastmod>2025-09-26T15:35:09.010Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shklinkenberg.github.io/courses/SM/2023-2024-S1/SM.html</loc>
+    <lastmod>2023-08-30T11:10:35.876Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shklinkenberg.github.io/courses/SSR/2022-2023/SSR.html</loc>
+    <lastmod>2023-08-30T10:02:50.669Z</lastmod>
   </url>
 </urlset>
