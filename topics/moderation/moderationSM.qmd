@@ -23,6 +23,17 @@ $\definecolor{red}{RGB}{255,0,0} \definecolor{black}{RGB}{0,0,0}
 
 ![](../../../../topics/moderation/moderation.png)
 
+## Assumptions {.smaller}
+
+As a moderation is just a regression model, the same assumptions hold:
+
+- **Independent observations**: A respondent’s dependent variable score is not allowed to depend on scores of other respondents.
+- **Identically distributed observations**: The residuals of the model are normally distributed.
+- **Linearity**: The relationship between the predictors and the outcome is linear.
+- **Homoscedasticity**: The residuals have constant variance at every level of the predictor variable(s).
+
+Checking these assumptions in PROCESS requires different steps compared to running a regression analysis in SPSS.
+
 ## Example {.smaller}
 
 Video games are among the favourite online activities for young people: two-thirds of 5–16-year-olds have their own video games console, and 88% of boys aged 8–15 own at least one games console. Although playing violent video games can enhance visuospatial acuity, visual memory, probabilistic inference, and mental rotation, compared to games such as Tetris, these games have also been linked to increased aggression in youths Another predictor of aggression and conduct problems is callous-unemotional traits such as lack of guilt, lack of empathy, and callous use of others for personal gain. 
