@@ -1,7 +1,7 @@
 ---
 title: "Mediation"
 author: "Klinkenberg"
-date: "16 oct 2025"
+date: "13 oct 2025"
 footer: "Statistical Reasoning 2025-2026"
 format: 
   html: default
