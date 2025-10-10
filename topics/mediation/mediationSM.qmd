@@ -67,7 +67,7 @@ In statistics, a mediation model is one that seeks to identify and explain the m
 
 > **Mediation does not imply causation!**
 
-[Criteria for causal relations](https://shklinkenberg.github.io/Statistical-Inference/9.1-mediation-as-causal-process.html#causalcriteria)
+[Criteria for causal relations](https://shklinkenberg.github.io/Statistical-Inference/11-mediation.html#sec-causalcriteria)
 
 All requirements need to be met:
 
@@ -399,14 +399,6 @@ $a \times b = b_a \times b_b$
 ```{r, echo=TRUE}
 b.a*b.b
 b.c - b.c.accent
-```
-
-## Indirect effect (partially standardized) {.subsection}
-
-$\frac{ab}{s_{Outcome}} = \frac{b_a b_b}{s_{Outcome}}$
-
-```{r, echo=TRUE}
-b.a*b.b/sd(speed.of.healing)
 ```
 
 ## Indirect effect (standardized) {.subsection}
