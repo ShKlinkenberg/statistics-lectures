@@ -158,6 +158,49 @@ text(x.2.position[i], mean_x2+se_x2*1.96+.7, labels=n_x1[i])
 ```{r, echo=FALSE, out.height=600}
 set.seed(1548)
 
+# install.packages("bezier")
+library("bezier")
+
+CurlyBrackets <- function(position, height, flip=FALSE) {
+
+adj <- position
+
+# BEZIER SPLINES ##
+# SPECIFY PARAMETRIC VALUES FROM 0 TO 3 FOR SAMLPING A BEZIER SPLINE
+t <- seq(0, 1, length.out = 30)
+
+# BEZIER CONTROL POINTS
+p <- matrix(c( 0,0, 
+              .7,0,
+              .2, height,
+               .5, height), nrow=4, ncol=2, byrow=TRUE)
+
+# CREATE A 2D BEZIER SPLINE WITH 3, 2-DEGREE BEZIER CURVES
+bezier_points <- bezier(t=t, p=p[, 1:2], deg=3)
+
+# Flip and add curve to make braces
+mirror <- cbind(bezier_points[,1],-(bezier_points[,2]))
+
+# Order bezier points to get one continuous 
+# line from top to bottom
+bezier_points <- bezier_points[order(bezier_points[,1], decreasing = TRUE),]
+
+# Combine top and bottom curves to make curly brackets
+bezier_points <- rbind(bezier_points, mirror)
+
+# Flip
+if(flip == TRUE) { bezier_points[,1] = -bezier_points[,1] }
+
+# Adjust position x and y
+
+bezier_points[,1] = bezier_points[,1] + adj[1]
+bezier_points[,2] = bezier_points[,2] + adj[2]
+
+# PLOT BEZIER SPLINE
+lines(bezier_points)
+
+}
+
 x  = seq(-4,4,.05) # sequence x values for normal distribution
 hx = dnorm(x)      # calculate y values
 
@@ -174,17 +217,12 @@ lines(c(0,0),c(0,max(hx)+1))
 # Add mu symbol to x axis
 axis( 1,at=0,labels=expression(mu), cex=2 )
 
-# Create curly braces for normal distribution 
-ybracket = seq(1,max(hx)+1,length=39)
-xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
+# Create curly brackets for normal distribution 
+CurlyBrackets(c(4.6,1.2), .2, flip=1)
 
-lines(xbracket,ybracket,col="black")
+# Create curly brackets for samples
+CurlyBrackets(c(4.6,.5), .5, flip=1)  
 
-# Create curly braces for samples
-ybracket = seq(0,1,length=39)
-xbracket = rep(4.1,39)*c(c(1,1.02),rep(1.03,16),c(1.04,1.05,1.04),rep(1.03,16),c(1.02,1))
-
-lines(xbracket,ybracket,col="black")
 
 text = expression(atop("Normally distributed","population"))
 
