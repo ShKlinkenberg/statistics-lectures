@@ -6,3 +6,4 @@
 statistics-lectures.Rproj
 
 **/*.quarto_ipynb
+topics/.DS_Store
