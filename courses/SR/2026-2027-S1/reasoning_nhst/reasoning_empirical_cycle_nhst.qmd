@@ -1,0 +1,69 @@
+---
+title: "Statistical Reasoning"
+subtitle: "Introduction to statistical reasoning"
+author: "Klinkenberg"
+date: "01 sep 2025"
+footer: "Statistical Reasoning 2025-2026"
+format: 
+  html: default
+  revealjs: 
+    output-ext: slide.html
+---
+
+# Statistical Reasoning {background-image="Here-Be-Dragons-animation.gif" background-size="contain"}
+
+# Course setup
+
+* Lectures: On campus / Online / Video recording
+* Preparatory Assignment: Submit and **reflect** in canvas
+* Tutorials: For your support and in class progress check (you can mis max 3 tutorials)
+* Exam: Knowledge and skills
+
+## in class progress check
+
+![](unnamed-chunk-13-1.png)
+
+## Grading {.smaller}
+
+> $\text{Final grade} = 0.9 \times \text{exam grade} + \text{proportion completed PA}$
+
+* Exam
+* PA = Preparatory Assignment (VO in Dutch)
+
+## Preparatory Assignment
+
+* 11 PA's/VO's in total
+* You need to have done the PA with effort and reflect on your progress.
+
+$$\text{proportion completed PA} = \frac{\text{Number of PA's done}}{11}$$
+
+## Tutorial participation
+
+* Tutorial participation mandatory
+* Mis max 3
+
+# Learning
+
+<iframe style="height:400px;  width:100%;" src="https://www.youtube.com/embed/JC82Il2cjqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Course changes {.smaller}
+
+Changes based on feedback, course evaluation, and redesign.
+
+* SPSS basics added to [introduction chapter](https://shklinkenberg.github.io/Statistical-Inference/#spss-basics).
+* PROCESS instructions and video's updated to version 5.
+* New [statistical test selection flowchart](https://shklinkenberg.github.io/Statistical-Inference/04-hypothesis.html#sec-test-selection) added.
+* Self reflection reduced to 3
+
+<!-- Add the required topics below -->
+
+```{r child="../../../../topics/statistical_reasoning/statistical_reasoning.qmd"}
+```
+
+```{r child="../../../../topics/empirical_cycle/empirical_cycle.qmd"}
+```
+
+<!-- Footer insert below -->
+
+```{r child="../../../../footer.qmd"}
+```
