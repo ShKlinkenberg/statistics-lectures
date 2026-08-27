@@ -16,7 +16,7 @@ format:
     logo: https://shklinkenberg.github.io/uva_style/images/logo_uva.png
     transition: slide
     background-transition: fade
-    theme: white
+    theme: [white, ../style.scss]
     slide-number: true
     css: 
     - https://shklinkenberg.github.io/statistics-lectures/courses/uva_reveal.css

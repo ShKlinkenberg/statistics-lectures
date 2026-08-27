@@ -1,28 +1,28 @@
-# Reasoning in statistics {.section}
+# Reasoning in statistics 
 
-## Statistical Literacy {.subsection}
+## Statistical Literacy {.smaller}
 
 * Knowledge (Basic understanding of concepts)
     * Identify
     * Describe
-* Skils (Ability to work with statistical tools)
+* Skills (Ability to work with statistical tools)
     * Translate
     * Interpret
     * Read
     * Compute
 
-## Statistical Reasoning {.subsection}
+## Statistical Reasoning {.smaller}
 
 * Understanding
     * Explain why
     * Explain how
     
-## Statistical thinking {.subsection}
+## Statistical thinking {.smaller}
 
 * Apply
     * What methods to use in a specific situation
 * Critique
-    * Comment and reflect on work of others
+    * Comment and reflect on work of yourself and others
 * Evaluate
     * Assigning value to work
 * Generalize

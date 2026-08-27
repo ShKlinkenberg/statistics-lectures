@@ -1,6 +1,6 @@
+/*-- scss:defaults --*/
 
-
-$link-color: #e98300;
+$link-color: #bc0031;
 $light-bg-link-color: #fff;
 
 /*-- scss:rules --*/
@@ -9,5 +9,14 @@ $light-bg-link-color: #fff;
   border-left: 3px solid $link-color;
   padding-left: 0.5em;
   color: $link-color;
-  background-color: lighten($link-color, 45%);
+  background-color: #faebef;
+}
+
+.reveal ::selection {
+  background-color: rgba(188, 0, 49, 0.99);
+  color: #fff;
+}
+.reveal ::-moz-selection {
+  background-color: rgba(188, 0, 49, 0.99);
+  color: #fff;
 }
