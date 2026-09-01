@@ -97,6 +97,8 @@ Changes based on feedback, course evaluation, and redesign.
 * PROCESS instructions and video's updated to version 5.
 * New [statistical test selection flowchart](https://shklinkenberg.github.io/Statistical-Inference/04-hypothesis.html#sec-test-selection) added.
 * Self reflection reduced to 3
+* No more lectures
+* 2 Q&A sections
 
 # Learning
 
